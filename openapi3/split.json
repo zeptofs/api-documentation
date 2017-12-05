@@ -1903,7 +1903,7 @@
             "description": "Amount of days to apply against the frequency",
             "example": 7
           },
-          "max_amount_": {
+          "max_amount": {
             "type": "number",
             "nullable": true,
             "description": "Maximum amount in cents the total of all PRs can be for the duration of the frequency",
