@@ -7,11 +7,11 @@
   },
   "servers": [
     {
-      "url": "https://api-sandbox.split.cash/",
+      "url": "https://api-sandbox.split.cash",
       "description": "Sandbox API server"
     },
     {
-      "url": "https://api.split.cash/",
+      "url": "https://api.split.cash",
       "description": "Production API server"
     }
   ],
@@ -23,6 +23,10 @@
     {
       "name": "Contacts",
       "description": "Your contacts form an address book of Split accounts and non-Split accounts (Anyone accounts) with whom you can interact. In order to create Payments, Payment Requests or Agreements you must first have the party in your contacts.\n\nThere are a few IDs supplied within a Contact's response:\n\n1. `data.id` represents the Contact resource.\n2. `data.bank_account.id` represents the Contact's bank account and is used when creating Payments or Payment Requests.\n3. `data.account.id` represents the Vontact's Split account and is used when proposing Agreements.\n"
+    },
+    {
+      "name": "Open Agreements",
+      "description": "An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account or anyone, an Agreement is automatically created based between the Open Agreement initiator and the authoriser.\n\nAn Open Agreement can be accepted multiple times by different parties and the result is the same: A new Agreement.\n\n<aside class=\"notice\">When you close an Open Agreement, no new Agreements can be created from it.</aside>\n"
     },
     {
       "name": "Payments",
@@ -618,7 +622,7 @@
         }
       }
     },
-    "open_agreements": {
+    "/open_agreements": {
       "post": {
         "tags": [
           "Open Agreements"
@@ -684,7 +688,7 @@
         }
       }
     },
-    "open_agreements/{open_agreement_ref}/activate": {
+    "/open_agreements/{open_agreement_ref}/activate": {
       "post": {
         "tags": [
           "Open Agreements"
@@ -719,7 +723,7 @@
         }
       }
     },
-    "open_agreements/{open_agreement_ref}/close": {
+    "/open_agreements/{open_agreement_ref}/close": {
       "post": {
         "tags": [
           "Open Agreements"
@@ -754,7 +758,7 @@
         }
       }
     },
-    "payments": {
+    "/payments": {
       "post": {
         "tags": [
           "Payments"
@@ -819,7 +823,7 @@
         }
       }
     },
-    "payments/{payment_ref}": {
+    "/payments/{payment_ref}": {
       "get": {
         "tags": [
           "Payments"
@@ -854,7 +858,7 @@
         }
       }
     },
-    "payouts/{debit_ref}": {
+    "/payouts/{debit_ref}": {
       "delete": {
         "tags": [
           "Payouts"
@@ -883,7 +887,7 @@
         }
       }
     },
-    "payment_requests": {
+    "/payment_requests": {
       "post": {
         "tags": [
           "Payment Requests"
@@ -917,7 +921,7 @@
         }
       }
     },
-    "payment_requests/{payment_request_ref}/approve": {
+    "/payment_requests/{payment_request_ref}/approve": {
       "post": {
         "tags": [
           "Payment Requests"
@@ -952,7 +956,7 @@
         }
       }
     },
-    "payment_requests/{payment_request_ref}/decline": {
+    "/payment_requests/{payment_request_ref}/decline": {
       "post": {
         "tags": [
           "Payment Requests"
@@ -987,7 +991,7 @@
         }
       }
     },
-    "payment_requests/{payment_request_ref}": {
+    "/payment_requests/{payment_request_ref}": {
       "get": {
         "tags": [
           "Payment Requests"
@@ -1048,7 +1052,7 @@
         }
       }
     },
-    "payment_requests/incoming": {
+    "/payment_requests/incoming": {
       "get": {
         "tags": [
           "Payment Requests"
@@ -1083,7 +1087,7 @@
         }
       }
     },
-    "payment_requests/outgoing": {
+    "/payment_requests/outgoing": {
       "get": {
         "tags": [
           "Payment Requests"
@@ -1117,7 +1121,7 @@
         }
       }
     },
-    "payment_requests/{payment_request_ref}/history": {
+    "/payment_requests/{payment_request_ref}/history": {
       "get": {
         "tags": [
           "Payment Requests"
@@ -1152,7 +1156,7 @@
         }
       }
     },
-    "credits/{credit_ref}/refunds": {
+    "/credits/{credit_ref}/refunds": {
       "post": {
         "tags": [
           "Refunds"
@@ -1197,7 +1201,7 @@
         }
       }
     },
-    "refunds/incoming": {
+    "/refunds/incoming": {
       "get": {
         "tags": [
           "Refunds"
@@ -1231,7 +1235,7 @@
         }
       }
     },
-    "refunds/outgoing": {
+    "/refunds/outgoing": {
       "get": {
         "tags": [
           "Refunds"
@@ -1265,7 +1269,7 @@
         }
       }
     },
-    "refunds/{refund_ref}": {
+    "/refunds/{refund_ref}": {
       "get": {
         "tags": [
           "Refunds"
@@ -1300,7 +1304,7 @@
         }
       }
     },
-    "payout_refund_requests": {
+    "/payout_refund_requests": {
       "post": {
         "tags": [
           "Refund Requests"
@@ -1334,7 +1338,7 @@
         }
       }
     },
-    "payout_refund_requests/{payout_refund_request_ref}/approve": {
+    "/payout_refund_requests/{payout_refund_request_ref}/approve": {
       "post": {
         "tags": [
           "Refund Requests"
@@ -1369,7 +1373,7 @@
         }
       }
     },
-    "payout_refund_requests/{payout_refund_request_ref}/decline": {
+    "/payout_refund_requests/{payout_refund_request_ref}/decline": {
       "post": {
         "tags": [
           "Refund Requests"
@@ -1465,7 +1469,7 @@
         }
       }
     },
-    "payout_refund_requests/incoming": {
+    "/payout_refund_requests/incoming": {
       "get": {
         "tags": [
           "Refund Requests"
@@ -1499,7 +1503,7 @@
         }
       }
     },
-    "payout_refund_requests/outgoing": {
+    "/payout_refund_requests/outgoing": {
       "get": {
         "tags": [
           "Refund Requests"
@@ -1535,7 +1539,7 @@
         }
       }
     },
-    "transactions": {
+    "/transactions": {
       "get": {
         "tags": [
           "Transactions"
@@ -1774,7 +1778,7 @@
         }
       }
     },
-    "user": {
+    "/user": {
       "get": {
         "tags": [
           "Users"
@@ -2150,7 +2154,7 @@
       "CreateOpenAgreementRequest": {
         "title": "Create an Open Agreement (request)",
         "required": [
-          "title",
+          "authoriser_id",
           "terms"
         ],
         "type": "object",
@@ -2197,8 +2201,8 @@
             "created_at": "2017-03-20T00:53:27Z",
             "terms": {
               "per_payout": {
-                "max_amount": 10000,
-                "min_amount": null
+                "min_amount": null,
+                "max_amount": 10000
               },
               "per_frequency": {
                 "days": 7,
