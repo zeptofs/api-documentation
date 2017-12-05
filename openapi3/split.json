@@ -552,7 +552,7 @@
           "Contacts"
         ],
         "summary": "Remove a Contact",
-        "description": "<aside class=\"noticed\">Removing a contact will not affect your transaction history.</aside>\n",
+        "description": "<aside class=\"notice\">Removing a contact will not affect your transaction history.</aside>\n",
         "operationId": "RemoveAContact",
         "parameters": [
           {
