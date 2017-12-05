@@ -1,0 +1,3709 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Split API",
+    "description": "* Authentication is performed using OAuth2. See the [Get started](/#get-started) and [Authentication & Authorisation](/#authentication-and-authorisation) guides for more.\n* All communication is via `https`.\n* Production API: `https://api.split.cash/`.\n* Production UI: `https://go.split.cash/`.\n* Sandbox API: `https://api-sandbox.split.cash/`.\n* Sandbox UI: `https://go-sandbox.split.cash/`.\n* Data is sent and received as JSON.\n* Currencies are represented by 3 characters as defined in [ISO 4217](http://www.xe.com/iso4217.php).\n* Dates & times are returned in UTC using [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format with second accuracy.\n* Amounts are always in cents with no decimals unless otherwise stated.\n\n# Guides\n\n## Try it out\nThe best way to familiarise yourself with our API is by interacting with it. We've preloaded a collection of all our endpoints for you to use in Postman.\n\nBefore you start, load up our API collection:\n\n[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/988421dc8fb7d55526d5#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLXNhbmRib3guc3BsaXQuY2FzaCIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhcGlfaG9zdCIsInZhbHVlIjoiaHR0cHM6Ly9hcGktc2FuZGJveC5zcGxpdC5jYXNoIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoMl9hcHBsaWNhdGlvbl9pZCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhdXRob3Jpc2F0aW9uX2NvZGUiLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhY2Nlc3NfdG9rZW4iLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJ0eXBlIjoidGV4dCJ9XQ==)\n\nOkay, lets get things setup!\n\n1. **Create a Split account**\n    \n    If you haven't already, you'll want to create a sandbox Split account at [https://go-sandbox.split.cash](https://go-sandbox.split.cash)\n\n2. **Register your application with Split**\n\n    Sign in and create an OAuth2 application: [https://go-sandbox.split.cash/oauth/applications](https://go-sandbox.split.cash/oauth/applications).\n    \n    [![Split OAuth2 app setup](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)\n\n3. **In Postman, setup your environment variables**\n\n    Click on **Manage Environments**\n\n    [![Postman environment variables](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png)\n    \n    We've included the **Split Payments Public Sandbox** environment to get you started. Go ahead an click on it.\n    \n    [![Select Postman environment](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png)\n    \n    Using the details from the OAuth2 app you created earlier, fill in the **oauth2_application_id** & **oauth2_secret** fields.\n    \n    [![Fill in environment values](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png)\n    \n4. **Setup the authorization**\n    \n    Click on the **Authorization** tab and select **OAuth 2.0**\n    \n    [![Postman Authorization tab](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png)\n    \n    Click the **Get New Access Token** button\n    \n    [![Postman get new access token](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png)\n\n    Fill in the OAuth2 form as below:\n    \n    [![Postman OAuth2](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png)\n      \n5. **Get authorised**\n\n    Click **Request Token** and wait a few seconds and a browser window will popup\n\n    Sign in with your Split account (or any other Split account you want to authorise).\n\n    [![Signin Split to authorise via OAuth2](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png)\n\n    Click **Authorise** to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Split for the `access_token/refresh_token` pair. It will then store the `access_token/refresh_token` for you to use in subsequent API requests. The `access_token` effectively allows you to send requests via the API as the user who provided you authorisation.\n\n    [![Authorise OAuth2 app](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)\n\n6. **You're now ready to use the API**\n\n    Select an endpoint from the Split collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.\n    \n    [![Postman use token](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png)\n        \n<aside class=\"notice\">Remember to select the access token everytime you try a new endpoint. Have fun!</aside>\n\n## Get started\nThis guide will help you setup your OAuth2 app in order to get authenticated & authorised to communicate with the Split API.\n\n\n**Before you start:**\n\n* Often times you'll want to grant your own app access to itself so that you can access the API on your own account. We use the term **user** below but the user can be a third party or the same user that owns the OAuth2 application.\n* As noted below, the access token expires every 2 hours. To get a new access token without going through steps 1 to 4 again, use the [refresh grant strategy](/#authentication-and-authorisation) to swap a refresh token for a new access token.\n\n1. **Create a Split account**\n\n    If you haven't already, you'll want to create a sandbox Split account at [https://go-sandbox.split.cash](https://go-sandbox.split.cash).\n\n2. **Register your application with Split**\n\n    Once you've got your account up and running, sign in and create an OAuth2 profile for your application: [https://go-sandbox.split.cash/oauth/applications](https://go-sandbox.split.cash/oauth/applications)\n    \n    | Parameter | Description |\n    |-----------|-------------|\n    | **Name**  | The name of your application. When using the the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |\n    | **Redirect URI** | Set this to your application's endpoint charged with receiving the authorisation code. |\n\n3. **Obtain an authorisation code**\n\n    Construct the initial URL the user will need to visit in order to grant your application permission to act on his/her behalf. The constructed URL describes the level of permission ([`scope`](/#scopes)), the application requesting permission (`client_id`) and where the user gets redirected once they've granted permission (`redirect_uri`).\n    \n    The URL should be formatted to look like this:\n    `https://go-sandbox.split.cash/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}`\n    \n    | Parameter | Description |\n    |-----------|-------------|\n    | `response_type` | Always set to `code` |\n    | `client_id` | This is your `Application ID` as generated when you registered your application with Split |\n    | `redirect_uri` | URL where the user will get redirected along with the newly generated authorisation code |\n    | `scope` | The [scope](/#scopes) of permission you're requesting |\n\n4. **Exchange the authorisation code for an access token**\n    \n    When the user visits the above-mentioned URL, they will be presented with a Split login screen and then an authorisation screen:\n    \n    [![Authorise OAuth2 app](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)\n    \n    After the user has authorised your application, they will be returned to your application at the URL specified in `redirect_uri` along with the `code` query parameter as the authorisation code.\n    \n    Finally, the authorisation code can than be exchanged for an access token and refresh token pair by POSTing to: `https://go-sandbox.split.cash/oauth/token`\n    \n    | Parameter | Description |\n    |-----------|-------------|\n    | `grant_type` | Set to `authorization_code` |\n    | `client_id` | This is your `Application ID` as generated when you registered your application with Split |\n    | `client_secret` | This is your `Secret` as generated when you registered your application with Split |\n    | `code` | The authorisation code returned with the user |\n    | `redirect_uri` | Same URL used in step 3 |\n\n5. **Wrap-up**\n\n    Now that you have an access token and refresh token, you can interact with the Split API as the user related to the access token.\n    To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`\n  \n## Authentication and Authorisation\n\nSplit uses OAuth2 over https to manage authentication and authorisation.\n\nOAuth2 is a protocol that lets external applications request permission from another Split user to send requests on their behalf without getting their password.\nThis is preferred over Basic Authentication because access tokens can be limited by scope and can be revoked by the user at any time.\n\nNew to OAuth2? DigitalOcean has a fantastic 5 minute [introduction to OAuth2](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2#grant-type-authorization-code).\n\nWe currently support the **authorisation code** and **refresh token** grants.\n\n### Authorisation Code Grant\nThis type of grant allows your application to act on behalf of a user. If you've ever used a website or application with your\nGoogle, Twitter or Facebook account, this is the grant being used.\n\nSee the [Get Started guide](/#get-started) for step by step details on how to use this grant.\n\n### Refresh Token Grant\n\n> Code sample\n\n```\ncurl -F \"grant_type=refresh_token\" \\\n     -F \"client_id={{oauth2_application_id}}\" \\\n     -F \"client_secret={{oauth2_application_secret }}\" \\\n     -F \"refresh_token={{refresh_token}}\" \\\n     -X POST https://go-sandbox.split.cash/oauth/token\n```\n\n> Example response\n\n```\n{\n    \"access_token\":\"ad0b5847cb7d254f1e2ff1910275fe9dcb95345c9d54502d156fe35a37b93e80\",\n    \"token_type\":\"bearer\",\n    \"expires_in\":7200,\n    \"refresh_token\":\"cc38f78a5b8abe8ee81cdf25b1ca74c3fa10c3da2309de5ac37fde00cbcf2815\",\n    \"scope\":\"public\"\n}\n```\n\nWhen using the authorisation code grant above, Split will return a `refresh token` along with the access token. Access tokens are short lived and last 2 hours but refresh tokens do not expire.\n\nWhen the access token expires, instead of sending the user back through the authorisation flow you can use the refresh token to retrieve a new access token with the same permissions as the old one.\n\n<aside class=\"notice\">\n  The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you'll\nwant to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>acccess_token</code>\n</aside>\n\n## Making payments\nIn order to payout funds, you'll be looking to use the [Payments](/#Split-API-Payments) endpoint.\n\nCommon use cases:\n\n* Automated payout disbursement (Referal programs, net/commission payouts, etc...)\n\n## Getting paid\nThere are 2 ways to get paid:\n\n**A [Payment Request](/#Split-API-Payment-Requests)**\n\nProvides the ability to send a Payment Request to any contact with a verified bank account in your Split contacts list.\n\n* By default, the payer will receive a request that they must approve in order for the funds to flow from their bank account to yours.\n* The approval process can be automated by first entering into an agreement with the payer. Once the agreement is approved, any future Payment Request will be automatically approved and processed per the agreement terms.\n\nCommon use cases:\n\n* Subscriptions\n* On-account balance payments\n* Bill smoothing\n* Repayment plans\n\n**An [Open Payment Request](http://help.split.cash/payment-requests/open-payment-requests)**\n\nUtilise a [customisable hosted payment request form](http://help.split.cash/payment-requests/open-payment-requests) which takes care of everything from confirming payer bank account access to the transfer of funds.\n\n* The secure form can either sit outside your app or embeded within via iframe with ability to whitelabel.\n* The URL for the form contains all the customisation parameters enabling you to generate the form on the fly.\n\nCommon use cases:\n\n* Online or offline purchases (eCommerce, fundraiser, etc...)\n* Invoice payment\n* Group funding (paying for a restaurant bill)\n\n## Idempotent requests\n\n> Example response\n\n```\n{\n  \"errors\": [\n    {\n      \"title\": \"Duplicate idempotency key\"),\n      \"detail\": \"A resource has already been created with this idempotency key\",\n      links: {\n        \"about\": \"A resource has already been created with this idempotency key\"\n      },\n      \"meta\": {\n        \"resource_ref\": \"PB.1a4\"\n      }\n    }\n  ]\n}\n```\n\nThe Split API supports idempotency for safely retrying requests without accidentally performing the same operation twice.\nFor example, if a [Payment](#Split-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.\n\nTo perform an idempotent request, provide an additional `Idempotency-Key: <key>` header to the request.\nYou can pass any value as the key but we suggest that you use [V4 UUIDs](https://www.uuidgenerator.net/) or another appropriately random string.\n\nKeys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a `409 Conflict`.\n\n* The `meta.resource_ref` value is the reference of the resource that was previously created with the conflicting idempotency key.\n* The `Idempotency-Key` header is optional but recommended.\n* Only the `POST` action for the Payments, Payment Requests, Refunds, Refund Requests support the use of the `Idempotency-Key`.\n* Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.\n\n# Configuration\n\n## Scopes\nScopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.\n\n| Scope | Description |\n|--------|------------|\n| `public` | View user's public information |\n| `agreements` | Manage user's Agreements |\n| `contacts` | Manage user's Contacts |\n| `open_agreements` | Manage user's Open Agreements |\n| `payments` | Manage user's Payments |\n| `payment_requests` | Manage user's Payment Requests |\n| `refund_requests` | Manage user's Refund Requests |\n| `refunds` | Manage user's Refunds |\n| `transactions` | Access user's Transactions |\n\n## Pagination\n\n> Example response header\n\n```\nLink: <https://api-sandbox.split.cash/payments?page=2>; rel=\"next\",\n  <https://api-sandbox.split.cash/payments?page=15>; rel=\"last\"\n```\n\nAll collections are paginated to 100 items by default. You can request the following page by appending `?page=x` where `x` is the page you'd like to retrieve.\n\nYou can extract the pagination information from the response header.\n\n## Webhooks\n\n> Example response\n\n```\n{\n  \"event\": {\n    \"type\": \"object.action\",\n    \"at\": \"yyyy-mm-ddThh:mm:ssZ\",\n    \"who\": {\n      \"account_id\": \"x\",\n      \"bank_account_id\": \"x\"\n    }\n  },\n  \"data\": [\n    {\n      // The data section will follow the same type of structure\n      // as the event type it is representing. For example, if the\n      // event type was \"debit.scheduled\", the data representation\n      // structure would be that of a debit object. Too see what a\n      // debit object structure looks like, see the Transactions\n      // section.\n    }\n  ]\n}\n```\n\nWe support two main categories of webhooks:\n\n1. **Owner**: These webhooks are managed by the owner of the Split account and only report on events owned by the Split account.\n2. **App**: These webhooks are managed by the Split OAuth2 application owner and will report on events relating to any authorised Split account (limited by scope).\n\nAll events posted to the designated URL fit the same structure.\n    \n<aside class=\"notice\">\n  The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.\n</aside>\n",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-sandbox.split.cash/",
+      "description": "Sandbox API server"
+    },
+    {
+      "url": "https://api.split.cash/",
+      "description": "Production API server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Agreements",
+      "description": "Split Agreements are managed on a per Contact basis and allow two parties to agree on terms for which future Payment Requests will be auto-approved.\n\nAgreement are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.\n\nAgreements are therefore broken up by direction:\n\n1. **Incoming:** Agreement received from another Split account\n2. **Outgoing:** Agreement sent to another Split account\n"
+    },
+    {
+      "name": "Contacts",
+      "description": "Your contacts form an address book of Split accounts and non-Split accounts (Anyone accounts) with whom you can interact. In order to create Payments, Payment Requests or Agreements you must first have the party in your contacts.\n\nThere are a few IDs supplied within a Contact's response:\n\n1. `data.id` represents the Contact resource.\n2. `data.bank_account.id` represents the Contact's bank account and is used when creating Payments or Payment Requests.\n3. `data.account.id` represents the Vontact's Split account and is used when proposing Agreements.\n"
+    },
+    {
+      "name": "Payments",
+      "description": "**A Payment is made up of two parts:**\n\n1. General details about the Payment.\n2. One or many Payout recipients with individual amounts and descriptions.\n"
+    },
+    {
+      "name": "Payouts",
+      "description": "Payouts are what a compose a Payment. One or all Payouts can be voided individually as part of the larger Payment.\n"
+    },
+    {
+      "name": "Payment Requests",
+      "description": "A Payment Request (PR) is used to request payment from another party.\n\n<div class=\"middle-header\">Applicable scenarios</div>\n\n1. **A Split account sends a PR to a Contact that is a Split account:**\n    1. The authoriser must either approve or decline the request; **or**\n    2. Given there is an Agreement in place and the PR is within the terms of the Agreement, then the PR will be automatically approved; **or**\n    3. Given the PR is **not** within the terms of the Agreement, then the authoriser must either approve or decline the request.\n2. **A Split accounts sends a PR to a Contact that is not a Split account:**\n    1. Given there is an Agreement in place and the PR is within the terms of the Agreement, then the PR will be automatically approved; **or**\n    2. Given the PR is **not** within the terms of the Agreement, then the PR will not be created; **or**\n    3. There is no Agreement in place, then the PR will not be created.\n\n<div class=\"middle-header\">Direction</div>\n\nPayment Requests are broken up by direction:\n\n1. **Incoming:** An incoming Payment Request (you are the authoriser/payer)\n2. **Outgoing:** An outgoing Payment Request (you are the initiator/payee)\n\n      \nThere are two response fields that differ depending on the direction:\n\n| Field | Description |\n|-------|-------------|\n| `debit_ref` | Only visible to the PR authoriser (incoming PRs). This reference corresponds to the newly created debit to process the approved PR. |\n| `credit_ref` | Only visible to the PR initiator (outgoing PRs). This reference corresponds to the newly created credit from the approved PR. |\n\n<div class=\"middle-header\">Lifecycle</div>\n\nA Payment Request can have the following states:\n\n| State | Description |\n|-------|-------------|\n| `pending_approval` | Waiting for the authoriser to approve the PR. |\n| `approved` | The authoriser has approved the PR. |\n| `declined` | The payer has declined the PR. |\n| `cancelled` | The initiator has cancelled the PR. |\n"
+    },
+    {
+      "name": "Refunds",
+      "description": "Refunds can be issued for any successfully cleared Payout (credit) transactions.\n\n<div class=\"middle-header\">Direction</div>\n\nRefunds are broken up by direction:\n\n1. **Incoming:** An incoming Refund (you are the recipient of the refund)\n2. **Outgoing:** An outgoing Refund (you are the issuer of the refund)\n\n      \nThere are two response fields that differ depending on the direction:\n\n| Field | Description |\n|-------|-------------|\n| `debit_ref` | Only visible to the Refund issuer (outgoing Refunds). This reference corresponds to the newly created debit to process the Refund. |\n| `credit_ref` | Only visible to the Refund recipient (incoming Refunds). This reference corresponds to the newly created credit to process the Refund. |\n"
+    },
+    {
+      "name": "Refund Requests",
+      "description": "Manage Refund Requests (RR) applied against successfully cleared Payouts.\nA refunder corresponds to a recipient of a successfully cleared Payout (credit).\n  \n<div class=\"middle-header\">Direction</div>\n\nRefund Requests are broken up by direction:\n\n1. **Incoming:** An incoming Refund Request (you are the authoriser/refunder)\n2. **Outgoing:** An outgoing Refund Request (you are the initiator/refundee)\n\n      \nThere are two response fields that differ depending on the direction:\n\n| Field | Description |\n|-------|-------------|\n| `debit_ref` | Only visible to the RR authoriser (incoming RRs). This reference corresponds to the newly created debit to process the approved RR. |\n| `credit_ref` | Only visible to the RR initiator (outgoing RRs). This reference corresponds to the newly created credit from the approved RR. |\n\n<div class=\"middle-header\">Lifecycle</div>\n\nA Payment Request can have the following states:\n\n| State | Description |\n|-------|-------------|\n| `pending_approval` | Waiting for the authoriser to approve the RR. |\n| `approved` | The authoriser has approved the RR. |\n| `declined` | The payer has declined the RR. |\n| `cancelled` | The initiator has cancelled the RR. |\n"
+    },
+    {
+      "name": "Transactions",
+      "description": "The transactions endpoint provides a detailed look at all past, current and future scheduled debits & credits relating to the Split account. In other words, we not only show the transactions initiated by the Split account but also show transactions where the Split account is on the receiving end - even for payments that have not yet matured.\n"
+    },
+    {
+      "name": "Users",
+      "description": "All about the currently authenticated user.\n"
+    }
+  ],
+  "paths": {
+    "/agreements": {
+      "post": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Propose an Agreement",
+        "description": "Propose an Agreement to another Split Contact",
+        "operationId": "ProposeAgreement",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProposeAgreementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposeAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agreements/{agreement_ref}/accept": {
+      "post": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Approve an Agreement",
+        "description": "Approve an incoming Agreement",
+        "operationId": "ApproveAgreement",
+        "parameters": [
+          {
+            "name": "agreement_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "A.2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApproveAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agreements/{agreement_ref}/decline": {
+      "post": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Decline and Agreement",
+        "description": "Decline an incoming Agreement",
+        "operationId": "DeclineAgreement",
+        "parameters": [
+          {
+            "name": "agreement_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "A.2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeclineAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agreements/{agreement_ref}": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Get an Agreement",
+        "description": "Get a single Agreement by its reference",
+        "operationId": "GetAgreement",
+        "parameters": [
+          {
+            "name": "agreement_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "A.2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Cancel an Agreement",
+        "description": "An agreement can be cancelled by the initiator at any time whilst the authoriser (agreement recipient) can only cancel a previously accepted agreement.",
+        "operationId": "CancelAgreement",
+        "parameters": [
+          {
+            "name": "agreement_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "A.2"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/agreements/incoming": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List incoming Agreements",
+        "description": "By default, all incoming agreements will be returned. You can apply filters to your query to customise the returned agreements.\n",
+        "operationId": "ListIncomingAgreements",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "initiator_id",
+            "in": "query",
+            "description": "Initiator ID (`contact.id`), single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2c4dec90-8a4c-4685-b620-bd1d7ca05a60"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Multiple values, exact match",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "enum": [
+                "proposed",
+                "accepted",
+                "declined",
+                "cancelled"
+              ]
+            },
+            "example": [
+              "proposed"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListIncomingAgreementsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agreements/outgoing": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List outgoing Agreements",
+        "description": "By default, all outgoing agreements will be returned. You can apply filters to your query to customise the returned agreements.",
+        "operationId": "ListOutgoingAgreements",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "authoriser_id",
+            "in": "query",
+            "description": "Authoriser ID (`contact.id`), single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2c4dec90-8a4c-4685-b620-bd1d7ca05a60"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Exact match",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "enum": [
+                "proposed",
+                "accepted",
+                "declined",
+                "cancelled"
+              ]
+            },
+            "example": [
+              "proposed"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutgoingAgreementsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Add a Split Contact",
+        "description": "Add a Split Contact",
+        "operationId": "AddASplitContact",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddASplitContactRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddASplitContactResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "List all Contacts",
+        "description": "By default, all contacts will be returned. You can apply filters to your query to customise the returned contact list.\n",
+        "operationId": "ListAllContacts",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Single value, string search",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Some name"
+          },
+          {
+            "name": "nickname",
+            "in": "query",
+            "description": "Single value, string search",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Some_nickname"
+          },
+          {
+            "name": "bank_account_id",
+            "in": "query",
+            "description": "Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "095c5ab7-7fa8-40fd-b317-cddbbf4c8fbc"
+          },
+          {
+            "name": "bank_account_branch_code",
+            "in": "query",
+            "description": "Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "068231"
+          },
+          {
+            "name": "bank_account_account_number",
+            "in": "query",
+            "description": "Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "4395959"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAllContactsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/new/anyone": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Add an Anyone Contact",
+        "description": "When you want to pay somebody that doesn't have a Split account, you can add them as an Anyone Contact.\n\n<aside class=\"notice\">\n  Anyone Contacts added this way can be used solely as payout recipients in a Payment.\n</aside>\n",
+        "operationId": "AddAnAnyoneContact",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAnAnyoneContactRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddAnAnyoneContactResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get a Contact",
+        "description": "Get a single Contact by its ID",
+        "operationId": "GetAContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Contact ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            },
+            "example": "55afddde-4296-4daf-8e49-7ba481ef9608"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAContactResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Remove a Contact",
+        "description": "<aside class=\"noticed\">Removing a contact will not affect your transaction history.</aside>\n",
+        "operationId": "RemoveAContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Contact ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            },
+            "example": "55afddde-4296-4daf-8e49-7ba481ef9608"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update a Contact",
+        "description": "You can update the name of any Contact. This is essentially an alias you can use to provide something contextually meaninful.\n\n<aside class=\"notice\">\n  Any previous transactions to that Contact will retain the Contact name that was current at the time.\n</aside>\n",
+        "operationId": "UpdateAContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Contact ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "55afddde-4296-4daf-8e49-7ba481ef9608"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAContactRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateAContactResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "open_agreements": {
+      "post": {
+        "tags": [
+          "Open Agreements"
+        ],
+        "summary": "Create an Open Agreement",
+        "description": "Create an Open Agreement that can be accepted by anyone",
+        "operationId": "CreateOpenAgreement",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOpenAgreementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOpenAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Open Agreements"
+        ],
+        "summary": "List all Open Agreements",
+        "description": "",
+        "operationId": "ListAllOpenAgreements",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAllOpenAgreementsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "open_agreements/{open_agreement_ref}/activate": {
+      "post": {
+        "tags": [
+          "Open Agreements"
+        ],
+        "summary": "Activate a closed Open Agreement",
+        "description": "",
+        "operationId": "ActivateOpenAgreement",
+        "parameters": [
+          {
+            "name": "open_agreement_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "OA.1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivateOpenAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "open_agreements/{open_agreement_ref}/close": {
+      "post": {
+        "tags": [
+          "Open Agreements"
+        ],
+        "summary": "Close an active Open Agreement",
+        "description": "",
+        "operationId": "CloseOpenAgreement",
+        "parameters": [
+          {
+            "name": "open_agreement_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "OA.1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloseOpenAgreementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payments": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Make a Payment",
+        "description": "",
+        "operationId": "MakeAPayment",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MakeAPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MakeAPaymentResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "List all Payments",
+        "description": "",
+        "operationId": "ListAllPayments",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page of results to return",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAllPaymentsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payments/{payment_ref}": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Get a Payment",
+        "description": "Get a single payment by its reference",
+        "operationId": "GetAPayment",
+        "parameters": [
+          {
+            "name": "payment_ref",
+            "in": "path",
+            "description": "Payment reference",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PB.1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAPaymentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payouts/{debit_ref}": {
+      "delete": {
+        "tags": [
+          "Payouts"
+        ],
+        "summary": "Void a Payout",
+        "description": "You can void any Payout debit from your account that has not yet matured. In the case where it has matured, you can send a Payment Request to the Payout recipient once the Payout has successfully cleared.\n",
+        "operationId": "VoidAPayout",
+        "parameters": [
+          {
+            "name": "debit_ref",
+            "in": "path",
+            "description": "Payout debit reference",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "D.1"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "payment_requests": {
+      "post": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "Request Payment",
+        "description": "",
+        "operationId": "MakeAPaymentRequest",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MakeAPaymentRequestRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MakeAPaymentRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payment_requests/{payment_request_ref}/approve": {
+      "post": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "Approve a Payment Request",
+        "description": "",
+        "operationId": "ApprovePaymentRequest",
+        "parameters": [
+          {
+            "name": "payment_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PR.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApprovePaymentRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payment_requests/{payment_request_ref}/decline": {
+      "post": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "Decline a Payment Request",
+        "description": "",
+        "operationId": "DeclinePaymentRequest",
+        "parameters": [
+          {
+            "name": "payment_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PR.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeclinePaymentRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payment_requests/{payment_request_ref}": {
+      "get": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "Get a Payment Request",
+        "description": "",
+        "operationId": "GetAPaymentRequest",
+        "parameters": [
+          {
+            "name": "payment_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PR.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAPaymentRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "Cancel a Payment Request",
+        "description": "A PR can only be cancelled if it has not yet matured.",
+        "operationId": "CancelAPaymentRequest",
+        "parameters": [
+          {
+            "name": "payment_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PR.3"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "payment_requests/incoming": {
+      "get": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "List incoming Payment Requests",
+        "description": "",
+        "operationId": "ListIncomingPaymentRequests",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": null,
+                  "$ref": "#/components/schemas/ListIncomingPaymentRequestsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payment_requests/outgoing": {
+      "get": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "List outgoing Payment Requests",
+        "description": "",
+        "operationId": "ListOutgoingPaymentRequests",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutgoingPaymentRequestsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payment_requests/{payment_request_ref}/history": {
+      "get": {
+        "tags": [
+          "Payment Requests"
+        ],
+        "summary": "Get a Payment Request's history",
+        "description": "Gives you visibility of the entire Payment Request lifecycle including the generated debit and credit transactions.",
+        "operationId": "GetAPaymentRequest'sHistory",
+        "parameters": [
+          {
+            "name": "payment_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PR.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAPaymentRequestsHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "credits/{credit_ref}/refunds": {
+      "post": {
+        "tags": [
+          "Refunds"
+        ],
+        "summary": "Issue a Refund",
+        "description": "Certain rules apply to the issuance of a refund:\n\n* Must be applied against a successfully cleared payout (credit)\n* The refund amount may not exceed the original amount of the credit\n",
+        "operationId": "IssueARefund",
+        "parameters": [
+          {
+            "name": "credit_ref",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueARefundRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssueARefundResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refunds/incoming": {
+      "get": {
+        "tags": [
+          "Refunds"
+        ],
+        "summary": "List incoming Refunds",
+        "description": "",
+        "operationId": "ListIncomingRefunds|Get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListIncomingRefundsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refunds/outgoing": {
+      "get": {
+        "tags": [
+          "Refunds"
+        ],
+        "summary": "List outgoing Refunds",
+        "description": "",
+        "operationId": "ListOutgoingRefunds",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutgoingRefundsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refunds/{refund_ref}": {
+      "get": {
+        "tags": [
+          "Refunds"
+        ],
+        "summary": "Retrieve a Refund",
+        "description": "Get a single Refund by its reference",
+        "operationId": "RetrieveARefund",
+        "parameters": [
+          {
+            "name": "refund_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PRF.1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetrieveARefundResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payout_refund_requests": {
+      "post": {
+        "tags": [
+          "Refund Requests"
+        ],
+        "summary": "Request a Refund",
+        "description": "Certain rules apply to the creation of a Refund Request:\n\n* Must be applied against a successfully cleared payout (debit)\n* The refund amount requested from a Payout recipient may not exceed the original amount of the Payout\n",
+        "operationId": "RequestARefund",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestARefundRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestARefundResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payout_refund_requests/{payout_refund_request_ref}/approve": {
+      "post": {
+        "tags": [
+          "Refund Requests"
+        ],
+        "summary": "Approve Refund Request",
+        "description": "",
+        "operationId": "ApproveRefundRequest",
+        "parameters": [
+          {
+            "name": "payout_refund_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PR.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApprovePayoutRefundRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payout_refund_requests/{payout_refund_request_ref}/decline": {
+      "post": {
+        "tags": [
+          "Refund Requests"
+        ],
+        "summary": "Decline Refund Request",
+        "description": "",
+        "operationId": "DeclineRefundRequest",
+        "parameters": [
+          {
+            "name": "payout_refund_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PR.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeclinePayoutRefundRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payout_refund_requests/{payout_refund_request_ref}": {
+      "get": {
+        "tags": [
+          "Refund Requests"
+        ],
+        "summary": "Retrieve a Refund Request",
+        "description": "Get a specific Refund Request by its reference",
+        "operationId": "RetrieveARefundRequest",
+        "parameters": [
+          {
+            "name": "payout_refund_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "RR.2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetrieveARefundRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Refund Requests"
+        ],
+        "summary": "Cancel a Refund Request",
+        "description": "A Refund Request can only be canceled if it is pending approval.",
+        "operationId": "CancelARefundRequest",
+        "parameters": [
+          {
+            "name": "payout_refund_request_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "RR.2"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "payout_refund_requests/incoming": {
+      "get": {
+        "tags": [
+          "Refund Requests"
+        ],
+        "summary": "List incoming Refund Requests",
+        "description": "",
+        "operationId": "ListIncomingRefundRequests",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListIncomingRefundRequestsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "payout_refund_requests/outgoing": {
+      "get": {
+        "tags": [
+          "Refund Requests"
+        ],
+        "summary": "List outgoing Refund Requests",
+        "description": "**Endpoint:** `/payout_refund_requests/outgoing{?page}`",
+        "operationId": "ListOutgoingRefundRequests",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return, single value, exact match",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListIncomingRefundRequestsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "transactions": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "List all transactions",
+        "description": "",
+        "operationId": "ListAllTransactions",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page of results to return, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "ref",
+            "in": "query",
+            "description": "Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "D.1i"
+          },
+          {
+            "name": "parent_ref",
+            "in": "query",
+            "description": "Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "PRF.92a"
+          },
+          {
+            "name": "bank_ref",
+            "in": "query",
+            "description": "Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "DT.12"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Multiple values, exact match",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "enum": [
+                "maturing",
+                "matured",
+                "processing",
+                "clearing",
+                "cleared",
+                "rejected",
+                "returned",
+                "voided",
+                "pending_verification",
+                "paused"
+              ]
+            },
+            "example": [
+              "maturing"
+            ]
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Multiple values, exact match",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "enum": [
+                "payout",
+                "payout_refund",
+                "invoice"
+              ]
+            },
+            "example": [
+              "payout"
+            ]
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Multiple values, exact match",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "enum": [
+                "debit",
+                "credit"
+              ]
+            },
+            "example": [
+              "debit"
+            ]
+          },
+          {
+            "name": "other_party",
+            "in": "query",
+            "description": "Single value, string search",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "party people"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "Single value, string search",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "some description"
+          },
+          {
+            "name": "min_amount",
+            "in": "query",
+            "description": "Cents, Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 500
+          },
+          {
+            "name": "max_amount",
+            "in": "query",
+            "description": "Cents, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1000
+          },
+          {
+            "name": "min_created_date",
+            "in": "query",
+            "description": "Date/time UTC ISO 8601 format, Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2017-05-10T00:00:00Z"
+          },
+          {
+            "name": "max_created_date",
+            "in": "query",
+            "description": "Date/time UTC ISO 8601 format, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2017-06-10T00:00:00Z"
+          },
+          {
+            "name": "min_matured_date",
+            "in": "query",
+            "description": "Date/time UTC ISO 8601 format, Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2017-05-10T00:00:00Z"
+          },
+          {
+            "name": "max_matured_date",
+            "in": "query",
+            "description": "Date/time UTC ISO 8601 format, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2017-06-10T00:00:00Z"
+          },
+          {
+            "name": "min_cleared_date",
+            "in": "query",
+            "description": "Date/time UTC ISO 8601 format, Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2017-05-10T00:00:00Z"
+          },
+          {
+            "name": "max_cleared_date",
+            "in": "query",
+            "description": "Date/time UTC ISO 8601 format, single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2017-06-10T00:00:00Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAllTransactionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "user": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user details",
+        "description": "",
+        "operationId": "GetUserDetails",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserDetailsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "/oauth/authorize",
+            "tokenUrl": "/oauth/token",
+            "refreshUrl": "/oauth/token",
+            "scopes": {
+              "public": "Access your public information",
+              "contacts": "Manage your contacts",
+              "payments": "Manage your payments",
+              "payment_requests": "Manage your payment requests",
+              "refund_requests": "Manage your refund requests",
+              "refunds": "Manage your refunds",
+              "agreements": "Manage your agreements",
+              "transactions": "Access your transaction history",
+              "open_agreements": "Manage your open agreements"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ProposeAgreementRequest": {
+        "title": "Propose an Agreement (request)",
+        "required": [
+          "authoriser_id",
+          "terms"
+        ],
+        "type": "object",
+        "properties": {
+          "authoriser_id": {
+            "type": "string",
+            "description": "The Contact's account ID (`Contact.account.id`)",
+            "example": "8df89c16-330f-462b-8891-808d7bdceb7f"
+          },
+          "terms": {
+            "$ref": "#/components/schemas/Terms"
+          }
+        },
+        "example": {
+          "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+          "terms": {
+            "per_payout": {
+              "min_amount": null,
+              "max_amount": 10000
+            },
+            "per_frequency": {
+              "days": 7,
+              "max_amount": 1000000
+            }
+          }
+        }
+      },
+      "Terms": {
+        "title": "Agreement terms",
+        "required": [
+          "per_payout",
+          "per_frequency"
+        ],
+        "type": "object",
+        "description": "Terms",
+        "properties": {
+          "per_payout": {
+            "$ref": "#/components/schemas/PerPayout"
+          },
+          "per_frequency": {
+            "$ref": "#/components/schemas/PerFrequency"
+          }
+        }
+      },
+      "PerPayout": {
+        "title": "Per payout terms",
+        "type": "object",
+        "properties": {
+          "min_amount": {
+            "type": "number",
+            "nullable": true,
+            "description": "Minimum amount in cents a PR can be in order to be auto-approved",
+            "example": 0
+          },
+          "max_amount": {
+            "type": "number",
+            "nullable": true,
+            "description": "Maximum amount in cents a PR can be in order to be auto-approved",
+            "example": 10000
+          }
+        }
+      },
+      "PerFrequency": {
+        "title": "Per frequency terms",
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "number",
+            "nullable": true,
+            "description": "Amount of days to apply against the frequency",
+            "example": 7
+          },
+          "max_amount_": {
+            "type": "number",
+            "nullable": true,
+            "description": "Maximum amount in cents the total of all PRs can be for the duration of the frequency",
+            "example": 1000000
+          }
+        }
+      },
+      "ProposeAgreementResponse": {
+        "title": "Propose an Agreement (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "A.2",
+            "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+            "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+            "status": "proposed",
+            "responded_at": null,
+            "created_at": "2017-03-20T00:53:27Z",
+            "terms": {
+              "per_payout": {
+                "max_amount": 10000,
+                "min_amount": null
+              },
+              "per_frequency": {
+                "days": 7,
+                "max_amount": 1000000
+              }
+            }
+          }
+        }
+      },
+      "ApproveAgreementResponse": {
+        "title": "Approve an Agreement (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "A.2",
+            "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+            "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+            "status": "accepted",
+            "responded_at": "2017-03-20T02:13:11Z",
+            "created_at": "2017-03-20T00:53:27Z",
+            "terms": {
+              "per_payout": {
+                "max_amount": 10000,
+                "min_amount": 1
+              },
+              "per_frequency": {
+                "days": 7,
+                "max_amount": 1000000
+              }
+            }
+          }
+        }
+      },
+      "DeclineAgreementResponse": {
+        "title": "Decline an Agreement (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "A.2",
+            "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+            "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+            "status": "declined",
+            "responded_at": "2017-03-20T02:13:11Z",
+            "created_at": "2017-03-20T00:53:27Z",
+            "terms": {
+              "per_payout": {
+                "max_amount": 10000,
+                "min_amount": 1
+              },
+              "per_frequency": {
+                "days": 7,
+                "max_amount": 1000000
+              }
+            }
+          }
+        }
+      },
+      "GetAgreementResponse": {
+        "title": "Get an Agreement (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "A.2",
+            "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+            "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+            "status": "approved",
+            "responded_at": "2017-03-20T02:13:11Z",
+            "created_at": "2017-03-20T00:53:27Z",
+            "terms": {
+              "per_payout": {
+                "max_amount": 10000,
+                "min_amount": 1
+              },
+              "per_frequency": {
+                "days": 7,
+                "max_amount": 1000000
+              }
+            }
+          }
+        }
+      },
+      "ListIncomingAgreementsResponse": {
+        "title": "List incoming Agreements (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "A.2",
+              "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+              "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+              "status": "proposed",
+              "responded_at": null,
+              "created_at": "2017-03-20T00:53:27Z",
+              "terms": {
+                "per_payout": {
+                  "max_amount": 10000,
+                  "min_amount": 1
+                },
+                "per_frequency": {
+                  "days": 7,
+                  "max_amount": 1000000
+                }
+              }
+            },
+            {
+              "ref": "A.1",
+              "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+              "authoriser_id": "56df206a-aaff-471a-b075-11882bc8906a",
+              "status": "proposed",
+              "responded_at": null,
+              "created_at": "2017-03-16T22:51:48Z",
+              "terms": {
+                "per_payout": {
+                  "max_amount": 5000,
+                  "min_amount": 0
+                },
+                "per_frequency": {
+                  "days": "1",
+                  "max_amount": 10000
+                }
+              }
+            }
+          ]
+        }
+      },
+      "ListOutgoingAgreementsResponse": {
+        "title": "List outgoing Agreements (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "A.4",
+              "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+              "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+              "status": "proposed",
+              "responded_at": null,
+              "created_at": "2017-03-20T00:53:27Z",
+              "terms": {
+                "per_payout": {
+                  "max_amount": 10000,
+                  "min_amount": 1
+                },
+                "per_frequency": {
+                  "days": 7,
+                  "max_amount": 1000000
+                }
+              }
+            },
+            {
+              "ref": "A.3",
+              "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+              "authoriser_id": "56df206a-aaff-471a-b075-11882bc8906a",
+              "status": "proposed",
+              "responded_at": null,
+              "created_at": "2017-03-16T22:51:48Z",
+              "terms": {
+                "per_payout": {
+                  "max_amount": 5000,
+                  "min_amount": 0
+                },
+                "per_frequency": {
+                  "days": "1",
+                  "max_amount": 10000
+                }
+              }
+            }
+          ]
+        }
+      },
+      "CreateOpenAgreementRequest": {
+        "title": "Create an Open Agreement (request)",
+        "required": [
+          "title",
+          "terms"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the Open Agreement (Visible to authorisers)",
+            "example": "Subscription Plan A"
+          },
+          "terms": {
+            "$ref": "#/components/schemas/Terms"
+          }
+        },
+        "example": {
+          "title": "Subscription Plan A",
+          "terms": {
+            "per_payout": {
+              "min_amount": null,
+              "max_amount": 10000
+            },
+            "per_frequency": {
+              "days": 7,
+              "max_amount": 1000000
+            }
+          }
+        }
+      },
+      "CreateOpenAgreementResponse": {
+        "title": "Create an Open Agreement (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "OA.1",
+            "title": "Subscription Plan A",
+            "status": "active",
+            "created_at": "2017-03-20T00:53:27Z",
+            "terms": {
+              "per_payout": {
+                "max_amount": 10000,
+                "min_amount": null
+              },
+              "per_frequency": {
+                "days": 7,
+                "max_amount": 1000000
+              }
+            }
+          }
+        }
+      },
+      "ListAllOpenAgreementsResponse": {
+        "title": "List all Open Agreements (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "OA.1",
+              "title": "Subscription Plan A",
+              "status": "active",
+              "created_at": "2017-03-20T00:53:27Z",
+              "terms": {
+                "per_payout": {
+                  "max_amount": 10000,
+                  "min_amount": null
+                },
+                "per_frequency": {
+                  "days": 7,
+                  "max_amount": 1000000
+                }
+              },
+              "link": "https://go-sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation"
+            },
+            {
+              "ref": "OA.2",
+              "title": "Subscription Plan B",
+              "status": "closed",
+              "created_at": "2017-03-20T00:53:27Z",
+              "terms": {
+                "per_payout": {
+                  "max_amount": 10000,
+                  "min_amount": null
+                },
+                "per_frequency": {
+                  "days": null,
+                  "max_amount": null
+                }
+              },
+              "link": "https://go-sandbox.split.cash/open_agreements/948e3662-154d-42d1-bdc9-a05c251d3981/agreements/invitation"
+            }
+          ]
+        }
+      },
+      "ActivateOpenAgreementResponse": {
+        "title": "Activate Open Agreement Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "OA.1",
+            "title": "Subscription Plan A",
+            "status": "active",
+            "created_at": "2017-03-20T00:53:27Z",
+            "terms": {
+              "per_payout": {
+                "max_amount": 10000,
+                "min_amount": null
+              },
+              "per_frequency": {
+                "days": 7,
+                "max_amount": 1000000
+              }
+            },
+            "link": "https://go-sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation"
+          }
+        }
+      },
+      "CloseOpenAgreementResponse": {
+        "title": "Close Open Agreement Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "OA.1",
+            "title": "Subscription Plan A",
+            "status": "closed",
+            "created_at": "2017-03-20T00:53:27Z",
+            "terms": {
+              "per_payout": {
+                "max_amount": 10000,
+                "min_amount": null
+              },
+              "per_frequency": {
+                "days": 7,
+                "max_amount": 1000000
+              }
+            },
+            "link": "https://go-sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation"
+          }
+        }
+      },
+      "AddASplitContactRequest": {
+        "title": "Add a Split Contact (request)",
+        "required": [
+          "nickname"
+        ],
+        "type": "object",
+        "properties": {
+          "nickname": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "nickname": "outstanding_tours"
+        }
+      },
+      "AddASplitContactResponse": {
+        "title": "Add a Split Contact (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "id": "6a7ed958-f1e8-42dc-8c02-3901d7057357",
+            "name": "Oustanding Tours Pty Ltd",
+            "email": null,
+            "type": "Split account",
+            "bank_account": {
+              "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
+              "account_number": "947434694",
+              "branch_code": "304304",
+              "state": "verified"
+            },
+            "account": {
+              "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d",
+              "nickname": "outstanding_tours",
+              "abn": "123456789",
+              "name": "Outstanding Tours Pty Ltd"
+            }
+          }
+        }
+      },
+      "ListAllContactsResponse": {
+        "title": "List all Contacts (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "id": "6a7ed958-f1e8-42dc-8c02-3901d7057357",
+              "name": "Oustanding Tours Pty Ltd",
+              "email": null,
+              "type": "Split account",
+              "bank_account": {
+                "id": "095c5ab7-7fa8-40fd-b317-cddbbf4c8fbc",
+                "account_number": "494307",
+                "branch_code": "435434",
+                "state": "verified"
+              },
+              "account": {
+                "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d",
+                "nickname": "outstanding_tours",
+                "abn": "123456789",
+                "name": "Oustanding Tours Pty Ltd"
+              }
+            },
+            {
+              "id": "49935c67-c5df-4f00-99f4-1413c18a89a0",
+              "name": "Adventure Dudes Pty Ltd",
+              "email": null,
+              "type": "Split account",
+              "bank_account": {
+                "id": "861ff8e4-7acf-4897-9e53-e7c5ae5f7cc0",
+                "account_number": "4395959",
+                "branch_code": "068231",
+                "state": "verified"
+              },
+              "account": {
+                "id": "362f7fe8-4af2-4902-b3d7-b5ab704ef2e7",
+                "nickname": "adventure_dudes",
+                "abn": "126754389",
+                "name": "Adventure Dudes Pty Ltd"
+              }
+            },
+            {
+              "id": "eb3266f9-e172-4b6c-b802-fe5ac4d3250a",
+              "name": "Surfing World Pty Ltd",
+              "email": null,
+              "type": "Split account",
+              "bank_account": {
+                "id": "N/A",
+                "account_number": "N/A",
+                "branch_code": "N/A",
+                "state": "disabled"
+              },
+              "account": {
+                "id": "a31dc907-9c7a-4736-84c9-1149cf03de42",
+                "nickname": "surfing_world",
+                "abn": "295443789",
+                "name": "Surfing World Pty Ltd"
+              }
+            },
+            {
+              "id": "6a7ed958-f1e8-42dc-8c02-3901d7057357",
+              "name": "Hunter Thompson",
+              "email": "hunter@batcountry.com",
+              "type": "anyone",
+              "bank_account": {
+                "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
+                "account_number": "123456789",
+                "branch_code": "123456",
+                "state": "pending_verification"
+              },
+              "anyone_account": {
+                "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d"
+              }
+            }
+          ]
+        }
+      },
+      "AddAnAnyoneContactRequest": {
+        "title": "Add an Anyone Contact (request)",
+        "required": [
+          "name",
+          "email",
+          "branch_code",
+          "account_number"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "branch_code": {
+            "type": "string"
+          },
+          "account_number": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "Hunter Thompson",
+          "email": "hunter@batcountry.com",
+          "branch_code": "123456",
+          "account_number": "123456789"
+        }
+      },
+      "AddAnAnyoneContactResponse": {
+        "title": "Add an Anyone Contact (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "id": "6a7ed958-f1e8-42dc-8c02-3901d7057357",
+            "name": "Hunter Thompson",
+            "email": "hunter@batcountry.com",
+            "type": "anyone",
+            "bank_account": {
+              "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
+              "account_number": "123456789",
+              "branch_code": "123456",
+              "state": "pending_verification"
+            },
+            "anyone_account": {
+              "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d"
+            }
+          }
+        }
+      },
+      "GetAContactResponse": {
+        "title": "Get a Contact (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "id": "fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb",
+            "name": "Oustanding Tours Pty Ltd",
+            "email": null,
+            "type": "Split account",
+            "bank_account": {
+              "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
+              "account_number": "947434694",
+              "branch_code": "304304",
+              "state": "pending_verification"
+            },
+            "account": {
+              "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d",
+              "nickname": "outstanding_tours",
+              "abn": "123456789",
+              "name": "Outstanding Tours Pty Ltd"
+            }
+          }
+        }
+      },
+      "UpdateAContactRequest": {
+        "title": "Update a Contact (request)",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "My very own alias"
+        }
+      },
+      "UpdateAContactResponse": {
+        "title": "Update a Contact (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "id": "fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb",
+            "name": "My very own alias",
+            "email": null,
+            "type": "Split account",
+            "bank_account": {
+              "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
+              "account_number": "947434694",
+              "branch_code": "304304",
+              "state": "pending_verification"
+            },
+            "account": {
+              "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d",
+              "nickname": "outstanding_tours",
+              "abn": "123456789",
+              "name": "Outstanding Tours Pty Ltd"
+            }
+          }
+        }
+      },
+      "MakeAPaymentRequest": {
+        "title": "Make a Payment (request)",
+        "required": [
+          "description",
+          "matures_at",
+          "payouts"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "User description. Only visible to the payer",
+            "example": "The SuperPackage"
+          },
+          "matures_at": {
+            "type": "string",
+            "description": "Date & time in UTC ISO8601 the payment should be processed",
+            "example": "9/13/2016 12:00:00 AM"
+          },
+          "payouts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payouts"
+            },
+            "description": "One or many contact to pay (2 recipients in this example)"
+          },
+          "metadata": {
+            "description": "Optional object to allow custom and configuration values",
+            "$ref": "#/components/schemas/Metadata"
+          }
+        },
+        "example": {
+          "description": "The SuperPackage",
+          "matures_at": "2016-09-13T00:00:00Z",
+          "payouts": [
+            {
+              "amount": 30000,
+              "description": "A tandem skydive jump SB23094",
+              "recipient_id": "48b89364-1577-4c81-ba02-96705895d457",
+              "metadata": {
+                "invoice_ref": "BILL-0001",
+                "invoice_id": "c80a9958-e805-47c0-ac2a-c947d7fd778d",
+                "custom_key": "Custom string",
+                "another_custom_key": "Maybe a URL"
+              }
+            },
+            {
+              "amount": 30000,
+              "description": "A scuba dive SDS5464",
+              "recipient_id": "dc6f1e60-3803-43ca-a200-7d641816f57f"
+            }
+          ],
+          "metadata": {
+            "custom_key": "Custom string",
+            "another_custom_key": "Maybe a URL"
+          }
+        }
+      },
+      "Payouts": {
+        "title": "Payouts",
+        "required": [
+          "amount",
+          "description",
+          "recipient_id"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Amount in cents to pay the recipient",
+            "example": 30000
+          },
+          "description": {
+            "type": "string",
+            "description": "Description that both the payer an recipient can see",
+            "example": "A tandem skydive jump SB23094"
+          },
+          "recipient_id": {
+            "type": "string",
+            "description": "Contact to pay (`Contact.id`)",
+            "example": "48b89364-1577-4c81-ba02-96705895d457"
+          },
+          "metadata": {
+            "description": "Optional object to allow custom and configuration values",
+            "$ref": "#/components/schemas/Metadata"
+          }
+        }
+      },
+      "Metadata": {
+        "title": "Metadata",
+        "type": "object",
+        "properties": {},
+        "example": {
+          "custom_key": "Custom string",
+          "another_custom_key": "Maybe a URL"
+        }
+      },
+      "MakeAPaymentResponse": {
+        "title": "Make a Payment (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PB.1",
+            "payouts": [
+              {
+                "ref": "D.1",
+                "invoice_ref": "BILL-0001",
+                "batch_description": "The SuperPackage",
+                "matures_at": "2016-09-13T23:50:44Z",
+                "created_at": "2016-09-10T23:50:44Z",
+                "status": "maturing",
+                "amount": 30000,
+                "description": "A tandem skydive jump SB23094",
+                "from_id": "83623359-e86e-440c-9780-432a3bc3626f",
+                "to_id": "48b89364-1577-4c81-ba02-96705895d457",
+                "metadata": {
+                  "invoice_ref": "BILL-0001",
+                  "invoice_id": "c80a9958-e805-47c0-ac2a-c947d7fd778d",
+                  "custom_key": "Custom string",
+                  "another_custom_key": "Maybe a URL"
+                }
+              },
+              {
+                "ref": "D.2",
+                "invoice_ref": null,
+                "batch_description": "The SuperPackage",
+                "matures_at": "2016-09-13T23:50:44Z",
+                "created_at": "2016-09-10T23:50:44Z",
+                "status": "maturing",
+                "amount": 30000,
+                "description": "A scuba dive SDS5464",
+                "from_id": "48b89364-1577-4c81-ba02-96705895d457",
+                "to_id": "dc6f1e60-3803-43ca-a200-7d641816f57f"
+              }
+            ],
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "ApprovePaymentRequestResponse": {
+        "title": "Approve Payment Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PR.3",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+            "status": "approved",
+            "responded_at": "2016-12-19T02:38:04Z",
+            "created_at": "2016-12-19T02:10:56Z",
+            "debit_ref": "D.b",
+            "payout": {
+              "amount": 99000,
+              "description": "The elite package for 4",
+              "matures_at": "2016-12-25T00:00:00Z"
+            },
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "DeclinePaymentRequestResponse": {
+        "title": "Decline a Payment Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PR.3",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+            "status": "declined",
+            "responded_at": "2016-12-19T02:38:04Z",
+            "created_at": "2016-12-19T02:10:56Z",
+            "debit_ref": null,
+            "payout": {
+              "amount": 99000,
+              "description": "The elite package for 4",
+              "matures_at": "2016-12-25T00:00:00Z"
+            },
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "ListAllPaymentsResponse": {
+        "title": "List all Payments (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "PB.1",
+              "payouts": [
+                {
+                  "ref": "D.1",
+                  "invoice_ref": null,
+                  "batch_description": "This description is only available to the payer",
+                  "matures_at": "2016-09-13T23:50:44Z",
+                  "created_at": "2016-09-10T23:50:44Z",
+                  "status": "maturing",
+                  "amount": 30000,
+                  "description": "The recipient will see this description",
+                  "from_id": "83623359-e86e-440c-9780-432a3bc3626f",
+                  "to_id": "48b89364-1577-4c81-ba02-96705895d457",
+                  "metadata": {
+                    "invoice_ref": "BILL-0001",
+                    "invoice_id": "c80a9958-e805-47c0-ac2a-c947d7fd778d",
+                    "custom_key": "Custom string",
+                    "another_custom_key": "Maybe a URL"
+                  }
+                },
+                {
+                  "ref": "D.2",
+                  "invoice_ref": null,
+                  "batch_description": "This description is only available to the payer",
+                  "matures_at": "2016-09-13T23:50:44Z",
+                  "created_at": "2016-09-10T23:50:44Z",
+                  "status": "maturing",
+                  "amount": 30000,
+                  "description": "The recipient will see this description",
+                  "from_id": "48b89364-1577-4c81-ba02-96705895d457",
+                  "to_id": "dc6f1e60-3803-43ca-a200-7d641816f57f"
+                }
+              ],
+              "metadata": {
+                "custom_key": "Custom string",
+                "another_custom_key": "Maybe a URL"
+              }
+            }
+          ]
+        }
+      },
+      "GetAPaymentResponse": {
+        "title": "Get a Payment (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PB.1",
+            "payouts": [
+              {
+                "ref": "D.1",
+                "invoice_ref": null,
+                "batch_description": "The SuperPackage",
+                "matures_at": "2016-09-13T23:50:44Z",
+                "created_at": "2016-09-10T23:50:44",
+                "status": "maturing",
+                "amount": 30000,
+                "description": "A tandem skydive jump SB23094",
+                "from_id": "83623359-e86e-440c-9780-432a3bc3626f",
+                "to_id": "48b89364-1577-4c81-ba02-96705895d457",
+                "metadata": {
+                  "invoice_ref": "BILL-0001",
+                  "invoice_id": "c80a9958-e805-47c0-ac2a-c947d7fd778d",
+                  "custom_key": "Custom string",
+                  "another_custom_key": "Maybe a URL"
+                }
+              },
+              {
+                "ref": "D.2",
+                "invoice_ref": null,
+                "batch_description": "The SuperPackage",
+                "matures_at": "2016-09-13T23:50:44Z",
+                "created_at": "2016-09-10T23:50:44Z",
+                "status": "maturing",
+                "amount": 30000,
+                "description": "A scuba dive SDS5464",
+                "from_id": "48b89364-1577-4c81-ba02-96705895d457",
+                "to_id": "dc6f1e60-3803-43ca-a200-7d641816f57f"
+              }
+            ],
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "MakeAPaymentRequestRequest": {
+        "title": "Make a Payment Request (request)",
+        "required": [
+          "description",
+          "matures_at",
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description visible to the initiator (payee) & authoriser (payer)",
+            "example": "Visible to both initiator and authoriser"
+          },
+          "matures_at": {
+            "type": "string",
+            "description": "Date & time in UTC ISO8601 that the payment will be processed if the request is approved",
+            "example": "12/19/2016 2:10:56 AM"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount in cents to pay the initiator",
+            "example": 99000
+          },
+          "authoriser_id": {
+            "type": "string",
+            "description": "The Split account's bank account that will be used to pay the PR (`Contact.data.bank_account.id`)'",
+            "example": "de86472c-c027-4735-a6a7-234366a27fc7"
+          },
+          "metadata": {
+            "description": "Optional object to allow custom and configuration values",
+            "$ref": "#/components/schemas/Metadata"
+          }
+        }
+      },
+      "MakeAPaymentRequestResponse": {
+        "title": "Make a Payment Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PR.3",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "de86472c-c027-4735-a6a7-234366a27fc7",
+            "status": "pending_approval",
+            "responded_at": null,
+            "created_at": "2016-12-19T02:10:56Z",
+            "credit_ref": null,
+            "payout": {
+              "amount": 99000,
+              "description": "The elite package for 4",
+              "matures_at": "2016-12-25T00:00:00Z"
+            },
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "GetAPaymentRequestResponse": {
+        "title": "Get a Payment Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PR.3",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+            "status": "approved",
+            "responded_at": "2016-12-19T02:38:04Z",
+            "created_at": "2016-12-19T02:10:56Z",
+            "credit_ref": "C.b",
+            "payout": {
+              "amount": 99000,
+              "description": "The elite package for 4",
+              "matures_at": "2016-12-25T00:00:00Z"
+            },
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "ListIncomingPaymentRequestsResponse": {
+        "title": "List incoming Payment Requests (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "PR.2",
+              "initiator_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+              "authoriser_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+              "status": "approved",
+              "responded_at": "2016-12-19T02:10:18Z",
+              "created_at": "2016-12-19T02:09:09Z",
+              "debit_ref": "D.a",
+              "payout": {
+                "amount": 30000,
+                "description": "The SuperPackage",
+                "matures_at": "2016-12-20T00:00:00Z"
+              }
+            },
+            {
+              "ref": "PR.3",
+              "initiator_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+              "authoriser_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+              "status": "pending_approval",
+              "responded_at": null,
+              "created_at": "2016-12-19T02:10:56Z",
+              "debit_ref": null,
+              "payout": {
+                "amount": 99000,
+                "description": "The elite package for 4",
+                "matures_at": "2016-12-25T00:00:00Z"
+              },
+              "metadata": {
+                "custom_key": "Custom string",
+                "another_custom_key": "Maybe a URL"
+              }
+            }
+          ]
+        }
+      },
+      "ListOutgoingPaymentRequestsResponse": {
+        "title": "List outgoing Payment Requests (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "PR.4",
+              "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+              "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+              "status": "approved",
+              "responded_at": "2016-12-19T02:10:18Z",
+              "created_at": "2016-12-19T02:09:09Z",
+              "credit_ref": "C.a",
+              "payout": {
+                "amount": 30000,
+                "description": "The SuperPackage",
+                "matures_at": "2016-12-20T00:00:00Z"
+              }
+            },
+            {
+              "ref": "PR.5",
+              "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+              "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+              "status": "pending_approval",
+              "responded_at": null,
+              "created_at": "2016-12-19T02:10:56Z",
+              "credit_ref": null,
+              "payout": {
+                "amount": 99000,
+                "description": "The elite package for 4",
+                "matures_at": "2016-12-25T00:00:00Z"
+              }
+            }
+          ]
+        }
+      },
+      "GetAPaymentRequestsHistoryResponse": {
+        "title": "Get a Payment Request's history (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "type": "payout_request",
+              "event": "requested",
+              "at": "2017-01-05T07:47:45Z",
+              "ref": "PR.3",
+              "by": "Fancy Pants (fancy_pants)"
+            },
+            {
+              "type": "payout_request",
+              "event": "approved",
+              "at": "2017-01-07T06:13:52Z",
+              "ref": "PR.3",
+              "by": "Lycra Co (lycra_co)"
+            },
+            {
+              "type": "debit",
+              "event": "scheduled",
+              "at": "2017-01-07T06:13:52Z",
+              "ref": "D.n",
+              "by": "Split Payments"
+            },
+            {
+              "type": "credit",
+              "event": "scheduled",
+              "at": "2017-01-07T06:13:52Z",
+              "ref": "C.e",
+              "by": "Split Payments"
+            },
+            {
+              "type": "debit",
+              "event": "matured",
+              "at": "2017-01-08T04:30:14Z",
+              "ref": "D.n",
+              "by": "Split Payments"
+            },
+            {
+              "type": "debit",
+              "event": "processing",
+              "at": "2017-01-08T04:30:14Z",
+              "ref": "D.n",
+              "by": "Split Payments"
+            },
+            {
+              "type": "debit",
+              "event": "clearing",
+              "at": "2017-01-08T19:02:20Z",
+              "ref": "D.n",
+              "by": "Split Payments"
+            },
+            {
+              "type": "debit",
+              "event": "cleared",
+              "at": "2017-01-11T19:07:52Z",
+              "ref": "D.n",
+              "by": "Split Payments"
+            },
+            {
+              "type": "credit",
+              "event": "matured",
+              "at": "2017-01-11T19:07:52Z",
+              "ref": "C.e",
+              "by": "Split Payments"
+            },
+            {
+              "type": "credit",
+              "event": "processing",
+              "at": "2017-01-12T04:30:25Z",
+              "ref": "C.e",
+              "by": "Split Payments"
+            },
+            {
+              "type": "credit",
+              "event": "clearing",
+              "at": "2017-01-12T05:17:32Z",
+              "ref": "C.e",
+              "by": "Split Payments"
+            },
+            {
+              "type": "credit",
+              "event": "cleared",
+              "at": "2017-01-15T05:27:12Z",
+              "ref": "C.e",
+              "by": "Split Payments"
+            }
+          ]
+        }
+      },
+      "IssueARefundRequest": {
+        "title": "Issue a Refund (request)",
+        "required": [
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Amount in cents refund",
+            "example": 500
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for the refund. Visible to both parties.",
+            "example": "Because reason"
+          },
+          "metadata": {
+            "description": "Optional object to allow custom and configuration values",
+            "$ref": "#/components/schemas/Metadata"
+          }
+        },
+        "example": {
+          "amount": 500,
+          "reason": "Because reason",
+          "metadata": {
+            "custom_key": "Custom string",
+            "another_custom_key": "Maybe a URL"
+          }
+        }
+      },
+      "IssueARefundResponse": {
+        "title": "Issue a Refund (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PRF.1",
+            "for_ref": "C.59",
+            "debit_ref": "D.hi",
+            "created_at": "2017-05-08T07:20:24Z",
+            "amount": 500,
+            "reason": "Because reason",
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "ListIncomingRefundsResponse": {
+        "title": "List incoming Refunds (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "PRF.2",
+              "for_ref": "D.5",
+              "credit_ref": "C.q",
+              "created_at": "2017-05-09T04:45:26Z",
+              "amount": 5,
+              "reason": "Because reason",
+              "metadata": {
+                "custom_key": "Custom string",
+                "another_custom_key": "Maybe a URL"
+              }
+            }
+          ]
+        }
+      },
+      "ListOutgoingRefundsResponse": {
+        "title": "List outgoing Refunds (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "PRF.2",
+              "for_ref": "C.5",
+              "debit_ref": "D.5a",
+              "created_at": "2017-05-09T04:45:26Z",
+              "amount": 5,
+              "reason": "Because reason",
+              "metadata": {
+                "custom_key": "Custom string",
+                "another_custom_key": "Maybe a URL"
+              }
+            }
+          ]
+        }
+      },
+      "RetrieveARefundResponse": {
+        "title": "Retrieve a Refund (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "PRF.1",
+            "for_ref": "C.59",
+            "debit_ref": "D.hi",
+            "created_at": "2017-05-08T07:20:24Z",
+            "amount": 500,
+            "reason": "Because reason",
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "RequestARefundRequest": {
+        "title": "Request a Refund (request)",
+        "required": [
+          "for_ref",
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "for_ref": {
+            "type": "string",
+            "description": "The Payout debit reference to refund against",
+            "example": "D.1"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount in cents to request from the original payout recipient",
+            "example": 500
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for the refund request. Visible to both parties.",
+            "example": "Because reason"
+          },
+          "metadata": {
+            "description": "Optional object to allow custom and configuration values",
+            "$ref": "#/components/schemas/Metadata"
+          }
+        },
+        "example": {
+          "for_ref": "D.1",
+          "amount": 500,
+          "reason": "Because reason",
+          "metadata": {
+            "custom_key": "Custom string",
+            "another_custom_key": "Maybe a URL"
+          }
+        }
+      },
+      "RequestARefundResponse": {
+        "title": "Request a Refund (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "RR.2",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+            "status": "pending_approval",
+            "responded_at": null,
+            "created_at": "2016-12-19T04:34:38Z",
+            "for_ref": "D.1",
+            "credit_ref": null,
+            "amount": 500,
+            "reason": "Because reasons",
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "RetrieveARefundRequestResponse": {
+        "title": "Retrieve a Refund Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "RR.2",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+            "status": "pending_approval",
+            "responded_at": null,
+            "created_at": "2016-12-19T04:34:38Z",
+            "for_ref": "D.1",
+            "credit_ref": null,
+            "amount": 10000,
+            "reason": "Because reasons",
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "ApprovePayoutRefundRequestResponse": {
+        "title": "Approve a Refund Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "RR.2",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+            "status": "approved",
+            "responded_at": "2016-12-19T04:42:59Z",
+            "created_at": "2016-12-19T04:34:38Z",
+            "for_ref": "C.1",
+            "debit_ref": "D.2c3",
+            "amount": 100,
+            "reason": "Because reasons",
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "DeclinePayoutRefundRequestResponse": {
+        "title": "Decline a Refund Request (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "ref": "RR.2",
+            "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+            "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+            "status": "declined",
+            "responded_at": "2016-12-19T04:42:59Z",
+            "created_at": "2016-12-19T04:34:38Z",
+            "for_ref": "D.1",
+            "debit_ref": null,
+            "amount": 100,
+            "reason": "Because reasons",
+            "metadata": {
+              "custom_key": "Custom string",
+              "another_custom_key": "Maybe a URL"
+            }
+          }
+        }
+      },
+      "ListIncomingRefundRequestsResponse": {
+        "title": "List incoming Refund Requests (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "RR.2",
+              "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+              "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+              "status": "approved",
+              "responded_at": "2016-12-19T04:42:59Z",
+              "created_at": "2016-12-19T04:34:38Z",
+              "for_ref": "C.1",
+              "debit_ref": "D.2c3",
+              "amount": 100,
+              "reason": "Because reasons",
+              "metadata": {
+                "custom_key": "Custom string",
+                "another_custom_key": "Maybe a URL"
+              }
+            }
+          ]
+        }
+      },
+      "ListOutgoingRefundRequestsResponse": {
+        "title": "List outgoing Refund Requests (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "RR.2",
+              "initiator_id": "ca7bc5b3-e47f-4153-96fb-bbe326b42772",
+              "authoriser_id": "fb6a9252-3818-44dc-b5aa-2195391a746f",
+              "status": "pending_approval",
+              "responded_at": null,
+              "created_at": "2016-12-19T04:34:38Z",
+              "for_ref": "D.1",
+              "credit_ref": null,
+              "amount": 10000,
+              "reason": "Because reasons",
+              "metadata": {
+                "custom_key": "Custom string",
+                "another_custom_key": "Maybe a URL"
+              }
+            }
+          ]
+        }
+      },
+      "ListAllTransactionsResponse": {
+        "title": "List all transactions (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "ref": "D.3",
+              "parent_ref": null,
+              "type": "debit",
+              "category": "payout_refund",
+              "created_at": "2016-12-07T23:15:00Z",
+              "matures_at": "2016-12-10T23:15:00Z",
+              "cleared_at": null,
+              "bank_ref": null,
+              "status": "Pending",
+              "party_name": "Sanford-Rees",
+              "party_nickname": "sanford-rees-8",
+              "description": null,
+              "amount": 1
+            },
+            {
+              "ref": "D.2",
+              "parent_ref": "PB.2",
+              "type": "debit",
+              "category": "payout",
+              "created_at": "2016-12-06T23:15:00Z",
+              "matures_at": "2016-12-09T23:15:00Z",
+              "cleared_at": null,
+              "bank_ref": null,
+              "status": " Pending",
+              "party_name": "Gutmann-Schmidt",
+              "party_nickname": "gutmann-schmidt-6",
+              "description": null,
+              "amount": 1
+            },
+            {
+              "ref": "C.2",
+              "parent_ref": null,
+              "type": "credit",
+              "category": "payout",
+              "created_at": "2016-12-05T23:15:00Z",
+              "matures_at": "2016-12-06T23:15:00Z",
+              "cleared_at": "2016-12-09T23:15:00Z",
+              "bank_ref": "CT.1",
+              "status": "Pending",
+              "party_name": "Price and Sons",
+              "party_nickname": "price-and-sons-2",
+              "description": "Money for jam",
+              "amount": 1
+            }
+          ]
+        }
+      },
+      "GetUserDetailsResponse": {
+        "title": "Get User details (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "data": {
+            "first_name": "Bear",
+            "last_name": "Dog",
+            "mobile_phone": "0456945832",
+            "email": "bear@dog.com",
+            "account": {
+              "name": "Dog Bones Inc",
+              "nickname": "dog-bones-inc",
+              "abn": "129959040",
+              "phone": "0418495033",
+              "street_address": "98 Acme Avenue",
+              "suburb": "Lead",
+              "state": "NSW",
+              "postcode": "2478"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
