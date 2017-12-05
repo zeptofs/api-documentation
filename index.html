@@ -1186,7 +1186,7 @@ curl -X POST https://api-sandbox.split.cash/agreements <span class="se">\</span>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>The Contact&#39;s account ID (<code>Contact.account.id</code>)</td>
+<td>The Contact&#39;s account ID (<code>Contact.data.account.id</code>)</td>
 </tr>
 <tr>
 <td>» terms</td>
@@ -4636,7 +4636,7 @@ curl -X POST https://api-sandbox.split.cash/payments <span class="se">\</span>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>Contact to pay (<code>Contact.id</code>)</td>
+<td>Contact bank account to pay (<code>Contact.data.bank_account.id</code>)</td>
 </tr>
 <tr>
 <td>»»» metadata</td>
@@ -5492,7 +5492,7 @@ curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\<
 <td>body</td>
 <td>string</td>
 <td>false</td>
-<td>The Split account&#39;s bank account that will be used to pay the PR (<code>Contact.data.bank_account.id</code>)&#39;</td>
+<td>The Contact bank account that will be used to pay the PR (<code>Contact.data.bank_account.id</code>)&#39;</td>
 </tr>
 <tr>
 <td>» metadata</td>
@@ -9392,7 +9392,7 @@ Accept: application/json
 <td>authoriser_id</td>
 <td>string</td>
 <td>true</td>
-<td>The Contact&#39;s account ID (<code>Contact.account.id</code>)</td>
+<td>The Contact&#39;s account ID (<code>Contact.data.account.id</code>)</td>
 </tr>
 <tr>
 <td>terms</td>
@@ -10384,7 +10384,7 @@ Accept: application/json
 <td>recipient_id</td>
 <td>string</td>
 <td>true</td>
-<td>Contact to pay (<code>Contact.id</code>)</td>
+<td>Contact bank account to pay (<code>Contact.data.bank_account.id</code>)</td>
 </tr>
 <tr>
 <td>metadata</td>
@@ -10699,7 +10699,7 @@ Accept: application/json
 <td>authoriser_id</td>
 <td>string</td>
 <td>false</td>
-<td>The Split account&#39;s bank account that will be used to pay the PR (<code>Contact.data.bank_account.id</code>)&#39;</td>
+<td>The Contact bank account that will be used to pay the PR (<code>Contact.data.bank_account.id</code>)&#39;</td>
 </tr>
 <tr>
 <td>metadata</td>

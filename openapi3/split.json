@@ -1837,7 +1837,7 @@
         "properties": {
           "authoriser_id": {
             "type": "string",
-            "description": "The Contact's account ID (`Contact.account.id`)",
+            "description": "The Contact's account ID (`Contact.data.account.id`)",
             "example": "8df89c16-330f-462b-8891-808d7bdceb7f"
           },
           "terms": {
@@ -2681,7 +2681,7 @@
           },
           "recipient_id": {
             "type": "string",
-            "description": "Contact to pay (`Contact.id`)",
+            "description": "Contact bank account to pay (`Contact.data.bank_account.id`)",
             "example": "48b89364-1577-4c81-ba02-96705895d457"
           },
           "metadata": {
@@ -2954,7 +2954,7 @@
           },
           "authoriser_id": {
             "type": "string",
-            "description": "The Split account's bank account that will be used to pay the PR (`Contact.data.bank_account.id`)'",
+            "description": "The Contact bank account that will be used to pay the PR (`Contact.data.bank_account.id`)'",
             "example": "de86472c-c027-4735-a6a7-234366a27fc7"
           },
           "metadata": {
