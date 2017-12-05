@@ -1026,12 +1026,12 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api-sandbox.split.cash//agreements <span class="se">\</span>
+curl -X POST https://api-sandbox.split.cash/agreements <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash//agreements</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash/agreements</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -1046,7 +1046,7 @@ curl -X POST https://api-sandbox.split.cash//agreements <span class="se">\</span
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//agreements'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
 
 
@@ -1079,7 +1079,7 @@ curl -X POST https://api-sandbox.split.cash//agreements <span class="se">\</span
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//agreements'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/agreements'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
@@ -1102,7 +1102,7 @@ curl -X POST https://api-sandbox.split.cash//agreements <span class="se">\</span
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash//agreements'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash/agreements'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -1117,7 +1117,7 @@ curl -X POST https://api-sandbox.split.cash//agreements <span class="se">\</span
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//agreements'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/agreements'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -1126,7 +1126,7 @@ curl -X POST https://api-sandbox.split.cash//agreements <span class="se">\</span
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//agreements"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/agreements"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -1287,11 +1287,11 @@ curl -X POST https://api-sandbox.split.cash//agreements <span class="se">\</span
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api-sandbox.split.cash//agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>/accept <span class="se">\</span>
+curl -X POST https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>/accept <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash//agreements/{agreement_ref}/accept</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash/agreements/{agreement_ref}/accept</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -1306,7 +1306,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}/accept'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/accept'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
 
 
@@ -1327,7 +1327,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}/accept'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/accept'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
 
@@ -1350,7 +1350,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}/accept'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/accept'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -1364,7 +1364,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//agreements/{agreement_ref}/accept'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/agreements/{agreement_ref}/accept'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -1373,7 +1373,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//agreements/{agreement_ref}/accept"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/agreements/{agreement_ref}/accept"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -1461,11 +1461,11 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api-sandbox.split.cash//agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>/decline <span class="se">\</span>
+curl -X POST https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>/decline <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash//agreements/{agreement_ref}/decline</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash/agreements/{agreement_ref}/decline</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -1480,7 +1480,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}/decline'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/decline'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
 
 
@@ -1501,7 +1501,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}/decline'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/decline'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
 
@@ -1524,7 +1524,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}/decline'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/decline'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -1538,7 +1538,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//agreements/{agreement_ref}/decline'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/agreements/{agreement_ref}/decline'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -1547,7 +1547,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//agreements/{agreement_ref}/decline"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/agreements/{agreement_ref}/decline"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -1635,11 +1635,11 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api-sandbox.split.cash//agreements/<span class="o">{</span>agreement_ref<span class="o">}</span> <span class="se">\</span>
+curl -X GET https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash//agreements/{agreement_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash/agreements/{agreement_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -1654,7 +1654,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
 
 
@@ -1675,7 +1675,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
 
@@ -1698,7 +1698,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -1712,7 +1712,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -1721,7 +1721,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//agreements/{agreement_ref}"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/agreements/{agreement_ref}"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -1809,17 +1809,17 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash//agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash//agreements/{agreement_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/agreements/{agreement_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code>
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'delete'</span><span class="p">,</span>
 
 
@@ -1832,7 +1832,7 @@ curl -X DELETE https://api-sandbox.split.cash//agreements/<span class="o">{</spa
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span>
 
@@ -1849,7 +1849,7 @@ curl -X DELETE https://api-sandbox.split.cash//agreements/<span class="o">{</spa
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">}</span>
 
@@ -1860,7 +1860,7 @@ curl -X DELETE https://api-sandbox.split.cash//agreements/<span class="o">{</spa
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//agreements/{agreement_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">)</span>
@@ -1869,7 +1869,7 @@ curl -X DELETE https://api-sandbox.split.cash//agreements/<span class="o">{</spa
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//agreements/{agreement_ref}"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/agreements/{agreement_ref}"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -1933,11 +1933,11 @@ curl -X DELETE https://api-sandbox.split.cash//agreements/<span class="o">{</spa
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api-sandbox.split.cash//agreements/incoming <span class="se">\</span>
+curl -X GET https://api-sandbox.split.cash/agreements/incoming <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash//agreements/incoming</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash/agreements/incoming</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -1952,7 +1952,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//agreements/incoming'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/incoming'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
 
 
@@ -1973,7 +1973,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//agreements/incoming'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/agreements/incoming'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
 
@@ -1996,7 +1996,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash//agreements/incoming'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash/agreements/incoming'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -2010,7 +2010,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//agreements/incoming'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/agreements/incoming'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -2019,7 +2019,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//agreements/incoming"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/agreements/incoming"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -2165,11 +2165,11 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api-sandbox.split.cash//agreements/outgoing <span class="se">\</span>
+curl -X GET https://api-sandbox.split.cash/agreements/outgoing <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash//agreements/outgoing</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash/agreements/outgoing</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -2184,7 +2184,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//agreements/outgoing'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/outgoing'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
 
 
@@ -2205,7 +2205,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//agreements/outgoing'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/agreements/outgoing'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
 
@@ -2228,7 +2228,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash//agreements/outgoing'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash/agreements/outgoing'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -2242,7 +2242,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//agreements/outgoing'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/agreements/outgoing'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -2251,7 +2251,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//agreements/outgoing"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/agreements/outgoing"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -2409,12 +2409,12 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api-sandbox.split.cash//contacts <span class="se">\</span>
+curl -X POST https://api-sandbox.split.cash/contacts <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash//contacts</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash/contacts</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2429,7 +2429,7 @@ curl -X POST https://api-sandbox.split.cash//contacts <span class="se">\</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
 
 
@@ -2452,7 +2452,7 @@ curl -X POST https://api-sandbox.split.cash//contacts <span class="se">\</span>
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
@@ -2475,7 +2475,7 @@ curl -X POST https://api-sandbox.split.cash//contacts <span class="se">\</span>
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -2490,7 +2490,7 @@ curl -X POST https://api-sandbox.split.cash//contacts <span class="se">\</span>
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -2499,7 +2499,7 @@ curl -X POST https://api-sandbox.split.cash//contacts <span class="se">\</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//contacts"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/contacts"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -2607,11 +2607,11 @@ curl -X POST https://api-sandbox.split.cash//contacts <span class="se">\</span>
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api-sandbox.split.cash//contacts <span class="se">\</span>
+curl -X GET https://api-sandbox.split.cash/contacts <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash//contacts</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash/contacts</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -2626,7 +2626,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
 
 
@@ -2647,7 +2647,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
 
@@ -2670,7 +2670,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -2684,7 +2684,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//contacts'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -2693,7 +2693,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//contacts"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/contacts"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -2869,12 +2869,12 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api-sandbox.split.cash//contacts/new/anyone <span class="se">\</span>
+curl -X POST https://api-sandbox.split.cash/contacts/new/anyone <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash//contacts/new/anyone</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api-sandbox.split.cash/contacts/new/anyone</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2889,7 +2889,7 @@ curl -X POST https://api-sandbox.split.cash//contacts/new/anyone <span class="se
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//contacts/new/anyone'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts/new/anyone'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
 
 
@@ -2915,7 +2915,7 @@ curl -X POST https://api-sandbox.split.cash//contacts/new/anyone <span class="se
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//contacts/new/anyone'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts/new/anyone'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
@@ -2938,7 +2938,7 @@ curl -X POST https://api-sandbox.split.cash//contacts/new/anyone <span class="se
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash//contacts/new/anyone'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api-sandbox.split.cash/contacts/new/anyone'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -2953,7 +2953,7 @@ curl -X POST https://api-sandbox.split.cash//contacts/new/anyone <span class="se
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//contacts/new/anyone'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/contacts/new/anyone'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -2962,7 +2962,7 @@ curl -X POST https://api-sandbox.split.cash//contacts/new/anyone <span class="se
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//contacts/new/anyone"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/contacts/new/anyone"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -3089,11 +3089,11 @@ curl -X POST https://api-sandbox.split.cash//contacts/new/anyone <span class="se
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api-sandbox.split.cash//contacts/<span class="o">{</span>id<span class="o">}</span> <span class="se">\</span>
+curl -X GET https://api-sandbox.split.cash/contacts/<span class="o">{</span>id<span class="o">}</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash//contacts/{id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash/contacts/{id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -3108,7 +3108,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
 
 
@@ -3129,7 +3129,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
 
@@ -3152,7 +3152,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -3166,7 +3166,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -3175,7 +3175,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//contacts/{id}"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/contacts/{id}"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -3269,17 +3269,17 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash//contacts/<span class="o">{</span>id<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/contacts/<span class="o">{</span>id<span class="o">}</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash//contacts/{id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/contacts/{id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code>
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'delete'</span><span class="p">,</span>
 
 
@@ -3292,7 +3292,7 @@ curl -X DELETE https://api-sandbox.split.cash//contacts/<span class="o">{</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span>
 
@@ -3309,7 +3309,7 @@ curl -X DELETE https://api-sandbox.split.cash//contacts/<span class="o">{</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">}</span>
 
@@ -3320,7 +3320,7 @@ curl -X DELETE https://api-sandbox.split.cash//contacts/<span class="o">{</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">)</span>
@@ -3329,7 +3329,7 @@ curl -X DELETE https://api-sandbox.split.cash//contacts/<span class="o">{</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//contacts/{id}"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/contacts/{id}"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -3393,12 +3393,12 @@ curl -X DELETE https://api-sandbox.split.cash//contacts/<span class="o">{</span>
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X PATCH https://api-sandbox.split.cash//contacts/<span class="o">{</span>id<span class="o">}</span> <span class="se">\</span>
+curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id<span class="o">}</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://api-sandbox.split.cash//contacts/{id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://api-sandbox.split.cash/contacts/{id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3413,7 +3413,7 @@ curl -X PATCH https://api-sandbox.split.cash//contacts/<span class="o">{</span>i
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'patch'</span><span class="p">,</span>
 
 
@@ -3436,7 +3436,7 @@ curl -X PATCH https://api-sandbox.split.cash//contacts/<span class="o">{</span>i
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'PATCH'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
@@ -3459,7 +3459,7 @@ curl -X PATCH https://api-sandbox.split.cash//contacts/<span class="o">{</span>i
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">patch</span> <span class="s1">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">patch</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -3474,7 +3474,7 @@ curl -X PATCH https://api-sandbox.split.cash//contacts/<span class="o">{</span>i
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//contacts/{id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -3483,7 +3483,7 @@ curl -X PATCH https://api-sandbox.split.cash//contacts/<span class="o">{</span>i
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//contacts/{id}"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/contacts/{id}"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PATCH"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -3597,6 +3597,12 @@ curl -X PATCH https://api-sandbox.split.cash//contacts/<span class="o">{</span>i
 </tbody></table>
 
 <h1 id="Split-API-Open-Agreements">Open Agreements</h1>
+
+<p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account or anyone, an Agreement is automatically created based between the Open Agreement initiator and the authoriser.</p>
+
+<p>An Open Agreement can be accepted multiple times by different parties and the result is the same: A new Agreement.</p>
+
+<aside class="notice">When you close an Open Agreement, no new Agreements can be created from it.</aside>
 <h2 id='create-an-open-agreement'>Create an Open Agreement</h2>
 <p><a id="opIdCreateOpenAgreement"></a></p>
 
@@ -3720,7 +3726,7 @@ curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</
 
 
 </code></pre>
-<p><code>POST open_agreements</code></p>
+<p><code>POST /open_agreements</code></p>
 
 <p>Create an Open Agreement that can be accepted by anyone</p>
 
@@ -3763,7 +3769,7 @@ curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</
 <td>» title</td>
 <td>body</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>Title of the Open Agreement (Visible to authorisers)</td>
 </tr>
 <tr>
@@ -3828,8 +3834,8 @@ curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-20T00:53:27Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"per_payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"max_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"max_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"per_frequency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
@@ -3965,7 +3971,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET open_agreements</code></p>
+<p><code>GET /open_agreements</code></p>
 
 <h3 id="List-all-Open-Agreements-parameters" class="parameters">Parameters</h3>
 
@@ -4155,7 +4161,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>POST open_agreements/{open_agreement_ref}/activate</code></p>
+<p><code>POST /open_agreements/{open_agreement_ref}/activate</code></p>
 
 <h3 id="Activate-a-closed-Open-Agreement-parameters" class="parameters">Parameters</h3>
 
@@ -4326,7 +4332,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>POST open_agreements/{open_agreement_ref}/close</code></p>
+<p><code>POST /open_agreements/{open_agreement_ref}/close</code></p>
 
 <h3 id="Close-an-active-Open-Agreement-parameters" class="parameters">Parameters</h3>
 
@@ -4533,7 +4539,7 @@ curl -X POST https://api-sandbox.split.cash/payments <span class="se">\</span>
 
 
 </code></pre>
-<p><code>POST payments</code></p>
+<p><code>POST /payments</code></p>
 
 <blockquote>
 <p>Body parameter</p>
@@ -4819,7 +4825,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET payments</code></p>
+<p><code>GET /payments</code></p>
 
 <h3 id="List-all-Payments-parameters" class="parameters">Parameters</h3>
 
@@ -5014,7 +5020,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET payments/{payment_ref}</code></p>
+<p><code>GET /payments/{payment_ref}</code></p>
 
 <p>Get a single payment by its reference</p>
 
@@ -5187,7 +5193,7 @@ curl -X DELETE https://api-sandbox.split.cash/payouts/<span class="o">{</span>de
 
 
 </code></pre>
-<p><code>DELETE payouts/{debit_ref}</code></p>
+<p><code>DELETE /payouts/{debit_ref}</code></p>
 
 <p>You can void any Payout debit from your account that has not yet matured. In the case where it has matured, you can send a Payment Request to the Payout recipient once the Payout has successfully cleared.</p>
 
@@ -5426,7 +5432,7 @@ curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\<
 
 
 </code></pre>
-<p><code>POST payment_requests</code></p>
+<p><code>POST /payment_requests</code></p>
 
 <blockquote>
 <p>Body parameter</p>
@@ -5647,7 +5653,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>POST payment_requests/{payment_request_ref}/approve</code></p>
+<p><code>POST /payment_requests/{payment_request_ref}/approve</code></p>
 
 <h3 id="Approve-a-Payment-Request-parameters" class="parameters">Parameters</h3>
 
@@ -5819,7 +5825,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>POST payment_requests/{payment_request_ref}/decline</code></p>
+<p><code>POST /payment_requests/{payment_request_ref}/decline</code></p>
 
 <h3 id="Decline-a-Payment-Request-parameters" class="parameters">Parameters</h3>
 
@@ -5991,7 +5997,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET payment_requests/{payment_request_ref}</code></p>
+<p><code>GET /payment_requests/{payment_request_ref}</code></p>
 
 <h3 id="Get-a-Payment-Request-parameters" class="parameters">Parameters</h3>
 
@@ -6137,7 +6143,7 @@ curl -X DELETE https://api-sandbox.split.cash/payment_requests/<span class="o">{
 
 
 </code></pre>
-<p><code>DELETE payment_requests/{payment_request_ref}</code></p>
+<p><code>DELETE /payment_requests/{payment_request_ref}</code></p>
 
 <p>A PR can only be cancelled if it has not yet matured.</p>
 
@@ -6287,7 +6293,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET payment_requests/incoming</code></p>
+<p><code>GET /payment_requests/incoming</code></p>
 
 <h3 id="List-incoming-Payment-Requests-parameters" class="parameters">Parameters</h3>
 
@@ -6475,7 +6481,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET payment_requests/outgoing</code></p>
+<p><code>GET /payment_requests/outgoing</code></p>
 
 <h3 id="List-outgoing-Payment-Requests-parameters" class="parameters">Parameters</h3>
 
@@ -6659,7 +6665,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET payment_requests/{payment_request_ref}/history</code></p>
+<p><code>GET /payment_requests/{payment_request_ref}/history</code></p>
 
 <p>Gives you visibility of the entire Payment Request lifecycle including the generated debit and credit transactions.</p>
 
@@ -6941,7 +6947,7 @@ curl -X POST https://api-sandbox.split.cash/credits/<span class="o">{</span>cred
 
 
 </code></pre>
-<p><code>POST credits/{credit_ref}/refunds</code></p>
+<p><code>POST /credits/{credit_ref}/refunds</code></p>
 
 <p>Certain rules apply to the issuance of a refund:</p>
 
@@ -7154,7 +7160,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET refunds/incoming</code></p>
+<p><code>GET /refunds/incoming</code></p>
 
 <h3 id="List-incoming-Refunds-parameters" class="parameters">Parameters</h3>
 
@@ -7322,7 +7328,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET refunds/outgoing</code></p>
+<p><code>GET /refunds/outgoing</code></p>
 
 <h3 id="List-outgoing-Refunds-parameters" class="parameters">Parameters</h3>
 
@@ -7490,7 +7496,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET refunds/{refund_ref}</code></p>
+<p><code>GET /refunds/{refund_ref}</code></p>
 
 <p>Get a single Refund by its reference</p>
 
@@ -7728,7 +7734,7 @@ curl -X POST https://api-sandbox.split.cash/payout_refund_requests <span class="
 
 
 </code></pre>
-<p><code>POST payout_refund_requests</code></p>
+<p><code>POST /payout_refund_requests</code></p>
 
 <p>Certain rules apply to the creation of a Refund Request:</p>
 
@@ -7946,7 +7952,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>POST payout_refund_requests/{payout_refund_request_ref}/approve</code></p>
+<p><code>POST /payout_refund_requests/{payout_refund_request_ref}/approve</code></p>
 
 <h3 id="Approve-Refund-Request-parameters" class="parameters">Parameters</h3>
 
@@ -8116,7 +8122,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>POST payout_refund_requests/{payout_refund_request_ref}/decline</code></p>
+<p><code>POST /payout_refund_requests/{payout_refund_request_ref}/decline</code></p>
 
 <h3 id="Decline-Refund-Request-parameters" class="parameters">Parameters</h3>
 
@@ -8184,11 +8190,11 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api-sandbox.split.cash//payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span> <span class="se">\</span>
+curl -X GET https://api-sandbox.split.cash/payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
@@ -8203,7 +8209,7 @@ Accept: application/json
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
 
 
@@ -8224,7 +8230,7 @@ Accept: application/json
 <span class="p">};</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
 
@@ -8247,7 +8253,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
@@ -8261,7 +8267,7 @@ Accept: application/json
 <span class="p">}</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -8270,7 +8276,7 @@ Accept: application/json
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -8356,17 +8362,17 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash//payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span>
 
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api-sandbox.split.cash</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code>
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'delete'</span><span class="p">,</span>
 
 
@@ -8379,7 +8385,7 @@ curl -X DELETE https://api-sandbox.split.cash//payout_refund_requests/<span clas
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span>
 
@@ -8396,7 +8402,7 @@ curl -X DELETE https://api-sandbox.split.cash//payout_refund_requests/<span clas
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
   <span class="p">}</span>
 
@@ -8407,7 +8413,7 @@ curl -X DELETE https://api-sandbox.split.cash//payout_refund_requests/<span clas
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
 
 
 <span class="p">)</span>
@@ -8416,7 +8422,7 @@ curl -X DELETE https://api-sandbox.split.cash//payout_refund_requests/<span clas
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash//payout_refund_requests/{payout_refund_request_ref}"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -8582,7 +8588,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET payout_refund_requests/incoming</code></p>
+<p><code>GET /payout_refund_requests/incoming</code></p>
 
 <h3 id="List-incoming-Refund-Requests-parameters" class="parameters">Parameters</h3>
 
@@ -8754,7 +8760,7 @@ Accept: text/json
 
 
 </code></pre>
-<p><code>GET payout_refund_requests/outgoing</code></p>
+<p><code>GET /payout_refund_requests/outgoing</code></p>
 
 <p><strong>Endpoint:</strong> <code>/payout_refund_requests/outgoing{?page}</code></p>
 
@@ -8932,7 +8938,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET transactions</code></p>
+<p><code>GET /transactions</code></p>
 
 <h3 id="List-all-transactions-parameters" class="parameters">Parameters</h3>
 
@@ -9317,7 +9323,7 @@ Accept: application/json
 
 
 </code></pre>
-<p><code>GET user</code></p>
+<p><code>GET /user</code></p>
 
 <blockquote>
 <p>Example responses</p>
@@ -9780,7 +9786,7 @@ Accept: application/json
 <tr>
 <td>title</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>Title of the Open Agreement (Visible to authorisers)</td>
 </tr>
 <tr>
@@ -9800,8 +9806,8 @@ Accept: application/json
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-20T00:53:27Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"per_payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"max_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"max_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"per_frequency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
