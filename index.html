@@ -612,6 +612,16 @@
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
 
+<p>Split allows you to make, get and manage payments using nothing but bank accounts.</p>
+
+<p>It is important to understand that there are 2 main ways Split can be used for maximum flexibility:
+1. Between Split accounts.
+2. Between a Split account and anyone.</p>
+
+<p>Due to the above, certain endpoints and techniques will differ slightly depending on who you are interacting with. You can find more on this in the <a href="/#making-payments">Making payments</a> and <a href="/#getting-paid">Getting paid</a> guides.</p>
+
+<div class="middle-header">Conventions</div>
+
 <ul>
 <li>Authentication is performed using OAuth2. See the <a href="/#get-started">Get started</a> and <a href="/#authentication-and-authorisation">Authentication &amp; Authorisation</a> guides for more.</li>
 <li>All communication is via <code>https</code>.</li>
@@ -840,7 +850,12 @@ Google, Twitter or Facebook account, this is the grant being used.</p>
 want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>acccess_token</code>
 </aside>
 <h2 id='making-payments'>Making payments</h2>
-<p>In order to payout funds, you&#39;ll be looking to use the <a href="/#Split-API-Payments">Payments</a> endpoint.</p>
+<p>In order to payout funds, you&#39;ll be looking to use the <a href="/#Split-API-Payments">Payments</a> endpoint. Whether you&#39;re paying out another Split account holder or anyone, the process is the same:</p>
+
+<ol>
+<li>Add the recipient to your Contacts: <a href="/#add-a-split-contact">Split Contact</a> or <a href="/#add-an-anyone-contact">Anyone Contact</a></li>
+<li><a href="/#make-a-payment">Make the Payment</a> to your Contact.</li>
+</ol>
 
 <p>Common use cases:</p>
 
@@ -850,13 +865,21 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <h2 id='getting-paid'>Getting paid</h2>
 <p>There are 2 ways to get paid:</p>
 
-<p><strong>A <a href="/#Split-API-Payment-Requests">Payment Request</a></strong></p>
+<p><strong><code>POST</code>ing a <a href="/#Split-API-Payment-Requests">Payment Request</a></strong></p>
 
-<p>Provides the ability to send a Payment Request to any contact with a verified bank account in your Split contacts list.</p>
+<p>Provides the ability to send a Payment Request to any Contact that is either:</p>
 
 <ul>
-<li>By default, the payer will receive a request that they must approve in order for the funds to flow from their bank account to yours.</li>
-<li>The approval process can be automated by first entering into an agreement with the payer. Once the agreement is approved, any future Payment Request will be automatically approved and processed per the agreement terms.</li>
+<li>A Split Contact; <strong>or</strong></li>
+<li>An Anyone Contact with an accepted Agreement in place.</li>
+</ul>
+
+<p>Usage notes:</p>
+
+<ul>
+<li>If the payer is a Split Contact, they will receive a request that they must approve in order for the funds to flow from their bank account to yours.</li>
+<li>To automate the Payment Request approval process you can first <a href="/#Split-API-Agreements">enter into an Agreement</a> with the payer. Once the Agreement is accepted, any future Payment Request will be automatically approved and processed per the Agreement terms.</li>
+<li>If you would like to send a Payment Request using the API to an Anyone Contact, you must first have accepted an Agreement with them.</li>
 </ul>
 
 <p>Common use cases:</p>
@@ -868,14 +891,14 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <li>Repayment plans</li>
 </ul>
 
-<p><strong>An <a href="http://help.split.cash/payment-requests/open-payment-requests">Open Payment Request</a></strong></p>
+<p><strong>Sharing an <a href="http://help.split.cash/payment-requests/open-payment-requests">Open Payment Request</a></strong></p>
 
-<p>Utilise a <a href="http://help.split.cash/payment-requests/open-payment-requests">customisable hosted payment request form</a> which takes care of everything from confirming payer bank account access to the transfer of funds.</p>
+<p>Provides the ability to get paid by a anyone whether they are a Split account holder or not.</p>
 
-<ul>
-<li>The secure form can either sit outside your app or embeded within via iframe with ability to whitelabel.</li>
-<li>The URL for the form contains all the customisation parameters enabling you to generate the form on the fly.</li>
-</ul>
+<p>Usage notes:
+* Utilise a <a href="http://help.split.cash/payment-requests/open-payment-requests">customisable hosted Payment Request form</a> that takes care of everything from confirming the payer&#39;s bank account access to the transfer of funds.
+* The Open Payment Request link can be shared and sit as a secure form either outside your app or embeded within via iframe with the ability to whitelabel.
+* The URL for the form contains all the customisation parameters enabling you to generate the form on the fly.</p>
 
 <p>Common use cases:</p>
 
@@ -3602,11 +3625,11 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
 
 <h1 id="Split-API-Open-Agreements">Open Agreements</h1>
 
-<p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account or anyone, an Agreement is automatically created based between the Open Agreement initiator and the authoriser.</p>
+<p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account or anyone, a new Agreement is automatically created between the Open Agreement initiator and the authoriser.</p>
 
 <p>An Open Agreement can be accepted multiple times by different parties and the result is the same: A new Agreement.</p>
 
-<aside class="notice">When you close an Open Agreement, no new Agreements can be created from it.</aside>
+<aside class="notice">When you close an Open Agreement, no new Agreements can be created from it and all past Agreement resulting from the acceptance of the Open Agreement are unaffected.</aside>
 <h2 id='create-an-open-agreement'>Create an Open Agreement</h2>
 <p><a id="opIdCreateOpenAgreement"></a></p>
 
