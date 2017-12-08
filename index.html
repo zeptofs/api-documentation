@@ -1089,6 +1089,7 @@ Total: 5
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/agreements <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -1100,18 +1101,15 @@ curl -X POST https://api-sandbox.split.cash/agreements <span class="se">\</span>
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -1352,6 +1350,7 @@ curl -X POST https://api-sandbox.split.cash/agreements <span class="se">\</span>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>/accept <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -1363,17 +1362,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/accept'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -1526,6 +1522,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>/decline <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -1537,17 +1534,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}/decline'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -1700,6 +1694,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -1711,17 +1706,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/{agreement_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -1873,7 +1865,8 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/agreements/<span class="o">{</span>agreement_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span>
 
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/agreements/{agreement_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -1998,6 +1991,7 @@ curl -X DELETE https://api-sandbox.split.cash/agreements/<span class="o">{</span
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/agreements/incoming <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -2009,17 +2003,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/incoming'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -2237,6 +2228,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/agreements/outgoing <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -2248,17 +2240,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/agreements/outgoing'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -2490,6 +2479,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/contacts <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -2501,18 +2491,15 @@ curl -X POST https://api-sandbox.split.cash/contacts <span class="se">\</span>
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -2688,6 +2675,7 @@ curl -X POST https://api-sandbox.split.cash/contacts <span class="se">\</span>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/contacts <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -2699,17 +2687,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -2957,6 +2942,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/contacts/new/anyone <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -2968,18 +2954,15 @@ curl -X POST https://api-sandbox.split.cash/contacts/new/anyone <span class="se"
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts/new/anyone'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -3177,6 +3160,7 @@ curl -X POST https://api-sandbox.split.cash/contacts/new/anyone <span class="se"
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/contacts/<span class="o">{</span>id<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -3188,17 +3172,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -3356,7 +3337,8 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash/contacts/<span class="o">{</span>id<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/contacts/<span class="o">{</span>id<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span>
 
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/contacts/{id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -3481,6 +3463,7 @@ curl -X DELETE https://api-sandbox.split.cash/contacts/<span class="o">{</span>i
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -3492,18 +3475,15 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/contacts/{id}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'patch'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -3718,6 +3698,7 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -3729,18 +3710,15 @@ curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/open_agreements'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -3979,6 +3957,7 @@ curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/open_agreements <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -3990,17 +3969,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/open_agreements'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -4176,6 +4152,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/open_agreements/<span class="o">{</span>open_agreement_ref<span class="o">}</span>/activate <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -4187,17 +4164,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/open_agreements/{open_agreement_ref}/activate'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -4349,6 +4323,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/open_agreements/<span class="o">{</span>open_agreement_ref<span class="o">}</span>/close <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -4360,17 +4335,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/open_agreements/{open_agreement_ref}/close'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -4535,6 +4507,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/payments <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -4546,18 +4519,15 @@ curl -X POST https://api-sandbox.split.cash/payments <span class="se">\</span>
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payments'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -4848,6 +4818,7 @@ curl -X POST https://api-sandbox.split.cash/payments <span class="se">\</span>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payments <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -4859,17 +4830,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payments'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -5050,6 +5018,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payments/<span class="o">{</span>payment_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -5061,17 +5030,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payments/{payment_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -5248,7 +5214,8 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash/payouts/<span class="o">{</span>debit_ref<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/payouts/<span class="o">{</span>debit_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span>
 
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/payouts/{debit_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -5451,6 +5418,7 @@ curl -X DELETE https://api-sandbox.split.cash/payouts/<span class="o">{</span>de
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -5462,18 +5430,15 @@ curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\<
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payment_requests'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -5683,6 +5648,7 @@ curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\<
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/payment_requests/<span class="o">{</span>payment_request_ref<span class="o">}</span>/approve <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -5694,17 +5660,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payment_requests/{payment_request_ref}/approve'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -5855,6 +5818,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/payment_requests/<span class="o">{</span>payment_request_ref<span class="o">}</span>/decline <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -5866,17 +5830,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payment_requests/{payment_request_ref}/decline'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -6027,6 +5988,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payment_requests/<span class="o">{</span>payment_request_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -6038,17 +6000,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payment_requests/{payment_request_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -6198,7 +6157,8 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash/payment_requests/<span class="o">{</span>payment_request_ref<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/payment_requests/<span class="o">{</span>payment_request_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span>
 
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/payment_requests/{payment_request_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -6323,6 +6283,7 @@ curl -X DELETE https://api-sandbox.split.cash/payment_requests/<span class="o">{
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payment_requests/incoming <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -6334,17 +6295,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payment_requests/incoming'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -6518,6 +6476,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payment_requests/outgoing <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -6529,17 +6488,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payment_requests/outgoing'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -6709,6 +6665,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payment_requests/<span class="o">{</span>payment_request_ref<span class="o">}</span>/history <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -6720,17 +6677,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payment_requests/{payment_request_ref}/history'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -6982,6 +6936,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/credits/<span class="o">{</span>credit_ref<span class="o">}</span>/refunds <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -6993,18 +6948,15 @@ curl -X POST https://api-sandbox.split.cash/credits/<span class="o">{</span>cred
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/credits/{credit_ref}/refunds'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -7204,6 +7156,7 @@ curl -X POST https://api-sandbox.split.cash/credits/<span class="o">{</span>cred
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/refunds/incoming <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -7215,17 +7168,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/refunds/incoming'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -7379,6 +7329,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/refunds/outgoing <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -7390,17 +7341,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/refunds/outgoing'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -7554,6 +7502,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/refunds/<span class="o">{</span>refund_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -7565,17 +7514,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/refunds/{refund_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -7782,6 +7728,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/payout_refund_requests <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
@@ -7793,18 +7740,15 @@ curl -X POST https://api-sandbox.split.cash/payout_refund_requests <span class="
 
 <span class="w">
 </span></code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -8010,6 +7954,7 @@ curl -X POST https://api-sandbox.split.cash/payout_refund_requests <span class="
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span>/approve <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -8021,17 +7966,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}/approve'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -8180,6 +8122,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api-sandbox.split.cash/payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span>/decline <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -8191,17 +8134,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}/decline'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -8350,6 +8290,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -8361,17 +8302,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -8521,7 +8459,8 @@ Accept: application/json
 <p>Code samples</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api-sandbox.split.cash/payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span>
+curl -X DELETE https://api-sandbox.split.cash/payout_refund_requests/<span class="o">{</span>payout_refund_request_ref<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span>
 
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api-sandbox.split.cash/payout_refund_requests/{payout_refund_request_ref}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -8646,6 +8585,7 @@ curl -X DELETE https://api-sandbox.split.cash/payout_refund_requests/<span class
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payout_refund_requests/incoming <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -8657,17 +8597,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/incoming'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -8825,6 +8762,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/payout_refund_requests/outgoing <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: text/json'</span>
 
 
@@ -8836,17 +8774,14 @@ Accept: text/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'text/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/payout_refund_requests/outgoing'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -9060,6 +8995,7 @@ Accept: text/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/transactions <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -9071,17 +9007,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/transactions'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -9452,6 +9385,7 @@ Accept: application/json
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api-sandbox.split.cash/user <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span> <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span>
 
 
@@ -9463,17 +9397,14 @@ Accept: application/json
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization: Bearer ACCESS_TOKEN'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-
 <span class="p">};</span>
 
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api-sandbox.split.cash/user'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
