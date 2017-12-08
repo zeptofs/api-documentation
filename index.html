@@ -1045,12 +1045,42 @@ Total: 5
 
 <p>Agreement are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.</p>
 
+<div class="middle-header">Direction</div>
+
 <p>Agreements are therefore broken up by direction:</p>
 
 <ol>
 <li><strong>Incoming:</strong> Agreement received from another Split account</li>
 <li><strong>Outgoing:</strong> Agreement sent to another Split account</li>
 </ol>
+
+<div class="middle-header">Lifecycle</div>
+
+<p>An Agreement can have the following statuses:</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>proposed</code></td>
+<td>Waiting for the Agreement to be accepted or declined.</td>
+</tr>
+<tr>
+<td><code>accepted</code></td>
+<td>The Agreement have been accepted and is active.</td>
+</tr>
+<tr>
+<td><code>cancelled</code></td>
+<td>The Agreement has been cancelled (The initiator or authoriser can cancel an Agreement).</td>
+</tr>
+<tr>
+<td><code>declined</code></td>
+<td>The Agreement has been declined.</td>
+</tr>
+</tbody></table>
 <h2 id='propose-an-agreement'>Propose an Agreement</h2>
 <p><a id="opIdProposeAgreement"></a></p>
 
@@ -3657,7 +3687,27 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
 
 <p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account holder or anyone, they authoriser is added to your Contacts list and a new Agreement is automatically created between the Open Agreement initiator and the authoriser.</p>
 
-<p>An Open Agreement can be accepted multiple times by different parties and the result is the same: A new Agreement.</p>
+<p>An Open Agreement can be accepted multiple times by different parties and the result is the same: A new Agreement.|</p>
+
+<div class="middle-header">Lifecycle</div>
+
+<p>An Open Agreement can have the following statuses:</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>active</code></td>
+<td>The Open Agreement can be viewed and accepted.</td>
+</tr>
+<tr>
+<td><code>closed</code></td>
+<td>The Open Agreement can not be viewed or accepted.</td>
+</tr>
+</tbody></table>
 
 <aside class="notice">When you close an Open Agreement, no new Agreements can be created from it and all past Agreement resulting from the acceptance of the Open Agreement are unaffected.</aside>
 <h2 id='create-an-open-agreement'>Create an Open Agreement</h2>
@@ -4229,6 +4279,8 @@ Accept: application/json
 </code></pre>
 <p><code>POST /open_agreements/{open_agreement_ref}/activate</code></p>
 
+<p>Allow the Open Agreement to viewed and accepted</p>
+
 <h3 id="Activate-a-closed-Open-Agreement-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
@@ -4400,6 +4452,8 @@ Accept: application/json
 </code></pre>
 <p><code>POST /open_agreements/{open_agreement_ref}/close</code></p>
 
+<p>Disable the Open Agreement from being viewed or accepted</p>
+
 <h3 id="Close-an-active-Open-Agreement-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
@@ -4469,6 +4523,10 @@ Accept: application/json
 <li>General details about the Payment.</li>
 <li>One or many Payouts with individual recipients, amounts and descriptions.</li>
 </ol>
+
+<div class="middle-header">Lifecycle</div>
+
+<p>The Payment is simply a group of Payouts therefore it does not have a particular status. Its Payouts however have their status regularly updated, for a list of possible Payout statuses check out the <a href="/#Split-API-Transactions">Transactions</a>.</p>
 <h2 id='make-a-payment'>Make a Payment</h2>
 <p><a id="opIdMakeAPayment"></a></p>
 
@@ -5360,11 +5418,11 @@ curl -X DELETE https://api-sandbox.split.cash/payouts/<span class="o">{</span>de
 
 <div class="middle-header">Lifecycle</div>
 
-<p>A Payment Request can have the following states:</p>
+<p>A Payment Request can have the following statuses:</p>
 
 <table><thead>
 <tr>
-<th>State</th>
+<th>Status</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -7691,11 +7749,11 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 
 <div class="middle-header">Lifecycle</div>
 
-<p>A Payment Request can have the following states:</p>
+<p>A Refund Request can have the following statuses:</p>
 
 <table><thead>
 <tr>
-<th>State</th>
+<th>Status</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -8870,8 +8928,6 @@ Accept: text/json
 </code></pre>
 <p><code>GET /payout_refund_requests/outgoing</code></p>
 
-<p><strong>Endpoint:</strong> <code>/payout_refund_requests/outgoing{?page}</code></p>
-
 <h3 id="List-outgoing-Refund-Requests-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
@@ -8944,6 +9000,58 @@ Accept: text/json
 <h1 id="Split-API-Transactions">Transactions</h1>
 
 <p>The transactions endpoint provides a detailed look at all past, current and future scheduled debits &amp; credits relating to the Split account. In other words, we not only show the transactions initiated by the Split account but also show transactions where the Split account is on the receiving end - even for payments that have not yet matured.</p>
+
+<div class="middle-header">Lifecycle</div>
+
+<p>A transaction (debit or credit) can have the following statuses:</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>maturing</code></td>
+<td>The maturation date has not yet been reached</td>
+</tr>
+<tr>
+<td><code>matured</code></td>
+<td>The maturation date has been reached and the transaction is eligible for processing.</td>
+</tr>
+<tr>
+<td><code>processing</code></td>
+<td>The transaction has been submitted to the bank.</td>
+</tr>
+<tr>
+<td><code>clearing</code></td>
+<td>Waiting for confirmation from the bank that the transaction has succeeded.</td>
+</tr>
+<tr>
+<td><code>cleared</code></td>
+<td>The transaction is complete.</td>
+</tr>
+<tr>
+<td><code>rejected</code></td>
+<td>The bank has rejected the transaction due to incorrect bank account details.</td>
+</tr>
+<tr>
+<td><code>returned</code></td>
+<td>The transaction did not successfully clear. Usually due to insufficient funds.</td>
+</tr>
+<tr>
+<td><code>voided</code></td>
+<td>The transaction has been cancelled and is no longer eligible for processing.</td>
+</tr>
+<tr>
+<td><code>pending_verification</code></td>
+<td>The bank account must be verified before the transaction can proceed.</td>
+</tr>
+<tr>
+<td><code>paused</code></td>
+<td>The transaction has temporary been paused by Split pending internal review.</td>
+</tr>
+</tbody></table>
 <h2 id='list-all-transactions'>List all transactions</h2>
 <p><a id="opIdListAllTransactions"></a></p>
 
