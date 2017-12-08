@@ -517,7 +517,7 @@
                     <a href="#makeapaymentrequest" class="toc-h2 toc-link" data-title="MakeAPaymentRequest">MakeAPaymentRequest</a>
                   </li>
                   <li>
-                    <a href="#payouts" class="toc-h2 toc-link" data-title="Payouts">Payouts</a>
+                    <a href="#payout" class="toc-h2 toc-link" data-title="Payout">Payout</a>
                   </li>
                   <li>
                     <a href="#metadata" class="toc-h2 toc-link" data-title="Metadata">Metadata</a>
@@ -996,12 +996,11 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <blockquote>
 <p>Example response header</p>
 </blockquote>
-<pre class="highlight plaintext"><code>Link: &lt;https://api-sandbox.split.cash/payments?page=2&gt;; rel="next",
-  &lt;https://api-sandbox.split.cash/payments?page=15&gt;; rel="last"
+<pre class="highlight plaintext"><code>Link: &lt;http://api-sandbox.split.cash/contacts?page=5&gt;; rel="last", &lt;http://api-sandbox.split.cash/contacts?page=2&gt;; rel="next"
+Per-Page: 25
+Total: 5
 </code></pre>
-<p>All collections are paginated to 100 items by default. You can request the following page by appending <code>?page=x</code> where <code>x</code> is the page you&#39;d like to retrieve.</p>
-
-<p>You can extract the pagination information from the response header.</p>
+<p>All collections are paginated to 25 items by default and the pagination information may be found in the response header. You can customise the pagination by appending <code>?per_page=x</code> and/or <code>?page=x</code> to the endpoint URL.</p>
 <h2 id='webhooks'>Webhooks</h2>
 <blockquote>
 <p>Example response</p>
@@ -1178,6 +1177,8 @@ curl -X POST https://api-sandbox.split.cash/agreements <span class="se">\</span>
 <p><code>POST /agreements</code></p>
 
 <p>Propose an Agreement to another Split Contact</p>
+
+<aside class="notice">You can set any of the term metrics to <code>null</code> if you wish them to not have a limit.</aside>
 
 <blockquote>
 <p>Body parameter</p>
@@ -1920,7 +1921,7 @@ curl -X DELETE https://api-sandbox.split.cash/agreements/<span class="o">{</span
 </code></pre>
 <p><code>DELETE /agreements/{agreement_ref}</code></p>
 
-<p>An agreement can be cancelled by the initiator at any time whilst the authoriser (agreement recipient) can only cancel a previously accepted agreement.</p>
+<p>An Agreement can be cancelled by the initiator at any time whilst the authoriser (Agreement recipient) can only cancel a previously accepted Agreement.</p>
 
 <h3 id="Cancel-an-Agreement-parameters" class="parameters">Parameters</h3>
 
@@ -2070,7 +2071,7 @@ Accept: application/json
 </code></pre>
 <p><code>GET /agreements/incoming</code></p>
 
-<p>By default, all incoming agreements will be returned. You can apply filters to your query to customise the returned agreements.</p>
+<p>By default, all incoming Agreements will be returned. You can apply filters to your query to customise the returned Agreements.</p>
 
 <h3 id="List-incoming-Agreements-parameters" class="parameters">Parameters</h3>
 
@@ -2088,14 +2089,21 @@ Accept: application/json
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Page of results to return</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 <tr>
 <td>initiator_id</td>
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Initiator ID (<code>contact.id</code>), single value, exact match</td>
+<td>Initiator ID (<code>Contact.data.account.id</code>), single value, exact match</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2302,7 +2310,7 @@ Accept: application/json
 </code></pre>
 <p><code>GET /agreements/outgoing</code></p>
 
-<p>By default, all outgoing agreements will be returned. You can apply filters to your query to customise the returned agreements.</p>
+<p>By default, all outgoing Agreements will be returned. You can apply filters to your query to customise the returned Agreements.</p>
 
 <h3 id="List-outgoing-Agreements-parameters" class="parameters">Parameters</h3>
 
@@ -2320,14 +2328,21 @@ Accept: application/json
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Page of results to return</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 <tr>
 <td>authoriser_id</td>
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Authoriser ID (<code>contact.id</code>), single value, exact match</td>
+<td>Authoriser ID (<code>Contact.data.account.id</code>), single value, exact match</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2426,15 +2441,17 @@ Accept: application/json
 
 <h1 id="Split-API-Contacts">Contacts</h1>
 
-<p>Your contacts form an address book of Split accounts and non-Split accounts (Anyone accounts) with whom you can interact. In order to create Payments, Payment Requests or Agreements you must first have the party in your contacts.</p>
+<p>Your Contacts form an address book of Split accounts and non-Split accounts (Anyone accounts) with whom you can interact. In order to initiate any type of transaction you must first have the party in your Contact list.</p>
 
 <p>There are a few IDs supplied within a Contact&#39;s response:</p>
 
 <ol>
 <li><code>data.id</code> represents the Contact resource.</li>
 <li><code>data.bank_account.id</code> represents the Contact&#39;s bank account and is used when creating Payments or Payment Requests.</li>
-<li><code>data.account.id</code> represents the Vontact&#39;s Split account and is used when proposing Agreements.</li>
+<li><code>data.account.id</code> represents the Contact&#39;s Split account and is used when proposing Agreements.</li>
 </ol>
+
+<aside class="notice">In the case of Open Payment Requests & Open Agreements, the authorising party will be automatically added to your Contacts list.</aside>
 <h2 id='add-a-split-contact'>Add a Split Contact</h2>
 <p><a id="opIdAddASplitContact"></a></p>
 
@@ -2582,7 +2599,7 @@ curl -X POST https://api-sandbox.split.cash/contacts <span class="se">\</span>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>Split account nickname</td>
 </tr>
 </tbody></table>
 
@@ -2592,8 +2609,8 @@ curl -X POST https://api-sandbox.split.cash/contacts <span class="se">\</span>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a7ed958-f1e8-42dc-8c02-3901d7057357"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
@@ -2744,7 +2761,7 @@ Accept: application/json
 </code></pre>
 <p><code>GET /contacts</code></p>
 
-<p>By default, all contacts will be returned. You can apply filters to your query to customise the returned contact list.</p>
+<p>By default, all Contacts will be returned. You can apply filters to your query to customise the returned Contact list.</p>
 
 <h3 id="List-all-Contacts-parameters" class="parameters">Parameters</h3>
 
@@ -2762,7 +2779,14 @@ Accept: application/json
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Page of results to return</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 <tr>
 <td>name</td>
@@ -2808,8 +2832,8 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a7ed958-f1e8-42dc-8c02-3901d7057357"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"095c5ab7-7fa8-40fd-b317-cddbbf4c8fbc"</span><span class="p">,</span><span class="w">
@@ -2821,13 +2845,13 @@ Accept: application/json
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49935c67-c5df-4f00-99f4-1413c18a89a0"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adventure Dudes Pty Ltd"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@adventuredudes.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"861ff8e4-7acf-4897-9e53-e7c5ae5f7cc0"</span><span class="p">,</span><span class="w">
@@ -2845,7 +2869,7 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb3266f9-e172-4b6c-b802-fe5ac4d3250a"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surfing World Pty Ltd"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@surfingworld.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
@@ -3052,28 +3076,28 @@ curl -X POST https://api-sandbox.split.cash/contacts/new/anyone <span class="se"
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The name of the Contact</td>
 </tr>
 <tr>
 <td>» email</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The email of the Contact</td>
 </tr>
 <tr>
 <td>» branch_code</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The bank account BSB of the Contact</td>
 </tr>
 <tr>
 <td>» account_number</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The bank account number of the Contact</td>
 </tr>
 </tbody></table>
 
@@ -3244,7 +3268,7 @@ Accept: application/json
 <td>path</td>
 <td>string(UUID)</td>
 <td>true</td>
-<td>Contact ID</td>
+<td>Contact ID (<code>Contact.data.id</code>)</td>
 </tr>
 </tbody></table>
 
@@ -3254,8 +3278,8 @@ Accept: application/json
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
@@ -3380,7 +3404,7 @@ curl -X DELETE https://api-sandbox.split.cash/contacts/<span class="o">{</span>i
 </code></pre>
 <p><code>DELETE /contacts/{id}</code></p>
 
-<aside class="notice">Removing a contact will not affect your transaction history.</aside>
+<aside class="notice">Removing a Contact will not affect your transaction history.</aside>
 
 <h3 id="Remove-a-Contact-parameters" class="parameters">Parameters</h3>
 
@@ -3398,7 +3422,7 @@ curl -X DELETE https://api-sandbox.split.cash/contacts/<span class="o">{</span>i
 <td>path</td>
 <td>string(UUID)</td>
 <td>true</td>
-<td>Contact ID</td>
+<td>Contact ID (<code>Contact.data.id</code>)</td>
 </tr>
 </tbody></table>
 
@@ -3563,7 +3587,7 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
 <td>path</td>
 <td>string</td>
 <td>true</td>
-<td>Contact ID</td>
+<td>Contact ID (<code>Contact.data.id</code>)</td>
 </tr>
 <tr>
 <td>body</td>
@@ -3577,7 +3601,7 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The name of the Contact</td>
 </tr>
 </tbody></table>
 
@@ -3588,7 +3612,7 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My very own alias"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
@@ -3631,7 +3655,7 @@ curl -X PATCH https://api-sandbox.split.cash/contacts/<span class="o">{</span>id
 
 <h1 id="Split-API-Open-Agreements">Open Agreements</h1>
 
-<p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account or anyone, a new Agreement is automatically created between the Open Agreement initiator and the authoriser.</p>
+<p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account holder or anyone, they authoriser is added to your Contacts list and a new Agreement is automatically created between the Open Agreement initiator and the authoriser.</p>
 
 <p>An Open Agreement can be accepted multiple times by different parties and the result is the same: A new Agreement.</p>
 
@@ -3761,7 +3785,9 @@ curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</
 </code></pre>
 <p><code>POST /open_agreements</code></p>
 
-<p>Create an Open Agreement that can be accepted by anyone</p>
+<p>Create an Open Agreement that can be accepted by anyone.</p>
+
+<aside class="notice">You can set any of the term metrics to <code>null</code> if you wish them to not have a limit.</aside>
 
 <blockquote>
 <p>Body parameter</p>
@@ -3802,7 +3828,7 @@ curl -X POST https://api-sandbox.split.cash/open_agreements <span class="se">\</
 <td>» title</td>
 <td>body</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Title of the Open Agreement (Visible to authorisers)</td>
 </tr>
 <tr>
@@ -4022,7 +4048,14 @@ Accept: application/json
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Page of results to return</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 </tbody></table>
 
@@ -4434,7 +4467,7 @@ Accept: application/json
 
 <ol>
 <li>General details about the Payment.</li>
-<li>One or many Payout recipients with individual amounts and descriptions.</li>
+<li>One or many Payouts with individual recipients, amounts and descriptions.</li>
 </ol>
 <h2 id='make-a-payment'>Make a Payment</h2>
 <p><a id="opIdMakeAPayment"></a></p>
@@ -4634,21 +4667,21 @@ curl -X POST https://api-sandbox.split.cash/payments <span class="se">\</span>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 the payment should be processed</td>
+<td>Date &amp; time in UTC ISO8601 the Payment should be processed</td>
 </tr>
 <tr>
 <td>» payouts</td>
 <td>body</td>
-<td>[<a href="#schemapayouts">Payouts</a>]</td>
+<td>[<a href="#schemapayout">Payout</a>]</td>
 <td>true</td>
-<td>One or many contact to pay (2 recipients in this example)</td>
+<td>One or many Payouts</td>
 </tr>
 <tr>
-<td>»» Payouts</td>
+<td>»» Payout</td>
 <td>body</td>
-<td><a href="#schemapayouts">Payouts</a></td>
+<td><a href="#schemapayout">Payout</a></td>
 <td>false</td>
-<td>No description</td>
+<td>The actual Payout</td>
 </tr>
 <tr>
 <td>»»» amount</td>
@@ -4676,14 +4709,14 @@ curl -X POST https://api-sandbox.split.cash/payments <span class="se">\</span>
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>No description</td>
+<td>Use for your custom data an certain Split customisations</td>
 </tr>
 <tr>
 <td>»» metadata</td>
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>No description</td>
+<td>Use for your custom data an certain Split customisations</td>
 </tr>
 </tbody></table>
 
@@ -4876,7 +4909,14 @@ Accept: application/json
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>page of results to return</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 </tbody></table>
 
@@ -5228,7 +5268,7 @@ curl -X DELETE https://api-sandbox.split.cash/payouts/<span class="o">{</span>de
 </code></pre>
 <p><code>DELETE /payouts/{debit_ref}</code></p>
 
-<p>You can void any Payout debit from your account that has not yet matured. In the case where it has matured, you can send a Payment Request to the Payout recipient once the Payout has successfully cleared.</p>
+<p>You can void any Payout debit from your account that has not yet matured. In the case where it has matured, you can send a Refund Request to the Payout recipient once the Payout has successfully cleared in order to reverse the transaction.</p>
 
 <h3 id="Void-a-Payout-parameters" class="parameters">Parameters</h3>
 
@@ -5511,7 +5551,7 @@ curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\<
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 that the payment will be processed if the request is approved</td>
+<td>Date &amp; time in UTC ISO8601 that the Payment will be processed if the request is approved</td>
 </tr>
 <tr>
 <td>» amount</td>
@@ -5524,7 +5564,7 @@ curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\<
 <td>» authoriser_id</td>
 <td>body</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>The Contact bank account that will be used to pay the PR (<code>Contact.data.bank_account.id</code>)&#39;</td>
 </tr>
 <tr>
@@ -5532,7 +5572,7 @@ curl -X POST https://api-sandbox.split.cash/payment_requests <span class="se">\<
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>No description</td>
+<td>Use for your custom data an certain Split customisations</td>
 </tr>
 </tbody></table>
 
@@ -6346,6 +6386,13 @@ Accept: application/json
 <td>false</td>
 <td>Page of results to return, single value, exact match</td>
 </tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -6533,6 +6580,13 @@ Accept: application/json
 <td>string</td>
 <td>false</td>
 <td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 </tbody></table>
 
@@ -7045,7 +7099,7 @@ curl -X POST https://api-sandbox.split.cash/credits/<span class="o">{</span>cred
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>No description</td>
+<td>Use for your custom data an certain Split customisations</td>
 </tr>
 </tbody></table>
 
@@ -7212,6 +7266,13 @@ Accept: application/json
 <td>string</td>
 <td>false</td>
 <td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 </tbody></table>
 
@@ -7380,6 +7441,13 @@ Accept: application/json
 <td>string</td>
 <td>false</td>
 <td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 </tbody></table>
 
@@ -7833,7 +7901,7 @@ curl -X POST https://api-sandbox.split.cash/payout_refund_requests <span class="
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>No description</td>
+<td>Use for your custom data an certain Split customisations</td>
 </tr>
 </tbody></table>
 
@@ -8641,6 +8709,13 @@ Accept: application/json
 <td>false</td>
 <td>Page of results to return, single value, exact match</td>
 </tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -8814,6 +8889,13 @@ Accept: text/json
 <td>string</td>
 <td>false</td>
 <td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 </tbody></table>
 
@@ -8990,6 +9072,13 @@ Accept: application/json
 <td>string</td>
 <td>false</td>
 <td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
 </tr>
 <tr>
 <td>ref</td>
@@ -9819,7 +9908,7 @@ Accept: application/json
 <tr>
 <td>title</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Title of the Open Agreement (Visible to authorisers)</td>
 </tr>
 <tr>
@@ -10013,7 +10102,7 @@ Accept: application/json
 <td>nickname</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>Split account nickname</td>
 </tr>
 </tbody></table>
 <h2 id='addasplitcontactresponse'>AddASplitContactResponse</h2>
@@ -10021,8 +10110,8 @@ Accept: application/json
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a7ed958-f1e8-42dc-8c02-3901d7057357"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
@@ -10060,8 +10149,8 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a7ed958-f1e8-42dc-8c02-3901d7057357"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"095c5ab7-7fa8-40fd-b317-cddbbf4c8fbc"</span><span class="p">,</span><span class="w">
@@ -10073,13 +10162,13 @@ Accept: application/json
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49935c67-c5df-4f00-99f4-1413c18a89a0"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adventure Dudes Pty Ltd"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@adventuredudes.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"861ff8e4-7acf-4897-9e53-e7c5ae5f7cc0"</span><span class="p">,</span><span class="w">
@@ -10097,7 +10186,7 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb3266f9-e172-4b6c-b802-fe5ac4d3250a"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surfing World Pty Ltd"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@surfingworld.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
@@ -10166,25 +10255,25 @@ Accept: application/json
 <td>name</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The name of the Contact</td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The email of the Contact</td>
 </tr>
 <tr>
 <td>branch_code</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The bank account BSB of the Contact</td>
 </tr>
 <tr>
 <td>account_number</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The bank account number of the Contact</td>
 </tr>
 </tbody></table>
 <h2 id='addananyonecontactresponse'>AddAnAnyoneContactResponse</h2>
@@ -10227,8 +10316,8 @@ Accept: application/json
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oustanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
@@ -10278,7 +10367,7 @@ Accept: application/json
 <td>name</td>
 <td>string</td>
 <td>true</td>
-<td>No description</td>
+<td>The name of the Contact</td>
 </tr>
 </tbody></table>
 <h2 id='updateacontactresponse'>UpdateAContactResponse</h2>
@@ -10287,7 +10376,7 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My very own alias"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split account"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
@@ -10366,13 +10455,13 @@ Accept: application/json
 <td>matures_at</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 the payment should be processed</td>
+<td>Date &amp; time in UTC ISO8601 the Payment should be processed</td>
 </tr>
 <tr>
 <td>payouts</td>
-<td>[<a href="#schemapayouts">Payouts</a>]</td>
+<td>[<a href="#schemapayout">Payout</a>]</td>
 <td>true</td>
-<td>One or many contact to pay (2 recipients in this example)</td>
+<td>One or many Payouts</td>
 </tr>
 <tr>
 <td>metadata</td>
@@ -10381,8 +10470,8 @@ Accept: application/json
 <td>No description</td>
 </tr>
 </tbody></table>
-<h2 id='payouts'>Payouts</h2>
-<p><a id="schemapayouts"></a></p>
+<h2 id='payout'>Payout</h2>
+<p><a id="schemapayout"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
   </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A tandem skydive jump SB23094"</span><span class="p">,</span><span class="w">
@@ -10720,7 +10809,7 @@ Accept: application/json
 <td>matures_at</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 that the payment will be processed if the request is approved</td>
+<td>Date &amp; time in UTC ISO8601 that the Payment will be processed if the request is approved</td>
 </tr>
 <tr>
 <td>amount</td>
@@ -10731,7 +10820,7 @@ Accept: application/json
 <tr>
 <td>authoriser_id</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>The Contact bank account that will be used to pay the PR (<code>Contact.data.bank_account.id</code>)&#39;</td>
 </tr>
 <tr>
