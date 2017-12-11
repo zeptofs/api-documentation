@@ -882,7 +882,7 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <ul>
 <li>If the payer is a Split Contact, they will receive a request that they must approve in order for the funds to flow from their bank account to yours.</li>
 <li>To automate the Payment Request approval process you can first <a href="/#Split-API-Agreements">enter into an Agreement</a> with the payer. Once the Agreement is accepted, any future Payment Request will be automatically approved and processed per the Agreement terms.</li>
-<li>If you would like to send a Payment Request using the API to an Anyone Contact, you must first have accepted an Agreement with them.</li>
+<li>If you would like to send a Payment Request using the API to an Anyone Contact, you must first have an accepted Agreement with them.</li>
 </ul>
 
 <p>Common use cases:</p>
@@ -893,6 +893,10 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <li>Bill smoothing</li>
 <li>Repayment plans</li>
 </ul>
+
+<p>Example flow embedding an Open Agreement link using an iFrame in order to automate future Payment Request approvals:</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/host_oa.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/host_oa.png" alt="Hosted Open Agreement" /></a></p>
 
 <p><strong>Sharing an <a href="http://help.split.cash/payment-requests/open-payment-requests">Open Payment Request</a></strong></p>
 
@@ -913,6 +917,10 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <li>Invoice payment</li>
 <li>Group funding (paying for a restaurant bill)</li>
 </ul>
+
+<p>Example flow embedding the Open Payment Request link using an iFrame:</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/hosted_opr.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/hosted_opr.png" alt="Hosted Open Payment Request" /></a></p>
 <h2 id='idempotent-requests'>Idempotent requests</h2>
 <blockquote>
 <p>Example response</p>
