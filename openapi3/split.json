@@ -504,7 +504,7 @@
         }
       }
     },
-    "/contacts/new/anyone": {
+    "/contacts/anyone": {
       "post": {
         "tags": [
           "Contacts"
@@ -2574,7 +2574,7 @@
               "type": "anyone",
               "bank_account": {
                 "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
-                "account_number": "123456789",
+                "account_number": "13048322",
                 "branch_code": "123456",
                 "state": "pending_verification"
               },
@@ -2616,7 +2616,7 @@
           "name": "Hunter Thompson",
           "email": "hunter@batcountry.com",
           "branch_code": "123456",
-          "account_number": "123456789"
+          "account_number": "13048322"
         }
       },
       "AddAnAnyoneContactResponse": {
@@ -2638,7 +2638,7 @@
             "type": "anyone",
             "bank_account": {
               "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
-              "account_number": "123456789",
+              "account_number": "13048322",
               "branch_code": "123456",
               "state": "pending_verification"
             },
