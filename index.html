@@ -249,6 +249,9 @@
                   <li>
                     <a href="#idempotent-requests" class="toc-h2 toc-link" data-title="Idempotent requests">Idempotent requests</a>
                   </li>
+                  <li>
+                    <a href="#speeding-up-onboarding" class="toc-h2 toc-link" data-title="Speeding up onboarding">Speeding up onboarding</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -954,6 +957,90 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>Only the <code>POST</code> action for the Payments, Payment Requests, Refunds, Refund Requests support the use of the <code>Idempotency-Key</code>.</li>
 <li>Endpoints that use the <code>GET</code> or <code>DELETE</code> actions are idempotent by nature.</li>
 </ul>
+<h2 id='speeding-up-onboarding'>Speeding up onboarding</h2>
+<p>Consider the following scenario:</p>
+
+<blockquote class="main-quote">Split is integrated in your application to handle payments.<br>A customer would like to use Split but does not yet have Split account.<br>You already have some information about this customer.</blockquote>
+
+<p>Given the above, in a standard implementation where a customer enables/uses Split within your application, these are the steps they would follow:</p>
+
+<ol>
+<li>Click on some sort of button within your app to use Split.</li>
+<li>They get redirected to the Split sign in page (possibly via a popup or modal).</li>
+<li>Since they don&#39;t yet have a Split account, they would click on sign up.</li>
+<li>They would fill in all their signup details and submit.</li>
+<li>They would be presented with the <a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png">authorisation page</a>.</li>
+<li>They would click the &quot;Authorise&quot; button and be redirected to your app.</li>
+</ol>
+
+<p>Whilst not too bad, we can do better!</p>
+
+<p>In order to speed up the process, we allow query string params to be appended to the <a href="/#get-started">authorisation URL</a>. For instance, if we already have some information about the customer and know they probably don&#39;t have a Split account, we can embed this information in the authorisation URL.</p>
+
+<p><strong>Supported query string parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>landing</code></td>
+<td>Accepted values: <code>business_sign_up</code> or <code>personal_sign_up</code>. What page the user should see first if not already signed in. Default is the sign in page.</td>
+</tr>
+<tr>
+<td><code>nickname</code></td>
+<td>Only letters, numbers, dashes and underscores are permitted. This will be used to identify the account in Split.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Business account only. Business name.</td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td>Business account only. Business phone number.</td>
+</tr>
+<tr>
+<td><code>street_address</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>suburb</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>See the sign up page for accepted values</td>
+</tr>
+<tr>
+<td><code>post_code</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>first_name</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>mobile_phone</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>All values should be <a href="https://en.wikipedia.org/wiki/Query_string#URL_encoding">URL encoded</a>.</p>
+
+<p>As an example, the following authorisation URL would display the <strong>personal sign up</strong> &amp; prefill the first name field with <strong>George</strong>:
+<code>https://go-sandbox.split.cash/oauth/authorize?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx&amp;scope=xxx&amp;landing=personal_sign_up&amp;first_name=George</code></p>
+
+<p>You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded: <a href="https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgceco&amp;first_name=George">https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgeco&amp;first_name=George</a>.</p>
 <h1 id='configuration'>Configuration</h1><h2 id='scopes'>Scopes</h2>
 <p>Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.</p>
 
