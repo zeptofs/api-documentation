@@ -264,6 +264,9 @@
                     <a href="#pagination" class="toc-h2 toc-link" data-title="Pagination">Pagination</a>
                   </li>
                   <li>
+                    <a href="#remitter" class="toc-h2 toc-link" data-title="Remitter">Remitter</a>
+                  </li>
+                  <li>
                     <a href="#webhooks" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
                   </li>
               </ul>
@@ -1096,6 +1099,25 @@ Per-Page: 25
 Total: 5
 </code></pre>
 <p>All collections are paginated to 25 items by default and the pagination information may be found in the response header. You can customise the pagination by appending <code>?per_page=x</code> and/or <code>?page=x</code> to the endpoint URL.</p>
+<h2 id='remitter'>Remitter</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"..."</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="s2">"remitter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomRem"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>You can elect to assign a remitter name on a per-request basis when submitting Payments &amp; Payment Requests. Simply append the <code>remitter</code> key and a value within the <code>metadata</code> key.</p>
+
+<ul>
+<li><strong>For Payments</strong>, the party being credited will see the designated remitter name along the entry on their bank statement.</li>
+<li><strong>For Payment Requests</strong>, the party being debited will see the designated remitter name along the entry on their bank statement.</li>
+</ul>
+
+<aside class="notice">The remitter name MUST be between 3 and 16 characters.</aside>
 <h2 id='webhooks'>Webhooks</h2>
 <blockquote>
 <p>Example response</p>
@@ -1130,8 +1152,7 @@ Total: 5
 
 <p>All events posted to the designated URL fit the same structure.</p>
 
-<aside class="notice">
-  The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
+<aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
 </aside>
 
 <h1 id="Split-API-Agreements">Agreements</h1>
