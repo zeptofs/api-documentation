@@ -440,6 +440,16 @@
             "example": "100"
           },
           {
+            "name": "account_id",
+            "in": "query",
+            "description": "Single value, string search",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00994ebb-e3cd-4598-8965-bf4e6ca7d840"
+          },
+          {
             "name": "name",
             "in": "query",
             "description": "Single value, string search",
