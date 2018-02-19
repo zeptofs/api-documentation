@@ -18,11 +18,15 @@
   "tags": [
     {
       "name": "Agreements",
-      "description": "Split Agreements are managed on a per Contact basis and allow two parties to agree on terms for which future Payment Requests will be auto-approved.\n\nAgreement are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.\n\n<div class=\"middle-header\">Direction</div>\n\nAgreements are therefore broken up by direction:\n\n1. **Incoming:** Agreement received from another Split account\n2. **Outgoing:** Agreement sent to another Split account\n\n<div class=\"middle-header\">Lifecycle</div>\n\nAn Agreement can have the following statuses:\n\n| Status | Description |\n|-------|-------------|\n| `proposed` | Waiting for the Agreement to be accepted or declined. |\n| `accepted` | The Agreement have been accepted and is active. |\n| `cancelled` | The Agreement has been cancelled (The initiator or authoriser can cancel an Agreement). |\n| `declined` | The Agreement has been declined. |\n\n"
+      "description": "Split Agreements are managed on a per Contact basis and allow two parties to agree on terms for which future Payment Requests will be auto-approved.\n\nAgreement are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.\n\n<div class=\"middle-header\">Direction</div>\n\nAgreements are therefore broken up by direction:\n\n1. **Incoming:** Agreement received from another Split account\n2. **Outgoing:** Agreement sent to another Split account\n\n<div class=\"middle-header\">Lifecycle</div>\n\nAn Agreement can have the following statuses:\n\n| Status | Description |\n|-------|-------------|\n| `proposed` | Waiting for the Agreement to be accepted or declined. |\n| `accepted` | The Agreement have been accepted and is active. |\n| `cancelled` | The Agreement has been cancelled (The initiator or authoriser can cancel an Agreement). |\n| `declined` | The Agreement has been declined. |\n"
+    },
+    {
+      "name": "Bank Accounts",
+      "description": "Your currently linked up bank accounts.\n"
     },
     {
       "name": "Contacts",
-      "description": "Your Contacts form an address book of Split accounts and non-Split accounts (Anyone accounts) with whom you can interact. In order to initiate any type of transaction you must first have the party in your Contact list.\n\nThere are a few IDs supplied within a Contact's response:\n\n1. `data.id` represents the Contact resource.\n2. `data.bank_account.id` represents the Contact's bank account and is used when creating Payments or Payment Requests.\n3. `data.account.id` represents the Contact's Split account and is used when proposing Agreements.\n\n<aside class=\"notice\">In the case of Open Payment Requests & Open Agreements, the authorising party will be automatically added to your Contacts list.</aside>"
+      "description": "Your Contacts form an address book of Split accounts and non-Split accounts (Anyone accounts) with whom you can interact. In order to initiate any type of transaction you must first have the party in your Contact list.\n\nThere are a few IDs supplied within a Contact's response:\n\n1. `data.id` represents the Contact resource.\n2. `data.bank_account.id` represents the Contact's bank account and is used when creating Payments or Payment Requests.\n3. `data.account.id` represents the Contact's Split account and is used when proposing Agreements.\n\n<aside class=\"notice\">In the case of Open Payment Requests & Open Agreements, the authorising party will be automatically added to your Contacts list.</aside>\n"
     },
     {
       "name": "Open Agreements",
@@ -30,7 +34,7 @@
     },
     {
       "name": "Payments",
-      "description": "**A Payment is made up of two parts:**\n\n1. General details about the Payment.\n2. One or many Payouts with individual recipients, amounts and descriptions.\n\n<div class=\"middle-header\">Lifecycle</div>\n\nThe Payment is simply a group of Payouts therefore it does not have a particular status. Its Payouts however have their status regularly updated, for a list of possible Payout statuses check out the [Transactions](/#Split-API-Transactions).\n\n"
+      "description": "**A Payment is made up of two parts:**\n\n1. General details about the Payment.\n2. One or many Payouts with individual recipients, amounts and descriptions.\n\n<div class=\"middle-header\">Lifecycle</div>\n\nThe Payment is simply a group of Payouts therefore it does not have a particular status. Its Payouts however have their status regularly updated, for a list of possible Payout statuses check out the [Transactions](/#Split-API-Transactions).\n"
     },
     {
       "name": "Payouts",
@@ -368,6 +372,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListOutgoingAgreementsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bank_accounts": {
+      "get": {
+        "tags": [
+          "Bank Accounts"
+        ],
+        "summary": "List all Bank Accounts",
+        "description": "By default, all Bank Accounts will be returned. There can currently be only 1 active bank account.\n",
+        "operationId": "ListAllBankAccounts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAllBankAccountsResponse"
                 }
               }
             }
@@ -2277,6 +2303,38 @@
                   "max_amount": 10000
                 }
               }
+            }
+          ]
+        }
+      },
+      "ListAllBankAccountsResponse": {
+        "title": "List all Bank Accounts (response)",
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "id": "6a7ed958-f1e8-42dc-8c02-3901d7057357",
+              "branch_code": "493192",
+              "account_number": "3993013",
+              "status": "active"
+            },
+            {
+              "id": "56df206a-aaff-471a-b075-11882bc8906a",
+              "branch_code": "302193",
+              "account_number": "119302",
+              "status": "removed"
             }
           ]
         }
