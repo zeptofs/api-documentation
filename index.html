@@ -275,6 +275,9 @@
             <a href="#Split-API-Agreements" class="toc-h1 toc-link" data-title="Agreements">Agreements</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#lifecycle" class="toc-h2 toc-link" data-title="Lifecycle">Lifecycle</a>
+                  </li>
+                  <li>
                     <a href="#propose-an-agreement" class="toc-h2 toc-link" data-title="Propose an Agreement">Propose an Agreement</a>
                   </li>
                   <li>
@@ -332,6 +335,9 @@
             <a href="#Split-API-Open-Agreements" class="toc-h1 toc-link" data-title="Open Agreements">Open Agreements</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#lifecycle-2" class="toc-h2 toc-link" data-title="Lifecycle">Lifecycle</a>
+                  </li>
+                  <li>
                     <a href="#create-an-open-agreement" class="toc-h2 toc-link" data-title="Create an Open Agreement">Create an Open Agreement</a>
                   </li>
                   <li>
@@ -348,6 +354,9 @@
           <li>
             <a href="#Split-API-Payments" class="toc-h1 toc-link" data-title="Payments">Payments</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#lifecycle-3" class="toc-h2 toc-link" data-title="Lifecycle">Lifecycle</a>
+                  </li>
                   <li>
                     <a href="#make-a-payment" class="toc-h2 toc-link" data-title="Make a Payment">Make a Payment</a>
                   </li>
@@ -370,6 +379,9 @@
           <li>
             <a href="#Split-API-Payment-Requests" class="toc-h1 toc-link" data-title="Payment Requests">Payment Requests</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#lifecycle-4" class="toc-h2 toc-link" data-title="Lifecycle">Lifecycle</a>
+                  </li>
                   <li>
                     <a href="#request-payment" class="toc-h2 toc-link" data-title="Request Payment">Request Payment</a>
                   </li>
@@ -417,6 +429,9 @@
             <a href="#Split-API-Refund-Requests" class="toc-h1 toc-link" data-title="Refund Requests">Refund Requests</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#lifecycle-5" class="toc-h2 toc-link" data-title="Lifecycle">Lifecycle</a>
+                  </li>
+                  <li>
                     <a href="#request-a-refund" class="toc-h2 toc-link" data-title="Request a Refund">Request a Refund</a>
                   </li>
                   <li>
@@ -442,6 +457,12 @@
           <li>
             <a href="#Split-API-Transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#lifecycle-6" class="toc-h2 toc-link" data-title="Lifecycle">Lifecycle</a>
+                  </li>
+                  <li>
+                    <a href="#failure-reasons" class="toc-h2 toc-link" data-title="Failure reasons">Failure reasons</a>
+                  </li>
                   <li>
                     <a href="#list-all-transactions" class="toc-h2 toc-link" data-title="List all transactions">List all transactions</a>
                   </li>
@@ -1214,9 +1235,7 @@ Total: 5
 <li><strong>Incoming:</strong> Agreement received from another Split account</li>
 <li><strong>Outgoing:</strong> Agreement sent to another Split account</li>
 </ol>
-
-<div class="middle-header">Lifecycle</div>
-
+<h2 id='lifecycle'>Lifecycle</h2>
 <p>An Agreement can have the following statuses:</p>
 
 <table><thead>
@@ -4065,9 +4084,7 @@ Accept: application/json
 <p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by either a Split account holder or anyone, they authoriser is added to your Contacts list and a new Agreement is automatically created between the Open Agreement initiator and the authoriser.</p>
 
 <p>An Open Agreement can be accepted multiple times by different parties and the result is the same: A new Agreement.|</p>
-
-<div class="middle-header">Lifecycle</div>
-
+<h2 id='lifecycle-2'>Lifecycle</h2>
 <p>An Open Agreement can have the following statuses:</p>
 
 <table><thead>
@@ -4922,9 +4939,7 @@ Accept: application/json
 <li>General details about the Payment.</li>
 <li>One or many Payouts with individual recipients, amounts and descriptions.</li>
 </ol>
-
-<div class="middle-header">Lifecycle</div>
-
+<h2 id='lifecycle-3'>Lifecycle</h2>
 <p>The Payment is simply a group of Payouts therefore it does not have a particular status. Its Payouts however have their status regularly updated, for a list of possible Payout statuses check out the <a href="/#Split-API-Transactions">Transactions</a>.</p>
 <h2 id='make-a-payment'>Make a Payment</h2>
 <p><a id="opIdMakeAPayment"></a></p>
@@ -5893,9 +5908,7 @@ Accept: application/json
 <td>Only visible to the PR initiator (outgoing PRs). This reference corresponds to the newly created credit from the approved PR.</td>
 </tr>
 </tbody></table>
-
-<div class="middle-header">Lifecycle</div>
-
+<h2 id='lifecycle-4'>Lifecycle</h2>
 <p>A Payment Request can have the following statuses:</p>
 
 <table><thead>
@@ -8238,9 +8251,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>Only visible to the RR initiator (outgoing RRs). This reference corresponds to the newly created credit from the approved RR.</td>
 </tr>
 </tbody></table>
-
-<div class="middle-header">Lifecycle</div>
-
+<h2 id='lifecycle-5'>Lifecycle</h2>
 <p>A Refund Request can have the following statuses:</p>
 
 <table><thead>
@@ -9502,9 +9513,7 @@ Accept: text/json
 <h1 id="Split-API-Transactions">Transactions</h1>
 
 <p>The transactions endpoint provides a detailed look at all past, current and future scheduled debits &amp; credits relating to the Split account. In other words, we not only show the transactions initiated by the Split account but also show transactions where the Split account is on the receiving end - even for payments that have not yet matured.</p>
-
-<div class="middle-header">Lifecycle</div>
-
+<h2 id='lifecycle-6'>Lifecycle</h2>
 <p>A transaction (debit or credit) can have the following statuses:</p>
 
 <table><thead>
@@ -9539,7 +9548,7 @@ Accept: text/json
 </tr>
 <tr>
 <td><code>returned</code></td>
-<td>The transaction did not successfully clear. Usually due to insufficient funds.</td>
+<td>The transaction did not successfully clear.</td>
 </tr>
 <tr>
 <td><code>voided</code></td>
@@ -9552,6 +9561,76 @@ Accept: text/json
 <tr>
 <td><code>paused</code></td>
 <td>The transaction has temporary been paused by Split pending internal review.</td>
+</tr>
+<tr>
+<td><code>prefailed</code></td>
+<td>The transaction was never submitted to the bank because we detected that there were insufficient funds. The transaction can be retried.</td>
+</tr>
+</tbody></table>
+<h2 id='failure-reasons'>Failure reasons</h2>
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_refund"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-07T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"returned"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refer_to_customer"</span><span class="w">
+      </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The <code>rejected</code>, <code>returned</code>, <code>voided</code> &amp; <code>prefailed</code> statuses are always accompanied by a <code>failure_reason</code>:</p>
+
+<table><thead>
+<tr>
+<th>Reason</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>invalid_bsb_number</code></td>
+<td>BSB number is invalid</td>
+</tr>
+<tr>
+<td><code>payment_stopped</code></td>
+<td>The payment was stopped at the bank. Can be due to a customer requesting a stop payment with their financial institution.</td>
+</tr>
+<tr>
+<td><code>account_closed</code></td>
+<td>The bank account is closed</td>
+</tr>
+<tr>
+<td><code>customer_deceased</code></td>
+<td>Customer is deceased</td>
+</tr>
+<tr>
+<td><code>incorrect_account_number</code></td>
+<td>Account number is incorrect</td>
+</tr>
+<tr>
+<td><code>refer_to_customer</code></td>
+<td>Usually due to insufficient funds</td>
+</tr>
+<tr>
+<td><code>refer_to_split</code></td>
+<td>Failed due to reasons not listed here. Please contact us.</td>
+</tr>
+<tr>
+<td><code>insufficient_funds</code></td>
+<td>Insufficient funds</td>
 </tr>
 </tbody></table>
 <h2 id='list-all-transactions'>List all transactions</h2>
