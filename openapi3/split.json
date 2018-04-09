@@ -1679,9 +1679,9 @@
           "200": {
             "description": "OK",
             "content": {
-              "text/json": {
+              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListIncomingRefundRequestsResponse"
+                  "$ref": "#/components/schemas/ListOutgoingRefundRequestsResponse"
                 }
               }
             }
@@ -2045,6 +2045,32 @@
                 }
               }
             }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Unassigned Agreements"
+        ],
+        "summary": "Delete an Unassigned Agreement",
+        "description": "An Unassigned Agreement can be deleted at anytime as long as it has not yet been assigned an authoriser.",
+        "operationId": "DeleteUnassignedAgreement",
+        "parameters": [
+          {
+            "name": "unassigned_agreement_ref",
+            "in": "path",
+            "description": "Single value, exact match",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            },
+            "example": "A.2"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -2938,7 +2964,6 @@
             "description": "One or many Payouts"
           },
           "metadata": {
-            "description": "Optional object to allow custom and configuration values",
             "$ref": "#/components/schemas/Metadata"
           }
         },
@@ -2995,7 +3020,6 @@
             "example": "48b89364-1577-4c81-ba02-96705895d457"
           },
           "metadata": {
-            "description": "Optional object to allow custom and configuration values",
             "$ref": "#/components/schemas/Metadata"
           }
         }
@@ -3270,7 +3294,6 @@
             "example": "de86472c-c027-4735-a6a7-234366a27fc7"
           },
           "metadata": {
-            "description": "Optional object to allow custom and configuration values",
             "$ref": "#/components/schemas/Metadata"
           }
         }
@@ -3561,7 +3584,6 @@
             "example": "Because reason"
           },
           "metadata": {
-            "description": "Optional object to allow custom and configuration values",
             "$ref": "#/components/schemas/Metadata"
           }
         },
@@ -3714,7 +3736,6 @@
             "example": "Because reason"
           },
           "metadata": {
-            "description": "Optional object to allow custom and configuration values",
             "$ref": "#/components/schemas/Metadata"
           }
         },
