@@ -1828,6 +1828,16 @@
             "example": "party people"
           },
           {
+            "name": "other_party_bank_ref",
+            "in": "query",
+            "description": "Single value, exact match",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "example": "CT.3a"
+          },
+          {
             "name": "description",
             "in": "query",
             "description": "Single value, string search",
@@ -3975,11 +3985,12 @@
               "category": "payout_refund",
               "created_at": "2016-12-07T23:15:00Z",
               "matures_at": "2016-12-10T23:15:00Z",
-              "cleared_at": null,
-              "bank_ref": null,
-              "status": "Pending",
+              "cleared_at": "2016-12-10T23:15:00Z",
+              "bank_ref": "DT.9a",
+              "status": "Cleared",
               "party_name": "Sanford-Rees",
-              "party_nickname": "sanford-rees-8",
+              "party_nickname": null,
+              "party_bank_ref": "CT.11",
               "description": null,
               "amount": 1
             },
@@ -3994,8 +4005,9 @@
               "bank_ref": null,
               "status": " Pending",
               "party_name": "Gutmann-Schmidt",
-              "party_nickname": "gutmann-schmidt-6",
-              "description": null,
+              "party_nickname": null,
+              "party_bank_ref": null,
+              "description": "Batteries for hire",
               "amount": 1
             },
             {
@@ -4010,6 +4022,7 @@
               "status": "Pending",
               "party_name": "Price and Sons",
               "party_nickname": "price-and-sons-2",
+              "party_bank_ref": null,
               "description": "Money for jam",
               "amount": 1
             }

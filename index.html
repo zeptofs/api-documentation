@@ -8666,6 +8666,13 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>Single value, string search</td>
 </tr>
 <tr>
+<td>other_party_bank_ref</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Single value, exact match</td>
+</tr>
+<tr>
 <td>description</td>
 <td>query</td>
 <td>string</td>
@@ -8810,11 +8817,12 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_refund"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-07T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cleared"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.11"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -8829,8 +8837,9 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Pending"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gutmann-Schmidt"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gutmann-schmidt-6"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Batteries for hire"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -8845,6 +8854,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Money for jam"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -11906,11 +11916,12 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_refund"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-07T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cleared"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.11"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -11925,8 +11936,9 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Pending"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gutmann-Schmidt"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gutmann-schmidt-6"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Batteries for hire"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -11941,6 +11953,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Money for jam"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">}</span><span class="w">
