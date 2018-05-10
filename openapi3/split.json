@@ -3067,7 +3067,6 @@
             "payouts": [
               {
                 "ref": "D.1",
-                "invoice_ref": "BILL-0001",
                 "batch_description": "The SuperPackage",
                 "matures_at": "2016-09-13T23:50:44Z",
                 "created_at": "2016-09-10T23:50:44Z",
@@ -3085,7 +3084,6 @@
               },
               {
                 "ref": "D.2",
-                "invoice_ref": null,
                 "batch_description": "The SuperPackage",
                 "matures_at": "2016-09-13T23:50:44Z",
                 "created_at": "2016-09-10T23:50:44Z",
@@ -3189,7 +3187,6 @@
               "payouts": [
                 {
                   "ref": "D.1",
-                  "invoice_ref": null,
                   "batch_description": "This description is only available to the payer",
                   "matures_at": "2016-09-13T23:50:44Z",
                   "created_at": "2016-09-10T23:50:44Z",
@@ -3207,7 +3204,6 @@
                 },
                 {
                   "ref": "D.2",
-                  "invoice_ref": null,
                   "batch_description": "This description is only available to the payer",
                   "matures_at": "2016-09-13T23:50:44Z",
                   "created_at": "2016-09-10T23:50:44Z",
@@ -3243,7 +3239,6 @@
             "payouts": [
               {
                 "ref": "D.1",
-                "invoice_ref": null,
                 "batch_description": "The SuperPackage",
                 "matures_at": "2016-09-13T23:50:44Z",
                 "created_at": "2016-09-10T23:50:44",
@@ -3261,7 +3256,6 @@
               },
               {
                 "ref": "D.2",
-                "invoice_ref": null,
                 "batch_description": "The SuperPackage",
                 "matures_at": "2016-09-13T23:50:44Z",
                 "created_at": "2016-09-10T23:50:44Z",
