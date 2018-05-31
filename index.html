@@ -782,6 +782,8 @@
 <li>As noted below, the access token expires every 2 hours. To get a new access token without going through steps 1 to 4 again, use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</li>
 </ul>
 
+<aside class="notice">Just want to access your own account and don't want to go through the entire authorisation process described below? Checkout how to create a <a href="/#personal-access-token">Personal Access Token</a>.</aside>
+
 <ol>
 <li><p><strong>Create a Split account</strong></p>
 
@@ -918,8 +920,12 @@ Google, Twitter or Facebook account, this is the grant being used.</p>
 
 <aside class="notice">
   The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you'll
-want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>acccess_token</code>
+want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>access_token</code>
 </aside>
+<h3 id='personal-access-token'>Personal Access Token</h3>
+<p>If you&#39;re looking to only access your own account via the API, you can generate an access/refresh token pair from the UI.</p>
+
+<p>To do this, sign in to your Split account and <a href="https://go-sandbox.split.cash/oauth/applications">create an application</a> if you haven&#39;t already. Click on your application from your <a href="https://go-sandbox.split.cash/oauth/applications">application list</a> and click on <strong>Personal access</strong>.</p>
 <h2 id='making-payments'>Making payments</h2>
 <p>In order to payout funds, you&#39;ll be looking to use the <a href="/#Split-API-Payments">Payments</a> endpoint. Whether you&#39;re paying out another Split account holder or anyone, the process is the same:</p>
 
