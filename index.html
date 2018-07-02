@@ -1255,6 +1255,146 @@ Total: 5
 
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
 </aside>
+<h3 id='checking-webhook-signatures'>Checking Webhook Signatures</h3>
+<blockquote>
+<p>Example header</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Split-Signature: 1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+</code></pre>
+<p>Split signs the webhook events it sends to your endpoints. We do so by including a signature in each event’s <code>Split-Signature</code> header. This allows you to validate that the events were indeed sent by Split.</p>
+
+<p>Before you can verify signatures, you need to retrieve your endpoint’s secret from your Webhooks settings. Each endpoint has its own unique secret; if you use multiple endpoints, you must obtain a secret for each one. If you use multiple endpoints, you must obtain a secret for each one.</p>
+
+<p>The <code>Split-Signature</code> header contains a timestamp and one or more signatures. All separated by <code>.</code> (dot).</p>
+
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<pre class="highlight sh tab-shell"><code><span class="c"># Shell example is not available</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"crypto/hmac"</span><span class="x">
+    </span><span class="s">"crypto/sha256"</span><span class="x">
+    </span><span class="s">"strings"</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"encoding/hex"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">secret</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"1234"</span><span class="x">
+    </span><span class="n">message</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"{</span><span class="se">\"</span><span class="s">data</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">value</span><span class="se">\"</span><span class="s">}}"</span><span class="x">
+    </span><span class="n">splitSignature</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635"</span><span class="x">
+
+    </span><span class="n">data</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">Split</span><span class="p">(</span><span class="n">splitSignature</span><span class="p">,</span><span class="x"> </span><span class="s">"."</span><span class="p">)</span><span class="x">
+    </span><span class="n">timestamp</span><span class="p">,</span><span class="x"> </span><span class="n">givenSignature</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">data</span><span class="p">[</span><span class="m">0</span><span class="p">],</span><span class="x"> </span><span class="n">data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="x">
+
+    </span><span class="n">signedPayload</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">timestamp</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="s">"."</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">message</span><span class="x">
+
+    </span><span class="n">hash</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">hmac</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="n">sha256</span><span class="o">.</span><span class="n">New</span><span class="p">,</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">secret</span><span class="p">))</span><span class="x">
+    </span><span class="n">hash</span><span class="o">.</span><span class="n">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="n">signedPayload</span><span class="p">))</span><span class="x">
+    </span><span class="n">expectedSignature</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">hex</span><span class="o">.</span><span class="n">EncodeToString</span><span class="p">(</span><span class="n">hash</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="no">nil</span><span class="p">))</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">expectedSignature</span><span class="p">)</span><span class="x">
+    </span><span class="c">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">givenSignature</span><span class="p">)</span><span class="x">
+    </span><span class="c">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">hmac</span>
+
+<span class="n">split_signature</span> <span class="o">=</span> <span class="s">'1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s">'1234'</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="n">message</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s">'{"data":{"key":"value"}}'</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">split_signature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'.'</span><span class="p">)</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">given_signature</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">signed_payload</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s">'.'</span> <span class="o">+</span> <span class="n">message</span>
+
+<span class="n">expected_signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">signed_payload</span><span class="p">,</span> <span class="n">digestmod</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">expected_signature</span><span class="p">)</span>
+<span class="c"># &gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">given_signature</span><span class="p">)</span>
+<span class="c"># &gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'openssl'</span>
+
+<span class="n">split_signature</span> <span class="o">=</span> <span class="s1">'1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="s1">'1234'</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'{"data":{"key":"value"}}'</span>
+
+<span class="n">timestamp</span><span class="p">,</span> <span class="n">given_signature</span><span class="p">,</span> <span class="o">*</span><span class="n">other</span> <span class="o">=</span> <span class="n">split_signature</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+<span class="n">signed_payload</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="n">message</span>
+<span class="n">expected_signature</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">hexdigest</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">signed_payload</span><span class="p">)</span>
+
+<span class="nb">puts</span><span class="p">(</span><span class="n">expected_signature</span><span class="p">)</span>
+<span class="c1"># =&gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+<span class="nb">puts</span><span class="p">(</span><span class="n">given_signature</span><span class="p">)</span>
+<span class="c1"># =&gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="s1">'{\"data\":{\"key\":\"value\"}}'</span>
+<span class="kd">var</span> <span class="nx">secret</span> <span class="o">=</span> <span class="s1">'1234'</span>
+<span class="kd">var</span> <span class="nx">splitSignature</span> <span class="o">=</span> <span class="s1">'1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'</span>
+
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">splitSignature</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="kd">var</span> <span class="nx">givenSignature</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="kd">var</span> <span class="nx">signedPayload</span> <span class="o">=</span> <span class="nx">timestamp</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="nx">message</span>
+
+<span class="kd">var</span> <span class="nx">expectedSignature</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="nx">secret</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">signedPayload</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">)</span>
+<span class="c1">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">givenSignature</span><span class="p">)</span>
+<span class="c1">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+</code></pre>
+<p><strong>Step 1. Extract the timestamp and signatures from the header</strong></p>
+
+<p>Split the header, using the <code>.</code> (dot) character as the separator, to get a list of elements.</p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>timestamp</code></td>
+<td><a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a> in seconds when the signature was created</td>
+</tr>
+<tr>
+<td><code>signature</code></td>
+<td>Request signature</td>
+</tr>
+<tr>
+<td><code>other</code></td>
+<td>Placeholder for future parameters (currently not used)</td>
+</tr>
+</tbody></table>
+
+<p><strong>Step 2: Prepare the signed_payload string</strong></p>
+
+<p>You achieve this by concatenating:</p>
+
+<ul>
+<li>The timestamp from the header (as a string)</li>
+<li>The character <code>.</code> (dot)</li>
+<li>The actual JSON payload (request body)</li>
+</ul>
+
+<p><strong>Step 3: Determine the expected signature</strong></p>
+
+<p>Compute an HMAC with the SHA256 hash function. Use the endpoint’s signing secret as the key, and use the <code>signed_payload</code> string as the message.</p>
+
+<p><strong>Step 4: Compare signatures</strong></p>
+
+<p>Compare the signature in the header to the expected signature. If a signature matches, compute the difference between the current timestamp and the received timestamp, then decide if the difference is within your tolerance.</p>
+
+<p>To protect against timing attacks, use a constant-time string comparison to compare the expected signature to each of the received signatures.</p>
 
 <h1 id="Split-API-Agreements">Agreements</h1>
 
