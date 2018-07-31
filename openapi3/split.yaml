@@ -828,6 +828,8 @@ paths:
         Propose an Agreement to another Split Contact
 
         <aside class="notice">You can set any of the term metrics to <code>null</code> if you wish them to not have a limit.</aside>
+
+        <aside class="notice">[31/07/2018] Please note that we've deprecated <code>authoriser_id</code> in favour of <code>authoriser_contact_id</code>. We will continue to support the use of <code>authoriser_id (Contact.data.account.id)</code> but encourage you to use <code>authoriser_contact_id (Contact.data.id)</code> to identify the authoriser of the Agreement.</aside>
       operationId: ProposeAgreement
       parameters: []
       requestBody:
@@ -2253,14 +2255,14 @@ components:
         - terms
       type: object
       properties:
-        authoriser_id:
+        authoriser_contact_id:
           type: string
-          description: The Contact's account ID (`Contact.data.account.id`)
+          description: The Authoriser's contact ID (`Contact.data.id`)
           example: 8df89c16-330f-462b-8891-808d7bdceb7f
         terms:
           $ref: '#/components/schemas/Terms'
       example:
-        authoriser_id: 8df89c16-330f-462b-8891-808d7bdceb7f
+        authoriser_contact_id: 8df89c16-330f-462b-8891-808d7bdceb7f
         terms:
           per_payout:
             min_amount: null
@@ -2320,8 +2322,8 @@ components:
         data:
           ref: A.2
           initiator_id: 4e2728cc-b4ba-42c2-a6c3-26a7758de58d
-          authoriser_id: 8df89c16-330f-462b-8891-808d7bdceb7f
-          contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
+          authoriser_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
+          contact_id: 8df89c16-330f-462b-8891-808d7bdceb7f
           bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
           status: proposed
           responded_at: null
