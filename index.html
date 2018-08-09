@@ -241,6 +241,9 @@
                     <a href="#authentication-and-authorisation" class="toc-h2 toc-link" data-title="Authentication and Authorisation">Authentication and Authorisation</a>
                   </li>
                   <li>
+                    <a href="#oauth-grant-flow-process" class="toc-h2 toc-link" data-title="OAuth grant flow process">OAuth grant flow process</a>
+                  </li>
+                  <li>
                     <a href="#making-payments" class="toc-h2 toc-link" data-title="Making payments">Making payments</a>
                   </li>
                   <li>
@@ -713,11 +716,7 @@
 <h1 id='guides'>Guides</h1><h2 id='try-it-out'>Try it out</h2>
 <p>The best way to familiarise yourself with our API is by interacting with it.</p>
 
-<p><strong>Prefer a screencast? We&#39;ve got you covered: <a href="https://vimeo.com/246203244">https://vimeo.com/246203244</a>.</strong></p>
-
-<p>We&#39;ve preloaded a collection of all our endpoints for you to use in Postman.</p>
-
-<p>Before you start, load up our API collection:</p>
+<p>We&#39;ve preloaded a collection of all our endpoints for you to use in Postman. Before you start, load up our API collection:</p>
 
 <p><a href="https://app.getpostman.com/run-collection/988421dc8fb7d55526d5#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLXNhbmRib3guc3BsaXQuY2FzaCIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhcGlfaG9zdCIsInZhbHVlIjoiaHR0cHM6Ly9hcGktc2FuZGJveC5zcGxpdC5jYXNoIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoMl9hcHBsaWNhdGlvbl9pZCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhdXRob3Jpc2F0aW9uX2NvZGUiLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhY2Nlc3NfdG9rZW4iLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJ0eXBlIjoidGV4dCJ9XQ=="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
@@ -731,52 +730,34 @@
 
 <p>Sign in and create an OAuth2 application: <a href="https://go-sandbox.split.cash/oauth/applications">https://go-sandbox.split.cash/oauth/applications</a>.</p>
 
+<p>Use the special postman callback URL: <code>https://www.getpostman.com/oauth2/callback</code></p>
+
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png" alt="Split OAuth2 app setup" /></a></p></li>
-<li><p><strong>In Postman, setup your environment variables</strong></p>
+<li><p><strong>Generate personal access tokens</strong></p>
 
-<p>Click on <strong>Manage Environments</strong></p>
+<p>The quickest way to access your split account via the API is using
+personal access tokens. Click on your newly created application from your <a href="https://go-sandbox.split.cash/oauth/applications">application
+list</a> and click on <strong>Personal access</strong>.</p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png" alt="Postman environment variables" /></a></p>
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png" alt="Split locate personal OAuth2 tokens" /></a></p>
 
-<p>We&#39;ve included the <strong>Split Payments Public Sandbox</strong> environment to get you started. Go ahead an click on it.</p>
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png" alt="Split personal OAuth2 tokens" /></a></p></li>
+<li><p><strong>Use personal access token in postman</strong></p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png" alt="Select Postman environment" /></a></p>
+<p>You can use this <code>access_token</code> to authorise any requests to the
+split API in postman by choosing the <strong>Bearer Token</strong> option under
+the <strong>Authorization</strong> tab.</p>
 
-<p>Using the details from the OAuth2 app you created earlier, fill in the <strong>oauth2_application_id</strong> &amp; <strong>oauth2_secret</strong> fields.</p>
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png" alt="Postman use personal OAuth2 tokens" /></a></p></li>
+<li><p><strong>Make an API request!</strong></p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png" alt="Fill in environment values" /></a></p></li>
-<li><p><strong>Setup the authorization</strong></p>
+<p>You are now ready to interact with your split account via the
+API! Go ahead and send a request using postman.</p>
 
-<p>Click on the <strong>Authorization</strong> tab and select <strong>OAuth 2.0</strong></p>
+<p><small>(Please note that access tokens expire after 2 hours)</small></p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png" alt="Postman Authorization tab" /></a></p>
-
-<p>Click the <strong>Get New Access Token</strong> button</p>
-
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png" alt="Postman get new access token" /></a></p>
-
-<p>Fill in the OAuth2 form as below:</p>
-
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png" alt="Postman OAuth2" /></a></p></li>
-<li><p><strong>Get authorised</strong></p>
-
-<p>Click <strong>Request Token</strong> and wait a few seconds and a browser window will popup</p>
-
-<p>Sign in with your Split account (or any other Split account you want to authorise).</p>
-
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png" alt="Signin Split to authorise via OAuth2" /></a></p>
-
-<p>Click <strong>Authorise</strong> to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Split for the <code>access_token/refresh_token</code> pair. It will then store the <code>access_token/refresh_token</code> for you to use in subsequent API requests. The <code>access_token</code> effectively allows you to send requests via the API as the user who provided you authorisation.</p>
-
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png" alt="Authorise OAuth2 app" /></a></p></li>
-<li><p><strong>You&#39;re now ready to use the API</strong></p>
-
-<p>Select an endpoint from the Split collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.</p>
-
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png" alt="Postman use token" /></a></p></li>
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png" alt="Postman use personal OAuth2 tokens" /></a></p></li>
 </ol>
-
-<aside class="notice">Remember to select the access token everytime you try a new endpoint. Have fun!</aside>
 <h2 id='get-started'>Get started</h2>
 <p>This guide will help you setup your OAuth2 app in order to get authenticated &amp; authorised to communicate with the Split API.</p>
 
@@ -931,6 +912,71 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <p>If you&#39;re looking to only access your own account via the API, you can generate an access/refresh token pair from the UI.</p>
 
 <p>To do this, sign in to your Split account and <a href="https://go-sandbox.split.cash/oauth/applications">create an application</a> if you haven&#39;t already. Click on your application from your <a href="https://go-sandbox.split.cash/oauth/applications">application list</a> and click on <strong>Personal access</strong>.</p>
+<h2 id='oauth-grant-flow-process'>OAuth grant flow process</h2>
+<p>When you want your application to act on behalf of other split accounts you&#39;ll need to implement the OAuth grant flow process. This process is demonstrated using postman in the steps below.</p>
+
+<p>Before you start, load up our API collection:</p>
+
+<p><a href="https://app.getpostman.com/run-collection/988421dc8fb7d55526d5#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLXNhbmRib3guc3BsaXQuY2FzaCIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhcGlfaG9zdCIsInZhbHVlIjoiaHR0cHM6Ly9hcGktc2FuZGJveC5zcGxpdC5jYXNoIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoMl9hcHBsaWNhdGlvbl9pZCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhdXRob3Jpc2F0aW9uX2NvZGUiLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJhY2Nlc3NfdG9rZW4iLCJ2YWx1ZSI6IiIsInR5cGUiOiJ0ZXh0In0seyJlbmFibGVkIjp0cnVlLCJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJ0eXBlIjoidGV4dCJ9XQ=="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><strong>A screencast of this process is also available: <a href="https://vimeo.com/246203244">https://vimeo.com/246203244</a>.</strong></p>
+
+<ol>
+<li><p><strong>Create a Split account</strong></p>
+
+<p>If you haven&#39;t already, you&#39;ll want to create a sandbox Split account at <a href="https://go-sandbox.split.cash">https://go-sandbox.split.cash</a></p></li>
+<li><p><strong>Register your application with Split</strong></p>
+
+<p>Sign in and create an OAuth2 application: <a href="https://go-sandbox.split.cash/oauth/applications">https://go-sandbox.split.cash/oauth/applications</a>.</p>
+
+<p>Use the special postman callback URL: <code>https://www.getpostman.com/oauth2/callback</code></p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png" alt="Split OAuth2 app setup" /></a></p></li>
+<li><p><strong>In Postman, setup your environment variables</strong></p>
+
+<p>Click on <strong>Manage Environments</strong></p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png" alt="Postman environment variables" /></a></p>
+
+<p>We&#39;ve included the <strong>Split Payments Public Sandbox</strong> environment to get you started. Go ahead an click on it.</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png" alt="Select Postman environment" /></a></p>
+
+<p>Using the details from the OAuth2 app you created earlier, fill in the <strong>oauth2_application_id</strong> &amp; <strong>oauth2_secret</strong> fields.</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png" alt="Fill in environment values" /></a></p></li>
+<li><p><strong>Setup the authorization</strong></p>
+
+<p>Click on the <strong>Authorization</strong> tab and select <strong>OAuth 2.0</strong></p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png" alt="Postman Authorization tab" /></a></p>
+
+<p>Click the <strong>Get New Access Token</strong> button</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png" alt="Postman get new access token" /></a></p>
+
+<p>Fill in the OAuth2 form as below:</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png" alt="Postman OAuth2" /></a></p></li>
+<li><p><strong>Get authorised</strong></p>
+
+<p>Click <strong>Request Token</strong> and wait a few seconds and a browser window will popup</p>
+
+<p>Sign in with your Split account (or any other Split account you want to authorise).</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png" alt="Signin Split to authorise via OAuth2" /></a></p>
+
+<p>Click <strong>Authorise</strong> to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Split for the <code>access_token/refresh_token</code> pair. It will then store the <code>access_token/refresh_token</code> for you to use in subsequent API requests. The <code>access_token</code> effectively allows you to send requests via the API as the user who provided you authorisation.</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png" alt="Authorise OAuth2 app" /></a></p></li>
+<li><p><strong>You&#39;re now ready to use the API</strong></p>
+
+<p>Select an endpoint from the Split collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png" alt="Postman use token" /></a></p></li>
+</ol>
+
+<aside class="notice">Remember to select the access token everytime you try a new endpoint. Have fun!</aside>
 <h2 id='making-payments'>Making payments</h2>
 <p>In order to payout funds, you&#39;ll be looking to use the <a href="/#Split-API-Payments">Payments</a> endpoint. Whether you&#39;re paying out another Split account holder or anyone, the process is the same:</p>
 
