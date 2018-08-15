@@ -238,10 +238,16 @@
                     <a href="#get-started" class="toc-h2 toc-link" data-title="Get started">Get started</a>
                   </li>
                   <li>
-                    <a href="#authentication-and-authorisation" class="toc-h2 toc-link" data-title="Authentication and Authorisation">Authentication and Authorisation</a>
+                    <a href="#personal-access-token" class="toc-h2 toc-link" data-title="Personal access token">Personal access token</a>
                   </li>
                   <li>
-                    <a href="#oauth-grant-flow-process" class="toc-h2 toc-link" data-title="OAuth grant flow process">OAuth grant flow process</a>
+                    <a href="#oauth-grant-flow" class="toc-h2 toc-link" data-title="OAuth grant flow">OAuth grant flow</a>
+                  </li>
+                  <li>
+                    <a href="#oauth-grant-flow-tutorial" class="toc-h2 toc-link" data-title="OAuth grant flow tutorial">OAuth grant flow tutorial</a>
+                  </li>
+                  <li>
+                    <a href="#authentication-and-authorisation" class="toc-h2 toc-link" data-title="Authentication and Authorisation">Authentication and Authorisation</a>
                   </li>
                   <li>
                     <a href="#making-payments" class="toc-h2 toc-link" data-title="Making payments">Making payments</a>
@@ -730,50 +736,73 @@
 
 <p>Sign in and create an OAuth2 application: <a href="https://go-sandbox.split.cash/oauth/applications">https://go-sandbox.split.cash/oauth/applications</a>.</p>
 
-<p>Use the special postman callback URL: <code>https://www.getpostman.com/oauth2/callback</code></p>
-
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png" alt="Split OAuth2 app setup" /></a></p></li>
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png" alt="Split OAuth2 app create" /></a></p></li>
 <li><p><strong>Generate personal access tokens</strong></p>
 
-<p>The quickest way to access your split account via the API is using
+<p>The quickest way to access your Split account via the API is using
 personal access tokens. Click on your newly created application from your <a href="https://go-sandbox.split.cash/oauth/applications">application
 list</a> and click on <strong>Personal access</strong>.</p>
 
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png" alt="Split locate personal OAuth2 tokens" /></a></p>
 
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png" alt="Split personal OAuth2 tokens" /></a></p></li>
-<li><p><strong>Use personal access token in postman</strong></p>
+<li><p><strong>Use personal access token in Postman</strong></p>
 
 <p>You can use this <code>access_token</code> to authorise any requests to the
-split API in postman by choosing the <strong>Bearer Token</strong> option under
+Split API in Postman by choosing the <strong>Bearer Token</strong> option under
 the <strong>Authorization</strong> tab.</p>
 
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png" alt="Postman use personal OAuth2 tokens" /></a></p></li>
 <li><p><strong>Make an API request!</strong></p>
 
-<p>You are now ready to interact with your split account via the
-API! Go ahead and send a request using postman.</p>
+<p>You are now ready to interact with your Split account via the
+API! Go ahead and send a request using Postman.</p>
 
 <p><small>(Please note that access tokens expire after 2 hours)</small></p>
 
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png" alt="Postman use personal OAuth2 tokens" /></a></p></li>
 </ol>
 <h2 id='get-started'>Get started</h2>
-<p>This guide will help you setup your OAuth2 app in order to get authenticated &amp; authorised to communicate with the Split API.</p>
+<p>This guide will help you setup an OAuth2 app in order to get authenticated &amp; authorised to communicate with the Split API.</p>
 
 <p><strong>Before you start:</strong></p>
 
 <ul>
-<li>Often times you&#39;ll want to grant your own app access to itself so that you can access the API on your own account. We use the term <strong>user</strong> below but the user can be a third party or the same user that owns the OAuth2 application.</li>
-<li>As noted below, the access token expires every 2 hours. To get a new access token without going through steps 1 to 4 again, use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</li>
+<li>We use the term <strong>user</strong> below but the user can be a third party or the same user that owns the OAuth2 application.</li>
+<li>As noted below, the access token expires every 2 hours. To get a new access token use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</li>
 </ul>
-
-<aside class="notice">Just want to access your own account and don't want to go through the entire authorisation process described below? Checkout how to create a <a href="/#personal-access-token">Personal Access Token</a>.</aside>
 
 <ol>
 <li><p><strong>Create a Split account</strong></p>
 
 <p>If you haven&#39;t already, you&#39;ll want to create a sandbox Split account at <a href="https://go-sandbox.split.cash">https://go-sandbox.split.cash</a>.</p></li>
+<li><p><strong>Choose authentication method</strong></p>
+
+<p>All requests to the Split API require a <code>access_token</code> for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:</p>
+
+<p><strong>Personal access token</strong> If you only need to access your own Split account via the API, then using personal access tokens are the most straight-forward way. Refer to <a href="/#personal-access-token">Personal access token</a> to setup.</p>
+
+<p><strong>OAuth grant flow</strong> When you require your application to act on behalf of other Split accounts you&#39;ll need to implement the OAuth grant flow process. Refer to <a href="/#oauth-grant-flow">OAuth grant flow guide</a> to setup. There is also an <a href="/#oauth-grant-flow-tutorial">OAuth grant flow tutorial</a>.</p></li>
+</ol>
+<h2 id='personal-access-token'>Personal access token</h2>
+<p>If you&#39;re looking to only access your own account via the API, you can generate an access/refresh token pair from the UI.</p>
+
+<ul>
+<li><p>To do this, sign in to your Split account and <a href="https://go-sandbox.split.cash/oauth/applications">create an application</a> if you haven&#39;t already. Click on your application from your <a href="https://go-sandbox.split.cash/oauth/applications">application list</a> and click on <strong>Personal access</strong>.</p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png" alt="Split locate personal OAuth2 tokens" /></a></p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png" alt="Split personal OAuth2 tokens" /></a></p></li>
+<li><p>Now that you have an <code>access_token</code> and <code>refresh_token</code>, you can interact with your Split account via the API.</p>
+
+<p>To do so, you must simply append the access token to the header of any API request:</p>
+
+<p><code>Authorization: Bearer {access_token}</code></p>
+
+<p><small>The access token expires every 2 hours. To get a new access token use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</small></p></li>
+</ul>
+<h2 id='oauth-grant-flow'>OAuth grant flow</h2>
+<ol>
 <li><p><strong>Register your application with Split</strong></p>
 
 <p>Once you&#39;ve got your account up and running, sign in and create an OAuth2 profile for your application: <a href="https://go-sandbox.split.cash/oauth/applications">https://go-sandbox.split.cash/oauth/applications</a></p>
@@ -865,55 +894,8 @@ API! Go ahead and send a request using postman.</p>
 <p>Now that you have an access token and refresh token, you can interact with the Split API as the user related to the access token.
 To do so, you must simply append the access token to the header of any API request: <code>Authorization: Bearer {access_token}</code></p></li>
 </ol>
-<h2 id='authentication-and-authorisation'>Authentication and Authorisation</h2>
-<p>Split uses OAuth2 over https to manage authentication and authorisation.</p>
-
-<p>OAuth2 is a protocol that lets external applications request permission from another Split user to send requests on their behalf without getting their password.
-This is preferred over Basic Authentication because access tokens can be limited by scope and can be revoked by the user at any time.</p>
-
-<p>New to OAuth2? DigitalOcean has a fantastic 5 minute <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2#grant-type-authorization-code">introduction to OAuth2</a>.</p>
-
-<p>We currently support the <strong>authorisation code</strong> and <strong>refresh token</strong> grants.</p>
-<h3 id='authorisation-code-grant'>Authorisation Code Grant</h3>
-<p>This type of grant allows your application to act on behalf of a user. If you&#39;ve ever used a website or application with your
-Google, Twitter or Facebook account, this is the grant being used.</p>
-
-<p>See the <a href="/#get-started">Get Started guide</a> for step by step details on how to use this grant.</p>
-<h3 id='refresh-token-grant'>Refresh Token Grant</h3>
-<blockquote>
-<p>Code sample</p>
-</blockquote>
-<pre class="highlight plaintext"><code>curl -F "grant_type=refresh_token" \
-     -F "client_id={{oauth2_application_id}}" \
-     -F "client_secret={{oauth2_application_secret }}" \
-     -F "refresh_token={{refresh_token}}" \
-     -X POST https://go-sandbox.split.cash/oauth/token
-</code></pre>
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad0b5847cb7d254f1e2ff1910275fe9dcb95345c9d54502d156fe35a37b93e80"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc38f78a5b8abe8ee81cdf25b1ca74c3fa10c3da2309de5ac37fde00cbcf2815"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>When using the authorisation code grant above, Split will return a <code>refresh token</code> along with the access token. Access tokens are short lived and last 2 hours but refresh tokens do not expire.</p>
-
-<p>When the access token expires, instead of sending the user back through the authorisation flow you can use the refresh token to retrieve a new access token with the same permissions as the old one.</p>
-
-<aside class="notice">
-  The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you'll
-want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>access_token</code>
-</aside>
-<h3 id='personal-access-token'>Personal Access Token</h3>
-<p>If you&#39;re looking to only access your own account via the API, you can generate an access/refresh token pair from the UI.</p>
-
-<p>To do this, sign in to your Split account and <a href="https://go-sandbox.split.cash/oauth/applications">create an application</a> if you haven&#39;t already. Click on your application from your <a href="https://go-sandbox.split.cash/oauth/applications">application list</a> and click on <strong>Personal access</strong>.</p>
-<h2 id='oauth-grant-flow-process'>OAuth grant flow process</h2>
-<p>When you want your application to act on behalf of other split accounts you&#39;ll need to implement the OAuth grant flow process. This process is demonstrated using postman in the steps below.</p>
+<h2 id='oauth-grant-flow-tutorial'>OAuth grant flow tutorial</h2>
+<p>The OAuth grant flow process is demonstrated using Postman in the steps below.</p>
 
 <p>Before you start, load up our API collection:</p>
 
@@ -929,7 +911,7 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 
 <p>Sign in and create an OAuth2 application: <a href="https://go-sandbox.split.cash/oauth/applications">https://go-sandbox.split.cash/oauth/applications</a>.</p>
 
-<p>Use the special postman callback URL: <code>https://www.getpostman.com/oauth2/callback</code></p>
+<p>Use the special Postman callback URL: <code>https://www.getpostman.com/oauth2/callback</code></p>
 
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png" alt="Split OAuth2 app setup" /></a></p></li>
 <li><p><strong>In Postman, setup your environment variables</strong></p>
@@ -977,6 +959,49 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 </ol>
 
 <aside class="notice">Remember to select the access token everytime you try a new endpoint. Have fun!</aside>
+<h2 id='authentication-and-authorisation'>Authentication and Authorisation</h2>
+<p>Split uses OAuth2 over https to manage authentication and authorisation.</p>
+
+<p>OAuth2 is a protocol that lets external applications request permission from another Split user to send requests on their behalf without getting their password.
+This is preferred over Basic Authentication because access tokens can be limited by scope and can be revoked by the user at any time.</p>
+
+<p>New to OAuth2? DigitalOcean has a fantastic 5 minute <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2#grant-type-authorization-code">introduction to OAuth2</a>.</p>
+
+<p>We currently support the <strong>authorisation code</strong> and <strong>refresh token</strong> grants.</p>
+<h3 id='authorisation-code-grant'>Authorisation Code Grant</h3>
+<p>This type of grant allows your application to act on behalf of a user. If you&#39;ve ever used a website or application with your
+Google, Twitter or Facebook account, this is the grant being used.</p>
+
+<p>See the <a href="/#get-started">Get Started guide</a> for step by step details on how to use this grant.</p>
+<h3 id='refresh-token-grant'>Refresh Token Grant</h3>
+<blockquote>
+<p>Code sample</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl -F "grant_type=refresh_token" \
+     -F "client_id={{oauth2_application_id}}" \
+     -F "client_secret={{oauth2_application_secret }}" \
+     -F "refresh_token={{refresh_token}}" \
+     -X POST https://go-sandbox.split.cash/oauth/token
+</code></pre>
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad0b5847cb7d254f1e2ff1910275fe9dcb95345c9d54502d156fe35a37b93e80"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc38f78a5b8abe8ee81cdf25b1ca74c3fa10c3da2309de5ac37fde00cbcf2815"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When using the authorisation code grant above, Split will return a <code>refresh token</code> along with the access token. Access tokens are short lived and last 2 hours but refresh tokens do not expire.</p>
+
+<p>When the access token expires, instead of sending the user back through the authorisation flow you can use the refresh token to retrieve a new access token with the same permissions as the old one.</p>
+
+<aside class="notice">
+  The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you'll
+want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>access_token</code>
+</aside>
 <h2 id='making-payments'>Making payments</h2>
 <p>In order to payout funds, you&#39;ll be looking to use the <a href="/#Split-API-Payments">Payments</a> endpoint. Whether you&#39;re paying out another Split account holder or anyone, the process is the same:</p>
 
