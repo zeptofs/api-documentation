@@ -795,12 +795,10 @@ API! Go ahead and send a request using Postman.</p>
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png" alt="Split personal OAuth2 tokens" /></a></p></li>
 <li><p>Now that you have an <code>access_token</code> and <code>refresh_token</code>, you can interact with your Split account via the API.</p>
 
-<p>To do so, you must simply append the access token to the header of any API request:</p>
-
-<p><code>Authorization: Bearer {access_token}</code></p>
-
-<p><small>The access token expires every 2 hours. To get a new access token use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</small></p></li>
+<p>To do so, you must simply append the access token to the header of any API request: <code>Authorization: Bearer {access_token}</code></p></li>
 </ul>
+
+<aside class="notice">The access token expires every 2 hours. To get a new access token use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</aside>
 <h2 id='oauth-grant-flow'>OAuth grant flow</h2>
 <ol>
 <li><p><strong>Register your application with Split</strong></p>
@@ -2635,6 +2633,13 @@ Total: 5
 <td>Number of results per page, single value, exact match</td>
 </tr>
 <tr>
+<td>contact_id</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Contact ID (<code>Contact.data.id</code>), single value, exact match</td>
+</tr>
+<tr>
 <td>initiator_id</td>
 <td>query</td>
 <td>string</td>
@@ -2890,6 +2895,13 @@ Total: 5
 <td>string</td>
 <td>false</td>
 <td>Authoriser ID (<code>Contact.data.account.id</code>), single value, exact match</td>
+</tr>
+<tr>
+<td>contact_id</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Contact ID (<code>Contact.data.id</code>), single value, exact match</td>
 </tr>
 <tr>
 <td>status</td>
