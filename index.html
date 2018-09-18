@@ -416,6 +416,9 @@
             <a href="#Split-API-Payouts" class="toc-h1 toc-link" data-title="Payouts">Payouts</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#retry-a-credit-debit-payout" class="toc-h2 toc-link" data-title="Retry a credit/debit Payout">Retry a credit/debit Payout</a>
+                  </li>
+                  <li>
                     <a href="#void-a-payout" class="toc-h2 toc-link" data-title="Void a Payout">Void a Payout</a>
                   </li>
               </ul>
@@ -660,6 +663,9 @@
                   </li>
                   <li>
                     <a href="#listoutgoingrefundrequestsresponse" class="toc-h2 toc-link" data-title="ListOutgoingRefundRequestsResponse">ListOutgoingRefundRequestsResponse</a>
+                  </li>
+                  <li>
+                    <a href="#retrypayoutresponse" class="toc-h2 toc-link" data-title="RetryPayoutResponse">RetryPayoutResponse</a>
                   </li>
                   <li>
                     <a href="#listalltransactionsresponse" class="toc-h2 toc-link" data-title="ListAllTransactionsResponse">ListAllTransactionsResponse</a>
@@ -1567,7 +1573,7 @@ Total: 5
 <span class="p">});</span>
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'8df89c16-330f-462b-8891-808d7bdceb7f'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span>
+  <span class="na">terms</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
      <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -4578,7 +4584,7 @@ Total: 5
 <span class="p">});</span>
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s1">'Subscription Plan A'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span>
+  <span class="na">terms</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
      <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -5500,7 +5506,7 @@ Total: 5
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'12/19/2016 2:10:56 AM'</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mi">99000</span><span class="p">,</span>
   <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'de86472c-c027-4735-a6a7-234366a27fc7'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span>
+  <span class="na">metadata</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -6345,7 +6351,7 @@ Total: 5
 </span></code></pre>
 <p><code>DELETE /payment_requests/{payment_request_ref}</code></p>
 
-<p>A PR can only be cancelled if it has not yet matured.</p>
+<p>A Payment Request can be cancelled as long as the associated transaction&#39;s state is maturing or matured.</p>
 
 <h3 id="Cancel-a-Payment-Request-parameters" class="parameters">Parameters</h3>
 
@@ -7106,11 +7112,11 @@ Total: 5
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">description</span><span class="p">:</span> <span class="s1">'The SuperPackage'</span><span class="p">,</span>
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'2016-09-13T00:00:00Z'</span><span class="p">,</span>
-  <span class="na">payouts</span><span class="p">:</span>
+  <span class="na">payouts</span><span class="p">:</span> 
    <span class="p">[</span> <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
        <span class="na">description</span><span class="p">:</span> <span class="s1">'A tandem skydive jump SB23094'</span><span class="p">,</span>
        <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'48b89364-1577-4c81-ba02-96705895d457'</span><span class="p">,</span>
-       <span class="na">metadata</span><span class="p">:</span>
+       <span class="na">metadata</span><span class="p">:</span> 
         <span class="p">{</span> <span class="na">invoice_ref</span><span class="p">:</span> <span class="s1">'BILL-0001'</span><span class="p">,</span>
           <span class="na">invoice_id</span><span class="p">:</span> <span class="s1">'c80a9958-e805-47c0-ac2a-c947d7fd778d'</span><span class="p">,</span>
           <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
@@ -7118,7 +7124,7 @@ Total: 5
      <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
        <span class="na">description</span><span class="p">:</span> <span class="s1">'A scuba dive SDS5464'</span><span class="p">,</span>
        <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'dc6f1e60-3803-43ca-a200-7d641816f57f'</span> <span class="p">}</span> <span class="p">],</span>
-  <span class="na">metadata</span><span class="p">:</span>
+  <span class="na">metadata</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -7795,7 +7801,189 @@ Total: 5
 
 <h1 id="Split-API-Payouts">Payouts</h1>
 
-<p>Payouts are what a compose a Payment. One or all Payouts can be voided individually as part of the larger Payment.</p>
+<p>Payouts are what a Payment or Payment Request are made of and can be either a debit or a credit. One or all Payouts can be voided individually as part of the larger Payment or Payment Request.</p>
+<h2 id='retry-a-credit-debit-payout'>Retry a credit/debit Payout</h2>
+<p><a id="opIdRetryAPayout"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --request POST <span class="se">\</span>
+  --url https://api-sandbox.split.cash/payouts/C.2 <span class="se">\</span>
+  --header <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api-sandbox.split.cash/payouts/C.2"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"https"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
+  <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"api-sandbox.split.cash"</span><span class="p">,</span>
+  <span class="s2">"port"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/payouts/C.2"</span><span class="p">,</span>
+  <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accept"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
+    <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"Bearer {access-token}"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api-sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/payouts/C.2"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/payouts/C.2"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/payouts/C.2'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"net/http"</span><span class="x">
+    </span><span class="s">"io/ioutil"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+    </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api-sandbox.split.cash/payouts/C.2"</span><span class="x">
+
+    </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span><span class="x"> </span><span class="s">"application/json"</span><span class="p">)</span><span class="x">
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span><span class="x"> </span><span class="s">"Bearer {access-token}"</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">res</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="x">
+
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    </span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span><span class="x">
+
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<p><code>POST /payouts/{ref}</code></p>
+
+<p>Split will prefail a debit and its associated credit transaction before ever sending it to the bank if we detect a high probability of insufficient funds.</p>
+
+<p>This endpoint allows you to retry the payout without having to recreate the parent request. e.g A Payment or Payment Request.</p>
+
+<h3 id="Retry-a-credit/debit-Payout-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ref</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Payout debit or credit reference</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.039a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Money for jam"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="Retry a credit/debit Payout-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td><a href="#schemaretrypayoutresponse">RetryPayoutResponse</a></td>
+</tr>
+</tbody></table>
 <h2 id='void-a-payout'>Void a Payout</h2>
 <p><a id="opIdVoidAPayout"></a></p>
 
@@ -7924,7 +8112,7 @@ Total: 5
 
 </span><span class="p">}</span><span class="x">
 </span></code></pre>
-<p><code>DELETE /payouts/{debit_ref}</code></p>
+<p><code>DELETE /payouts/{ref}</code></p>
 
 <p>You can void any Payout debit from your account that has not yet matured. In the case where it has matured, you can send a Refund Request to the Payout recipient once the Payout has successfully cleared in order to reverse the transaction.</p>
 
@@ -7947,7 +8135,7 @@ Total: 5
 </tr>
 </thead><tbody>
 <tr>
-<td>debit_ref</td>
+<td>ref</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -8103,7 +8291,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">for_ref</span><span class="p">:</span> <span class="s1">'D.1'</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
   <span class="na">reason</span><span class="p">:</span> <span class="s1">'Because reason'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span>
+  <span class="na">metadata</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -9435,7 +9623,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
   <span class="na">reason</span><span class="p">:</span> <span class="s1">'Because reason'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span>
+  <span class="na">metadata</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -10642,7 +10830,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cleared"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31354923-b1e9-4d65-b03c-415ead89cbf3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -10659,7 +10847,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Pending"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gutmann-Schmidt"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -10676,7 +10864,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
@@ -10767,7 +10955,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <span class="p">});</span>
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">expiry_in_seconds</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span>
+  <span class="na">terms</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
      <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -13947,6 +14135,45 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>No description</td>
 </tr>
 </tbody></table>
+<h2 id='retrypayoutresponse'>RetryPayoutResponse</h2>
+<p><a id="schemaretrypayoutresponse"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.039a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Money for jam"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='properties-52'>Properties</h3>
+<p><em>Retry a payout (response)</em></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>[object]</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+</tbody></table>
 <h2 id='listalltransactionsresponse'>ListAllTransactionsResponse</h2>
 <p><a id="schemalistalltransactionsresponse"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -13960,7 +14187,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cleared"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31354923-b1e9-4d65-b03c-415ead89cbf3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -13977,7 +14204,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Pending"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gutmann-Schmidt"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -13994,7 +14221,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
@@ -14004,7 +14231,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-52'>Properties</h3>
+</span></code></pre><h3 id='properties-53'>Properties</h3>
 <p><em>List all transactions (response)</em></p>
 
 <table><thead>
@@ -14037,7 +14264,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-53'>Properties</h3>
+</span></code></pre><h3 id='properties-54'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (request)</em></p>
 
 <table><thead>
@@ -14084,7 +14311,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go-sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-54'>Properties</h3>
+</span></code></pre><h3 id='properties-55'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -14146,7 +14373,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-55'>Properties</h3>
+</span></code></pre><h3 id='properties-56'>Properties</h3>
 <p><em>List Unassigned Agreements (response)</em></p>
 
 <table><thead>
@@ -14187,7 +14414,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go-sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-56'>Properties</h3>
+</span></code></pre><h3 id='properties-57'>Properties</h3>
 <p><em>Get an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -14225,7 +14452,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-57'>Properties</h3>
+</span></code></pre><h3 id='properties-58'>Properties</h3>
 <p><em>Get User details (response)</em></p>
 
 <table><thead>
