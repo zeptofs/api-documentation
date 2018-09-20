@@ -747,11 +747,15 @@
 
 <p>The quickest way to access your Split account via the API is using
 personal access tokens. Click on your newly created application from your <a href="https://go-sandbox.split.cash/oauth/applications">application
-list</a> and click on <strong>Personal access</strong>.</p>
+list</a> and click on <strong>+ Personal Access Token</strong>.</p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png" alt="Split locate personal OAuth2 tokens" /></a></p>
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png" alt="Split locate personal OAuth2 tokens" /></a></p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png" alt="Split personal OAuth2 tokens" /></a></p></li>
+<p><em>(You&#39;ll have the option to give the token a title)</em></p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png" alt="Split personal OAuth2 tokens" /></a></p>
+
+<aside class="notice">Please note that personal access tokens do not expire.</aside></li>
 <li><p><strong>Use personal access token in Postman</strong></p>
 
 <p>You can use this <code>access_token</code> to authorise any requests to the
@@ -764,8 +768,6 @@ the <strong>Authorization</strong> tab.</p>
 <p>You are now ready to interact with your Split account via the
 API! Go ahead and send a request using Postman.</p>
 
-<p><small>(Please note that access tokens expire after 2 hours)</small></p>
-
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png" alt="Postman use personal OAuth2 tokens" /></a></p></li>
 </ol>
 <h2 id='get-started'>Get started</h2>
@@ -775,7 +777,7 @@ API! Go ahead and send a request using Postman.</p>
 
 <ul>
 <li>We use the term <strong>user</strong> below but the user can be a third party or the same user that owns the OAuth2 application.</li>
-<li>As noted below, the access token expires every 2 hours. To get a new access token use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</li>
+<li>As noted below, some access tokens expire every 2 hours. To get a new access token use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</li>
 </ul>
 
 <ol>
@@ -786,25 +788,25 @@ API! Go ahead and send a request using Postman.</p>
 
 <p>All requests to the Split API require a <code>access_token</code> for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:</p>
 
-<p><strong>Personal access token</strong> If you only need to access your own Split account via the API, then using personal access tokens are the most straight-forward way. Refer to <a href="/#personal-access-token">Personal access token</a> to setup.</p>
+<p><strong>Personal access token</strong> If you only need to access your own Split account via the API, then using personal access tokens are the most straight-forward way. Refer to <a href="/#personal-access-token">Personal access token</a> to setup. These tokens do not expire so no refreshing is required.</p>
 
-<p><strong>OAuth grant flow</strong> When you require your application to act on behalf of other Split accounts you&#39;ll need to implement the OAuth grant flow process. Refer to <a href="/#oauth-grant-flow">OAuth grant flow guide</a> to setup. There is also an <a href="/#oauth-grant-flow-tutorial">OAuth grant flow tutorial</a>.</p></li>
+<p><strong>OAuth grant flow</strong> When you require your application to act on behalf of other Split accounts you&#39;ll need to implement the OAuth grant flow process. Refer to <a href="/#oauth-grant-flow">OAuth grant flow guide</a> to setup. There is also an <a href="/#oauth-grant-flow-tutorial">OAuth grant flow tutorial</a>. These access tokens expire every 2 hours, unless the <code>offline_access</code> scope is used in which case the tokens will not expire.</p></li>
 </ol>
 <h2 id='personal-access-token'>Personal access token</h2>
-<p>If you&#39;re looking to only access your own account via the API, you can generate an access/refresh token pair from the UI.</p>
+<p>If you&#39;re looking to only access your own account via the API, you can generate a personal access token from the UI. These tokens do not expire, but can be deleted.</p>
 
 <ul>
 <li><p>To do this, sign in to your Split account and <a href="https://go-sandbox.split.cash/oauth/applications">create an application</a> if you haven&#39;t already. Click on your application from your <a href="https://go-sandbox.split.cash/oauth/applications">application list</a> and click on <strong>Personal access</strong>.</p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_locate_personal_oauth_tokens.png" alt="Split locate personal OAuth2 tokens" /></a></p>
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png" alt="Split locate personal OAuth2 tokens" /></a></p>
 
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_app_personal_tokens.png" alt="Split personal OAuth2 tokens" /></a></p></li>
-<li><p>Now that you have an <code>access_token</code> and <code>refresh_token</code>, you can interact with your Split account via the API.</p>
+<p><em>(You&#39;ll have the option to give the token a title)</em></p>
+
+<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png" alt="Split personal OAuth2 tokens" /></a></p></li>
+<li><p>Now that you have an <code>access_token</code> you can interact with your Split account via the API.</p>
 
 <p>To do so, you must simply append the access token to the header of any API request: <code>Authorization: Bearer {access_token}</code></p></li>
 </ul>
-
-<aside class="notice">The access token expires every 2 hours. To get a new access token use the <a href="/#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</aside>
 <h2 id='oauth-grant-flow'>OAuth grant flow</h2>
 <ol>
 <li><p><strong>Register your application with Split</strong></p>
@@ -1270,7 +1272,13 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <td><code>transactions</code></td>
 <td>Access user&#39;s Transactions</td>
 </tr>
+<tr>
+<td><code>offline_access</code></td>
+<td>Create non-expiring access tokens for user</td>
+</tr>
 </tbody></table>
+
+<p><aside class="notice">Please use <code>offline_access</code> with discretion, as you&#39;ll have no direct way to invalidate the token. Please contact Split Payments immediately if any token may have potentially been compromised.</aside> </p>
 <h2 id='pagination'>Pagination</h2>
 <blockquote>
 <p>Example response header</p>
@@ -1573,7 +1581,7 @@ Total: 5
 <span class="p">});</span>
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'8df89c16-330f-462b-8891-808d7bdceb7f'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> 
+  <span class="na">terms</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
      <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -4584,7 +4592,7 @@ Total: 5
 <span class="p">});</span>
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s1">'Subscription Plan A'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> 
+  <span class="na">terms</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
      <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -5506,7 +5514,7 @@ Total: 5
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'12/19/2016 2:10:56 AM'</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mi">99000</span><span class="p">,</span>
   <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'de86472c-c027-4735-a6a7-234366a27fc7'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> 
+  <span class="na">metadata</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -7112,11 +7120,11 @@ Total: 5
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">description</span><span class="p">:</span> <span class="s1">'The SuperPackage'</span><span class="p">,</span>
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'2016-09-13T00:00:00Z'</span><span class="p">,</span>
-  <span class="na">payouts</span><span class="p">:</span> 
+  <span class="na">payouts</span><span class="p">:</span>
    <span class="p">[</span> <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
        <span class="na">description</span><span class="p">:</span> <span class="s1">'A tandem skydive jump SB23094'</span><span class="p">,</span>
        <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'48b89364-1577-4c81-ba02-96705895d457'</span><span class="p">,</span>
-       <span class="na">metadata</span><span class="p">:</span> 
+       <span class="na">metadata</span><span class="p">:</span>
         <span class="p">{</span> <span class="na">invoice_ref</span><span class="p">:</span> <span class="s1">'BILL-0001'</span><span class="p">,</span>
           <span class="na">invoice_id</span><span class="p">:</span> <span class="s1">'c80a9958-e805-47c0-ac2a-c947d7fd778d'</span><span class="p">,</span>
           <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
@@ -7124,7 +7132,7 @@ Total: 5
      <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
        <span class="na">description</span><span class="p">:</span> <span class="s1">'A scuba dive SDS5464'</span><span class="p">,</span>
        <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'dc6f1e60-3803-43ca-a200-7d641816f57f'</span> <span class="p">}</span> <span class="p">],</span>
-  <span class="na">metadata</span><span class="p">:</span> 
+  <span class="na">metadata</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -8291,7 +8299,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">for_ref</span><span class="p">:</span> <span class="s1">'D.1'</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
   <span class="na">reason</span><span class="p">:</span> <span class="s1">'Because reason'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> 
+  <span class="na">metadata</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -9623,7 +9631,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
   <span class="na">reason</span><span class="p">:</span> <span class="s1">'Because reason'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> 
+  <span class="na">metadata</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
@@ -10955,7 +10963,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <span class="p">});</span>
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">expiry_in_seconds</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> 
+  <span class="na">terms</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
      <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
