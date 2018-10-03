@@ -1199,7 +1199,96 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <code>https://go-sandbox.split.cash/oauth/authorize?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx&amp;scope=xxx&amp;landing=personal_sign_up&amp;first_name=George</code></p>
 
 <p>You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded: <a href="https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgceco&amp;first_name=George">https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgeco&amp;first_name=George</a>.</p>
-<h2 id='testing-details'>Testing details</h2>
+<h2 id='testing-details'>Testing details</h2><h3 id='payment-failure-bank-accounts'>Payment failure bank accounts</h3>
+<p>You can send Payments to the following reserved bank accounts to trigger specific failures.</p>
+
+<table><thead>
+<tr>
+<th>Failure type</th>
+<th>Branch code (BSB)</th>
+<th>Account number</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invalid_bsb_number</td>
+<td><code>100000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>account_closed</td>
+<td><code>300000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>customer_deceased</td>
+<td><code>400000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>incorrect_account_number</td>
+<td><code>500000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>refer_to_split</td>
+<td><code>700000</code></td>
+<td><code>99999</code></td>
+</tr>
+</tbody></table>
+<h3 id='payment-request-failure-bank-accounts'>Payment Request failure bank accounts</h3>
+<p>You can send Payment Requests to the following reserved bank accounts to trigger specific failures.</p>
+
+<table><thead>
+<tr>
+<th>Failure type</th>
+<th>Branch code (BSB)</th>
+<th>Account number</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invalid_bsb_number</td>
+<td><code>100000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>payment_stopped</td>
+<td><code>200000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>account_closed</td>
+<td><code>300000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>customer_deceased</td>
+<td><code>400000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>incorrect_account_number</td>
+<td><code>500000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>refer_to_customer</td>
+<td><code>600000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>refer_to_split</td>
+<td><code>700000</code></td>
+<td><code>99999</code></td>
+</tr>
+<tr>
+<td>insufficient_funds</td>
+<td><code>800000</code></td>
+<td><code>99999</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">Ensure you have a an Agreement with a Contact using one of the above bank accounts before you send a Payment Request or it'll be declined. By default, all Agreements sent to Contacts with a failure bank account will be automatically accepted.</aside>
+<h3 id='instant-account-verification-accounts'>Instant account verification accounts</h3>
 <p>When using any of our hosted solutions (<a href="https://help.split.cash/payment-requests/open-payment-requests">Payment Requests</a>, <a href="https://help.split.cash/agreements/open-agreement">Open Agreements</a> or <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreements</a>) you may want to test the <a href="http://help.split.cash/bank-accounts/instant-account-verification-iav">Instant Account Verification (IAV)</a> process where we accept online banking credentials to validate bank account access. To do so, you can use the following credentials:</p>
 
 <table><thead>
