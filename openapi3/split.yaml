@@ -2247,6 +2247,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MakeAPaymentRequestResponse'
+        '422':
+          description: When a payment is requested from an Anyone Contact with no valid Agreement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeAPaymentRequestWithNoAgreementResponse'
   '/payment_requests/{payment_request_ref}/approve':
     post:
       tags:
@@ -3957,6 +3963,16 @@ components:
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
+    MakeAPaymentRequestWithNoAgreementResponse:
+      title: Make a Payment Request to an Anyone Contact with no valid Agreement (response)
+      required:
+        - errors
+      type: object
+      properties:
+        errors:
+          type: string
+      example:
+        errors: Authoriser contact (de86472c-c027-4735-a6a7-234366a27fc7) is not a Split account holder and therefore must have a valid agreement in place before a Payment Request can be issued.
     GetAPaymentRequestResponse:
       title: Get a Payment Request (response)
       required:
