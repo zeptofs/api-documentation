@@ -3666,6 +3666,13 @@ Total: 5
 <td>Single value, string search</td>
 </tr>
 <tr>
+<td>email</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Single value, string search</td>
+</tr>
+<tr>
 <td>bank_account_id</td>
 <td>query</td>
 <td>string</td>
@@ -5735,7 +5742,7 @@ Total: 5
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 that the Payment will be processed if the request is approved</td>
+<td>Date &amp; time in UTC ISO8601 that the Payment will be processed if the request is approved. (If the request is approved after this point in time, it will be processed straight away)</td>
 </tr>
 <tr>
 <td>» amount</td>
@@ -7373,7 +7380,7 @@ Total: 5
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 the Payment should be processed</td>
+<td>Date &amp; time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day)</td>
 </tr>
 <tr>
 <td>» payouts</td>
@@ -13069,7 +13076,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>matures_at</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 the Payment should be processed</td>
+<td>Date &amp; time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day)</td>
 </tr>
 <tr>
 <td>payouts</td>
@@ -13464,7 +13471,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>matures_at</td>
 <td>string</td>
 <td>true</td>
-<td>Date &amp; time in UTC ISO8601 that the Payment will be processed if the request is approved</td>
+<td>Date &amp; time in UTC ISO8601 that the Payment will be processed if the request is approved. (If the request is approved after this point in time, it will be processed straight away)</td>
 </tr>
 <tr>
 <td>amount</td>

@@ -1847,6 +1847,13 @@ paths:
           schema:
             type: string
           example: Some_nickname
+        - name: email
+          in: query
+          description: 'Single value, string search'
+          style: form
+          schema:
+            type: string
+          example: george@gmail.com
         - name: bank_account_id
           in: query
           description: 'Single value, exact match'
@@ -3663,7 +3670,7 @@ components:
           example: The SuperPackage
         matures_at:
           type: string
-          description: Date & time in UTC ISO8601 the Payment should be processed
+          description: Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day)
           example: '9/13/2016 12:00:00 AM'
         payouts:
           type: array
@@ -3926,8 +3933,7 @@ components:
         matures_at:
           type: string
           description: >-
-            Date & time in UTC ISO8601 that the Payment will be processed if the
-            request is approved
+            Date & time in UTC ISO8601 that the Payment will be processed if the request is approved. (If the request is approved after this point in time, it will be processed straight away)
           example: '12/19/2016 2:10:56 AM'
         amount:
           type: number
