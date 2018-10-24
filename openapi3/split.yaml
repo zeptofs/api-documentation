@@ -1165,6 +1165,8 @@ tags:
       authoriser can cancel an Agreement). |
 
       | `declined` | The Agreement has been declined. |
+
+      | `expended` | The Agreement has been expended (Only for [single_use Unassigned Agreements](/#Split-API-Unassigned-Agreements)). |
   - name: Bank Accounts
     description: |
       Your currently linked up bank accounts.
@@ -4533,6 +4535,11 @@ components:
             The amount of time in seconds before the Unassigned Agreement can no
             longer be accepted.
           example: 60
+        single_use:
+          type: boolean
+          description: >
+            Optionally propose a single use agreement. When the Unassigned Agreement is accepted and a Payment Request is approved according to the Agreement terms, the agreement will automatically become <code>expended</code>.<br><br>The proposed agreement must have equal max/min <code>per_payout</code> amounts and <code>null</code> <code>per_frequency</code> amounts.<br><br>Furthermore, we will automatically check that the authoriser's bank account has sufficient funds to honour the agreement terms.
+          example: true
         terms:
           $ref: '#/components/schemas/Terms'
       example:
