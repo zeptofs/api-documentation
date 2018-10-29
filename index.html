@@ -261,6 +261,11 @@
                   <li>
                     <a href="#speeding-up-onboarding" class="toc-h2 toc-link" data-title="Speeding up onboarding">Speeding up onboarding</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sandbox" class="toc-h1 toc-link" data-title="Sandbox">Sandbox</a>
+              <ul class="toc-list-h2">
                   <li>
                     <a href="#testing-details" class="toc-h2 toc-link" data-title="Testing details">Testing details</a>
                   </li>
@@ -1202,7 +1207,13 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <code>https://go-sandbox.split.cash/oauth/authorize?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx&amp;scope=xxx&amp;landing=personal_sign_up&amp;first_name=George</code></p>
 
 <p>You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded: <a href="https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgceco&amp;first_name=George">https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgeco&amp;first_name=George</a>.</p>
-<h2 id='testing-details'>Testing details</h2><h3 id='payment-failure-bank-accounts'>Payment failure bank accounts</h3>
+<h1 id='sandbox'>Sandbox</h1>
+<p>Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transfering actual funds. All transactions are simulated and no communication with financial institutions is performed.</p>
+
+<p>The sandbox works on 2.5 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every 2.5 minutes we simulate communicating with financial institutions and update statuses and events accordingly.</p>
+<h2 id='testing-details'>Testing details</h2>
+<p>All 6 digits BSBs are valid in the sandbox with the exception of <code>100000</code> which is a place keeper for an invalid BSB. In production, only valid and real BSB are accepted. </p>
+<h3 id='payment-failure-bank-accounts'>Payment failure bank accounts</h3>
 <p>You can send Payments to the following reserved bank accounts to trigger specific failures.</p>
 
 <table><thead>
@@ -1212,11 +1223,6 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <th>Account number</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>invalid_bsb_number</td>
-<td><code>100000</code></td>
-<td><code>99999</code></td>
-</tr>
 <tr>
 <td>account_closed</td>
 <td><code>300000</code></td>
@@ -1238,6 +1244,8 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <td><code>99999</code></td>
 </tr>
 </tbody></table>
+
+<aside class="notice">When paying a contact with one of the above bank accounts, we will mimic a successful direct debit from your bank account but we will fail the credit to the contact's bank account. Split will then automatically create a <code>payout_reversal</code> credit to your account.</aside>
 <h3 id='payment-request-failure-bank-accounts'>Payment Request failure bank accounts</h3>
 <p>You can send Payment Requests to the following reserved bank accounts to trigger specific failures.</p>
 
@@ -1248,11 +1256,6 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <th>Account number</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>invalid_bsb_number</td>
-<td><code>100000</code></td>
-<td><code>99999</code></td>
-</tr>
 <tr>
 <td>payment_stopped</td>
 <td><code>200000</code></td>
@@ -10794,6 +10797,13 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 </tr>
 <tr>
 <td>other_party_bank_ref</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Single value, exact match</td>
+</tr>
+<tr>
+<td>party_contact_id</td>
 <td>query</td>
 <td>string</td>
 <td>false</td>

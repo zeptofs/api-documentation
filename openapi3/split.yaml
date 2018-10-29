@@ -658,8 +658,17 @@ info:
     [https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgeco&first_name=George](https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgceco&first_name=George).
 
 
+    # Sandbox
+
+    Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transfering actual funds. All transactions are simulated and no communication with financial institutions is performed.
+
+
+    The sandbox works on 2.5 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every 2.5 minutes we simulate communicating with financial institutions and update statuses and events accordingly.
+
     ## Testing details
     
+    All 6 digits BSBs are valid in the sandbox with the exception of `100000` which is a place keeper for an invalid BSB. In production, only valid and real BSB are accepted.
+
     ### Payment failure bank accounts
     
     You can send Payments to the following reserved bank accounts to trigger specific failures.
@@ -668,8 +677,6 @@ info:
     | Failure type             | Branch code (BSB) | Account number |
 
     |--------------------------|-------------------|----------------|
-
-    | invalid_bsb_number       | `100000`          | `99999`        |
 
     | account_closed           | `300000`          | `99999`        |
 
@@ -680,6 +687,10 @@ info:
     | refer_to_split           | `700000`          | `99999`        |
 
 
+
+    <aside class="notice">When paying a contact with one of the above bank accounts, we will mimic a successful direct debit from your bank account but we will fail the credit to the contact's bank account. Split will then automatically create a <code>payout_reversal</code> credit to your account.</aside>
+
+
     ### Payment Request failure bank accounts
     
     You can send Payment Requests to the following reserved bank accounts to trigger specific failures.
@@ -688,8 +699,6 @@ info:
     | Failure type             | Branch code (BSB) | Account number |
 
     |--------------------------|-------------------|----------------|
-
-    | invalid_bsb_number       | `100000`          | `99999`        |
 
     | payment_stopped          | `200000`          | `99999`        |
 
@@ -2831,6 +2840,13 @@ paths:
           schema:
             type: string
           example: CT.3a
+        - name: party_contact_id
+          in: query
+          description: 'Single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: a67036fc-217e-437a-83f4-89e90724bea0
         - name: description
           in: query
           description: 'Single value, string search'
