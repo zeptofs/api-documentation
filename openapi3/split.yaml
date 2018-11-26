@@ -3136,6 +3136,7 @@ components:
           contact_id: 8df89c16-330f-462b-8891-808d7bdceb7f
           bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
           status: proposed
+          status_reason: null
           responded_at: null
           created_at: '2017-03-20T00:53:27Z'
           terms:
@@ -3161,6 +3162,7 @@ components:
           contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
           bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
           status: accepted
+          status_reason: null
           responded_at: '2017-03-20T02:13:11Z'
           created_at: '2017-03-20T00:53:27Z'
           terms:
@@ -3186,6 +3188,7 @@ components:
           contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
           bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
           status: declined
+          status_reason: null
           responded_at: '2017-03-20T02:13:11Z'
           created_at: '2017-03-20T00:53:27Z'
           terms:
@@ -3211,6 +3214,7 @@ components:
           contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
           bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
           status: approved
+          status_reason: null
           responded_at: '2017-03-20T02:13:11Z'
           created_at: '2017-03-20T00:53:27Z'
           terms:
@@ -3239,6 +3243,7 @@ components:
             contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
             bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
             status: proposed
+            status_reason: null
             responded_at: null
             created_at: '2017-03-20T00:53:27Z'
             terms:
@@ -3254,6 +3259,7 @@ components:
             contact_id: a80ac411-c8fb-45c0-9557-607c54649907
             bank_account_id: fa80ac411-c8fb-45c0-9557-607c54649907
             status: proposed
+            status_reason: null
             responded_at: null
             created_at: '2017-03-16T22:51:48Z'
             terms:
@@ -3282,6 +3288,7 @@ components:
             contact_id: a80ac411-c8fb-45c0-9557-607c54649907
             bank_account_id: fa80ac411-c8fb-45c0-9557-607c54649907
             status: proposed
+            status_reason: null
             responded_at: null
             created_at: '2017-03-20T00:53:27Z'
             terms:
@@ -3297,6 +3304,7 @@ components:
             contact_id: a80ac411-c8fb-45c0-9557-607c54649907
             bank_account_id: fa80ac411-c8fb-45c0-9557-607c54649907
             status: proposed
+            status_reason: null
             responded_at: null
             created_at: '2017-03-16T22:51:48Z'
             terms:
