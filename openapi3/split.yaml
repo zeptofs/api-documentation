@@ -2181,7 +2181,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentResponse'
-  '/payouts/{ref}':
+  '/payouts/{ref}/retry':
     post:
       tags:
         - Payouts
@@ -2208,6 +2208,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RetryPayoutResponse'
+  '/payouts/{ref}':
     delete:
       tags:
         - Payouts
