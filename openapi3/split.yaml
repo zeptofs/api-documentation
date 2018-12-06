@@ -28,7 +28,7 @@ info:
     started](/#get-started) and [Authentication &
     Authorisation](/#authentication-and-authorisation) guides for more.
 
-    * All communication is via `https`.
+    * All communication is via `https` and supports **only** `TLSv1.2`.
 
     * Production API: `https://api.split.cash/`.
 
