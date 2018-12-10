@@ -1420,6 +1420,8 @@ tags:
       | `matured` | The maturation date has been reached and the transaction is
       eligible for processing. |
 
+      | `preprocessing` | The transaction is undergoing pre-checks before being sent to the bank. |
+
       | `processing` | The transaction has been submitted to the bank. |
 
       | `clearing` | Waiting for confirmation from the bank that the transaction
@@ -2788,6 +2790,7 @@ paths:
             enum:
               - maturing
               - matured
+              - preprocessing
               - processing
               - clearing
               - cleared
