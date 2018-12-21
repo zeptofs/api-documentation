@@ -1308,12 +1308,32 @@ tags:
       |-------|-------------|
 
       | `pending_approval` | Waiting for the authoriser to approve the PR. |
+      
+      | `unverified` | Waiting for available funds response (only applicable when `precheck_funds` enabled). |
 
       | `approved` | The authoriser has approved the PR. |
 
       | `declined` | The payer has declined the PR. |
 
       | `cancelled` | The initiator has cancelled the PR. |
+      
+      ### Precheck funds lifecycle
+
+      <aside class="notice">Split will automatically precheck for available funds right before debit messages are sent to the bank. You can however enable prechecking earlier in the process such as when a Payment Request is approved.</aside>
+      
+      When the `precheck_funds` option is enabled, prechecking of available funds will be completed before approving the Payment Request. The authoriser contact must have valid agreement and bank connection to make use of this option.
+      
+      
+      There are **synchronous** and **asynchronous** lifecycles when the `precheck_funds` option is enabled.
+
+
+      + When the available funds for a contact's bank account are considered out of date, the API response will return the Payment Request with a state of `unverified` while we refresh and ensure there are sufficient available funds. Once the precheck has completed, the Payment Request state will transition to either `approved` or `declined`. This process can be followed by subscribing to the relevant webhook events or regularly polling the Payment Request and verifying its status.
+
+      + When the available funds for a contact are current, the API will respond immediately with a final state of either `approved` or an error message if there are insufficient funds.
+
+
+      You can gain some control over this process by preemptively telling Split to refresh a contact's available balance at least 1 minute before making a Payment Request. See [Contact balance refresh](/#refresh-contact-bank-connection) for more.
+
   - name: Refunds
     description: >
       Refunds can be issued for any successfully cleared Payout (credit)
@@ -2010,6 +2030,29 @@ paths:
                 $ref: '#/components/schemas/UpdateAContactResponse'
         '404':
           description: Not Found
+  '/contacts/{id}/refresh_balance':
+    post:
+      tags:
+        - Contacts
+      summary: Refresh contact bank connection
+      description: Request the bank connection for a contact to refresh available funds. This is intended for use in conjunction with the `precheck_funds` option, see [Payment Request - Precheck Funds](/#precheck-funds-lifecycle)
+      operationId: RefreshBalanceContact
+      parameters:
+        - name: id
+          in: path
+          description: Contact ID (`Contact.data.id`)
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: UUID
+          example: 55afddde-4296-4daf-8e49-7ba481ef9608
+      responses:
+        '204':
+          description: No Content (success)
+        '422':
+          description: Unprocessable Entity (errors)
   /open_agreements:
     post:
       tags:
@@ -3973,6 +4016,10 @@ components:
           type: string
           description: The Contact the payment will be requested from (`Contact.data.id`)'
           example: de86472c-c027-4735-a6a7-234366a27fc7
+        precheck_funds:
+          type: boolean
+          description: Enforce prechecking of available funds before approving the Payment Request. see [Payment Request - Precheck Funds](/#precheck-funds-lifecycle)
+          example: "false"
         metadata:
           $ref: '#/components/schemas/Metadata'
     MakeAPaymentRequestResponse:

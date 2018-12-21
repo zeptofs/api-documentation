@@ -346,6 +346,9 @@
                   <li>
                     <a href="#update-a-contact" class="toc-h2 toc-link" data-title="Update a Contact">Update a Contact</a>
                   </li>
+                  <li>
+                    <a href="#refresh-contact-bank-connection" class="toc-h2 toc-link" data-title="Refresh contact bank connection">Refresh contact bank connection</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -4623,6 +4626,158 @@ Total: 5
 <td>None</td>
 </tr>
 </tbody></table>
+<h2 id='refresh-contact-bank-connection'>Refresh contact bank connection</h2>
+<p><a id="opIdRefreshBalanceContact"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --request POST <span class="se">\</span>
+  --url https://api-sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api-sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"https"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
+  <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"api-sandbox.split.cash"</span><span class="p">,</span>
+  <span class="s2">"port"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="p">,</span>
+  <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"Bearer {access-token}"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api-sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span> <span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api-sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"net/http"</span><span class="x">
+    </span><span class="s">"io/ioutil"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+    </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api-sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="x">
+
+    </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span><span class="x"> </span><span class="s">"Bearer {access-token}"</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">res</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="x">
+
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    </span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span><span class="x">
+
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<p><code>POST /contacts/{id}/refresh_balance</code></p>
+
+<p>Request the bank connection for a contact to refresh available funds. This is intended for use in conjunction with the <code>precheck_funds</code> option, see <a href="/#precheck-funds-lifecycle">Payment Request - Precheck Funds</a></p>
+
+<h3 id="Refresh-contact-bank-connection-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string(UUID)</td>
+<td>true</td>
+<td>Contact ID (<code>Contact.data.id</code>)</td>
+</tr>
+</tbody></table>
+
+<h3 id="Refresh contact bank connection-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>No Content (success)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Unprocessable Entity (errors)</td>
+<td>None</td>
+</tr>
+</tbody></table>
 
 <h1 id="Split-API-Open-Agreements">Open Agreements</h1>
 
@@ -5556,6 +5711,10 @@ Total: 5
 <td>Waiting for the authoriser to approve the PR.</td>
 </tr>
 <tr>
+<td><code>unverified</code></td>
+<td>Waiting for available funds response (only applicable when <code>precheck_funds</code> enabled).</td>
+</tr>
+<tr>
 <td><code>approved</code></td>
 <td>The authoriser has approved the PR.</td>
 </tr>
@@ -5568,6 +5727,19 @@ Total: 5
 <td>The initiator has cancelled the PR.</td>
 </tr>
 </tbody></table>
+<h3 id='precheck-funds-lifecycle'>Precheck funds lifecycle</h3>
+<aside class="notice">Split will automatically precheck for available funds right before debit messages are sent to the bank. You can however enable prechecking earlier in the process such as when a Payment Request is approved.</aside>
+
+<p>When the <code>precheck_funds</code> option is enabled, prechecking of available funds will be completed before approving the Payment Request. The authoriser contact must have valid agreement and bank connection to make use of this option.</p>
+
+<p>There are <strong>synchronous</strong> and <strong>asynchronous</strong> lifecycles when the <code>precheck_funds</code> option is enabled.</p>
+
+<ul>
+<li>When the available funds for a contact&#39;s bank account are considered out of date, the API response will return the Payment Request with a state of <code>unverified</code> while we refresh and ensure there are sufficient available funds. Once the precheck has completed, the Payment Request state will transition to either <code>approved</code> or <code>declined</code>. This process can be followed by subscribing to the relevant webhook events or regularly polling the Payment Request and verifying its status.</li>
+<li>When the available funds for a contact are current, the API will respond immediately with a final state of either <code>approved</code> or an error message if there are insufficient funds.</li>
+</ul>
+
+<p>You can gain some control over this process by preemptively telling Split to refresh a contact&#39;s available balance at least 1 minute before making a Payment Request. See <a href="/#refresh-contact-bank-connection">Contact balance refresh</a> for more.</p>
 <h2 id='request-payment'>Request Payment</h2>
 <p><a id="opIdMakeAPaymentRequest"></a></p>
 
@@ -5579,7 +5751,7 @@ Total: 5
   --header <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
   --header <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  --data <span class="s1">'{"description":"Visible to both initiator and authoriser","matures_at":"2016-12-19T02:10:56Z","amount":99000,"authoriser_contact_id":"de86472c-c027-4735-a6a7-234366a27fc7","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
+  --data <span class="s1">'{"description":"Visible to both initiator and authoriser","matures_at":"2016-12-19T02:10:56Z","amount":99000,"authoriser_contact_id":"de86472c-c027-4735-a6a7-234366a27fc7","precheck_funds":"false","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
 
@@ -5593,7 +5765,7 @@ Total: 5
 <span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Visible to both initiator and authoriser</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2016-12-19T02:10:56Z</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:99000,</span><span class="se">\"</span><span class="s2">authoriser_contact_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">de86472c-c027-4735-a6a7-234366a27fc7</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Visible to both initiator and authoriser</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2016-12-19T02:10:56Z</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:99000,</span><span class="se">\"</span><span class="s2">authoriser_contact_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">de86472c-c027-4735-a6a7-234366a27fc7</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">precheck_funds</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 <span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
@@ -5628,6 +5800,7 @@ Total: 5
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'2016-12-19T02:10:56Z'</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mi">99000</span><span class="p">,</span>
   <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'de86472c-c027-4735-a6a7-234366a27fc7'</span><span class="p">,</span>
+  <span class="na">precheck_funds</span><span class="p">:</span> <span class="s1">'false'</span><span class="p">,</span>
   <span class="na">metadata</span><span class="p">:</span>
    <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
      <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
@@ -5636,7 +5809,7 @@ Total: 5
 
 <span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api-sandbox.split.cash"</span><span class="p">)</span>
 
-<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Visible to both initiator and authoriser</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2016-12-19T02:10:56Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:99000,</span><span class="se">\"</span><span class="s">authoriser_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">de86472c-c027-4735-a6a7-234366a27fc7</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Visible to both initiator and authoriser</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2016-12-19T02:10:56Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:99000,</span><span class="se">\"</span><span class="s">authoriser_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">de86472c-c027-4735-a6a7-234366a27fc7</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">precheck_funds</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">false</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span>
 
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
@@ -5654,7 +5827,7 @@ Total: 5
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"description\":\"Visible to both initiator and authoriser\",\"matures_at\":\"2016-12-19T02:10:56Z\",\"amount\":99000,\"authoriser_contact_id\":\"de86472c-c027-4735-a6a7-234366a27fc7\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"description\":\"Visible to both initiator and authoriser\",\"matures_at\":\"2016-12-19T02:10:56Z\",\"amount\":99000,\"authoriser_contact_id\":\"de86472c-c027-4735-a6a7-234366a27fc7\",\"precheck_funds\":\"false\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
 </code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
@@ -5662,7 +5835,7 @@ Total: 5
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
 
 <span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Message\Body</span><span class="p">;</span>
-<span class="nv">$body</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'{"description":"Visible to both initiator and authoriser","matures_at":"2016-12-19T02:10:56Z","amount":99000,"authoriser_contact_id":"de86472c-c027-4735-a6a7-234366a27fc7","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span><span class="p">);</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'{"description":"Visible to both initiator and authoriser","matures_at":"2016-12-19T02:10:56Z","amount":99000,"authoriser_contact_id":"de86472c-c027-4735-a6a7-234366a27fc7","precheck_funds":"false","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span><span class="p">);</span>
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/payment_requests'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
@@ -5691,7 +5864,7 @@ Total: 5
 
     </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api-sandbox.split.cash/payment_requests"</span><span class="x">
 
-    </span><span class="n">payload</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Visible to both initiator and authoriser</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2016-12-19T02:10:56Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:99000,</span><span class="se">\"</span><span class="s">authoriser_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">de86472c-c027-4735-a6a7-234366a27fc7</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span><span class="p">)</span><span class="x">
+    </span><span class="n">payload</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Visible to both initiator and authoriser</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2016-12-19T02:10:56Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:99000,</span><span class="se">\"</span><span class="s">authoriser_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">de86472c-c027-4735-a6a7-234366a27fc7</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">precheck_funds</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">false</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span><span class="p">)</span><span class="x">
 
     </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="n">payload</span><span class="p">)</span><span class="x">
 
@@ -5721,6 +5894,7 @@ Total: 5
   </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
   </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"precheck_funds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
@@ -5772,6 +5946,13 @@ Total: 5
 <td>string</td>
 <td>true</td>
 <td>The Contact the payment will be requested from (<code>Contact.data.id</code>)&#39;</td>
+</tr>
+<tr>
+<td>» precheck_funds</td>
+<td>body</td>
+<td>boolean</td>
+<td>false</td>
+<td>Enforce prechecking of available funds before approving the Payment Request. see <a href="/#precheck-funds-lifecycle">Payment Request - Precheck Funds</a></td>
 </tr>
 <tr>
 <td>» metadata</td>
@@ -13490,6 +13671,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
   </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
   </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"precheck_funds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
@@ -13529,6 +13711,12 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>string</td>
 <td>true</td>
 <td>The Contact the payment will be requested from (<code>Contact.data.id</code>)&#39;</td>
+</tr>
+<tr>
+<td>precheck_funds</td>
+<td>boolean</td>
+<td>false</td>
+<td>Enforce prechecking of available funds before approving the Payment Request. see <a href="/#precheck-funds-lifecycle">Payment Request - Precheck Funds</a></td>
 </tr>
 <tr>
 <td>metadata</td>
