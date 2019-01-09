@@ -4431,8 +4431,15 @@ A Payment Request can have the following statuses:
 | `approved` | The authoriser has approved the PR. |
 | `declined` | The payer has declined the PR. |
 | `cancelled` | The initiator has cancelled the PR. |
+
 ### Precheck funds lifecycle
-<aside class="notice">Split will automatically precheck for available funds right before debit messages are sent to the bank. You can however enable prechecking earlier in the process such as when a Payment Request is approved.</aside>
+
+Split will automatically check for available funds right before debits are sent to the bank. This check is performed for all contacts with [Instant Account Verification (IAV)](http://help.split.cash/bank-accounts/instant-account-verification-iav).
+
+However if you want prechecking earlier in the process such as when a Payment Request is approved, there is an optional precheck process.
+
+**Precheck for Payment Requests**
+
 When the `precheck_funds` option is enabled, prechecking of available funds will be completed before approving the Payment Request. The authoriser contact must have valid agreement and bank connection to make use of this option.
 
 There are **synchronous** and **asynchronous** lifecycles when the `precheck_funds` option is enabled.
