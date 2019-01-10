@@ -4436,7 +4436,7 @@ A Payment Request can have the following statuses:
 
 Split will automatically check for available funds right before debits are sent to the bank. This check is performed for all contacts with [Instant Account Verification (IAV)](http://help.split.cash/bank-accounts/instant-account-verification-iav).
 
-However if you want prechecking earlier in the process such as when a Payment Request is approved, there is an optional precheck process.
+If you would like to also precheck available funds before a Payment Request is allowed to be approved, there is an optional precheck attribute as outlined below.
 
 **Precheck for Payment Requests**
 
