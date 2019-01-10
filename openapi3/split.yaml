@@ -663,7 +663,7 @@ info:
     Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transfering actual funds. All transactions are simulated and no communication with financial institutions is performed.
 
 
-    The sandbox works on 2.5 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every 2.5 minutes we simulate communicating with financial institutions and update statuses and events accordingly.
+    The sandbox works on 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute we simulate communicating with financial institutions and update statuses and events accordingly.
 
     ## Testing details
     
@@ -1316,14 +1316,23 @@ tags:
       | `declined` | The payer has declined the PR. |
 
       | `cancelled` | The initiator has cancelled the PR. |
-      
+
+
       ### Precheck funds lifecycle
 
-      <aside class="notice">Split will automatically precheck for available funds right before debit messages are sent to the bank. You can however enable prechecking earlier in the process such as when a Payment Request is approved.</aside>
-      
+
+      Split will automatically check for available funds right before debits are sent to the bank. This check is performed for all contacts with [Instant Account Verification (IAV)](http://help.split.cash/bank-accounts/instant-account-verification-iav).
+
+
+      If you would like to also precheck available funds before a Payment Request is allowed to be approved, there is an optional precheck attribute as outlined below.
+
+
+      **Precheck for Payment Requests**
+
+
       When the `precheck_funds` option is enabled, prechecking of available funds will be completed before approving the Payment Request. The authoriser contact must have valid agreement and bank connection to make use of this option.
-      
-      
+
+
       There are **synchronous** and **asynchronous** lifecycles when the `precheck_funds` option is enabled.
 
 
