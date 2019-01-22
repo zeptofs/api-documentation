@@ -8271,6 +8271,7 @@ Total: 5
     </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
@@ -10740,6 +10741,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"returned"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-08T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refer_to_customer"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"failure_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Incorrect recipient"</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
@@ -11018,7 +11020,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>query</td>
 <td>integer</td>
 <td>false</td>
-<td>Cents, Single value, exact match</td>
+<td>Cents, single value, exact match</td>
 </tr>
 <tr>
 <td>max_amount</td>
@@ -11032,7 +11034,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>query</td>
 <td>string(date-time)</td>
 <td>false</td>
-<td>Date/time UTC ISO 8601 format, Single value, exact match</td>
+<td>Date/time UTC ISO 8601 format, single value, exact match</td>
 </tr>
 <tr>
 <td>max_created_date</td>
@@ -11046,7 +11048,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>query</td>
 <td>string(date-time)</td>
 <td>false</td>
-<td>Date/time UTC ISO 8601 format, Single value, exact match</td>
+<td>Date/time UTC ISO 8601 format, single value, exact match</td>
 </tr>
 <tr>
 <td>max_matured_date</td>
@@ -11060,10 +11062,24 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>query</td>
 <td>string(date-time)</td>
 <td>false</td>
-<td>Date/time UTC ISO 8601 format, Single value, exact match</td>
+<td>Date/time UTC ISO 8601 format, single value, exact match</td>
 </tr>
 <tr>
 <td>max_cleared_date</td>
+<td>query</td>
+<td>string(date-time)</td>
+<td>false</td>
+<td>Date/time UTC ISO 8601 format, single value, exact match</td>
+</tr>
+<tr>
+<td>min_status_changed_date</td>
+<td>query</td>
+<td>string(date-time)</td>
+<td>false</td>
+<td>Date/time UTC ISO 8601 format, single value, exact match</td>
+</tr>
+<tr>
+<td>max_status_changed_date</td>
 <td>query</td>
 <td>string(date-time)</td>
 <td>false</td>
@@ -11160,6 +11176,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31354923-b1e9-4d65-b03c-415ead89cbf3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -11177,6 +11194,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gutmann-Schmidt"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -11194,6 +11212,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
@@ -14526,6 +14545,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
     </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
@@ -14566,6 +14586,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31354923-b1e9-4d65-b03c-415ead89cbf3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -14583,6 +14604,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gutmann-Schmidt"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -14600,6 +14622,7 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
