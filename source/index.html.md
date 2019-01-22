@@ -6828,6 +6828,7 @@ This endpoint allows you to retry the payout without having to recreate the pare
     "cleared_at": null,
     "bank_ref": null,
     "status": "maturing",
+    "status_changed_at": "2016-12-05T23:15:00Z",
     "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
     "party_name": "Price and Sons",
     "party_nickname": "price-and-sons-2",
@@ -9075,6 +9076,7 @@ A transaction (debit or credit) can have the following statuses:
       "cleared_at": null,
       "bank_ref": null,
       "status": "returned",
+      "status_changed_at": "2016-12-08T23:15:00Z",
       "failure_reason": "refer_to_customer",
       "failure_details": "Incorrect recipient"
       "party_contact_id": "26297f44-c5e1-40a1-9864-3e0b0754c32a",
@@ -9256,14 +9258,16 @@ func main() {
 |other_party_bank_ref|query|string|false|Single value, exact match|
 |party_contact_id|query|string|false|Single value, exact match|
 |description|query|string|false|Single value, string search|
-|min_amount|query|integer|false|Cents, Single value, exact match|
+|min_amount|query|integer|false|Cents, single value, exact match|
 |max_amount|query|integer|false|Cents, single value, exact match|
-|min_created_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, Single value, exact match|
+|min_created_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
 |max_created_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
-|min_matured_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, Single value, exact match|
+|min_matured_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
 |max_matured_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
-|min_cleared_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, Single value, exact match|
+|min_cleared_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
 |max_cleared_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
+|min_status_changed_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
+|max_status_changed_date|query|string(date-time)|false|Date/time UTC ISO 8601 format, single value, exact match|
 
 #### Enumerated Values
 
@@ -9303,6 +9307,7 @@ func main() {
       "cleared_at": "2016-12-10T23:15:00Z",
       "bank_ref": "DT.9a",
       "status": "cleared",
+      "status_changed_at": "2016-12-10T23:15:00Z",
       "party_contact_id": "31354923-b1e9-4d65-b03c-415ead89cbf3",
       "party_name": "Sanford-Rees",
       "party_nickname": null,
@@ -9320,6 +9325,7 @@ func main() {
       "cleared_at": null,
       "bank_ref": null,
       "status": "maturing",
+      "status_changed_at": "2016-12-06T23:15:00Z",
       "party_contact_id": "3c6e31d3-1dc1-448b-9512-0320bc44fdcf",
       "party_name": "Gutmann-Schmidt",
       "party_nickname": null,
@@ -9337,6 +9343,7 @@ func main() {
       "cleared_at": "2016-12-09T23:15:00Z",
       "bank_ref": "CT.1",
       "status": "cleared",
+      "status_changed_at": "2016-12-09T23:15:00Z",
       "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
       "party_name": "Price and Sons",
       "party_nickname": "price-and-sons-2",
@@ -12230,6 +12237,7 @@ func main() {
     "cleared_at": null,
     "bank_ref": null,
     "status": "maturing",
+    "status_changed_at": "2016-12-05T23:15:00Z",
     "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
     "party_name": "Price and Sons",
     "party_nickname": "price-and-sons-2",
@@ -12265,6 +12273,7 @@ func main() {
       "cleared_at": "2016-12-10T23:15:00Z",
       "bank_ref": "DT.9a",
       "status": "cleared",
+      "status_changed_at": "2016-12-10T23:15:00Z",
       "party_contact_id": "31354923-b1e9-4d65-b03c-415ead89cbf3",
       "party_name": "Sanford-Rees",
       "party_nickname": null,
@@ -12282,6 +12291,7 @@ func main() {
       "cleared_at": null,
       "bank_ref": null,
       "status": "maturing",
+      "status_changed_at": "2016-12-06T23:15:00Z",
       "party_contact_id": "3c6e31d3-1dc1-448b-9512-0320bc44fdcf",
       "party_name": "Gutmann-Schmidt",
       "party_nickname": null,
@@ -12299,6 +12309,7 @@ func main() {
       "cleared_at": "2016-12-09T23:15:00Z",
       "bank_ref": "CT.1",
       "status": "cleared",
+      "status_changed_at": "2016-12-09T23:15:00Z",
       "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
       "party_name": "Price and Sons",
       "party_nickname": "price-and-sons-2",
