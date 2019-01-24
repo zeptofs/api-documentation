@@ -1458,7 +1458,6 @@ Total: 5
 </blockquote>
 <pre class="highlight sh tab-shell"><code><span class="c"># Shell example is not available</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
-
 </span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
     </span><span class="s">"crypto/hmac"</span><span class="x">
     </span><span class="s">"crypto/sha256"</span><span class="x">
@@ -1466,11 +1465,10 @@ Total: 5
     </span><span class="s">"fmt"</span><span class="x">
     </span><span class="s">"encoding/hex"</span><span class="x">
 </span><span class="p">)</span><span class="x">
-
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
     </span><span class="n">secret</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"1234"</span><span class="x">
-    </span><span class="n">message</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"{</span><span class="se">\"</span><span class="s">data</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">value</span><span class="se">\"</span><span class="s">}}"</span><span class="x">
-    </span><span class="n">splitSignature</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635"</span><span class="x">
+    </span><span class="n">message</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"full payload of the request"</span><span class="x">
+    </span><span class="n">splitSignature</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f"</span><span class="x">
 
     </span><span class="n">data</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">Split</span><span class="p">(</span><span class="n">splitSignature</span><span class="p">,</span><span class="x"> </span><span class="s">"."</span><span class="p">)</span><span class="x">
     </span><span class="n">timestamp</span><span class="p">,</span><span class="x"> </span><span class="n">givenSignature</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">data</span><span class="p">[</span><span class="m">0</span><span class="p">],</span><span class="x"> </span><span class="n">data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="x">
@@ -1482,16 +1480,16 @@ Total: 5
     </span><span class="n">expectedSignature</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">hex</span><span class="o">.</span><span class="n">EncodeToString</span><span class="p">(</span><span class="n">hash</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="no">nil</span><span class="p">))</span><span class="x">
 
     </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">expectedSignature</span><span class="p">)</span><span class="x">
-    </span><span class="c">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span><span class="x">
+    </span><span class="c">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span><span class="x">
     </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">givenSignature</span><span class="p">)</span><span class="x">
-    </span><span class="c">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span><span class="x">
+    </span><span class="c">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span><span class="x">
 </span><span class="p">}</span><span class="x">
 </span></code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="kn">import</span> <span class="nn">hmac</span>
 
-<span class="n">split_signature</span> <span class="o">=</span> <span class="s">'1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'</span>
+<span class="n">split_signature</span> <span class="o">=</span> <span class="s">'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'</span>
 <span class="n">secret</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s">'1234'</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
-<span class="n">message</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s">'{"data":{"key":"value"}}'</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="n">message</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s">'full payload of the request'</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">split_signature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'.'</span><span class="p">)</span>
 <span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1502,28 +1500,28 @@ Total: 5
 <span class="n">expected_signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">signed_payload</span><span class="p">,</span> <span class="n">digestmod</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">expected_signature</span><span class="p">)</span>
-<span class="c"># &gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+<span class="c"># &gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">given_signature</span><span class="p">)</span>
-<span class="c"># &gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+<span class="c"># &gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'openssl'</span>
 
-<span class="n">split_signature</span> <span class="o">=</span> <span class="s1">'1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'</span>
+<span class="n">split_signature</span> <span class="o">=</span> <span class="s1">'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'</span>
 <span class="n">secret</span> <span class="o">=</span> <span class="s1">'1234'</span>
-<span class="n">message</span> <span class="o">=</span> <span class="s1">'{"data":{"key":"value"}}'</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'full payload of the request'</span>
 
 <span class="n">timestamp</span><span class="p">,</span> <span class="n">given_signature</span><span class="p">,</span> <span class="o">*</span><span class="n">other</span> <span class="o">=</span> <span class="n">split_signature</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
 <span class="n">signed_payload</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="n">message</span>
 <span class="n">expected_signature</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">hexdigest</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">signed_payload</span><span class="p">)</span>
 
 <span class="nb">puts</span><span class="p">(</span><span class="n">expected_signature</span><span class="p">)</span>
-<span class="c1"># =&gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+<span class="c1"># =&gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
 <span class="nb">puts</span><span class="p">(</span><span class="n">given_signature</span><span class="p">)</span>
-<span class="c1"># =&gt; 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">)</span>
-<span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="s1">'{\"data\":{\"key\":\"value\"}}'</span>
+<span class="c1"># =&gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="s1">'full payload of the request'</span>
 <span class="kd">var</span> <span class="nx">secret</span> <span class="o">=</span> <span class="s1">'1234'</span>
-<span class="kd">var</span> <span class="nx">splitSignature</span> <span class="o">=</span> <span class="s1">'1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'</span>
+<span class="kd">var</span> <span class="nx">splitSignature</span> <span class="o">=</span> <span class="s1">'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'</span>
 
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">splitSignature</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
 <span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1534,9 +1532,56 @@ Total: 5
 <span class="kd">var</span> <span class="nx">expectedSignature</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="nx">secret</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">signedPayload</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">)</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">)</span>
-<span class="c1">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+<span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">givenSignature</span><span class="p">)</span>
-<span class="c1">// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635</span>
+<span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+
+</code></pre><pre class="highlight php tab-php"><code>$split_signature = '1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f';
+$secret = '1234';
+$message = 'full payload of the request';
+
+list($timestamp, $given_signature, $other) = explode('.', $split_signature);
+$signed_payload = $timestamp . "." . $message;
+$expected_signature = hash_hmac('sha256', $signed_payload, $secret, false);
+
+echo $expected_signature; // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+echo "\n";
+echo $given_signature; // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">javax.crypto.Mac</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+      <span class="n">String</span> <span class="n">splitSignature</span> <span class="o">=</span> <span class="s">"1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f"</span><span class="o">;</span>
+      <span class="n">String</span> <span class="n">secret</span> <span class="o">=</span> <span class="s">"1234"</span><span class="o">;</span>
+      <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"full payload of the request"</span><span class="o">;</span>
+
+      <span class="n">String</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="n">splitSignature</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\."</span><span class="o">);</span>
+      <span class="n">String</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+      <span class="n">String</span> <span class="n">givenSignature</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+      <span class="n">String</span> <span class="n">signedPayload</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="n">message</span><span class="o">;</span>
+
+      <span class="n">Mac</span> <span class="n">sha256_HMAC</span> <span class="o">=</span> <span class="n">Mac</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"HmacSHA256"</span><span class="o">);</span>
+      <span class="n">SecretKeySpec</span> <span class="n">secret_key</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecretKeySpec</span><span class="o">(</span><span class="n">secret</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(),</span> <span class="s">"HmacSHA256"</span><span class="o">);</span>
+      <span class="n">sha256_HMAC</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">secret_key</span><span class="o">);</span>
+
+      <span class="n">String</span> <span class="n">expectedSignature</span> <span class="o">=</span> <span class="n">javax</span><span class="o">.</span><span class="na">xml</span><span class="o">.</span><span class="na">bind</span><span class="o">.</span><span class="na">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">sha256_HMAC</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">signedPayload</span><span class="o">.</span><span class="na">getBytes</span><span class="o">())).</span><span class="na">toLowerCase</span><span class="o">();</span>
+
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">expectedSignature</span><span class="o">);</span>
+      <span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">givenSignature</span><span class="o">);</span>
+      <span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+    <span class="o">}</span>
+    <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Error"</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
 </code></pre>
 <p><strong>Step 1. Extract the timestamp and signatures from the header</strong></p>
 
@@ -4403,7 +4448,7 @@ Total: 5
   --header <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
   --header <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  --data <span class="s1">'{"name":"My very own alias"}'</span>
+  --data <span class="s1">'{"name":"My very own alias","email":"updated@email.com"}'</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
 
@@ -4417,7 +4462,7 @@ Total: 5
 <span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">My very own alias</span><span class="se">\"</span><span class="s2">}"</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">My very own alias</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">updated@email.com</span><span class="se">\"</span><span class="s2">}"</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 <span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
@@ -4448,13 +4493,13 @@ Total: 5
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'My very own alias'</span> <span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'My very own alias'</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="s1">'updated@email.com'</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
 <span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api-sandbox.split.cash"</span><span class="p">)</span>
 
-<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">My very own alias</span><span class="se">\"</span><span class="s">}"</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">My very own alias</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">updated@email.com</span><span class="se">\"</span><span class="s">}"</span>
 
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
@@ -4472,7 +4517,7 @@ Total: 5
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"name\":\"My very own alias\"}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"name\":\"My very own alias\",\"email\":\"updated@email.com\"}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
 </code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
@@ -4480,7 +4525,7 @@ Total: 5
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
 
 <span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Message\Body</span><span class="p">;</span>
-<span class="nv">$body</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'{"name":"My very own alias"}'</span><span class="p">);</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'{"name":"My very own alias","email":"updated@email.com"}'</span><span class="p">);</span>
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api-sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'PATCH'</span><span class="p">);</span>
@@ -4509,7 +4554,7 @@ Total: 5
 
     </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api-sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="x">
 
-    </span><span class="n">payload</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">My very own alias</span><span class="se">\"</span><span class="s">}"</span><span class="p">)</span><span class="x">
+    </span><span class="n">payload</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">My very own alias</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">updated@email.com</span><span class="se">\"</span><span class="s">}"</span><span class="p">)</span><span class="x">
 
     </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="n">payload</span><span class="p">)</span><span class="x">
 
@@ -4529,7 +4574,7 @@ Total: 5
 </span></code></pre>
 <p><code>PATCH /contacts/{id}</code></p>
 
-<p>You can update the name of any Contact. This is essentially an alias you can use to provide something contextually meaninful.</p>
+<p>You can update the name and email of any Contact. This is essentially an alias you can use to provide something contextually meaningful.</p>
 
 <aside class="notice">
   Any previous transactions to that Contact will retain the Contact name that was current at the time.
@@ -4539,7 +4584,8 @@ Total: 5
 <p>Body parameter</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My very own alias"</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My very own alias"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"updated@email.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Update-a-Contact-parameters" class="parameters">Parameters</h3>
@@ -4571,8 +4617,15 @@ Total: 5
 <td>» name</td>
 <td>body</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>The name of the Contact</td>
+</tr>
+<tr>
+<td>» email</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>The email of the Contact</td>
 </tr>
 </tbody></table>
 
@@ -13215,7 +13268,8 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <h2 id='updateacontactrequest'>UpdateAContactRequest</h2>
 <p><a id="schemaupdateacontactrequest"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My very own alias"</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My very own alias"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"updated@email.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='properties-23'>Properties</h3>
 <p><em>Update a Contact (request)</em></p>
@@ -13231,8 +13285,14 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <tr>
 <td>name</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>The name of the Contact</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>false</td>
+<td>The email of the Contact</td>
 </tr>
 </tbody></table>
 <h2 id='updateacontactresponse'>UpdateAContactResponse</h2>
