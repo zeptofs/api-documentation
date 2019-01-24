@@ -585,7 +585,6 @@ The `Split-Signature` header contains a timestamp and one or more signatures. Al
 
 ```go
 package main
-
 import (
     "crypto/hmac"
     "crypto/sha256"
@@ -593,11 +592,10 @@ import (
     "fmt"
     "encoding/hex"
 )
-
 func main() {
     secret := "1234"
-    message := "{\"data\":{\"key\":\"value\"}}"
-    splitSignature := "1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635"
+    message := "full payload of the request"
+    splitSignature := "1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f"
 
     data := strings.Split(splitSignature, ".")
     timestamp, givenSignature := data[0], data[1]
@@ -609,9 +607,9 @@ func main() {
     expectedSignature := hex.EncodeToString(hash.Sum(nil))
 
     fmt.Println(expectedSignature)
-    // 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+    // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
     fmt.Println(givenSignature)
-    // 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+    // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 }
 ```
 
@@ -619,9 +617,9 @@ func main() {
 import hashlib
 import hmac
 
-split_signature = '1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'
+split_signature = '1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'
 secret = bytes('1234').encode('utf-8')
-message = bytes('{"data":{"key":"value"}}').encode('utf-8')
+message = bytes('full payload of the request').encode('utf-8')
 
 data = split_signature.split('.')
 timestamp = data[0]
@@ -632,34 +630,34 @@ signed_payload = timestamp + '.' + message
 expected_signature = hmac.new(secret, signed_payload, digestmod=hashlib.sha256).hexdigest()
 
 print(expected_signature)
-# > 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+# > f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 
 print(given_signature)
-# > 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+# > f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 ```
 
 ```ruby
 require 'openssl'
 
-split_signature = '1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'
+split_signature = '1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'
 secret = '1234'
-message = '{"data":{"key":"value"}}'
+message = 'full payload of the request'
 
 timestamp, given_signature, *other = split_signature.split('.')
 signed_payload = timestamp + '.' + message
 expected_signature = OpenSSL::HMAC.hexdigest('sha256', secret, signed_payload)
 
 puts(expected_signature)
-# => 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+# => f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 puts(given_signature)
-# => 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+# => f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 ```
 
-```javascript--nodejs
+```javascript--node
 var crypto = require('crypto')
-var message = '{\"data\":{\"key\":\"value\"}}'
+var message = 'full payload of the request'
 var secret = '1234'
-var splitSignature = '1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635'
+var splitSignature = '1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'
 
 var data = splitSignature.split('.')
 var timestamp = data[0]
@@ -670,9 +668,62 @@ var signedPayload = timestamp + '.' + message
 var expectedSignature = crypto.createHmac('sha256', secret).update(signedPayload).digest('hex')
 
 console.log(expectedSignature)
-// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 console.log(givenSignature)
-// 93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+
+```
+
+```php
+$split_signature = '1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f';
+$secret = '1234';
+$message = 'full payload of the request';
+
+list($timestamp, $given_signature, $other) = explode('.', $split_signature);
+$signed_payload = $timestamp . "." . $message;
+$expected_signature = hash_hmac('sha256', $signed_payload, $secret, false);
+
+echo $expected_signature; // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+echo "\n";
+echo $given_signature; // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+
+```
+
+```java
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+class Main {
+  public static void main(String[] args) {
+    try {
+      String splitSignature = "1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f";
+      String secret = "1234";
+      String message = "full payload of the request";
+
+      String[] data = splitSignature.split("\\.");
+      String timestamp = data[0];
+      String givenSignature = data[1];
+
+      String signedPayload = timestamp + "." + message;
+
+      Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
+      SecretKeySpec secret_key = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
+      sha256_HMAC.init(secret_key);
+
+      String expectedSignature = javax.xml.bind.DatatypeConverter.printHexBinary(sha256_HMAC.doFinal(signedPayload.getBytes())).toLowerCase();
+
+      System.out.println(expectedSignature);
+      // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+
+      System.out.println(givenSignature);
+      // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+    }
+    catch (Exception e){
+      System.out.println("Error");
+    }
+  }
+}
+
 ```
 
 **Step 1. Extract the timestamp and signatures from the header**
