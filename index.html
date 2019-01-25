@@ -1216,8 +1216,39 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <p>The sandbox works on 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute we simulate communicating with financial institutions and update statuses and events accordingly.</p>
 <h2 id='testing-details'>Testing details</h2>
 <p>All 6 digits BSBs are valid in the sandbox with the exception of <code>100000</code> which is a place keeper for an invalid BSB. In production, only valid and real BSB are accepted.</p>
-<h3 id='payment-failure-bank-accounts'>Payment failure bank accounts</h3>
-<p>You can send Payments to the following reserved bank accounts to trigger specific failures.</p>
+<h3 id='payment-credit-failure-bank-accounts'>Payment credit failure bank accounts</h3>
+<blockquote>
+<p>Example payout reversal response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_reversal"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-07T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-08T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payout reversal of D.1 for Sanford-Rees due to no account or incorrect account number"</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"reversal_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"source_debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"source_credit_failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incorrect_account_number"</span><span class="p">,</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>You can send Payments to the following reserved bank accounts to trigger specific failures on the credit side.</p>
+
+<p>When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. Furthermore, within the payout reversal credit, Split will include details in the <code>description</code> and under the <code>reversal_details</code> key as to why the original credit to the recipient failed.</p>
 
 <table><thead>
 <tr>
@@ -10795,8 +10826,8 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
       </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"returned"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-08T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refer_to_customer"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"failure_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Incorrect recipient"</span><span class="w">
+      </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_voided"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"failure_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong amount - approved by Stacey"</span><span class="w">
       </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
@@ -10815,12 +10846,20 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 </tr>
 </thead><tbody>
 <tr>
-<td><code>invalid_bsb_number</code></td>
-<td>BSB number is invalid</td>
+<td><code>refer_to_customer</code></td>
+<td><strong>(Debit only)</strong> Usually due to insufficient funds</td>
+</tr>
+<tr>
+<td><code>insufficient_funds</code></td>
+<td><strong>(Debit only)</strong> Insufficient funds</td>
 </tr>
 <tr>
 <td><code>payment_stopped</code></td>
-<td>The payment was stopped at the bank. Can be due to a customer requesting a stop payment with their financial institution.</td>
+<td><strong>(Debit only)</strong> The payment was stopped at the bank. Can be due to a customer requesting a stop payment with their financial institution.</td>
+</tr>
+<tr>
+<td><code>invalid_bsb_number</code></td>
+<td>BSB number is invalid</td>
 </tr>
 <tr>
 <td><code>account_closed</code></td>
@@ -10835,16 +10874,8 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <td>Account number is incorrect</td>
 </tr>
 <tr>
-<td><code>refer_to_customer</code></td>
-<td>Usually due to insufficient funds</td>
-</tr>
-<tr>
 <td><code>refer_to_split</code></td>
 <td>Failed due to reasons not listed here. Please contact us.</td>
-</tr>
-<tr>
-<td><code>insufficient_funds</code></td>
-<td>Insufficient funds</td>
 </tr>
 <tr>
 <td><code>user_voided</code></td>
@@ -10856,7 +10887,9 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 </tr>
 </tbody></table>
 
-<p>Some failures will include additional details which will be returned in <code>failure_details</code></p>
+<aside class="notice">
+  The <code>user_voided</code> and <code>admin_voided</code> <code>failure_reason</code>s can sometimes be accompanied by the <code>failure_details</code> key which includes user submitted comments relating to the <code>failure_reason</code>.
+</aside>
 <h2 id='list-all-transactions'>List all transactions</h2>
 <p><a id="opIdListAllTransactions"></a></p>
 
