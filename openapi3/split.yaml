@@ -563,6 +563,55 @@ info:
     Requests support the use of the `Idempotency-Key`.
 
     * Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
+    
+  
+    ## Error responses
+
+
+    > Example detailed error response
+
+
+    ```json
+
+    {
+      "errors": [
+        {
+          "title": "A Specific Error",
+          "detail": "Details about the error",
+          "links": {
+            "about": "https://docs.split.cash/..."
+          }
+        }
+      ]
+    }
+
+    ```
+    
+    > Example resource error response
+
+
+    ```json
+
+    {
+      "errors": "A sentence explaining error/s encounted"
+    }
+
+    ```
+    
+    The Split API returns two different types of error responses depending on the context.
+    
+    
+    **Detailed error responses** are returned for:
+    
+    
+    * Authentication
+    
+    * Request types
+    
+    * Idempotency
+    
+    
+    All other errors relating to Split specific resources(e.g. Contacts) will return the **Resource error response** style.
 
 
     ## Speeding up onboarding
@@ -949,8 +998,7 @@ info:
 
     Before you can verify signatures, you need to retrieve your endpoint’s
     secret from your Webhooks settings. Each endpoint has its own unique secret;
-    if you use multiple endpoints, you must obtain a secret for each one. If you
-    use multiple endpoints, you must obtain a secret for each one.
+    if you use multiple endpoints, you must obtain a secret for each one.
 
 
     The `Split-Signature` header contains a timestamp and one or more

@@ -259,6 +259,9 @@
                     <a href="#idempotent-requests" class="toc-h2 toc-link" data-title="Idempotent requests">Idempotent requests</a>
                   </li>
                   <li>
+                    <a href="#error-responses" class="toc-h2 toc-link" data-title="Error responses">Error responses</a>
+                  </li>
+                  <li>
                     <a href="#speeding-up-onboarding" class="toc-h2 toc-link" data-title="Speeding up onboarding">Speeding up onboarding</a>
                   </li>
               </ul>
@@ -1122,6 +1125,40 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>Only the <code>POST</code> action for the Payments, Payment Requests, Refunds, Refund Requests support the use of the <code>Idempotency-Key</code>.</li>
 <li>Endpoints that use the <code>GET</code> or <code>DELETE</code> actions are idempotent by nature.</li>
 </ul>
+<h2 id='error-responses'>Error responses</h2>
+<blockquote>
+<p>Example detailed error response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Specific Error"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Details about the error"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"about"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://docs.split.cash/..."</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example resource error response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A sentence explaining error/s encounted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The Split API returns two different types of error responses depending on the context.</p>
+
+<p><strong>Detailed error responses</strong> are returned for:</p>
+
+<ul>
+<li>Authentication</li>
+<li>Request types</li>
+<li>Idempotency</li>
+</ul>
+
+<p>All other errors relating to Split specific resources(e.g. Contacts) will return the <strong>Resource error response</strong> style.</p>
 <h2 id='speeding-up-onboarding'>Speeding up onboarding</h2>
 <p>Consider the following scenario:</p>
 
@@ -1480,7 +1517,7 @@ Total: 5
 </code></pre>
 <p>Split signs the webhook events it sends to your endpoints. We do so by including a signature in each event’s <code>Split-Signature</code> header. This allows you to validate that the events were indeed sent by Split.</p>
 
-<p>Before you can verify signatures, you need to retrieve your endpoint’s secret from your Webhooks settings. Each endpoint has its own unique secret; if you use multiple endpoints, you must obtain a secret for each one. If you use multiple endpoints, you must obtain a secret for each one.</p>
+<p>Before you can verify signatures, you need to retrieve your endpoint’s secret from your Webhooks settings. Each endpoint has its own unique secret; if you use multiple endpoints, you must obtain a secret for each one.</p>
 
 <p>The <code>Split-Signature</code> header contains a timestamp and one or more signatures. All separated by <code>.</code> (dot).</p>
 
