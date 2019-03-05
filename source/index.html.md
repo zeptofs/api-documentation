@@ -443,7 +443,7 @@ In order to speed up the process, we allow query string params to be appended to
 
 | Parameter | Description |
 |-----------|--------|
-| `landing`   | Accepted values: `business_sign_up` or `personal_sign_up`. What page the user should see first if not already signed in. Default is the sign in page. |
+| `landing`   | Accepted value: `sign_up`. What page the user should see first if not already signed in. Default is the sign in page. <br><br>Deprecated values: `business_sign_up` or `personal_sign_up`.|
 | `nickname` | Only letters, numbers, dashes and underscores are permitted. This will be used to identify the account in Split. |
 | `name` | Business account only. Business name. |
 | `abn` | Business account only. Business ABN. |
@@ -460,7 +460,7 @@ In order to speed up the process, we allow query string params to be appended to
 All values should be [URL encoded](https://en.wikipedia.org/wiki/Query_string#URL_encoding).
 
 As an example, the following authorisation URL would display the **personal sign up** & prefill the first name field with **George**:
-`https://go-sandbox.split.cash/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=personal_sign_up&first_name=George`
+`https://go-sandbox.split.cash/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=sign_up&first_name=George`
 
 You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded: [https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgeco&first_name=George](https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgceco&first_name=George).
 
