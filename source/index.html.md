@@ -443,7 +443,7 @@ In order to speed up the process, we allow query string params to be appended to
 
 | Parameter | Description |
 |-----------|--------|
-| `landing`   | Accepted value: `sign_up`. What page the user should see first if not already signed in. Default is the sign in page. <br><br>Deprecated values: `business_sign_up` or `personal_sign_up`.|
+| `landing`   | Accepted value: `sign_up`. What page the user should see first if not already signed in. Default is the sign in page. <br><br>Deprecated values: `business_sign_up`, `personal_sign_up`.|
 | `nickname` | Only letters, numbers, dashes and underscores are permitted. This will be used to identify the account in Split. |
 | `name` | Business account only. Business name. |
 | `abn` | Business account only. Business ABN. |
