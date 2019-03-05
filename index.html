@@ -1195,7 +1195,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 </thead><tbody>
 <tr>
 <td><code>landing</code></td>
-<td>Accepted values: <code>business_sign_up</code> or <code>personal_sign_up</code>. What page the user should see first if not already signed in. Default is the sign in page.</td>
+<td>Accepted value: <code>sign_up</code>. What page the user should see first if not already signed in. Default is the sign in page. <br><br>Deprecated values: <code>business_sign_up</code>, <code>personal_sign_up</code>.</td>
 </tr>
 <tr>
 <td><code>nickname</code></td>
@@ -1250,7 +1250,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <p>All values should be <a href="https://en.wikipedia.org/wiki/Query_string#URL_encoding">URL encoded</a>.</p>
 
 <p>As an example, the following authorisation URL would display the <strong>personal sign up</strong> &amp; prefill the first name field with <strong>George</strong>:
-<code>https://go-sandbox.split.cash/oauth/authorize?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx&amp;scope=xxx&amp;landing=personal_sign_up&amp;first_name=George</code></p>
+<code>https://go-sandbox.split.cash/oauth/authorize?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx&amp;scope=xxx&amp;landing=sign_up&amp;first_name=George</code></p>
 
 <p>You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded: <a href="https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgceco&amp;first_name=George">https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgeco&amp;first_name=George</a>.</p>
 <h1 id='sandbox-testing-details'>Sandbox Testing Details</h1>

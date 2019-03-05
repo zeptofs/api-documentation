@@ -661,9 +661,10 @@ info:
 
     |-----------|--------|
 
-    | `landing`   | Accepted values: `business_sign_up` or `personal_sign_up`.
+    | `landing`   | Accepted value: `sign_up`.
     What page the user should see first if not already signed in. Default is the
-    sign in page. |
+    sign in page.
+    <br><br>Deprecated values: `business_sign_up`, `personal_sign_up`.|
 
     | `nickname` | Only letters, numbers, dashes and underscores are permitted.
     This will be used to identify the account in Split. |
@@ -698,7 +699,7 @@ info:
     As an example, the following authorisation URL would display the **personal
     sign up** & prefill the first name field with **George**:
 
-    `https://go-sandbox.split.cash/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=personal_sign_up&first_name=George`
+    `https://go-sandbox.split.cash/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=sign_up&first_name=George`
 
 
     You can also pass the values directly to the sign up page outside of the
