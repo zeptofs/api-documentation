@@ -267,10 +267,16 @@
               </ul>
           </li>
           <li>
-            <a href="#sandbox" class="toc-h1 toc-link" data-title="Sandbox">Sandbox</a>
+            <a href="#sandbox-testing-details" class="toc-h1 toc-link" data-title="Sandbox Testing Details">Sandbox Testing Details</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#testing-details" class="toc-h2 toc-link" data-title="Testing details">Testing details</a>
+                    <a href="#transaction-failures" class="toc-h2 toc-link" data-title="Transaction failures">Transaction failures</a>
+                  </li>
+                  <li>
+                    <a href="#special-accounts" class="toc-h2 toc-link" data-title="Special accounts">Special accounts</a>
+                  </li>
+                  <li>
+                    <a href="#instant-account-verification-accounts" class="toc-h2 toc-link" data-title="Instant account verification accounts">Instant account verification accounts</a>
                   </li>
               </ul>
           </li>
@@ -1247,45 +1253,124 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <code>https://go-sandbox.split.cash/oauth/authorize?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx&amp;scope=xxx&amp;landing=personal_sign_up&amp;first_name=George</code></p>
 
 <p>You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded: <a href="https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgceco&amp;first_name=George">https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgeco&amp;first_name=George</a>.</p>
-<h1 id='sandbox'>Sandbox</h1>
-<p>Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transfering actual funds. All transactions are simulated and no communication with financial institutions is performed.</p>
+<h1 id='sandbox-testing-details'>Sandbox Testing Details</h1>
+<p>Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transferring actual funds. All transactions are simulated and no communication with financial institutions is performed.</p>
 
-<p>The sandbox works on 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute we simulate communicating with financial institutions and update statuses and events accordingly.</p>
-<h2 id='testing-details'>Testing details</h2>
-<p>All 6 digits BSBs are valid in the sandbox with the exception of <code>100000</code> which is a place keeper for an invalid BSB. In production, only valid and real BSB are accepted.</p>
-<h3 id='payment-credit-failure-bank-accounts'>Payment credit failure bank accounts</h3>
-<blockquote>
-<p>Example payout reversal response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_reversal"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-07T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-08T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payout reversal of D.1 for Sanford-Rees due to no account or incorrect account number"</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"reversal_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"source_debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"source_credit_failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incorrect_account_number"</span><span class="p">,</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p>The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.</p>
+
+<p>All 6 digits BSBs are valid in the sandbox with the exception of <code>100000</code> which is a place keeper for an invalid BSB. In production, only real BSBs are accepted.</p>
+<h2 id='transaction-failures'>Transaction failures</h2>
+<p>To simulate <a href="#failure-reasons">transaction failures</a> create a Payment or Payment Request with a specific amount listed in the table.</p>
+
+<table><thead>
+<tr>
+<th>Transaction failure reason</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>invalid_bsb_number</code></td>
+<td>$0.01</td>
+<td>$0.51</td>
+</tr>
+<tr>
+<td><code>account_closed</code></td>
+<td>$0.02</td>
+<td>$0.52</td>
+</tr>
+<tr>
+<td><code>customer_deceased</code></td>
+<td>$0.03</td>
+<td>$0.53</td>
+</tr>
+<tr>
+<td><code>incorrect_account_number</code></td>
+<td>$0.04</td>
+<td>$0.54</td>
+</tr>
+<tr>
+<td><code>refer_to_split</code></td>
+<td>$0.05</td>
+<td>$0.55</td>
+</tr>
+<tr>
+<td><code>user_voided</code></td>
+<td>$0.06</td>
+<td>$0.56</td>
+</tr>
+<tr>
+<td><code>admin_voided</code></td>
+<td>$0.07</td>
+<td>$0.57</td>
+</tr>
+<tr>
+<td><code>refer_to_customer</code></td>
+<td>$0.10</td>
+<td></td>
+</tr>
+<tr>
+<td><code>insufficient_funds</code></td>
+<td>$0.11</td>
+<td></td>
+</tr>
+<tr>
+<td><code>payment_stopped</code></td>
+<td>$0.12</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='example-scenarios'>Example scenarios</h3>
+<ol>
+<li>Pay a contact with an invalid account number:
+
+<ul>
+<li>Initiate a Payment for <code>$0.54</code>.</li>
+<li>Split will mimic a successful debit from your bank account.</li>
+<li>Split will mimic a failure to credit the contact&#39;s bank account.</li>
+<li>Split will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.</li>
+</ul></li>
+<li>Pay a contact whilst having insufficient funds:
+
+<ul>
+<li>Initiate a Payment for <code>$0.11</code>.</li>
+<li>Split will mimic a failure to debit your bank account.</li>
+<li>Split will mark the debit as <code>returned</code> due to <code>insufficient_funds</code>.</li>
+<li>Split will void the scheduled credit to the contact&#39;s bank account.</li>
+</ul></li>
+<li>Request payment from a contact with a closed bank account:
+
+<ul>
+<li>Initiate a Payment Request for <code>$0.02</code>.</li>
+<li>Split will mimic a failure to debit the contact&#39;s bank account.</li>
+</ul></li>
+</ol>
+<h2 id='special-accounts'>Special accounts</h2>
+<p>There are some accounts with a special behaviour. You can add them to your Contacts by nickname or bank details.</p>
+
+<table><thead>
+<tr>
+<th>Account nickname</th>
+<th>Branch code (BSB)</th>
+<th>Account number</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>accept_agreements</td>
+<td><code>900000</code></td>
+<td><code>99999</code></td>
+<td>Always accepts agreements</td>
+</tr>
+<tr>
+<td>decline_agreements</td>
+<td><code>900001</code></td>
+<td><code>99999</code></td>
+<td>Always declines agreements</td>
+</tr>
+</tbody></table>
+<h3 id='deprecated-payment-credit-failure-bank-accounts'>(Deprecated) Payment credit failure bank accounts</h3>
 <p>You can send Payments to the following reserved bank accounts to trigger specific failures on the credit side.</p>
-
-<p>When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. Furthermore, within the payout reversal credit, Split will include details in the <code>description</code> and under the <code>reversal_details</code> key as to why the original credit to the recipient failed.</p>
 
 <table><thead>
 <tr>
@@ -1295,29 +1380,27 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 </tr>
 </thead><tbody>
 <tr>
-<td>account_closed</td>
+<td><code>account_closed</code></td>
 <td><code>300000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>customer_deceased</td>
+<td><code>customer_deceased</code></td>
 <td><code>400000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>incorrect_account_number</td>
+<td><code>incorrect_account_number</code></td>
 <td><code>500000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>refer_to_split</td>
+<td><code>refer_to_split</code></td>
 <td><code>700000</code></td>
 <td><code>99999</code></td>
 </tr>
 </tbody></table>
-
-<aside class="notice">When paying a contact with one of the above bank accounts, we will mimic a successful direct debit from your bank account but we will fail the credit to the contact's bank account. Split will then automatically create a <code>payout_reversal</code> credit to your account.</aside>
-<h3 id='payment-request-failure-bank-accounts'>Payment Request failure bank accounts</h3>
+<h3 id='deprecated-payment-request-failure-bank-accounts'>(Deprecated) Payment Request failure bank accounts</h3>
 <p>You can send Payment Requests to the following reserved bank accounts to trigger specific failures.</p>
 
 <table><thead>
@@ -1328,44 +1411,44 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 </tr>
 </thead><tbody>
 <tr>
-<td>payment_stopped</td>
+<td><code>payment_stopped</code></td>
 <td><code>200000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>account_closed</td>
+<td><code>account_closed</code></td>
 <td><code>300000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>customer_deceased</td>
+<td><code>customer_deceased</code></td>
 <td><code>400000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>incorrect_account_number</td>
+<td><code>incorrect_account_number</code></td>
 <td><code>500000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>refer_to_customer</td>
+<td><code>refer_to_customer</code></td>
 <td><code>600000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>refer_to_split</td>
+<td><code>refer_to_split</code></td>
 <td><code>700000</code></td>
 <td><code>99999</code></td>
 </tr>
 <tr>
-<td>insufficient_funds</td>
+<td><code>insufficient_funds</code></td>
 <td><code>800000</code></td>
 <td><code>99999</code></td>
 </tr>
 </tbody></table>
 
-<aside class="notice">Ensure you have a an Agreement with a Contact using one of the above bank accounts before you send a Payment Request or it'll be declined. By default, all Agreements sent to Contacts with a failure bank account will be automatically accepted.</aside>
-<h3 id='instant-account-verification-accounts'>Instant account verification accounts</h3>
+<p>By default, all Agreements sent to Contacts with a failure bank account will be automatically accepted.</p>
+<h2 id='instant-account-verification-accounts'>Instant account verification accounts</h2>
 <p>When using any of our hosted solutions (<a href="https://help.split.cash/payment-requests/open-payment-requests">Payment Requests</a>, <a href="https://help.split.cash/agreements/open-agreement">Open Agreements</a> or <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreements</a>) you may want to test the <a href="http://help.split.cash/bank-accounts/instant-account-verification-iav">Instant Account Verification (IAV)</a> process where we accept online banking credentials to validate bank account access. To do so, you can use the following credentials:</p>
 
 <table><thead>
@@ -1651,6 +1734,38 @@ echo $given_signature; // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47
 <span class="o">}</span>
 
 </code></pre>
+<!-- This example is commented out since the docs do not include C#
+```csharp
+using System; using System.Security.Cryptography;
+class MainClass {
+  public static void Main (string[] args) {
+    var splitSignature = "1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f";
+    var secret = "1234";
+    var message = "full payload of the request";
+
+    var header = splitSignature.Split('.');
+    var timeStamp = header[0];
+    var givenSignature = header[1];
+
+    var signedPayload = timeStamp + "." + message;
+
+    var encoding = new System.Text.ASCIIEncoding();
+    var hmacsha256 = new HMACSHA256(encoding.GetBytes(secret));
+
+    byte[] hashmessage = hmacsha256.ComputeHash(encoding.GetBytes(signedPayload));
+    var expectedSignature = BitConverter.ToString(hashmessage).Replace("-", "").ToLower();
+
+    Console.WriteLine(expectedSignature);
+    // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+
+    Console.WriteLine(givenSignature);
+    // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+  }
+}
+
+```
+-->
+
 <p><strong>Step 1. Extract the timestamp and signatures from the header</strong></p>
 
 <p>Split the header, using the <code>.</code> (dot) character as the separator, to get a list of elements.</p>
@@ -7487,7 +7602,38 @@ echo $given_signature; // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47
 <li>One or many Payouts with individual recipients, amounts and descriptions.</li>
 </ol>
 <h2 id='lifecycle-4'>Lifecycle</h2>
+<blockquote>
+<p>Example payout reversal response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_reversal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-07T23:15:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-10T23:15:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-08T23:15:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payout reversal of D.1 for Sanford-Rees due to no account or incorrect account number"</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reversal_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"source_debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source_credit_failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incorrect_account_number"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>The Payment is simply a group of Payouts therefore it does not have a particular status. Its Payouts however have their status regularly updated, for a list of possible Payout statuses check out the <a href="/#Split-API-Transactions">Transactions</a>.</p>
+
+<p>When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. Furthermore, within the payout reversal credit, Split will include details in the <code>description</code> and under the <code>reversal_details</code> key as to why the original credit to the recipient failed.</p>
 <h2 id='make-a-payment'>Make a Payment</h2>
 <p><a id="opIdMakeAPayment"></a></p>
 

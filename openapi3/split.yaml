@@ -707,78 +707,96 @@ info:
     [https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgeco&first_name=George](https://go-sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgceco&first_name=George).
 
 
-    # Sandbox
+    # Sandbox Testing Details
 
-    Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transfering actual funds. All transactions are simulated and no communication with financial institutions is performed.
-
-
-    The sandbox works on 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute we simulate communicating with financial institutions and update statuses and events accordingly.
-
-    ## Testing details
-    
-    All 6 digits BSBs are valid in the sandbox with the exception of `100000` which is a place keeper for an invalid BSB. In production, only valid and real BSB are accepted.
-
-    ### Payment credit failure bank accounts
-    
-
-    > Example payout reversal response
+    Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transferring actual funds. All transactions are simulated and no communication with financial institutions is performed.
 
 
-    ```json
+    The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.
 
-    {
-      "data": [
-        {
-          "ref": "C.3",
-          "parent_ref": "PB.1",
-          "type": "credit",
-          "category": "payout_reversal",
-          "created_at": "2016-12-07T23:15:00Z",
-          "matures_at": "2016-12-10T23:15:00Z",
-          "cleared_at": null,
-          "bank_ref": null,
-          "status": "maturing",
-          "status_changed_at": "2016-12-08T23:15:00Z",
-          "party_contact_id": "26297f44-c5e1-40a1-9864-3e0b0754c32a",
-          "party_name": "Sanford-Rees",
-          "party_nickname": "sanford-rees-8",
-          "description": "Payout reversal of D.1 for Sanford-Rees due to no account or incorrect account number"
-          "amount": 1,
-          "reversal_details": {
-            "source_debit_ref": "D.1",
-            "source_credit_failure_reason": "incorrect_account_number",
-          }
-        }
-      ]
-    }
 
-    ```
+    All 6 digits BSBs are valid in the sandbox with the exception of `100000` which is a place keeper for an invalid BSB. In production, only real BSBs are accepted.
+
+    ## Transaction failures
+
+    To simulate [transaction failures](#failure-reasons) create a Payment or Payment Request with a specific amount listed in the table.
+
+
+    | Transaction failure reason | Debit | Credit |
+
+    |----------------------------|-------|--------|
+
+    | `invalid_bsb_number`       |  $0.01  |  $0.51   |
+
+    | `account_closed`           |  $0.02  |  $0.52   |
+
+    | `customer_deceased`        |  $0.03  |  $0.53   |
+
+    | `incorrect_account_number` |  $0.04  |  $0.54   |
+
+    | `refer_to_split`           |  $0.05  |  $0.55   |
+
+    | `user_voided`              |  $0.06  |  $0.56   |
+
+    | `admin_voided`             |  $0.07  |  $0.57   |
+
+    | `refer_to_customer`        |  $0.10  |          |
+
+    | `insufficient_funds`       |  $0.11  |          |
+
+    | `payment_stopped`          |  $0.12  |          |
+
+
+    ### Example scenarios
+
+      1. Pay a contact with an invalid account number:
+        * Initiate a Payment for <code>$0.54</code>.
+        * Split will mimic a successful debit from your bank account.
+        * Split will mimic a failure to credit the contact's bank account.
+        * Split will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.
+      2. Pay a contact whilst having insufficient funds:
+        * Initiate a Payment for <code>$0.11</code>.
+        * Split will mimic a failure to debit your bank account.
+        * Split will mark the debit as `returned` due to `insufficient_funds`.
+        * Split will void the scheduled credit to the contact's bank account.
+      3. Request payment from a contact with a closed bank account:
+        * Initiate a Payment Request for <code>$0.02</code>.
+        * Split will mimic a failure to debit the contact's bank account.
+
+    ## Special accounts
+
+    There are some accounts with a special behaviour. You can add them to your Contacts by nickname or bank details.
+
+
+    | Account nickname | Branch code (BSB) | Account number | Description |
+
+    |---|---|---|---|
+
+    | accept_agreements | `900000` | `99999` | Always accepts agreements |
+
+    | decline_agreements | `900001` | `99999` | Always declines agreements |
+
+
+    ### (Deprecated) Payment credit failure bank accounts
 
     You can send Payments to the following reserved bank accounts to trigger specific failures on the credit side.
-
-
-    When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. Furthermore, within the payout reversal credit, Split will include details in the `description` and under the `reversal_details` key as to why the original credit to the recipient failed.
 
 
     | Failure type             | Branch code (BSB) | Account number |
 
     |--------------------------|-------------------|----------------|
 
-    | account_closed           | `300000`          | `99999`        |
+    | `account_closed`           | `300000`          | `99999`        |
 
-    | customer_deceased        | `400000`          | `99999`        |
+    | `customer_deceased`        | `400000`          | `99999`        |
 
-    | incorrect_account_number | `500000`          | `99999`        |
+    | `incorrect_account_number` | `500000`          | `99999`        |
 
-    | refer_to_split           | `700000`          | `99999`        |
-
-
-
-    <aside class="notice">When paying a contact with one of the above bank accounts, we will mimic a successful direct debit from your bank account but we will fail the credit to the contact's bank account. Split will then automatically create a <code>payout_reversal</code> credit to your account.</aside>
+    | `refer_to_split`           | `700000`          | `99999`        |
 
 
-    ### Payment Request failure bank accounts
-    
+    ### (Deprecated) Payment Request failure bank accounts
+
     You can send Payment Requests to the following reserved bank accounts to trigger specific failures.
 
 
@@ -786,24 +804,25 @@ info:
 
     |--------------------------|-------------------|----------------|
 
-    | payment_stopped          | `200000`          | `99999`        |
+    | `payment_stopped`          | `200000`          | `99999`        |
 
-    | account_closed           | `300000`          | `99999`        |
+    | `account_closed`           | `300000`          | `99999`        |
 
-    | customer_deceased        | `400000`          | `99999`        |
+    | `customer_deceased`        | `400000`          | `99999`        |
 
-    | incorrect_account_number | `500000`          | `99999`        |
+    | `incorrect_account_number` | `500000`          | `99999`        |
 
-    | refer_to_customer        | `600000`          | `99999`        |
+    | `refer_to_customer`        | `600000`          | `99999`        |
 
-    | refer_to_split           | `700000`          | `99999`        |
+    | `refer_to_split`           | `700000`          | `99999`        |
 
-    | insufficient_funds       | `800000`          | `99999`        |
+    | `insufficient_funds`       | `800000`          | `99999`        |
 
-    
-    <aside class="notice">Ensure you have a an Agreement with a Contact using one of the above bank accounts before you send a Payment Request or it'll be declined. By default, all Agreements sent to Contacts with a failure bank account will be automatically accepted.</aside>
 
-    ### Instant account verification accounts
+    By default, all Agreements sent to Contacts with a failure bank account will be automatically accepted.
+
+
+    ## Instant account verification accounts
 
     When using any of our hosted solutions ([Payment
     Requests](https://help.split.cash/payment-requests/open-payment-requests),
@@ -829,7 +848,6 @@ info:
 
     <aside class="notice">The credentials will work with any of the available
     financial institutions.</aside>
-
 
     # Configuration
 
@@ -1231,6 +1249,45 @@ info:
 
     ```
 
+    <!--
+    This example is commented out since the docs do not include C#
+
+    ```csharp
+
+    using System;
+    using System.Security.Cryptography;
+
+    class MainClass {
+      public static void Main (string[] args) {
+        var splitSignature = "1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f";
+        var secret = "1234";
+        var message = "full payload of the request";
+
+        var header = splitSignature.Split('.');
+        var timeStamp = header[0];
+        var givenSignature = header[1];
+
+        var signedPayload = timeStamp + "." + message;
+
+        var encoding = new System.Text.ASCIIEncoding();
+        var hmacsha256 = new HMACSHA256(encoding.GetBytes(secret));
+
+        byte[] hashmessage = hmacsha256.ComputeHash(encoding.GetBytes(signedPayload));
+        var expectedSignature = BitConverter.ToString(hashmessage).Replace("-", "").ToLower();
+
+        Console.WriteLine(expectedSignature);
+        // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+
+        Console.WriteLine(givenSignature);
+        // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+      }
+    }
+
+
+    ```
+
+    -->
+
 
     **Step 1. Extract the timestamp and signatures from the header**
 
@@ -1393,11 +1450,46 @@ tags:
 
       ##Lifecycle
 
+      > Example payout reversal response
+
+
+      ```json
+
+      {
+        "data": [
+        {
+          "ref": "C.3",
+          "parent_ref": "PB.1",
+          "type": "credit",
+          "category": "payout_reversal",
+          "created_at": "2016-12-07T23:15:00Z",
+          "matures_at": "2016-12-10T23:15:00Z",
+          "cleared_at": null,
+          "bank_ref": null,
+          "status": "maturing",
+          "status_changed_at": "2016-12-08T23:15:00Z",
+          "party_contact_id": "26297f44-c5e1-40a1-9864-3e0b0754c32a",
+          "party_name": "Sanford-Rees",
+          "party_nickname": "sanford-rees-8",
+          "description": "Payout reversal of D.1 for Sanford-Rees due to no account or incorrect account number"
+            "amount": 1,
+          "reversal_details": {
+            "source_debit_ref": "D.1",
+            "source_credit_failure_reason": "incorrect_account_number",
+          }
+        }
+        ]
+      }
+
+      ```
 
       The Payment is simply a group of Payouts therefore it does not have a
       particular status. Its Payouts however have their status regularly
       updated, for a list of possible Payout statuses check out the
       [Transactions](/#Split-API-Transactions).
+
+
+      When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. Furthermore, within the payout reversal credit, Split will include details in the `description` and under the `reversal_details` key as to why the original credit to the recipient failed.
   - name: Payouts
     description: >
       Payouts are what a Payment or Payment Request are made of and can be either a debit or a credit.
