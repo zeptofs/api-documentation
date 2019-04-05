@@ -54,42 +54,42 @@ We've preloaded a collection of all our endpoints for you to use in Postman. Bef
 Okay, lets get things setup!
 
 1. **Create a Split account**
-    
+
     If you haven't already, you'll want to create a sandbox Split account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
 
 2. **Register your application with Split**
 
     Sign in and create an OAuth2 application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications).
-    
+
     [![Split OAuth2 app create](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png)
 
 3. **Generate personal access tokens**
-  
+
     The quickest way to access your Split account via the API is using
     personal access tokens. Click on your newly created application from your [application
 list](https://go.sandbox.split.cash/oauth/applications) and click on **+ Personal Access Token**.
-    
+
     [![Split locate personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)
-    
+
     _(You'll have the option to give the token a title)_
-    
+
     [![Split personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)
-  
+
     <aside class="notice">Please note that personal access tokens do not expire.</aside>
-  
+
 4. **Use personal access token in Postman**
 
     You can use this `access_token` to authorise any requests to the
     Split API in Postman by choosing the **Bearer Token** option under
     the **Authorization** tab.
-    
+
     [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png)
-    
+
 5. **Make an API request!**
 
     You are now ready to interact with your Split account via the
     API! Go ahead and send a request using Postman.
-    
+
     [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png)
 
 ## Get started
@@ -103,13 +103,13 @@ This guide will help you setup an OAuth2 app in order to get authenticated & aut
 1. **Create a Split account**
 
     If you haven't already, you'll want to create a sandbox Split account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash).
-    
+
 2. **Choose authentication method**
 
     All requests to the Split API require a `access_token` for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:
-    
+
     **Personal access token** If you only need to access your own Split account via the API, then using personal access tokens are the most straight-forward way. Refer to [Personal access token](/#personal-access-token) to setup. These tokens do not expire so no refreshing is required.
-      
+
     **OAuth grant flow** When you require your application to act on behalf of other Split accounts you'll need to implement the OAuth grant flow process. Refer to [OAuth grant flow guide](/#oauth-grant-flow) to setup. There is also an [OAuth grant flow tutorial](/#oauth-grant-flow-tutorial). These access tokens expire every 2 hours, unless the `offline_access` scope is used in which case the tokens will not expire.
 
 ## Personal access token
@@ -118,9 +118,9 @@ If you're looking to only access your own account via the API, you can generate 
 * To do this, sign in to your Split account and [create an application](https://go.sandbox.split.cash/oauth/applications) if you haven't already. Click on your application from your [application list](https://go.sandbox.split.cash/oauth/applications) and click on **Personal access**.
 
     [![Split locate personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)
-    
+
     _(You'll have the option to give the token a title)_
-    
+
     [![Split personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)
 
 * Now that you have an `access_token` you can interact with your Split account via the API.
@@ -131,7 +131,7 @@ If you're looking to only access your own account via the API, you can generate 
 1. **Register your application with Split**
 
     Once you've got your account up and running, sign in and create an OAuth2 profile for your application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications)
-    
+
     | Parameter | Description |
     |-----------|-------------|
     | **Name**  | The name of your application. When using the the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |
@@ -140,10 +140,10 @@ If you're looking to only access your own account via the API, you can generate 
 2. **Obtain an authorisation code**
 
     Construct the initial URL the user will need to visit in order to grant your application permission to act on his/her behalf. The constructed URL describes the level of permission ([`scope`](/#scopes)), the application requesting permission (`client_id`) and where the user gets redirected once they've granted permission (`redirect_uri`).
-    
+
     The URL should be formatted to look like this:
     `https://go.sandbox.split.cash/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}`
-    
+
     | Parameter | Description |
     |-----------|-------------|
     | `response_type` | Always set to `code` |
@@ -152,15 +152,15 @@ If you're looking to only access your own account via the API, you can generate 
     | `scope` | The [scope](/#scopes) of permission you're requesting |
 
 3. **Exchange the authorisation code for an access token**
-    
+
     When the user visits the above-mentioned URL, they will be presented with a Split login screen and then an authorisation screen:
-    
+
     [![Authorise OAuth2 app](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)
-    
+
     After the user has authorised your application, they will be returned to your application at the URL specified in `redirect_uri` along with the `code` query parameter as the authorisation code.
-    
+
     Finally, the authorisation code can than be exchanged for an access token and refresh token pair by POSTing to: `https://go.sandbox.split.cash/oauth/token`
-    
+
     | Parameter | Description |
     |-----------|-------------|
     | `grant_type` | Set to `authorization_code` |
@@ -184,15 +184,15 @@ Before you start, load up our API collection:
 **A screencast of this process is also available: [https://vimeo.com/246203244](https://vimeo.com/246203244).**
 
 1. **Create a Split account**
-    
+
     If you haven't already, you'll want to create a sandbox Split account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
 
 2. **Register your application with Split**
 
     Sign in and create an OAuth2 application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications).
-    
+
     Use the special Postman callback URL: `https://www.getpostman.com/oauth2/callback`
-    
+
     [![Split OAuth2 app setup](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)
 
 3. **In Postman, setup your environment variables**
@@ -200,29 +200,29 @@ Before you start, load up our API collection:
     Click on **Manage Environments**
 
     [![Postman environment variables](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_gear.png)
-    
+
     We've included the **Split Payments Public Sandbox** environment to get you started. Go ahead an click on it.
-    
+
     [![Select Postman environment](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_select_environment.png)
-    
+
     Using the details from the OAuth2 app you created earlier, fill in the **oauth2_application_id** & **oauth2_secret** fields.
-    
+
     [![Fill in environment values](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_environment_values.png)
-    
+
 4. **Setup the authorization**
-    
+
     Click on the **Authorization** tab and select **OAuth 2.0**
-    
+
     [![Postman Authorization tab](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_authorization_tab.png)
-    
+
     Click the **Get New Access Token** button
-    
+
     [![Postman get new access token](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_get_new_access_token.png)
 
     Fill in the OAuth2 form as below:
-    
+
     [![Postman OAuth2](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_oauth2_form.png)
-      
+
 5. **Get authorised**
 
     Click **Request Token** and wait a few seconds and a browser window will popup
@@ -238,9 +238,9 @@ Before you start, load up our API collection:
 6. **You're now ready to use the API**
 
     Select an endpoint from the Split collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.
-    
+
     [![Postman use token](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png)
-        
+
 <aside class="notice">Remember to select the access token everytime you try a new endpoint. Have fun!</aside>
 
 ## Authentication and Authorisation
@@ -564,7 +564,7 @@ Scopes define the level of access granted via the OAuth2 authorisation process. 
 | `transactions` | Access user's Transactions |
 | `offline_access` | Create non-expiring access tokens for user |
 
-  <aside class="notice">Please use `offline_access` with discretion, as you'll have no direct way to invalidate the token. Please contact Split Payments immediately if any token may have potentially been compromised.</aside> 
+  <aside class="notice">Please use `offline_access` with discretion, as you'll have no direct way to invalidate the token. Please contact Split Payments immediately if any token may have potentially been compromised.</aside>
 
 ## Pagination
 
@@ -631,7 +631,7 @@ We support two main categories of webhooks:
 2. **App**: These webhooks are managed by the Split OAuth2 application owner and will report on events relating to any authorised Split account (limited by scope).
 
 All events posted to the designated URL fit the same structure.
-    
+
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
 </aside>
 
@@ -1296,7 +1296,7 @@ Approve an incoming Agreement
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ApproveAgreementResponse](#schemaapproveagreementresponse)|
 
-## Decline and Agreement
+## Decline an Agreement
 
 <a id="opIdDeclineAgreement"></a>
 
@@ -1434,7 +1434,7 @@ func main() {
 
 Decline an incoming Agreement
 
-<h3 id="Decline-and-Agreement-parameters" class="parameters">Parameters</h3>
+<h3 id="Decline-an-Agreement-parameters" class="parameters">Parameters</h3>
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -1470,7 +1470,7 @@ Decline an incoming Agreement
 }
 ```
 
-<h3 id="Decline and Agreement-responses">Responses</h3>
+<h3 id="Decline an Agreement-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -4568,7 +4568,7 @@ Payment Requests are broken up by direction:
 1. **Incoming:** An incoming Payment Request (you are the authoriser/payer)
 2. **Outgoing:** An outgoing Payment Request (you are the initiator/payee)
 
-      
+
 There are two response fields that differ depending on the direction:
 
 | Field | Description |
@@ -7209,7 +7209,7 @@ You can void any Payout debit from your account that has not yet matured. In the
 
 Manage Refund Requests (RR) applied against successfully cleared Payouts.
 A refunder corresponds to a recipient of a successfully cleared Payout (credit).
-  
+
 <div class="middle-header">Direction</div>
 
 Refund Requests are broken up by direction:
@@ -7217,7 +7217,7 @@ Refund Requests are broken up by direction:
 1. **Incoming:** An incoming Refund Request (you are the authoriser/refunder)
 2. **Outgoing:** An outgoing Refund Request (you are the initiator/refundee)
 
-      
+
 There are two response fields that differ depending on the direction:
 
 | Field | Description |
@@ -8483,7 +8483,7 @@ Refunds are broken up by direction:
 1. **Incoming:** An incoming Refund (you are the recipient of the refund)
 2. **Outgoing:** An outgoing Refund (you are the issuer of the refund)
 
-      
+
 There are two response fields that differ depending on the direction:
 
 | Field | Description |
@@ -12714,4 +12714,3 @@ func main() {
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|object|true|No description|
-
