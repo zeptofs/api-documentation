@@ -3819,6 +3819,8 @@ components:
             branch_code: '304304'
             bank_name: National Australia Bank
             state: verified
+            iav_provider: null
+            iav_status: null
           account:
             id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
             nickname: outstanding_tours
@@ -3847,6 +3849,8 @@ components:
               branch_code: '435434'
               bank_name: National Australia Bank
               state: verified
+              iav_provider: split
+              iav_status: active
             account:
               id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
               nickname: outstanding_tours
@@ -3862,6 +3866,8 @@ components:
               branch_code: 068231
               bank_name: National Australia Bank
               state: verified
+              iav_provider: split
+              iav_status: credentials_invalid
             account:
               id: 362f7fe8-4af2-4902-b3d7-b5ab704ef2e7
               nickname: adventure_dudes
@@ -3877,6 +3883,8 @@ components:
               branch_code: null
               bank_name: null
               state: disabled
+              iav_provider: null
+              iav_status: null
             account:
               id: a31dc907-9c7a-4736-84c9-1149cf03de42
               nickname: surfing_world
@@ -3892,6 +3900,8 @@ components:
               branch_code: '123456'
               bank_name: National Australia Bank
               state: pending_verification
+              iav_provider: null
+              iav_status: null
             anyone_account:
               id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
     AddAnAnyoneContactRequest:
@@ -3940,6 +3950,8 @@ components:
             branch_code: '123456'
             bank_name: National Australia Bank
             state: pending_verification
+            iav_provider: null
+            iav_status: null
           anyone_account:
             id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
     GetAContactResponse:
@@ -3962,6 +3974,8 @@ components:
             branch_code: '304304'
             bank_name: National Australia Bank
             state: pending_verification
+            iav_provider: split
+            iav_status: 'active'
           account:
             id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
             nickname: outstanding_tours
@@ -4000,6 +4014,8 @@ components:
             branch_code: '304304'
             bank_name: National Australia Bank
             state: pending_verification
+            iav_provider: null
+            iav_status: null
           account:
             id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
             nickname: outstanding_tours
