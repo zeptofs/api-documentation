@@ -635,6 +635,16 @@ All events posted to the designated URL fit the same structure.
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
 </aside>
 
+### Request ID
+
+> Example header
+
+```
+Split-Request-Id: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
+```
+
+Split provides a `Split-Request-Id` header in the form of an `UUID` which uniquely  identifies a webhook event. The UUID is unique with respect to the webhook endpoint and Split's internal event identifier. If the webhook event is retried/retransmitted  by Split, the UUID will remain the same. This permits a client to check if a  webhook event has been previously handled/processed.
+
 ### Checking Webhook Signatures
 
 > Example header
@@ -945,10 +955,13 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ authoriser_contact_id: '8df89c16-330f-462b-8891-808d7bdceb7f',
-  terms:
-   { per_payout: { min_amount: null, max_amount: 10000 },
-     per_frequency: { days: 7, max_amount: 1000000 } } }));
+req.write(JSON.stringify({
+  authoriser_contact_id: '8df89c16-330f-462b-8891-808d7bdceb7f',
+  terms: {
+    per_payout: { min_amount: null, max_amount: 10000 },
+    per_frequency: { days: 7, max_amount: 1000000 }
+  }
+}));
 req.end();
 ```
 
@@ -2932,10 +2945,12 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ name: 'Hunter Thompson',
+req.write(JSON.stringify({
+  name: 'Hunter Thompson',
   email: 'hunter@batcountry.com',
   branch_code: '123456',
-  account_number: '13048322' }));
+  account_number: '13048322'
+}));
 req.end();
 ```
 
@@ -3851,10 +3866,13 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ title: 'Subscription Plan A',
-  terms:
-   { per_payout: { min_amount: null, max_amount: 10000 },
-     per_frequency: { days: 7, max_amount: 1000000 } } }));
+req.write(JSON.stringify({
+  title: 'Subscription Plan A',
+  terms: {
+    per_payout: { min_amount: null, max_amount: 10000 },
+    per_frequency: { days: 7, max_amount: 1000000 }
+  }
+}));
 req.end();
 ```
 
@@ -4684,14 +4702,14 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ description: 'Visible to both initiator and authoriser',
+req.write(JSON.stringify({
+  description: 'Visible to both initiator and authoriser',
   matures_at: '2016-12-19T02:10:56Z',
   amount: 99000,
   authoriser_contact_id: 'de86472c-c027-4735-a6a7-234366a27fc7',
   precheck_funds: 'false',
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -6252,23 +6270,29 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ description: 'The SuperPackage',
+req.write(JSON.stringify({
+  description: 'The SuperPackage',
   matures_at: '2016-09-13T00:00:00Z',
-  payouts:
-   [ { amount: 30000,
-       description: 'A tandem skydive jump SB23094',
-       recipient_contact_id: '48b89364-1577-4c81-ba02-96705895d457',
-       metadata:
-        { invoice_ref: 'BILL-0001',
-          invoice_id: 'c80a9958-e805-47c0-ac2a-c947d7fd778d',
-          custom_key: 'Custom string',
-          another_custom_key: 'Maybe a URL' } },
-     { amount: 30000,
-       description: 'A scuba dive SDS5464',
-       recipient_contact_id: 'dc6f1e60-3803-43ca-a200-7d641816f57f' } ],
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  payouts: [
+    {
+      amount: 30000,
+      description: 'A tandem skydive jump SB23094',
+      recipient_contact_id: '48b89364-1577-4c81-ba02-96705895d457',
+      metadata: {
+        invoice_ref: 'BILL-0001',
+        invoice_id: 'c80a9958-e805-47c0-ac2a-c947d7fd778d',
+        custom_key: 'Custom string',
+        another_custom_key: 'Maybe a URL'
+      }
+    },
+    {
+      amount: 30000,
+      description: 'A scuba dive SDS5464',
+      recipient_contact_id: 'dc6f1e60-3803-43ca-a200-7d641816f57f'
+    }
+  ],
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -7315,12 +7339,12 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ for_ref: 'D.1',
+req.write(JSON.stringify({
+  for_ref: 'D.1',
   amount: 500,
   reason: 'Because reason',
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -8570,11 +8594,11 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ amount: 500,
+req.write(JSON.stringify({
+  amount: 500,
   reason: 'Because reason',
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -9638,10 +9662,13 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ expiry_in_seconds: 60,
-  terms:
-   { per_payout: { min_amount: null, max_amount: 10000 },
-     per_frequency: { days: 7, max_amount: 1000000 } } }));
+req.write(JSON.stringify({
+  expiry_in_seconds: 60,
+  terms: {
+    per_payout: { min_amount: null, max_amount: 10000 },
+    per_frequency: { days: 7, max_amount: 1000000 }
+  }
+}));
 req.end();
 ```
 

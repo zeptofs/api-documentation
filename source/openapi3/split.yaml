@@ -994,6 +994,26 @@ info:
     </aside>
 
 
+    ### Request ID
+
+
+    > Example header
+
+
+    ```
+
+    Split-Request-Id: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
+
+    ```
+
+
+    Split provides a `Split-Request-Id` header in the form of an `UUID` which uniquely 
+    identifies a webhook event. The UUID is unique with respect to the webhook endpoint
+    and Split's internal event identifier. If the webhook event is retried/retransmitted 
+    by Split, the UUID will remain the same. This permits a client to check if a 
+    webhook event has been previously handled/processed.
+
+
     ### Checking Webhook Signatures
 
 
