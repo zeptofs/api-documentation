@@ -1767,11 +1767,11 @@ tags:
 
       |--------|-------------|
 
-      | `refer_to_customer` | **(Debit only)** Usually due to insufficient funds |
+      | `refer_to_customer` | Usually due to insufficient funds |
 
-      | `insufficient_funds` | **(Debit only)** Insufficient funds |
+      | `insufficient_funds` | Insufficient funds |
 
-      | `payment_stopped` | **(Debit only)** The payment was stopped at the bank. Can be due to a
+      | `payment_stopped` | The payment was stopped at the bank. Can be due to a
       customer requesting a stop payment with their financial institution. |
 
       | `invalid_bsb_number` | BSB number is invalid |
@@ -1868,7 +1868,7 @@ paths:
     post:
       tags:
         - Agreements
-      summary: Decline and Agreement
+      summary: Decline an Agreement
       description: Decline an incoming Agreement
       operationId: DeclineAgreement
       parameters:

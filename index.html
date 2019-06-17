@@ -310,7 +310,7 @@
                     <a href="#approve-an-agreement" class="toc-h2 toc-link" data-title="Approve an Agreement">Approve an Agreement</a>
                   </li>
                   <li>
-                    <a href="#decline-and-agreement" class="toc-h2 toc-link" data-title="Decline and Agreement">Decline and Agreement</a>
+                    <a href="#decline-an-agreement" class="toc-h2 toc-link" data-title="Decline an Agreement">Decline an Agreement</a>
                   </li>
                   <li>
                     <a href="#get-an-agreement" class="toc-h2 toc-link" data-title="Get an Agreement">Get an Agreement</a>
@@ -2323,7 +2323,7 @@ class MainClass {
 <td><a href="#schemaapproveagreementresponse">ApproveAgreementResponse</a></td>
 </tr>
 </tbody></table>
-<h2 id='decline-and-agreement'>Decline and Agreement</h2>
+<h2 id='decline-an-agreement'>Decline an Agreement</h2>
 <p><a id="opIdDeclineAgreement"></a></p>
 
 <blockquote>
@@ -2441,7 +2441,7 @@ class MainClass {
 
 <p>Decline an incoming Agreement</p>
 
-<h3 id="Decline-and-Agreement-parameters" class="parameters">Parameters</h3>
+<h3 id="Decline-an-Agreement-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -2490,7 +2490,7 @@ class MainClass {
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id="Decline and Agreement-responses">Responses</h3>
+<h3 id="Decline an Agreement-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -11046,15 +11046,15 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 </thead><tbody>
 <tr>
 <td><code>refer_to_customer</code></td>
-<td><strong>(Debit only)</strong> Usually due to insufficient funds</td>
+<td>Usually due to insufficient funds</td>
 </tr>
 <tr>
 <td><code>insufficient_funds</code></td>
-<td><strong>(Debit only)</strong> Insufficient funds</td>
+<td>Insufficient funds</td>
 </tr>
 <tr>
 <td><code>payment_stopped</code></td>
-<td><strong>(Debit only)</strong> The payment was stopped at the bank. Can be due to a customer requesting a stop payment with their financial institution.</td>
+<td>The payment was stopped at the bank. Can be due to a customer requesting a stop payment with their financial institution.</td>
 </tr>
 <tr>
 <td><code>invalid_bsb_number</code></td>
