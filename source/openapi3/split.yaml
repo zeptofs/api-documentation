@@ -1007,11 +1007,10 @@ info:
     ```
 
 
-    Split provides a `Split-Request-ID` header in the form of an `UUID` which uniquely 
-    identifies a webhook event.
-     If the webhook event is retried/retransmitted 
-    by Split, the UUID will remain the same. This allows you to check if a 
-    webhook event has been previously handled/processed.
+    Split provides a `Split-Request-ID` header in the form of a `UUID` which 
+    uniquely identifies a webhook event. If the webhook event is 
+    retried/retransmitted by Split, the UUID will remain the same. This allows 
+    you to check if a webhook event has been previously handled/processed.
 
 
     ### Checking Webhook Signatures
