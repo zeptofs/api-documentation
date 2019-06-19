@@ -1527,7 +1527,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 </tr>
 </tbody></table>
 
-<p><aside class="notice">Please use <code>offline_access</code> with discretion, as you&#39;ll have no direct way to invalidate the token. Please contact Split Payments immediately if any token may have potentially been compromised.</aside> </p>
+<p><aside class="notice">Please use <code>offline_access</code> with discretion, as you&#39;ll have no direct way to invalidate the token. Please contact Split Payments immediately if any token may have potentially been compromised.</aside></p>
 <h2 id='pagination'>Pagination</h2>
 <blockquote>
 <p>Example response header</p>
@@ -1588,17 +1588,34 @@ Total: 5
 <li><strong>App</strong>: These webhooks are managed by the Split OAuth2 application owner and will report on events relating to any authorised Split account (limited by scope).</li>
 </ol>
 
-<p>All events posted to the designated URL fit the same structure.</p>
-
+<p>All events posted to the designated URL fit the same structure.
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
-</aside>
+</aside></p>
+<h3 id='public-ip-addresses'>Public IP Addresses</h3>
+<p>Split provides static public IP addresses for all outbound traffic, including webhooks.</p>
+
+<table><thead>
+<tr>
+<th>Environment</th>
+<th>IP</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sandbox</td>
+<td>13.237.142.60</td>
+</tr>
+<tr>
+<td>production</td>
+<td>52.64.11.67<br>13.238.78.114</td>
+</tr>
+</tbody></table>
 <h3 id='request-id'>Request ID</h3>
 <blockquote>
 <p>Example header</p>
 </blockquote>
 <pre class="highlight plaintext"><code>Split-Request-ID: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
 </code></pre>
-<p>Split provides a <code>Split-Request-ID</code> header in the form of a <code>UUID</code> which  uniquely identifies a webhook event. If the webhook event is  retried/retransmitted by Split, the UUID will remain the same. This allows  you to check if a webhook event has been previously handled/processed.</p>
+<p>Split provides a <code>Split-Request-ID</code> header in the form of a <code>UUID</code> which uniquely identifies a webhook event. If the webhook event is retried/retransmitted by Split, the UUID will remain the same. This allows you to check if a webhook event has been previously handled/processed.</p>
 <h3 id='checking-webhook-signatures'>Checking Webhook Signatures</h3>
 <blockquote>
 <p>Example header</p>
@@ -8796,9 +8813,8 @@ class MainClass {
 <h1 id="Split-API-Refund-Requests">Refund Requests</h1>
 
 <p>Manage Refund Requests (RR) applied against successfully cleared Payouts.
-A refunder corresponds to a recipient of a successfully cleared Payout (credit).</p>
-
-<div class="middle-header">Direction</div>
+A refunder corresponds to a recipient of a successfully cleared Payout (credit).
+<div class="middle-header">Direction</div></p>
 
 <p>Refund Requests are broken up by direction:</p>
 
