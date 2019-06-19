@@ -16,9 +16,10 @@ Get started
 ---
 
 1. Clone the repo
-2. `$ yarn install`
-3. Edit the `source/openapi3/split.json` or any themes/templates
-4. `$ yarn run widdershins -e options.yml ./source/openapi3/split.yaml -o ./source/index.html.md`
+2. `$ bundle install`
+3. `$ yarn install`
+4. Edit the `source/openapi3/split.yaml` or any themes/templates
+5. `$ yarn run widdershins -e options.yml ./source/openapi3/split.yaml -o ./source/index.html.md`
     1. Preview: `$ bundle exec middleman server`
     1. Publish: `./deploy.sh`
 
