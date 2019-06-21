@@ -41,6 +41,9 @@ Due to the above, certain endpoints and techniques will differ slightly dependin
 * Currencies are represented by 3 characters as defined in [ISO 4217](http://www.xe.com/iso4217.php).
 * Dates & times are returned in UTC using [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used.
 * Amounts are always in cents with no decimals unless otherwise stated.
+* Split provides static public IP addresses for all outbound traffic, including webhooks.
+    * Sandbox IP: `13.237.142.60`
+    * Production IPs: `52.64.11.67` and `13.238.78.114`
 
 # Guides
 
@@ -633,15 +636,6 @@ We support two main categories of webhooks:
 All events posted to the designated URL fit the same structure.
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
 </aside>
-
-### Public IP Addresses
-
-Split provides static public IP addresses for all outbound traffic, including webhooks.
-
-| Environment | IP            |
-|-------------|---------------|
-| sandbox     | 13.237.142.60 |
-| production  | 52.64.11.67<br>13.238.78.114 |
 
 ### Request ID
 
