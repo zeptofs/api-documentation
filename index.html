@@ -744,6 +744,12 @@
 <li>Currencies are represented by 3 characters as defined in <a href="http://www.xe.com/iso4217.php">ISO 4217</a>.</li>
 <li>Dates &amp; times are returned in UTC using <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used.</li>
 <li>Amounts are always in cents with no decimals unless otherwise stated.</li>
+<li>Split provides static public IP addresses for all outbound traffic, including webhooks.
+
+<ul>
+<li>Sandbox IP: <code>13.237.142.60</code></li>
+<li>Production IPs: <code>52.64.11.67</code> and <code>13.238.78.114</code></li>
+</ul></li>
 </ul>
 <h1 id='guides'>Guides</h1><h2 id='try-it-out'>Try it out</h2>
 <p>The best way to familiarise yourself with our API is by interacting with it.</p>
@@ -1591,24 +1597,6 @@ Total: 5
 <p>All events posted to the designated URL fit the same structure.
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
 </aside></p>
-<h3 id='public-ip-addresses'>Public IP Addresses</h3>
-<p>Split provides static public IP addresses for all outbound traffic, including webhooks.</p>
-
-<table><thead>
-<tr>
-<th>Environment</th>
-<th>IP</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>sandbox</td>
-<td>13.237.142.60</td>
-</tr>
-<tr>
-<td>production</td>
-<td>52.64.11.67<br>13.238.78.114</td>
-</tr>
-</tbody></table>
 <h3 id='request-id'>Request ID</h3>
 <blockquote>
 <p>Example header</p>
