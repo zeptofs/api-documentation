@@ -4185,6 +4185,7 @@ components:
           initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
           authoriser_id: d194c54b-9183-410c-966b-50485c5ce3f0
           authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+          schedule_ref: null
           status: approved
           responded_at: '2016-12-19T02:38:04Z'
           created_at: '2016-12-19T02:10:56Z'
@@ -4210,6 +4211,7 @@ components:
           initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
           authoriser_id: d194c54b-9183-410c-966b-50485c5ce3f0
           authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+          schedule_ref: null
           status: declined
           responded_at: '2016-12-19T02:38:04Z'
           created_at: '2016-12-19T02:10:56Z'
@@ -4350,6 +4352,7 @@ components:
           initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
           authoriser_id: 970e4526-67d9-4ed9-b554-f5cf390ab775
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
+          schedule_ref: null
           status: pending_approval
           responded_at: null
           created_at: '2016-12-19T02:10:56Z'
@@ -4385,6 +4388,7 @@ components:
           initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
           authoriser_id: 970e4526-67d9-4ed9-b554-f5cf390ab775
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
+          schedule_ref: null
           status: approved
           responded_at: '2016-12-19T02:38:04Z'
           created_at: '2016-12-19T02:10:56Z'
@@ -4413,6 +4417,7 @@ components:
             initiator_id: fb6a9252-3818-44dc-b5aa-2195391a746f
             authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
             authoriser_contact_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
+            schedule_ref: PRS.1
             status: approved
             responded_at: '2016-12-19T02:10:18Z'
             created_at: '2016-12-19T02:09:09Z'
@@ -4425,6 +4430,7 @@ components:
             initiator_id: fb6a9252-3818-44dc-b5aa-2195391a746f
             authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
             authoriser_contact_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
+            schedule_ref: null
             status: pending_approval
             responded_at: null
             created_at: '2016-12-19T02:10:56Z'
@@ -4453,6 +4459,7 @@ components:
             initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
             authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            schedule_ref: PRS.2
             status: approved
             responded_at: '2016-12-19T02:10:18Z'
             created_at: '2016-12-19T02:09:09Z'
@@ -4465,6 +4472,7 @@ components:
             initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
             authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            schedule_ref: null
             status: pending_approval
             responded_at: null
             created_at: '2016-12-19T02:10:56Z'
