@@ -3819,8 +3819,13 @@ components:
         nickname:
           type: string
           description: Split account nickname
+        metadata:
+          $ref: '#/components/schemas/Metadata'
       example:
         nickname: outstanding_tours
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
     AddASplitContactResponse:
       title: Add a Split Contact (response)
       required:
@@ -3835,6 +3840,9 @@ components:
           name: Outstanding Tours Pty Ltd
           email: accounts@outstandingtours.com.au
           type: Split account
+          metadata:
+            custom_key: Custom string
+            another_custom_key: Maybe a URL
           bank_account:
             id: 55afddde-4296-4daf-8e49-7ba481ef9608
             account_number: '947434694'
@@ -3947,11 +3955,16 @@ components:
         account_number:
           type: string
           description: The bank account number of the Contact
+        metadata:
+          $ref: '#/components/schemas/Metadata'
       example:
         name: Hunter Thompson
         email: hunter@batcountry.com
         branch_code: '123456'
         account_number: '13048322'
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
     AddAnAnyoneContactResponse:
       title: Add an Anyone Contact (response)
       required:
@@ -3966,6 +3979,9 @@ components:
           name: Hunter Thompson
           email: hunter@batcountry.com
           type: anyone
+          metadata:
+            custom_key: Custom string
+            another_custom_key: Maybe a URL
           bank_account:
             id: 55afddde-4296-4daf-8e49-7ba481ef9608
             account_number: '13048322'
