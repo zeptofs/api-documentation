@@ -859,10 +859,12 @@ To protect against timing attacks, use a constant-time string comparison to comp
 
 <h1 id="Split-API-Agreements">Agreements</h1>
 
-Split Agreements are managed on a per Contact basis and allow two parties to agree on terms for which future Payment Requests will be auto-approved.
+An Agreement is an arrangement between two parties that allows them to agree on terms for which future Payment Requests will be auto-approved.
 
-Agreement are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.
+Split Agreements are managed on a per Contact basis and are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.
 
+If a Payment Request is sent for an amount that exceeds the terms of the agreement, it will need to be manually approved by the recipient.
+Please refer to the [What is an Agreement](http://help.split.cash/articles/3094575-what-is-an-agreement) article in our knowledge base for an overview.
 <div class="middle-header">Direction</div>
 
 Agreements are therefore broken up by direction:
@@ -9574,6 +9576,8 @@ func main() {
 An agreement with no preset authoriser that can only be accepted once and must be accepted within a predefined time period.
 
 Unassigned Agreements are shared using the generated link available in the response body. You can then include it in an email, text message, embed it in an iFrame, etc...
+
+Please refer to the [Unassigned Agreement](http://help.split.cash/agreements/unassigned-agreement) article in our knowledge base for more information.
 
 ## Propose an Unassigned Agreement
 
