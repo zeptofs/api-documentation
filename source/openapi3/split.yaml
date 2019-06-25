@@ -3426,12 +3426,10 @@ components:
       properties:
         min_amount:
           type: number
-          nullable: true
           description: Minimum amount in cents a PR can be in order to be auto-approved
           example: 0
         max_amount:
           type: number
-          nullable: true
           description: Maximum amount in cents a PR can be in order to be auto-approved
           example: 10000
     PerFrequency:
@@ -3440,12 +3438,10 @@ components:
       properties:
         days:
           type: number
-          nullable: true
           description: Amount of days to apply against the frequency
           example: 7
         max_amount:
           type: number
-          nullable: true
           description: >-
             Maximum amount in cents the total of all PRs can be for the duration
             of the frequency

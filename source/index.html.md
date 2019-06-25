@@ -1076,11 +1076,11 @@ Propose an Agreement to another Split Contact
 |» authoriser_contact_id|body|string|false|The Authoriser's contact ID (`Contact.data.id`)|
 |» terms|body|[Terms](#schematerms)|true|Terms|
 |»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
-|»»» min_amount|body|number\|null|false|Minimum amount in cents a PR can be in order to be auto-approved|
-|»»» max_amount|body|number\|null|false|Maximum amount in cents a PR can be in order to be auto-approved|
+|»»» min_amount|body|number|false|Minimum amount in cents a PR can be in order to be auto-approved|
+|»»» max_amount|body|number|false|Maximum amount in cents a PR can be in order to be auto-approved|
 |»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
-|»»» days|body|number\|null|false|Amount of days to apply against the frequency|
-|»»» max_amount|body|number\|null|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
+|»»» days|body|number|false|Amount of days to apply against the frequency|
+|»»» max_amount|body|number|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
 
 > Example responses
 
@@ -3980,11 +3980,11 @@ Create an Open Agreement that can be accepted by anyone.
 |» title|body|string|true|Title of the Open Agreement (Visible to authorisers)|
 |» terms|body|[Terms](#schematerms)|true|Terms|
 |»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
-|»»» min_amount|body|number\|null|false|Minimum amount in cents a PR can be in order to be auto-approved|
-|»»» max_amount|body|number\|null|false|Maximum amount in cents a PR can be in order to be auto-approved|
+|»»» min_amount|body|number|false|Minimum amount in cents a PR can be in order to be auto-approved|
+|»»» max_amount|body|number|false|Maximum amount in cents a PR can be in order to be auto-approved|
 |»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
-|»»» days|body|number\|null|false|Amount of days to apply against the frequency|
-|»»» max_amount|body|number\|null|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
+|»»» days|body|number|false|Amount of days to apply against the frequency|
+|»»» max_amount|body|number|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
 
 > Example responses
 
@@ -9770,11 +9770,11 @@ Create an Unassigned Agreement
 |» single_use|body|boolean|false|Optionally propose a single use agreement. When the Unassigned Agreement is accepted and a Payment Request is approved according to the Agreement terms, the agreement will automatically become <code>expended</code>.<br><br>The proposed agreement must have equal max/min <code>per_payout</code> amounts and <code>null</code> <code>per_frequency</code> amounts.<br><br>Furthermore, we will automatically check that the authoriser's bank account has sufficient funds to honour the agreement terms.|
 |» terms|body|[Terms](#schematerms)|true|Terms|
 |»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
-|»»» min_amount|body|number\|null|false|Minimum amount in cents a PR can be in order to be auto-approved|
-|»»» max_amount|body|number\|null|false|Maximum amount in cents a PR can be in order to be auto-approved|
+|»»» min_amount|body|number|false|Minimum amount in cents a PR can be in order to be auto-approved|
+|»»» max_amount|body|number|false|Maximum amount in cents a PR can be in order to be auto-approved|
 |»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
-|»»» days|body|number\|null|false|Amount of days to apply against the frequency|
-|»»» max_amount|body|number\|null|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
+|»»» days|body|number|false|Amount of days to apply against the frequency|
+|»»» max_amount|body|number|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
 
 > Example responses
 
@@ -10574,8 +10574,8 @@ func main() {
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|min_amount|number\|null|false|Minimum amount in cents a PR can be in order to be auto-approved|
-|max_amount|number\|null|false|Maximum amount in cents a PR can be in order to be auto-approved|
+|min_amount|number|false|Minimum amount in cents a PR can be in order to be auto-approved|
+|max_amount|number|false|Maximum amount in cents a PR can be in order to be auto-approved|
 
 ## PerFrequency
 
@@ -10594,8 +10594,8 @@ func main() {
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|days|number\|null|false|Amount of days to apply against the frequency|
-|max_amount|number\|null|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
+|days|number|false|Amount of days to apply against the frequency|
+|max_amount|number|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
 
 ## ProposeAgreementResponse
 
