@@ -1824,11 +1824,13 @@ class MainClass {
 
 <h1 id="Split-API-Agreements">Agreements</h1>
 
-<p>Split Agreements are managed on a per Contact basis and allow two parties to agree on terms for which future Payment Requests will be auto-approved.</p>
+<p>An Agreement is an arrangement between two parties that allows them to agree on terms for which future Payment Requests will be auto-approved.</p>
 
-<p>Agreement are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.</p>
+<p>Split Agreements are managed on a per Contact basis and are unidirectional. In other words, if both parties wish for auto-approved Payment Requests, they must each propose an Agreement to the other.</p>
 
-<div class="middle-header">Direction</div>
+<p>If a Payment Request is sent for an amount that exceeds the terms of the agreement, it will need to be manually approved by the recipient.
+Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-agreement">What is an Agreement</a> article in our knowledge base for an overview.
+<div class="middle-header">Direction</div></p>
 
 <p>Agreements are therefore broken up by direction:</p>
 
@@ -2071,16 +2073,16 @@ class MainClass {
 <tr>
 <td>»»» min_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Minimum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 <tr>
 <td>»»» max_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 <tr>
 <td>»» per_frequency</td>
@@ -2092,16 +2094,16 @@ class MainClass {
 <tr>
 <td>»»» days</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Amount of days to apply against the frequency</td>
 </tr>
 <tr>
 <td>»»» max_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents the total of all PRs can be for the duration of the frequency</td>
 </tr>
 </tbody></table>
 
@@ -5307,16 +5309,16 @@ class MainClass {
 <tr>
 <td>»»» min_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Minimum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 <tr>
 <td>»»» max_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 <tr>
 <td>»» per_frequency</td>
@@ -5328,16 +5330,16 @@ class MainClass {
 <tr>
 <td>»»» days</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Amount of days to apply against the frequency</td>
 </tr>
 <tr>
 <td>»»» max_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents the total of all PRs can be for the duration of the frequency</td>
 </tr>
 </tbody></table>
 
@@ -11590,6 +11592,8 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <p>An agreement with no preset authoriser that can only be accepted once and must be accepted within a predefined time period.</p>
 
 <p>Unassigned Agreements are shared using the generated link available in the response body. You can then include it in an email, text message, embed it in an iFrame, etc...</p>
+
+<p>Please refer to the <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreement</a> article in our knowledge base for more information.</p>
 <h2 id='propose-an-unassigned-agreement'>Propose an Unassigned Agreement</h2>
 <p><a id="opIdProposeUnassignedAgreement"></a></p>
 
@@ -11800,16 +11804,16 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <tr>
 <td>»»» min_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Minimum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 <tr>
 <td>»»» max_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 <tr>
 <td>»» per_frequency</td>
@@ -11821,16 +11825,16 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 <tr>
 <td>»»» days</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Amount of days to apply against the frequency</td>
 </tr>
 <tr>
 <td>»»» max_amount</td>
 <td>body</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents the total of all PRs can be for the duration of the frequency</td>
 </tr>
 </tbody></table>
 
@@ -12671,15 +12675,15 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 </thead><tbody>
 <tr>
 <td>min_amount</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Minimum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 <tr>
 <td>max_amount</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents a PR can be in order to be auto-approved</td>
 </tr>
 </tbody></table>
 <h2 id='perfrequency'>PerFrequency</h2>
@@ -12701,15 +12705,15 @@ A refunder corresponds to a recipient of a successfully cleared Payout (credit).
 </thead><tbody>
 <tr>
 <td>days</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Amount of days to apply against the frequency</td>
 </tr>
 <tr>
 <td>max_amount</td>
-<td>number\</td>
-<td>null</td>
+<td>number</td>
 <td>false</td>
+<td>Maximum amount in cents the total of all PRs can be for the duration of the frequency</td>
 </tr>
 </tbody></table>
 <h2 id='proposeagreementresponse'>ProposeAgreementResponse</h2>

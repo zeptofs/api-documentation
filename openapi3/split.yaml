@@ -1370,14 +1370,19 @@ servers:
 tags:
   - name: Agreements
     description: >
-      Split Agreements are managed on a per Contact basis and allow two parties
-      to agree on terms for which future Payment Requests will be auto-approved.
+      An Agreement is an arrangement between two parties that allows them to
+      agree on terms for which future Payment Requests will be auto-approved.
 
 
-      Agreement are unidirectional. In other words, if both parties wish for
-      auto-approved Payment Requests, they must each propose an Agreement to the
-      other.
+      Split Agreements are managed on a per Contact basis and are
+      unidirectional. In other words, if both parties wish for auto-approved
+      Payment Requests, they must each propose an Agreement to the other.
 
+
+      If a Payment Request is sent for an amount that exceeds the terms of the
+      agreement, it will need to be manually approved by the recipient.
+
+      Please refer to the [What is an Agreement](http://help.split.cash/articles/3094575-what-is-an-agreement) article in our knowledge base for an overview.
 
       <div class="middle-header">Direction</div>
 
@@ -1825,6 +1830,10 @@ tags:
       Unassigned Agreements are shared using the generated link available in the
       response body. You can then include it in an email, text message, embed it
       in an iFrame, etc...
+
+
+      Please refer to the [Unassigned Agreement](http://help.split.cash/agreements/unassigned-agreement)
+      article in our knowledge base for more information.
   - name: Users
     description: |
       All about the currently authenticated user.
@@ -3439,12 +3448,10 @@ components:
       properties:
         min_amount:
           type: number
-          nullable: true
           description: Minimum amount in cents a PR can be in order to be auto-approved
           example: 0
         max_amount:
           type: number
-          nullable: true
           description: Maximum amount in cents a PR can be in order to be auto-approved
           example: 10000
     PerFrequency:
@@ -3453,12 +3460,10 @@ components:
       properties:
         days:
           type: number
-          nullable: true
           description: Amount of days to apply against the frequency
           example: 7
         max_amount:
           type: number
-          nullable: true
           description: >-
             Maximum amount in cents the total of all PRs can be for the duration
             of the frequency
