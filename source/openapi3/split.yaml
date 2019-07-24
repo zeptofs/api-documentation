@@ -2595,7 +2595,7 @@ paths:
               $ref: '#/components/schemas/MakeAPaymentRequestRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
