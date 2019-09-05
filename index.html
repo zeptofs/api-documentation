@@ -1587,6 +1587,8 @@ Total: 5
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>Please refer to our help centre <a href="http://help.split.cash/en/articles/3303626-webhooks">article on webhooks</a> for more information and an overview of what you can achieve with webhooks.</p>
+
 <p>We support two main categories of webhooks:</p>
 
 <ol>
@@ -1597,6 +1599,13 @@ Total: 5
 <p>All events posted to the designated URL fit the same structure.
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
 </aside></p>
+<h3 id='our-delivery-promises'>Our Delivery Promises</h3>
+<ol>
+<li>We only consider a webhook event delivery as failed if we don&#39;t receive any http response code (2xx, 4xx, 5xx, etc.)</li>
+<li>We will auto-retry failed deliveries every 5 minutes for 1 hour.</li>
+<li>Delivery order for webhook events is not guaranteed.</li>
+<li>We guarantee at least 1 delivery attempt.</li>
+</ol>
 <h3 id='request-id'>Request ID</h3>
 <blockquote>
 <p>Example header</p>
