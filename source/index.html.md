@@ -1103,7 +1103,7 @@ Propose an Agreement to another Split Contact
 
 > Example responses
 
-> 201 Response
+> 200 Response
 
 ```json
 {
@@ -1135,7 +1135,7 @@ Propose an Agreement to another Split Contact
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[ProposeAgreementResponse](#schemaproposeagreementresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Created|[ProposeAgreementResponse](#schemaproposeagreementresponse)|
 
 ## Approve an Agreement
 
@@ -4031,7 +4031,7 @@ Create an Open Agreement that can be accepted by anyone.
 
 > Example responses
 
-> 201 Response
+> 200 Response
 
 ```json
 {
@@ -4059,7 +4059,7 @@ Create an Open Agreement that can be accepted by anyone.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[CreateOpenAgreementResponse](#schemacreateopenagreementresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Created|[CreateOpenAgreementResponse](#schemacreateopenagreementresponse)|
 
 ## List all Open Agreements
 
@@ -4861,7 +4861,7 @@ func main() {
 
 > Example responses
 
-> 201 Response
+> 200 Response
 
 ```json
 {
@@ -4892,7 +4892,7 @@ func main() {
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[MakeAPaymentRequestResponse](#schemamakeapaymentrequestresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Created|[MakeAPaymentRequestResponse](#schemamakeapaymentrequestresponse)|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|When a payment is requested from an Anyone Contact with no valid Agreement|[MakeAPaymentRequestWithNoAgreementResponse](#schemamakeapaymentrequestwithnoagreementresponse)|
 
 ## Approve a Payment Request
@@ -7495,7 +7495,7 @@ Certain rules apply to the creation of a Refund Request:
 
 > Example responses
 
-> 201 Response
+> 200 Response
 
 ```json
 {
@@ -7522,7 +7522,7 @@ Certain rules apply to the creation of a Refund Request:
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[RequestARefundResponse](#schemarequestarefundresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Created|[RequestARefundResponse](#schemarequestarefundresponse)|
 
 ## Approve Refund Request
 
@@ -8747,7 +8747,7 @@ Certain rules apply to the issuance of a refund:
 
 > Example responses
 
-> 201 Response
+> 200 Response
 
 ```json
 {
@@ -8770,7 +8770,7 @@ Certain rules apply to the issuance of a refund:
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[IssueARefundResponse](#schemaissuearefundresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Created|[IssueARefundResponse](#schemaissuearefundresponse)|
 
 ## List incoming Refunds
 
@@ -9825,7 +9825,7 @@ Create an Unassigned Agreement
 
 > Example responses
 
-> 201 Response
+> 200 Response
 
 ```json
 {
@@ -9855,7 +9855,7 @@ Create an Unassigned Agreement
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[ProposeUnassignedAgreementResponse](#schemaproposeunassignedagreementresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Created|[ProposeUnassignedAgreementResponse](#schemaproposeunassignedagreementresponse)|
 
 ## List all Unassigned Agreements
 

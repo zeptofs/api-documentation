@@ -1880,7 +1880,7 @@ paths:
               $ref: '#/components/schemas/ProposeAgreementRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
@@ -2376,7 +2376,7 @@ paths:
               $ref: '#/components/schemas/CreateOpenAgreementRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
@@ -2608,7 +2608,7 @@ paths:
               $ref: '#/components/schemas/MakeAPaymentRequestRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
@@ -2817,7 +2817,7 @@ paths:
               $ref: '#/components/schemas/IssueARefundRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
@@ -2927,7 +2927,7 @@ paths:
               $ref: '#/components/schemas/RequestARefundRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
@@ -3309,7 +3309,7 @@ paths:
               $ref: '#/components/schemas/ProposeUnassignedAgreementRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
