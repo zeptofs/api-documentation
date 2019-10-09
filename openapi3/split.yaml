@@ -947,6 +947,30 @@ info:
     characters.</aside>
 
 
+    ## Aggregation
+
+
+    Split will automatically aggregate debits that are:
+
+    
+    - From the same bank account; and
+
+    - Initiated by the same Split account.
+
+
+    Likewise for credits:
+
+    
+    - To the same bank account; and
+
+    - Initiated by the same Split account.
+
+
+    Should you prefer aggregation to be disabled, please contact
+    [support@splitpayments.com.au](mailto:support@splitpayments.com.au). Note
+    that additional charges may apply.
+
+
     ## Webhooks
 
 
@@ -4160,7 +4184,7 @@ components:
     Metadata:
       title: Metadata
       type: object
-      description: Use for your custom data an certain Split customisations
+      description: Use for your custom data and certain Split customisations
       properties: {}
       example:
         custom_key: Custom string
