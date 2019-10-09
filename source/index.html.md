@@ -603,8 +603,17 @@ You can elect to assign a remitter name on a per-request basis when submitting P
 
 ## Aggregation
 
-When Split detects multiple debits or credits to be processed against a  single bank account, they are aggregated into one transaction.
-If you assign a unique remitter name for each transaction, this prevents  the transactions from being aggregated. This is useful if you would like to ensure that your transactions are processed individually.
+Split will automatically aggregate debits that are:
+
+- From the same bank account; and
+- Initiated by the same Split account.
+
+Likewise for credits:
+
+- To the same bank account; and
+- Initiated by the same Split account.
+
+Should you prefer aggregation to be disabled, please contact [support@splitpayments.com.au](mailto:support@splitpayments.com.au). Note that additional charges may apply.
 
 ## Webhooks
 
