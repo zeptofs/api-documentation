@@ -63,3 +63,10 @@ blockquote.main-quote {
 @media (max-width: $phone-width) {
   .content h2, .middle-header, blockquote.main-quote { margin-right: 0; }
 }
+
+img.inline-1 {
+    display: inline-block;
+    height: 1em;
+    padding: 0;
+    border: 0;
+}
