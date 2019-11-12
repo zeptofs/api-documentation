@@ -897,6 +897,8 @@ API! Go ahead and send a request using Postman.</p>
 
 <p>Finally, the authorisation code can then be exchanged for an access token and refresh token pair by POSTing to: <code>https://go.sandbox.split.cash/oauth/token</code></p>
 
+<p><strong>Note:</strong> The authorisation code is a ONE-TIME use code. It will not work again if you try to POST it a second time.</p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -917,7 +919,7 @@ API! Go ahead and send a request using Postman.</p>
 </tr>
 <tr>
 <td><code>code</code></td>
-<td>The authorisation code returned with the user</td>
+<td>The authorisation code returned with the user (ONE-TIME use)</td>
 </tr>
 <tr>
 <td><code>redirect_uri</code></td>
