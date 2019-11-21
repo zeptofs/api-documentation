@@ -38,6 +38,7 @@ Due to the above, certain endpoints and techniques will differ slightly dependin
 * Sandbox API: `https://api.sandbox.split.cash/`.
 * Sandbox UI: `https://go.sandbox.split.cash/`.
 * Data is sent and received as JSON.
+* Clients should include the `Accepts: application/json` header in their requests.
 * Currencies are represented by 3 characters as defined in [ISO 4217](http://www.xe.com/iso4217.php).
 * Dates & times are returned in UTC using [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used.
 * Amounts are always in cents with no decimals unless otherwise stated.
