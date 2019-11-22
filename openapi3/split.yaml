@@ -40,6 +40,8 @@ info:
 
     * Data is sent and received as JSON.
 
+    * Clients should include the `Accepts: application/json` header in their requests.
+
     * Currencies are represented by 3 characters as defined in [ISO
     4217](http://www.xe.com/iso4217.php).
 
