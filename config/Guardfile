@@ -10,7 +10,7 @@ directories %w[source config] \
 # Add files and commands to this file, like the example:
 #   watch(%r{file/path}) { `command(s)` }
 #
-guard :shell do
+guard :shell, all_on_start: true do
   watch(/source\/openapi3\/split.yaml/) do |m|
     `yarn run widdershins -e options.yml ./source/openapi3/split.yaml -o ./source/index.html.md`
   end
