@@ -1,17 +1,14 @@
 # frozen_string_literal: true
-
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-## Uncomment and set this to only include directories you want to watch
-directories %w[source config] \
-  .select { |d| Dir.exist?(d) ? d : UI.warning("Directory #{d} does not exist") }
-
-# Add files and commands to this file, like the example:
-#   watch(%r{file/path}) { `command(s)` }
 #
+ignore %r{\.html\.md$}
+
+dirs = directories(%w[source widdershins_templates config])
+dirs.select do |d|
+  Dir.exist?(d) ? d : UI.warning("Directory #{d} does not exist")
+end
+
 guard :shell, all_on_start: true do
-  watch(/source\/openapi3\/split.yaml/) do |m|
+  watch(%r{split.yaml}) do
     `yarn run widdershins -e options.yml ./source/openapi3/split.yaml -o ./source/index.html.md`
   end
 end
