@@ -562,8 +562,8 @@ info:
 
     * The `Idempotency-Key` header is optional but recommended.
 
-    * Only the `POST` action for the Payments, Payment Requests, Refunds, Refund
-    Requests support the use of the `Idempotency-Key`.
+    * Only the `POST` action for the Payments, Payment Requests and Refunds endpoints
+    support the use of the `Idempotency-Key`.
 
     * Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 
@@ -876,8 +876,6 @@ info:
     | `payments` | Manage user's Payments |
 
     | `payment_requests` | Manage user's Payment Requests |
-
-    | `refund_requests` | Manage user's Refund Requests |
 
     | `refunds` | Manage user's Refunds |
 
@@ -1681,58 +1679,6 @@ tags:
       | `credit_ref` | Only visible to the Refund recipient (incoming Refunds).
       This reference corresponds to the newly created credit to process the
       Refund. |
-  - name: Refund Requests
-    description: >
-      Manage Refund Requests (RR) applied against successfully cleared Payouts.
-
-      A refunder corresponds to a recipient of a successfully cleared Payout
-      (credit).
-
-      <div class="middle-header">Direction</div>
-
-
-      Refund Requests are broken up by direction:
-
-
-      1. **Incoming:** An incoming Refund Request (you are the
-      authoriser/refunder)
-
-      2. **Outgoing:** An outgoing Refund Request (you are the
-      initiator/refundee)
-
-
-      There are two response fields that differ depending on the direction:
-
-
-      | Field | Description |
-
-      |-------|-------------|
-
-      | `debit_ref` | Only visible to the RR authoriser (incoming RRs). This
-      reference corresponds to the newly created debit to process the approved
-      RR. |
-
-      | `credit_ref` | Only visible to the RR initiator (outgoing RRs). This
-      reference corresponds to the newly created credit from the approved RR. |
-
-
-      ##Lifecycle
-
-
-      A Refund Request can have the following statuses:
-
-
-      | Status | Description |
-
-      |-------|-------------|
-
-      | `pending_approval` | Waiting for the authoriser to approve the RR. |
-
-      | `approved` | The authoriser has approved the RR. |
-
-      | `declined` | The payer has declined the RR. |
-
-      | `cancelled` | The initiator has cancelled the RR. |
   - name: Transactions
     description: >
       The transactions endpoint provides a detailed look at all past, current
@@ -2583,9 +2529,7 @@ paths:
       summary: Void a Payout
       description: >
         You can void any Payout debit from your account that has not yet
-        matured. In the case where it has matured, you can send a Refund Request
-        to the Payout recipient once the Payout has successfully cleared in
-        order to reverse the transaction.
+        matured.
       operationId: VoidAPayout
       parameters:
         - name: ref
@@ -2925,182 +2869,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RetrieveARefundResponse'
-  /payout_refund_requests:
-    post:
-      tags:
-        - Refund Requests
-      summary: Request a Refund
-      description: >
-        Certain rules apply to the creation of a Refund Request:
-
-
-        * Must be applied against a successfully cleared payout (debit)
-
-        * The refund amount requested from a Payout recipient may not exceed the
-        original amount of the Payout
-      operationId: RequestARefund
-      parameters: []
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestARefundRequest'
-        required: true
-      responses:
-        '200':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestARefundResponse'
-  '/payout_refund_requests/{payout_refund_request_ref}/approve':
-    post:
-      tags:
-        - Refund Requests
-      summary: Approve Refund Request
-      description: ''
-      operationId: ApproveRefundRequest
-      parameters:
-        - name: payout_refund_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApprovePayoutRefundRequestResponse'
-  '/payout_refund_requests/{payout_refund_request_ref}/decline':
-    post:
-      tags:
-        - Refund Requests
-      summary: Decline Refund Request
-      description: ''
-      operationId: DeclineRefundRequest
-      parameters:
-        - name: payout_refund_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeclinePayoutRefundRequestResponse'
-  '/payout_refund_requests/{payout_refund_request_ref}':
-    get:
-      tags:
-        - Refund Requests
-      summary: Retrieve a Refund Request
-      description: Get a specific Refund Request by its reference
-      operationId: RetrieveARefundRequest
-      parameters:
-        - name: payout_refund_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: RR.2
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RetrieveARefundRequestResponse'
-    delete:
-      tags:
-        - Refund Requests
-      summary: Cancel a Refund Request
-      description: A Refund Request can only be canceled if it is pending approval.
-      operationId: CancelARefundRequest
-      parameters:
-        - name: payout_refund_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: RR.2
-      responses:
-        '204':
-          description: No Content
-  /payout_refund_requests/incoming:
-    get:
-      tags:
-        - Refund Requests
-      summary: List incoming Refund Requests
-      description: ''
-      operationId: ListIncomingRefundRequests
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListIncomingRefundRequestsResponse'
-  /payout_refund_requests/outgoing:
-    get:
-      tags:
-        - Refund Requests
-      summary: List outgoing Refund Requests
-      description: ''
-      operationId: ListOutgoingRefundRequests
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          explode: true
-          schema:
-            type: string
-            example: '1'
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListOutgoingRefundRequestsResponse'
   /transactions:
     get:
       tags:
@@ -3436,7 +3204,6 @@ components:
             contacts: Manage your contacts
             payments: Manage your payments
             payment_requests: Manage your payment requests
-            refund_requests: Manage your refund requests
             refunds: Manage your refunds
             agreements: Manage your agreements
             transactions: Access your transaction history
@@ -4713,178 +4480,6 @@ components:
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
-    RequestARefundRequest:
-      title: Request a Refund (request)
-      required:
-        - for_ref
-        - amount
-      type: object
-      properties:
-        for_ref:
-          type: string
-          description: The Payout debit reference to refund against
-          example: D.1
-        amount:
-          type: number
-          description: Amount in cents to request from the original payout recipient
-          example: 500
-        reason:
-          type: string
-          description: Reason for the refund request. Visible to both parties.
-          example: Because reason
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      example:
-        for_ref: D.1
-        amount: 500
-        reason: Because reason
-        metadata:
-          custom_key: Custom string
-          another_custom_key: Maybe a URL
-    RequestARefundResponse:
-      title: Request a Refund (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: RR.2
-          initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-          authoriser_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-          status: pending_approval
-          responded_at: null
-          created_at: '2016-12-19T04:34:38Z'
-          for_ref: D.1
-          credit_ref: null
-          amount: 500
-          reason: Because reasons
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-    RetrieveARefundRequestResponse:
-      title: Retrieve a Refund Request (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: RR.2
-          initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-          authoriser_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-          status: pending_approval
-          responded_at: null
-          created_at: '2016-12-19T04:34:38Z'
-          for_ref: D.1
-          credit_ref: null
-          amount: 10000
-          reason: Because reasons
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-    ApprovePayoutRefundRequestResponse:
-      title: Approve a Refund Request (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: RR.2
-          initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-          authoriser_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-          status: approved
-          responded_at: '2016-12-19T04:42:59Z'
-          created_at: '2016-12-19T04:34:38Z'
-          for_ref: C.1
-          debit_ref: D.2c3
-          amount: 100
-          reason: Because reasons
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-    DeclinePayoutRefundRequestResponse:
-      title: Decline a Refund Request (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: RR.2
-          initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-          authoriser_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-          status: declined
-          responded_at: '2016-12-19T04:42:59Z'
-          created_at: '2016-12-19T04:34:38Z'
-          for_ref: D.1
-          debit_ref: null
-          amount: 100
-          reason: Because reasons
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-    ListIncomingRefundRequestsResponse:
-      title: List incoming Refund Requests (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-          description: ''
-      example:
-        data:
-          - ref: RR.2
-            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-            authoriser_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-            status: approved
-            responded_at: '2016-12-19T04:42:59Z'
-            created_at: '2016-12-19T04:34:38Z'
-            for_ref: C.1
-            debit_ref: D.2c3
-            amount: 100
-            reason: Because reasons
-            metadata:
-              custom_key: Custom string
-              another_custom_key: Maybe a URL
-    ListOutgoingRefundRequestsResponse:
-      title: List outgoing Refund Requests (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-          description: ''
-      example:
-        data:
-          - ref: RR.2
-            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-            authoriser_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-            status: pending_approval
-            responded_at: null
-            created_at: '2016-12-19T04:34:38Z'
-            for_ref: D.1
-            credit_ref: null
-            amount: 10000
-            reason: Because reasons
-            metadata:
-              custom_key: Custom string
-              another_custom_key: Maybe a URL
     RetryPayoutResponse:
       title: Retry a payout (response)
       required:
