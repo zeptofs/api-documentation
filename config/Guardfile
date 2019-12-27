@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+#
+ignore %r{\.html\.md$}
+
+dirs = directories(%w[source widdershins_templates config])
+dirs.select do |d|
+  Dir.exist?(d) ? d : UI.warning("Directory #{d} does not exist")
+end
+
+guard :shell, all_on_start: true do
+  watch(%r{split.yaml}) do
+    `yarn run widdershins -e options.yml ./source/openapi3/split.yaml -o ./source/index.html.md`
+  end
+end

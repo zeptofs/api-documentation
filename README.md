@@ -18,9 +18,14 @@ Get started
 1. Clone the repo
 2. `$ bundle install`
 3. `$ yarn install`
-4. Edit the `source/openapi3/split.yaml` or any themes/templates
-5. `$ yarn run widdershins -e options.yml ./source/openapi3/split.yaml -o ./source/index.html.md`
-    1. Preview: `$ bundle exec middleman server`
+4. `$ bundle exec foreman start`
+5. Browse to http://localhost:4567 to preview the documentation.
+4. Edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
+you save your changes.
+
+
+Note: Currently only changes to split.yaml will trigger the automatic update.
+
 
 Publishing changes
 ---
