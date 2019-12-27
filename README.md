@@ -18,7 +18,7 @@ Get started
 1. Clone the repo
 2. `$ bundle install`
 3. `$ yarn install`
-4. `$ bundle foreman start`
+4. `$ bundle exec foreman start`
 5. Browse to http://localhost:4567 to preview the documentation.
 4. Edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
 you save your changes.
