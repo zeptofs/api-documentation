@@ -1105,7 +1105,7 @@ Propose an Agreement to another Split Contact
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[ProposeAgreementRequest](#schemaproposeagreementrequest)|true|No description|
-|» authoriser_contact_id|body|string|false|The Authoriser's contact ID (`Contact.data.id`)|
+|» authoriser_contact_id|body|string|true|The Authoriser's contact ID (`Contact.data.id`)|
 |» terms|body|[Terms](#schematerms)|true|Terms|
 |»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
 |»»» min_amount|body|number|false|Minimum amount in cents a PR can be in order to be auto-approved|
@@ -11354,4 +11354,3 @@ func main() {
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|object|true|No description|
-
