@@ -338,6 +338,20 @@
               </ul>
           </li>
           <li>
+            <a href="#Split-API-Bank-Connections" class="toc-h1 toc-link" data-title="Bank Connections">Bank Connections</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-all-bank-connections" class="toc-h2 toc-link" data-title="List all Bank Connections">List all Bank Connections</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-bank-connection" class="toc-h2 toc-link" data-title="Get a Bank Connection">Get a Bank Connection</a>
+                  </li>
+                  <li>
+                    <a href="#remove-a-bank-connection" class="toc-h2 toc-link" data-title="Remove a Bank Connection">Remove a Bank Connection</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#Split-API-Contacts" class="toc-h1 toc-link" data-title="Contacts">Contacts</a>
               <ul class="toc-list-h2">
                   <li>
@@ -536,6 +550,9 @@
                     <a href="#listallbankaccountsresponse" class="toc-h2 toc-link" data-title="ListAllBankAccountsResponse">ListAllBankAccountsResponse</a>
                   </li>
                   <li>
+                    <a href="#listallbankconnectionsresponse" class="toc-h2 toc-link" data-title="ListAllBankConnectionsResponse">ListAllBankConnectionsResponse</a>
+                  </li>
+                  <li>
                     <a href="#createopenagreementrequest" class="toc-h2 toc-link" data-title="CreateOpenAgreementRequest">CreateOpenAgreementRequest</a>
                   </li>
                   <li>
@@ -564,6 +581,9 @@
                   </li>
                   <li>
                     <a href="#addananyonecontactresponse" class="toc-h2 toc-link" data-title="AddAnAnyoneContactResponse">AddAnAnyoneContactResponse</a>
+                  </li>
+                  <li>
+                    <a href="#getabankconnectionresponse" class="toc-h2 toc-link" data-title="GetABankConnectionResponse">GetABankConnectionResponse</a>
                   </li>
                   <li>
                     <a href="#getacontactresponse" class="toc-h2 toc-link" data-title="GetAContactResponse">GetAContactResponse</a>
@@ -2021,7 +2041,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>» authoriser_contact_id</td>
 <td>body</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>The Authoriser&#39;s contact ID (<code>Contact.data.id</code>)</td>
 </tr>
 <tr>
@@ -3478,7 +3498,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"302193"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"119302"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"removed"</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3498,6 +3518,608 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
 <td><a href="#schemalistallbankaccountsresponse">ListAllBankAccountsResponse</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="Split-API-Bank-Connections">Bank Connections</h1>
+
+<p>Bank connections are read-only connections to your contacts&#39; banking data. This allows Split (and yourself) to make intelligent transactional decisions leading to better outcomes.</p>
+
+<p>Use these endpoints to:</p>
+
+<ul>
+<li>List your bank connections and check their status</li>
+<li>Retrieve a link that you can share with your contact to update their invalidated bank connection (e.g Their online banking credentials have changed)</li>
+</ul>
+
+<aside class="notice">Looking to add a new bank connection to a contact? See the <a href="#get-a-contact">get a contact endpoint</a></aside>
+<h2 id='list-all-bank-connections'>List all Bank Connections</h2>
+<p><a id="opIdListAllBankConnections"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --request GET <span class="se">\</span>
+  --url https://api.sandbox.split.cash/bank_connections <span class="se">\</span>
+  --header <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/bank_connections"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"https"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+  <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"api.sandbox.split.cash"</span><span class="p">,</span>
+  <span class="s2">"port"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/bank_connections"</span><span class="p">,</span>
+  <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accept"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
+    <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"Bearer {access-token}"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/bank_connections"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/bank_connections"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/bank_connections'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"net/http"</span><span class="x">
+    </span><span class="s">"io/ioutil"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+    </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api.sandbox.split.cash/bank_connections"</span><span class="x">
+
+    </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span><span class="x"> </span><span class="s">"application/json"</span><span class="p">)</span><span class="x">
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span><span class="x"> </span><span class="s">"Bearer {access-token}"</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">res</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="x">
+
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    </span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span><span class="x">
+
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<p><code>GET /bank_connections</code></p>
+
+<p>By default, all Bank Connections will be returned. You can apply filters to your query to customise the returned Bank Connection list.</p>
+
+<h3 id="List-all-Bank-Connections-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
+</tr>
+<tr>
+<td>provider_name</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Single value, exact match</td>
+</tr>
+<tr>
+<td>state</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Single value, exact match</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>provider_name</td>
+<td>basiq</td>
+</tr>
+<tr>
+<td>provider_name</td>
+<td>proviso</td>
+</tr>
+<tr>
+<td>provider_name</td>
+<td>split</td>
+</tr>
+<tr>
+<td>state</td>
+<td>active</td>
+</tr>
+<tr>
+<td>state</td>
+<td>credentials_invalid</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb497754-87e2-407d-871f-32aec39d09d4"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"refreshed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-02-13T20:05:00.000+11:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"removed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CBA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commonwealth Bank of Australia"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"626e15b1-aa4a-496e-b5d6-3f8c1a6d2189"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George Morissette"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"randy@windler.net"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"update_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://go.split.cash/authorise_bank_connections/williams-and-sons-5/fb497754-87e2-407d-871f-32aec39d09d4"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ddbee875-7344-4d74-9503-6233149fe1a0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"refreshed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-02-13T20:05:00.000+11:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"removed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CBA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commonwealth Bank of Australia"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72e37667-6364-440f-b1bd-56df5654e258"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joel Boyle"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travis@hermanntorp.net"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"update_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://go.split.cash/authorise_bank_connections/williams-and-sons-5/ddbee875-7344-4d74-9503-6233149fe1a0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="List all Bank Connections-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td><a href="#schemalistallbankconnectionsresponse">ListAllBankConnectionsResponse</a></td>
+</tr>
+</tbody></table>
+<h2 id='get-a-bank-connection'>Get a Bank Connection</h2>
+<p><a id="opIdGetABankConnection"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --request GET <span class="se">\</span>
+  --url https://api.sandbox.split.cash/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7 <span class="se">\</span>
+  --header <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"https"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+  <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"api.sandbox.split.cash"</span><span class="p">,</span>
+  <span class="s2">"port"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="p">,</span>
+  <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accept"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
+    <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"Bearer {access-token}"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"net/http"</span><span class="x">
+    </span><span class="s">"io/ioutil"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+    </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api.sandbox.split.cash/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="x">
+
+    </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span><span class="x"> </span><span class="s">"application/json"</span><span class="p">)</span><span class="x">
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span><span class="x"> </span><span class="s">"Bearer {access-token}"</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">res</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="x">
+
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    </span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span><span class="x">
+
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<p><code>GET /bank_connections/{id}</code></p>
+
+<p>Get a single Bank Connection by its ID</p>
+
+<h3 id="Get-a-Bank-Connection-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string(UUID)</td>
+<td>true</td>
+<td>BankConnection ID (<code>BankConnection.data.id</code>)</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refreshed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-02-13T20:01:00.000+11:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"removed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CBA"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commonwealth Bank of Australia"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72e37667-6364-440f-b1bd-56df5654e258"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joel Boyle"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travis@hermanntorp.net"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"update_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/authorise_bank_connections/thomas-morgan-1/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="Get a Bank Connection-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td><a href="#schemagetabankconnectionresponse">GetABankConnectionResponse</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Not Found</td>
+<td>None</td>
+</tr>
+</tbody></table>
+<h2 id='remove-a-bank-connection'>Remove a Bank Connection</h2>
+<p><a id="opIdRemoveABankConnection"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --request DELETE <span class="se">\</span>
+  --url https://api.sandbox.split.cash/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Delete</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"https"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"DELETE"</span><span class="p">,</span>
+  <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"api.sandbox.split.cash"</span><span class="p">,</span>
+  <span class="s2">"port"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de"</span><span class="p">,</span>
+  <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"Bearer {access-token}"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span> <span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Unirest</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'DELETE'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"net/http"</span><span class="x">
+    </span><span class="s">"io/ioutil"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+    </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api.sandbox.split.cash/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de"</span><span class="x">
+
+    </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span><span class="x"> </span><span class="s">"Bearer {access-token}"</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">res</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="x">
+
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    </span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span><span class="x">
+
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<p><code>DELETE /bank_connections/{id}</code></p>
+
+<aside class="notice">Removing a Bank Connection will not affect your transaction history.</aside>
+
+<h3 id="Remove-a-Bank-Connection-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string(UUID)</td>
+<td>true</td>
+<td>BankConnection ID (<code>BankConnection.data.id</code>)</td>
+</tr>
+</tbody></table>
+
+<h3 id="Remove a Bank Connection-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>No description</td>
+<td>None</td>
 </tr>
 </tbody></table>
 
@@ -3689,7 +4311,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>Use for your custom data and certain Split customisations</td>
+<td>Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.</td>
 </tr>
 </tbody></table>
 
@@ -3713,15 +4335,22 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"947434694"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"304304"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3893,13 +4522,6 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>Number of results per page, single value, exact match</td>
 </tr>
 <tr>
-<td>account_id</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Single value, string search</td>
-</tr>
-<tr>
 <td>name</td>
 <td>query</td>
 <td>string</td>
@@ -3960,15 +4582,16 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"494307"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"435434"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+      </span><span class="s2">"bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -3981,15 +4604,16 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4395959"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"068231"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"362f7fe8-4af2-4902-b3d7-b5ab704ef2e7"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adventure_dudes"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"126754389"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adventure Dudes Pty Ltd"</span><span class="w">
+      </span><span class="s2">"bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -4004,13 +4628,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a31dc907-9c7a-4736-84c9-1149cf03de42"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"surfing_world"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"295443789"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surfing World Pty Ltd"</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -4025,10 +4650,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"anyone_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -4265,7 +4894,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>Use for your custom data and certain Split customisations</td>
+<td>Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.</td>
 </tr>
 </tbody></table>
 
@@ -4291,10 +4920,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"anyone_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4470,15 +5103,16 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"947434694"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"304304"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4860,15 +5494,16 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"947434694"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"304304"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+    </span><span class="s2">"bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -6236,7 +6871,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>Use for your custom data and certain Split customisations</td>
+<td>Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.</td>
 </tr>
 </tbody></table>
 
@@ -7940,14 +8575,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>Use for your custom data and certain Split customisations</td>
+<td>Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.</td>
 </tr>
 <tr>
 <td>»» metadata</td>
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>Use for your custom data and certain Split customisations</td>
+<td>Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.</td>
 </tr>
 </tbody></table>
 <h4 id='detailed-descriptions'>Detailed descriptions</h4>
@@ -9041,7 +9676,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>body</td>
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
-<td>Use for your custom data and certain Split customisations</td>
+<td>Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.</td>
 </tr>
 </tbody></table>
 
@@ -10046,7 +10681,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>Date/time UTC ISO 8601 format, single value, exact match</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -11231,7 +11866,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <tr>
 <td>authoriser_contact_id</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>The Authoriser&#39;s contact ID (<code>Contact.data.id</code>)</td>
 </tr>
 <tr>
@@ -11657,12 +12292,76 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"302193"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"119302"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"removed"</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='properties-11'>Properties</h3>
 <p><em>List all Bank Accounts (response)</em></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>[object]</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+</tbody></table>
+<h2 id='listallbankconnectionsresponse'>ListAllBankConnectionsResponse</h2>
+<p><a id="schemalistallbankconnectionsresponse"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb497754-87e2-407d-871f-32aec39d09d4"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"refreshed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-02-13T20:05:00.000+11:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"removed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CBA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commonwealth Bank of Australia"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"626e15b1-aa4a-496e-b5d6-3f8c1a6d2189"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George Morissette"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"randy@windler.net"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"update_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://go.split.cash/authorise_bank_connections/williams-and-sons-5/fb497754-87e2-407d-871f-32aec39d09d4"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ddbee875-7344-4d74-9503-6233149fe1a0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"refreshed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-02-13T20:05:00.000+11:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"removed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CBA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commonwealth Bank of Australia"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72e37667-6364-440f-b1bd-56df5654e258"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joel Boyle"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travis@hermanntorp.net"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"update_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://go.split.cash/authorise_bank_connections/williams-and-sons-5/ddbee875-7344-4d74-9503-6233149fe1a0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='properties-12'>Properties</h3>
+<p><em>List all Bank Connections (response)</em></p>
 
 <table><thead>
 <tr>
@@ -11694,7 +12393,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-12'>Properties</h3>
+</span></code></pre><h3 id='properties-13'>Properties</h3>
 <p><em>Create an Open Agreement (request)</em></p>
 
 <table><thead>
@@ -11739,7 +12438,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/open_agreements/aecff76d-13e0-4e17-b7c5-844ae07fa675/agreements/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-13'>Properties</h3>
+</span></code></pre><h3 id='properties-14'>Properties</h3>
 <p><em>Create an Open Agreement (response)</em></p>
 
 <table><thead>
@@ -11797,7 +12496,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-14'>Properties</h3>
+</span></code></pre><h3 id='properties-15'>Properties</h3>
 <p><em>List all Open Agreements (response)</em></p>
 
 <table><thead>
@@ -11836,7 +12535,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-15'>Properties</h3>
+</span></code></pre><h3 id='properties-16'>Properties</h3>
 <p><em>Activate Open Agreement Request (response)</em></p>
 
 <table><thead>
@@ -11875,7 +12574,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-16'>Properties</h3>
+</span></code></pre><h3 id='properties-17'>Properties</h3>
 <p><em>Close Open Agreement Request (response)</em></p>
 
 <table><thead>
@@ -11902,7 +12601,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-17'>Properties</h3>
+</span></code></pre><h3 id='properties-18'>Properties</h3>
 <p><em>Add a Split Contact (request)</em></p>
 
 <table><thead>
@@ -11943,19 +12642,26 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"947434694"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"304304"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-18'>Properties</h3>
+</span></code></pre><h3 id='properties-19'>Properties</h3>
 <p><em>Add a Split Contact (response)</em></p>
 
 <table><thead>
@@ -11987,15 +12693,16 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"494307"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"435434"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+      </span><span class="s2">"bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -12008,15 +12715,16 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4395959"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"068231"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"362f7fe8-4af2-4902-b3d7-b5ab704ef2e7"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adventure_dudes"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"126754389"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adventure Dudes Pty Ltd"</span><span class="w">
+      </span><span class="s2">"bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -12031,13 +12739,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a31dc907-9c7a-4736-84c9-1149cf03de42"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"surfing_world"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"295443789"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surfing World Pty Ltd"</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -12052,15 +12761,19 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
         </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"anyone_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-19'>Properties</h3>
+</span></code></pre><h3 id='properties-20'>Properties</h3>
 <p><em>List all Contacts (response)</em></p>
 
 <table><thead>
@@ -12090,7 +12803,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-20'>Properties</h3>
+</span></code></pre><h3 id='properties-21'>Properties</h3>
 <p><em>Add an Anyone Contact (request)</em></p>
 
 <table><thead>
@@ -12151,15 +12864,61 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"anyone_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-21'>Properties</h3>
+</span></code></pre><h3 id='properties-22'>Properties</h3>
 <p><em>Add an Anyone Contact (response)</em></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+</tbody></table>
+<h2 id='getabankconnectionresponse'>GetABankConnectionResponse</h2>
+<p><a id="schemagetabankconnectionresponse"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credentials_invalid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refreshed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-02-13T20:01:00.000+11:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"removed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"institution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CBA"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commonwealth Bank of Australia"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72e37667-6364-440f-b1bd-56df5654e258"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joel Boyle"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travis@hermanntorp.net"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"update_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/authorise_bank_connections/thomas-morgan-1/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='properties-23'>Properties</h3>
+<p><em>Get a BankConnection (response)</em></p>
 
 <table><thead>
 <tr>
@@ -12189,19 +12948,20 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"947434694"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"304304"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"add_bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-22'>Properties</h3>
+</span></code></pre><h3 id='properties-24'>Properties</h3>
 <p><em>Get a Contact (response)</em></p>
 
 <table><thead>
@@ -12225,7 +12985,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My very own alias"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"updated@email.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-23'>Properties</h3>
+</span></code></pre><h3 id='properties-25'>Properties</h3>
 <p><em>Update a Contact (request)</em></p>
 
 <table><thead>
@@ -12262,19 +13022,20 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"947434694"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"304304"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outstanding_tours"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="w">
+    </span><span class="s2">"bank_connection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1030bfef-cef5-4938-b10b-5841cafafc80"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-24'>Properties</h3>
+</span></code></pre><h3 id='properties-26'>Properties</h3>
 <p><em>Update a Contact (response)</em></p>
 
 <table><thead>
@@ -12320,7 +13081,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-25'>Properties</h3>
+</span></code></pre><h3 id='properties-27'>Properties</h3>
 <p><em>Make a Payment (request)</em></p>
 
 <table><thead>
@@ -12367,7 +13128,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-26'>Properties</h3>
+</span></code></pre><h3 id='properties-28'>Properties</h3>
 <p><em>Payout</em></p>
 
 <table><thead>
@@ -12408,7 +13169,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Incorrect recipient"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-27'>Properties</h3>
+</span></code></pre><h3 id='properties-29'>Properties</h3>
 <p><em>Void a Payout (request)</em></p>
 
 <table><thead>
@@ -12432,7 +13193,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   </span><span class="s2">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-28'>Properties</h3>
+</span></code></pre><h3 id='properties-30'>Properties</h3>
 <p><em>Metadata</em></p>
 
 <p><em>None</em></p>
@@ -12479,7 +13240,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-29'>Properties</h3>
+</span></code></pre><h3 id='properties-31'>Properties</h3>
 <p><em>Make a Payment (response)</em></p>
 
 <table><thead>
@@ -12521,7 +13282,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-30'>Properties</h3>
+</span></code></pre><h3 id='properties-32'>Properties</h3>
 <p><em>Approve Payment Request (response)</em></p>
 
 <table><thead>
@@ -12563,7 +13324,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-31'>Properties</h3>
+</span></code></pre><h3 id='properties-33'>Properties</h3>
 <p><em>Decline a Payment Request (response)</em></p>
 
 <table><thead>
@@ -12626,7 +13387,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-32'>Properties</h3>
+</span></code></pre><h3 id='properties-34'>Properties</h3>
 <p><em>List all Payments (response)</em></p>
 
 <table><thead>
@@ -12687,7 +13448,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-33'>Properties</h3>
+</span></code></pre><h3 id='properties-35'>Properties</h3>
 <p><em>Get a Payment (response)</em></p>
 
 <table><thead>
@@ -12718,7 +13479,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-34'>Properties</h3>
+</span></code></pre><h3 id='properties-36'>Properties</h3>
 <p><em>Make a Payment Request (request)</em></p>
 
 <table><thead>
@@ -12790,7 +13551,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-35'>Properties</h3>
+</span></code></pre><h3 id='properties-37'>Properties</h3>
 <p><em>Make a Payment Request (response)</em></p>
 
 <table><thead>
@@ -12813,7 +13574,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authoriser contact (de86472c-c027-4735-a6a7-234366a27fc7) is not a Split account holder and therefore must have a valid agreement in place before a Payment Request can be issued."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-36'>Properties</h3>
+</span></code></pre><h3 id='properties-38'>Properties</h3>
 <p><em>Make a Payment Request to an Anyone Contact with no valid Agreement (response)</em></p>
 
 <table><thead>
@@ -12855,7 +13616,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-37'>Properties</h3>
+</span></code></pre><h3 id='properties-39'>Properties</h3>
 <p><em>Get a Payment Request (response)</em></p>
 
 <table><thead>
@@ -12915,7 +13676,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-38'>Properties</h3>
+</span></code></pre><h3 id='properties-40'>Properties</h3>
 <p><em>List incoming Payment Requests (response)</em></p>
 
 <table><thead>
@@ -12971,7 +13732,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-39'>Properties</h3>
+</span></code></pre><h3 id='properties-41'>Properties</h3>
 <p><em>List outgoing Payment Requests (response)</em></p>
 
 <table><thead>
@@ -13079,7 +13840,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-40'>Properties</h3>
+</span></code></pre><h3 id='properties-42'>Properties</h3>
 <p><em>Get a Payment Request&#39;s history (response)</em></p>
 
 <table><thead>
@@ -13107,7 +13868,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-41'>Properties</h3>
+</span></code></pre><h3 id='properties-43'>Properties</h3>
 <p><em>Issue a Refund (request)</em></p>
 
 <table><thead>
@@ -13153,7 +13914,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-42'>Properties</h3>
+</span></code></pre><h3 id='properties-44'>Properties</h3>
 <p><em>Issue a Refund (response)</em></p>
 
 <table><thead>
@@ -13189,7 +13950,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-43'>Properties</h3>
+</span></code></pre><h3 id='properties-45'>Properties</h3>
 <p><em>List incoming Refunds (response)</em></p>
 
 <table><thead>
@@ -13225,7 +13986,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-44'>Properties</h3>
+</span></code></pre><h3 id='properties-46'>Properties</h3>
 <p><em>List outgoing Refunds (response)</em></p>
 
 <table><thead>
@@ -13259,7 +14020,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-45'>Properties</h3>
+</span></code></pre><h3 id='properties-47'>Properties</h3>
 <p><em>Retrieve a Refund (response)</em></p>
 
 <table><thead>
@@ -13299,7 +14060,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-46'>Properties</h3>
+</span></code></pre><h3 id='properties-48'>Properties</h3>
 <p><em>Retry a payout (response)</em></p>
 
 <table><thead>
@@ -13381,7 +14142,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-47'>Properties</h3>
+</span></code></pre><h3 id='properties-49'>Properties</h3>
 <p><em>List all transactions (response)</em></p>
 
 <table><thead>
@@ -13414,7 +14175,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-48'>Properties</h3>
+</span></code></pre><h3 id='properties-50'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (request)</em></p>
 
 <table><thead>
@@ -13467,7 +14228,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-49'>Properties</h3>
+</span></code></pre><h3 id='properties-51'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -13529,7 +14290,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-50'>Properties</h3>
+</span></code></pre><h3 id='properties-52'>Properties</h3>
 <p><em>List Unassigned Agreements (response)</em></p>
 
 <table><thead>
@@ -13570,7 +14331,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-51'>Properties</h3>
+</span></code></pre><h3 id='properties-53'>Properties</h3>
 <p><em>Get an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -13608,7 +14369,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-52'>Properties</h3>
+</span></code></pre><h3 id='properties-54'>Properties</h3>
 <p><em>Get User details (response)</em></p>
 
 <table><thead>

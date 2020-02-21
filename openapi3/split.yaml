@@ -947,7 +947,7 @@ info:
 
     Split will automatically aggregate debits that are:
 
-    
+
     - From the same bank account; and
 
     - Initiated by the same Split account.
@@ -955,7 +955,7 @@ info:
 
     Likewise for credits:
 
-    
+
     - To the same bank account; and
 
     - Initiated by the same Split account.
@@ -1496,6 +1496,20 @@ tags:
       <aside class="notice">When you close an Open Agreement, no new Agreements
       can be created from it and all past Agreement resulting from the
       acceptance of the Open Agreement are unaffected.</aside>
+  - name: Bank Connections
+    description: >
+      Bank connections are read-only connections to your contacts' banking data. This
+      allows Split (and yourself) to make intelligent transactional decisions leading
+      to better outcomes.
+
+
+      Use these endpoints to:
+
+        * List your bank connections and check their status
+        * Retrieve a link that you can share with your contact to update their invalidated bank connection (e.g Their online banking credentials have changed)
+
+
+      <aside class="notice">Looking to add a new bank connection to a contact? See the <a href="#get-a-contact">get a contact endpoint</a></aside>
   - name: Payments
     description: >
       **A Payment is made up of two parts:**
@@ -2081,6 +2095,101 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListAllBankAccountsResponse'
+  /bank_connections:
+    get:
+      tags:
+        - Bank Connections
+      summary: List all Bank Connections
+      description: >
+        By default, all Bank Connections will be returned. You can apply filters to your
+        query to customise the returned Bank Connection list.
+      operationId: ListAllBankConnections
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAllBankConnectionsResponse'
+      parameters:
+        - name: page
+          in: query
+          description: 'Page of results to return, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '1'
+        - name: per_page
+          in: query
+          description: 'Number of results per page, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '100'
+        - name: provider_name
+          in: query
+          description: 'Single value, exact match'
+          style: simple
+          schema:
+            type: string
+            enum: [basiq, proviso, split]
+          example: basiq
+        - name: state
+          in: query
+          description: 'Single value, exact match'
+          style: simple
+          schema:
+            type: string
+            enum: [active, credentials_invalid]
+          example: credentials_invalid
+  /bank_connections/{id}:
+    get:
+      tags:
+        - Bank Connections
+      summary: Get a Bank Connection
+      description: Get a single Bank Connection by its ID
+      operationId: GetABankConnection
+      parameters:
+        - name: id
+          in: path
+          description: BankConnection ID (`BankConnection.data.id`)
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: UUID
+          example: c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetABankConnectionResponse'
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - Bank Connections
+      summary: Remove a Bank Connection
+      description: >
+        <aside class="notice">Removing a Bank Connection will not affect your
+        transaction history.</aside>
+      operationId: RemoveABankConnection
+      parameters:
+        - name: id
+          in: path
+          description: BankConnection ID (`BankConnection.data.id`)
+          required: true
+          style: simple
+          schema:
+            type: string
+            format: UUID
+          example: 01586a3f-f25b-404f-b135-c42a1b7ef4de
+      responses:
+        '204':
+          description: ''
   /contacts:
     post:
       tags:
@@ -2128,13 +2237,6 @@ paths:
           schema:
             type: string
           example: '100'
-        - name: account_id
-          in: query
-          description: 'Single value, string search'
-          style: form
-          schema:
-            type: string
-          example: 00994ebb-e3cd-4598-8965-bf4e6ca7d840
         - name: name
           in: query
           description: 'Single value, string search'
@@ -3212,7 +3314,7 @@ components:
     ProposeAgreementRequest:
       title: Propose an Agreement (request)
       required:
-        - authoriser_id
+        - authoriser_contact_id
         - terms
       type: object
       properties:
@@ -3485,7 +3587,51 @@ components:
             branch_code: '302193'
             bank_name: National Australia Bank
             account_number: '119302'
-            status: removed
+            status: active
+    ListAllBankConnectionsResponse:
+      title: List all Bank Connections (response)
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+      example:
+        data:
+          - id: fb497754-87e2-407d-871f-32aec39d09d4
+            provider_name: split
+            state: active
+            refreshed_at: '2020-02-13T20:05:00.000+11:00'
+            removed_at:
+            failure_reason:
+            institution:
+              short_name: CBA
+              full_name: Commonwealth Bank of Australia
+            contact:
+              id: 626e15b1-aa4a-496e-b5d6-3f8c1a6d2189
+              name: George Morissette
+              email: randy@windler.net
+            links:
+              update_bank_connection: http://go.split.cash/authorise_bank_connections/williams-and-sons-5/fb497754-87e2-407d-871f-32aec39d09d4
+          - id: ddbee875-7344-4d74-9503-6233149fe1a0
+            provider_name: split
+            state: credentials_invalid
+            refreshed_at: '2020-02-13T20:05:00.000+11:00'
+            removed_at:
+            failure_reason:
+            institution:
+              short_name: CBA
+              full_name: Commonwealth Bank of Australia
+            contact:
+              id: 72e37667-6364-440f-b1bd-56df5654e258
+              name: Joel Boyle
+              email: travis@hermanntorp.net
+            links:
+              update_bank_connection: http://go.split.cash/authorise_bank_connections/williams-and-sons-5/ddbee875-7344-4d74-9503-6233149fe1a0
+
     CreateOpenAgreementRequest:
       title: Create an Open Agreement (request)
       required:
@@ -3654,14 +3800,19 @@ components:
             account_number: '947434694'
             branch_code: '304304'
             bank_name: National Australia Bank
-            state: verified
+            state: active
             iav_provider: null
             iav_status: null
+            blocks:
+              debits_blocked: false
+              credits_blocked: false
           account:
             id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
             nickname: outstanding_tours
             abn: '123456789'
             name: Outstanding Tours Pty Ltd
+          links: 
+            add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     ListAllContactsResponse:
       title: List all Contacts (response)
       required:
@@ -3684,14 +3835,14 @@ components:
               account_number: '494307'
               branch_code: '435434'
               bank_name: National Australia Bank
-              state: verified
+              state: active
               iav_provider: split
               iav_status: active
-            account:
-              id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
-              nickname: outstanding_tours
-              abn: '123456789'
-              name: Outstanding Tours Pty Ltd
+              blocks:
+                debits_blocked: false
+                credits_blocked: false
+            bank_connection:
+              id: c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
           - id: 49935c67-c5df-4f00-99f4-1413c18a89a0
             name: Adventure Dudes Pty Ltd
             email: accounts@adventuredudes.com.au
@@ -3701,14 +3852,14 @@ components:
               account_number: '4395959'
               branch_code: 068231
               bank_name: National Australia Bank
-              state: verified
+              state: active
               iav_provider: split
               iav_status: credentials_invalid
-            account:
-              id: 362f7fe8-4af2-4902-b3d7-b5ab704ef2e7
-              nickname: adventure_dudes
-              abn: '126754389'
-              name: Adventure Dudes Pty Ltd
+              blocks:
+                debits_blocked: false
+                credits_blocked: false
+            bank_connection:
+              id: c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
           - id: eb3266f9-e172-4b6c-b802-fe5ac4d3250a
             name: Surfing World Pty Ltd
             email: accounts@surfingworld.com.au
@@ -3721,11 +3872,11 @@ components:
               state: disabled
               iav_provider: null
               iav_status: null
-            account:
-              id: a31dc907-9c7a-4736-84c9-1149cf03de42
-              nickname: surfing_world
-              abn: '295443789'
-              name: Surfing World Pty Ltd
+              blocks:
+                debits_blocked: false
+                credits_blocked: false
+            links:
+              add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
           - id: 6a7ed958-f1e8-42dc-8c02-3901d7057357
             name: Hunter Thompson
             email: hunter@batcountry.com
@@ -3738,8 +3889,11 @@ components:
               state: pending_verification
               iav_provider: null
               iav_status: null
-            anyone_account:
-              id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
+              blocks:
+                debits_blocked: false
+                credits_blocked: false
+            links:
+              add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     AddAnAnyoneContactRequest:
       title: Add an Anyone Contact (request)
       required:
@@ -3796,8 +3950,37 @@ components:
             state: pending_verification
             iav_provider: null
             iav_status: null
-          anyone_account:
-            id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
+            blocks:
+              debits_blocked: false
+              credits_blocked: false
+          links:
+            add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
+    GetABankConnectionResponse:
+      title: Get a BankConnection (response)
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: object
+      example:
+        data:
+          id: c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
+          provider_name: split
+          state: credentials_invalid
+          refreshed_at: '2020-02-13T20:01:00.000+11:00'
+          removed_at: 
+          failure_reason: 
+          institution:
+            short_name: CBA
+            full_name: Commonwealth Bank of Australia
+          contact:
+            id: 72e37667-6364-440f-b1bd-56df5654e258
+            name: Joel Boyle
+            email: travis@hermanntorp.net
+          links:
+            update_bank_connection: https://go.sandbox.split.cash/authorise_bank_connections/thomas-morgan-1/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
+
     GetAContactResponse:
       title: Get a Contact (response)
       required:
@@ -3817,14 +4000,14 @@ components:
             account_number: '947434694'
             branch_code: '304304'
             bank_name: National Australia Bank
-            state: pending_verification
-            iav_provider: split
-            iav_status: 'active'
-          account:
-            id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
-            nickname: outstanding_tours
-            abn: '123456789'
-            name: Outstanding Tours Pty Ltd
+            state: active
+            iav_provider: null
+            iav_status: null
+            blocks:
+              debits_blocked: false
+              credits_blocked: false
+          links: 
+            add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     UpdateAContactRequest:
       title: Update a Contact (request)
       type: object
@@ -3857,14 +4040,14 @@ components:
             account_number: '947434694'
             branch_code: '304304'
             bank_name: National Australia Bank
-            state: pending_verification
-            iav_provider: null
-            iav_status: null
-          account:
-            id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
-            nickname: outstanding_tours
-            abn: '123456789'
-            name: Outstanding Tours Pty Ltd
+            state: active
+            iav_provider: split
+            iav_status: active
+            blocks:
+              debits_blocked: false
+              credits_blocked: false
+          bank_connection:
+            id: 1030bfef-cef5-4938-b10b-5841cafafc80
     MakeAPaymentRequest:
       title: Make a Payment (request)
       required:
@@ -3948,7 +4131,7 @@ components:
     Metadata:
       title: Metadata
       type: object
-      description: Use for your custom data and certain Split customisations
+      description: Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.
       properties: {}
       example:
         custom_key: Custom string
