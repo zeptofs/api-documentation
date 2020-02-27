@@ -234,7 +234,7 @@ info:
     Before you start, load up our API collection:
 
 
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/988421dc8fb7d55526d5#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImtleSI6InNpdGVfaG9zdCIsImVuYWJsZWQiOnRydWV9LHsidmFsdWUiOiJodHRwczovL2FwaS5zYW5kYm94LnNwbGl0LmNhc2giLCJrZXkiOiJhcGlfaG9zdCIsImVuYWJsZWQiOnRydWV9LHsidmFsdWUiOiIiLCJrZXkiOiJvYXV0aDJfYXBwbGljYXRpb25faWQiLCJlbmFibGVkIjp0cnVlfSx7InZhbHVlIjoiIiwia2V5Ijoib2F1dGgyX3NlY3JldCIsImVuYWJsZWQiOnRydWV9LHsidmFsdWUiOiJwdWJsaWMgYWdyZWVtZW50cyBiYW5rX2FjY291bnRzIGNvbnRhY3RzIHBheW1lbnRzIHBheW1lbnRfcmVxdWVzdHMgcmVmdW5kX3JlcXVlc3RzIHRyYW5zYWN0aW9ucyByZWZ1bmRzIG9wZW5fYWdyZWVtZW50cyBvZmZsaW5lX2FjY2VzcyIsImtleSI6InNjb3BlIiwiZW5hYmxlZCI6dHJ1ZX0seyJ2YWx1ZSI6IjIwMTgtMTEtMjhUMjA6NTU6MjRaIiwia2V5IjoiaXNvODYwMV9ub3ciLCJlbmFibGVkIjp0cnVlfSx7InZhbHVlIjoiIiwia2V5IjoiYWNjZXNzX3Rva2VuIiwiZW5hYmxlZCI6dHJ1ZX0seyJ2YWx1ZSI6IiIsImtleSI6InJlZnJlc2hfdG9rZW4iLCJlbmFibGVkIjp0cnVlfV0=)
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/54edf5935ad8a2bcd15b#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDE4LTExLTI4VDIwOjU1OjI0WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
 
 
     **A screencast of this process is also available:
@@ -868,6 +868,8 @@ info:
     | `agreements` | Manage user's Agreements |
 
     | `bank_accounts` | Manage user's Bank Accounts |
+
+    | `bank_connections` | Manage user's Bank Connections |
 
     | `contacts` | Manage user's Contacts |
 
@@ -1508,6 +1510,7 @@ tags:
         * List your bank connections and check their status
         * Retrieve a link that you can share with your contact to update their invalidated bank connection (e.g Their online banking credentials have changed)
 
+      <aside class="notice">To access these endpoints on behalf of another account via OAuth2, your application must request (and the user must authorise) <a href="#configuration">the bank_connections scope</a>.</aside>
 
       <aside class="notice">Looking to add a new bank connection to a contact? See the <a href="#get-a-contact">get a contact endpoint</a></aside>
   - name: Payments
