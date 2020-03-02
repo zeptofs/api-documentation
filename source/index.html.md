@@ -46,6 +46,10 @@ Due to the above, certain endpoints and techniques will differ slightly dependin
     * Sandbox IP: `13.237.142.60`
     * Production IPs: `52.64.11.67` and `13.238.78.114`
 
+<div class="middle-header">System Status</div>
+
+Check the platform status, or subscribe to receive notifications at [status.split.cash](https://status.split.cash/). If you would like to check platform status programmatically, please refer to [status.split.cash/api](https://status.split.cash/api).
+
 # Guides
 
 ## Try it out
