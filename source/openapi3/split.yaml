@@ -556,7 +556,7 @@ info:
     <key>` header to the request.
 
     You can pass any value as the key but we suggest that you use [V4
-    UUIDs](https://www.uuidgenerator.net/) or another appropriately random
+    UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random
     string.
 
 
@@ -3821,7 +3821,7 @@ components:
             nickname: outstanding_tours
             abn: '123456789'
             name: Outstanding Tours Pty Ltd
-          links: 
+          links:
             add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     ListAllContactsResponse:
       title: List all Contacts (response)
@@ -3979,8 +3979,8 @@ components:
           provider_name: split
           state: credentials_invalid
           refreshed_at: '2020-02-13T20:01:00.000+11:00'
-          removed_at: 
-          failure_reason: 
+          removed_at:
+          failure_reason:
           institution:
             short_name: CBA
             full_name: Commonwealth Bank of Australia
@@ -4016,7 +4016,7 @@ components:
             blocks:
               debits_blocked: false
               credits_blocked: false
-          links: 
+          links:
             add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     UpdateAContactRequest:
       title: Update a Contact (request)

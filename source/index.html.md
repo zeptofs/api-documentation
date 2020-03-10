@@ -384,7 +384,7 @@ The Split API supports idempotency for safely retrying requests without accident
 For example, if a [Payment](#Split-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.
 
 To perform an idempotent request, provide an additional `Idempotency-Key: <key>` header to the request.
-You can pass any value as the key but we suggest that you use [V4 UUIDs](https://www.uuidgenerator.net/) or another appropriately random string.
+You can pass any value as the key but we suggest that you use [V4 UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random string.
 
 Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a `409 Conflict`.
 
