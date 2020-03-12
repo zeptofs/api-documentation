@@ -1103,7 +1103,7 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 For example, if a <a href="#Split-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.</p>
 
 <p>To perform an idempotent request, provide an additional <code>Idempotency-Key: &lt;key&gt;</code> header to the request.
-You can pass any value as the key but we suggest that you use <a href="https://www.uuidgenerator.net/">V4 UUIDs</a> or another appropriately random string.</p>
+You can pass any value as the key but we suggest that you use <a href="https://www.uuidtools.com/generate/v4">V4 UUIDs</a> or another appropriately random string.</p>
 
 <p>Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a <code>409 Conflict</code>.</p>
 
