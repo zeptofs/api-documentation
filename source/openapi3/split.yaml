@@ -4786,15 +4786,21 @@ components:
           example: true
         terms:
           $ref: '#/components/schemas/Terms'
-      example:
-        expiry_in_seconds: 60
-        terms:
-          per_payout:
-            min_amount: null
-            max_amount: 10000
-          per_frequency:
-            days: 7
-            max_amount: 1000000
+          example:
+            expiry_in_seconds: 60
+            terms:
+              per_payout:
+                min_amount: null
+                max_amount: 10000
+              per_frequency:
+                days: 7
+                max_amount: 1000000
+        metadata:
+          type: Metadata
+          description: Use for your custom data and certain Split customisations. This data will be attached to the resulting Agreement and its associated Payments, Payment Requests and Webhook Events.
+          example:
+            custom_key: Custom string
+            another_custom_key: Maybe a URL
     ProposeUnassignedAgreementResponse:
       title: Propose an Unassigned Agreement (response)
       required:

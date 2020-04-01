@@ -8966,7 +8966,7 @@ curl --request POST \
   --header 'accept: application/json' \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
-  --data '{"expiry_in_seconds":60,"terms":{"per_payout":{"min_amount":null,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}}}'
+  --data '{"expiry_in_seconds":60,"single_use":true,"terms":{"per_payout":{"min_amount":0,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'
 ```
 
 ```ruby
@@ -8983,7 +8983,7 @@ request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["accept"] = 'application/json'
 request["authorization"] = 'Bearer {access-token}'
-request.body = "{\"expiry_in_seconds\":60,\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}}}"
+request.body = "{\"expiry_in_seconds\":60,\"single_use\":true,\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 response = http.request(request)
 puts response.read_body
@@ -9019,10 +9019,12 @@ var req = http.request(options, function (res) {
 
 req.write(JSON.stringify({
   expiry_in_seconds: 60,
+  single_use: true,
   terms: {
-    per_payout: { min_amount: null, max_amount: 10000 },
+    per_payout: { min_amount: 0, max_amount: 10000 },
     per_frequency: { days: 7, max_amount: 1000000 }
-  }
+  },
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
 }));
 req.end();
 ```
@@ -9032,7 +9034,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("api.sandbox.split.cash")
 
-payload = "{\"expiry_in_seconds\":60,\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}}}"
+payload = "{\"expiry_in_seconds\":60,\"single_use\":true,\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 headers = {
     'content-type': "application/json",
@@ -9053,7 +9055,7 @@ HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/una
   .header("content-type", "application/json")
   .header("accept", "application/json")
   .header("authorization", "Bearer {access-token}")
-  .body("{\"expiry_in_seconds\":60,\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}}}")
+  .body("{\"expiry_in_seconds\":60,\"single_use\":true,\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
   .asString();
 ```
 
@@ -9064,7 +9066,7 @@ $client = new http\Client;
 $request = new http\Client\Request;
 
 $body = new http\Message\Body;
-$body->append('{"expiry_in_seconds":60,"terms":{"per_payout":{"min_amount":null,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}}}');
+$body->append('{"expiry_in_seconds":60,"single_use":true,"terms":{"per_payout":{"min_amount":0,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}');
 
 $request->setRequestUrl('https://api.sandbox.split.cash/unassigned_agreements');
 $request->setRequestMethod('POST');
@@ -9096,7 +9098,7 @@ func main() {
 
 	url := "https://api.sandbox.split.cash/unassigned_agreements"
 
-	payload := strings.NewReader("{\"expiry_in_seconds\":60,\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}}}")
+	payload := strings.NewReader("{\"expiry_in_seconds\":60,\"single_use\":true,\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
 
 	req, _ := http.NewRequest("POST", url, payload)
 
@@ -9126,15 +9128,20 @@ Create an Unassigned Agreement
 ```json
 {
   "expiry_in_seconds": 60,
+  "single_use": true,
   "terms": {
     "per_payout": {
-      "min_amount": null,
+      "min_amount": 0,
       "max_amount": 10000
     },
     "per_frequency": {
       "days": 7,
       "max_amount": 1000000
     }
+  },
+  "metadata": {
+    "custom_key": "Custom string",
+    "another_custom_key": "Maybe a URL"
   }
 }
 ```
@@ -9153,6 +9160,7 @@ Create an Unassigned Agreement
 |»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
 |»»» days|body|number|false|Amount of days to apply against the frequency|
 |»»» max_amount|body|number|false|Maximum amount in cents the total of all PRs can be for the duration of the frequency|
+|»» metadata|body|Metadata|false|Use for your custom data and certain Split customisations. This data will be attached to the resulting Agreement and its associated Payments, Payment Requests and Webhook Events.|
 
 > Example responses
 
@@ -11857,15 +11865,20 @@ func main() {
 ```json
 {
   "expiry_in_seconds": 60,
+  "single_use": true,
   "terms": {
     "per_payout": {
-      "min_amount": null,
+      "min_amount": 0,
       "max_amount": 10000
     },
     "per_frequency": {
       "days": 7,
       "max_amount": 1000000
     }
+  },
+  "metadata": {
+    "custom_key": "Custom string",
+    "another_custom_key": "Maybe a URL"
   }
 }
 ```
@@ -11879,6 +11892,7 @@ func main() {
 |expiry_in_seconds|number|true|The amount of time in seconds before the Unassigned Agreement can no longer be accepted.|
 |single_use|boolean|false|Optionally propose a single use agreement. When the Unassigned Agreement is accepted and a Payment Request is approved according to the Agreement terms, the agreement will automatically become <code>expended</code>.<br><br>The proposed agreement must have equal max/min <code>per_payout</code> amounts and <code>null</code> <code>per_frequency</code> amounts.<br><br>Furthermore, we will automatically check that the authoriser's bank account has sufficient funds to honour the agreement terms.|
 |terms|[Terms](#schematerms)|true|No description|
+|metadata|Metadata|false|Use for your custom data and certain Split customisations. This data will be attached to the resulting Agreement and its associated Payments, Payment Requests and Webhook Events.|
 
 ## ProposeUnassignedAgreementResponse
 
