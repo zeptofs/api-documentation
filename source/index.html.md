@@ -9185,7 +9185,11 @@ Create an Unassigned Agreement
       }
     },
     "assignment_expires_at": "2017-03-20T00:54:27Z",
-    "link": "https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"
+    "link": "https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation",
+    "metadata": {
+      "custom_key": "Custom string",
+      "another_custom_key": "Maybe a URL"
+    }
   }
 }
 ```
@@ -11917,7 +11921,11 @@ func main() {
       }
     },
     "assignment_expires_at": "2017-03-20T00:54:27Z",
-    "link": "https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"
+    "link": "https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation",
+    "metadata": {
+      "custom_key": "Custom string",
+      "another_custom_key": "Maybe a URL"
+    }
   }
 }
 ```
