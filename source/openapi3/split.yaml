@@ -4783,11 +4783,12 @@ components:
           type: boolean
           description: >
             Optionally propose a single use agreement. When the Unassigned Agreement is accepted and a Payment Request is approved according to the Agreement terms, the agreement will automatically become <code>expended</code>.<br><br>The proposed agreement must have equal max/min <code>per_payout</code> amounts and <code>null</code> <code>per_frequency</code> amounts.<br><br>Furthermore, we will automatically check that the authoriser's bank account has sufficient funds to honour the agreement terms.
-          example: true
+          example: false
         terms:
           $ref: '#/components/schemas/Terms'
       example:
         expiry_in_seconds: 60
+        single_use: false
         terms:
           per_payout:
             min_amount: null
