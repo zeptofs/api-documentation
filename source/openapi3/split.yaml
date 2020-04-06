@@ -3357,29 +3357,35 @@ components:
           $ref: '#/components/schemas/PerFrequency'
     PerPayout:
       title: Per payout terms
+      required:
+        - min_amount
+        - max_amount
       type: object
       properties:
         min_amount:
           type: number
-          description: Minimum amount in cents a PR can be in order to be auto-approved
+          description: Minimum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 0
         max_amount:
           type: number
-          description: Maximum amount in cents a PR can be in order to be auto-approved
+          description: Maximum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 10000
     PerFrequency:
       title: Per frequency terms
+      required:
+        - days
+        - max_amount
       type: object
       properties:
         days:
           type: number
-          description: Amount of days to apply against the frequency
+          description: Amount of days to apply against the frequency. Specify <code>null</code> for no limit.
           example: 7
         max_amount:
           type: number
           description: >-
             Maximum amount in cents the total of all PRs can be for the duration
-            of the frequency
+            of the frequency. Specify <code>null</code> for no limit.
           example: 1000000
     ProposeAgreementResponse:
       title: Propose an Agreement (response)
