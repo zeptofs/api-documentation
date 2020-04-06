@@ -4797,7 +4797,7 @@ components:
                 max_amount: 1000000
         metadata:
           type: Metadata
-          description: Use for your custom data and certain Split customisations. This data will be attached to the resulting Agreement and its associated Payments, Payment Requests and Webhook Events.
+          description: Use for your custom data and certain Split customisations. This data will be attached to the resulting Agreement and included in the Agreement Webhook Events.
           example:
             custom_key: Custom string
             another_custom_key: Maybe a URL
