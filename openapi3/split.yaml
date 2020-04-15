@@ -3334,6 +3334,8 @@ components:
           example: 8df89c16-330f-462b-8891-808d7bdceb7f
         terms:
           $ref: '#/components/schemas/Terms'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
       example:
         authoriser_contact_id: 8df89c16-330f-462b-8891-808d7bdceb7f
         terms:
@@ -3343,6 +3345,9 @@ components:
           per_frequency:
             days: 7
             max_amount: 1000000
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
     Terms:
       title: Agreement terms
       required:
@@ -3357,29 +3362,35 @@ components:
           $ref: '#/components/schemas/PerFrequency'
     PerPayout:
       title: Per payout terms
+      required:
+        - min_amount
+        - max_amount
       type: object
       properties:
         min_amount:
           type: number
-          description: Minimum amount in cents a PR can be in order to be auto-approved
+          description: Minimum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 0
         max_amount:
           type: number
-          description: Maximum amount in cents a PR can be in order to be auto-approved
+          description: Maximum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 10000
     PerFrequency:
       title: Per frequency terms
+      required:
+        - days
+        - max_amount
       type: object
       properties:
         days:
           type: number
-          description: Amount of days to apply against the frequency
+          description: Amount of days to apply against the frequency. Specify <code>null</code> for no limit.
           example: 7
         max_amount:
           type: number
           description: >-
             Maximum amount in cents the total of all PRs can be for the duration
-            of the frequency
+            of the frequency. Specify <code>null</code> for no limit.
           example: 1000000
     ProposeAgreementResponse:
       title: Propose an Agreement (response)
@@ -3655,6 +3666,8 @@ components:
           example: Subscription Plan A
         terms:
           $ref: '#/components/schemas/Terms'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
       example:
         title: Subscription Plan A
         terms:
@@ -3664,6 +3677,9 @@ components:
           per_frequency:
             days: 7
             max_amount: 1000000
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
     CreateOpenAgreementResponse:
       title: Create an Open Agreement (response)
       required:
@@ -4129,7 +4145,8 @@ components:
           description: Contact to pay (`Contact.data.id`)
           example: 48b89364-1577-4c81-ba02-96705895d457
         metadata:
-          $ref: '#/components/schemas/Metadata'
+          type: Metadata
+          description: Use for your custom data and certain Split customisations. Stored against generated transactions and included in associated webhook payloads.
     VoidAPayoutRequest:
       title: Void a Payout (request)
       type: object
@@ -4141,7 +4158,7 @@ components:
     Metadata:
       title: Metadata
       type: object
-      description: Use for your custom data and certain Split customisations. This data will be attached to the Payment Request and its associated Payouts, Transactions and Webhook Events.
+      description: Use for your custom data and certain Split customisations.
       properties: {}
       example:
         custom_key: Custom string
@@ -4352,7 +4369,17 @@ components:
           description: Enforce prechecking of available funds before approving the Payment Request. see [Payment Request - Precheck Funds](/#precheck-funds-lifecycle)
           example: "false"
         metadata:
-          $ref: '#/components/schemas/Metadata'
+          type: Metadata
+          description: Use for your custom data and certain Split customisations. Stored against generated transactions and included in associated webhook payloads.
+      example:
+        description: Visible to both initiator and authoriser
+        matures_at: 2016-12-19T02:10:56Z
+        amount: 99000
+        authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
+        precheck_funds: false
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
     MakeAPaymentRequestResponse:
       title: Make a Payment Request (response)
       required:
@@ -4783,11 +4810,14 @@ components:
           type: boolean
           description: >
             Optionally propose a single use agreement. When the Unassigned Agreement is accepted and a Payment Request is approved according to the Agreement terms, the agreement will automatically become <code>expended</code>.<br><br>The proposed agreement must have equal max/min <code>per_payout</code> amounts and <code>null</code> <code>per_frequency</code> amounts.<br><br>Furthermore, we will automatically check that the authoriser's bank account has sufficient funds to honour the agreement terms.
-          example: true
+          example: false
         terms:
           $ref: '#/components/schemas/Terms'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
       example:
         expiry_in_seconds: 60
+        single_use: false
         terms:
           per_payout:
             min_amount: null
@@ -4795,6 +4825,9 @@ components:
           per_frequency:
             days: 7
             max_amount: 1000000
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
     ProposeUnassignedAgreementResponse:
       title: Propose an Unassigned Agreement (response)
       required:
@@ -4820,6 +4853,9 @@ components:
           assignment_expires_at: '2017-03-20T00:54:27Z'
           link: >-
             https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation
+          metadata:
+            custom_key: Custom string
+            another_custom_key: Maybe a URL
     ListUnassignedAgreementsResponse:
       title: List Unassigned Agreements (response)
       required:
