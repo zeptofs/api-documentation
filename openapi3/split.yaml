@@ -574,6 +574,10 @@ info:
 
     * Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 
+    * A request that quickly follows another with the same idempotency key may return
+    with `503 Service Unavailable`. If so, retry the request after the number of seconds
+    specified in the `Retry-After` response header.
+
 
     ## Error responses
 

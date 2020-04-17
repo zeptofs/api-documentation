@@ -1112,6 +1112,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>The <code>Idempotency-Key</code> header is optional but recommended.</li>
 <li>Only the <code>POST</code> action for the Payments, Payment Requests and Refunds endpoints support the use of the <code>Idempotency-Key</code>.</li>
 <li>Endpoints that use the <code>GET</code> or <code>DELETE</code> actions are idempotent by nature.</li>
+<li>A request that quickly follows another with the same idempotency key may return with <code>503 Service Unavailable</code>. If so, retry the request after the number of seconds specified in the <code>Retry-After</code> response header.</li>
 </ul>
 <h2 id='error-responses'>Error responses</h2>
 <blockquote>
@@ -1917,14 +1918,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'8df89c16-330f-462b-8891-808d7bdceb7f'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
-    <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'8df89c16-330f-462b-8891-808d7bdceb7f'</span><span class="p">,</span>
+  <span class="na">terms</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
+     <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">},</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -4206,10 +4206,10 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">nickname</span><span class="p">:</span> <span class="s1">'outstanding_tours'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">nickname</span><span class="p">:</span> <span class="s1">'outstanding_tours'</span><span class="p">,</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -4758,13 +4758,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">name</span><span class="p">:</span> <span class="s1">'Hunter Thompson'</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'Hunter Thompson'</span><span class="p">,</span>
   <span class="na">email</span><span class="p">:</span> <span class="s1">'hunter@batcountry.com'</span><span class="p">,</span>
   <span class="na">branch_code</span><span class="p">:</span> <span class="s1">'123456'</span><span class="p">,</span>
   <span class="na">account_number</span><span class="p">:</span> <span class="s1">'13048322'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -5787,14 +5787,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">title</span><span class="p">:</span> <span class="s1">'Subscription Plan A'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
-    <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s1">'Subscription Plan A'</span><span class="p">,</span>
+  <span class="na">terms</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
+     <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">},</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -6742,14 +6741,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">description</span><span class="p">:</span> <span class="s1">'Visible to both initiator and authoriser'</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">description</span><span class="p">:</span> <span class="s1">'Visible to both initiator and authoriser'</span><span class="p">,</span>
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'2016-12-19T02:10:56.000Z'</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mi">99000</span><span class="p">,</span>
   <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'de86472c-c027-4735-a6a7-234366a27fc7'</span><span class="p">,</span>
   <span class="na">precheck_funds</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -8404,29 +8403,23 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">description</span><span class="p">:</span> <span class="s1">'The SuperPackage'</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">description</span><span class="p">:</span> <span class="s1">'The SuperPackage'</span><span class="p">,</span>
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'2016-09-13T00:00:00Z'</span><span class="p">,</span>
-  <span class="na">payouts</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s1">'A tandem skydive jump SB23094'</span><span class="p">,</span>
-      <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'48b89364-1577-4c81-ba02-96705895d457'</span><span class="p">,</span>
-      <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">invoice_ref</span><span class="p">:</span> <span class="s1">'BILL-0001'</span><span class="p">,</span>
-        <span class="na">invoice_id</span><span class="p">:</span> <span class="s1">'c80a9958-e805-47c0-ac2a-c947d7fd778d'</span><span class="p">,</span>
-        <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
-        <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s1">'A scuba dive SDS5464'</span><span class="p">,</span>
-      <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'dc6f1e60-3803-43ca-a200-7d641816f57f'</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">payouts</span><span class="p">:</span>
+   <span class="p">[</span> <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
+       <span class="na">description</span><span class="p">:</span> <span class="s1">'A tandem skydive jump SB23094'</span><span class="p">,</span>
+       <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'48b89364-1577-4c81-ba02-96705895d457'</span><span class="p">,</span>
+       <span class="na">metadata</span><span class="p">:</span>
+        <span class="p">{</span> <span class="na">invoice_ref</span><span class="p">:</span> <span class="s1">'BILL-0001'</span><span class="p">,</span>
+          <span class="na">invoice_id</span><span class="p">:</span> <span class="s1">'c80a9958-e805-47c0-ac2a-c947d7fd778d'</span><span class="p">,</span>
+          <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+          <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">},</span>
+     <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
+       <span class="na">description</span><span class="p">:</span> <span class="s1">'A scuba dive SDS5464'</span><span class="p">,</span>
+       <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'dc6f1e60-3803-43ca-a200-7d641816f57f'</span> <span class="p">}</span> <span class="p">],</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -9562,11 +9555,11 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
   <span class="na">reason</span><span class="p">:</span> <span class="s1">'Because reason'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -10937,15 +10930,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">expiry_in_seconds</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">expiry_in_seconds</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
   <span class="na">single_use</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
-    <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">terms</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
+     <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">},</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
