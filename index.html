@@ -1147,7 +1147,16 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>Idempotency</li>
 </ul>
 
-<p>All other errors relating to Split specific resources(e.g. Contacts) will return the <strong>Resource error response</strong> style.</p>
+<p>All other errors relating to Split specific resources(e.g. Contacts) will return the <strong>Resource error response</strong> style.
+<div class="middle-header">403 errors</div></p>
+
+<p><strong>403 errors</strong> are generally returned from any of our endpoints if your application does not have the required authorisation. This is usually due to:</p>
+
+<ul>
+<li>An <a href="/#authentication-and-authorisation">invalid/expired <code>access_token</code></a>; or</li>
+<li>The required <strong>scopes</strong> not being present when setting up your <a href="https://go.sandbox.split.cash/oauth/applications">OAuth application</a>; or</li>
+<li>The required <strong>scopes</strong> not being present in the <a href="/#oauth-grant-flow">authorisation code link</a> used to present your user with an authorisation request.</li>
+</ul>
 <h2 id='speeding-up-onboarding'>Speeding up onboarding</h2>
 <p>Consider the following scenario:</p>
 

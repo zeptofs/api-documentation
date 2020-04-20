@@ -627,6 +627,19 @@ info:
 
     All other errors relating to Split specific resources(e.g. Contacts) will return the **Resource error response** style.
 
+    <div class="middle-header">403 errors</div>
+
+
+    **403 errors** are generally returned from any of our endpoints if your
+    application does not have the required authorisation. This is usually due to:
+
+
+    * An [invalid/expired `access_token`](/#authentication-and-authorisation); or
+
+    * The required **scopes** not being present when setting up your [OAuth application](https://go.sandbox.split.cash/oauth/applications); or
+
+    * The required **scopes** not being present in the [authorisation code link](/#oauth-grant-flow) used to present your user with an authorisation request.
+
 
     ## Speeding up onboarding
 
