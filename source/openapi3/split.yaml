@@ -2395,12 +2395,14 @@ paths:
         - Contacts
       summary: Update a Contact
       description: >
-        You can update the name and email of any Contact. This is essentially an alias you
-        can use to provide something contextually meaningful.
-
+        You can update the name, email, bank account and metadata of any Contact.
 
         <aside class="notice">
-          Any previous transactions to that Contact will retain the Contact name that was current at the time.
+          <ul>
+            <li>Previous transactions to this Contact will retain the name and bank account that was used at the time.</li>
+            <li>You cannot update a Contact's bank account details if they currently have an accepted agreement.</li>
+            <li>Any active Bank Connections will be lost if you change the Contact's bank account.</li>
+          </ul>
         </aside>
       operationId: UpdateAContact
       parameters:
@@ -4061,9 +4063,22 @@ components:
         email:
           type: string
           description: The email of the Contact
+        branch_code:
+          type: string
+          description: The bank account BSB of the Contact
+        account_number:
+          type: string
+          description: The bank account number of the Contact
+        metadata:
+          $ref: '#/components/schemas/Metadata'
       example:
         name: My very own alias
         email: updated@email.com
+        branch_code: '123456'
+        account_number: '99887766'
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
     UpdateAContactResponse:
       title: Update a Contact (response)
       required:
@@ -4076,21 +4091,26 @@ components:
         data:
           id: fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb
           name: My very own alias
-          email: accounts@outstandingtours.com.au
-          type: Split account
+          email: updated@email.com
+          type: anyone
+          metadata:
+            custom_key: Custom string
+            another_custom_key: Maybe a URL
           bank_account:
             id: 55afddde-4296-4daf-8e49-7ba481ef9608
-            account_number: '947434694'
-            branch_code: '304304'
-            bank_name: National Australia Bank
+            account_number: '99887766'
+            branch_code: '123456'
+            bank_name: Split SANDBOX Bank
             state: active
-            iav_provider: split
-            iav_status: active
+            iav_provider: null
+            iav_status: null
             blocks:
               debits_blocked: false
               credits_blocked: false
-          bank_connection:
-            id: 1030bfef-cef5-4938-b10b-5841cafafc80
+          anyone_account:
+            id: 63232c0a-a783-4ae9-ae73-f0974fe1e345
+          links:
+            add_bank_connection: http://go.sandbox.split.cash/invite_contact/dog-bones-inc/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb
     MakeAPaymentRequest:
       title: Make a Payment (request)
       required:

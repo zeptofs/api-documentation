@@ -479,6 +479,10 @@ html, body {
     &.success {
       background-color: $aside-success-bg;
     }
+
+    ul {
+      margin-top: -1.5em;
+    }
   }
 
   aside:before {

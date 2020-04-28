@@ -989,13 +989,14 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ authoriser_contact_id: '8df89c16-330f-462b-8891-808d7bdceb7f',
-  terms:
-   { per_payout: { min_amount: null, max_amount: 10000 },
-     per_frequency: { days: 7, max_amount: 1000000 } },
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+req.write(JSON.stringify({
+  authoriser_contact_id: '8df89c16-330f-462b-8891-808d7bdceb7f',
+  terms: {
+    per_payout: { min_amount: null, max_amount: 10000 },
+    per_frequency: { days: 7, max_amount: 1000000 }
+  },
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -3070,10 +3071,10 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ nickname: 'outstanding_tours',
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+req.write(JSON.stringify({
+  nickname: 'outstanding_tours',
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -3556,13 +3557,13 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ name: 'Hunter Thompson',
+req.write(JSON.stringify({
+  name: 'Hunter Thompson',
   email: 'hunter@batcountry.com',
   branch_code: '123456',
   account_number: '13048322',
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -4064,7 +4065,7 @@ curl --request PATCH \
   --header 'accept: application/json' \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
-  --data '{"name":"My very own alias","email":"updated@email.com"}'
+  --data '{"name":"My very own alias","email":"updated@email.com","branch_code":"123456","account_number":"99887766","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'
 ```
 
 ```ruby
@@ -4081,7 +4082,7 @@ request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/json'
 request["accept"] = 'application/json'
 request["authorization"] = 'Bearer {access-token}'
-request.body = "{\"name\":\"My very own alias\",\"email\":\"updated@email.com\"}"
+request.body = "{\"name\":\"My very own alias\",\"email\":\"updated@email.com\",\"branch_code\":\"123456\",\"account_number\":\"99887766\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 response = http.request(request)
 puts response.read_body
@@ -4115,7 +4116,13 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ name: 'My very own alias', email: 'updated@email.com' }));
+req.write(JSON.stringify({
+  name: 'My very own alias',
+  email: 'updated@email.com',
+  branch_code: '123456',
+  account_number: '99887766',
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -4124,7 +4131,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("api.sandbox.split.cash")
 
-payload = "{\"name\":\"My very own alias\",\"email\":\"updated@email.com\"}"
+payload = "{\"name\":\"My very own alias\",\"email\":\"updated@email.com\",\"branch_code\":\"123456\",\"account_number\":\"99887766\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 headers = {
     'content-type': "application/json",
@@ -4145,7 +4152,7 @@ HttpResponse<String> response = Unirest.patch("https://api.sandbox.split.cash/co
   .header("content-type", "application/json")
   .header("accept", "application/json")
   .header("authorization", "Bearer {access-token}")
-  .body("{\"name\":\"My very own alias\",\"email\":\"updated@email.com\"}")
+  .body("{\"name\":\"My very own alias\",\"email\":\"updated@email.com\",\"branch_code\":\"123456\",\"account_number\":\"99887766\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
   .asString();
 ```
 
@@ -4156,7 +4163,7 @@ $client = new http\Client;
 $request = new http\Client\Request;
 
 $body = new http\Message\Body;
-$body->append('{"name":"My very own alias","email":"updated@email.com"}');
+$body->append('{"name":"My very own alias","email":"updated@email.com","branch_code":"123456","account_number":"99887766","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}');
 
 $request->setRequestUrl('https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608');
 $request->setRequestMethod('PATCH');
@@ -4188,7 +4195,7 @@ func main() {
 
 	url := "https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608"
 
-	payload := strings.NewReader("{\"name\":\"My very own alias\",\"email\":\"updated@email.com\"}")
+	payload := strings.NewReader("{\"name\":\"My very own alias\",\"email\":\"updated@email.com\",\"branch_code\":\"123456\",\"account_number\":\"99887766\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
 
 	req, _ := http.NewRequest("PATCH", url, payload)
 
@@ -4209,10 +4216,13 @@ func main() {
 
 `PATCH /contacts/{id}`
 
-You can update the name and email of any Contact. This is essentially an alias you can use to provide something contextually meaningful.
-
+You can update the name, email, bank account and metadata of any Contact.
 <aside class="notice">
-  Any previous transactions to that Contact will retain the Contact name that was current at the time.
+  <ul>
+    <li>Previous transactions to this Contact will retain the name and bank account that was used at the time.</li>
+    <li>You cannot update a Contact's bank account details if they currently have an accepted agreement.</li>
+    <li>Any active Bank Connections will be lost if you change the Contact's bank account.</li>
+  </ul>
 </aside>
 
 > Body parameter
@@ -4220,7 +4230,13 @@ You can update the name and email of any Contact. This is essentially an alias y
 ```json
 {
   "name": "My very own alias",
-  "email": "updated@email.com"
+  "email": "updated@email.com",
+  "branch_code": "123456",
+  "account_number": "99887766",
+  "metadata": {
+    "custom_key": "Custom string",
+    "another_custom_key": "Maybe a URL"
+  }
 }
 ```
 
@@ -4232,6 +4248,9 @@ You can update the name and email of any Contact. This is essentially an alias y
 |body|body|[UpdateAContactRequest](#schemaupdateacontactrequest)|true|No description|
 |» name|body|string|false|The name of the Contact|
 |» email|body|string|false|The email of the Contact|
+|» branch_code|body|string|false|The bank account BSB of the Contact|
+|» account_number|body|string|false|The bank account number of the Contact|
+|» metadata|body|[Metadata](#schemametadata)|false|Use for your custom data and certain Split customisations.|
 
 > Example responses
 
@@ -4242,23 +4261,30 @@ You can update the name and email of any Contact. This is essentially an alias y
   "data": {
     "id": "fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb",
     "name": "My very own alias",
-    "email": "accounts@outstandingtours.com.au",
-    "type": "Split account",
+    "email": "updated@email.com",
+    "type": "anyone",
+    "metadata": {
+      "custom_key": "Custom string",
+      "another_custom_key": "Maybe a URL"
+    },
     "bank_account": {
       "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
-      "account_number": "947434694",
-      "branch_code": "304304",
-      "bank_name": "National Australia Bank",
+      "account_number": "99887766",
+      "branch_code": "123456",
+      "bank_name": "Split SANDBOX Bank",
       "state": "active",
-      "iav_provider": "split",
-      "iav_status": "active",
+      "iav_provider": null,
+      "iav_status": null,
       "blocks": {
         "debits_blocked": false,
         "credits_blocked": false
       }
     },
-    "bank_connection": {
-      "id": "1030bfef-cef5-4938-b10b-5841cafafc80"
+    "anyone_account": {
+      "id": "63232c0a-a783-4ae9-ae73-f0974fe1e345"
+    },
+    "links": {
+      "add_bank_connection": "http://go.sandbox.split.cash/invite_contact/dog-bones-inc/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb"
     }
   }
 }
@@ -4493,13 +4519,14 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ title: 'Subscription Plan A',
-  terms:
-   { per_payout: { min_amount: null, max_amount: 10000 },
-     per_frequency: { days: 7, max_amount: 1000000 } },
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+req.write(JSON.stringify({
+  title: 'Subscription Plan A',
+  terms: {
+    per_payout: { min_amount: null, max_amount: 10000 },
+    per_frequency: { days: 7, max_amount: 1000000 }
+  },
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -5333,14 +5360,14 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ description: 'Visible to both initiator and authoriser',
+req.write(JSON.stringify({
+  description: 'Visible to both initiator and authoriser',
   matures_at: '2016-12-19T02:10:56.000Z',
   amount: 99000,
   authoriser_contact_id: 'de86472c-c027-4735-a6a7-234366a27fc7',
   precheck_funds: false,
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -6909,23 +6936,29 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ description: 'The SuperPackage',
+req.write(JSON.stringify({
+  description: 'The SuperPackage',
   matures_at: '2016-09-13T00:00:00Z',
-  payouts:
-   [ { amount: 30000,
-       description: 'A tandem skydive jump SB23094',
-       recipient_contact_id: '48b89364-1577-4c81-ba02-96705895d457',
-       metadata:
-        { invoice_ref: 'BILL-0001',
-          invoice_id: 'c80a9958-e805-47c0-ac2a-c947d7fd778d',
-          custom_key: 'Custom string',
-          another_custom_key: 'Maybe a URL' } },
-     { amount: 30000,
-       description: 'A scuba dive SDS5464',
-       recipient_contact_id: 'dc6f1e60-3803-43ca-a200-7d641816f57f' } ],
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  payouts: [
+    {
+      amount: 30000,
+      description: 'A tandem skydive jump SB23094',
+      recipient_contact_id: '48b89364-1577-4c81-ba02-96705895d457',
+      metadata: {
+        invoice_ref: 'BILL-0001',
+        invoice_id: 'c80a9958-e805-47c0-ac2a-c947d7fd778d',
+        custom_key: 'Custom string',
+        another_custom_key: 'Maybe a URL'
+      }
+    },
+    {
+      amount: 30000,
+      description: 'A scuba dive SDS5464',
+      recipient_contact_id: 'dc6f1e60-3803-43ca-a200-7d641816f57f'
+    }
+  ],
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -7959,11 +7992,11 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ amount: 500,
+req.write(JSON.stringify({
+  amount: 500,
   reason: 'Because reason',
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -9029,14 +9062,15 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ expiry_in_seconds: 60,
+req.write(JSON.stringify({
+  expiry_in_seconds: 60,
   single_use: false,
-  terms:
-   { per_payout: { min_amount: null, max_amount: 10000 },
-     per_frequency: { days: 7, max_amount: 1000000 } },
-  metadata:
-   { custom_key: 'Custom string',
-     another_custom_key: 'Maybe a URL' } }));
+  terms: {
+    per_payout: { min_amount: null, max_amount: 10000 },
+    per_frequency: { days: 7, max_amount: 1000000 }
+  },
+  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+}));
 req.end();
 ```
 
@@ -10892,7 +10926,13 @@ func main() {
 ```json
 {
   "name": "My very own alias",
-  "email": "updated@email.com"
+  "email": "updated@email.com",
+  "branch_code": "123456",
+  "account_number": "99887766",
+  "metadata": {
+    "custom_key": "Custom string",
+    "another_custom_key": "Maybe a URL"
+  }
 }
 ```
 
@@ -10904,6 +10944,9 @@ func main() {
 |---|---|---|---|
 |name|string|false|The name of the Contact|
 |email|string|false|The email of the Contact|
+|branch_code|string|false|The bank account BSB of the Contact|
+|account_number|string|false|The bank account number of the Contact|
+|metadata|[Metadata](#schemametadata)|false|No description|
 
 ## UpdateAContactResponse
 
@@ -10914,23 +10957,30 @@ func main() {
   "data": {
     "id": "fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb",
     "name": "My very own alias",
-    "email": "accounts@outstandingtours.com.au",
-    "type": "Split account",
+    "email": "updated@email.com",
+    "type": "anyone",
+    "metadata": {
+      "custom_key": "Custom string",
+      "another_custom_key": "Maybe a URL"
+    },
     "bank_account": {
       "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
-      "account_number": "947434694",
-      "branch_code": "304304",
-      "bank_name": "National Australia Bank",
+      "account_number": "99887766",
+      "branch_code": "123456",
+      "bank_name": "Split SANDBOX Bank",
       "state": "active",
-      "iav_provider": "split",
-      "iav_status": "active",
+      "iav_provider": null,
+      "iav_status": null,
       "blocks": {
         "debits_blocked": false,
         "credits_blocked": false
       }
     },
-    "bank_connection": {
-      "id": "1030bfef-cef5-4938-b10b-5841cafafc80"
+    "anyone_account": {
+      "id": "63232c0a-a783-4ae9-ae73-f0974fe1e345"
+    },
+    "links": {
+      "add_bank_connection": "http://go.sandbox.split.cash/invite_contact/dog-bones-inc/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb"
     }
   }
 }
