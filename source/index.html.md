@@ -2622,7 +2622,7 @@ By default, all Bank Connections will be returned. You can apply filters to your
       "id": "fb497754-87e2-407d-871f-32aec39d09d4",
       "provider_name": "split",
       "state": "active",
-      "refreshed_at": "2020-02-13T20:05:00.000+11:00",
+      "refreshed_at": "2020-02-13T09:05Z",
       "removed_at": null,
       "failure_reason": null,
       "institution": {
@@ -2642,7 +2642,7 @@ By default, all Bank Connections will be returned. You can apply filters to your
       "id": "ddbee875-7344-4d74-9503-6233149fe1a0",
       "provider_name": "split",
       "state": "credentials_invalid",
-      "refreshed_at": "2020-02-13T20:05:00.000+11:00",
+      "refreshed_at": "2020-02-13T09:05:00Z",
       "removed_at": null,
       "failure_reason": null,
       "institution": {
@@ -2822,7 +2822,7 @@ Get a single Bank Connection by its ID
     "id": "c397645b-bd4f-4fc6-b1fe-4993fef6c3c7",
     "provider_name": "split",
     "state": "credentials_invalid",
-    "refreshed_at": "2020-02-13T20:01:00.000+11:00",
+    "refreshed_at": "2020-02-13T09:01:00Z",
     "removed_at": null,
     "failure_reason": null,
     "institution": {
@@ -10294,7 +10294,7 @@ func main() {
       "id": "fb497754-87e2-407d-871f-32aec39d09d4",
       "provider_name": "split",
       "state": "active",
-      "refreshed_at": "2020-02-13T20:05:00.000+11:00",
+      "refreshed_at": "2020-02-13T09:05Z",
       "removed_at": null,
       "failure_reason": null,
       "institution": {
@@ -10314,7 +10314,7 @@ func main() {
       "id": "ddbee875-7344-4d74-9503-6233149fe1a0",
       "provider_name": "split",
       "state": "credentials_invalid",
-      "refreshed_at": "2020-02-13T20:05:00.000+11:00",
+      "refreshed_at": "2020-02-13T09:05:00Z",
       "removed_at": null,
       "failure_reason": null,
       "institution": {
@@ -10787,7 +10787,7 @@ func main() {
     "id": "c397645b-bd4f-4fc6-b1fe-4993fef6c3c7",
     "provider_name": "split",
     "state": "credentials_invalid",
-    "refreshed_at": "2020-02-13T20:01:00.000+11:00",
+    "refreshed_at": "2020-02-13T09:01:00Z",
     "removed_at": null,
     "failure_reason": null,
     "institution": {
