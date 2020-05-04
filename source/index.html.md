@@ -2635,7 +2635,7 @@ By default, all Bank Connections will be returned. You can apply filters to your
       "id": "fb497754-87e2-407d-871f-32aec39d09d4",
       "provider_name": "split",
       "state": "active",
-      "refreshed_at": "2020-02-13T09:05Z",
+      "refreshed_at": "2020-02-13T09:05:00Z",
       "removed_at": null,
       "failure_reason": null,
       "institution": {
@@ -10355,7 +10355,7 @@ func main() {
       "id": "fb497754-87e2-407d-871f-32aec39d09d4",
       "provider_name": "split",
       "state": "active",
-      "refreshed_at": "2020-02-13T09:05Z",
+      "refreshed_at": "2020-02-13T09:05:00Z",
       "removed_at": null,
       "failure_reason": null,
       "institution": {
