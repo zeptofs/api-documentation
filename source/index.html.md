@@ -4222,6 +4222,7 @@ You can update the name, email, bank account and metadata of any Contact.
     <li>Previous transactions to this Contact will retain the name and bank account that was used at the time.</li>
     <li>You cannot update a Contact's bank account details if they currently have an accepted agreement.</li>
     <li>Any active Bank Connections will be lost if you change the Contact's bank account.</li>
+    <li>[Click here](https://help.split.cash/en/articles/3829211-how-do-i-change-my-customers-bank-account-details) to view an article explaining how to correctly update your contacts Bank details</li>
   </ul>
 </aside>
 
