@@ -552,13 +552,16 @@ By default, all Agreements sent to Contacts with a failure bank account will be 
 ## Instant account verification accounts
 When using any of our hosted solutions ([Payment Requests](https://help.split.cash/payment-requests/open-payment-requests), [Open Agreements](https://help.split.cash/agreements/open-agreement) or [Unassigned Agreements](http://help.split.cash/agreements/unassigned-agreement)) you may want to test the [Instant Account Verification (IAV)](http://help.split.cash/bank-accounts/instant-account-verification-iav) process where we accept online banking credentials to validate bank account access. To do so, you can use the following credentials:
 
-| Login | Password |
-|-------|----------|
-| `12345678` | `TestMyMoney` |
+| Login | Password | Available Balance |
+|-------|----------|---------|
+| `12345678` | `TestMyMoney` | `$123.45` |
 
 <aside class="notice">The credentials will work with any of the available financial institutions.</aside>
-# Configuration
+## Available balances in the test environment
+If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested, this is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.
 
+In the testing environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the available balance of their bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount less than or equal to this amount will succeed.
+# Configuration
 ## Scopes
 Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.
 
