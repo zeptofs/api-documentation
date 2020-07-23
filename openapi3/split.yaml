@@ -4140,6 +4140,13 @@ components:
           type: string
           description: Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day)
           example: '9/13/2016 12:00:00 AM'
+        your_bank_account_id:
+          type: string
+          description: Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.
+          style: form
+          schema:
+            type: string
+          example: 83623359-e86e-440c-9780-432a3bc3626f
         payouts:
           type: array
           items:
@@ -4150,6 +4157,7 @@ components:
       example:
         description: The SuperPackage
         matures_at: '2016-09-13T00:00:00Z'
+        your_bank_account_id: 83623359-e86e-440c-9780-432a3bc3626f
         payouts:
           - amount: 30000
             description: A tandem skydive jump SB23094
@@ -4428,6 +4436,13 @@ components:
           type: boolean
           description: Enforce prechecking of available funds before approving the Payment Request. see [Payment Request - Precheck Funds](/#precheck-funds-lifecycle)
           example: "false"
+        your_bank_account_id:
+          type: string
+          description: Specify where we should settle the funds for this transaction. If omitted, your primary bank account will be used.
+          style: form
+          schema:
+            type: string
+          example: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         metadata:
           type: Metadata
           description: Use for your custom data and certain Split customisations. Stored against generated transactions and included in associated webhook payloads.
@@ -4436,6 +4451,7 @@ components:
         matures_at: 2016-12-19T02:10:56Z
         amount: 99000
         authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
+        your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         precheck_funds: false
         metadata:
           custom_key: Custom string
@@ -4676,11 +4692,19 @@ components:
           type: string
           description: Reason for the refund. Visible to both parties.
           example: Because reason
+        your_bank_account_id:
+          type: string
+          description: Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.
+          style: form
+          schema:
+            type: string
+          example: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         metadata:
           $ref: '#/components/schemas/Metadata'
       example:
         amount: 500
         reason: Because reason
+        your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         metadata:
           custom_key: Custom string
           another_custom_key: Maybe a URL
