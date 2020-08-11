@@ -921,7 +921,7 @@ An Agreement can have the following statuses:
 | Status | Description |
 |-------|-------------|
 | `proposed` | Waiting for the Agreement to be accepted or declined. |
-| `accepted` | The Agreement have been accepted and is active. |
+| `accepted` | The Agreement has been accepted and is active. |
 | `cancelled` | The Agreement has been cancelled (The initiator or authoriser can cancel an Agreement). |
 | `declined` | The Agreement has been declined. |
 | `expended` | The Agreement has been expended (Only for [single_use Unassigned Agreements](/#Split-API-Unassigned-Agreements)). |
