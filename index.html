@@ -1927,14 +1927,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'8df89c16-330f-462b-8891-808d7bdceb7f'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
-    <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'8df89c16-330f-462b-8891-808d7bdceb7f'</span><span class="p">,</span>
+  <span class="na">terms</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
+     <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">},</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -3522,7 +3521,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3993013"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU.493192.3993013"</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU.493192.3993013"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="p">,</span><span class="w">
@@ -3530,7 +3530,17 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"119302"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trust Account"</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trust Account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab3de19b-709b-4a41-82a5-3b43b3dc58c9"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Float Account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1748212"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float Account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4218,10 +4228,10 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">nickname</span><span class="p">:</span> <span class="s1">'outstanding_tours'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">nickname</span><span class="p">:</span> <span class="s1">'outstanding_tours'</span><span class="p">,</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -4770,13 +4780,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">name</span><span class="p">:</span> <span class="s1">'Hunter Thompson'</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'Hunter Thompson'</span><span class="p">,</span>
   <span class="na">email</span><span class="p">:</span> <span class="s1">'hunter@batcountry.com'</span><span class="p">,</span>
   <span class="na">branch_code</span><span class="p">:</span> <span class="s1">'123456'</span><span class="p">,</span>
   <span class="na">account_number</span><span class="p">:</span> <span class="s1">'13048322'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -5376,13 +5386,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">name</span><span class="p">:</span> <span class="s1">'My very own alias'</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'My very own alias'</span><span class="p">,</span>
   <span class="na">email</span><span class="p">:</span> <span class="s1">'updated@email.com'</span><span class="p">,</span>
   <span class="na">branch_code</span><span class="p">:</span> <span class="s1">'123456'</span><span class="p">,</span>
   <span class="na">account_number</span><span class="p">:</span> <span class="s1">'99887766'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -5843,14 +5853,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">title</span><span class="p">:</span> <span class="s1">'Subscription Plan A'</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
-    <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s1">'Subscription Plan A'</span><span class="p">,</span>
+  <span class="na">terms</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
+     <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">},</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -6798,15 +6807,15 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">description</span><span class="p">:</span> <span class="s1">'Visible to both initiator and authoriser'</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">description</span><span class="p">:</span> <span class="s1">'Visible to both initiator and authoriser'</span><span class="p">,</span>
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'2016-12-19T02:10:56.000Z'</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mi">99000</span><span class="p">,</span>
   <span class="na">authoriser_contact_id</span><span class="p">:</span> <span class="s1">'de86472c-c027-4735-a6a7-234366a27fc7'</span><span class="p">,</span>
   <span class="na">your_bank_account_id</span><span class="p">:</span> <span class="s1">'9c70871d-8e36-4c3e-8a9c-c0ee20e7c679'</span><span class="p">,</span>
   <span class="na">precheck_funds</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -8479,30 +8488,24 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">description</span><span class="p">:</span> <span class="s1">'The SuperPackage'</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">description</span><span class="p">:</span> <span class="s1">'The SuperPackage'</span><span class="p">,</span>
   <span class="na">matures_at</span><span class="p">:</span> <span class="s1">'2016-09-13T00:00:00Z'</span><span class="p">,</span>
   <span class="na">your_bank_account_id</span><span class="p">:</span> <span class="s1">'83623359-e86e-440c-9780-432a3bc3626f'</span><span class="p">,</span>
-  <span class="na">payouts</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s1">'A tandem skydive jump SB23094'</span><span class="p">,</span>
-      <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'48b89364-1577-4c81-ba02-96705895d457'</span><span class="p">,</span>
-      <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">invoice_ref</span><span class="p">:</span> <span class="s1">'BILL-0001'</span><span class="p">,</span>
-        <span class="na">invoice_id</span><span class="p">:</span> <span class="s1">'c80a9958-e805-47c0-ac2a-c947d7fd778d'</span><span class="p">,</span>
-        <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
-        <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s1">'A scuba dive SDS5464'</span><span class="p">,</span>
-      <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'dc6f1e60-3803-43ca-a200-7d641816f57f'</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">payouts</span><span class="p">:</span>
+   <span class="p">[</span> <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
+       <span class="na">description</span><span class="p">:</span> <span class="s1">'A tandem skydive jump SB23094'</span><span class="p">,</span>
+       <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'48b89364-1577-4c81-ba02-96705895d457'</span><span class="p">,</span>
+       <span class="na">metadata</span><span class="p">:</span>
+        <span class="p">{</span> <span class="na">invoice_ref</span><span class="p">:</span> <span class="s1">'BILL-0001'</span><span class="p">,</span>
+          <span class="na">invoice_id</span><span class="p">:</span> <span class="s1">'c80a9958-e805-47c0-ac2a-c947d7fd778d'</span><span class="p">,</span>
+          <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+          <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">},</span>
+     <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
+       <span class="na">description</span><span class="p">:</span> <span class="s1">'A scuba dive SDS5464'</span><span class="p">,</span>
+       <span class="na">recipient_contact_id</span><span class="p">:</span> <span class="s1">'dc6f1e60-3803-43ca-a200-7d641816f57f'</span> <span class="p">}</span> <span class="p">],</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -9650,12 +9653,12 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
   <span class="na">reason</span><span class="p">:</span> <span class="s1">'Because reason'</span><span class="p">,</span>
   <span class="na">your_bank_account_id</span><span class="p">:</span> <span class="s1">'9c70871d-8e36-4c3e-8a9c-c0ee20e7c679'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -11038,15 +11041,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">expiry_in_seconds</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">expiry_in_seconds</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
   <span class="na">single_use</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="na">terms</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
-    <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span>
-<span class="p">}));</span>
+  <span class="na">terms</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">per_payout</span><span class="p">:</span> <span class="p">{</span> <span class="na">min_amount</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">10000</span> <span class="p">},</span>
+     <span class="na">per_frequency</span><span class="p">:</span> <span class="p">{</span> <span class="na">days</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="na">max_amount</span><span class="p">:</span> <span class="mi">1000000</span> <span class="p">}</span> <span class="p">},</span>
+  <span class="na">metadata</span><span class="p">:</span>
+   <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="s1">'Custom string'</span><span class="p">,</span>
+     <span class="na">another_custom_key</span><span class="p">:</span> <span class="s1">'Maybe a URL'</span> <span class="p">}</span> <span class="p">}));</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
 
@@ -12449,7 +12451,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3993013"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU.493192.3993013"</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU.493192.3993013"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="p">,</span><span class="w">
@@ -12457,7 +12460,17 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"119302"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trust Account"</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trust Account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab3de19b-709b-4a41-82a5-3b43b3dc58c9"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Float Account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1748212"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float Account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
