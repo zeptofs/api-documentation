@@ -873,8 +873,14 @@ info:
     <aside class="notice">The credentials will work with any of the available
     financial institutions.</aside>
 
-    # Configuration
+    ## Available balances in the Sandbox
 
+    If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested. This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.
+
+
+    In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the available balance of their bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount less than or equal to this amount will succeed.
+
+    # Configuration
 
     ## Scopes
 
@@ -1800,7 +1806,8 @@ tags:
             "party_name": "Sanford-Rees",
             "party_nickname": "sanford-rees-8",
             "description": null,
-            "amount": 1
+            "amount": 1,
+            "bank_account_id": "56df206a-aaff-471a-b075-11882bc8906a"
           }
         ]
       }
@@ -4863,6 +4870,7 @@ components:
             party_bank_ref: CT.11
             description: null
             amount: 20000
+            bank_account_id: '56df206a-aaff-471a-b075-11882bc8906a'
           - ref: D.2
             parent_ref: PB.2
             type: debit
@@ -4879,6 +4887,7 @@ components:
             party_bank_ref: null
             description: Batteries for hire
             amount: 2949299
+            bank_account_id: '56df206a-aaff-471a-b075-11882bc8906a'
           - ref: C.2
             parent_ref: PB.s0z
             type: credit
@@ -4895,6 +4904,7 @@ components:
             party_bank_ref: null
             description: Online purchase
             amount: 19999
+            bank_account_id: 'c2e329ae-606f-4311-a9ab-a751baa1915c'
             metadata:
               customer_id: xur4492
               product_ref: TSXL392110x

@@ -278,6 +278,9 @@
                   <li>
                     <a href="#instant-account-verification-accounts" class="toc-h2 toc-link" data-title="Instant account verification accounts">Instant account verification accounts</a>
                   </li>
+                  <li>
+                    <a href="#available-balances-in-the-sandbox" class="toc-h2 toc-link" data-title="Available balances in the Sandbox">Available balances in the Sandbox</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1456,6 +1459,10 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 </tbody></table>
 
 <aside class="notice">The credentials will work with any of the available financial institutions.</aside>
+<h2 id='available-balances-in-the-sandbox'>Available balances in the Sandbox</h2>
+<p>If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested. This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.</p>
+
+<p>In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the available balance of their bank account will always be <code>$123.45</code>. Any payment requests above this amount will pre-fail and any amount less than or equal to this amount will succeed.</p>
 <h1 id='configuration'>Configuration</h1><h2 id='scopes'>Scopes</h2>
 <p>Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.</p>
 
@@ -10479,7 +10486,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -10915,7 +10923,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.11"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.2"</span><span class="p">,</span><span class="w">
@@ -10933,7 +10942,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Batteries for hire"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2949299</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2949299</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.2"</span><span class="p">,</span><span class="w">
@@ -10952,6 +10962,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Online purchase"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">19999</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c2e329ae-606f-4311-a9ab-a751baa1915c"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xur4492"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"product_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSXL392110x"</span><span class="w">
@@ -14350,7 +14361,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.11"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.2"</span><span class="p">,</span><span class="w">
@@ -14368,7 +14380,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Batteries for hire"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2949299</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2949299</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.2"</span><span class="p">,</span><span class="w">
@@ -14387,6 +14400,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="s2">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Online purchase"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">19999</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c2e329ae-606f-4311-a9ab-a751baa1915c"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xur4492"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"product_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSXL392110x"</span><span class="w">
