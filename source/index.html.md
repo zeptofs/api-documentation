@@ -523,7 +523,7 @@ If you are utilising an [Account Float](https://help.split.cash/en/articles/4275
 |----------------------------|-----------------|---------|
 | `refer_to_split`           | Real-time payment service currently unavailable |  $1.55  |
 | `refer_to_customer`        | Real-time payment rejected by recipient |  $1.60  |
-You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails)  to learn more about our what happens when an NPP Payment is unable to process.
+You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails)  to learn more about what happens when an NPP Payment is unable to process.
 ## Special accounts
 There are some accounts with a special behaviour. You can add them to your Contacts by nickname or bank details.
 
