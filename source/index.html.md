@@ -519,10 +519,10 @@ To simulate [transaction failures](#failure-reasons) create a Payment or Payment
 ## NPP payment failures
 If you are utilising an [Account Float](https://help.split.cash/en/articles/4275280-utilising-an-account-float)  to create NPP payments, you can simulate a transaction that fails to process through the NPP channel by [creating a Payment from your account float](https://help.split.cash/en/articles/4275293-transacting-from-your-account-float) for one of the following amounts.
 
-| Transaction failure reason | Amount |
-|----------------------------|---------|
-| `refer_to_split`           |  $1.55  |
-| `refer_to_customer`        |  $1.60  |
+| Transaction failure reason | Failure details | Amount |
+|----------------------------|-----------------|---------|
+| `refer_to_split`           | Real-time payment service currently unavailable |  $1.55  |
+| `refer_to_customer`        | Real-time payment rejected by recipient |  $1.60  |
 You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails)  to learn more about our what happens when an NPP Payment is unable to process.
 ## Special accounts
 There are some accounts with a special behaviour. You can add them to your Contacts by nickname or bank details.

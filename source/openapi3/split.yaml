@@ -799,13 +799,13 @@ info:
     for one of the following amounts.
 
 
-    | Transaction failure reason | Amount |
+    | Transaction failure reason | Failure details | Amount |
 
-    |----------------------------|---------|
+    |----------------------------|-----------------|---------|
 
-    | `refer_to_split`           |  $1.55  |
+    | `refer_to_split`           | Real-time payment service currently unavailable |  $1.55  |
 
-    | `refer_to_customer`        |  $1.60  |
+    | `refer_to_customer`        | Real-time payment rejected by recipient |  $1.60  |
 
     You will receive all the same notifications as if this happened in our live environment. We recommend you
     check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails) 
