@@ -10438,7 +10438,9 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 
 <h1 id="Split-API-Transactions">Transactions</h1>
 
-<p>The transactions endpoint provides a detailed look at all past, current and future scheduled debits &amp; credits relating to the Split account. In other words, we not only show the transactions initiated by the Split account but also show transactions where the Split account is on the receiving end - even for payments that have not yet matured.</p>
+<p>By default, the transactions endpoint provides a detailed look at all past, current and future debits &amp; credits applied to your bank/float accounts.</p>
+
+<aside class="notice">Want to also know about the debits & credits applied to the other party? No problem! Use the <code>both_parties=true</code> query string.</aside>
 <h2 id='lifecycle-5'>Lifecycle</h2>
 <p>A transaction (debit or credit) can have the following statuses:</p>
 
@@ -10742,6 +10744,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>Single value, exact match</td>
 </tr>
 <tr>
+<td>both_parties</td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>Single value, exact match. Will also list debits &amp; credits applied to the other party</td>
+</tr>
+<tr>
 <td>status</td>
 <td>query</td>
 <td>array[string]</td>
@@ -10767,7 +10776,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Single value, string search</td>
+<td>Single value, string search. Cannot be combine with <code>both_parties</code> query string</td>
 </tr>
 <tr>
 <td>other_party_bank_ref</td>
@@ -10781,7 +10790,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Single value, exact match</td>
+<td>Single value, exact match. Cannot be combine with <code>both_parties</code> query string</td>
 </tr>
 <tr>
 <td>description</td>
