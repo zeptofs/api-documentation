@@ -722,7 +722,7 @@
 <li>Data is sent and received as JSON.</li>
 <li>Clients should include the <code>Accepts: application/json</code> header in their requests.</li>
 <li>Currencies are represented by 3 characters as defined in <a href="http://www.xe.com/iso4217.php">ISO 4217</a>.</li>
-<li>Dates &amp; times are returned in UTC using <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used.</li>
+<li>Dates &amp; times are returned in UTC using <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used, or <code>Australia/Sydney</code> if no TZ is configured.</li>
 <li>Amounts are always in cents with no decimals unless otherwise stated.</li>
 <li>Split provides static public IP addresses for all outbound traffic, including webhooks.
 

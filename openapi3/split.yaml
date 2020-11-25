@@ -48,7 +48,7 @@ info:
     * Dates & times are returned in UTC using [ISO
     8601](https://en.wikipedia.org/wiki/ISO_8601) format with second accuracy.
     With requests, when no TZ is supplied, the configured TZ of the
-    authenticated user is used.
+    authenticated user is used, or `Australia/Sydney` if no TZ is configured.
 
     * Amounts are always in cents with no decimals unless otherwise stated.
 
