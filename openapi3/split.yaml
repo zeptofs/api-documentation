@@ -956,8 +956,10 @@ info:
 
 
     All collections are paginated to 25 items by default and the pagination
-    information may be found in the response header. You can customise the
-    pagination by appending `?per_page=x` and/or `?page=x` to the endpoint URL.
+    information may be found in the response header. You can customise the pagination by appending `?per_page=x` and/or `?page=x` to the endpoint URL.
+
+
+    <aside class="notice">The maximum <code>per_page</code> value is <code>100</code>. Any value above this will be ignored and <code>100</code> will be used instead.</aside>
 
 
     ## Remitter
@@ -990,7 +992,7 @@ info:
     remitter name along the entry on their bank statement.
 
 
-    <aside class="notice">The remitter name MUST be between 3 and 16
+    <aside class="notice">The remitter name MUST be between <code>3</code> and <code>16</code>
     characters.</aside>
 
 
@@ -1749,7 +1751,7 @@ tags:
   - name: Transactions
     description: >
       By default, the transactions endpoint provides a detailed look at all past, current
-      and future debits & credits applied to your bank/float accounts.
+      and future debits & credits related to your account.
 
 
       <aside class="notice">Want to also know about the debits & credits applied to the other party? No problem! Use the <code>both_parties=true</code> query string.</aside>
@@ -2244,6 +2246,62 @@ paths:
       responses:
         '204':
           description: ''
+  /contacts/anyone:
+    post:
+      tags:
+        - Contacts
+      summary: Add a Contact
+      description: >
+        Use this endpoint when you want to pay somebody.
+
+
+        <aside class="notice">
+          A Contact added this way cannot be debited.
+        </aside>
+      operationId: AddAnAnyoneContact
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAnAnyoneContactRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddAnAnyoneContactResponse'
+  /contacts/receivable:
+    post:
+      tags:
+        - Contacts
+      summary: Add a receivable Contact
+      description: |
+        Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error & improving your customer's experience.
+
+
+        <aside class="notice">When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change</aside>
+      operationId: AddAReceivableContact
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAReceivableContactRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddAReceivableContactResponse'
+        '404':
+          description: Not Found
   /contacts:
     post:
       tags:
@@ -2340,35 +2398,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListAllContactsResponse'
-  /contacts/anyone:
-    post:
-      tags:
-        - Contacts
-      summary: Add an Anyone Contact
-      description: >
-        When you want to pay somebody that doesn't have a Split account, you can
-        add them as an Anyone Contact.
-
-
-        <aside class="notice">
-          Anyone Contacts added this way can be used solely as payout recipients in a Payment.
-        </aside>
-      operationId: AddAnAnyoneContact
-      parameters: []
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddAnAnyoneContactRequest'
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AddAnAnyoneContactResponse'
   '/contacts/{id}':
     get:
       tags:
@@ -3045,7 +3074,7 @@ paths:
       tags:
         - Transactions
       summary: List all transactions
-      description: ''
+      description: '<aside class="notice">By default, Split will search and return all transactions created in the <strong>last 30 days</strong>. You can adjust this up to <strong>1 year</strong> by defining the <code>min_created_date</code> query string parameter defined below.</aside>'
       operationId: ListAllTransactions
       parameters:
         - name: page
@@ -3916,6 +3945,139 @@ components:
             name: Outstanding Tours Pty Ltd
           links:
             add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
+    AddAReceivableContactRequest:
+      title: Add a receivable Contact (request)
+      required:
+        - name
+        - email
+        - payid_email
+      type: object
+      properties:
+        name:
+          type: string
+          description: Contact name (140 max. characters)
+        email:
+          type: string
+          description: Contact email (256 max. characters)
+        payid_email:
+          type: string
+          description: Contact PayID email (256 max. characters)
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      example:
+        name: Delphine Jestin
+        email: delphine@gmail.com
+        payid_email: delphine_123@merchant.com.au
+        metadata:
+          custom_key: Custom string
+          another_custom_key: Maybe a URL
+    AddAReceivableContactResponse:
+      title: Add a receivable Contact (response)
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: uuid
+            name:
+              type: string
+              description: Contact name (140 max. characters)
+            email:
+              type: string
+              description: Contact email (256 max. characters)
+            'type':
+              type: string
+              description: Fixed to 'anyone'
+            metadata:
+              $ref: '#/components/schemas/Metadata'
+            bank_account:
+              type: object
+              properties:
+                id:
+                  type: uuid
+                account_number:
+                  type: string
+                  description: Split generated account number (9 max. characters)
+                branch_code:
+                  type: string
+                  description: Split branch code (fixed 6 characters)
+                bank_name:
+                  type: string
+                  description: Fixed to 'Split Float Acount'
+                state:
+                  type: string
+                  description: Fixed to 'Active'
+                  enum:
+                    - active
+                    - removed
+                iav_provider:
+                  type: string
+                  description: Always null
+                iav_status:
+                  type: string
+                  description: Always null
+                blocks:
+                  type: object
+                  properties:
+                    debits_blocked:
+                      type: boolean
+                      description: Used by Split admins in case of fraud
+                    credits_blocked:
+                      type: boolean
+                      description: Used by Split admins in case of fraud
+            anyone_account:
+              type: object
+              properties:
+                id:
+                  type: uuid
+            payid_details:
+              type: object
+              properties:
+                alias_value:
+                  type: string
+                  description: The PayID email
+                alias_type:
+                  type: string
+                  description: Type of PayID. Fixed to 'email'
+                alias_name:
+                  type: string
+                  description: The contact name
+                state:
+                  type: string
+                  description: Pending -> Active or Failed -> Deregistered (Contact removed)
+                  enum:
+                    - pending
+                    - active
+                    - failed
+                    - deregistered
+      example:
+        data:
+          id: 6a7ed958-f1e8-42dc-8c02-3901d7057357
+          name: Delphine Jestin
+          email: delphine@gmail.com
+          type: anyone
+          metadata:
+            custom_key: Custom string
+            another_custom_key: Maybe a URL
+          bank_account:
+            id: 55afddde-4296-4daf-8e49-7ba481ef9608
+            account_number: '1408281'
+            branch_code: '802919'
+            bank_name: Split Float Account
+            state: active
+            iav_provider: null
+            iav_status: null
+            blocks:
+              debits_blocked: false
+              credits_blocked: false
+          anyone_account:
+            id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
+          payid_details:
+            alias_value: delphine_123@merchant.com.au
+            alias_type: email
+            alias_name: Delphine Jestin
+            state: pending
     ListAllContactsResponse:
       title: List all Contacts (response)
       required:
@@ -3998,7 +4160,7 @@ components:
             links:
               add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     AddAnAnyoneContactRequest:
-      title: Add an Anyone Contact (request)
+      title: Add a Contact (request)
       required:
         - name
         - email
@@ -4008,10 +4170,10 @@ components:
       properties:
         name:
           type: string
-          description: The name of the Contact
+          description: The name of the Contact (140 max. characters)
         email:
           type: string
-          description: The email of the Contact
+          description: The email of the Contact (256 max. characters)
         branch_code:
           type: string
           description: The bank account BSB of the Contact
@@ -4029,7 +4191,7 @@ components:
           custom_key: Custom string
           another_custom_key: Maybe a URL
     AddAnAnyoneContactResponse:
-      title: Add an Anyone Contact (response)
+      title: Add a Contact (response)
       required:
         - data
       type: object
