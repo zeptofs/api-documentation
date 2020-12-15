@@ -1038,14 +1038,7 @@ info:
         }
       },
       "data": [
-        {
-          // The data section will follow the same type of structure
-          // as the event type it is representing. For example, if the
-          // event type was "debit.scheduled", the data representation
-          // structure would be that of a debit object. Too see what a
-          // debit object structure looks like, see the Transactions
-          // section.
-        }
+        {}
       ]
     }
 
@@ -1065,12 +1058,33 @@ info:
     by scope).
 
 
-    All events posted to the designated URL fit the same structure.
+    | Name | Type | Required | Description |
 
-    <aside class="notice">The sandbox environment allow both HTTP and HTTPS
-    webhook URLs. The live environment however will only POST to HTTPS URLs.
+    |-|-|-|-|
 
-    </aside>
+    | event | object | true | Webhook event details |
+
+    | » type | string | true | The webhook event key (list available in the webhook settings) |
+
+    | » at | string(date-time) | true | When the event occurred |
+
+    | » who | object | true | Who the webhook event relates to |
+
+    | »» account_id | string(uuid) | true | The Split account who's the owner of the event |
+
+    | »» bank_account_id | string(uuid) | true | The above Split account's bank account |
+
+    | data | [object] | true | Array of response bodies |
+
+
+    To see an example of the `data.[object]` response along with its expected format, first determine the event you're interested in then locate its equivalent API request/response.
+
+
+    For example:
+
+      * Given I want to listen to the `Payment Request - Added` webhook event
+      * Then I'd use the [Get a Payment Request](/#get-a-payment-request) endpoint if I was polling the API
+      * Therefore the [Get a Payment Request Response schema](/#schemagetapaymentrequestresponse) is the format Split will use for the webhook `data.[object]`.
 
 
     ### Our Delivery Promises
@@ -1447,6 +1461,23 @@ info:
 
     To protect against timing attacks, use a constant-time string comparison to
     compare the expected signature to each of the received signatures.
+
+
+    <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.</aside>
+
+
+    # Changelog
+
+    We take backwards compatibility seriously. The following list contains backwards compatible changes:
+
+    - **2020-12-15** - Improve webhooks section
+
+    - **2020-12-15** - Add changelog
+
+    - **2020-12-15** - Re-word Payment Requests introduction to better cover its use with Receivable Contacts.
+
+
+    Our docs are open sourced if you're looking for more: [https://github.com/splitpayments/api-documentation](https://github.com/splitpayments/api-documentation)
   version: '1.0'
 servers:
   - url: 'https://api.sandbox.split.cash'
@@ -1624,55 +1655,24 @@ tags:
       One or all Payouts can be voided individually as part of the larger Payment or Payment Request.
   - name: Payment Requests
     description: >
-      A Payment Request (PR) is used to request payment from another party.
-      Additionally, a Payment Request can be approved by anybody, not just other
-      Split users. This is achieved by using our [Instant Account Verification
-      process](http://help.split.cash/bank-accounts/instant-account-verification-iav)
-      as part of approving a [Payment
-      Request](https://help.split.cash/payment-requests/open-payment-requests).
+      A Payment Request (PR) is used to identify incoming funds from another party.
 
 
       <div class="middle-header">Applicable scenarios</div>
 
 
-      1. **A Split account sends a PR to a Contact that is a Split account:**
-          1. The authoriser must either approve or decline the request; **or**
-          2. Given there is an Agreement in place and the PR is within the terms of the Agreement, then the PR will be automatically approved; **or**
-          3. Given the PR is **not** within the terms of the Agreement, then the authoriser must either approve or decline the request.
-      2. **A Split accounts sends a PR to a Contact that is not a Split
-      account:**
-          1. Given there is an Agreement in place and the PR is within the terms of the Agreement, then the PR will be automatically approved; **or**
-          2. Given the PR is **not** within the terms of the Agreement, then the PR will not be created; **or**
-          3. There is no Agreement in place, then the PR will not be created.
-
-      <div class="middle-header">Direction</div>
-
-
-      Payment Requests are broken up by direction:
-
-
-      1. **Incoming:** An incoming Payment Request (you are the
-      authoriser/payer)
-
-      2. **Outgoing:** An outgoing Payment Request (you are the initiator/payee)
-
-
-      There are two response fields that differ depending on the direction:
-
-
-      | Field | Description |
-
-      |-------|-------------|
-
-      | `debit_ref` | Only visible to the PR authoriser (incoming PRs). This
-      reference corresponds to the newly created debit to process the approved
-      PR. |
-
-      | `credit_ref` | Only visible to the PR initiator (outgoing PRs). This
-      reference corresponds to the newly created credit from the approved PR. |
+      1. **You send a Payment Request to a [Contact](/#Split-API-Contacts) in order to collect funds:**
+          1. Given there is an Agreement in place and the Payment Request is within the terms of the Agreement, then it will be automatically approved; **or**
+          1. Given the Payment Request is **not** within the terms of the Agreement, then it will not be created; **or**
+          1. There is no Agreement in place, then it will not be created.
+      1. **Your customer sends funds to you as a [Receivable Contact](/#add-a-receivable-contact):**
+          1. A *receivable* Payment Request will be automatically created and approved to identify the movement of funds from your customer to your chosen Split float account.
 
 
       ##Lifecycle
+
+
+      <aside class="notice">Payment Requests generated from a customer sending you funds will always be <code>approved</code> and is not subjet to any prechecking outlined below.</aside>
 
 
       A Payment Request can have the following statuses:
@@ -1682,41 +1682,39 @@ tags:
 
       |-------|-------------|
 
-      | `pending_approval` | Waiting for the authoriser to approve the PR. |
+      | `pending_approval` | Waiting for the debtor to approve the Payment Request. |
 
       | `unverified` | Waiting for available funds response (only applicable when `precheck_funds` enabled). |
 
-      | `approved` | The authoriser has approved the PR. |
+      | `approved` | The debtor has approved the Payment Request. |
 
-      | `declined` | The payer has declined the PR. |
+      | `declined` | The debtor has declined the Payment Request. |
 
-      | `cancelled` | The initiator has cancelled the PR. |
-
-
-      ### Precheck funds lifecycle
+      | `cancelled` | The creditor has cancelled the Payment Request. |
 
 
-      Split will automatically check for available funds right before debits are sent to the bank. This check is performed for all contacts with [Instant Account Verification (IAV)](http://help.split.cash/bank-accounts/instant-account-verification-iav).
+      <div class="middle-header">Prechecking</div>
 
 
-      If you would like to also precheck available funds before a Payment Request is allowed to be approved, there is an optional precheck attribute as outlined below.
+      Split will automatically check for available funds before **attempting to debit** the debtor. This check is only performed for contacts with an active [bank connection](/#Split-API-Bank-Connections).
 
 
-      **Precheck for Payment Requests**
+      **Prechecking as part of a Payment Request approval**
 
 
-      When the `precheck_funds` option is enabled, prechecking of available funds will be completed before approving the Payment Request. The authoriser contact must have a valid agreement and bank connection to make use of this option.
+      When the `precheck_funds` option is enabled, **approval** of a Payment Request will only be allowed when there are sufficient funds. The debtor contact must have a valid agreement and bank connection to make use of this option.
 
 
       There are **synchronous** and **asynchronous** lifecycles when the `precheck_funds` option is enabled.
 
 
-      + When the available funds for a contact's bank account are considered out of date, the API response will return the Payment Request with a state of `unverified` while we refresh and ensure there are sufficient available funds. Once the precheck has completed, the Payment Request state will transition to either `approved` or `declined`. This process can be followed by subscribing to the relevant webhook events or regularly polling the Payment Request and verifying its status.
+      - When the available funds for a contact's bank account are considered out of date, the API response will return the Payment Request with a state of `unverified` while the bank account data is refreshed. Once the precheck has completed, the Payment Request state will transition to either `approved` or `declined`. This process can be followed by subscribing to the relevant webhook events or regularly polling the Payment Request and verifying its status.
 
-      + When the available funds for a contact are current, the API will respond immediately with a final state of either `approved` or an error message if there are insufficient funds.
+      - When the available funds for a contact are current, the API will respond immediately with a final state of either `approved` or an error message if there are insufficient funds.
 
 
       You can gain some control over this process by preemptively telling Split to refresh a contact's available balance at least 1 minute before making a Payment Request. See [Contact balance refresh](/#refresh-contact-bank-connection) for more.
+
 
   - name: Refunds
     description: >
@@ -1899,14 +1897,6 @@ paths:
 
         <aside class="notice">You can set any of the term metrics to
         <code>null</code> if you wish them to not have a limit.</aside>
-
-
-        <aside class="notice">[31/07/2018] Please note that we've deprecated
-        <code>authoriser_id</code> in favour of
-        <code>authoriser_contact_id</code>. We will continue to support the use
-        of <code>authoriser_id (Contact.data.account.id)</code> but encourage
-        you to use <code>authoriser_contact_id (Contact.data.id)</code> to
-        identify the authoriser of the Agreement.</aside>
       operationId: ProposeAgreement
       parameters: []
       requestBody:
@@ -2743,19 +2733,7 @@ paths:
       tags:
         - Payment Requests
       summary: Request Payment
-      description: >
-        <aside class="notice">[23/07/2018] Please note that we've deprecated
-        <code>authoriser_id</code> in favour of
-        <code>authoriser_contact_id</code>. We will continue to support the use
-        of <code>authoriser_id (Contact.data.bank_account.id)</code> but
-        encourage you to use <code>authoriser_contact_id
-        (Contact.data.id)</code> to identify the authoriser of the Payment
-        Request.</aside>
-
-        <aside class="notice"> Please note that
-        <code>your_bank_account_id</code> refers to the
-        <code>initiator_bank_account_id</code>. You can use this to identify
-        issues related to the initiator's bank account.</aside>
+      description: ''
       operationId: MakeAPaymentRequest
       parameters: []
       requestBody:
@@ -2778,52 +2756,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MakeAPaymentRequestWithNoAgreementResponse'
-  '/payment_requests/{payment_request_ref}/approve':
-    post:
-      tags:
-        - Payment Requests
-      summary: Approve a Payment Request
-      description: ''
-      operationId: ApprovePaymentRequest
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApprovePaymentRequestResponse'
-  '/payment_requests/{payment_request_ref}/decline':
-    post:
-      tags:
-        - Payment Requests
-      summary: Decline a Payment Request
-      description: ''
-      operationId: DeclinePaymentRequest
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeclinePaymentRequestResponse'
   '/payment_requests/{payment_request_ref}':
     get:
       tags:
@@ -2847,59 +2779,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentRequestResponse'
-    delete:
-      tags:
-        - Payment Requests
-      summary: Cancel a Payment Request
-      description: A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
-      operationId: CancelAPaymentRequest
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '204':
-          description: No Content
-  /payment_requests/incoming:
-    get:
-      tags:
-        - Payment Requests
-      summary: List incoming Payment Requests
-      description: ''
-      operationId: ListIncomingPaymentRequests
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListIncomingPaymentRequestsResponse'
   /payment_requests/outgoing:
     get:
       tags:
         - Payment Requests
-      summary: List outgoing Payment Requests
-      description: ''
+      summary: List Payment Requests
+      description: Payment Requests where you're the creditor and collecting funds from the debtor. Alternatively the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact))
       operationId: ListOutgoingPaymentRequests
       parameters:
         - name: page
@@ -2948,6 +2833,99 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentRequestsHistoryResponse'
+    delete:
+      tags:
+        - Payment Requests
+      summary: Cancel a Payment Request
+      description: A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
+      operationId: CancelAPaymentRequest
+      parameters:
+        - name: payment_request_ref
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: PR.3
+      responses:
+        '204':
+          description: No Content
+  /payment_requests/incoming:
+    get:
+      tags:
+        - Payment Requests
+      summary: List incoming Payment Requests
+      description: Payment Requests where you're the debtor and another Split account is collecting funds from you.
+      operationId: ListIncomingPaymentRequests
+      parameters:
+        - name: page
+          in: query
+          description: 'Page of results to return, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '1'
+        - name: per_page
+          in: query
+          description: 'Number of results per page, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIncomingPaymentRequestsResponse'
+  '/payment_requests/{payment_request_ref}/approve':
+    post:
+      tags:
+        - Payment Requests
+      summary: Approve a Payment Request
+      description: ''
+      operationId: ApprovePaymentRequest
+      parameters:
+        - name: payment_request_ref
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: PR.3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovePaymentRequestResponse'
+  '/payment_requests/{payment_request_ref}/decline':
+    post:
+      tags:
+        - Payment Requests
+      summary: Decline a Payment Request
+      description: ''
+      operationId: DeclinePaymentRequest
+      parameters:
+        - name: payment_request_ref
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: PR.3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeclinePaymentRequestResponse'
   '/credits/{credit_ref}/refunds':
     post:
       tags:
@@ -2960,11 +2938,6 @@ paths:
           <li>Must be applied against a successfully cleared payout (credit)</li>
           <li>The refund amount must not exceed the original amount of the credit</li>
         </ul>
-
-        <aside class="notice"> Please note that
-        <code>your_bank_account_id</code> refers to the
-        <code>initiator_bank_account_id</code>. You can use this to identify
-        issues related to the initiator's bank account.</aside>
       operationId: IssueARefund
       parameters:
         - name: credit_ref
@@ -3979,7 +3952,8 @@ components:
           type: object
           properties:
             id:
-              type: uuid
+              type: string
+              format: uuid
             name:
               type: string
               description: Contact name (140 max. characters)
@@ -3995,7 +3969,8 @@ components:
               type: object
               properties:
                 id:
-                  type: uuid
+                  type: string
+                  format: uuid
                 account_number:
                   type: string
                   description: Split generated account number (9 max. characters)
@@ -4030,7 +4005,8 @@ components:
               type: object
               properties:
                 id:
-                  type: uuid
+                  type: string
+                  format:  uuid
             payid_details:
               type: object
               properties:
@@ -4345,6 +4321,7 @@ components:
           example: The SuperPackage
         matures_at:
           type: string
+          format: date-time
           description: Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day)
           example: '9/13/2016 12:00:00 AM'
         your_bank_account_id:
@@ -4386,20 +4363,7 @@ components:
         - amount
         - description
         - recipient_contact_id
-      description: >
-        The actual Payout
-
-        <aside class="notice">[23/07/2018] Please note that we've deprecated
-        <code>recipient_id</code> in favour of
-        <code>recipient_contact_id</code>. We will continue to support the use
-        of <code>recipient_id (Contact.data.bank_account.id)</code> but
-        encourage you to use <code>recipient_contact_id (Contact.data.id)</code>
-        to identify the recipient of the payout.</aside>
-
-        <aside class="notice"> Please note that
-        <code>your_bank_account_id</code> refers to the
-        <code>initiator_bank_account_id</code>. You can use this to identify
-        issues related to the initiator's bank account.</aside>
+      description: The actual Payout
       type: object
       properties:
         amount:
@@ -4491,6 +4455,8 @@ components:
           authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
           schedule_ref: null
           status: approved
+          status_reason: null
+          matures_at: '2016-12-25T00:00:00Z'
           responded_at: '2016-12-19T02:38:04Z'
           created_at: '2016-12-19T02:10:56Z'
           debit_ref: D.b
@@ -4518,6 +4484,8 @@ components:
           authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
           schedule_ref: null
           status: declined
+          status_reason: null
+          matures_at: '2016-12-25T00:00:00Z'
           responded_at: '2016-12-19T02:38:04Z'
           created_at: '2016-12-19T02:10:56Z'
           debit_ref: null
@@ -4628,11 +4596,12 @@ components:
           example: Visible to both initiator and authoriser
         matures_at:
           type: string
+          format: date-time
           description: >-
             Date & time in UTC ISO8601 that the Payment will be processed if the request is approved. (If the request is approved after this point in time, it will be processed straight away)
           example: '2016-12-19T02:10:56Z'
         amount:
-          type: number
+          type: integer
           description: Amount in cents to pay the initiator
           example: 99000
         authoriser_contact_id:
@@ -4651,7 +4620,7 @@ components:
             type: string
           example: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         metadata:
-          type: Metadata
+          type: object
           description: Use for your custom data and certain Split customisations. Stored against generated transactions and included in associated webhook payloads.
       example:
         description: Visible to both initiator and authoriser
@@ -4671,6 +4640,93 @@ components:
       properties:
         data:
           type: object
+          required:
+            - ref
+            - initiator_id
+            - your_bank_account_id
+            - authoriser_id
+            - authoriser_contact_id
+            - schedule_ref
+            - status
+            - status_reason
+            - matures_at
+            - responded_at
+            - created_at
+            - credit_ref
+            - payout
+          properties:
+            ref:
+              type: string
+              description: The Payment Reference reference (PR.*)
+            initiator_id:
+              type: string
+              format: uuid
+              description: Your bank account ID where the funds will settle
+            your_bank_account_id:
+              type: string
+              format: uuid
+              description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+            authoriser_id:
+              type: string
+              format: uuid
+              description: The debtor's bank account ID
+            authoriser_contact_id:
+              type: string
+              format: uuid
+              description: The contact ID representing the debtor within Split
+            schedule_ref:
+              type: string
+              description: The schedule that generated the Payment request if applicable
+            status:
+              type: string
+              description: The status of the Payment Request
+              enum:
+                - pending_approval
+                - unverified
+                - approved
+                - declined
+                - cancelled
+            status_reason:
+              type: string
+              description: Only used when the `status` is `declined` due to prechecking.
+              enum:
+                - The balance of the nominated bank account for this Payment Request is not available.
+                - The nominated bank account for this Payment Request has insufficient funds.
+            matures_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request is up for processing
+            responded_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request status changed
+            created_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request was created
+            credit_ref:
+              type: string
+              description: The resulting credit entry reference (available once approved)
+            payout:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: Amount in cents
+                'description':
+                  type: string
+                  description: Payment Request description
+                matures_at:
+                  type: string
+                  format: date-time
+                  description: The date-time when the Payment Request is up for processing
+              required:
+                - amount
+                - description
+                - matures_at
+            metadata:
+              type: object
+              description: Your custom keyed data
       example:
         data:
           ref: PR.3
@@ -4680,6 +4736,8 @@ components:
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
           schedule_ref: null
           status: pending_approval
+          status_reason: null
+          matures_at: '2016-12-25T00:00:00Z'
           responded_at: null
           created_at: '2016-12-19T02:10:56Z'
           credit_ref: null
@@ -4708,6 +4766,95 @@ components:
       properties:
         data:
           type: object
+          required:
+            - ref
+            - initiator_id
+            - your_bank_account_id
+            - authoriser_id
+            - authoriser_contact_id
+            - schedule_ref
+            - status
+            - status_reason
+            - matures_at
+            - responded_at
+            - created_at
+            - payout
+          properties:
+            ref:
+              type: string
+              description: The Payment Reference reference (PR.*)
+            initiator_id:
+              type: string
+              format: uuid
+              description: Your bank account ID where the funds will settle
+            your_bank_account_id:
+              type: string
+              format: uuid
+              description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+            authoriser_id:
+              type: string
+              format: uuid
+              description: The debtor's bank account ID
+            authoriser_contact_id:
+              type: string
+              format: uuid
+              description: The contact ID representing the debtor within Split
+            schedule_ref:
+              type: string
+              description: The schedule that generated the Payment request if applicable
+            status:
+              type: string
+              description: The status of the Payment Request
+              enum:
+                - pending_approval
+                - unverified
+                - approved
+                - declined
+                - cancelled
+            status_reason:
+              type: string
+              description: Only used when the `status` is `declined` due to prechecking.
+              enum:
+                - The balance of the nominated bank account for this Payment Request is not available.
+                - The nominated bank account for this Payment Request has insufficient funds.
+            matures_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request is up for processing
+            responded_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request status changed
+            created_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request was created
+            credit_ref:
+              type: string
+              description: The resulting credit entry reference (available once approved, if applicable)
+            debit_ref:
+              type: string
+              description: The resulting debit entry reference (available once approved, if applicable)
+            payout:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: Amount in cents
+                'description':
+                  type: string
+                  description: Payment Request description
+                matures_at:
+                  type: string
+                  format: date-time
+                  description: The date-time when the Payment Request is up for processing
+              required:
+                - amount
+                - description
+                - matures_at
+            metadata:
+              type: object
+              description: Your custom keyed data
       example:
         data:
           ref: PR.3
@@ -4717,6 +4864,8 @@ components:
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
           schedule_ref: null
           status: approved
+          status_reason: null
+          matures_at: '2016-12-25T00:00:00Z'
           responded_at: '2016-12-19T02:38:04Z'
           created_at: '2016-12-19T02:10:56Z'
           credit_ref: C.b
@@ -4731,13 +4880,96 @@ components:
       title: List incoming Payment Requests (response)
       required:
         - data
-      type: object
       properties:
         data:
           type: array
-          items:
-            type: object
-          description: ''
+          required:
+            - ref
+            - initiator_id
+            - your_bank_account_id
+            - authoriser_id
+            - authoriser_contact_id
+            - schedule_ref
+            - status
+            - status_reason
+            - matures_at
+            - responded_at
+            - created_at
+            - debit_ref
+            - payout
+          properties:
+            ref:
+              type: string
+              description: The Payment Reference reference (PR.*)
+            initiator_id:
+              type: string
+              format: uuid
+              description: Your bank account ID where the funds will settle
+            your_bank_account_id:
+              type: string
+              format: uuid
+              description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+            authoriser_id:
+              type: string
+              format: uuid
+              description: The debtor's bank account ID
+            authoriser_contact_id:
+              type: string
+              format: uuid
+              description: The contact ID representing the debtor within Split
+            schedule_ref:
+              type: string
+              description: The schedule that generated the Payment request if applicable
+            status:
+              type: string
+              description: The status of the Payment Request
+              enum:
+                - pending_approval
+                - unverified
+                - approved
+                - declined
+                - cancelled
+            status_reason:
+              type: string
+              description: Only used when the `status` is `declined` due to prechecking.
+              enum:
+                - The balance of the nominated bank account for this Payment Request is not available.
+                - The nominated bank account for this Payment Request has insufficient funds.
+            matures_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request is up for processing
+            responded_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request status changed
+            created_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request was created
+            debit_ref:
+              type: string
+              description: The resulting debit entry reference (available once approved)
+            payout:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: Amount in cents
+                'description':
+                  type: string
+                  description: Payment Request description
+                matures_at:
+                  type: string
+                  format: date-time
+                  description: The date-time when the Payment Request is up for processing
+              required:
+                - amount
+                - description
+                - matures_at
+            metadata:
+              type: object
+              description: Your custom keyed data added to the object
       example:
         data:
           - ref: PR.2
@@ -4747,6 +4979,8 @@ components:
             authoriser_contact_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
             schedule_ref: PRS.1
             status: approved
+            status_reason: null
+            matures_at: '2016-12-20T00:00:00Z'
             responded_at: '2016-12-19T02:10:18Z'
             created_at: '2016-12-19T02:09:09Z'
             debit_ref: D.a
@@ -4761,6 +4995,8 @@ components:
             authoriser_contact_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
             schedule_ref: null
             status: pending_approval
+            status_reason: null
+            matures_at: '2016-12-25T00:00:00Z'
             responded_at: null
             created_at: '2016-12-19T02:10:56Z'
             debit_ref: null
@@ -4775,13 +5011,100 @@ components:
       title: List outgoing Payment Requests (response)
       required:
         - data
-      type: object
       properties:
         data:
           type: array
           items:
             type: object
-          description: ''
+            required:
+              - ref
+              - initiator_id
+              - your_bank_account_id
+              - authoriser_id
+              - authoriser_contact_id
+              - schedule_ref
+              - status
+              - status_reason
+              - matures_at
+              - responded_at
+              - created_at
+              - credit_ref
+              - payout
+            properties:
+              ref:
+                type: string
+                description: The Payment Reference reference (PR.*)
+              initiator_id:
+                type: string
+                format: uuid
+                description: Your bank account ID where the funds will settle
+              your_bank_account_id:
+                type: string
+                format: uuid
+                description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+              authoriser_id:
+                type: string
+                format: uuid
+                description: The debtor's bank account ID
+              authoriser_contact_id:
+                type: string
+                format: uuid
+                description: The contact ID representing the debtor within Split
+              schedule_ref:
+                type: string
+                description: The schedule that generated the Payment request if applicable
+              status:
+                type: string
+                description: The status of the Payment Request
+                enum:
+                  - pending_approval
+                  - unverified
+                  - approved
+                  - declined
+                  - cancelled
+              status_reason:
+                type: string
+                description: Only used when the `status` is `declined` due to prechecking.
+                enum:
+                  - The balance of the nominated bank account for this Payment Request is not available.
+                  - The nominated bank account for this Payment Request has insufficient funds.
+              matures_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request is up for processing
+              responded_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request status changed
+              created_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request was created
+              credit_ref:
+                type: string
+                description: The resulting credit entry reference (available once approved)
+              payout:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                    description: Amount in cents
+                  'description':
+                    type: string
+                    description: Payment Request description
+                  matures_at:
+                    type: string
+                    format: date-time
+                    description: The date-time when the Payment Request is up for processing
+                required:
+                  - amount
+                  - description
+                  - matures_at
+              metadata:
+                type: array
+                description: Your custom keyed data
+                items:
+                  type: object
       example:
         data:
           - ref: PR.4
@@ -4791,6 +5114,8 @@ components:
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
             schedule_ref: PRS.2
             status: approved
+            status_reason: null
+            matures_at: '2016-12-20T00:00:00Z'
             responded_at: '2016-12-19T02:10:18Z'
             created_at: '2016-12-19T02:09:09Z'
             credit_ref: C.a
@@ -4805,6 +5130,8 @@ components:
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
             schedule_ref: null
             status: pending_approval
+            status_reason: null
+            matures_at: '2016-12-25T00:00:00Z'
             responded_at: null
             created_at: '2016-12-19T02:10:56Z'
             credit_ref: null
@@ -4816,13 +5143,39 @@ components:
       title: Get a Payment Request's history (response)
       required:
         - data
-      type: object
       properties:
         data:
           type: array
           items:
             type: object
-          description: ''
+            required:
+              - type
+              - description
+              - event
+              - at
+              - ref
+              - by
+            properties:
+              'type':
+                type: string
+                description: The type of object affected
+                enum:
+                  - payout_request
+                  - debit
+                  - credit
+              event:
+                type: string
+                description: The event that occurred
+              at:
+                type: string
+                format: date-time
+                description: When the event occurred
+              ref:
+                type: string
+                description: The reference of the affected object
+              by:
+                type: string
+                description: Who triggered the change/event
       example:
         data:
           - type: payout_request
