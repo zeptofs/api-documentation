@@ -1470,6 +1470,7 @@ info:
 
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+
     - **2020-12-15** - Improve webhooks section
 
     - **2020-12-15** - Add changelog
@@ -1477,7 +1478,7 @@ info:
     - **2020-12-15** - Re-word Payment Requests introduction to better cover its use with Receivable Contacts.
 
 
-    Our docs are open sourced if you're looking for more: [https://github.com/splitpayments/api-documentation](https://github.com/splitpayments/api-documentation)
+    Looking for more? Our docs are open sourced! [https://github.com/splitpayments/api-documentation](https://github.com/splitpayments/api-documentation)
   version: '1.0'
 servers:
   - url: 'https://api.sandbox.split.cash'
