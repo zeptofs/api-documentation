@@ -4586,28 +4586,24 @@ You can update the name, email, bank account and metadata of any Contact.
 
 ```shell
 curl --request POST \
-  --url https://api.sandbox.split.cash/contacts//reactivate \
+  --url https://api.sandbox.split.cash/contacts/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb/reactivate \
   --header 'accept: application/json' \
-  --header 'authorization: Bearer {access-token}' \
-  --header 'content-type: application/json' \
-  --data '{"id":"string"}'
+  --header 'authorization: Bearer {access-token}'
 ```
 
 ```ruby
 require 'uri'
 require 'net/http'
 
-url = URI("https://api.sandbox.split.cash/contacts//reactivate")
+url = URI("https://api.sandbox.split.cash/contacts/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb/reactivate")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 request = Net::HTTP::Post.new(url)
-request["content-type"] = 'application/json'
 request["accept"] = 'application/json'
 request["authorization"] = 'Bearer {access-token}'
-request.body = "{\"id\":\"string\"}"
 
 response = http.request(request)
 puts response.read_body
@@ -4620,9 +4616,8 @@ var options = {
   "method": "POST",
   "hostname": "api.sandbox.split.cash",
   "port": null,
-  "path": "/contacts//reactivate",
+  "path": "/contacts/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb/reactivate",
   "headers": {
-    "content-type": "application/json",
     "accept": "application/json",
     "authorization": "Bearer {access-token}"
   }
@@ -4641,7 +4636,6 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ id: 'string' }));
 req.end();
 ```
 
@@ -4650,15 +4644,12 @@ import http.client
 
 conn = http.client.HTTPSConnection("api.sandbox.split.cash")
 
-payload = "{\"id\":\"string\"}"
-
 headers = {
-    'content-type': "application/json",
     'accept': "application/json",
     'authorization': "Bearer {access-token}"
     }
 
-conn.request("POST", "/contacts//reactivate", payload, headers)
+conn.request("POST", "/contacts/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb/reactivate", headers=headers)
 
 res = conn.getresponse()
 data = res.read()
@@ -4667,11 +4658,9 @@ print(data.decode("utf-8"))
 ```
 
 ```java
-HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/contacts//reactivate")
-  .header("content-type", "application/json")
+HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/contacts/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb/reactivate")
   .header("accept", "application/json")
   .header("authorization", "Bearer {access-token}")
-  .body("{\"id\":\"string\"}")
   .asString();
 ```
 
@@ -4681,17 +4670,11 @@ HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/con
 $client = new http\Client;
 $request = new http\Client\Request;
 
-$body = new http\Message\Body;
-$body->append('{"id":"string"}');
-
-$request->setRequestUrl('https://api.sandbox.split.cash/contacts//reactivate');
+$request->setRequestUrl('https://api.sandbox.split.cash/contacts/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb/reactivate');
 $request->setRequestMethod('POST');
-$request->setBody($body);
-
 $request->setHeaders(array(
   'authorization' => 'Bearer {access-token}',
-  'accept' => 'application/json',
-  'content-type' => 'application/json'
+  'accept' => 'application/json'
 ));
 
 $client->enqueue($request)->send();
@@ -4705,20 +4688,16 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"net/http"
 	"io/ioutil"
 )
 
 func main() {
 
-	url := "https://api.sandbox.split.cash/contacts//reactivate"
+	url := "https://api.sandbox.split.cash/contacts/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb/reactivate"
 
-	payload := strings.NewReader("{\"id\":\"string\"}")
+	req, _ := http.NewRequest("POST", url, nil)
 
-	req, _ := http.NewRequest("POST", url, payload)
-
-	req.Header.Add("content-type", "application/json")
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("authorization", "Bearer {access-token}")
 
@@ -4741,20 +4720,11 @@ Return a removed Contact to an active state.
   If the Contact is a Receivable Contact then the PayID used for receiving funds will also be returned to an active state.
 </aside>
 
-> Body parameter
-
-```json
-{
-  "id": "string"
-}
-```
-
 <h3 id="Reactivate-a-Contact-parameters" class="parameters">Parameters</h3>
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[ReactivateContactRequest](#schemareactivatecontactrequest)|true|No description|
-|» id|body|string(uuid)|true|No description|
+|id|path|string|true|Contact ID (`Contact.data.id`)|
 
 > Example responses
 
@@ -4764,14 +4734,18 @@ Return a removed Contact to an active state.
 {
   "data": {
     "id": "fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb",
-    "name": "Outstanding Tours Pty Ltd",
-    "email": "accounts@outstandingtours.com.au",
-    "type": "Split account",
+    "name": "My very own alias",
+    "email": "updated@email.com",
+    "type": "anyone",
+    "metadata": {
+      "custom_key": "Custom string",
+      "another_custom_key": "Maybe a URL"
+    },
     "bank_account": {
       "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
-      "account_number": "947434694",
-      "branch_code": "304304",
-      "bank_name": "National Australia Bank",
+      "account_number": "99887766",
+      "branch_code": "123456",
+      "bank_name": "Split SANDBOX Bank",
       "state": "active",
       "iav_provider": null,
       "iav_status": null,
@@ -4780,8 +4754,11 @@ Return a removed Contact to an active state.
         "credits_blocked": false
       }
     },
+    "anyone_account": {
+      "id": "63232c0a-a783-4ae9-ae73-f0974fe1e345"
+    },
     "links": {
-      "add_bank_connection": "https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"
+      "add_bank_connection": "http://go.sandbox.split.cash/invite_contact/dog-bones-inc/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb"
     }
   }
 }
@@ -4791,7 +4768,7 @@ Return a removed Contact to an active state.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[GetAContactResponse](#schemagetacontactresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[UpdateAContactResponse](#schemaupdateacontactresponse)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
 
 ## Refresh contact bank connection
@@ -11320,18 +11297,14 @@ func main() {
 <a id="schemareactivatecontactrequest"></a>
 
 ```json
-{
-  "id": "string"
-}
+{}
 ```
 
 ### Properties
 
 *Reactivate a contact (request)*
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|string(uuid)|true|No description|
+*None*
 
 ## ReactivateContactResponse
 

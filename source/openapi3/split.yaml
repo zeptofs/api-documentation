@@ -2490,21 +2490,22 @@ paths:
           If the Contact is a Receivable Contact then the PayID used for receiving funds will also be returned to an active state.
         </aside>
       operationId: ReactivateContact
-      parameters: []
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReactivateContactRequest'
-        required: true
+      parameters:
+        - name: id
+          in: path
+          description: Contact ID (`Contact.data.id`)
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAContactResponse'
+                $ref: '#/components/schemas/UpdateAContactResponse'
         '404':
           description: Not Found
   '/contacts/{id}/refresh_balance':
@@ -4062,10 +4063,16 @@ components:
       required:
         - id
       type: object
-      properties:
-        id:
-          type: string
+      parameters:
+        - name: id
+          in: path
+          description: Contact ID (`Contact.data.id`)
+          required: true
+          style: simple
           format: uuid
+          schema:
+            type: string
+          example: 55afddde-4296-4daf-8e49-7ba481ef9608
     ReactivateContactResponse:
       title: Reactivate a contact (response)
       required:
