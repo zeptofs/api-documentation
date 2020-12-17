@@ -11292,20 +11292,6 @@ func main() {
 |state|failed|
 |state|deregistered|
 
-## ReactivateContactRequest
-
-<a id="schemareactivatecontactrequest"></a>
-
-```json
-{}
-```
-
-### Properties
-
-*Reactivate a contact (request)*
-
-*None*
-
 ## ReactivateContactResponse
 
 <a id="schemareactivatecontactresponse"></a>

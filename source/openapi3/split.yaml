@@ -4058,21 +4058,6 @@ components:
                     - active
                     - failed
                     - deregistered
-    ReactivateContactRequest:
-      title: Reactivate a contact (request)
-      required:
-        - id
-      type: object
-      parameters:
-        - name: id
-          in: path
-          description: Contact ID (`Contact.data.id`)
-          required: true
-          style: simple
-          format: uuid
-          schema:
-            type: string
-          example: 55afddde-4296-4daf-8e49-7ba481ef9608
     ReactivateContactResponse:
       title: Reactivate a contact (response)
       required:
