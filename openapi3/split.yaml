@@ -1077,14 +1077,34 @@ info:
     | data | [object] | true | Array of response bodies |
 
 
-    To see an example of the `data.[object]` response along with its expected format, first determine the event you're interested in then locate its equivalent API request/response.
+    ### Data schemas
+
+    Use the following table to discover what type of response schema to expect for for the `data.[{}]` component of the webhook delivery.
 
 
-    For example:
+    | Event                    | Data schema                                                               |
 
-      * Given I want to listen to the `Payment Request - Added` webhook event
-      * Then I'd use the [Get a Payment Request](/#get-a-payment-request) endpoint if I was polling the API
-      * Therefore the [Get a Payment Request Response schema](/#schemagetapaymentrequestresponse) is the format Split will use for the webhook `data.[object]`.
+    |--------------------------|---------------------------------------------------------------------------|
+
+    | `agreement.*`            | [GetAnAgreementResponse](/#schemagetagreementresponse)                    |
+
+    | `contact.*`              | [GetAContactResponse](/#schemagetacontactresponse)                        |
+
+    | `credit.*`               | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
+
+    | `creditor_debit.*`       | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
+
+    | `debit.*`                | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
+
+    | `debtor_credit.*`        | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
+
+    | `open_agreement.*`       | [ListAllOpenAgreementsRespose](/#schemalistallopenagreementsresponse)     |
+
+    | `payment.*`              | [GetAPaymentResponse](/#schemagetapaymentresponse)                        |
+
+    | `payment_request.*`      | [GetAPaymentRequestResponse](/#schemagetapaymentrequestresponse)          |
+
+    | `unassigned_agreement.*` | [GetAnUnassignedAgreementResponse](#schemagetunassignedagreementresponse) |
 
 
     ### Our Delivery Promises
@@ -1470,6 +1490,12 @@ info:
 
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+
+    - **2020-12-17** - Add Sandbox Only API endpoints
+
+    - **2020-12-17** - Enhance response schema for several endpoints
+
+    - **2020-12-16** - Add webhook schema table
 
     - **2020-12-15** - Improve webhooks section
 
@@ -1886,6 +1912,8 @@ tags:
   - name: Users
     description: |
       All about the currently authenticated user.
+  - name: Sandbox Only
+    description: Special testing endpoints that only exist in the sandbox environment.
 paths:
   /agreements:
     post:
@@ -1914,6 +1942,111 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProposeAgreementResponse'
+  /agreements/outgoing:
+    get:
+      tags:
+        - Agreements
+      summary: List Agreements
+      description: >-
+        By default, all outgoing Agreements will be returned. You can apply
+        filters to your query to customise the returned Agreements.
+      operationId: ListOutgoingAgreements
+      parameters:
+        - name: page
+          in: query
+          description: 'Page of results to return, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '1'
+        - name: per_page
+          in: query
+          description: 'Number of results per page, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '100'
+        - name: authoriser_id
+          in: query
+          description: 'Authoriser ID (`Contact.data.account.id`), single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: 2c4dec90-8a4c-4685-b620-bd1d7ca05a60
+        - name: contact_id
+          in: query
+          description: 'Contact ID (`Contact.data.id`), single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: e5edc264-1771-4809-9cf5-b40baaee15f7
+        - name: status
+          in: query
+          description: Exact match
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+            enum:
+              - proposed
+              - accepted
+              - declined
+              - cancelled
+          example:
+            - proposed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOutgoingAgreementsResponse'
+  '/agreements/{agreement_ref}':
+    get:
+      tags:
+        - Agreements
+      summary: Get an Agreement
+      description: Get a single Agreement by its reference
+      operationId: GetAgreement
+      parameters:
+        - name: agreement_ref
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: A.2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAgreementResponse'
+    delete:
+      tags:
+        - Agreements
+      summary: Cancel an Agreement
+      description: >-
+        An Agreement can be cancelled by the initiator at any time whilst the
+        authoriser (Agreement recipient) can only cancel a previously accepted
+        Agreement.
+      operationId: CancelAgreement
+      parameters:
+        - name: agreement_ref
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: A.2
+      responses:
+        '204':
+          description: No Content
   '/agreements/{agreement_ref}/accept':
     post:
       tags:
@@ -1960,50 +2093,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeclineAgreementResponse'
-  '/agreements/{agreement_ref}':
-    get:
-      tags:
-        - Agreements
-      summary: Get an Agreement
-      description: Get a single Agreement by its reference
-      operationId: GetAgreement
-      parameters:
-        - name: agreement_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: A.2
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetAgreementResponse'
-    delete:
-      tags:
-        - Agreements
-      summary: Cancel an Agreement
-      description: >-
-        An Agreement can be cancelled by the initiator at any time whilst the
-        authoriser (Agreement recipient) can only cancel a previously accepted
-        Agreement.
-      operationId: CancelAgreement
-      parameters:
-        - name: agreement_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: A.2
-      responses:
-        '204':
-          description: No Content
   /agreements/incoming:
     get:
       tags:
@@ -2065,67 +2154,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListIncomingAgreementsResponse'
-  /agreements/outgoing:
-    get:
-      tags:
-        - Agreements
-      summary: List outgoing Agreements
-      description: >-
-        By default, all outgoing Agreements will be returned. You can apply
-        filters to your query to customise the returned Agreements.
-      operationId: ListOutgoingAgreements
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-        - name: authoriser_id
-          in: query
-          description: 'Authoriser ID (`Contact.data.account.id`), single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: 2c4dec90-8a4c-4685-b620-bd1d7ca05a60
-        - name: contact_id
-          in: query
-          description: 'Contact ID (`Contact.data.id`), single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: e5edc264-1771-4809-9cf5-b40baaee15f7
-        - name: status
-          in: query
-          description: Exact match
-          style: form
-          explode: false
-          schema:
-            type: array
-            items:
-              type: string
-            enum:
-              - proposed
-              - accepted
-              - declined
-              - cancelled
-          example:
-            - proposed
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListOutgoingAgreementsResponse'
   /bank_accounts:
     get:
       tags:
@@ -2269,12 +2297,13 @@ paths:
     post:
       tags:
         - Contacts
-      summary: Add a receivable Contact
+      summary: Add a Receivable Contact
       description: |
         Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error & improving your customer's experience.
 
 
         <aside class="notice">When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change</aside>
+        <aside class="notice">You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="#simulate-incoming-payid-payment">PayID simulation endpoint</a>.</aside>
       operationId: AddAReceivableContact
       parameters: []
       requestBody:
@@ -3371,6 +3400,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetUserDetailsResponse'
+  /simulate/incoming_payid_payment:
+    post:
+      tags:
+        - Sandbox Only
+      summary: Simulate incoming PayID payment
+      description: Simulate receiving a real time PayID payment from one of your Receivable Contacts.
+      operationId: SimulateIncomingPayIDPayment
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulateIncomingPayIDPaymentRequest'
+        required: true
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulateIncomingPayIDPaymentResponse'
 components:
   securitySchemes:
     bearerAuth:
@@ -3437,11 +3487,11 @@ components:
       type: object
       properties:
         min_amount:
-          type: number
+          type: integer
           description: Minimum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 0
         max_amount:
-          type: number
+          type: integer
           description: Maximum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 10000
     PerFrequency:
@@ -3452,11 +3502,11 @@ components:
       type: object
       properties:
         days:
-          type: number
+          type: integer
           description: Amount of days to apply against the frequency. Specify <code>null</code> for no limit.
           example: 7
         max_amount:
-          type: number
+          type: integer
           description: >-
             Maximum amount in cents the total of all PRs can be for the duration
             of the frequency. Specify <code>null</code> for no limit.
@@ -3547,6 +3597,65 @@ components:
       properties:
         data:
           type: object
+          required:
+            - ref
+            - initiator_id
+            - authoriser_id
+            - contact_id
+            - bank_account_id
+            - status
+            - status_reason
+            - responded_at
+            - created_at
+            - payout
+            - terms
+          properties:
+            ref:
+              type: string
+              minLength: 3
+              maxLenght: 18
+              description: "The Agreement reference (Min: 3 - Max: 18)"
+            initiator_id:
+              type: string
+              format: uuid
+              description: Your Split account ID
+            authoriser_id:
+              type: string
+              format: uuid
+              description: The authoriser's account ID (AnyoneAccount)
+            contact_id:
+              type: string
+              format: uuid
+              description: The contact ID representing the authoriser within Split
+            bank_account_id:
+              type: string
+              format: uuid
+              description: The authoriser's bank account ID
+            status:
+              type: string
+              description: The status of the Agreement
+              enum:
+                - proposed
+                - accepted
+                - cancelled
+                - declined
+                - expended
+            status_reason:
+              type: string
+              description: The reason the agreement was cancelled. This is a free text field.
+            responded_at:
+              type: string
+              format: date-time
+              description: The date-time when the Agreement status changed
+            created_at:
+              type: string
+              format: date-time
+              description: The date-time when the Agreement was created
+            terms:
+              $ref: '#/components/schemas/Terms'
+            metadata:
+              type: object
+              description: Your custom keyed data
       example:
         data:
           ref: A.2
@@ -3920,7 +4029,7 @@ components:
           links:
             add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     AddAReceivableContactRequest:
-      title: Add a receivable Contact (request)
+      title: Add a Receivable Contact (request)
       required:
         - name
         - email
@@ -3929,13 +4038,19 @@ components:
       properties:
         name:
           type: string
-          description: Contact name (140 max. characters)
+          min: 3
+          max: 140
+          description: 'Contact name (Min: 3 - Max: 140)'
         email:
           type: string
-          description: Contact email (256 max. characters)
+          min: 6
+          max: 256 
+          description: 'Contact email (Min: 6 - Max: 256)'
         payid_email:
           type: string
-          description: Contact PayID email (256 max. characters)
+          min: 6
+          max: 256
+          description: 'Contact PayID email (Min: 6 - Max: 256)'
         metadata:
           $ref: '#/components/schemas/Metadata'
       example:
@@ -3946,7 +4061,7 @@ components:
           custom_key: Custom string
           another_custom_key: Maybe a URL
     AddAReceivableContactResponse:
-      title: Add a receivable Contact (response)
+      title: Add a Receivable Contact (response)
       type: object
       properties:
         data:
@@ -3957,10 +4072,14 @@ components:
               format: uuid
             name:
               type: string
-              description: Contact name (140 max. characters)
+              min: 3
+              max: 140
+              description: 'Contact name (Min: 3 - Max: 140)'
             email:
               type: string
-              description: Contact email (256 max. characters)
+              min: 6
+              max: 256
+              description: 'Contact email (Min: 6 - Max: 256)'
             'type':
               type: string
               description: Fixed to 'anyone'
@@ -3974,10 +4093,14 @@ components:
                   format: uuid
                 account_number:
                   type: string
-                  description: Split generated account number (9 max. characters)
+                  min: 5
+                  max: 9
+                  description: 'Split generated account number (Min: 5 - Max: 9)'
                 branch_code:
                   type: string
-                  description: Split branch code (fixed 6 characters)
+                  min: 6
+                  max: 6
+                  description: 'Split branch code (Min: 6 - Max: 6)'
                 bank_name:
                   type: string
                   description: Fixed to 'Split Float Acount'
@@ -3998,10 +4121,10 @@ components:
                   properties:
                     debits_blocked:
                       type: boolean
-                      description: Used by Split admins in case of fraud
+                      description: Used by Split admins. Defines whether the bank account is blocked from being debited
                     credits_blocked:
                       type: boolean
-                      description: Used by Split admins in case of fraud
+                      description: Used by Split admins. Defined Whether this bank account is blocked from being credited
             anyone_account:
               type: object
               properties:
@@ -4013,12 +4136,17 @@ components:
               properties:
                 alias_value:
                   type: string
+                  format: email
+                  min: 6
+                  max: 256
                   description: The PayID email
                 alias_type:
                   type: string
-                  description: Type of PayID. Fixed to 'email'
+                  description: Type of PayID. Fixed to `email`
                 alias_name:
                   type: string
+                  min: 3
+                  max: 140
                   description: The contact name
                 state:
                   type: string
@@ -4231,14 +4359,142 @@ components:
       properties:
         data:
           type: object
+          required:
+            - id
+            - name
+            - email
+            - type
+            - metadata
+            - bank_account
+            - anyone_account
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: The Contact ID
+            name:
+              type: string
+              min: 3
+              max: 140
+              description: 'The Contact name (Min: 3 - Max: 140)'
+            email:
+              type: string
+              min: 6
+              max: 256
+              format: email
+              description: 'The Contact email (Min: 6 - Max: 256)'
+            'type':
+              type: string
+              description: (Deprecated) The Contact account type
+              enum:
+                - Split account
+                - anyone
+            metadata:
+              $ref: '#/components/schemas/Metadata'
+            bank_account:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: The Bank Account ID
+                account_number:
+                  type: string
+                  min: 5
+                  max: 9
+                  description: 'The Bank Account number (Min: 5 - Max: 9)'
+                branch_code:
+                  type: string
+                  min: 6
+                  max: 6
+                  description: 'The BSB number (Min: 6 - Max: 6)'
+                state:
+                  type: string
+                  description: The bank account state
+                  enum:
+                    - active
+                    - removed
+                iav_provider:
+                  type: string
+                  description: The instant account verification provider
+                  enum:
+                    - split
+                    - proviso
+                    - basiq
+                    - credit_sense
+                iav_status:
+                  type: string
+                  description: The instant account verification bank connection status
+                  enum:
+                    - active
+                    - removed
+                    - credentials_invalid
+                blocks:
+                  type: object
+                  properties:
+                    debits_blocked:
+                      type: boolean
+                      description: Used by Split admins. Defines whether the bank account is blocked from being debited
+                    credits_blocked:
+                      type: boolean
+                      description: Used by Split admins. Defined Whether this bank account is blocked from being credited
+            anyone_account:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: (Deprecated) The Anyone Account ID
+            bank_connection:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: The bank connection ID
+            links:
+              type: object
+              properties:
+                add_bank_connection:
+                  type: string
+                  format: url
+                  description: A unique URL to share with the Contact in order to establish a new bank connection to their bank account
+            payid_details:
+              type: object
+              properties:
+                alias_value:
+                  type: string
+                  format: email
+                  min: 6
+                  max: 256
+                  description: The PayID email
+                alias_type:
+                  type: string
+                  description: Type of PayID. Fixed to `email`
+                alias_name:
+                  type: string
+                  min: 3
+                  max: 140
+                  description: The contact name
+                state:
+                  type: string
+                  description: Pending -> Active or Failed -> Deregistered (Contact removed)
+                  enum:
+                    - pending
+                    - active
+                    - failed
+                    - deregistered
       example:
         data:
-          id: fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb
+          id: 55afddde-4296-4daf-8e49-7ba481ef9608
           name: Outstanding Tours Pty Ltd
           email: accounts@outstandingtours.com.au
-          type: Split account
+          type: anyone
+          metadata:
+            custom_key: Custom string
+            another_custom_key: Maybe a URL
           bank_account:
-            id: 55afddde-4296-4daf-8e49-7ba481ef9608
+            id: fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb
             account_number: '947434694'
             branch_code: '304304'
             bank_name: National Australia Bank
@@ -4248,8 +4504,17 @@ components:
             blocks:
               debits_blocked: false
               credits_blocked: false
+          anyone_account:
+            id: 31a05f81-25a2-4085-92ef-0d16d0263bff
+          bank_connection:
+            id: null
           links:
             add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
+          payid_details:
+            alias_value: otp@pay.travel.com.au
+            alias_type: email
+            alias_name: Outstanding Tours
+            state: active
     UpdateAContactRequest:
       title: Update a Contact (request)
       type: object
@@ -4368,7 +4633,7 @@ components:
       type: object
       properties:
         amount:
-          type: number
+          type: integer
           description: Amount in cents to pay the recipient
           example: 30000
         description:
@@ -4603,11 +4868,13 @@ components:
           example: '2016-12-19T02:10:56Z'
         amount:
           type: integer
-          description: Amount in cents to pay the initiator
+          min: 1
+          max: 99999999999
+          description: 'Amount in cents to pay the initiator (Min: 1 - Max: 99999999999)'
           example: 99000
         authoriser_contact_id:
           type: string
-          description: The Contact the payment will be requested from (`Contact.data.id`)'
+          description: The Contact the payment will be requested from (`Contact.data.id`)
           example: de86472c-c027-4735-a6a7-234366a27fc7
         precheck_funds:
           type: boolean
@@ -4615,6 +4882,7 @@ components:
           example: "false"
         your_bank_account_id:
           type: string
+          format: uuid
           description: Specify where we should settle the funds for this transaction. If omitted, your primary bank account will be used.
           style: form
           schema:
@@ -4658,7 +4926,7 @@ components:
           properties:
             ref:
               type: string
-              description: The Payment Reference reference (PR.*)
+              description: The Payment Request reference (PR.*)
             initiator_id:
               type: string
               format: uuid
@@ -4713,7 +4981,9 @@ components:
               properties:
                 amount:
                   type: integer
-                  description: Amount in cents
+                  min: 1
+                  max: 99999999999
+                  description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                 'description':
                   type: string
                   description: Payment Request description
@@ -4841,7 +5111,9 @@ components:
               properties:
                 amount:
                   type: integer
-                  description: Amount in cents
+                  min: 1
+                  max: 99999999999
+                  description: 'Amount in cents (Min: 1 - Max: 99999999999)
                 'description':
                   type: string
                   description: Payment Request description
@@ -4956,7 +5228,9 @@ components:
               properties:
                 amount:
                   type: integer
-                  description: Amount in cents
+                  min: 1
+                  max: 99999999999
+                  description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                 'description':
                   type: string
                   description: Payment Request description
@@ -5089,7 +5363,9 @@ components:
                 properties:
                   amount:
                     type: integer
-                    description: Amount in cents
+                    min: 1
+                    max: 99999999999
+                    description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                   'description':
                     type: string
                     description: Payment Request description
@@ -5246,8 +5522,10 @@ components:
       type: object
       properties:
         amount:
-          type: number
-          description: Amount in cents refund
+          type: integer
+          min: 1
+          max: 99999999999
+          description: 'Amount in cents refund (Min: 1 - Max: 99999999999)'
           example: 500
         reason:
           type: string
@@ -5255,11 +5533,8 @@ components:
           example: Because reason
         your_bank_account_id:
           type: string
+          format: uuid
           description: Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.
-          style: form
-          schema:
-            type: string
-          example: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         metadata:
           $ref: '#/components/schemas/Metadata'
       example:
@@ -5459,7 +5734,7 @@ components:
       type: object
       properties:
         expiry_in_seconds:
-          type: number
+          type: integer
           description: >
             The amount of time in seconds before the Unassigned Agreement can no
             longer be accepted.
@@ -5605,5 +5880,55 @@ components:
             suburb: Lead
             state: NSW
             postcode: '2478'
+    SimulateIncomingPayIDPaymentRequest:
+      required:
+        - payid_email
+        - amount
+      type: object
+      properties:
+        payid_email:
+          type: string
+          min: 6
+          max: 256
+          description: 'Receivable Contact PayID email (Min: 6 - Max: 256)'
+        amount:
+          type: integer
+          min: 1
+          max: 99999999999
+          description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+      example:
+        payid_email: incoming@split.cash
+        amount: 10000
+    SimulateIncomingPayIDPaymentResponse:
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+            - id
+            - payid_email
+            - amount
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: A unique ID which can be provided to Split for debugging purposes
+            payid_email:
+              type: string
+              min: 6
+              max: 256
+              description: 'The PayID email value provided (Min: 6 - Max: 256)'
+            amount:
+              type: integer
+              min: 1
+              max: 99999999999
+              description: 'The amount value provided (Min: 1 - Max: 99999999999)'
+      example:
+        data:
+          id: 92c75281-5b60-489a-bd8a-e513ba9277c5
+          payid_email: incoming@split.cash
+          amount: 10000
 security:
   - bearerAuth: []
