@@ -4058,15 +4058,6 @@ components:
                     - active
                     - failed
                     - deregistered
-    ReactivateContactResponse:
-      title: Reactivate a contact (response)
-      required:
-        - id
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
     ListAllContactsResponse:
       title: List all Contacts (response)
       required:

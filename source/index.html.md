@@ -11292,24 +11292,6 @@ func main() {
 |state|failed|
 |state|deregistered|
 
-## ReactivateContactResponse
-
-<a id="schemareactivatecontactresponse"></a>
-
-```json
-{
-  "id": "string"
-}
-```
-
-### Properties
-
-*Reactivate a contact (response)*
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|string(uuid)|true|No description|
-
 ## ListAllContactsResponse
 
 <a id="schemalistallcontactsresponse"></a>
