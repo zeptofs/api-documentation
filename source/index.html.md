@@ -3483,34 +3483,34 @@ Receive funds from a Contact by allowing them to pay to a personalised PayID or 
 ```json
 {
   "data": {
-    "id": "6a7ed958-f1e8-42dc-8c02-3901d7057357",
-    "name": "Delphine Jestin",
-    "email": "delphine@gmail.com",
-    "type": "anyone",
+    "id": "string",
+    "name": "string",
+    "email": "string",
+    "type": "string",
     "metadata": {
       "custom_key": "Custom string",
       "another_custom_key": "Maybe a URL"
     },
     "bank_account": {
-      "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
-      "account_number": "1408281",
-      "branch_code": "802919",
-      "bank_name": "Split Float Account",
+      "id": "string",
+      "account_number": "string",
+      "branch_code": "string",
+      "bank_name": "string",
       "state": "active",
-      "iav_provider": null,
-      "iav_status": null,
+      "iav_provider": "string",
+      "iav_status": "string",
       "blocks": {
-        "debits_blocked": false,
-        "credits_blocked": false
+        "debits_blocked": true,
+        "credits_blocked": true
       }
     },
     "anyone_account": {
-      "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d"
+      "id": "string"
     },
     "payid_details": {
-      "alias_value": "delphine_123@merchant.com.au",
-      "alias_type": "email",
-      "alias_name": "Delphine Jestin",
+      "alias_value": "string",
+      "alias_type": "string",
+      "alias_name": "string",
       "state": "pending"
     }
   }
@@ -4576,6 +4576,222 @@ You can update the name, email, bank account and metadata of any Contact.
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[UpdateAContactResponse](#schemaupdateacontactresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
+
+## Reactivate a Contact
+
+<a id="opIdReactivateContact"></a>
+
+> Code samples
+
+```shell
+curl --request POST \
+  --url https://api.sandbox.split.cash/contacts//reactivate \
+  --header 'accept: application/json' \
+  --header 'authorization: Bearer {access-token}' \
+  --header 'content-type: application/json' \
+  --data '{"id":"string"}'
+```
+
+```ruby
+require 'uri'
+require 'net/http'
+
+url = URI("https://api.sandbox.split.cash/contacts//reactivate")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = 'application/json'
+request["accept"] = 'application/json'
+request["authorization"] = 'Bearer {access-token}'
+request.body = "{\"id\":\"string\"}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```javascript--node
+var http = require("https");
+
+var options = {
+  "method": "POST",
+  "hostname": "api.sandbox.split.cash",
+  "port": null,
+  "path": "/contacts//reactivate",
+  "headers": {
+    "content-type": "application/json",
+    "accept": "application/json",
+    "authorization": "Bearer {access-token}"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(JSON.stringify({ id: 'string' }));
+req.end();
+```
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection("api.sandbox.split.cash")
+
+payload = "{\"id\":\"string\"}"
+
+headers = {
+    'content-type': "application/json",
+    'accept': "application/json",
+    'authorization': "Bearer {access-token}"
+    }
+
+conn.request("POST", "/contacts//reactivate", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+```java
+HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/contacts//reactivate")
+  .header("content-type", "application/json")
+  .header("accept", "application/json")
+  .header("authorization", "Bearer {access-token}")
+  .body("{\"id\":\"string\"}")
+  .asString();
+```
+
+```php
+<?php
+
+$client = new http\Client;
+$request = new http\Client\Request;
+
+$body = new http\Message\Body;
+$body->append('{"id":"string"}');
+
+$request->setRequestUrl('https://api.sandbox.split.cash/contacts//reactivate');
+$request->setRequestMethod('POST');
+$request->setBody($body);
+
+$request->setHeaders(array(
+  'authorization' => 'Bearer {access-token}',
+  'accept' => 'application/json',
+  'content-type' => 'application/json'
+));
+
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+
+echo $response->getBody();
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://api.sandbox.split.cash/contacts//reactivate"
+
+	payload := strings.NewReader("{\"id\":\"string\"}")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("accept", "application/json")
+	req.Header.Add("authorization", "Bearer {access-token}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+
+`POST /contacts/{id}/reactivate`
+
+Return a removed Contact to an active state.
+
+<aside class="notice">
+  If the Contact is a Receivable Contact then the PayID used for receiving funds will also be returned to an active state.
+</aside>
+
+> Body parameter
+
+```json
+{
+  "id": "string"
+}
+```
+
+<h3 id="Reactivate-a-Contact-parameters" class="parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[ReactivateContactRequest](#schemareactivatecontactrequest)|true|No description|
+|» id|body|string(uuid)|true|No description|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": {
+    "id": "fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb",
+    "name": "Outstanding Tours Pty Ltd",
+    "email": "accounts@outstandingtours.com.au",
+    "type": "Split account",
+    "bank_account": {
+      "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
+      "account_number": "947434694",
+      "branch_code": "304304",
+      "bank_name": "National Australia Bank",
+      "state": "active",
+      "iav_provider": null,
+      "iav_status": null,
+      "blocks": {
+        "debits_blocked": false,
+        "credits_blocked": false
+      }
+    },
+    "links": {
+      "add_bank_connection": "https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80"
+    }
+  }
+}
+```
+
+<h3 id="Reactivate a Contact-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[GetAContactResponse](#schemagetacontactresponse)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
 
 ## Refresh contact bank connection
@@ -11023,34 +11239,34 @@ func main() {
 ```json
 {
   "data": {
-    "id": "6a7ed958-f1e8-42dc-8c02-3901d7057357",
-    "name": "Delphine Jestin",
-    "email": "delphine@gmail.com",
-    "type": "anyone",
+    "id": "string",
+    "name": "string",
+    "email": "string",
+    "type": "string",
     "metadata": {
       "custom_key": "Custom string",
       "another_custom_key": "Maybe a URL"
     },
     "bank_account": {
-      "id": "55afddde-4296-4daf-8e49-7ba481ef9608",
-      "account_number": "1408281",
-      "branch_code": "802919",
-      "bank_name": "Split Float Account",
+      "id": "string",
+      "account_number": "string",
+      "branch_code": "string",
+      "bank_name": "string",
       "state": "active",
-      "iav_provider": null,
-      "iav_status": null,
+      "iav_provider": "string",
+      "iav_status": "string",
       "blocks": {
-        "debits_blocked": false,
-        "credits_blocked": false
+        "debits_blocked": true,
+        "credits_blocked": true
       }
     },
     "anyone_account": {
-      "id": "77be6ecc-5fa7-454b-86d6-02a5f147878d"
+      "id": "string"
     },
     "payid_details": {
-      "alias_value": "delphine_123@merchant.com.au",
-      "alias_type": "email",
-      "alias_name": "Delphine Jestin",
+      "alias_value": "string",
+      "alias_type": "string",
+      "alias_name": "string",
       "state": "pending"
     }
   }
@@ -11098,6 +11314,42 @@ func main() {
 |state|active|
 |state|failed|
 |state|deregistered|
+
+## ReactivateContactRequest
+
+<a id="schemareactivatecontactrequest"></a>
+
+```json
+{
+  "id": "string"
+}
+```
+
+### Properties
+
+*Reactivate a contact (request)*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|id|string(uuid)|true|No description|
+
+## ReactivateContactResponse
+
+<a id="schemareactivatecontactresponse"></a>
+
+```json
+{
+  "id": "string"
+}
+```
+
+### Properties
+
+*Reactivate a contact (response)*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|id|string(uuid)|true|No description|
 
 ## ListAllContactsResponse
 

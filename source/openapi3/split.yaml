@@ -2478,6 +2478,35 @@ paths:
                 $ref: '#/components/schemas/UpdateAContactResponse'
         '404':
           description: Not Found
+  '/contacts/{id}/reactivate':
+    post:
+      tags:
+        - Contacts
+      summary: Reactivate a Contact
+      description: |
+        Return a removed Contact to an active state.
+
+        <aside class="notice">
+          If the Contact is a Receivable Contact then the PayID used for receiving funds will also be returned to an active state.
+        </aside>
+      operationId: ReactivateContact
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReactivateContactRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAContactResponse'
+        '404':
+          description: Not Found
   '/contacts/{id}/refresh_balance':
     post:
       tags:
@@ -4028,33 +4057,24 @@ components:
                     - active
                     - failed
                     - deregistered
-      example:
-        data:
-          id: 6a7ed958-f1e8-42dc-8c02-3901d7057357
-          name: Delphine Jestin
-          email: delphine@gmail.com
-          type: anyone
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-          bank_account:
-            id: 55afddde-4296-4daf-8e49-7ba481ef9608
-            account_number: '1408281'
-            branch_code: '802919'
-            bank_name: Split Float Account
-            state: active
-            iav_provider: null
-            iav_status: null
-            blocks:
-              debits_blocked: false
-              credits_blocked: false
-          anyone_account:
-            id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
-          payid_details:
-            alias_value: delphine_123@merchant.com.au
-            alias_type: email
-            alias_name: Delphine Jestin
-            state: pending
+    ReactivateContactRequest:
+      title: Reactivate a contact (request)
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+    ReactivateContactResponse:
+      title: Reactivate a contact (response)
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
     ListAllContactsResponse:
       title: List all Contacts (response)
       required:
