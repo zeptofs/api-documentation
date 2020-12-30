@@ -2822,6 +2822,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentRequestResponse'
+    delete:
+      tags:
+        - Payment Requests
+      summary: Cancel a Payment Request
+      description: A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
+      operationId: CancelAPaymentRequest
+      parameters:
+        - name: payment_request_ref
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: PR.3
+      responses:
+        '204':
+          description: No Content
   /payment_requests/outgoing:
     get:
       tags:
@@ -2876,24 +2894,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentRequestsHistoryResponse'
-    delete:
-      tags:
-        - Payment Requests
-      summary: Cancel a Payment Request
-      description: A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
-      operationId: CancelAPaymentRequest
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '204':
-          description: No Content
   /payment_requests/incoming:
     get:
       tags:

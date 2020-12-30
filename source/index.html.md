@@ -6018,6 +6018,147 @@ func main() {
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[GetAPaymentRequestResponse](#schemagetapaymentrequestresponse)|
 
+## Cancel a Payment Request
+
+<a id="opIdCancelAPaymentRequest"></a>
+
+> Code samples
+
+```shell
+curl --request DELETE \
+  --url https://api.sandbox.split.cash/payment_requests/PR.3 \
+  --header 'authorization: Bearer {access-token}'
+```
+
+```ruby
+require 'uri'
+require 'net/http'
+
+url = URI("https://api.sandbox.split.cash/payment_requests/PR.3")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Delete.new(url)
+request["authorization"] = 'Bearer {access-token}'
+
+response = http.request(request)
+puts response.read_body
+```
+
+```javascript--node
+var http = require("https");
+
+var options = {
+  "method": "DELETE",
+  "hostname": "api.sandbox.split.cash",
+  "port": null,
+  "path": "/payment_requests/PR.3",
+  "headers": {
+    "authorization": "Bearer {access-token}"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.end();
+```
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection("api.sandbox.split.cash")
+
+headers = { 'authorization': "Bearer {access-token}" }
+
+conn.request("DELETE", "/payment_requests/PR.3", headers=headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+```java
+HttpResponse<String> response = Unirest.delete("https://api.sandbox.split.cash/payment_requests/PR.3")
+  .header("authorization", "Bearer {access-token}")
+  .asString();
+```
+
+```php
+<?php
+
+$client = new http\Client;
+$request = new http\Client\Request;
+
+$request->setRequestUrl('https://api.sandbox.split.cash/payment_requests/PR.3');
+$request->setRequestMethod('DELETE');
+$request->setHeaders(array(
+  'authorization' => 'Bearer {access-token}'
+));
+
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+
+echo $response->getBody();
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://api.sandbox.split.cash/payment_requests/PR.3"
+
+	req, _ := http.NewRequest("DELETE", url, nil)
+
+	req.Header.Add("authorization", "Bearer {access-token}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+
+`DELETE /payment_requests/{payment_request_ref}`
+
+A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
+
+<h3 id="Cancel-a-Payment-Request-parameters" class="parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|payment_request_ref|path|string|true|Single value, exact match|
+
+<h3 id="Cancel a Payment Request-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None|
+
 ## List Payment Requests
 
 <a id="opIdListOutgoingPaymentRequests"></a>
@@ -6462,147 +6603,6 @@ Gives you visibility of the entire Payment Request lifecycle including the gener
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[GetAPaymentRequestsHistoryResponse](#schemagetapaymentrequestshistoryresponse)|
-
-## Cancel a Payment Request
-
-<a id="opIdCancelAPaymentRequest"></a>
-
-> Code samples
-
-```shell
-curl --request DELETE \
-  --url https://api.sandbox.split.cash/payment_requests/PR.3/history \
-  --header 'authorization: Bearer {access-token}'
-```
-
-```ruby
-require 'uri'
-require 'net/http'
-
-url = URI("https://api.sandbox.split.cash/payment_requests/PR.3/history")
-
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-request = Net::HTTP::Delete.new(url)
-request["authorization"] = 'Bearer {access-token}'
-
-response = http.request(request)
-puts response.read_body
-```
-
-```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "DELETE",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/PR.3/history",
-  "headers": {
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-});
-
-req.end();
-```
-
-```python
-import http.client
-
-conn = http.client.HTTPSConnection("api.sandbox.split.cash")
-
-headers = { 'authorization': "Bearer {access-token}" }
-
-conn.request("DELETE", "/payment_requests/PR.3/history", headers=headers)
-
-res = conn.getresponse()
-data = res.read()
-
-print(data.decode("utf-8"))
-```
-
-```java
-HttpResponse<String> response = Unirest.delete("https://api.sandbox.split.cash/payment_requests/PR.3/history")
-  .header("authorization", "Bearer {access-token}")
-  .asString();
-```
-
-```php
-<?php
-
-$client = new http\Client;
-$request = new http\Client\Request;
-
-$request->setRequestUrl('https://api.sandbox.split.cash/payment_requests/PR.3/history');
-$request->setRequestMethod('DELETE');
-$request->setHeaders(array(
-  'authorization' => 'Bearer {access-token}'
-));
-
-$client->enqueue($request)->send();
-$response = $client->getResponse();
-
-echo $response->getBody();
-```
-
-```go
-package main
-
-import (
-	"fmt"
-	"net/http"
-	"io/ioutil"
-)
-
-func main() {
-
-	url := "https://api.sandbox.split.cash/payment_requests/PR.3/history"
-
-	req, _ := http.NewRequest("DELETE", url, nil)
-
-	req.Header.Add("authorization", "Bearer {access-token}")
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println(res)
-	fmt.Println(string(body))
-
-}
-```
-
-`DELETE /payment_requests/{payment_request_ref}/history`
-
-A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
-
-<h3 id="Cancel-a-Payment-Request-parameters" class="parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|payment_request_ref|path|string|true|Single value, exact match|
-
-<h3 id="Cancel a Payment Request-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None|
 
 ## List incoming Payment Requests
 
