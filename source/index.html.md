@@ -1004,42 +1004,26 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/agreements",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/agreements", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-});
-
-req.write(JSON.stringify({
-  authoriser_contact_id: '8df89c16-330f-462b-8891-808d7bdceb7f',
-  terms: {
-    per_payout: { min_amount: null, max_amount: 10000 },
-    per_frequency: { days: 7, max_amount: 1000000 }
+    "authorization": `Bearer ${accessToken}`
   },
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+  body: JSON.stringify({
+    authoriser_contact_id: '8df89c16-330f-462b-8891-808d7bdceb7f',
+    terms: {
+      per_payout: { min_amount: null, max_amount: 10000 },
+      per_frequency: { days: 7, max_amount: 1000000 }
+    },
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
+});
+const body = await response.json();
+
+console.log(body);
 ```
 
 ```python
@@ -1241,33 +1225,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/agreements/outgoing",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/agreements/outgoing", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -1457,33 +1425,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/agreements/A.2",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/agreements/A.2", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -1635,32 +1587,16 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "DELETE",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/agreements/A.2",
-  "headers": {
-    "authorization": "Bearer {access-token}"
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/agreements/A.2", {
+  method: "DELETE",
+  headers: {
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -1778,33 +1714,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/agreements/A.2/accept",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/agreements/A.2/accept", {
+  method: "POST",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -1958,33 +1878,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/agreements/A.2/decline",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/agreements/A.2/decline", {
+  method: "POST",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -2138,33 +2042,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/agreements/incoming",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/agreements/incoming", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -2358,33 +2246,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/bank_accounts",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/bank_accounts", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -2552,33 +2424,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/bank_connections",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/bank_connections", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -2766,33 +2622,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/bank_connections/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -2944,32 +2784,16 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "DELETE",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de",
-  "headers": {
-    "authorization": "Bearer {access-token}"
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/bank_connections/01586a3f-f25b-404f-b135-c42a1b7ef4de", {
+  method: "DELETE",
+  headers: {
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -3097,41 +2921,25 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts/anyone",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/contacts/anyone", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    name: 'Hunter Thompson',
+    email: 'hunter@batcountry.com',
+    branch_code: '123456',
+    account_number: '13048322',
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({
-  name: 'Hunter Thompson',
-  email: 'hunter@batcountry.com',
-  branch_code: '123456',
-  account_number: '13048322',
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -3333,40 +3141,24 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts/receivable",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/contacts/receivable", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    name: 'Delphine Jestin',
+    email: 'delphine@gmail.com',
+    payid_email: 'delphine_123@merchant.com.au',
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({
-  name: 'Delphine Jestin',
-  email: 'delphine@gmail.com',
-  payid_email: 'delphine_123@merchant.com.au',
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -3581,38 +3373,22 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/contacts", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    nickname: 'outstanding_tours',
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({
-  nickname: 'outstanding_tours',
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -3807,33 +3583,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/contacts", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -4063,33 +3823,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts/55afddde-4296-4daf-8e49-7ba481ef9608",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/contacts/55afddde-4296-4daf-8e49-7ba481ef9608", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -4259,32 +4003,16 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "DELETE",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts/55afddde-4296-4daf-8e49-7ba481ef9608",
-  "headers": {
-    "authorization": "Bearer {access-token}"
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/contacts/55afddde-4296-4daf-8e49-7ba481ef9608", {
+  method: "DELETE",
+  headers: {
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -4411,41 +4139,25 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "PATCH",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts/55afddde-4296-4daf-8e49-7ba481ef9608",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "contacts/55afddde-4296-4daf-8e49-7ba481ef9608", {
+  method: "PATCH",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    name: 'My very own alias',
+    email: 'updated@email.com',
+    branch_code: '123456',
+    account_number: '99887766',
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({
-  name: 'My very own alias',
-  email: 'updated@email.com',
-  branch_code: '123456',
-  account_number: '99887766',
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -4650,32 +4362,16 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance",
-  "headers": {
-    "authorization": "Bearer {access-token}"
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance", {
+  method: "POST",
+  headers: {
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -4815,42 +4511,26 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/open_agreements",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/open_agreements", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-});
-
-req.write(JSON.stringify({
-  title: 'Subscription Plan A',
-  terms: {
-    per_payout: { min_amount: null, max_amount: 10000 },
-    per_frequency: { days: 7, max_amount: 1000000 }
+    "authorization": `Bearer ${accessToken}`
   },
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+  body: JSON.stringify({
+    title: 'Subscription Plan A',
+    terms: {
+      per_payout: { min_amount: null, max_amount: 10000 },
+      per_frequency: { days: 7, max_amount: 1000000 }
+    },
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
+});
+const body = await response.json();
+
+console.log(body);
 ```
 
 ```python
@@ -5048,33 +4728,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/open_agreements",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/open_agreements", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -5242,33 +4906,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/open_agreements/OA.1/activate",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/open_agreements/OA.1/activate", {
+  method: "POST",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -5418,33 +5066,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/open_agreements/OA.1/close",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/open_agreements/OA.1/close", {
+  method: "POST",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -5640,43 +5272,27 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    description: 'Visible to both initiator and authoriser',
+    matures_at: '2016-12-19T02:10:56.000Z',
+    amount: 99000,
+    authoriser_contact_id: 'de86472c-c027-4735-a6a7-234366a27fc7',
+    your_bank_account_id: '9c70871d-8e36-4c3e-8a9c-c0ee20e7c679',
+    precheck_funds: false,
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({
-  description: 'Visible to both initiator and authoriser',
-  matures_at: '2016-12-19T02:10:56.000Z',
-  amount: 99000,
-  authoriser_contact_id: 'de86472c-c027-4735-a6a7-234366a27fc7',
-  your_bank_account_id: '9c70871d-8e36-4c3e-8a9c-c0ee20e7c679',
-  precheck_funds: false,
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -5870,33 +5486,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/PR.3",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests/PR.3", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -6050,33 +5650,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/outgoing",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests/outgoing", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -6250,33 +5834,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/PR.3/history",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests/PR.3/history", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -6493,32 +6061,16 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "DELETE",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/PR.3/history",
-  "headers": {
-    "authorization": "Bearer {access-token}"
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests/PR.3/history", {
+  method: "DELETE",
+  headers: {
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -6636,33 +6188,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/incoming",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests/incoming", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -6840,33 +6376,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/PR.3/approve",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests/PR.3/approve", {
+  method: "POST",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -7020,33 +6540,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payment_requests/PR.3/decline",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payment_requests/PR.3/decline", {
+  method: "POST",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -7245,58 +6749,42 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payments",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payments", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-});
-
-req.write(JSON.stringify({
-  description: 'The SuperPackage',
-  matures_at: '2016-09-13T00:00:00Z',
-  your_bank_account_id: '83623359-e86e-440c-9780-432a3bc3626f',
-  payouts: [
-    {
-      amount: 30000,
-      description: 'A tandem skydive jump SB23094',
-      recipient_contact_id: '48b89364-1577-4c81-ba02-96705895d457',
-      metadata: {
-        invoice_ref: 'BILL-0001',
-        invoice_id: 'c80a9958-e805-47c0-ac2a-c947d7fd778d',
-        custom_key: 'Custom string',
-        another_custom_key: 'Maybe a URL'
+    "authorization": `Bearer ${accessToken}`
+  },
+  "base": JSON.stringify({
+    description: 'The SuperPackage',
+    matures_at: '2016-09-13T00:00:00Z',
+    your_bank_account_id: '83623359-e86e-440c-9780-432a3bc3626f',
+    payouts: [
+      {
+        amount: 30000,
+        description: 'A tandem skydive jump SB23094',
+        recipient_contact_id: '48b89364-1577-4c81-ba02-96705895d457',
+        metadata: {
+          invoice_ref: 'BILL-0001',
+          invoice_id: 'c80a9958-e805-47c0-ac2a-c947d7fd778d',
+          custom_key: 'Custom string',
+          another_custom_key: 'Maybe a URL'
+        }
+      },
+      {
+        amount: 30000,
+        description: 'A scuba dive SDS5464',
+        recipient_contact_id: 'dc6f1e60-3803-43ca-a200-7d641816f57f'
       }
-    },
-    {
-      amount: 30000,
-      description: 'A scuba dive SDS5464',
-      recipient_contact_id: 'dc6f1e60-3803-43ca-a200-7d641816f57f'
-    }
-  ],
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+    ],
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
+});
+const body = await response.json();
+
+console.log(body);
 ```
 
 ```python
@@ -7524,33 +7012,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payments",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payments", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -7724,33 +7196,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payments/PB.1",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payments/PB.1", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -7927,33 +7383,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payouts/C.2/retry",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payouts/C.2/retry", {
+  method: "POST",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -8108,34 +7548,18 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "DELETE",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payouts/D.1",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/payouts/D.1", {
+  method: "DELETE",
+  headers: {
     "content-type": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({ details: 'Incorrect recipient' })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({ details: 'Incorrect recipient' }));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -8302,40 +7726,24 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/credits/string/refunds",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/credits/string/refunds", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    amount: 500,
+    reason: 'Because reason',
+    your_bank_account_id: '9c70871d-8e36-4c3e-8a9c-c0ee20e7c679',
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({
-  amount: 500,
-  reason: 'Because reason',
-  your_bank_account_id: '9c70871d-8e36-4c3e-8a9c-c0ee20e7c679',
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -8519,33 +7927,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/refunds/incoming",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/refunds/incoming", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -8692,33 +8084,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/refunds/outgoing",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/refunds/outgoing", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -8865,33 +8241,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/refunds/PRF.1",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/refunds/PRF.1", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -9045,35 +8405,19 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/simulate/incoming_payid_payment",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/simulate/incoming_payid_payment", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    "authorization": `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({ payid_email: 'incoming@split.cash', amount: 10000 })
 });
+const body = await response.json();
 
-req.write(JSON.stringify({ payid_email: 'incoming@split.cash', amount: 10000 }));
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -9312,33 +8656,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/transactions",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/transactions", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -9589,43 +8917,27 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/unassigned_agreements",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/unassigned_agreements", {
+  method: "POST",
+  headers: {
     "content-type": "application/json",
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-});
-
-req.write(JSON.stringify({
-  expiry_in_seconds: 60,
-  single_use: false,
-  terms: {
-    per_payout: { min_amount: null, max_amount: 10000 },
-    per_frequency: { days: 7, max_amount: 1000000 }
+    "authorization": `Bearer ${accessToken}`
   },
-  metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
-}));
-req.end();
+  body: JSON.stringify({
+    expiry_in_seconds: 60,
+    single_use: false,
+    terms: {
+      per_payout: { min_amount: null, max_amount: 10000 },
+      per_frequency: { days: 7, max_amount: 1000000 }
+    },
+    metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
+  })
+});
+const body = await response.json();
+
+console.log(body);
 ```
 
 ```python
@@ -9831,33 +9143,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/unassigned_agreements",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/unassigned_agreements", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -10031,33 +9327,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/unassigned_agreements/A.4k",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/unassigned_agreements/A.4k", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -10207,32 +9487,16 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "DELETE",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/unassigned_agreements/A.2",
-  "headers": {
-    "authorization": "Bearer {access-token}"
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/unassigned_agreements/A.2", {
+  method: "DELETE",
+  headers: {
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
@@ -10354,33 +9618,17 @@ puts response.read_body
 ```
 
 ```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "GET",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/user",
-  "headers": {
+const URL = "https://api.sandbox.split.cash";
+const response = await fetch(URL + "/user", {
+  method: "GET",
+  headers: {
     "accept": "application/json",
-    "authorization": "Bearer {access-token}"
+    "authorization": `Bearer ${accessToken}`
   }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
 });
+const body = await response.json();
 
-req.end();
+console.log(body);
 ```
 
 ```python
