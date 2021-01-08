@@ -2302,8 +2302,17 @@ paths:
         Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error & improving your customer's experience.
 
 
-        <aside class="notice">When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change</aside>
-        <aside class="notice">You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="#simulate-incoming-payid-payment">PayID simulation endpoint</a>.</aside>
+        <aside class="notice">
+          When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
+        </aside>
+        <aside class="notice">
+          While unlikely, it is possible that we will be unable to register the given PayID. In this case <code>payid_details.state</code> will transition to <code>failed</code>.
+
+          You can simulate this path in sandbox by adding <code>+failure</code> to your <code>payid_email</code> e.g <code>test+failure@split.cash</code>
+        </aside>
+        <aside class="notice">
+          You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="#simulate-incoming-payid-payment">PayID simulation endpoint</a>.
+        </aside>
       operationId: AddAReceivableContact
       parameters: []
       requestBody:
@@ -2450,8 +2459,12 @@ paths:
         - Contacts
       summary: Remove a Contact
       description: >
-        <aside class="notice">Removing a Contact will not affect your
-        transaction history.</aside>
+        <aside class="notice">
+          <ul>
+            <li>Removing a Contact will not affect your transaction history.</li>
+            <li>Removing a Receivable Contact will deactivate any associated PayIDs.</li>
+          </ul>
+        </aside>
       operationId: RemoveAContact
       parameters:
         - name: id
@@ -2809,6 +2822,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentRequestResponse'
+    delete:
+      tags:
+        - Payment Requests
+      summary: Cancel a Payment Request
+      description: A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
+      operationId: CancelAPaymentRequest
+      parameters:
+        - name: payment_request_ref
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: PR.3
+      responses:
+        '204':
+          description: No Content
   /payment_requests/outgoing:
     get:
       tags:
@@ -2863,24 +2894,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentRequestsHistoryResponse'
-    delete:
-      tags:
-        - Payment Requests
-      summary: Cancel a Payment Request
-      description: A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
-      operationId: CancelAPaymentRequest
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '204':
-          description: No Content
   /payment_requests/incoming:
     get:
       tags:
