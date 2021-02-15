@@ -4651,7 +4651,7 @@ components:
           example: 30000
         description:
           type: string
-          description: Description that both the payer an recipient can see
+          description: Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description.
           example: A tandem skydive jump SB23094
         recipient_contact_id:
           type: string
@@ -4871,7 +4871,7 @@ components:
       properties:
         description:
           type: string
-          description: Description visible to the initiator (payee) & authoriser (payer)
+          description: Description visible to the initiator (payee). The first 9 characters supplied will be visible to the authoriser (payer)
           example: Visible to both initiator and authoriser
         matures_at:
           type: string
