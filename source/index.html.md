@@ -3531,7 +3531,7 @@ Receive funds from a Contact by allowing them to pay to a personalised PayID or 
     "payid_details": {
       "alias_value": "delphine_123@merchant.com.au",
       "alias_type": "email",
-      "alias_name": "Your merchant's alias_name",
+      "alias_name": "your merchant's alias_name",
       "state": "pending"
     }
   }
@@ -4215,7 +4215,7 @@ Get a single Contact by its ID
     "payid_details": {
       "alias_value": "otp@pay.travel.com.au",
       "alias_type": "email",
-      "alias_name": "Outstanding Tours",
+      "alias_name": "your merchant's alias_name",
       "state": "active"
     }
   }
@@ -11313,7 +11313,7 @@ func main() {
     "payid_details": {
       "alias_value": "delphine_123@merchant.com.au",
       "alias_type": "email",
-      "alias_name": "Your merchant's alias_name",
+      "alias_name": "your merchant's alias_name",
       "state": "pending"
     }
   }
@@ -11618,7 +11618,7 @@ func main() {
     "payid_details": {
       "alias_value": "otp@pay.travel.com.au",
       "alias_type": "email",
-      "alias_name": "Outstanding Tours",
+      "alias_name": "your merchant's alias_name",
       "state": "active"
     }
   }

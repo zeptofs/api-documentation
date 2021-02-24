@@ -4194,7 +4194,7 @@ components:
           payid_details:
             alias_value: delphine_123@merchant.com.au
             alias_type: email
-            alias_name: Your merchant's alias_name
+            alias_name: your merchant's alias_name
             state: pending
     ListAllContactsResponse:
       title: List all Contacts (response)
@@ -4526,7 +4526,7 @@ components:
           payid_details:
             alias_value: otp@pay.travel.com.au
             alias_type: email
-            alias_name: Outstanding Tours
+            alias_name: your merchant's alias_name
             state: active
     UpdateAContactRequest:
       title: Update a Contact (request)
