@@ -1503,6 +1503,8 @@ info:
 
     - **2020-12-15** - Re-word Payment Requests introduction to better cover its use with Receivable Contacts.
 
+    - **2021-02-24** - Added details on enabling the Receivable Contact feature and amended the POST/contacts/receivable response body
+
 
     Looking for more? Our docs are open sourced! [https://github.com/splitpayments/api-documentation](https://github.com/splitpayments/api-documentation)
   version: '1.0'
@@ -2306,7 +2308,7 @@ paths:
           To enable this feature, please contact our support team with the following information:
             <li>Your full legal account name</li>
             <li>A legally owned domain name: for your PayID email addresses</li>
-            <li>alias_name: the short business name that will be displayed to your customers</li>
+            <li><strong>alias_name</strong>: the short business name that will be displayed to your customers</li>
         </aside>
         <aside class="notice">
           When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
