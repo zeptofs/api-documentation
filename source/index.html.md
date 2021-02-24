@@ -3462,6 +3462,12 @@ func main() {
 Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error & improving your customer's experience.
 
 <aside class="notice">
+  To enable this feature, please contact our support team with the following information:
+    <li>Your full legal account name</li>
+    <li>A legally owned domain name: for your PayID email addresses</li>
+    <li>alias_name: the short business name that will be displayed to your customers</li>
+</aside>
+<aside class="notice">
   When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
 </aside>
 <aside class="notice">
