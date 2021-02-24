@@ -4168,7 +4168,7 @@ components:
                   type: string
                   min: 3
                   max: 140
-                  description: The contact name
+                  description: Your merchant's alias_name
                 state:
                   type: string
                   description: Pending -> Active or Failed -> Deregistered (Contact removed)
@@ -4496,7 +4496,7 @@ components:
                   type: string
                   min: 3
                   max: 140
-                  description: The contact name
+                  description: Your merchant's alias_name
                 state:
                   type: string
                   description: Pending -> Active or Failed -> Deregistered (Contact removed)

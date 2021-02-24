@@ -11355,7 +11355,7 @@ func main() {
 |»» payid_details|object|false|No description|
 |»»» alias_value|string(email)|false|The PayID email|
 |»»» alias_type|string|false|Type of PayID. Fixed to `email`|
-|»»» alias_name|string|false|The contact name|
+|»»» alias_name|string|false|Your merchant's alias_name|
 |»»» state|string|false|Pending -> Active or Failed -> Deregistered (Contact removed)|
 
 #### Enumerated Values
@@ -11663,7 +11663,7 @@ func main() {
 |»» payid_details|object|false|No description|
 |»»» alias_value|string(email)|false|The PayID email|
 |»»» alias_type|string|false|Type of PayID. Fixed to `email`|
-|»»» alias_name|string|false|The contact name|
+|»»» alias_name|string|false|Your merchant's alias_name|
 |»»» state|string|false|Pending -> Active or Failed -> Deregistered (Contact removed)|
 
 #### Enumerated Values
