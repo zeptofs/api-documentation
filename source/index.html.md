@@ -3531,7 +3531,7 @@ Receive funds from a Contact by allowing them to pay to a personalised PayID or 
     "payid_details": {
       "alias_value": "delphine_123@merchant.com.au",
       "alias_type": "email",
-      "alias_name": "Delphine Jestin",
+      "alias_name": "Your merchant's alias_name",
       "state": "pending"
     }
   }
@@ -11313,7 +11313,7 @@ func main() {
     "payid_details": {
       "alias_value": "delphine_123@merchant.com.au",
       "alias_type": "email",
-      "alias_name": "Delphine Jestin",
+      "alias_name": "Your merchant's alias_name",
       "state": "pending"
     }
   }

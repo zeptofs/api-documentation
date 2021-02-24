@@ -4194,7 +4194,7 @@ components:
           payid_details:
             alias_value: delphine_123@merchant.com.au
             alias_type: email
-            alias_name: Delphine Jestin
+            alias_name: Your merchant's alias_name
             state: pending
     ListAllContactsResponse:
       title: List all Contacts (response)
