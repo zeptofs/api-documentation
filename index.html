@@ -1988,6 +1988,7 @@ class MainClass {
 <li><strong>2020-12-15</strong> - Improve webhooks section</li>
 <li><strong>2020-12-15</strong> - Add changelog</li>
 <li><strong>2020-12-15</strong> - Re-word Payment Requests introduction to better cover its use with Receivable Contacts.</li>
+<li><strong>2021-02-24</strong> - Added details on enabling the Receivable Contact feature and amended the POST/contacts/receivable response body</li>
 </ul>
 
 <p>Looking for more? Our docs are open sourced! <a href="https://github.com/splitpayments/api-documentation">https://github.com/splitpayments/api-documentation</a></p>
@@ -4752,6 +4753,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <p>Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error &amp; improving your customer&#39;s experience.</p>
 
 <aside class="notice">
+  To enable this feature, please contact our support team with the following information:
+    <li>Your full legal account name</li>
+    <li>A legally owned domain name: for your PayID email addresses</li>
+    <li><strong>alias_name</strong>: the short business name that will be displayed to your customers</li>
+</aside>
+
+<aside class="notice">
   When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
 </aside>
 
@@ -4860,7 +4868,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"payid_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"alias_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine_123@merchant.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"alias_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Delphine Jestin"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your merchant's alias_name"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -5619,7 +5627,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"payid_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"alias_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"otp@pay.travel.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"alias_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your merchant's alias_name"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -13730,7 +13738,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"payid_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"alias_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine_123@merchant.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"alias_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Delphine Jestin"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your merchant's alias_name"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -14216,7 +14224,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="s2">"payid_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"alias_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"otp@pay.travel.com.au"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"alias_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your merchant's alias_name"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
