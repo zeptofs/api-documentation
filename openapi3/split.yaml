@@ -4659,7 +4659,7 @@ components:
           example: 30000
         description:
           type: string
-          description: Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description.
+          description: Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 271 characters of this description.
           example: A tandem skydive jump SB23094
         recipient_contact_id:
           type: string
