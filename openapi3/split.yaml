@@ -4659,7 +4659,7 @@ components:
           example: 30000
         description:
           type: string
-          description: Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 271 characters of this description.
+          description: Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.
           example: A tandem skydive jump SB23094
         recipient_contact_id:
           type: string
@@ -4947,26 +4947,26 @@ components:
           properties:
             ref:
               type: string
-              description: The Payment Request reference (PR.*)
+              description: 'The Payment Request reference (PR.*) (Min: 4 - Max: 8)'
             initiator_id:
               type: string
               format: uuid
-              description: Your bank account ID where the funds will settle
+              description: 'Your bank account ID where the funds will settle (Min: 36 - Max: 36)'
             your_bank_account_id:
               type: string
               format: uuid
-              description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+              description: 'Your bank account ID where the funds will settle (alias of `initiator_id`) (Min: 36 - Max: 36)'
             authoriser_id:
               type: string
               format: uuid
-              description: The debtor's bank account ID
+              description: "The debtor's bank account ID (Min: 36 - Max: 36)"
             authoriser_contact_id:
               type: string
               format: uuid
-              description: The contact ID representing the debtor within Split
+              description: 'The contact ID representing the debtor within Split (Min: 36 - Max: 36)'
             schedule_ref:
               type: string
-              description: The schedule that generated the Payment request if applicable
+              description: 'The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)'
             status:
               type: string
               description: The status of the Payment Request
@@ -4978,25 +4978,25 @@ components:
                 - cancelled
             status_reason:
               type: string
-              description: Only used when the `status` is `declined` due to prechecking.
+              description: 'Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)'
               enum:
                 - The balance of the nominated bank account for this Payment Request is not available.
                 - The nominated bank account for this Payment Request has insufficient funds.
             matures_at:
               type: string
               format: date-time
-              description: The date-time when the Payment Request is up for processing
+              description: 'The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)'
             responded_at:
               type: string
               format: date-time
-              description: The date-time when the Payment Request status changed
+              description: 'The date-time when the Payment Request status changed (Min: 0 - Max: 20)'
             created_at:
               type: string
               format: date-time
-              description: The date-time when the Payment Request was created
+              description: 'The date-time when the Payment Request was created (Min: 20 - Max: 20)'
             credit_ref:
               type: string
-              description: The resulting credit entry reference (available once approved)
+              description: 'The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)'
             payout:
               type: object
               properties:
@@ -5007,11 +5007,11 @@ components:
                   description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                 'description':
                   type: string
-                  description: Payment Request description
+                  description: 'Payment Request description (Min: 1 - Max: 280)'
                 matures_at:
                   type: string
                   format: date-time
-                  description: The date-time when the Payment Request is up for processing
+                  description: 'The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)'
               required:
                 - amount
                 - description
@@ -5074,26 +5074,26 @@ components:
           properties:
             ref:
               type: string
-              description: The Payment Reference reference (PR.*)
+              description: 'The Payment Request reference (PR.*) (Min: 4 - Max: 8)'
             initiator_id:
               type: string
               format: uuid
-              description: Your bank account ID where the funds will settle
+              description: 'Your bank account ID where the funds will settle (Min: 36 - Max: 36)'
             your_bank_account_id:
               type: string
               format: uuid
-              description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+              description: 'Your bank account ID where the funds will settle (alias of `initiator_id`) (Min: 36 - Max: 36)'
             authoriser_id:
               type: string
               format: uuid
-              description: The debtor's bank account ID
+              description: "The debtor's bank account ID (Min: 36 - Max: 36)"
             authoriser_contact_id:
               type: string
               format: uuid
-              description: The contact ID representing the debtor within Split
+              description: 'The contact ID representing the debtor within Split (Min: 36 - Max: 36)'
             schedule_ref:
               type: string
-              description: The schedule that generated the Payment request if applicable
+              description: 'The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)'
             status:
               type: string
               description: The status of the Payment Request
@@ -5105,28 +5105,25 @@ components:
                 - cancelled
             status_reason:
               type: string
-              description: Only used when the `status` is `declined` due to prechecking.
+              description: 'Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)'
               enum:
                 - The balance of the nominated bank account for this Payment Request is not available.
                 - The nominated bank account for this Payment Request has insufficient funds.
             matures_at:
               type: string
               format: date-time
-              description: The date-time when the Payment Request is up for processing
+              description: 'The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)'
             responded_at:
               type: string
               format: date-time
-              description: The date-time when the Payment Request status changed
+              description: 'The date-time when the Payment Request status changed (Min: 0 - Max: 20)'
             created_at:
               type: string
               format: date-time
-              description: The date-time when the Payment Request was created
+              description: 'The date-time when the Payment Request was created (Min: 20 - Max: 20)'
             credit_ref:
               type: string
-              description: The resulting credit entry reference (available once approved, if applicable)
-            debit_ref:
-              type: string
-              description: The resulting debit entry reference (available once approved, if applicable)
+              description: 'The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)'
             payout:
               type: object
               properties:
@@ -5134,14 +5131,14 @@ components:
                   type: integer
                   min: 1
                   max: 99999999999
-                  description: 'Amount in cents (Min: 1 - Max: 99999999999)
+                  description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                 'description':
                   type: string
-                  description: Payment Request description
+                  description: 'Payment Request description (Min: 1 - Max: 280)'
                 matures_at:
                   type: string
                   format: date-time
-                  description: The date-time when the Payment Request is up for processing
+                  description: 'The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)'
               required:
                 - amount
                 - description

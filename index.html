@@ -9155,7 +9155,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 271 characters of this description.</td>
+<td>Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.</td>
 </tr>
 <tr>
 <td>»»» recipient_contact_id</td>
@@ -14676,7 +14676,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>description</td>
 <td>string</td>
 <td>true</td>
-<td>Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 271 characters of this description.</td>
+<td>Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.</td>
 </tr>
 <tr>
 <td>recipient_contact_id</td>
@@ -15118,37 +15118,37 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>» ref</td>
 <td>string</td>
 <td>true</td>
-<td>The Payment Request reference (PR.*)</td>
+<td>The Payment Request reference (PR.*) (Min: 4 - Max: 8)</td>
 </tr>
 <tr>
 <td>» initiator_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>Your bank account ID where the funds will settle</td>
+<td>Your bank account ID where the funds will settle (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» your_bank_account_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>Your bank account ID where the funds will settle (alias of <code>initiator_id</code>)</td>
+<td>Your bank account ID where the funds will settle (alias of <code>initiator_id</code>) (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» authoriser_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>The debtor&#39;s bank account ID</td>
+<td>The debtor&#39;s bank account ID (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» authoriser_contact_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>The contact ID representing the debtor within Split</td>
+<td>The contact ID representing the debtor within Split (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» schedule_ref</td>
 <td>string</td>
 <td>true</td>
-<td>The schedule that generated the Payment request if applicable</td>
+<td>The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)</td>
 </tr>
 <tr>
 <td>» status</td>
@@ -15160,31 +15160,31 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>» status_reason</td>
 <td>string</td>
 <td>true</td>
-<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
+<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking. (Min: 0 - Max: 280)</td>
 </tr>
 <tr>
 <td>» matures_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request is up for processing</td>
+<td>The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)</td>
 </tr>
 <tr>
 <td>» responded_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request status changed</td>
+<td>The date-time when the Payment Request status changed (Min: 0 - Max: 20)</td>
 </tr>
 <tr>
 <td>» created_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request was created</td>
+<td>The date-time when the Payment Request was created (Min: 20 - Max: 20)</td>
 </tr>
 <tr>
 <td>» credit_ref</td>
 <td>string</td>
 <td>true</td>
-<td>The resulting credit entry reference (available once approved)</td>
+<td>The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)</td>
 </tr>
 <tr>
 <td>» payout</td>
@@ -15202,13 +15202,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>»» description</td>
 <td>string</td>
 <td>true</td>
-<td>Payment Request description</td>
+<td>Payment Request description (Min: 1 - Max: 280)</td>
 </tr>
 <tr>
 <td>»» matures_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request is up for processing</td>
+<td>The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)</td>
 </tr>
 <tr>
 <td>» metadata</td>
@@ -15324,37 +15324,37 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>» ref</td>
 <td>string</td>
 <td>true</td>
-<td>The Payment Reference reference (PR.*)</td>
+<td>The Payment Request reference (PR.*) (Min: 4 - Max: 8)</td>
 </tr>
 <tr>
 <td>» initiator_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>Your bank account ID where the funds will settle</td>
+<td>Your bank account ID where the funds will settle (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» your_bank_account_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>Your bank account ID where the funds will settle (alias of <code>initiator_id</code>)</td>
+<td>Your bank account ID where the funds will settle (alias of <code>initiator_id</code>) (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» authoriser_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>The debtor&#39;s bank account ID</td>
+<td>The debtor&#39;s bank account ID (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» authoriser_contact_id</td>
 <td>string(uuid)</td>
 <td>true</td>
-<td>The contact ID representing the debtor within Split</td>
+<td>The contact ID representing the debtor within Split (Min: 36 - Max: 36)</td>
 </tr>
 <tr>
 <td>» schedule_ref</td>
 <td>string</td>
 <td>true</td>
-<td>The schedule that generated the Payment request if applicable</td>
+<td>The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)</td>
 </tr>
 <tr>
 <td>» status</td>
@@ -15366,37 +15366,31 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>» status_reason</td>
 <td>string</td>
 <td>true</td>
-<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
+<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking. (Min: 0 - Max: 280)</td>
 </tr>
 <tr>
 <td>» matures_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request is up for processing</td>
+<td>The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)</td>
 </tr>
 <tr>
 <td>» responded_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request status changed</td>
+<td>The date-time when the Payment Request status changed (Min: 0 - Max: 20)</td>
 </tr>
 <tr>
 <td>» created_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request was created</td>
+<td>The date-time when the Payment Request was created (Min: 20 - Max: 20)</td>
 </tr>
 <tr>
 <td>» credit_ref</td>
 <td>string</td>
 <td>false</td>
-<td>The resulting credit entry reference (available once approved, if applicable)</td>
-</tr>
-<tr>
-<td>» debit_ref</td>
-<td>string</td>
-<td>false</td>
-<td>The resulting debit entry reference (available once approved, if applicable)</td>
+<td>The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)</td>
 </tr>
 <tr>
 <td>» payout</td>
@@ -15411,16 +15405,16 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>Amount in cents (Min: 1 - Max: 99999999999)</td>
 </tr>
 <tr>
-<td>»» description&#39;</td>
+<td>»» description</td>
 <td>string</td>
-<td>false</td>
-<td>Payment Request description</td>
+<td>true</td>
+<td>Payment Request description (Min: 1 - Max: 280)</td>
 </tr>
 <tr>
 <td>»» matures_at</td>
 <td>string(date-time)</td>
 <td>true</td>
-<td>The date-time when the Payment Request is up for processing</td>
+<td>The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)</td>
 </tr>
 <tr>
 <td>» metadata</td>
