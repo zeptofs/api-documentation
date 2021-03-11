@@ -3595,6 +3595,24 @@ components:
             metadata:
               type: object
               description: Your custom keyed data
+      example:
+        data:
+          ref: A.2
+          initiator_id: 4e2728cc-b4ba-42c2-a6c3-26a7758de58d
+          authoriser_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
+          contact_id: 8df89c16-330f-462b-8891-808d7bdceb7f
+          bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
+          status: proposed
+          status_reason: null
+          responded_at: null
+          created_at: '2017-03-20T00:53:27Z'
+          terms:
+            per_payout:
+              max_amount: 10000
+              min_amount: null
+            per_frequency:
+              days: 7
+              max_amount: 1000000
     ApproveAgreementResponse:
       title: Approve an Agreement (response)
       required:

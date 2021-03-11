@@ -1181,26 +1181,25 @@ Propose an Agreement to another Split Contact
 ```json
 {
   "data": {
-    "ref": "string",
-    "initiator_id": "string",
-    "authoriser_id": "string",
-    "contact_id": "string",
-    "bank_account_id": "string",
+    "ref": "A.2",
+    "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+    "authoriser_id": "0d290763-bd5a-4b4d-a8ce-06c64c4a697b",
+    "contact_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+    "bank_account_id": "fb9381ec-22af-47fd-8998-804f947aaca3",
     "status": "proposed",
-    "status_reason": "string",
-    "responded_at": "2021-03-11T04:08:45Z",
-    "created_at": "2021-03-11T04:08:45Z",
+    "status_reason": null,
+    "responded_at": null,
+    "created_at": "2017-03-20T00:53:27Z",
     "terms": {
       "per_payout": {
-        "min_amount": 0,
-        "max_amount": 10000
+        "max_amount": 10000,
+        "min_amount": null
       },
       "per_frequency": {
         "days": 7,
         "max_amount": 1000000
       }
-    },
-    "metadata": {}
+    }
   }
 }
 ```
@@ -10606,26 +10605,25 @@ func main() {
 ```json
 {
   "data": {
-    "ref": "string",
-    "initiator_id": "string",
-    "authoriser_id": "string",
-    "contact_id": "string",
-    "bank_account_id": "string",
+    "ref": "A.2",
+    "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
+    "authoriser_id": "0d290763-bd5a-4b4d-a8ce-06c64c4a697b",
+    "contact_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
+    "bank_account_id": "fb9381ec-22af-47fd-8998-804f947aaca3",
     "status": "proposed",
-    "status_reason": "string",
-    "responded_at": "2021-03-11T04:08:45Z",
-    "created_at": "2021-03-11T04:08:45Z",
+    "status_reason": null,
+    "responded_at": null,
+    "created_at": "2017-03-20T00:53:27Z",
     "terms": {
       "per_payout": {
-        "min_amount": 0,
-        "max_amount": 10000
+        "max_amount": 10000,
+        "min_amount": null
       },
       "per_frequency": {
         "days": 7,
         "max_amount": 1000000
       }
-    },
-    "metadata": {}
+    }
   }
 }
 ```
