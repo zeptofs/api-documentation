@@ -3798,22 +3798,22 @@ components:
             initiator_id:
               type: string
               format: uuid
-              description: Your Split account ID
+              description: 'Your Split account ID (Min: 36 - Max: 36)'
             authoriser_id:
               type: string
               format: uuid
-              description: The authoriser's account ID (AnyoneAccount)
+              description: "The authoriser's account ID (AnyoneAccount) (Min: 36 - Max: 36)"
             contact_id:
               type: string
               format: uuid
-              description: The contact ID representing the authoriser within Split
+              description: 'The contact ID representing the authoriser within Split (Min: 36 - Max: 36)'
             bank_account_id:
               type: string
               format: uuid
-              description: The authoriser's bank account ID
+              description: "The authoriser's bank account ID (Min: 36 - Max: 36)"
             status:
               type: string
-              description: The status of the Agreement
+              description: 'The status of the Agreement (Min: 8 - Max: 8)'
               enum:
                 - proposed
                 - accepted
@@ -3826,11 +3826,11 @@ components:
             responded_at:
               type: string
               format: date-time
-              description: The date-time when the Agreement status changed
+              description: 'The date-time when the Agreement status changed (Min: 20 - Max: 20)'
             created_at:
               type: string
               format: date-time
-              description: The date-time when the Agreement was created
+              description: 'The date-time when the Agreement was created (Min: 20 - Max: 20)'
             terms:
               $ref: '#/components/schemas/Terms'
             metadata:
