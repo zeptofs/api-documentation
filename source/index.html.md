@@ -1181,25 +1181,26 @@ Propose an Agreement to another Split Contact
 ```json
 {
   "data": {
-    "ref": "A.2",
-    "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
-    "authoriser_id": "0d290763-bd5a-4b4d-a8ce-06c64c4a697b",
-    "contact_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
-    "bank_account_id": "fb9381ec-22af-47fd-8998-804f947aaca3",
+    "ref": "string",
+    "initiator_id": "string",
+    "authoriser_id": "string",
+    "contact_id": "string",
+    "bank_account_id": "string",
     "status": "proposed",
-    "status_reason": null,
-    "responded_at": null,
-    "created_at": "2017-03-20T00:53:27Z",
+    "status_reason": "string",
+    "responded_at": "2021-03-11T04:08:45Z",
+    "created_at": "2021-03-11T04:08:45Z",
     "terms": {
       "per_payout": {
-        "max_amount": 10000,
-        "min_amount": null
+        "min_amount": 0,
+        "max_amount": 10000
       },
       "per_frequency": {
         "days": 7,
         "max_amount": 1000000
       }
-    }
+    },
+    "metadata": {}
   }
 }
 ```
@@ -10605,25 +10606,26 @@ func main() {
 ```json
 {
   "data": {
-    "ref": "A.2",
-    "initiator_id": "4e2728cc-b4ba-42c2-a6c3-26a7758de58d",
-    "authoriser_id": "0d290763-bd5a-4b4d-a8ce-06c64c4a697b",
-    "contact_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
-    "bank_account_id": "fb9381ec-22af-47fd-8998-804f947aaca3",
+    "ref": "string",
+    "initiator_id": "string",
+    "authoriser_id": "string",
+    "contact_id": "string",
+    "bank_account_id": "string",
     "status": "proposed",
-    "status_reason": null,
-    "responded_at": null,
-    "created_at": "2017-03-20T00:53:27Z",
+    "status_reason": "string",
+    "responded_at": "2021-03-11T04:08:45Z",
+    "created_at": "2021-03-11T04:08:45Z",
     "terms": {
       "per_payout": {
-        "max_amount": 10000,
-        "min_amount": null
+        "min_amount": 0,
+        "max_amount": 10000
       },
       "per_frequency": {
         "days": 7,
         "max_amount": 1000000
       }
-    }
+    },
+    "metadata": {}
   }
 }
 ```
@@ -10635,6 +10637,23 @@ func main() {
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|object|true|No description|
+|» ref|string|true|The Agreement reference (Min: 3 - Max: 18)|
+|» initiator_id|string(uuid)|true|Your Split account ID (Min: 36 - Max: 36)|
+|» authoriser_id|string(uuid)|true|The authoriser's account ID (AnyoneAccount) (Min: 36 - Max: 36)|
+|» contact_id|string(uuid)|true|The contact ID representing the authoriser within Split (Min: 36 - Max: 36)|
+|» bank_account_id|string(uuid)|true|The authoriser's bank account ID (Min: 36 - Max: 36)|
+|» status|string|true|The status of the Agreement (Min: 8 - Max: 8)|
+|» status_reason|string|true|The reason the agreement was cancelled. This is a free text field.|
+|» responded_at|string(date-time)|true|The date-time when the Agreement status changed (Min: 20 - Max: 20)|
+|» created_at|string(date-time)|true|The date-time when the Agreement was created (Min: 20 - Max: 20)|
+|» terms|[Terms](#schematerms)|true|No description|
+|» metadata|object|false|Your custom keyed data|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|proposed|
 
 ## ApproveAgreementResponse
 
