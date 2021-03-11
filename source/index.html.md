@@ -10880,6 +10880,26 @@ func main() {
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|[object]|true|No description|
+|» ref|string|true|The Agreement reference (Min: 3 - Max: 18)|
+|» initiator_id|string(uuid)|true|Your Split account ID (Min: 36 - Max: 36)|
+|» authoriser_id|string(uuid)|true|The authoriser's account ID (AnyoneAccount) (Min: 36 - Max: 36)|
+|» contact_id|string(uuid)|true|The contact ID representing the authoriser within Split (Min: 36 - Max: 36)|
+|» bank_account_id|string(uuid)|true|The authoriser's bank account ID (Min: 36 - Max: 36)|
+|» status|string|true|The status of the Agreement (Min: 8 - Max: 8)|
+|» status_reason|string|true|The reason the agreement was cancelled. This is a free text field.|
+|» responded_at|string(date-time)|true|The date-time when the Agreement status changed (Min: 20 - Max: 20)|
+|» created_at|string(date-time)|true|The date-time when the Agreement was created (Min: 20 - Max: 20)|
+|» terms|[Terms](#schematerms)|true|No description|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|proposed|
+|status|accepted|
+|status|cancelled|
+|status|declined|
+|status|expended|
 
 ## ListOutgoingAgreementsResponse
 

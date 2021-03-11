@@ -3858,13 +3858,67 @@ components:
       title: List incoming Agreements (response)
       required:
         - data
-      type: object
       properties:
         data:
           type: array
           items:
             type: object
-          description: ''
+            required:
+              - ref
+              - initiator_id
+              - authoriser_id
+              - contact_id
+              - bank_account_id
+              - status
+              - status_reason
+              - responded_at
+              - created_at
+              - payout
+              - terms
+            properties:
+              ref:
+                type: string
+                minLength: 3
+                maxLenght: 18
+                description: "The Agreement reference (Min: 3 - Max: 18)"
+              initiator_id:
+                type: string
+                format: uuid
+                description: 'Your Split account ID (Min: 36 - Max: 36)'
+              authoriser_id:
+                type: string
+                format: uuid
+                description: "The authoriser's account ID (AnyoneAccount) (Min: 36 - Max: 36)"
+              contact_id:
+                type: string
+                format: uuid
+                description: 'The contact ID representing the authoriser within Split (Min: 36 - Max: 36)'
+              bank_account_id:
+                type: string
+                format: uuid
+                description: "The authoriser's bank account ID (Min: 36 - Max: 36)"
+              status:
+                type: string
+                description: 'The status of the Agreement (Min: 8 - Max: 8)'
+                enum:
+                  - proposed
+                  - accepted
+                  - cancelled
+                  - declined
+                  - expended
+              status_reason:
+                type: string
+                description: The reason the agreement was cancelled. This is a free text field.
+              responded_at:
+                type: string
+                format: date-time
+                description: 'The date-time when the Agreement status changed (Min: 20 - Max: 20)'
+              created_at:
+                type: string
+                format: date-time
+                description: 'The date-time when the Agreement was created (Min: 20 - Max: 20)'
+              terms:
+                $ref: '#/components/schemas/Terms'
       example:
         data:
           - ref: A.2
