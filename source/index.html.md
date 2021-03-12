@@ -4981,15 +4981,16 @@ Create an Open Agreement that can be accepted by anyone.
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[CreateOpenAgreementRequest](#schemacreateopenagreementrequest)|true|No description|
-|» title|body|string|true|Title of the Open Agreement (Visible to authorisers)|
-|» terms|body|[Terms](#schematerms)|true|Terms|
-|»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
-|»»» min_amount|body|integer|true|Minimum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.|
-|»»» max_amount|body|integer|true|Maximum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.|
-|»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
-|»»» days|body|integer|true|Amount of days to apply against the frequency. Specify <code>null</code> for no limit.|
-|»»» max_amount|body|integer|true|Maximum amount in cents the total of all PRs can be for the duration of the frequency. Specify <code>null</code> for no limit.|
-|»» metadata|body|[Metadata](#schemametadata)|false|Use for your custom data and certain Split customisations.|
+|» data|body|object|true|No description|
+|»» title|body|string|true|Title of the Open Agreement (Visible to authorisers)|
+|»» terms|body|[Terms](#schematerms)|true|Terms|
+|»»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
+|»»»» min_amount|body|integer|true|Minimum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.|
+|»»»» max_amount|body|integer|true|Maximum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.|
+|»»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
+|»»»» days|body|integer|true|Amount of days to apply against the frequency. Specify <code>null</code> for no limit.|
+|»»»» max_amount|body|integer|true|Maximum amount in cents the total of all PRs can be for the duration of the frequency. Specify <code>null</code> for no limit.|
+|»»» metadata|body|[Metadata](#schemametadata)|false|Use for your custom data and certain Split customisations.|
 
 > Example responses
 
@@ -11118,9 +11119,10 @@ func main() {
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|title|string|true|Title of the Open Agreement (Visible to authorisers)|
-|terms|[Terms](#schematerms)|true|No description|
-|metadata|[Metadata](#schemametadata)|false|No description|
+|data|object|true|No description|
+|» title|string|true|Title of the Open Agreement (Visible to authorisers)|
+|» terms|[Terms](#schematerms)|true|No description|
+|» metadata|[Metadata](#schemametadata)|false|No description|
 
 ## CreateOpenAgreementResponse
 

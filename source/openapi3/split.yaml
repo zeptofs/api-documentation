@@ -4136,18 +4136,22 @@ components:
     CreateOpenAgreementRequest:
       title: Create an Open Agreement (request)
       required:
-        - title
-        - terms
+        - data
       type: object
       properties:
-        title:
-          type: string
-          description: Title of the Open Agreement (Visible to authorisers)
-          example: Subscription Plan A
-        terms:
-          $ref: '#/components/schemas/Terms'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
+        data:
+          required:
+            - title
+            - terms
+          properties:
+            title:
+              type: string
+              description: Title of the Open Agreement (Visible to authorisers)
+              example: Subscription Plan A
+            terms:
+              $ref: '#/components/schemas/Terms'
+            metadata:
+              $ref: '#/components/schemas/Metadata'
       example:
         title: Subscription Plan A
         terms:
