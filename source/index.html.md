@@ -11271,6 +11271,19 @@ func main() {
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|object|true|No description|
+|» ref|string|true|The Agreement reference (Min: 3 - Max: 18)|
+|» title|string|true|The chosen title for this Agreement (Min: 1 - Max: 280)|
+|» status|string|true|The status of the Agreement (Min: 6 - Max: 6)|
+|» created_at|string(date-time)|true|The date-time when the Agreement was created (Min: 20 - Max: 20)|
+|» terms|[Terms](#schematerms)|true|No description|
+|» metadata|object|false|Your custom keyed data|
+|» link|string(url)|true|The shareable link your customers can follow to accept this Agreement. (Min: 104 - Max: 104)|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|active|
 
 ## CloseOpenAgreementResponse
 
@@ -11305,6 +11318,19 @@ func main() {
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|object|true|No description|
+|» ref|string|true|The Agreement reference (Min: 3 - Max: 18)|
+|» title|string|true|The chosen title for this Agreement (Min: 1 - Max: 280)|
+|» status|string|true|The status of the Agreement (Min: 6 - Max: 6)|
+|» created_at|string(date-time)|true|The date-time when the Agreement was created (Min: 20 - Max: 20)|
+|» terms|[Terms](#schematerms)|true|No description|
+|» metadata|object|false|Your custom keyed data|
+|» link|string(url)|true|The shareable link your customers can follow to accept this Agreement. (Min: 104 - Max: 104)|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|closed|
 
 ## AddASplitContactRequest
 
