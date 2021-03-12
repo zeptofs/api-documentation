@@ -4172,6 +4172,38 @@ components:
       properties:
         data:
           type: object
+          required:
+              - ref
+              - title
+              - status
+              - created_at
+              - terms
+              - link
+          properties:
+            ref:
+              type: string
+              description: "The Agreement reference (Min: 3 - Max: 18)"
+            title:
+              type: string
+              description: "The chosen title for this Agreement (Min: 1 - Max: 280)"
+            status:
+              type: string
+              description: 'The status of the Agreement (Min: 6 - Max: 6)'
+              enum:
+                - active
+            created_at:
+              type: string
+              format: date-time
+              description: 'The date-time when the Agreement was created (Min: 20 - Max: 20)'
+            terms:
+              $ref: '#/components/schemas/Terms'
+            metadata:
+              type: object
+              description: Your custom keyed data
+            link:
+              type: string
+              format: url
+              description: 'The shareable link your customers can follow to accept this agreement. (Min: 104 - Max: 104)'
       example:
         data:
           ref: OA.1
