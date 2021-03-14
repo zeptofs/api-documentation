@@ -1982,6 +1982,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-03-12</strong> - Add ref to GetAContactResponse</li>
 <li><strong>2020-12-17</strong> - Add Sandbox Only API endpoints</li>
 <li><strong>2020-12-17</strong> - Enhance response schema for several endpoints</li>
 <li><strong>2020-12-16</strong> - Add webhook schema table</li>
@@ -5595,6 +5596,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CNT.123"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anyone"</span><span class="p">,</span><span class="w">
@@ -14192,6 +14194,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CNT.123"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outstanding Tours Pty Ltd"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts@outstandingtours.com.au"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anyone"</span><span class="p">,</span><span class="w">
@@ -14251,6 +14254,12 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>string(uuid)</td>
 <td>true</td>
 <td>The Contact ID</td>
+</tr>
+<tr>
+<td>» ref</td>
+<td>string(string)</td>
+<td>true</td>
+<td>The Contact ref</td>
 </tr>
 <tr>
 <td>» name</td>

@@ -1491,6 +1491,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-03-12** - Add ref to GetAContactResponse
+
     - **2020-12-17** - Add Sandbox Only API endpoints
 
     - **2020-12-17** - Enhance response schema for several endpoints
@@ -4382,6 +4384,7 @@ components:
           type: object
           required:
             - id
+            - ref
             - name
             - email
             - type
@@ -4393,6 +4396,10 @@ components:
               type: string
               format: uuid
               description: The Contact ID
+            ref:
+              type: string
+              format: string
+              description: The Contact ref
             name:
               type: string
               min: 3
@@ -4508,6 +4515,7 @@ components:
       example:
         data:
           id: 55afddde-4296-4daf-8e49-7ba481ef9608
+          ref: CNT.123
           name: Outstanding Tours Pty Ltd
           email: accounts@outstandingtours.com.au
           type: anyone
