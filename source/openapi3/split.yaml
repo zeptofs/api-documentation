@@ -4059,13 +4059,45 @@ components:
       title: List all Bank Accounts (response)
       required:
         - data
-      type: object
       properties:
         data:
           type: array
           items:
             type: object
-          description: ''
+            required:
+              - id
+              - branch_code
+              - bank_name
+              - account_number
+              - status
+              - title
+              - available_balance
+            properties:
+              id:
+                type: string
+                format: uuid
+                description: "The Bank Account ID (Min: 36 - Max: 36)"
+              branch_code:
+                type: string
+                description: "The Bank Account's branch code (Min: 6 - Max: 6)"
+              bank_name:
+                type: string
+                description: 'The name of the bank (Max: 280)'
+              account_number:
+                type: string
+                description: "The bank account's account number (Min: 5 - Max: 9)"
+              status:
+                description: 'The status of the Bank Account (Min: 6 - Max: 7)'
+                enum:
+                  - active
+                  - removed
+                type: string
+              title:
+                format: string
+                description: 'The title given to this bank account (Max: 30)'
+              available_balance:
+                type: integer
+                description: "The available balance of this bank account. (Min: 1 - Max: 8)"
       example:
         data:
           - id: 6a7ed958-f1e8-42dc-8c02-3901d7057357

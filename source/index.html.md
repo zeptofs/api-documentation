@@ -11029,6 +11029,20 @@ func main() {
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|[object]|true|No description|
+|» id|string(uuid)|true|The Bank Account ID (Min: 36 - Max: 36)|
+|» branch_code|string|true|The bank account's branch code (Min: 6 - Max: 6)|
+|» bank_name|string|true|The name of the bank (Max: 280)|
+|» account_number|string|true|The bank account's account number (Min: 5 - Max: 9)|
+|» status|string|true|The status of the Agreement (Min: 6 - Max: 7)|
+|» title|any|true|The title given to this bank account (Max: 30)|
+|» available_balance|integer|true|The available balance of this bank account. (Float account only)|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|active|
+|status|removed|
 
 ## ListAllBankConnectionsResponse
 
