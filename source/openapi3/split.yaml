@@ -1491,6 +1491,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-03-17** - Remove note indicating single active bank account limitation
+
     - **2021-03-12** - Add ref to GetAContactResponse
 
     - **2020-12-17** - Add Sandbox Only API endpoints
@@ -2164,8 +2166,7 @@ paths:
         - Bank Accounts
       summary: List all Bank Accounts
       description: >
-        By default, all Bank Accounts will be returned. There can currently be
-        only 1 active bank account.
+        By default, all Bank Accounts will be returned.
       operationId: ListAllBankAccounts
       responses:
         '200':

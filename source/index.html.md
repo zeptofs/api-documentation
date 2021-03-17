@@ -932,6 +932,7 @@ To protect against timing attacks, use a constant-time string comparison to comp
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+- **2021-03-17** - Remove note indicating single active bank account limitation
 - **2021-03-12** - Add ref to GetAContactResponse
 - **2020-12-17** - Add Sandbox Only API endpoints
 - **2020-12-17** - Enhance response schema for several endpoints
@@ -2464,7 +2465,7 @@ func main() {
 
 `GET /bank_accounts`
 
-By default, all Bank Accounts will be returned. There can currently be only 1 active bank account.
+By default, all Bank Accounts will be returned.
 
 > Example responses
 
