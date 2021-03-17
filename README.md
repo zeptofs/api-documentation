@@ -40,7 +40,7 @@ Publishing changes
 Notes
 ---
 
-* The Slate template/theme is mildly edited to suite our style.
+* The Slate template/theme is mildly edited to suit our style.
 * The same goes for Widdershin's conversion templates.
 
 Thanks
