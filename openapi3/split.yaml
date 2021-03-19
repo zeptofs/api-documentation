@@ -5556,7 +5556,7 @@ components:
           example: 500
         reason:
           type: string
-          description: Reason for the refund. Visible to both parties.
+          description: Reason for the refund. First 9 characters are visible to both parties.
           example: Because reason
         your_bank_account_id:
           type: string
