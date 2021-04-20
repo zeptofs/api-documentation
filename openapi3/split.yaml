@@ -2,24 +2,18 @@ openapi: 3.0.0
 info:
   title: Split API
   description: >
-    Split allows you to make, get and manage payments using nothing but bank
-    accounts.
+    Split enables your business to make, collect and receive payments using nothing but bank accounts.
+    We've overlaid a simple REST API on top of the legacy (and newer) Australian payment rails, 
+    enabling all of your account-to-account payment flows through 1 simple integration. 
 
 
-    It is important to understand that there are 2 main ways Split can be used
-    for maximum flexibility:
-
-
-    1. Between Split accounts.
-
-    2. Between a Split account and anyone.
-
-
-    Due to the above, certain endpoints and techniques will differ slightly
-    depending on who you are interacting with. You can find more on this in the
+    You can find more on this in the
     [Making payments](/#making-payments) and [Getting paid](/#getting-paid)
     guides.
 
+
+    And for all kinds of How To's and Recipes, head on over to our 
+    [Help Guide](https://help.split.cash/en/).
 
     <div class="middle-header">Conventions</div>
 
@@ -392,15 +386,13 @@ info:
 
     ## Making payments
 
-    In order to payout funds, you'll be looking to use the
-    [Payments](/#Split-API-Payments) endpoint. Whether you're paying out another
-    Split account holder or anyone, the process is the same:
+    To make outbound payments, you'll be looking to use the
+    [Payments](/#Split-API-Payments) endpoint:
 
 
-    1. Add the recipient to your Contacts: [Split
-    Contact](/#add-a-split-contact) or [Anyone Contact](/#add-a-contact)
+    1. Add the recipient to your [Contact](/#add-a-contact) list.
 
-    2. [Make the Payment](/#make-a-payment) to your Contact.
+    2. [Make a Payment](/#make-a-payment) to your Contact.
 
 
     Common use cases:
@@ -409,49 +401,35 @@ info:
     * Automated payout disbursement (Referal programs, net/commission payouts,
     etc...)
 
+    * Wage payments
+
+    * Gig economy payments
+
+    * Lending
+
 
     ## Getting paid
 
-    There are 2 ways to get paid:
+    In order to collect funds, use our Payment Requests to pull funds from your
+    customers using direct debit.
 
 
     ### POSTing a [Payment Request](/#Split-API-Payment-Requests)
 
 
-    Provides the ability to send a Payment Request (get paid) to any Contact
-    that is either:
+    Provides the ability to send a Payment Request (get paid) to any of 
+    your Contacts as long as there is an accepted Agreement in place.
 
 
-    * A Split Contact (The contact has a Split account); **or**
-
-    * An Anyone Contact (The contact does not have a Split account) with an
-    accepted Agreement in place.
-
-
-    **For a Split Contact**:
-
-
-    * They will receive a request that they must approve via the Split UI or API
-    in order for the funds to flow from their bank account to yours.
-
-
-    * To automate the Payment Request approval, process you must first [enter
-    into an Agreement](/#Split-API-Agreements) with the Split Contact. Once the
-    Agreement is accepted, any future Payment Request will be automatically
-    approved and processed per the Agreement terms.
-
-
-    **For an Anyone Contact**:
-
-
-    * To send a Payment Request using the API to an Anyone Contact, you must
-    first have an accepted Agreement with them . To do so, you can send them an
+    * To send a Payment Request to a Contact using the API, you must
+    first have an accepted [Agreement](/#Split-API-Agreements) with them. To do so, you can send them an
     [Open Agreement link](https://help.split.cash/agreements/open-agreement) or
     [Unassigned Agreement
     link](http://help.split.cash/agreements/unassigned-agreement) for them to
     [elect & verify their bank
     account](https://help.split.cash/bank-accounts/instant-account-verification-iav)
-    and accept the Agreement.
+    and accept the Agreement. Having this in place will allow any future Payment 
+    Requests to be automatically approved and processed as per the Agreement terms.
 
 
     Common use cases:
@@ -737,13 +715,16 @@ info:
 
     # Sandbox Testing Details
 
-    Try out your happy paths and not-so happy paths, the sandbox is a great place to get started without transferring actual funds. All transactions are simulated and no communication with financial institutions is performed.
+    Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds. 
+    All transactions are simulated and no communication with financial institutions is performed.
 
 
-    The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.
+    The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. 
+    In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.
 
 
-    All 6 digits BSBs are valid in the sandbox with the exception of `100000` which is a place keeper for an invalid BSB. In production, only real BSBs are accepted.
+    All 6 digits BSBs are valid in the sandbox with the exception of `100000`. This BSB allows you to simulate the adding of an invalid BSB.
+    In production, only real BSBs are accepted.
 
     ## Transaction failures
 
@@ -825,24 +806,6 @@ info:
     | decline_agreements | `900001` | `99999` | Always declines agreements |
 
 
-    ### (Deprecated) Payment credit failure bank accounts
-
-    You can send Payments to the following reserved bank accounts to trigger specific failures on the credit side.
-
-
-    | Failure type             | Branch code (BSB) | Account number |
-
-    |--------------------------|-------------------|----------------|
-
-    | `account_closed`           | `300000`          | `99999`        |
-
-    | `customer_deceased`        | `400000`          | `99999`        |
-
-    | `incorrect_account_number` | `500000`          | `99999`        |
-
-    | `refer_to_split`           | `700000`          | `99999`        |
-
-
     ### (Deprecated) Payment Request failure bank accounts
 
     You can send Payment Requests to the following reserved bank accounts to trigger specific failures.
@@ -895,10 +858,14 @@ info:
 
     ## Available balances in the Sandbox
 
-    If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested. This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.
+    If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. 
+    A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested. 
+    This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.
 
 
-    In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the available balance of their bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount less than or equal to this amount will succeed.
+    In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the 
+    available balance of any **Transactional**bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount 
+    less than or equal to this amount will succeed.
 
     # Configuration
 
@@ -1004,6 +971,8 @@ info:
 
     - From the same bank account; and
 
+    - Have the same description; and
+
     - Initiated by the same Split account.
 
 
@@ -1012,10 +981,12 @@ info:
 
     - To the same bank account; and
 
+    - Have the same description; and
+
     - Initiated by the same Split account.
 
 
-    Should you prefer aggregation to be disabled, please contact
+    Should you prefer debit aggregation to be disabled, please contact
     [support@splitpayments.com.au](mailto:support@splitpayments.com.au). Note
     that additional charges may apply.
 
@@ -1491,9 +1462,13 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-04-20** - Removed deprecated API references, refreshed Refunds and Payout descriptions
+
     - **2021-03-17** - Remove note indicating single active bank account limitation
 
     - **2021-03-12** - Add ref to GetAContactResponse
+
+    - **2021-02-24** - Added details on enabling the Receivable Contact feature and amended the POST/contacts/receivable response body
 
     - **2020-12-17** - Add Sandbox Only API endpoints
 
@@ -1503,11 +1478,9 @@ info:
 
     - **2020-12-15** - Improve webhooks section
 
-    - **2020-12-15** - Add changelog
-
     - **2020-12-15** - Re-word Payment Requests introduction to better cover its use with Receivable Contacts.
 
-    - **2021-02-24** - Added details on enabling the Receivable Contact feature and amended the POST/contacts/receivable response body
+    - **2020-12-15** - Add changelog
 
 
     Looking for more? Our docs are open sourced! [https://github.com/splitpayments/api-documentation](https://github.com/splitpayments/api-documentation)
@@ -1524,13 +1497,9 @@ tags:
       agree on terms for which future Payment Requests will be auto-approved.
 
 
-      Split Agreements are managed on a per Contact basis and are
-      unidirectional. In other words, if both parties wish for auto-approved
-      Payment Requests, they must each propose an Agreement to the other.
+      Split Agreements are managed on a per Contact basis, and if a Payment Request
+      is sent for an amount that exceeds the terms of the agreement, it will not be created.
 
-
-      If a Payment Request is sent for an amount that exceeds the terms of the
-      agreement, it will need to be manually approved by the recipient.
 
       Please refer to the [What is an Agreement](http://help.split.cash/articles/3094575-what-is-an-agreement) article in our knowledge base for an overview.
 
@@ -1540,9 +1509,11 @@ tags:
       Agreements are therefore broken up by direction:
 
 
-      1. **Incoming:** Agreement received from another Split account
-
-      2. **Outgoing:** Agreement sent to another Split account
+      1. **Outgoing:** Agreement sent to one of your Contacts
+      
+      2. **Outgoing:** Agreement sent to another Split account [Deprecated]
+      
+      3. **Incoming:** Agreement received from another Split account [Deprecated]
 
 
       ##Lifecycle
@@ -1581,19 +1552,19 @@ tags:
   - name: Open Agreements
     description: >
       An Open Agreement is essentially an Agreement template with no specific
-      authoriser. Each time an Open Agreement is accepted by either a Split
-      account holder or anyone, the authoriser is added to your Contacts list
-      and a new Agreement is automatically created between the Open Agreement
-      initiator and the authoriser.
+      authoriser. Each time an Open Agreement is accepted by anyone, the 
+      authoriser is added to your Contacts list and a new Agreement is 
+      automatically created between the Open Agreement initiator and the authoriser.
 
 
       An Open Agreement can be accepted multiple times by different parties and
-      the result is the same: A new Agreement. Additionally, an Open Agreement
-      can be accepted by anybody, not just other Split users. This is achieved
-      by using our [Instant Account Verification
-      process](http://help.split.cash/bank-accounts/instant-account-verification-iav)
-      as part of accepting an [Open
-      Agreement](https://help.split.cash/agreements/open-agreement).
+      the result is always the same: A new Agreement. 
+      
+      
+      Additionally, an Open Agreement can be accepted by anybody. This is achieved
+      by using our [Instant Account Verification process]
+      (http://help.split.cash/bank-accounts/instant-account-verification-iav)
+      as part of accepting an [Open Agreement](https://help.split.cash/agreements/open-agreement).
 
 
       ##Lifecycle
@@ -1631,13 +1602,15 @@ tags:
       <aside class="notice">Looking to add a new bank connection to a contact? See the <a href="#get-a-contact">get a contact endpoint</a></aside>
   - name: Payments
     description: >
-      **A Payment is made up of two parts:**
+      A Payment is used to disburse funds to your Contacts.
 
 
-      1. General details about the Payment.
+      Supported payment rails:
 
-      2. One or many Payouts with individual recipients, amounts and
-      descriptions.
+
+      * NPP: New Payments Platform (Real-time)
+
+      * DE / BECS: Direct Entry / Bulk Electronic Clearing System (Slower)
 
 
       ##Lifecycle
@@ -1654,8 +1627,8 @@ tags:
           "parent_ref": "PB.1",
           "type": "credit",
           "category": "payout_reversal",
-          "created_at": "2016-12-07T23:15:00Z",
-          "matures_at": "2016-12-10T23:15:00Z",
+          "created_at": "2021-04-07T23:15:00Z",
+          "matures_at": "2021-04-07T23:15:00Z",
           "cleared_at": null,
           "bank_ref": null,
           "status": "maturing",
@@ -1680,15 +1653,35 @@ tags:
       updated. For a list of possible Payout statuses check out the
       [Transactions](/#Split-API-Transactions).
 
+        <aside class="notice">
+          Split no longer supports multiple Payouts within a single Payment request. A Payment request must only contain 1 Payout object.
+        </aside>
 
-      When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. Furthermore, within the payout reversal credit, Split will include details in the `description` and under the `reversal_details` key as to why the original credit to the recipient failed.
+
+      ### Payout Reversal
+
+      When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. 
+      Furthermore, within the payout reversal credit, Split will include details in the `description` and under the `reversal_details` key
+       as to why the original credit to the recipient failed.
   - name: Payouts
     description: >
-      Payouts are what a Payment or Payment Request are made of and can be either a debit or a credit.
-      One or all Payouts can be voided individually as part of the larger Payment or Payment Request.
+      This endpoint gives you some control over a transaction:
+
+
+      * After it has been created; and
+
+      * Before it has been submitted to the banks; or
+
+      * If it was Prefailed, due to insufficient funds, and was therefore not submitted to the banks.
+
+
+      <aside class="notice">
+        Payments and Payment Requests are made up of individual Debits and Credits. These debits and credits
+        were once referred to as Payouts [Legacy naming].
+      </aside>
   - name: Payment Requests
     description: >
-      A Payment Request (PR) is used to identify incoming funds from another party.
+      A Payment Request (PR) is used to collect funds, via direct debit, from one of your Contacts (as long as there is an accepted Agreement in place).
 
 
       <div class="middle-header">Applicable scenarios</div>
@@ -1705,7 +1698,7 @@ tags:
       ##Lifecycle
 
 
-      <aside class="notice">Payment Requests generated from a customer sending you funds will always be <code>approved</code> and is not subjet to any prechecking outlined below.</aside>
+      <aside class="notice">Payment Requests generated from a customer sending you funds will always be <code>approved</code></aside>
 
 
       A Payment Request can have the following statuses:
@@ -1715,9 +1708,9 @@ tags:
 
       |-------|-------------|
 
-      | `pending_approval` | Waiting for the debtor to approve the Payment Request. |
+      | `pending_approval` | Waiting for the debtor to approve the Payment Request. [DEPRECATED] |
 
-      | `unverified` | Waiting for available funds response (only applicable when `precheck_funds` enabled). |
+      | `unverified` | Waiting for available funds response. |
 
       | `approved` | The debtor has approved the Payment Request. |
 
@@ -1730,55 +1723,11 @@ tags:
 
 
       Split will automatically check for available funds before **attempting to debit** the debtor. This check is only performed for contacts with an active [bank connection](/#Split-API-Bank-Connections).
-
-
-      **Prechecking as part of a Payment Request approval**
-
-
-      When the `precheck_funds` option is enabled, **approval** of a Payment Request will only be allowed when there are sufficient funds. The debtor contact must have a valid agreement and bank connection to make use of this option.
-
-
-      There are **synchronous** and **asynchronous** lifecycles when the `precheck_funds` option is enabled.
-
-
-      - When the available funds for a contact's bank account are considered out of date, the API response will return the Payment Request with a state of `unverified` while the bank account data is refreshed. Once the precheck has completed, the Payment Request state will transition to either `approved` or `declined`. This process can be followed by subscribing to the relevant webhook events or regularly polling the Payment Request and verifying its status.
-
-      - When the available funds for a contact are current, the API will respond immediately with a final state of either `approved` or an error message if there are insufficient funds.
-
-
-      You can gain some control over this process by preemptively telling Split to refresh a contact's available balance at least 1 minute before making a Payment Request. See [Contact balance refresh](/#refresh-contact-bank-connection) for more.
-
-
   - name: Refunds
     description: >
-      Refunds can be issued for any successfully cleared Payout (credit)
-      transactions.
 
-
-      <div class="middle-header">Direction</div>
-
-
-      Refunds are broken up by direction:
-
-
-      1. **Incoming:** An incoming Refund (you are the recipient of the refund)
-
-      2. **Outgoing:** An outgoing Refund (you are the issuer of the refund)
-
-
-      There are two response fields that differ depending on the direction:
-
-
-      | Field | Description |
-
-      |-------|-------------|
-
-      | `debit_ref` | Only visible to the Refund issuer (outgoing Refunds). This
-      reference corresponds to the newly created debit to process the Refund. |
-
-      | `credit_ref` | Only visible to the Refund recipient (incoming Refunds).
-      This reference corresponds to the newly created credit to process the
-      Refund. |
+      Refunds can be issued for any successfully completed Payment Request transaction.
+      This allows you to return previously collected funds.
   - name: Transactions
     description: >
       By default, the transactions endpoint provides a detailed look at all past, current
@@ -1798,7 +1747,7 @@ tags:
 
       |--------|-------------|
 
-      | `maturing` | The maturation date has not yet been reached |
+      | `maturing` | The maturation date has not yet been reached. |
 
       | `matured` | The maturation date has been reached and the transaction is
       eligible for processing. |
@@ -1847,12 +1796,12 @@ tags:
             "parent_ref": null,
             "type": "debit",
             "category": "payout_refund",
-            "created_at": "2016-12-07T23:15:00Z",
-            "matures_at": "2016-12-10T23:15:00Z",
+            "created_at": "2021-04-07T23:15:00Z",
+            "matures_at": "2021-04-10T23:15:00Z",
             "cleared_at": null,
             "bank_ref": null,
             "status": "returned",
-            "status_changed_at": "2016-12-08T23:15:00Z",
+            "status_changed_at": "2021-04-08T23:15:00Z",
             "failure_reason": "user_voided",
             "failure_details": "Wrong amount - approved by Stacey"
             "party_contact_id": "26297f44-c5e1-40a1-9864-3e0b0754c32a",
@@ -1861,6 +1810,8 @@ tags:
             "description": null,
             "amount": 1,
             "bank_account_id": "56df206a-aaff-471a-b075-11882bc8906a"
+            "channels": ["float_account"]
+            "current_channel": "float_account"
           }
         ]
       }
@@ -1870,6 +1821,9 @@ tags:
 
       The `rejected`, `returned`, `voided` & `prefailed` statuses are always
       accompanied by a `failure_reason`:
+
+
+      <aside class="notice">Please note that these failure reasons are passed to us directly from the banks.</aside>      
 
 
       | Reason | Description |
@@ -1900,7 +1854,7 @@ tags:
 
 
       <aside class="notice">
-        The <code>user_voided</code> and <code>admin_voided</code> <code>failure_reason</code>s can sometimes be accompanied by the <code>failure_details</code> key which includes user submitted comments relating to the <code>failure_reason</code>.
+        The <code>user_voided</code> and <code>admin_voided</code> <code>failure_reasons</code> can sometimes be accompanied by the <code>failure_details</code> key which includes user submitted comments relating to the <code>failure_reason</code>.
       </aside>
   - name: Unassigned Agreements
     description: >
@@ -1921,33 +1875,6 @@ tags:
   - name: Sandbox Only
     description: Special testing endpoints that only exist in the sandbox environment.
 paths:
-  /agreements:
-    post:
-      tags:
-        - Agreements
-      summary: Propose an Agreement
-      description: >-
-        Propose an Agreement to another Split Contact
-
-
-        <aside class="notice">You can set any of the term metrics to
-        <code>null</code> if you wish them to not have a limit.</aside>
-      operationId: ProposeAgreement
-      parameters: []
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProposeAgreementRequest'
-        required: true
-      responses:
-        '200':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProposeAgreementResponse'
   /agreements/outgoing:
     get:
       tags:
@@ -2053,113 +1980,6 @@ paths:
       responses:
         '204':
           description: No Content
-  '/agreements/{agreement_ref}/accept':
-    post:
-      tags:
-        - Agreements
-      summary: Approve an Agreement
-      description: Approve an incoming Agreement
-      operationId: ApproveAgreement
-      parameters:
-        - name: agreement_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: A.2
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApproveAgreementResponse'
-  '/agreements/{agreement_ref}/decline':
-    post:
-      tags:
-        - Agreements
-      summary: Decline an Agreement
-      description: Decline an incoming Agreement
-      operationId: DeclineAgreement
-      parameters:
-        - name: agreement_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: A.2
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeclineAgreementResponse'
-  /agreements/incoming:
-    get:
-      tags:
-        - Agreements
-      summary: List incoming Agreements
-      description: >
-        By default, all incoming Agreements will be returned. You can apply
-        filters to your query to customise the returned Agreements.
-      operationId: ListIncomingAgreements
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-        - name: contact_id
-          in: query
-          description: 'Contact ID (`Contact.data.id`), single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: e5edc264-1771-4809-9cf5-b40baaee15f7
-        - name: initiator_id
-          in: query
-          description: 'Initiator ID (`Contact.data.account.id`), single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: 2c4dec90-8a4c-4685-b620-bd1d7ca05a60
-        - name: status
-          in: query
-          description: 'Multiple values, exact match'
-          style: form
-          explode: false
-          schema:
-            type: array
-            items:
-              type: string
-            enum:
-              - proposed
-              - accepted
-              - declined
-              - cancelled
-          example:
-            - proposed
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListIncomingAgreementsResponse'
   /bank_accounts:
     get:
       tags:
@@ -2309,12 +2129,12 @@ paths:
 
         <aside class="notice">
           To enable this feature, please contact our support team with the following information:
-            <li>Your full legal account name</li>
+            <li>Your full legal business name</li>
             <li>A legally owned domain name: for your PayID email addresses</li>
-            <li><strong>alias_name</strong>: the short business name that will be displayed to your customers</li>
+            <li><strong>alias_name</strong>: the business name that will be displayed to your customers upon PayID resolution. We suggest using a shortened name appropriate for mobile displays</li>
         </aside>
         <aside class="notice">
-          When creating this type of contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it'll transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
+          When creating this type of Contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it will transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
         </aside>
         <aside class="notice">
           While unlikely, it is possible that we will be unable to register the given PayID. In this case <code>payid_details.state</code> will transition to <code>failed</code>.
@@ -2343,29 +2163,6 @@ paths:
         '404':
           description: Not Found
   /contacts:
-    post:
-      tags:
-        - Contacts
-      summary: Add a Split Contact
-      description: Add a Split Contact
-      operationId: AddASplitContact
-      parameters: []
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddASplitContactRequest'
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AddASplitContactResponse'
-        '404':
-          description: Not Found
     get:
       tags:
         - Contacts
@@ -2536,7 +2333,7 @@ paths:
       tags:
         - Contacts
       summary: Refresh contact bank connection
-      description: Request the bank connection for a contact to refresh available funds. This is intended for use in conjunction with the `precheck_funds` option, see [Payment Request - Precheck Funds](/#precheck-funds-lifecycle)
+      description: Refresh one of your Contact's bank connections to get the latest available balance.
       operationId: RefreshBalanceContact
       parameters:
         - name: id
@@ -2585,7 +2382,7 @@ paths:
       tags:
         - Open Agreements
       summary: List all Open Agreements
-      description: ''
+      description: By default, all Open Agreements will be returned.
       operationId: ListAllOpenAgreements
       parameters:
         - name: page
@@ -2614,7 +2411,7 @@ paths:
       tags:
         - Open Agreements
       summary: Activate a closed Open Agreement
-      description: Allow the Open Agreement to viewed and accepted
+      description: Allow the Open Agreement to viewed and accepted.
       operationId: ActivateOpenAgreement
       parameters:
         - name: open_agreement_ref
@@ -2637,7 +2434,7 @@ paths:
       tags:
         - Open Agreements
       summary: Close an active Open Agreement
-      description: Disable the Open Agreement from being viewed or accepted
+      description: Disable the Open Agreement from being viewed or accepted.
       operationId: CloseOpenAgreement
       parameters:
         - name: open_agreement_ref
@@ -2731,16 +2528,21 @@ paths:
     post:
       tags:
         - Payouts
-      summary: Retry a credit/debit Payout
+      summary: Retry a Prefailed Payment Request [DEPRECATED]
       description: |
-        Split will prefail a debit and its associated credit transaction before ever sending it to the bank if we detect a high probability of insufficient funds.
+        When debitting a Contact with an active bank connection, Split will first ensure that there are sufficient funds available before submitting the debit to the banks.
+        If a high probability of insufficient funds is detected, Split will not submit the transaction to the banks and will mark the transaction as <strong>Prefailed</strong>.
 
-        This endpoint allows you to retry the payout without having to recreate the parent request. e.g A Payment or Payment Request.
+        This endpoint allows you to retry the Payment Request without having to create a brand new transaction.
+
+        <aside class="notice">
+          Rather than using this endpoint, we now recommend creating a brand new transaction as this simplifies and maintains data integrity for the lifecycle of each attempt
+        </aside>
       operationId: RetryAPayout
       parameters:
         - name: ref
           in: path
-          description: Payout debit or credit reference
+          description: Payment Request credit reference number e.g C.2 
           required: true
           style: simple
           explode: false
@@ -2758,27 +2560,26 @@ paths:
     delete:
       tags:
         - Payouts
-      summary: Void a Payout
+      summary: Void a Payment
       description: >
-        You can void any Payout debit from your account that has not yet
-        matured.
-      operationId: VoidAPayout
+        You can void any Payment from your account that has not yet matured.
+      operationId: VoidAPayment
       parameters:
         - name: ref
           in: path
-          description: Payout debit reference
+          description: Payment debit reference number e.g D.48
           required: true
           style: simple
           explode: false
           schema:
             type: string
-          example: D.1
+          example: D.48
       requestBody:
         description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VoidAPayoutRequest'
+              $ref: '#/components/schemas/VoidAPayment'
       responses:
         '204':
           description: No Content
@@ -2837,7 +2638,7 @@ paths:
       tags:
         - Payment Requests
       summary: Cancel a Payment Request
-      description: A Payment Request can be cancelled as long as the associated transaction's state is maturing or matured.
+      description: A Payment Request can be cancelled as long as the associated transaction's state is <strong>maturing</strong> or <strong>matured</strong>.
       operationId: CancelAPaymentRequest
       parameters:
         - name: payment_request_ref
@@ -2880,106 +2681,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListOutgoingPaymentRequestsResponse'
-  '/payment_requests/{payment_request_ref}/history':
-    get:
-      tags:
-        - Payment Requests
-      summary: Get a Payment Request's history
-      description: >-
-        Gives you visibility of the entire Payment Request lifecycle including
-        the generated debit and credit transactions.
-      operationId: GetAPaymentRequest'sHistory
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetAPaymentRequestsHistoryResponse'
-  /payment_requests/incoming:
-    get:
-      tags:
-        - Payment Requests
-      summary: List incoming Payment Requests
-      description: Payment Requests where you're the debtor and another Split account is collecting funds from you.
-      operationId: ListIncomingPaymentRequests
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListIncomingPaymentRequestsResponse'
-  '/payment_requests/{payment_request_ref}/approve':
-    post:
-      tags:
-        - Payment Requests
-      summary: Approve a Payment Request
-      description: ''
-      operationId: ApprovePaymentRequest
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApprovePaymentRequestResponse'
-  '/payment_requests/{payment_request_ref}/decline':
-    post:
-      tags:
-        - Payment Requests
-      summary: Decline a Payment Request
-      description: ''
-      operationId: DeclinePaymentRequest
-      parameters:
-        - name: payment_request_ref
-          in: path
-          description: 'Single value, exact match'
-          required: true
-          style: simple
-          schema:
-            type: string
-          example: PR.3
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeclinePaymentRequestResponse'
   '/credits/{credit_ref}/refunds':
     post:
       tags:
@@ -2989,14 +2690,14 @@ paths:
         Certain rules apply to the issuance of a refund:
 
         <ul>
-          <li>Must be applied against a successfully cleared payout (credit)</li>
-          <li>The refund amount must not exceed the original amount of the credit</li>
+          <li>Must be applied against a successfully cleared Payment Request (credit)</li>
+          <li>Many refunds may be created against the original Payment Request. The total refunded amount must not exceed the original value</li>
         </ul>
       operationId: IssueARefund
       parameters:
         - name: credit_ref
           in: path
-          description: ''
+          description: 'The credit reference number e.g C.625v'
           required: true
           style: simple
           schema:
@@ -3015,40 +2716,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssueARefundResponse'
-  /refunds/incoming:
-    get:
-      tags:
-        - Refunds
-      summary: List incoming Refunds
-      description: ''
-      operationId: ListIncomingRefunds|Get
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListIncomingRefundsResponse'
   /refunds/outgoing:
     get:
       tags:
         - Refunds
-      summary: List outgoing Refunds
+      summary: List Refunds
       description: ''
       operationId: ListOutgoingRefunds
       parameters:
@@ -3317,7 +2989,7 @@ paths:
         - Unassigned Agreements
       summary: Propose an Unassigned Agreement
       description: >-
-        Create an Unassigned Agreement
+        Create an Unassigned Agreement.
 
 
         <aside class="notice">You can set any of the term metrics to
@@ -3342,7 +3014,7 @@ paths:
       tags:
         - Unassigned Agreements
       summary: List all Unassigned Agreements
-      description: Will return all Unassigned Agreements that have not yet be accepted.
+      description: Will return all Unassigned Agreements that have not yet been accepted.
       operationId: GetUnassignedAgreements
       parameters:
         - name: page
@@ -3371,7 +3043,7 @@ paths:
       tags:
         - Unassigned Agreements
       summary: Get an Unassigned Agreement
-      description: Get a single Unassigned Agreement by its reference
+      description: Get a single Unassigned Agreement by its reference.
       operationId: GetAgreement
       parameters:
         - name: unassigned_agreement_ref
@@ -3464,155 +3136,6 @@ components:
             transactions: Access your transaction history
             open_agreements: Manage your open agreements
   schemas:
-    ProposeAgreementRequest:
-      title: Propose an Agreement (request)
-      required:
-        - authoriser_contact_id
-        - terms
-      type: object
-      properties:
-        authoriser_contact_id:
-          type: string
-          description: The Authoriser's contact ID (`Contact.data.id`)
-          example: 8df89c16-330f-462b-8891-808d7bdceb7f
-        terms:
-          $ref: '#/components/schemas/Terms'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      example:
-        authoriser_contact_id: 8df89c16-330f-462b-8891-808d7bdceb7f
-        terms:
-          per_payout:
-            min_amount: null
-            max_amount: 10000
-          per_frequency:
-            days: 7
-            max_amount: 1000000
-        metadata:
-          custom_key: Custom string
-          another_custom_key: Maybe a URL
-    Terms:
-      title: Agreement terms
-      required:
-        - per_payout
-        - per_frequency
-      type: object
-      description: Terms
-      properties:
-        per_payout:
-          $ref: '#/components/schemas/PerPayout'
-        per_frequency:
-          $ref: '#/components/schemas/PerFrequency'
-    PerPayout:
-      title: Per payout terms
-      required:
-        - min_amount
-        - max_amount
-      type: object
-      properties:
-        min_amount:
-          type: integer
-          description: Minimum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
-          example: 0
-        max_amount:
-          type: integer
-          description: Maximum amount in cents a PR can be in order to be auto-approved. Specify <code>null</code> for no limit.
-          example: 10000
-    PerFrequency:
-      title: Per frequency terms
-      required:
-        - days
-        - max_amount
-      type: object
-      properties:
-        days:
-          type: integer
-          description: Amount of days to apply against the frequency. Specify <code>null</code> for no limit.
-          example: 7
-        max_amount:
-          type: integer
-          description: >-
-            Maximum amount in cents the total of all PRs can be for the duration
-            of the frequency. Specify <code>null</code> for no limit.
-          example: 1000000
-    ProposeAgreementResponse:
-      title: Propose an Agreement (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: A.2
-          initiator_id: 4e2728cc-b4ba-42c2-a6c3-26a7758de58d
-          authoriser_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
-          contact_id: 8df89c16-330f-462b-8891-808d7bdceb7f
-          bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
-          status: proposed
-          status_reason: null
-          responded_at: null
-          created_at: '2017-03-20T00:53:27Z'
-          terms:
-            per_payout:
-              max_amount: 10000
-              min_amount: null
-            per_frequency:
-              days: 7
-              max_amount: 1000000
-    ApproveAgreementResponse:
-      title: Approve an Agreement (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: A.2
-          initiator_id: 4e2728cc-b4ba-42c2-a6c3-26a7758de58d
-          authoriser_id: 8df89c16-330f-462b-8891-808d7bdceb7f
-          contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
-          bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
-          status: accepted
-          status_reason: null
-          responded_at: '2017-03-20T02:13:11Z'
-          created_at: '2017-03-20T00:53:27Z'
-          terms:
-            per_payout:
-              max_amount: 10000
-              min_amount: 1
-            per_frequency:
-              days: 7
-              max_amount: 1000000
-    DeclineAgreementResponse:
-      title: Decline an Agreement (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: A.2
-          initiator_id: 4e2728cc-b4ba-42c2-a6c3-26a7758de58d
-          authoriser_id: 8df89c16-330f-462b-8891-808d7bdceb7f
-          contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
-          bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
-          status: declined
-          status_reason: null
-          responded_at: '2017-03-20T02:13:11Z'
-          created_at: '2017-03-20T00:53:27Z'
-          terms:
-            per_payout:
-              max_amount: 10000
-              min_amount: 1
-            per_frequency:
-              days: 7
-              max_amount: 1000000
     GetAgreementResponse:
       title: Get an Agreement (response)
       required:
@@ -3698,51 +3221,6 @@ components:
             per_frequency:
               days: 7
               max_amount: 1000000
-    ListIncomingAgreementsResponse:
-      title: List incoming Agreements (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-          description: ''
-      example:
-        data:
-          - ref: A.2
-            initiator_id: 4e2728cc-b4ba-42c2-a6c3-26a7758de58d
-            authoriser_id: 8df89c16-330f-462b-8891-808d7bdceb7f
-            contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
-            bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
-            status: proposed
-            status_reason: null
-            responded_at: null
-            created_at: '2017-03-20T00:53:27Z'
-            terms:
-              per_payout:
-                max_amount: 10000
-                min_amount: 1
-              per_frequency:
-                days: 7
-                max_amount: 1000000
-          - ref: A.1
-            initiator_id: 4e2728cc-b4ba-42c2-a6c3-26a7758de58d
-            authoriser_id: 56df206a-aaff-471a-b075-11882bc8906a
-            contact_id: a80ac411-c8fb-45c0-9557-607c54649907
-            bank_account_id: fa80ac411-c8fb-45c0-9557-607c54649907
-            status: proposed
-            status_reason: null
-            responded_at: null
-            created_at: '2017-03-16T22:51:48Z'
-            terms:
-              per_payout:
-                max_amount: 5000
-                min_amount: 0
-              per_frequency:
-                days: '1'
-                max_amount: 10000
     ListOutgoingAgreementsResponse:
       title: List outgoing Agreements (response)
       required:
@@ -3816,7 +3294,7 @@ components:
             title: 'Trust Account'
             available_balance: null
           - id: ab3de19b-709b-4a41-82a5-3b43b3dc58c9
-            branch_code: '000000'
+            branch_code: '802919'
             bank_name: Split Float Account
             account_number: '1748212'
             status: active
@@ -3865,7 +3343,6 @@ components:
               email: travis@hermanntorp.net
             links:
               update_bank_connection: http://go.split.cash/authorise_bank_connections/williams-and-sons-5/ddbee875-7344-4d74-9503-6233149fe1a0
-
     CreateOpenAgreementRequest:
       title: Create an Open Agreement (request)
       required:
@@ -3893,6 +3370,50 @@ components:
         metadata:
           custom_key: Custom string
           another_custom_key: Maybe a URL
+    Terms:
+      title: Agreement terms
+      required:
+        - per_payout
+        - per_frequency
+      type: object
+      description: Terms
+      properties:
+        per_payout:
+          $ref: '#/components/schemas/PerPayout'
+        per_frequency:
+          $ref: '#/components/schemas/PerFrequency'
+    PerPayout:
+      title: Per payout terms
+      required:
+        - min_amount
+        - max_amount
+      type: object
+      properties:
+        min_amount:
+          type: integer
+          description: Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.
+          example: 0
+        max_amount:
+          type: integer
+          description: Maximum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.
+          example: 10000
+    PerFrequency:
+      title: Per frequency terms
+      required:
+        - days
+        - max_amount
+      type: object
+      properties:
+        days:
+          type: integer
+          description: Amount of days to apply against the frequency. Specify <code>null</code> for no limit.
+          example: 7
+        max_amount:
+          type: integer
+          description: >-
+            Maximum amount in cents the total of all PRs can be for the duration
+            of the frequency. Specify <code>null</code> for no limit.
+          example: 1000000
     CreateOpenAgreementResponse:
       title: Create an Open Agreement (response)
       required:
@@ -4001,57 +3522,6 @@ components:
               max_amount: 1000000
           link: >-
             https://go.sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation
-    AddASplitContactRequest:
-      title: Add a Split Contact (request)
-      required:
-        - nickname
-      type: object
-      properties:
-        nickname:
-          type: string
-          description: Split account nickname
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      example:
-        nickname: outstanding_tours
-        metadata:
-          custom_key: Custom string
-          another_custom_key: Maybe a URL
-    AddASplitContactResponse:
-      title: Add a Split Contact (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          id: 6a7ed958-f1e8-42dc-8c02-3901d7057357
-          name: Outstanding Tours Pty Ltd
-          email: accounts@outstandingtours.com.au
-          type: Split account
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-          bank_account:
-            id: 55afddde-4296-4daf-8e49-7ba481ef9608
-            account_number: '947434694'
-            branch_code: '304304'
-            bank_name: National Australia Bank
-            state: active
-            iav_provider: null
-            iav_status: null
-            blocks:
-              debits_blocked: false
-              credits_blocked: false
-          account:
-            id: 77be6ecc-5fa7-454b-86d6-02a5f147878d
-            nickname: outstanding_tours
-            abn: '123456789'
-            name: Outstanding Tours Pty Ltd
-          links:
-            add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     AddAReceivableContactRequest:
       title: Add a Receivable Contact (request)
       required:
@@ -4374,7 +3844,6 @@ components:
             email: travis@hermanntorp.net
           links:
             update_bank_connection: https://go.sandbox.split.cash/authorise_bank_connections/thomas-morgan-1/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
-
     GetAContactResponse:
       title: Get a Contact (response)
       required:
@@ -4631,7 +4100,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Payout'
-          description: One or many Payouts
+          description: One Payout object only
         metadata:
           $ref: '#/components/schemas/Metadata'
       example:
@@ -4647,9 +4116,6 @@ components:
               invoice_id: c80a9958-e805-47c0-ac2a-c947d7fd778d
               custom_key: Custom string
               another_custom_key: Maybe a URL
-          - amount: 30000
-            description: A scuba dive SDS5464
-            recipient_contact_id: dc6f1e60-3803-43ca-a200-7d641816f57f
         metadata:
           custom_key: Custom string
           another_custom_key: Maybe a URL
@@ -4677,8 +4143,8 @@ components:
         metadata:
           type: Metadata
           description: Use for your custom data and certain Split customisations. Stored against generated transactions and included in associated webhook payloads.
-    VoidAPayoutRequest:
-      title: Void a Payout (request)
+    VoidAPayment:
+      title: Void a Payment (request)
       type: object
       properties:
         details:
@@ -4721,74 +4187,6 @@ components:
                 invoice_id: c80a9958-e805-47c0-ac2a-c947d7fd778d
                 custom_key: Custom string
                 another_custom_key: Maybe a URL
-            - ref: D.2
-              recipient_contact_id: 48b89364-1577-4c81-ba02-96705895d457
-              batch_description: The SuperPackage
-              matures_at: '2016-09-13T23:50:44Z'
-              created_at: '2016-09-10T23:50:44Z'
-              status: maturing
-              amount: 30000
-              description: A scuba dive SDS5464
-              from_id: 83623359-e86e-440c-9780-432a3bc3626f
-              to_id: 21066764-c103-4e7f-b436-4cee7db5f400
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-    ApprovePaymentRequestResponse:
-      title: Approve Payment Request (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: PR.3
-          initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-          your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
-          authoriser_id: d194c54b-9183-410c-966b-50485c5ce3f0
-          authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-          schedule_ref: null
-          status: approved
-          status_reason: null
-          matures_at: '2016-12-25T00:00:00Z'
-          responded_at: '2016-12-19T02:38:04Z'
-          created_at: '2016-12-19T02:10:56Z'
-          debit_ref: D.b
-          payout:
-            amount: 99000
-            description: The elite package for 4
-            matures_at: '2016-12-25T00:00:00Z'
-          metadata:
-            custom_key: Custom string
-            another_custom_key: Maybe a URL
-    DeclinePaymentRequestResponse:
-      title: Decline a Payment Request (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: PR.3
-          initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-          your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
-          authoriser_id: d194c54b-9183-410c-966b-50485c5ce3f0
-          authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-          schedule_ref: null
-          status: declined
-          status_reason: null
-          matures_at: '2016-12-25T00:00:00Z'
-          responded_at: '2016-12-19T02:38:04Z'
-          created_at: '2016-12-19T02:10:56Z'
-          debit_ref: null
-          payout:
-            amount: 99000
-            description: The elite package for 4
-            matures_at: '2016-12-25T00:00:00Z'
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
@@ -4864,16 +4262,6 @@ components:
                 invoice_id: c80a9958-e805-47c0-ac2a-c947d7fd778d
                 custom_key: Custom string
                 another_custom_key: Maybe a URL
-            - ref: D.2
-              recipient_contact_id: dc6f1e60-3803-43ca-a200-7d641816f57f
-              batch_description: The SuperPackage
-              matures_at: '2016-09-13T23:50:44Z'
-              created_at: '2016-09-10T23:50:44Z'
-              status: maturing
-              amount: 30000
-              description: A scuba dive SDS5464
-              from_id: 48b89364-1577-4c81-ba02-96705895d457
-              to_id: f989d9cd-87fc-4c73-b0a4-1eb0e8768d3b
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
@@ -4906,10 +4294,6 @@ components:
           type: string
           description: The Contact the payment will be requested from (`Contact.data.id`)
           example: de86472c-c027-4735-a6a7-234366a27fc7
-        precheck_funds:
-          type: boolean
-          description: Enforce prechecking of available funds before approving the Payment Request. see [Payment Request - Precheck Funds](/#precheck-funds-lifecycle)
-          example: "false"
         your_bank_account_id:
           type: string
           format: uuid
@@ -4927,7 +4311,6 @@ components:
         amount: 99000
         authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
         your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
-        precheck_funds: false
         metadata:
           custom_key: Custom string
           another_custom_key: Maybe a URL
@@ -5176,139 +4559,6 @@ components:
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
-    ListIncomingPaymentRequestsResponse:
-      title: List incoming Payment Requests (response)
-      required:
-        - data
-      properties:
-        data:
-          type: array
-          required:
-            - ref
-            - initiator_id
-            - your_bank_account_id
-            - authoriser_id
-            - authoriser_contact_id
-            - schedule_ref
-            - status
-            - status_reason
-            - matures_at
-            - responded_at
-            - created_at
-            - debit_ref
-            - payout
-          properties:
-            ref:
-              type: string
-              description: The Payment Reference reference (PR.*)
-            initiator_id:
-              type: string
-              format: uuid
-              description: Your bank account ID where the funds will settle
-            your_bank_account_id:
-              type: string
-              format: uuid
-              description: Your bank account ID where the funds will settle (alias of `initiator_id`)
-            authoriser_id:
-              type: string
-              format: uuid
-              description: The debtor's bank account ID
-            authoriser_contact_id:
-              type: string
-              format: uuid
-              description: The contact ID representing the debtor within Split
-            schedule_ref:
-              type: string
-              description: The schedule that generated the Payment request if applicable
-            status:
-              type: string
-              description: The status of the Payment Request
-              enum:
-                - pending_approval
-                - unverified
-                - approved
-                - declined
-                - cancelled
-            status_reason:
-              type: string
-              description: Only used when the `status` is `declined` due to prechecking.
-              enum:
-                - The balance of the nominated bank account for this Payment Request is not available.
-                - The nominated bank account for this Payment Request has insufficient funds.
-            matures_at:
-              type: string
-              format: date-time
-              description: The date-time when the Payment Request is up for processing
-            responded_at:
-              type: string
-              format: date-time
-              description: The date-time when the Payment Request status changed
-            created_at:
-              type: string
-              format: date-time
-              description: The date-time when the Payment Request was created
-            debit_ref:
-              type: string
-              description: The resulting debit entry reference (available once approved)
-            payout:
-              type: object
-              properties:
-                amount:
-                  type: integer
-                  min: 1
-                  max: 99999999999
-                  description: 'Amount in cents (Min: 1 - Max: 99999999999)'
-                'description':
-                  type: string
-                  description: Payment Request description
-                matures_at:
-                  type: string
-                  format: date-time
-                  description: The date-time when the Payment Request is up for processing
-              required:
-                - amount
-                - description
-                - matures_at
-            metadata:
-              type: object
-              description: Your custom keyed data added to the object
-      example:
-        data:
-          - ref: PR.2
-            initiator_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-            your_bank_account_id: 049528f7-6698-40a6-8221-52ec406e5424
-            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
-            authoriser_contact_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-            schedule_ref: PRS.1
-            status: approved
-            status_reason: null
-            matures_at: '2016-12-20T00:00:00Z'
-            responded_at: '2016-12-19T02:10:18Z'
-            created_at: '2016-12-19T02:09:09Z'
-            debit_ref: D.a
-            payout:
-              amount: 30000
-              description: The SuperPackage
-              matures_at: '2016-12-20T00:00:00Z'
-          - ref: PR.3
-            initiator_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-            your_bank_account_id: 049528f7-6698-40a6-8221-52ec406e5424
-            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
-            authoriser_contact_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-            schedule_ref: null
-            status: pending_approval
-            status_reason: null
-            matures_at: '2016-12-25T00:00:00Z'
-            responded_at: null
-            created_at: '2016-12-19T02:10:56Z'
-            debit_ref: null
-            payout:
-              amount: 99000
-              description: The elite package for 4
-              matures_at: '2016-12-25T00:00:00Z'
-            metadata:
-              custom_key: Custom string
-              another_custom_key: Maybe a URL
     ListOutgoingPaymentRequestsResponse:
       title: List outgoing Payment Requests (response)
       required:
@@ -5591,29 +4841,6 @@ components:
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
-    ListIncomingRefundsResponse:
-      title: List incoming Refunds (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-          description: ''
-      example:
-        data:
-          - ref: PRF.2
-            for_ref: D.5
-            credit_ref: C.q
-            your_bank_account_id: 049528f7-6698-40a6-8221-52ec406e5424
-            created_at: '2017-05-09T04:45:26Z'
-            amount: 5
-            reason: Because reason
-            metadata:
-              custom_key: Custom string
-              another_custom_key: Maybe a URL
     ListOutgoingRefundsResponse:
       title: List outgoing Refunds (response)
       required:
@@ -5703,12 +4930,12 @@ components:
             parent_ref: null
             type: debit
             category: payout_refund
-            created_at: '2016-12-07T23:15:00Z'
-            matures_at: '2016-12-10T23:15:00Z'
-            cleared_at: '2016-12-10T23:15:00Z'
+            created_at: '2021-04-07T23:15:00Z'
+            matures_at: '2021-04-07T23:15:00Z'
+            cleared_at: '2021-04-10T23:15:00Z'
             bank_ref: DT.9a
             status: cleared
-            status_changed_at: '2016-12-10T23:15:00Z'
+            status_changed_at: '2021-04-10T23:15:00Z'
             party_contact_id: 31354923-b1e9-4d65-b03c-415ead89cbf3
             party_name: Sanford-Rees
             party_nickname: null
@@ -5716,6 +4943,8 @@ components:
             description: null
             amount: 20000
             bank_account_id: '56df206a-aaff-471a-b075-11882bc8906a'
+            channels: [float account]
+            current_channel: "float account"
           - ref: D.2
             parent_ref: PB.2
             type: debit
@@ -5733,6 +4962,8 @@ components:
             description: Batteries for hire
             amount: 2949299
             bank_account_id: '56df206a-aaff-471a-b075-11882bc8906a'
+            channels: [float_account]
+            current_channel: float_account
           - ref: C.2
             parent_ref: PB.s0z
             type: credit
@@ -5750,6 +4981,8 @@ components:
             description: Online purchase
             amount: 19999
             bank_account_id: 'c2e329ae-606f-4311-a9ab-a751baa1915c'
+            channels: [new_payments_platform,direct_entry]
+            current_channel: direct_entry
             metadata:
               customer_id: xur4492
               product_ref: TSXL392110x
