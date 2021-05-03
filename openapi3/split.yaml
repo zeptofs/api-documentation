@@ -1462,6 +1462,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-05-03** - Deprecated */payments_requests/outgoing* endpoint
+    
     - **2021-04-20** - Removed deprecated API references, refreshed Refunds and Payout descriptions
 
     - **2021-03-17** - Remove note indicating single active bank account limitation
@@ -2656,8 +2658,11 @@ paths:
     get:
       tags:
         - Payment Requests
-      summary: List Payment Requests
+      summary: List Payment Requests [DEPRECATED]
       description: Payment Requests where you're the creditor and collecting funds from the debtor. Alternatively the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact))
+          <aside class="notice">
+            The **/payment_requests/outgoing** endpoint will continue to be supported.
+          </aside>
       operationId: ListOutgoingPaymentRequests
       parameters:
         - name: page

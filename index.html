@@ -410,7 +410,7 @@
                     <a href="#cancel-a-payment-request" class="toc-h2 toc-link" data-title="Cancel a Payment Request">Cancel a Payment Request</a>
                   </li>
                   <li>
-                    <a href="#list-payment-requests" class="toc-h2 toc-link" data-title="List Payment Requests">List Payment Requests</a>
+                    <a href="#list-payment-requests-deprecated" class="toc-h2 toc-link" data-title="List Payment Requests [DEPRECATED]">List Payment Requests [DEPRECATED]</a>
                   </li>
               </ul>
           </li>
@@ -1873,6 +1873,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-05-03</strong> - Deprecated <em>/payments_requests/outgoing</em> endpoint</li>
 <li><strong>2021-04-20</strong> - Removed deprecated API references, refreshed Refunds and Payout descriptions</li>
 <li><strong>2021-03-17</strong> - Remove note indicating single active bank account limitation</li>
 <li><strong>2021-03-12</strong> - Add ref to GetAContactResponse</li>
@@ -6518,7 +6519,7 @@ class MainClass {
 <td>None</td>
 </tr>
 </tbody></table>
-<h2 id='list-payment-requests'>List Payment Requests</h2>
+<h2 id='list-payment-requests-deprecated'>List Payment Requests [DEPRECATED]</h2>
 <p><a id="opIdListOutgoingPaymentRequests"></a></p>
 
 <blockquote>
@@ -6634,9 +6635,9 @@ class MainClass {
 </span></code></pre>
 <p><code>GET /payment_requests/outgoing</code></p>
 
-<p>Payment Requests where you&#39;re the creditor and collecting funds from the debtor. Alternatively the debtor is sending you funds (<a href="/#add-a-receivable-contact">Receivable Contacts</a>)</p>
+<p>Payment Requests where you&#39;re the creditor and collecting funds from the debtor. Alternatively the debtor is sending you funds (<a href="/#add-a-receivable-contact">Receivable Contacts</a>) <aside class="notice"> The <strong>/payment_requests/outgoing</strong> endpoint will continue to be supported. </aside></p>
 
-<h3 id="List-Payment-Requests-parameters" class="parameters">Parameters</h3>
+<h3 id="List-Payment-Requests-[DEPRECATED]-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -6711,7 +6712,7 @@ class MainClass {
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id="List Payment Requests-responses">Responses</h3>
+<h3 id="List Payment Requests [DEPRECATED]-responses">Responses</h3>
 
 <table><thead>
 <tr>
