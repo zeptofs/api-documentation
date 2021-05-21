@@ -412,6 +412,12 @@
                   <li>
                     <a href="#list-payment-requests-deprecated" class="toc-h2 toc-link" data-title="List Payment Requests [DEPRECATED]">List Payment Requests [DEPRECATED]</a>
                   </li>
+                  <li>
+                    <a href="#list-payment-requests-collections" class="toc-h2 toc-link" data-title="List Payment Requests: Collections">List Payment Requests: Collections</a>
+                  </li>
+                  <li>
+                    <a href="#list-payment-requests-receivables" class="toc-h2 toc-link" data-title="List Payment Requests: Receivables">List Payment Requests: Receivables</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -606,7 +612,10 @@
                     <a href="#listoutgoingpaymentrequestsresponse" class="toc-h2 toc-link" data-title="ListOutgoingPaymentRequestsResponse">ListOutgoingPaymentRequestsResponse</a>
                   </li>
                   <li>
-                    <a href="#getapaymentrequestshistoryresponse" class="toc-h2 toc-link" data-title="GetAPaymentRequestsHistoryResponse">GetAPaymentRequestsHistoryResponse</a>
+                    <a href="#listoutgoingpaymentrequestcollectionsresponse" class="toc-h2 toc-link" data-title="ListOutgoingPaymentRequestCollectionsResponse">ListOutgoingPaymentRequestCollectionsResponse</a>
+                  </li>
+                  <li>
+                    <a href="#listoutgoingpaymentrequestreceivablesresponse" class="toc-h2 toc-link" data-title="ListOutgoingPaymentRequestReceivablesResponse">ListOutgoingPaymentRequestReceivablesResponse</a>
                   </li>
                   <li>
                     <a href="#issuearefundrequest" class="toc-h2 toc-link" data-title="IssueARefundRequest">IssueARefundRequest</a>
@@ -697,7 +706,7 @@
 
 <p>We&#39;ve preloaded a collection of all our endpoints for you to use in Postman. Before you start, load up our API collection:</p>
 
-<p><a href="https://god.postman.co/run-collection/46835ea325243f7bcb26#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIwLTExLTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://god.postman.co/run-collection/a35b4949557b0f18189a?action=collection%2Fimport#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIxLTA1LTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>Okay, lets get things setup!</p>
 
@@ -1873,6 +1882,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-05-21</strong> - Added new Payment Request endpoints, updated Postman collection</li>
 <li><strong>2021-05-03</strong> - Deprecated <em>/payments_requests/outgoing</em> endpoint</li>
 <li><strong>2021-04-20</strong> - Removed deprecated API references, refreshed Refunds and Payout descriptions</li>
 <li><strong>2021-03-17</strong> - Remove note indicating single active bank account limitation</li>
@@ -5913,7 +5923,7 @@ class MainClass {
 
 <div class="middle-header">Prechecking</div>
 
-<p>Split will automatically check for available funds before <strong>attempting to debit</strong> the debtor. This check is only performed for contacts with an active <a href="/#Split-API-Bank-Connections">bank connection</a>.</p>
+<p>When using Payment Requests to collect payments from your customer, Split will automatically check for available funds before <strong>attempting to debit</strong> the debtor.  This check is only performed for contacts with an active <a href="/#Split-API-Bank-Connections">bank connection</a>.</p>
 <h2 id='request-payment'>Request Payment</h2>
 <p><a id="opIdMakeAPaymentRequest"></a></p>
 
@@ -6142,22 +6152,23 @@ class MainClass {
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.39p1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"970e4526-67d9-4ed9-b554-f5cf390ab775"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The elite package for 4"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium Package for 4"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-25T00:00:00Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
@@ -6332,22 +6343,23 @@ class MainClass {
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.88me"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"970e4526-67d9-4ed9-b554-f5cf390ab775"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:38:04Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-25T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-19T02:38:04Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-19T02:10:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.b6tf"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The elite package for 4"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Xbox Live subscription"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-25T00:00:00Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
@@ -6635,7 +6647,7 @@ class MainClass {
 </span></code></pre>
 <p><code>GET /payment_requests/outgoing</code></p>
 
-<p>Payment Requests where you&#39;re the creditor and collecting funds from the debtor. Alternatively the debtor is sending you funds (<a href="/#add-a-receivable-contact">Receivable Contacts</a>) <aside class="notice"> The <strong>/payment_requests/outgoing</strong> endpoint will continue to be supported. </aside></p>
+<p>Payment Requests where you&#39;re the creditor and are <em>collecting</em> funds from the debtor. <aside class="notice"> The <strong>/payment_requests/outgoing</strong> endpoint will be supported until 31 June 2021. Any integrations to this endpoint should be pointed at the new <strong>/payment_requests/collections</strong> endpoint which returns the same information. </aside></p>
 
 <h3 id="List-Payment-Requests-[DEPRECATED]-parameters" class="parameters">Parameters</h3>
 
@@ -6677,6 +6689,7 @@ class MainClass {
       </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.2"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -6696,6 +6709,7 @@ class MainClass {
       </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -6727,6 +6741,430 @@ class MainClass {
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
 <td><a href="#schemalistoutgoingpaymentrequestsresponse">ListOutgoingPaymentRequestsResponse</a></td>
+</tr>
+</tbody></table>
+<h2 id='list-payment-requests-collections'>List Payment Requests: Collections</h2>
+<p><a id="opIdListOutgoingPaymentRequestCollections"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --request GET <span class="se">\</span>
+  --url https://api.sandbox.split.cash/payment_requests/collections <span class="se">\</span>
+  --header <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/payment_requests/collections"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"https"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+  <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"api.sandbox.split.cash"</span><span class="p">,</span>
+  <span class="s2">"port"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/payment_requests/collections"</span><span class="p">,</span>
+  <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accept"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
+    <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"Bearer {access-token}"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/payment_requests/collections"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/payment_requests/collections"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/payment_requests/collections'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"net/http"</span><span class="x">
+    </span><span class="s">"io/ioutil"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+    </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api.sandbox.split.cash/payment_requests/collections"</span><span class="x">
+
+    </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span><span class="x"> </span><span class="s">"application/json"</span><span class="p">)</span><span class="x">
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span><span class="x"> </span><span class="s">"Bearer {access-token}"</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">res</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="x">
+
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    </span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span><span class="x">
+
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<p><code>GET /payment_requests/collections</code></p>
+
+<p>Payment Requests where you are the creditor and are collecting funds from your debtor using traditional direct-debit.</p>
+
+<h3 id="List-Payment-Requests:-Collections-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.84t6"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.89t3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.6gr7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription Payment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.45h7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Membership fees"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="List Payment Requests: Collections-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td><a href="#schemalistoutgoingpaymentrequestcollectionsresponse">ListOutgoingPaymentRequestCollectionsResponse</a></td>
+</tr>
+</tbody></table>
+<h2 id='list-payment-requests-receivables'>List Payment Requests: Receivables</h2>
+<p><a id="opIdListOutgoingPaymentRequestReceivables"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --request GET <span class="se">\</span>
+  --url https://api.sandbox.split.cash/payment_requests/receivables <span class="se">\</span>
+  --header <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/payment_requests/receivables"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"https"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+  <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"api.sandbox.split.cash"</span><span class="p">,</span>
+  <span class="s2">"port"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/payment_requests/receivables"</span><span class="p">,</span>
+  <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accept"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
+    <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"Bearer {access-token}"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/payment_requests/receivables"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/payment_requests/receivables"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/payment_requests/receivables'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+    </span><span class="s">"net/http"</span><span class="x">
+    </span><span class="s">"io/ioutil"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+    </span><span class="n">url</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"https://api.sandbox.split.cash/payment_requests/receivables"</span><span class="x">
+
+    </span><span class="n">req</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span><span class="x"> </span><span class="n">url</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span><span class="x"> </span><span class="s">"application/json"</span><span class="p">)</span><span class="x">
+    </span><span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span><span class="x"> </span><span class="s">"Bearer {access-token}"</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">res</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="x">
+
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+    </span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span><span class="x">
+
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<p><code>GET /payment_requests/receivables</code></p>
+
+<p>Payment Requests where the debtor is sending you funds (<a href="/#add-a-receivable-contact">Receivable Contacts</a>). This endpoint exposes all received payments.</p>
+
+<h3 id="List-Payment-Requests:-Receivables-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.2t65"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.77b1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit to my Trading account"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.1n644"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T04:34:50Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T04:34:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c.54r3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Punting account top-up"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T04:34:56Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="List Payment Requests: Receivables-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td><a href="#schemalistoutgoingpaymentrequestreceivablesresponse">ListOutgoingPaymentRequestReceivablesResponse</a></td>
 </tr>
 </tbody></table>
 
@@ -12292,22 +12730,23 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <p><a id="schemamakeapaymentrequestresponse"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.39p1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"970e4526-67d9-4ed9-b554-f5cf390ab775"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The elite package for 4"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium Package for 4"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-25T00:00:00Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
@@ -12361,6 +12800,12 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>string(uuid)</td>
 <td>true</td>
 <td>The contact ID representing the debtor within Split (Min: 36 - Max: 36)</td>
+</tr>
+<tr>
+<td>» contact_initiated</td>
+<td>boolean</td>
+<td>true</td>
+<td>Initiated by Contact or Merchant</td>
 </tr>
 <tr>
 <td>» schedule_ref</td>
@@ -12498,22 +12943,23 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <p><a id="schemagetapaymentrequestresponse"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.88me"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"970e4526-67d9-4ed9-b554-f5cf390ab775"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:38:04Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-25T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-19T02:38:04Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-19T02:10:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.b6tf"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The elite package for 4"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Xbox Live subscription"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-25T00:00:00Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
@@ -12687,6 +13133,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
       </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.2"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -12706,6 +13153,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
       </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -12767,6 +13215,12 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>string(uuid)</td>
 <td>true</td>
 <td>The contact ID representing the debtor within Split</td>
+</tr>
+<tr>
+<td>» contact_initiated</td>
+<td>boolean</td>
+<td>true</td>
+<td>Initiated by Contact or Merchant</td>
 </tr>
 <tr>
 <td>» schedule_ref</td>
@@ -12877,98 +13331,54 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
 </tbody></table>
-<h2 id='getapaymentrequestshistoryresponse'>GetAPaymentRequestsHistoryResponse</h2>
-<p><a id="schemagetapaymentrequestshistoryresponse"></a></p>
+<h2 id='listoutgoingpaymentrequestcollectionsresponse'>ListOutgoingPaymentRequestCollectionsResponse</h2>
+<p><a id="schemalistoutgoingpaymentrequestcollectionsresponse"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_request"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"requested"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T07:47:45Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fancy Pants (fancy_pants)"</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.84t6"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.89t3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.6gr7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription Payment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_request"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-07T06:13:52Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lycra Co (lycra_co)"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-07T06:13:52Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.n"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-07T06:13:52Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.e"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"matured"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-08T04:30:14Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.n"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-08T04:30:14Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.n"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clearing"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-08T19:02:20Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.n"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-11T19:07:52Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.n"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"matured"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-11T19:07:52Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.e"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-12T04:30:25Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.e"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clearing"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-12T05:17:32Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.e"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-15T05:27:12Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.e"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split Payments"</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.45h7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Membership fees"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='properties-34'>Properties</h3>
-<p><em>Get a Payment Request&#39;s history (response)</em></p>
+<p><em>List Payment Requests: Collections (response)</em></p>
 
 <table><thead>
 <tr>
@@ -12985,34 +13395,112 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>No description</td>
 </tr>
 <tr>
-<td>» type</td>
-<td>string</td>
-<td>true</td>
-<td>The type of object affected</td>
-</tr>
-<tr>
-<td>» event</td>
-<td>string</td>
-<td>true</td>
-<td>The event that occurred</td>
-</tr>
-<tr>
-<td>» at</td>
-<td>string(date-time)</td>
-<td>true</td>
-<td>When the event occurred</td>
-</tr>
-<tr>
 <td>» ref</td>
 <td>string</td>
 <td>true</td>
-<td>The reference of the affected object</td>
+<td>The Payment Reference reference (PR.*)</td>
 </tr>
 <tr>
-<td>» by</td>
+<td>» initiator_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>Your bank account ID where the funds will settle</td>
+</tr>
+<tr>
+<td>» your_bank_account_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>Your bank account ID where the funds will settle (alias of <code>initiator_id</code>)</td>
+</tr>
+<tr>
+<td>» authoriser_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The debtor&#39;s bank account ID</td>
+</tr>
+<tr>
+<td>» authoriser_contact_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The contact ID representing the debtor within Split</td>
+</tr>
+<tr>
+<td>» contact_initiated</td>
+<td>boolean</td>
+<td>true</td>
+<td>Initiated by Contact or Merchant</td>
+</tr>
+<tr>
+<td>» schedule_ref</td>
 <td>string</td>
 <td>true</td>
-<td>Who triggered the change/event</td>
+<td>The schedule that generated the Payment request if applicable</td>
+</tr>
+<tr>
+<td>» status</td>
+<td>string</td>
+<td>true</td>
+<td>The status of the Payment Request</td>
+</tr>
+<tr>
+<td>» status_reason</td>
+<td>string</td>
+<td>true</td>
+<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
+</tr>
+<tr>
+<td>» matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request is up for processing</td>
+</tr>
+<tr>
+<td>» responded_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request status changed</td>
+</tr>
+<tr>
+<td>» created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request was created</td>
+</tr>
+<tr>
+<td>» credit_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The resulting credit entry reference (available once approved)</td>
+</tr>
+<tr>
+<td>» payout</td>
+<td>object</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>»» amount</td>
+<td>integer</td>
+<td>true</td>
+<td>Amount in cents (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>»» description</td>
+<td>string</td>
+<td>true</td>
+<td>Payment Request description</td>
+</tr>
+<tr>
+<td>»» matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request is up for processing</td>
+</tr>
+<tr>
+<td>» metadata</td>
+<td>[object]</td>
+<td>false</td>
+<td>Your custom keyed data</td>
 </tr>
 </tbody></table>
 <h4 id='enumerated-values-10'>Enumerated Values</h4>
@@ -13023,16 +13511,204 @@ If a high probability of insufficient funds is detected, Split will not submit t
 </tr>
 </thead><tbody>
 <tr>
-<td>type</td>
-<td>payout_request</td>
+<td>status</td>
+<td>pending_approval</td>
 </tr>
 <tr>
-<td>type</td>
-<td>debit</td>
+<td>status</td>
+<td>unverified</td>
 </tr>
 <tr>
-<td>type</td>
-<td>credit</td>
+<td>status</td>
+<td>approved</td>
+</tr>
+<tr>
+<td>status</td>
+<td>declined</td>
+</tr>
+<tr>
+<td>status</td>
+<td>cancelled</td>
+</tr>
+<tr>
+<td>status_reason</td>
+<td>The balance of the nominated bank account for this Payment Request is not available.</td>
+</tr>
+<tr>
+<td>status_reason</td>
+<td>The nominated bank account for this Payment Request has insufficient funds.</td>
+</tr>
+</tbody></table>
+<h2 id='listoutgoingpaymentrequestreceivablesresponse'>ListOutgoingPaymentRequestReceivablesResponse</h2>
+<p><a id="schemalistoutgoingpaymentrequestreceivablesresponse"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.2t65"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.77b1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit to my Trading account"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-12T13:43:12Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.1n644"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T04:34:50Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T04:34:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c.54r3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Punting account top-up"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T04:34:56Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='properties-35'>Properties</h3>
+<p><em>List Payment Requests: Receivables (response)</em></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>[object]</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» ref</td>
+<td>string</td>
+<td>true</td>
+<td>The Payment Reference reference (PR.*)</td>
+</tr>
+<tr>
+<td>» initiator_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>Your bank account ID where the funds will settle</td>
+</tr>
+<tr>
+<td>» your_bank_account_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>Your bank account ID where the funds will settle (alias of <code>initiator_id</code>)</td>
+</tr>
+<tr>
+<td>» authoriser_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The debtor&#39;s bank account ID</td>
+</tr>
+<tr>
+<td>» authoriser_contact_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The contact ID representing the debtor within Split</td>
+</tr>
+<tr>
+<td>» contact_initiated</td>
+<td>boolean</td>
+<td>true</td>
+<td>Initiated by Contact or Merchant</td>
+</tr>
+<tr>
+<td>» schedule_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The schedule that generated the Payment request if applicable</td>
+</tr>
+<tr>
+<td>» status</td>
+<td>string</td>
+<td>true</td>
+<td>The status of the Payment Request. For Receivables, this will always be <em>approved</em></td>
+</tr>
+<tr>
+<td>» status_reason</td>
+<td>string</td>
+<td>true</td>
+<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
+</tr>
+<tr>
+<td>» matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request is up for processing</td>
+</tr>
+<tr>
+<td>» responded_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request status changed</td>
+</tr>
+<tr>
+<td>» created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request was created</td>
+</tr>
+<tr>
+<td>» credit_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The resulting credit entry reference (available once approved)</td>
+</tr>
+<tr>
+<td>» payout</td>
+<td>object</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>»» amount</td>
+<td>integer</td>
+<td>true</td>
+<td>Amount in cents (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>»» description</td>
+<td>string</td>
+<td>true</td>
+<td>Payment Request description</td>
+</tr>
+<tr>
+<td>»» matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request is up for processing</td>
+</tr>
+<tr>
+<td>» metadata</td>
+<td>[object]</td>
+<td>false</td>
+<td>Your custom keyed data</td>
 </tr>
 </tbody></table>
 <h2 id='issuearefundrequest'>IssueARefundRequest</h2>
@@ -13046,7 +13722,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-35'>Properties</h3>
+</span></code></pre><h3 id='properties-36'>Properties</h3>
 <p><em>Issue a Refund (request)</em></p>
 
 <table><thead>
@@ -13099,7 +13775,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-36'>Properties</h3>
+</span></code></pre><h3 id='properties-37'>Properties</h3>
 <p><em>Issue a Refund (response)</em></p>
 
 <table><thead>
@@ -13136,7 +13812,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-37'>Properties</h3>
+</span></code></pre><h3 id='properties-38'>Properties</h3>
 <p><em>List outgoing Refunds (response)</em></p>
 
 <table><thead>
@@ -13171,7 +13847,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-38'>Properties</h3>
+</span></code></pre><h3 id='properties-39'>Properties</h3>
 <p><em>Retrieve a Refund (response)</em></p>
 
 <table><thead>
@@ -13211,7 +13887,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-39'>Properties</h3>
+</span></code></pre><h3 id='properties-40'>Properties</h3>
 <p><em>Retry a payout (response)</em></p>
 
 <table><thead>
@@ -13309,7 +13985,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-40'>Properties</h3>
+</span></code></pre><h3 id='properties-41'>Properties</h3>
 <p><em>List all transactions (response)</em></p>
 
 <table><thead>
@@ -13347,7 +14023,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="s2">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-41'>Properties</h3>
+</span></code></pre><h3 id='properties-42'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (request)</em></p>
 
 <table><thead>
@@ -13410,7 +14086,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-42'>Properties</h3>
+</span></code></pre><h3 id='properties-43'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -13472,7 +14148,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-43'>Properties</h3>
+</span></code></pre><h3 id='properties-44'>Properties</h3>
 <p><em>List Unassigned Agreements (response)</em></p>
 
 <table><thead>
@@ -13513,7 +14189,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-44'>Properties</h3>
+</span></code></pre><h3 id='properties-45'>Properties</h3>
 <p><em>Get an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -13551,7 +14227,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-45'>Properties</h3>
+</span></code></pre><h3 id='properties-46'>Properties</h3>
 <p><em>Get User details (response)</em></p>
 
 <table><thead>
@@ -13575,7 +14251,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
   </span><span class="s2">"payid_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming@split.cash"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-46'>Properties</h3>
+</span></code></pre><h3 id='properties-47'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -13606,7 +14282,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='properties-47'>Properties</h3>
+</span></code></pre><h3 id='properties-48'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>

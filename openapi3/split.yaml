@@ -70,7 +70,7 @@ info:
     Before you start, load up our API collection:
 
 
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/46835ea325243f7bcb26#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIwLTExLTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/a35b4949557b0f18189a?action=collection%2Fimport#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIxLTA1LTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
 
 
     Okay, lets get things setup!
@@ -1462,6 +1462,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-05-21** - Added new Payment Request endpoints, updated Postman collection
+
     - **2021-05-03** - Deprecated */payments_requests/outgoing* endpoint
     
     - **2021-04-20** - Removed deprecated API references, refreshed Refunds and Payout descriptions
@@ -1724,7 +1726,8 @@ tags:
       <div class="middle-header">Prechecking</div>
 
 
-      Split will automatically check for available funds before **attempting to debit** the debtor. This check is only performed for contacts with an active [bank connection](/#Split-API-Bank-Connections).
+      When using Payment Requests to collect payments from your customer, Split will automatically check for available funds before **attempting to debit** the debtor. 
+      This check is only performed for contacts with an active [bank connection](/#Split-API-Bank-Connections).
   - name: Refunds
     description: >
 
@@ -2659,9 +2662,10 @@ paths:
       tags:
         - Payment Requests
       summary: List Payment Requests [DEPRECATED]
-      description: Payment Requests where you're the creditor and collecting funds from the debtor. Alternatively the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact))
+      description: Payment Requests where you're the creditor and are _collecting_ funds from the debtor.
           <aside class="notice">
-            The **/payment_requests/outgoing** endpoint will continue to be supported.
+            The **/payment_requests/outgoing** endpoint will be supported until 31 June 2021. Any integrations to this 
+            endpoint should be pointed at the new **/payment_requests/collections** endpoint which returns the same information.
           </aside>
       operationId: ListOutgoingPaymentRequests
       parameters:
@@ -2686,6 +2690,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListOutgoingPaymentRequestsResponse'
+  /payment_requests/collections:
+    get:
+      tags:
+        - Payment Requests
+      summary: 'List Payment Requests: Collections'
+      description: Payment Requests where you are the creditor and are collecting funds from your debtor using traditional direct-debit.
+      operationId: ListOutgoingPaymentRequestCollections
+      parameters:
+        - name: page
+          in: query
+          description: 'Page of results to return, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '1'
+        - name: per_page
+          in: query
+          description: 'Number of results per page, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOutgoingPaymentRequestCollectionsResponse'
+  /payment_requests/receivables:
+    get:
+      tags:
+        - Payment Requests
+      summary: 'List Payment Requests: Receivables'
+      description: Payment Requests where the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact)). 
+                  This endpoint exposes all received payments.
+      operationId: ListOutgoingPaymentRequestReceivables
+      parameters:
+        - name: page
+          in: query
+          description: 'Page of results to return, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '1'
+        - name: per_page
+          in: query
+          description: 'Number of results per page, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOutgoingPaymentRequestReceivablesResponse'
   '/credits/{credit_ref}/refunds':
     post:
       tags:
@@ -4333,6 +4396,7 @@ components:
             - your_bank_account_id
             - authoriser_id
             - authoriser_contact_id
+            - contact_initiated
             - schedule_ref
             - status
             - status_reason
@@ -4361,6 +4425,9 @@ components:
               type: string
               format: uuid
               description: 'The contact ID representing the debtor within Split (Min: 36 - Max: 36)'
+            contact_initiated:
+              type: boolean
+              description: Initiated by Contact or Merchant
             schedule_ref:
               type: string
               description: 'The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)'
@@ -4418,22 +4485,23 @@ components:
               description: Your custom keyed data
       example:
         data:
-          ref: PR.3
+          ref: PR.39p1
           initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
           your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
           authoriser_id: 970e4526-67d9-4ed9-b554-f5cf390ab775
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
+          contact_initiated: false
           schedule_ref: null
           status: pending_approval
           status_reason: null
-          matures_at: '2016-12-25T00:00:00Z'
+          matures_at: '2021-12-25T00:00:00Z'
           responded_at: null
-          created_at: '2016-12-19T02:10:56Z'
+          created_at: '2021-12-19T02:10:56Z'
           credit_ref: null
           payout:
             amount: 99000
-            description: The elite package for 4
-            matures_at: '2016-12-25T00:00:00Z'
+            description: Premium Package for 4
+            matures_at: '2021-12-25T00:00:00Z'
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
@@ -4545,22 +4613,23 @@ components:
               description: Your custom keyed data
       example:
         data:
-          ref: PR.3
+          ref: PR.88me
           initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
           your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
           authoriser_id: 970e4526-67d9-4ed9-b554-f5cf390ab775
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
+          contact_initiated: false
           schedule_ref: null
           status: approved
           status_reason: null
-          matures_at: '2016-12-25T00:00:00Z'
-          responded_at: '2016-12-19T02:38:04Z'
-          created_at: '2016-12-19T02:10:56Z'
-          credit_ref: C.b
+          matures_at: '2021-11-25T00:00:00Z'
+          responded_at: '2021-11-19T02:38:04Z'
+          created_at: '2021-11-19T02:10:56Z'
+          credit_ref: C.b6tf
           payout:
-            amount: 99000
-            description: The elite package for 4
-            matures_at: '2016-12-25T00:00:00Z'
+            amount: 1200
+            description: Xbox Live subscription
+            matures_at: '2021-11-25T00:00:00Z'
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
@@ -4579,6 +4648,7 @@ components:
               - your_bank_account_id
               - authoriser_id
               - authoriser_contact_id
+              - contact_initiated
               - schedule_ref
               - status
               - status_reason
@@ -4607,6 +4677,9 @@ components:
                 type: string
                 format: uuid
                 description: The contact ID representing the debtor within Split
+              contact_initiated:
+                type: boolean
+                description: Initiated by Contact or Merchant
               schedule_ref:
                 type: string
                 description: The schedule that generated the Payment request if applicable
@@ -4671,6 +4744,7 @@ components:
             your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
             authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            contact_initiated: true
             schedule_ref: PRS.2
             status: approved
             status_reason: null
@@ -4687,6 +4761,7 @@ components:
             your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
             authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            contact_initiated: true
             schedule_ref: null
             status: pending_approval
             status_reason: null
@@ -4698,8 +4773,8 @@ components:
               amount: 99000
               description: The elite package for 4
               matures_at: '2016-12-25T00:00:00Z'
-    GetAPaymentRequestsHistoryResponse:
-      title: Get a Payment Request's history (response)
+    ListOutgoingPaymentRequestCollectionsResponse:
+      title: 'List Payment Requests: Collections (response)'
       required:
         - data
       properties:
@@ -4708,95 +4783,267 @@ components:
           items:
             type: object
             required:
-              - type
-              - description
-              - event
-              - at
               - ref
-              - by
+              - initiator_id
+              - your_bank_account_id
+              - authoriser_id
+              - authoriser_contact_id
+              - contact_initiated
+              - schedule_ref
+              - status
+              - status_reason
+              - matures_at
+              - responded_at
+              - created_at
+              - credit_ref
+              - payout
             properties:
-              'type':
-                type: string
-                description: The type of object affected
-                enum:
-                  - payout_request
-                  - debit
-                  - credit
-              event:
-                type: string
-                description: The event that occurred
-              at:
-                type: string
-                format: date-time
-                description: When the event occurred
               ref:
                 type: string
-                description: The reference of the affected object
-              by:
+                description: The Payment Reference reference (PR.*)
+              initiator_id:
                 type: string
-                description: Who triggered the change/event
+                format: uuid
+                description: Your bank account ID where the funds will settle
+              your_bank_account_id:
+                type: string
+                format: uuid
+                description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+              authoriser_id:
+                type: string
+                format: uuid
+                description: The debtor's bank account ID
+              authoriser_contact_id:
+                type: string
+                format: uuid
+                description: The contact ID representing the debtor within Split
+              contact_initiated:
+                type: boolean
+                description: Initiated by Contact or Merchant
+              schedule_ref:
+                type: string
+                description: The schedule that generated the Payment request if applicable
+              status:
+                type: string
+                description: The status of the Payment Request
+                enum:
+                  - pending_approval
+                  - unverified
+                  - approved
+                  - declined
+                  - cancelled
+              status_reason:
+                type: string
+                description: Only used when the `status` is `declined` due to prechecking.
+                enum:
+                  - The balance of the nominated bank account for this Payment Request is not available.
+                  - The nominated bank account for this Payment Request has insufficient funds.
+              matures_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request is up for processing
+              responded_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request status changed
+              created_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request was created
+              credit_ref:
+                type: string
+                description: The resulting credit entry reference (available once approved)
+              payout:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                    min: 1
+                    max: 99999999999
+                    description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+                  'description':
+                    type: string
+                    description: Payment Request description
+                  matures_at:
+                    type: string
+                    format: date-time
+                    description: The date-time when the Payment Request is up for processing
+                required:
+                  - amount
+                  - description
+                  - matures_at
+              metadata:
+                type: array
+                description: Your custom keyed data
+                items:
+                  type: object
       example:
         data:
-          - type: payout_request
-            event: requested
-            at: '2017-01-05T07:47:45Z'
-            ref: PR.3
-            by: Fancy Pants (fancy_pants)
-          - type: payout_request
-            event: approved
-            at: '2017-01-07T06:13:52Z'
-            ref: PR.3
-            by: Lycra Co (lycra_co)
-          - type: debit
-            event: scheduled
-            at: '2017-01-07T06:13:52Z'
-            ref: D.n
-            by: Split Payments
-          - type: credit
-            event: scheduled
-            at: '2017-01-07T06:13:52Z'
-            ref: C.e
-            by: Split Payments
-          - type: debit
-            event: matured
-            at: '2017-01-08T04:30:14Z'
-            ref: D.n
-            by: Split Payments
-          - type: debit
-            event: processing
-            at: '2017-01-08T04:30:14Z'
-            ref: D.n
-            by: Split Payments
-          - type: debit
-            event: clearing
-            at: '2017-01-08T19:02:20Z'
-            ref: D.n
-            by: Split Payments
-          - type: debit
-            event: cleared
-            at: '2017-01-11T19:07:52Z'
-            ref: D.n
-            by: Split Payments
-          - type: credit
-            event: matured
-            at: '2017-01-11T19:07:52Z'
-            ref: C.e
-            by: Split Payments
-          - type: credit
-            event: processing
-            at: '2017-01-12T04:30:25Z'
-            ref: C.e
-            by: Split Payments
-          - type: credit
-            event: clearing
-            at: '2017-01-12T05:17:32Z'
-            ref: C.e
-            by: Split Payments
-          - type: credit
-            event: cleared
-            at: '2017-01-15T05:27:12Z'
-            ref: C.e
-            by: Split Payments
+          - ref: PR.84t6
+            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
+            your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
+            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
+            authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            contact_initiated: false
+            schedule_ref: PRS.89t3
+            status: approved
+            status_reason: null
+            matures_at: '2021-07-18T02:10:00Z'
+            responded_at: '2021-07-18T02:10:00Z'
+            created_at: '2021-07-18T02:10:00Z'
+            credit_ref: C.6gr7
+            payout:
+              amount: 4999
+              description: Subscription Payment
+              matures_at: '2021-07-18T02:10:00Z'
+          - ref: PR.45h7
+            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
+            your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
+            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
+            authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            contact_initiated: false
+            schedule_ref: null
+            status: pending_approval
+            status_reason: null
+            matures_at: '2021-03-09T16:58:00Z'
+            responded_at: null
+            created_at: '2021-03-09T16:58:00Z'
+            credit_ref: null
+            payout:
+              amount: 3000
+              description: Membership fees
+              matures_at: '2021-03-09T16:58:00Z'
+    ListOutgoingPaymentRequestReceivablesResponse:
+      title: 'List Payment Requests: Receivables (response)'
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+              - ref
+              - initiator_id
+              - your_bank_account_id
+              - authoriser_id
+              - authoriser_contact_id
+              - contact_initiated
+              - schedule_ref
+              - status
+              - status_reason
+              - matures_at
+              - responded_at
+              - created_at
+              - credit_ref
+              - payout
+            properties:
+              ref:
+                type: string
+                description: The Payment Reference reference (PR.*)
+              initiator_id:
+                type: string
+                format: uuid
+                description: Your bank account ID where the funds will settle
+              your_bank_account_id:
+                type: string
+                format: uuid
+                description: Your bank account ID where the funds will settle (alias of `initiator_id`)
+              authoriser_id:
+                type: string
+                format: uuid
+                description: The debtor's bank account ID
+              authoriser_contact_id:
+                type: string
+                format: uuid
+                description: The contact ID representing the debtor within Split
+              contact_initiated:
+                type: boolean
+                description: Initiated by Contact or Merchant
+              schedule_ref:
+                type: string
+                description: The schedule that generated the Payment request if applicable
+              status:
+                type: string
+                description: The status of the Payment Request. For Receivables, this will always be *approved* 
+              status_reason:
+                type: string
+                description: Only used when the `status` is `declined` due to prechecking.
+              matures_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request is up for processing
+              responded_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request status changed
+              created_at:
+                type: string
+                format: date-time
+                description: The date-time when the Payment Request was created
+              credit_ref:
+                type: string
+                description: The resulting credit entry reference (available once approved)
+              payout:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                    min: 1
+                    max: 99999999999
+                    description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+                  'description':
+                    type: string
+                    description: Payment Request description
+                  matures_at:
+                    type: string
+                    format: date-time
+                    description: The date-time when the Payment Request is up for processing
+                required:
+                  - amount
+                  - description
+                  - matures_at
+              metadata:
+                type: array
+                description: Your custom keyed data
+                items:
+                  type: object
+      example:
+        data:
+          - ref: PR.2t65
+            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
+            your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
+            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
+            authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            contact_initiated: true
+            schedule_ref: null
+            status: approved
+            status_reason: null
+            matures_at: '2021-05-12T13:43:12Z'
+            responded_at: '2021-05-12T13:43:12Z'
+            created_at: '2021-05-12T13:43:12Z'
+            credit_ref: C.77b1
+            payout:
+              amount: 50000
+              description: Deposit to my Trading account
+              matures_at: '2021-05-12T13:43:12Z'
+          - ref: PR.1n644
+            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
+            your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
+            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
+            authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
+            contact_initiated: true
+            schedule_ref: null
+            status: approved
+            status_reason: null
+            matures_at: '2021-06-01T04:34:50Z'
+            responded_at: null
+            created_at: '2021-06-01T04:34:56Z'
+            credit_ref: c.54r3
+            payout:
+              amount: 5000
+              description: Punting account top-up
+              matures_at: '2021-06-01T04:34:56Z'
     IssueARefundRequest:
       title: Issue a Refund (request)
       required:
