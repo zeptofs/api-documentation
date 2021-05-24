@@ -975,7 +975,7 @@ url = URI("https://api.sandbox.split.cash/agreements/outgoing")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -1191,7 +1191,7 @@ url = URI("https://api.sandbox.split.cash/agreements/A.2")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -1370,7 +1370,7 @@ url = URI("https://api.sandbox.split.cash/agreements/A.2")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {access-token}'
@@ -1516,7 +1516,7 @@ url = URI("https://api.sandbox.split.cash/bank_accounts")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -1710,7 +1710,7 @@ url = URI("https://api.sandbox.split.cash/bank_connections")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -1924,7 +1924,7 @@ url = URI("https://api.sandbox.split.cash/bank_connections/c397645b-bd4f-4fc6-b1
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -2103,7 +2103,7 @@ url = URI("https://api.sandbox.split.cash/bank_connections/01586a3f-f25b-404f-b1
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {access-token}'
@@ -2253,7 +2253,7 @@ url = URI("https://api.sandbox.split.cash/contacts/anyone")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -2489,7 +2489,7 @@ url = URI("https://api.sandbox.split.cash/contacts/receivable")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -2741,7 +2741,7 @@ url = URI("https://api.sandbox.split.cash/contacts")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -2997,7 +2997,7 @@ url = URI("https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba48
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -3195,7 +3195,7 @@ url = URI("https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba48
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {access-token}'
@@ -3344,7 +3344,7 @@ url = URI("https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba48
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/json'
@@ -3586,7 +3586,7 @@ url = URI("https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba48
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer {access-token}'
@@ -3750,7 +3750,7 @@ url = URI("https://api.sandbox.split.cash/open_agreements")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -3985,7 +3985,7 @@ url = URI("https://api.sandbox.split.cash/open_agreements")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -4181,7 +4181,7 @@ url = URI("https://api.sandbox.split.cash/open_agreements/OA.1/activate")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["accept"] = 'application/json'
@@ -4357,7 +4357,7 @@ url = URI("https://api.sandbox.split.cash/open_agreements/OA.1/close")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["accept"] = 'application/json'
@@ -4566,7 +4566,7 @@ url = URI("https://api.sandbox.split.cash/payment_requests")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -4796,7 +4796,7 @@ url = URI("https://api.sandbox.split.cash/payment_requests/PR.3")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -4976,7 +4976,7 @@ url = URI("https://api.sandbox.split.cash/payment_requests/PR.3")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {access-token}'
@@ -5118,7 +5118,7 @@ url = URI("https://api.sandbox.split.cash/payment_requests/outgoing")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -5320,7 +5320,7 @@ url = URI("https://api.sandbox.split.cash/payment_requests/collections")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -5522,7 +5522,7 @@ url = URI("https://api.sandbox.split.cash/payment_requests/receivables")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -5775,7 +5775,7 @@ url = URI("https://api.sandbox.split.cash/payments")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -6034,7 +6034,7 @@ url = URI("https://api.sandbox.split.cash/payments")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -6234,7 +6234,7 @@ url = URI("https://api.sandbox.split.cash/payments/PB.1")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -6434,7 +6434,7 @@ url = URI("https://api.sandbox.split.cash/payouts/C.2/retry")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["accept"] = 'application/json'
@@ -6619,7 +6619,7 @@ url = URI("https://api.sandbox.split.cash/payouts/D.48")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Delete.new(url)
 request["content-type"] = 'application/json'
@@ -6798,7 +6798,7 @@ url = URI("https://api.sandbox.split.cash/credits/string/refunds")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -7017,7 +7017,7 @@ url = URI("https://api.sandbox.split.cash/refunds/outgoing")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -7190,7 +7190,7 @@ url = URI("https://api.sandbox.split.cash/refunds/PRF.1")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -7368,7 +7368,7 @@ url = URI("https://api.sandbox.split.cash/simulate/incoming_payid_payment")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -7641,7 +7641,7 @@ url = URI("https://api.sandbox.split.cash/transactions")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -7929,7 +7929,7 @@ url = URI("https://api.sandbox.split.cash/unassigned_agreements")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
@@ -8173,7 +8173,7 @@ url = URI("https://api.sandbox.split.cash/unassigned_agreements")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -8373,7 +8373,7 @@ url = URI("https://api.sandbox.split.cash/unassigned_agreements/A.4k")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
@@ -8550,7 +8550,7 @@ url = URI("https://api.sandbox.split.cash/unassigned_agreements/A.2")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {access-token}'
@@ -8696,7 +8696,7 @@ url = URI("https://api.sandbox.split.cash/user")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(url)
 request["accept"] = 'application/json'
