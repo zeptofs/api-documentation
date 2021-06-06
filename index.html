@@ -572,6 +572,20 @@
               </ul>
           </li>
           <li>
+            <a href="#Split-API-Transfers" class="toc-h1 toc-link" data-title="Transfers">Transfers</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#add-a-transfer" class="toc-h2 toc-link" data-title="Add a Transfer">Add a Transfer</a>
+                  </li>
+                  <li>
+                    <a href="#list-all-transfers-available-soon" class="toc-h2 toc-link" data-title="List all Transfers (Available soon)">List all Transfers (Available soon)</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-transfer-available-soon" class="toc-h2 toc-link" data-title="Get a Transfer (Available soon)">Get a Transfer (Available soon)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#Split-API-Unassigned-Agreements" class="toc-h1 toc-link" data-title="Unassigned Agreements">Unassigned Agreements</a>
               <ul class="toc-list-h2">
                   <li>
@@ -743,6 +757,15 @@
                   <li>
                     <a href="#simulateincomingpayidpaymentresponse" class="toc-h2 toc-link" data-title="SimulateIncomingPayIDPaymentResponse">SimulateIncomingPayIDPaymentResponse</a>
                   </li>
+                  <li>
+                    <a href="#addatransferrequest" class="toc-h2 toc-link" data-title="AddATransferRequest">AddATransferRequest</a>
+                  </li>
+                  <li>
+                    <a href="#addatransferresponse" class="toc-h2 toc-link" data-title="AddATransferResponse">AddATransferResponse</a>
+                  </li>
+                  <li>
+                    <a href="#getatransferresponse" class="toc-h2 toc-link" data-title="GetATransferResponse">GetATransferResponse</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -791,9 +814,9 @@
 <h1 id='guides'>Guides</h1><h2 id='try-it-out'>Try it out</h2>
 <p>The best way to familiarise yourself with our API is by interacting with it.</p>
 
-<p>We&#39;ve preloaded a collection of all our endpoints for you to use in Postman. Before you start, load up our API collection:</p>
+<p>We&#39;ve preloaded a collection with all our endpoints for you to use in Postman. Before you start, import a copy of our API collection:</p>
 
-<p><a href="https://god.postman.co/run-collection/a35b4949557b0f18189a?action=collection%2Fimport#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIxLTA1LTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&amp;collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>Okay, lets get things setup!</p>
 
@@ -3644,7 +3667,7 @@ class MainClass {
       </span><span class="nl">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13048322"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7314,7 +7337,7 @@ class MainClass {
   <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'{"description":"The SuperPackage","matures_at":"2016-09-13T00:00:00Z","your_bank_account_id":"83623359-e86e-440c-9780-432a3bc3626f","payouts":[{"amount":30000,"description":"A tandem skydive jump SB23094","recipient_contact_id":"48b89364-1577-4c81-ba02-96705895d457","metadata":{"invoice_ref":"BILL-0001","invoice_id":"c80a9958-e805-47c0-ac2a-c947d7fd778d","custom_key":"Custom string","another_custom_key":"Maybe a URL"}}],"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
+  <span class="nt">--data</span> <span class="s1">'{"description":"The SuperPackage","matures_at":"2021-06-13T00:00:00Z","your_bank_account_id":"83623359-e86e-440c-9780-432a3bc3626f","channels":"new_payments_platform","payouts":[{"amount":30000,"description":"A tandem skydive jump SB23094","recipient_contact_id":"48b89364-1577-4c81-ba02-96705895d457","metadata":{"invoice_ref":"BILL-0001","invoice_id":"c80a9958-e805-47c0-ac2a-c947d7fd778d","custom_key":"Custom string","another_custom_key":"Maybe a URL"}}],"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
 </code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
 
@@ -7328,7 +7351,7 @@ class MainClass {
 <span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">The SuperPackage</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2016-09-13T00:00:00Z</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">your_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">83623359-e86e-440c-9780-432a3bc3626f</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">payouts</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:30000,</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">A tandem skydive jump SB23094</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">recipient_contact_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">48b89364-1577-4c81-ba02-96705895d457</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">invoice_ref</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BILL-0001</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">invoice_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">c80a9958-e805-47c0-ac2a-c947d7fd778d</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}],</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">The SuperPackage</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2021-06-13T00:00:00Z</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">your_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">83623359-e86e-440c-9780-432a3bc3626f</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">channels</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">new_payments_platform</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">payouts</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:30000,</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">A tandem skydive jump SB23094</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">recipient_contact_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">48b89364-1577-4c81-ba02-96705895d457</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">invoice_ref</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BILL-0001</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">invoice_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">c80a9958-e805-47c0-ac2a-c947d7fd778d</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}],</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 <span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
@@ -7361,8 +7384,9 @@ class MainClass {
 
 <span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
   <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">The SuperPackage</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">matures_at</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2016-09-13T00:00:00Z</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">matures_at</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2021-06-13T00:00:00Z</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">your_bank_account_id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">83623359-e86e-440c-9780-432a3bc3626f</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">channels</span><span class="p">:</span> <span class="dl">'</span><span class="s1">new_payments_platform</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">payouts</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="na">amount</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span>
@@ -7383,7 +7407,7 @@ class MainClass {
 
 <span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
 
-<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">The SuperPackage</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2016-09-13T00:00:00Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">your_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">83623359-e86e-440c-9780-432a3bc3626f</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payouts</span><span class="se">\"</span><span class="s">:[{</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:30000,</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">A tandem skydive jump SB23094</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">recipient_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">48b89364-1577-4c81-ba02-96705895d457</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">invoice_ref</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">BILL-0001</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">invoice_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">c80a9958-e805-47c0-ac2a-c947d7fd778d</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}],</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">The SuperPackage</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2021-06-13T00:00:00Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">your_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">83623359-e86e-440c-9780-432a3bc3626f</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">channels</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">new_payments_platform</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payouts</span><span class="se">\"</span><span class="s">:[{</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:30000,</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">A tandem skydive jump SB23094</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">recipient_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">48b89364-1577-4c81-ba02-96705895d457</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">invoice_ref</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">BILL-0001</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">invoice_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">c80a9958-e805-47c0-ac2a-c947d7fd778d</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}],</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span>
 
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
@@ -7401,7 +7425,7 @@ class MainClass {
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"description\":\"The SuperPackage\",\"matures_at\":\"2016-09-13T00:00:00Z\",\"your_bank_account_id\":\"83623359-e86e-440c-9780-432a3bc3626f\",\"payouts\":[{\"amount\":30000,\"description\":\"A tandem skydive jump SB23094\",\"recipient_contact_id\":\"48b89364-1577-4c81-ba02-96705895d457\",\"metadata\":{\"invoice_ref\":\"BILL-0001\",\"invoice_id\":\"c80a9958-e805-47c0-ac2a-c947d7fd778d\",\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}],\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"description\":\"The SuperPackage\",\"matures_at\":\"2021-06-13T00:00:00Z\",\"your_bank_account_id\":\"83623359-e86e-440c-9780-432a3bc3626f\",\"channels\":\"new_payments_platform\",\"payouts\":[{\"amount\":30000,\"description\":\"A tandem skydive jump SB23094\",\"recipient_contact_id\":\"48b89364-1577-4c81-ba02-96705895d457\",\"metadata\":{\"invoice_ref\":\"BILL-0001\",\"invoice_id\":\"c80a9958-e805-47c0-ac2a-c947d7fd778d\",\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}],\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
 </code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
@@ -7409,7 +7433,7 @@ class MainClass {
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
 
 <span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Message\Body</span><span class="p">;</span>
-<span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">append</span><span class="p">(</span><span class="s1">'{"description":"The SuperPackage","matures_at":"2016-09-13T00:00:00Z","your_bank_account_id":"83623359-e86e-440c-9780-432a3bc3626f","payouts":[{"amount":30000,"description":"A tandem skydive jump SB23094","recipient_contact_id":"48b89364-1577-4c81-ba02-96705895d457","metadata":{"invoice_ref":"BILL-0001","invoice_id":"c80a9958-e805-47c0-ac2a-c947d7fd778d","custom_key":"Custom string","another_custom_key":"Maybe a URL"}}],"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span><span class="p">);</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">append</span><span class="p">(</span><span class="s1">'{"description":"The SuperPackage","matures_at":"2021-06-13T00:00:00Z","your_bank_account_id":"83623359-e86e-440c-9780-432a3bc3626f","channels":"new_payments_platform","payouts":[{"amount":30000,"description":"A tandem skydive jump SB23094","recipient_contact_id":"48b89364-1577-4c81-ba02-96705895d457","metadata":{"invoice_ref":"BILL-0001","invoice_id":"c80a9958-e805-47c0-ac2a-c947d7fd778d","custom_key":"Custom string","another_custom_key":"Maybe a URL"}}],"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span><span class="p">);</span>
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/payments'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
@@ -7438,7 +7462,7 @@ class MainClass {
 
     <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/payments"</span>
 
-    <span class="n">payload</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">The SuperPackage</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2016-09-13T00:00:00Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">your_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">83623359-e86e-440c-9780-432a3bc3626f</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payouts</span><span class="se">\"</span><span class="s">:[{</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:30000,</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">A tandem skydive jump SB23094</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">recipient_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">48b89364-1577-4c81-ba02-96705895d457</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">invoice_ref</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">BILL-0001</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">invoice_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">c80a9958-e805-47c0-ac2a-c947d7fd778d</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}],</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">The SuperPackage</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2021-06-13T00:00:00Z</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">your_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">83623359-e86e-440c-9780-432a3bc3626f</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">channels</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">new_payments_platform</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payouts</span><span class="se">\"</span><span class="s">:[{</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:30000,</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">A tandem skydive jump SB23094</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">recipient_contact_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">48b89364-1577-4c81-ba02-96705895d457</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">invoice_ref</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">BILL-0001</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">invoice_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">c80a9958-e805-47c0-ac2a-c947d7fd778d</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}],</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span><span class="p">)</span>
 
     <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
@@ -7458,13 +7482,22 @@ class MainClass {
 </code></pre></div>
 <p><code>POST /payments</code></p>
 
+<p>To enable custom payment flows, the required payment channel can be selected by setting the <em>channel</em> attribute to one of the following combinations:</p>
+
+<ul>
+  <li>["new_payments_platform"] - for faster payments 24/7/365</li>
+  <li>["direct_entry"] - for slower traditional payments</li>
+  <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
+</ul>
+
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The SuperPackage"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-13T00:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-13T00:00:00Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_payments_platform"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
@@ -7522,6 +7555,13 @@ class MainClass {
 <td>string</td>
 <td>false</td>
 <td>Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.</td>
+</tr>
+<tr>
+<td>» channels</td>
+<td>body</td>
+<td>array</td>
+<td>false</td>
+<td>Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)</td>
 </tr>
 <tr>
 <td>» payouts</td>
@@ -7583,6 +7623,7 @@ class MainClass {
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_payments_platform"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
@@ -7780,6 +7821,10 @@ class MainClass {
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"new_payments_platform"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direct_entry"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
       </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
@@ -7984,6 +8029,9 @@ class MainClass {
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"direct_entry"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
@@ -9866,6 +9914,625 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
 <td><a href="#schemalistalltransactionsresponse">ListAllTransactionsResponse</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="Split-API-Transfers">Transfers</h1>
+
+<p>This endpoint lets you Transfer funds between all bank and float accounts registered under your Split account:</p>
+
+<ul>
+<li>From: Bank Account -&gt; To: Float Account (Topping up a float account)</li>
+<li>From: Float Account -&gt; To: Bank Account (Withdrawing from a float account)</li>
+<li>From: Float Account -&gt; To: Float Account (Transfer between two float accounts).</li>
+</ul>
+<h2 id='add-a-transfer'>Add a Transfer</h2>
+<p><a id="opIdAddATransfer"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> https://api.sandbox.split.cash/transfers <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'{"from_bank_account_id":"a79423b2-3827-4cf5-9eda-dc02a298d005","to_bank_account_id":"0921a719-c79d-4ffb-91b6-1b30ab77d14d","amount":100000,"description":"Float account balance adjustment","matures_at":"2021-06-06T00:00:00Z"}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/transfers"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">from_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">a79423b2-3827-4cf5-9eda-dc02a298d005</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">to_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">0921a719-c79d-4ffb-91b6-1b30ab77d14d</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:100000,</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Float account balance adjustment</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2021-06-06T00:00:00Z</span><span class="se">\"</span><span class="s2">}"</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/transfers</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="na">from_bank_account_id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a79423b2-3827-4cf5-9eda-dc02a298d005</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">to_bank_account_id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0921a719-c79d-4ffb-91b6-1b30ab77d14d</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">amount</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
+  <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Float account balance adjustment</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">matures_at</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2021-06-06T00:00:00Z</span><span class="dl">'</span>
+<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">from_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">a79423b2-3827-4cf5-9eda-dc02a298d005</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">to_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">0921a719-c79d-4ffb-91b6-1b30ab77d14d</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:100000,</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Float account balance adjustment</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2021-06-06T00:00:00Z</span><span class="se">\"</span><span class="s">}"</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/transfers"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/transfers"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"from_bank_account_id\":\"a79423b2-3827-4cf5-9eda-dc02a298d005\",\"to_bank_account_id\":\"0921a719-c79d-4ffb-91b6-1b30ab77d14d\",\"amount\":100000,\"description\":\"Float account balance adjustment\",\"matures_at\":\"2021-06-06T00:00:00Z\"}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Message\Body</span><span class="p">;</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">append</span><span class="p">(</span><span class="s1">'{"from_bank_account_id":"a79423b2-3827-4cf5-9eda-dc02a298d005","to_bank_account_id":"0921a719-c79d-4ffb-91b6-1b30ab77d14d","amount":100000,"description":"Float account balance adjustment","matures_at":"2021-06-06T00:00:00Z"}'</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/transfers'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"strings"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"io/ioutil"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/transfers"</span>
+
+    <span class="n">payload</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">from_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">a79423b2-3827-4cf5-9eda-dc02a298d005</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">to_bank_account_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">0921a719-c79d-4ffb-91b6-1b30ab77d14d</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">amount</span><span class="se">\"</span><span class="s">:100000,</span><span class="se">\"</span><span class="s">description</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Float account balance adjustment</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">matures_at</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">2021-06-06T00:00:00Z</span><span class="se">\"</span><span class="s">}"</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
+
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p><code>POST /transfers</code></p>
+
+<p>Use this endpoint when you want to create a Transfer between any 2 of your float/bank accounts.</p>
+
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="Add-a-Transfer-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemaaddatransferrequest">AddATransferRequest</a></td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» from_bank_account_id</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>The source float/bank account (UUID)</td>
+</tr>
+<tr>
+<td>» to_bank_account_id</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>The destination float/bank account (UUID)</td>
+</tr>
+<tr>
+<td>» amount</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>Amount in cents (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>» description</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>Description for the Transfer</td>
+</tr>
+<tr>
+<td>» matures_at</td>
+<td>body</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>Date &amp; time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>201 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.11ub"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="Add a Transfer-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>Created</td>
+<td><a href="#schemaaddatransferresponse">AddATransferResponse</a></td>
+</tr>
+</tbody></table>
+<h2 id='list-all-transfers-available-soon'>List all Transfers (Available soon)</h2>
+<p><a id="opIdListAllTransfers"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
+  <span class="nt">--url</span> https://api.sandbox.split.cash/transfers <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/transfers"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/transfers</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/transfers"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/transfers"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/transfers'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"io/ioutil"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/transfers"</span>
+
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
+
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p><code>GET /transfers</code></p>
+
+<h3 id="List-all-Transfers-(Available-soon)-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Page of results to return, single value, exact match</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Number of results per page, single value, exact match</td>
+</tr>
+<tr>
+<td>from_bank_account_id</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Source bank/float account UUID, single value, exact match</td>
+</tr>
+<tr>
+<td>to_bank_account_id</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Target bank/float account UUID, single value, exact match</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+
+<h3 id="List all Transfers (Available soon)-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<h3 id="List all Transfers (Available soon)-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h2 id='get-a-transfer-available-soon'>Get a Transfer (Available soon)</h2>
+<p><a id="opIdGetATransfer"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
+  <span class="nt">--url</span> https://api.sandbox.split.cash/transfers/T.11ub <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/transfers/T.11ub"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/transfers/T.11ub</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/transfers/T.11ub"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/transfers/T.11ub"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/transfers/T.11ub'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"io/ioutil"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/transfers/T.11ub"</span>
+
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
+
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p><code>GET /transfers/{transfer_ref}</code></p>
+
+<p>Get a single transfer by its reference</p>
+
+<h3 id="Get-a-Transfer-(Available-soon)-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transfer_ref</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Transfer reference</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87xp"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">47000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit from my bank account"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="Get a Transfer (Available soon)-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td><a href="#schemagetatransferresponse">GetATransferResponse</a></td>
 </tr>
 </tbody></table>
 
@@ -11976,7 +12643,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
       </span><span class="nl">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13048322"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"National Australia Bank"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_verification"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -12449,8 +13116,9 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <p><a id="schemamakeapaymentrequest"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The SuperPackage"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-13T00:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-13T00:00:00Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_payments_platform"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
@@ -12497,6 +13165,12 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>string</td>
 <td>false</td>
 <td>Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.</td>
+</tr>
+<tr>
+<td>channels</td>
+<td>array</td>
+<td>false</td>
+<td>Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)</td>
 </tr>
 <tr>
 <td>payouts</td>
@@ -12594,6 +13268,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_payments_platform"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
@@ -12645,6 +13320,10 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"new_payments_platform"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direct_entry"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
       </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
@@ -12708,6 +13387,9 @@ If a high probability of insufficient funds is detected, Split will not submit t
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.1"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"direct_entry"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nl">"payouts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
@@ -14401,6 +15083,197 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>integer</td>
 <td>true</td>
 <td>The amount value provided (Min: 1 - Max: 99999999999)</td>
+</tr>
+</tbody></table>
+<h2 id='addatransferrequest'>AddATransferRequest</h2>
+<p><a id="schemaaddatransferrequest"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='properties-49'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>from_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The source float/bank account (UUID)</td>
+</tr>
+<tr>
+<td>to_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The destination float/bank account (UUID)</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer</td>
+<td>true</td>
+<td>Amount in cents (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>true</td>
+<td>Description for the Transfer</td>
+</tr>
+<tr>
+<td>matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>Date &amp; time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)</td>
+</tr>
+</tbody></table>
+<h2 id='addatransferresponse'>AddATransferResponse</h2>
+<p><a id="schemaaddatransferresponse"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.11ub"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='properties-50'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» ref</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The Transfer request reference (T.*) (Min: 4 - Max: 8)</td>
+</tr>
+<tr>
+<td>» initiator_id</td>
+<td>string</td>
+<td>false</td>
+<td>Initiating Split Account</td>
+</tr>
+<tr>
+<td>» from_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The source bank/float account (UUID)</td>
+</tr>
+<tr>
+<td>» to_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The destination bank/float account (UUID</td>
+</tr>
+<tr>
+<td>» amount</td>
+<td>integer</td>
+<td>true</td>
+<td>The amount value provided (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>» description</td>
+<td>string</td>
+<td>true</td>
+<td>Description for the Transfer</td>
+</tr>
+<tr>
+<td>» matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>Date &amp; time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)</td>
+</tr>
+</tbody></table>
+<h2 id='getatransferresponse'>GetATransferResponse</h2>
+<p><a id="schemagetatransferresponse"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87xp"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">47000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit from my bank account"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='properties-51'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» ref</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The Transfer request reference (T.*) (Min: 4 - Max: 8)</td>
+</tr>
+<tr>
+<td>» initiator_id</td>
+<td>string</td>
+<td>false</td>
+<td>Initiating Split Account</td>
+</tr>
+<tr>
+<td>» from_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The source bank/float account (UUID)</td>
+</tr>
+<tr>
+<td>» to_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The destination bank/float account (UUID</td>
+</tr>
+<tr>
+<td>» amount</td>
+<td>integer</td>
+<td>true</td>
+<td>The amount value provided (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>» description</td>
+<td>string</td>
+<td>true</td>
+<td>Description for the Transfer</td>
+</tr>
+<tr>
+<td>» matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>Date &amp; time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)</td>
 </tr>
 </tbody></table>
 

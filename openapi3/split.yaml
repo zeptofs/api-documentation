@@ -66,11 +66,11 @@ info:
     The best way to familiarise yourself with our API is by interacting with it.
 
 
-    We've preloaded a collection of all our endpoints for you to use in Postman.
-    Before you start, load up our API collection:
+    We've preloaded a collection with all our endpoints for you to use in Postman.
+    Before you start, import a copy of our API collection:
 
 
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/a35b4949557b0f18189a?action=collection%2Fimport#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIxLTA1LTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0=)
 
 
     Okay, lets get things setup!
@@ -1861,6 +1861,16 @@ tags:
       <aside class="notice">
         The <code>user_voided</code> and <code>admin_voided</code> <code>failure_reasons</code> can sometimes be accompanied by the <code>failure_details</code> key which includes user submitted comments relating to the <code>failure_reason</code>.
       </aside>
+  - name: Transfers
+    description: >
+      This endpoint lets you Transfer funds between all bank and float accounts registered under your Split account:
+
+
+      * From: Bank Account -> To: Float Account (Topping up a float account)
+
+      * From: Float Account -> To: Bank Account (Withdrawing from a float account)
+
+      * From: Float Account -> To: Float Account (Transfer between two float accounts).
   - name: Unassigned Agreements
     description: >
       An agreement with no preset authoriser that can only be accepted once and
@@ -2462,7 +2472,16 @@ paths:
       tags:
         - Payments
       summary: Make a Payment
-      description: ''
+      description: >
+        To enable custom payment flows, the required payment channel can be selected by setting the _channel_ attribute to one of the following combinations:
+
+        
+        <ul>
+          <li>["new_payments_platform"] - for faster payments 24/7/365</li>
+          <li>["direct_entry"] - for slower traditional payments</li>
+          <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
+        </ul>
+
       operationId: MakeAPayment
       requestBody:
         description: ''
@@ -3051,6 +3070,97 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListAllTransactionsResponse'
+  /transfers:
+    post:
+      tags:
+        - Transfers
+      summary: Add a Transfer
+      description: >
+        Use this endpoint when you want to create a Transfer between any 2 of your float/bank accounts.
+
+
+
+      operationId: AddATransfer
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddATransferRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddATransferResponse'
+    get:
+      tags:
+        - Transfers
+      summary: List all Transfers (Available soon)
+      description: ''
+      operationId: ListAllTransfers
+      parameters:
+        - name: page
+          in: query
+          description: 'Page of results to return, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '1'
+        - name: per_page
+          in: query
+          description: 'Number of results per page, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '100'
+        - name: from_bank_account_id
+          in: query
+          description: 'Source bank/float account UUID, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: 'a79423b2-3827-4cf5-9eda-dc02a298d005'
+        - name: to_bank_account_id
+          in: query
+          description: 'Target bank/float account UUID, single value, exact match'
+          style: form
+          schema:
+            type: string
+          example: '0921a719-c79d-4ffb-91b6-1b30ab77d14d'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAllTransfersResponse'
+  '/transfers/{transfer_ref}':
+    get:
+      tags:
+        - Transfers
+      summary: Get a Transfer (Available soon)
+      description: Get a single transfer by its reference
+      operationId: GetATransfer
+      parameters:
+        - name: transfer_ref
+          in: path
+          description: Transfer reference
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: T.11ub
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetATransferResponse'
   /unassigned_agreements:
     post:
       tags:
@@ -3879,7 +3989,7 @@ components:
             account_number: '13048322'
             branch_code: '123456'
             bank_name: National Australia Bank
-            state: pending_verification
+            state: active
             iav_provider: null
             iav_status: null
             blocks:
@@ -4164,6 +4274,9 @@ components:
           schema:
             type: string
           example: 83623359-e86e-440c-9780-432a3bc3626f
+        channels:
+          type: array
+          description: Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)
         payouts:
           type: array
           items:
@@ -4173,8 +4286,9 @@ components:
           $ref: '#/components/schemas/Metadata'
       example:
         description: The SuperPackage
-        matures_at: '2016-09-13T00:00:00Z'
+        matures_at: '2021-06-13T00:00:00Z'
         your_bank_account_id: 83623359-e86e-440c-9780-432a3bc3626f
+        channels: new_payments_platform
         payouts:
           - amount: 30000
             description: A tandem skydive jump SB23094
@@ -4239,6 +4353,7 @@ components:
         data:
           ref: PB.1
           your_bank_account_id: 83623359-e86e-440c-9780-432a3bc3626f
+          channels: new_payments_platform
           payouts:
             - ref: D.1
               recipient_contact_id: 48b89364-1577-4c81-ba02-96705895d457
@@ -4273,6 +4388,7 @@ components:
         data:
           - ref: PB.1
             your_bank_account_id: 83623359-e86e-440c-9780-432a3bc3626f
+            channels: ["new_payments_platform", "direct_entry"]
             payouts:
               - ref: D.1
                 recipient_contact_id: 48b89364-1577-4c81-ba02-96705895d457
@@ -4314,6 +4430,7 @@ components:
         data:
           ref: PB.1
           your_bank_account_id: 83623359-e86e-440c-9780-432a3bc3626f
+          channels: ["direct_entry"]
           payouts:
             - ref: D.1
               recipient_contact_id: 48b89364-1577-4c81-ba02-96705895d457
@@ -5442,5 +5559,133 @@ components:
           id: 92c75281-5b60-489a-bd8a-e513ba9277c5
           payid_email: incoming@split.cash
           amount: 10000
+    AddATransferRequest:
+      required:
+        - from_bank_account_id
+        - to_bank_account_id
+        - amount
+        - description
+        - matures_at
+      type: object
+      properties:
+        from_bank_account_id:
+          type: string
+          description: 'The source float/bank account (UUID)'
+        to_bank_account_id:
+          type: string
+          description: 'The destination float/bank account (UUID)'
+        amount:
+          type: integer
+          description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+        description:
+          type: string
+          description: Description for the Transfer
+        matures_at:
+          type: string
+          format: date-time
+          description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)
+          example: '2021-06-01T02:10:56Z'
+      example:
+        from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
+        to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
+        amount: 100000
+        description: Float account balance adjustment
+        matures_at: '2021-06-06T00:00:00Z'
+    AddATransferResponse:
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+            - ref
+            - from_bank_account_id
+            - to_bank_account_id
+            - amount
+            - description
+            - matures_at
+          properties:
+            ref:
+              type: string
+              format: uuid
+              description: 'The Transfer request reference (T.*) (Min: 4 - Max: 8)'
+            initiator_id:
+              type: string
+              description: 'Initiating Split Account'
+            from_bank_account_id:
+              type: string
+              description: 'The source bank/float account (UUID)'
+            to_bank_account_id:
+              type: string
+              description: 'The destination bank/float account (UUID'
+            amount:
+              type: integer
+              description: 'The amount value provided (Min: 1 - Max: 99999999999)'
+            description:  
+              type: string
+              description: Description for the Transfer
+            matures_at:
+              type: string
+              format: date-time
+              description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)
+              example: '2021-06-01T02:10:56Z'
+      example:
+        data:
+          ref: T.11ub
+          initiator_id: c0272er9-9b10-40de-aa45-386853f3efb5
+          from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
+          to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
+          amount: 100000
+          description: Float account balance adjustment
+          matures_at: '2021-06-06T00:00:00Z'
+    GetATransferResponse:
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+            - ref
+            - from_bank_account_id
+            - to_bank_account_id
+            - amount
+            - description
+            - matures_at
+          properties:
+            ref:
+              type: string
+              format: uuid
+              description: 'The Transfer request reference (T.*) (Min: 4 - Max: 8)'
+            initiator_id:
+              type: string
+              description: 'Initiating Split Account'
+            from_bank_account_id:
+              type: string
+              description: 'The source bank/float account (UUID)'
+            to_bank_account_id:
+              type: string
+              description: 'The destination bank/float account (UUID'
+            amount:
+              type: integer
+              description: 'The amount value provided (Min: 1 - Max: 99999999999)'
+            description:  
+              type: string
+              description: Description for the Transfer
+            matures_at:
+              type: string
+              format: date-time
+              description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)
+              example: '2021-06-01T02:10:56Z'
+      example:
+        data:
+          ref: T.87xp
+          initiator_id: c0272er9-9b10-40de-aa45-386853f3efb5
+          from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
+          to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
+          amount: 47000
+          description: Deposit from my bank account
+          matures_at: '2021-06-03T00:00:00Z'
 security:
   - bearerAuth: []
