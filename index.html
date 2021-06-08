@@ -497,9 +497,6 @@
                     <a href="#cancel-a-payment-request" class="toc-h2 toc-link" data-title="Cancel a Payment Request">Cancel a Payment Request</a>
                   </li>
                   <li>
-                    <a href="#list-payment-requests-deprecated" class="toc-h2 toc-link" data-title="List Payment Requests [DEPRECATED]">List Payment Requests [DEPRECATED]</a>
-                  </li>
-                  <li>
                     <a href="#list-payment-requests-collections" class="toc-h2 toc-link" data-title="List Payment Requests: Collections">List Payment Requests: Collections</a>
                   </li>
                   <li>
@@ -710,9 +707,6 @@
                     <a href="#getapaymentrequestresponse" class="toc-h2 toc-link" data-title="GetAPaymentRequestResponse">GetAPaymentRequestResponse</a>
                   </li>
                   <li>
-                    <a href="#listoutgoingpaymentrequestsresponse" class="toc-h2 toc-link" data-title="ListOutgoingPaymentRequestsResponse">ListOutgoingPaymentRequestsResponse</a>
-                  </li>
-                  <li>
                     <a href="#listoutgoingpaymentrequestcollectionsresponse" class="toc-h2 toc-link" data-title="ListOutgoingPaymentRequestCollectionsResponse">ListOutgoingPaymentRequestCollectionsResponse</a>
                   </li>
                   <li>
@@ -765,6 +759,9 @@
                   </li>
                   <li>
                     <a href="#getatransferresponse" class="toc-h2 toc-link" data-title="GetATransferResponse">GetATransferResponse</a>
+                  </li>
+                  <li>
+                    <a href="#listalltransfersresponse" class="toc-h2 toc-link" data-title="ListAllTransfersResponse">ListAllTransfersResponse</a>
                   </li>
               </ul>
           </li>
@@ -1992,6 +1989,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-06-08</strong> - Added Transfers, Payment Channel selection, Receivable Refunds</li>
 <li><strong>2021-05-21</strong> - Added new Payment Request endpoints, updated Postman collection</li>
 <li><strong>2021-05-03</strong> - Deprecated <em>/payments_requests/outgoing</em> endpoint</li>
 <li><strong>2021-04-20</strong> - Removed deprecated API references, refreshed Refunds and Payout descriptions</li>
@@ -6641,218 +6639,6 @@ class MainClass {
 <td>None</td>
 </tr>
 </tbody></table>
-<h2 id='list-payment-requests-deprecated'>List Payment Requests [DEPRECATED]</h2>
-<p><a id="opIdListOutgoingPaymentRequests"></a></p>
-
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
-  <span class="nt">--url</span> https://api.sandbox.split.cash/payment_requests/outgoing <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
-</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
-<span class="nb">require</span> <span class="s1">'net/http'</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/payment_requests/outgoing"</span><span class="p">)</span>
-
-<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
-<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
-<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
-
-<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/payment_requests/outgoing</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
-
-  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
-  <span class="p">});</span>
-
-  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-  <span class="p">});</span>
-<span class="p">});</span>
-
-<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
-
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
-    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
-    <span class="p">}</span>
-
-<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/payment_requests/outgoing"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/payment_requests/outgoing"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
-
-<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
-<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
-
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/payment_requests/outgoing'</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
-<span class="p">));</span>
-
-<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
-<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
-
-<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
-
-<span class="k">import</span> <span class="p">(</span>
-    <span class="s">"fmt"</span>
-    <span class="s">"net/http"</span>
-    <span class="s">"io/ioutil"</span>
-<span class="p">)</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-
-    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/payment_requests/outgoing"</span>
-
-    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
-
-    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
-    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
-
-    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-
-    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
-    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
-
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
-
-<span class="p">}</span>
-</code></pre></div>
-<p><code>GET /payment_requests/outgoing</code></p>
-
-<p>Payment Requests where you&#39;re the creditor and are <em>collecting</em> funds from the debtor. <aside class="notice"> The <strong>/payment_requests/outgoing</strong> endpoint will be supported until 31 June 2021. Any integrations to this endpoint should be pointed at the new <strong>/payment_requests/collections</strong> endpoint which returns the same information. </aside></p>
-
-<h3 id="List-Payment-Requests-[DEPRECATED]-parameters" class="parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>In</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>page</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Page of results to return, single value, exact match</td>
-</tr>
-<tr>
-<td>per_page</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Number of results per page, single value, exact match</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p>Example responses</p>
-
-<p>200 Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.4"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.2"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-20T00:00:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:18Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:09:09Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.a"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The SuperPackage"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-20T00:00:00Z"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.5"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The elite package for 4"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<h3 id="List Payment Requests [DEPRECATED]-responses">Responses</h3>
-
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>OK</td>
-<td><a href="#schemalistoutgoingpaymentrequestsresponse">ListOutgoingPaymentRequestsResponse</a></td>
-</tr>
-</tbody></table>
 <h2 id='list-payment-requests-collections'>List Payment Requests: Collections</h2>
 <p><a id="opIdListOutgoingPaymentRequestCollections"></a></p>
 
@@ -8472,7 +8258,25 @@ If a high probability of insufficient funds is detected, Split will not submit t
 
 <h1 id="Split-API-Refunds">Refunds</h1>
 
-<p>Refunds can be issued for any successfully completed Payment Request transaction. This allows you to return previously collected funds.</p>
+<p>Refunds can be issued for any successfully completed Payment Request transaction. This includes:</p>
+
+<ol>
+<li><strong>Payment Requests for direct debit payments (Collections)</strong>:
+
+<ul>
+<li>Contact to refund already exists (original Payment Request to collect funds will have used this Contact)</li>
+<li>Refund will be initiated to this <em>existing</em> Contact</li>
+</ul></li>
+<li><strong>Payment Requests for funds received via DE/NPP (Receivables)</strong>:
+
+<ul>
+<li>Contact to refund does not exist (Funds were received from an external source)</li>
+<li>Split will create a new contact representing the original Payer</li>
+<li>Refund will be initiated to this <em>new</em> Contact</li>
+</ul></li>
+</ol>
+
+<p>This allows you to return any funds that were previously collected or received into one of your bank/float accounts.</p>
 <h2 id='issue-a-refund'>Issue a Refund</h2>
 <p><a id="opIdIssueARefund"></a></p>
 
@@ -8617,8 +8421,9 @@ If a high probability of insufficient funds is detected, Split will not submit t
 
 <p>Certain rules apply to the issuance of a refund:
 <ul>
-  <li>Must be applied against a successfully cleared Payment Request (credit)</li>
-  <li>Many refunds may be created against the original Payment Request. The total refunded amount must not exceed the original value</li>
+  <li>Must be applied against a successfully cleared Payment Request (Collections or Receivables)</li>
+  <li>Many refunds may be created against the original Payment Request</li>
+  <li>The total refunded amount must not exceed the original value</li>
 </ul></p>
 
 <blockquote>
@@ -8696,13 +8501,17 @@ If a high probability of insufficient funds is detected, Split will not submit t
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRF.1"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"for_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.59"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.hi"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRF.7f4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"for_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.1gf22"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.63hgf"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-08T07:20:24Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T07:20:24Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Because reason"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription refund"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contacts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"source_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"194b0237-6c2c-4705-b4fb-308274b14eda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"target_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3694ff53-32ea-40ae-8392-821e48d7bd5a"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
@@ -8917,13 +8726,13 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
-  <span class="nt">--url</span> https://api.sandbox.split.cash/refunds/PRF.1 <span class="se">\</span>
+  <span class="nt">--url</span> https://api.sandbox.split.cash/refunds/PRF.75f <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
 </code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/refunds/PRF.1"</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/refunds/PRF.75f"</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
@@ -8941,7 +8750,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
   <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/refunds/PRF.1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/refunds/PRF.75f</span><span class="dl">"</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
@@ -8971,13 +8780,13 @@ If a high probability of insufficient funds is detected, Split will not submit t
     <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
     <span class="p">}</span>
 
-<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/refunds/PRF.1"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/refunds/PRF.75f"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 
 <span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/refunds/PRF.1"</span><span class="o">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/refunds/PRF.75f"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
@@ -8986,7 +8795,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
 
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/refunds/PRF.1'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/refunds/PRF.75f'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
   <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
@@ -9007,7 +8816,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
 
 <span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/refunds/PRF.1"</span>
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/refunds/PRF.75f"</span>
 
     <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
 
@@ -9919,13 +9728,28 @@ If a high probability of insufficient funds is detected, Split will not submit t
 
 <h1 id="Split-API-Transfers">Transfers</h1>
 
-<p>This endpoint lets you Transfer funds between all bank and float accounts registered under your Split account:</p>
+<p>This endpoint lets you Transfer funds between any bank &amp; float accounts registered under your Split account:</p>
+
+<ol>
+<li><strong>From</strong>: Bank Account <strong>To</strong>: Float Account:
 
 <ul>
-<li>From: Bank Account -&gt; To: Float Account (Topping up a float account)</li>
-<li>From: Float Account -&gt; To: Bank Account (Withdrawing from a float account)</li>
-<li>From: Float Account -&gt; To: Float Account (Transfer between two float accounts).</li>
-</ul>
+<li>Topping up a float account via Direct Debit</li>
+<li>Up to 2 days</li>
+</ul></li>
+<li><strong>From</strong>: Float Account <strong>To</strong>: Bank Account:
+
+<ul>
+<li>Withdrawing from a float account</li>
+<li>Will attempt NPP first and channel switch to DE if required</li>
+</ul></li>
+<li><strong>From</strong>: Float Account <strong>To</strong>: Float Account:
+
+<ul>
+<li>Transfer between two float accounts</li>
+<li>Within seconds</li>
+</ul></li>
+</ol>
 <h2 id='add-a-transfer'>Add a Transfer</h2>
 <p><a id="opIdAddATransfer"></a></p>
 
@@ -10145,7 +9969,6 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.11ub"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
@@ -10330,8 +10153,38 @@ If a high probability of insufficient funds is detected, Split will not submit t
 
 <blockquote>
 <p>Example responses</p>
-</blockquote>
 
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.62xl"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">47000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit from my bank account"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87xp"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">9700</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Withdrawal June 2021"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-28T00:00:00Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87s4"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">230</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer to my other Float account"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-03T00:00:00Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <h3 id="List all Transfers (Available soon)-responses">Responses</h3>
 
 <table><thead>
@@ -10346,22 +10199,8 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td>None</td>
+<td><a href="#schemalistalltransfersresponse">ListAllTransfersResponse</a></td>
 </tr>
-</tbody></table>
-
-<h3 id="List all Transfers (Available soon)-responseschema">Response Schema</h3>
-
-<p>Status Code <strong>200</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
 </tbody></table>
 <h2 id='get-a-transfer-available-soon'>Get a Transfer (Available soon)</h2>
 <p><a id="opIdGetATransfer"></a></p>
@@ -10509,7 +10348,6 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87xp"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">47000</span><span class="p">,</span><span class="w">
@@ -13892,54 +13730,54 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
 </tbody></table>
-<h2 id='listoutgoingpaymentrequestsresponse'>ListOutgoingPaymentRequestsResponse</h2>
-<p><a id="schemalistoutgoingpaymentrequestsresponse"></a></p>
+<h2 id='listoutgoingpaymentrequestcollectionsresponse'>ListOutgoingPaymentRequestCollectionsResponse</h2>
+<p><a id="schemalistoutgoingpaymentrequestcollectionsresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.4"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.84t6"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.89t3"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-20T00:00:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:18Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:09:09Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.6gr7"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The SuperPackage"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-20T00:00:00Z"</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription Payment"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.5"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.45h7"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T02:10:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">99000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The elite package for 4"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-25T00:00:00Z"</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Membership fees"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='properties-33'>Properties</h3>
-<p><em>List outgoing Payment Requests (response)</em></p>
+<p><em>List Payment Requests: Collections (response)</em></p>
 
 <table><thead>
 <tr>
@@ -14100,214 +13938,6 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
 </tbody></table>
-<h2 id='listoutgoingpaymentrequestcollectionsresponse'>ListOutgoingPaymentRequestCollectionsResponse</h2>
-<p><a id="schemalistoutgoingpaymentrequestcollectionsresponse"></a></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.84t6"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRS.89t3"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.6gr7"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription Payment"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-07-18T02:10:00Z"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.45h7"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bc5b3-e47f-4153-96fb-bbe326b42772"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"credit_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Membership fees"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-34'>Properties</h3>
-<p><em>List Payment Requests: Collections (response)</em></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>data</td>
-<td>[object]</td>
-<td>true</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>» ref</td>
-<td>string</td>
-<td>true</td>
-<td>The Payment Reference reference (PR.*)</td>
-</tr>
-<tr>
-<td>» initiator_id</td>
-<td>string(uuid)</td>
-<td>true</td>
-<td>Your bank account ID where the funds will settle</td>
-</tr>
-<tr>
-<td>» your_bank_account_id</td>
-<td>string(uuid)</td>
-<td>true</td>
-<td>Your bank account ID where the funds will settle (alias of <code>initiator_id</code>)</td>
-</tr>
-<tr>
-<td>» authoriser_id</td>
-<td>string(uuid)</td>
-<td>true</td>
-<td>The debtor&#39;s bank account ID</td>
-</tr>
-<tr>
-<td>» authoriser_contact_id</td>
-<td>string(uuid)</td>
-<td>true</td>
-<td>The contact ID representing the debtor within Split</td>
-</tr>
-<tr>
-<td>» contact_initiated</td>
-<td>boolean</td>
-<td>true</td>
-<td>Initiated by Contact or Merchant</td>
-</tr>
-<tr>
-<td>» schedule_ref</td>
-<td>string</td>
-<td>true</td>
-<td>The schedule that generated the Payment request if applicable</td>
-</tr>
-<tr>
-<td>» status</td>
-<td>string</td>
-<td>true</td>
-<td>The status of the Payment Request</td>
-</tr>
-<tr>
-<td>» status_reason</td>
-<td>string</td>
-<td>true</td>
-<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
-</tr>
-<tr>
-<td>» matures_at</td>
-<td>string(date-time)</td>
-<td>true</td>
-<td>The date-time when the Payment Request is up for processing</td>
-</tr>
-<tr>
-<td>» responded_at</td>
-<td>string(date-time)</td>
-<td>true</td>
-<td>The date-time when the Payment Request status changed</td>
-</tr>
-<tr>
-<td>» created_at</td>
-<td>string(date-time)</td>
-<td>true</td>
-<td>The date-time when the Payment Request was created</td>
-</tr>
-<tr>
-<td>» credit_ref</td>
-<td>string</td>
-<td>true</td>
-<td>The resulting credit entry reference (available once approved)</td>
-</tr>
-<tr>
-<td>» payout</td>
-<td>object</td>
-<td>true</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>»» amount</td>
-<td>integer</td>
-<td>true</td>
-<td>Amount in cents (Min: 1 - Max: 99999999999)</td>
-</tr>
-<tr>
-<td>»» description</td>
-<td>string</td>
-<td>true</td>
-<td>Payment Request description</td>
-</tr>
-<tr>
-<td>»» matures_at</td>
-<td>string(date-time)</td>
-<td>true</td>
-<td>The date-time when the Payment Request is up for processing</td>
-</tr>
-<tr>
-<td>» metadata</td>
-<td>[object]</td>
-<td>false</td>
-<td>Your custom keyed data</td>
-</tr>
-</tbody></table>
-<h4 id='enumerated-values-10'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>status</td>
-<td>pending_approval</td>
-</tr>
-<tr>
-<td>status</td>
-<td>unverified</td>
-</tr>
-<tr>
-<td>status</td>
-<td>approved</td>
-</tr>
-<tr>
-<td>status</td>
-<td>declined</td>
-</tr>
-<tr>
-<td>status</td>
-<td>cancelled</td>
-</tr>
-<tr>
-<td>status_reason</td>
-<td>The balance of the nominated bank account for this Payment Request is not available.</td>
-</tr>
-<tr>
-<td>status_reason</td>
-<td>The nominated bank account for this Payment Request has insufficient funds.</td>
-</tr>
-</tbody></table>
 <h2 id='listoutgoingpaymentrequestreceivablesresponse'>ListOutgoingPaymentRequestReceivablesResponse</h2>
 <p><a id="schemalistoutgoingpaymentrequestreceivablesresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -14354,7 +13984,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-35'>Properties</h3>
+</span></code></pre></div><h3 id='properties-34'>Properties</h3>
 <p><em>List Payment Requests: Receivables (response)</em></p>
 
 <table><thead>
@@ -14491,7 +14121,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-36'>Properties</h3>
+</span></code></pre></div><h3 id='properties-35'>Properties</h3>
 <p><em>Issue a Refund (request)</em></p>
 
 <table><thead>
@@ -14531,20 +14161,24 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <p><a id="schemaissuearefundresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRF.1"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"for_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.59"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.hi"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRF.7f4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"for_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.1gf22"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.63hgf"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"your_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-08T07:20:24Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-01T07:20:24Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Because reason"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription refund"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contacts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"source_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"194b0237-6c2c-4705-b4fb-308274b14eda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"target_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3694ff53-32ea-40ae-8392-821e48d7bd5a"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-37'>Properties</h3>
+</span></code></pre></div><h3 id='properties-36'>Properties</h3>
 <p><em>Issue a Refund (response)</em></p>
 
 <table><thead>
@@ -14560,6 +14194,66 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>object</td>
 <td>true</td>
 <td>No description</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The Refund request reference (PRF.*) (Min: 5 - Max: 9)</td>
+</tr>
+<tr>
+<td>for_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The associated credit reference (C.*)</td>
+</tr>
+<tr>
+<td>debit_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The associated debit reference (C.*)</td>
+</tr>
+<tr>
+<td>your_bank_Account_id</td>
+<td>string</td>
+<td>false</td>
+<td>The source bank/float account (UUID)</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>The date-time when the Payment Request was created</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer</td>
+<td>true</td>
+<td>The amount value provided (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>true</td>
+<td>Reason for the refund</td>
+</tr>
+<tr>
+<td>contacts</td>
+<td>object</td>
+<td>false</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» source_contact_id</td>
+<td>string</td>
+<td>false</td>
+<td>The original &#39;Receivable Contact&#39; ID (only visible when refunding Receivables)</td>
+</tr>
+<tr>
+<td>» target_contact_id</td>
+<td>string</td>
+<td>false</td>
+<td>The new Contact ID receiving the funds (only visible when refunding Receivables)</td>
 </tr>
 </tbody></table>
 <h2 id='listoutgoingrefundsresponse'>ListOutgoingRefundsResponse</h2>
@@ -14581,7 +14275,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-38'>Properties</h3>
+</span></code></pre></div><h3 id='properties-37'>Properties</h3>
 <p><em>List outgoing Refunds (response)</em></p>
 
 <table><thead>
@@ -14616,7 +14310,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-39'>Properties</h3>
+</span></code></pre></div><h3 id='properties-38'>Properties</h3>
 <p><em>Retrieve a Refund (response)</em></p>
 
 <table><thead>
@@ -14656,7 +14350,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-40'>Properties</h3>
+</span></code></pre></div><h3 id='properties-39'>Properties</h3>
 <p><em>Retry a payout (response)</em></p>
 
 <table><thead>
@@ -14754,7 +14448,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-41'>Properties</h3>
+</span></code></pre></div><h3 id='properties-40'>Properties</h3>
 <p><em>List all transactions (response)</em></p>
 
 <table><thead>
@@ -14792,7 +14486,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-42'>Properties</h3>
+</span></code></pre></div><h3 id='properties-41'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (request)</em></p>
 
 <table><thead>
@@ -14855,7 +14549,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-43'>Properties</h3>
+</span></code></pre></div><h3 id='properties-42'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -14917,7 +14611,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-44'>Properties</h3>
+</span></code></pre></div><h3 id='properties-43'>Properties</h3>
 <p><em>List Unassigned Agreements (response)</em></p>
 
 <table><thead>
@@ -14958,7 +14652,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="nl">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-45'>Properties</h3>
+</span></code></pre></div><h3 id='properties-44'>Properties</h3>
 <p><em>Get an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -14996,7 +14690,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-46'>Properties</h3>
+</span></code></pre></div><h3 id='properties-45'>Properties</h3>
 <p><em>Get User details (response)</em></p>
 
 <table><thead>
@@ -15020,7 +14714,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
   </span><span class="nl">"payid_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming@split.cash"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-47'>Properties</h3>
+</span></code></pre></div><h3 id='properties-46'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -15051,7 +14745,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-48'>Properties</h3>
+</span></code></pre></div><h3 id='properties-47'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -15094,7 +14788,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-49'>Properties</h3>
+</span></code></pre></div><h3 id='properties-48'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -15139,12 +14833,75 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.11ub"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='properties-49'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» ref</td>
+<td>string</td>
+<td>true</td>
+<td>The Transfer request reference (T.*) (Min: 4 - Max: 8)</td>
+</tr>
+<tr>
+<td>» from_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The source bank/float account (UUID)</td>
+</tr>
+<tr>
+<td>» to_bank_account_id</td>
+<td>string</td>
+<td>true</td>
+<td>The destination bank/float account (UUID</td>
+</tr>
+<tr>
+<td>» amount</td>
+<td>integer</td>
+<td>true</td>
+<td>The amount value provided (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>» description</td>
+<td>string</td>
+<td>true</td>
+<td>Description for the Transfer</td>
+</tr>
+<tr>
+<td>» matures_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>Date &amp; time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)</td>
+</tr>
+</tbody></table>
+<h2 id='getatransferresponse'>GetATransferResponse</h2>
+<p><a id="schemagetatransferresponse"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87xp"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">47000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit from my bank account"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='properties-50'>Properties</h3>
@@ -15205,20 +14962,39 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>Date &amp; time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)</td>
 </tr>
 </tbody></table>
-<h2 id='getatransferresponse'>GetATransferResponse</h2>
-<p><a id="schemagetatransferresponse"></a></p>
+<h2 id='listalltransfersresponse'>ListAllTransfersResponse</h2>
+<p><a id="schemalistalltransfersresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87xp"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"initiator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c0272er9-9b10-40de-aa45-386853f3efb5"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">47000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit from my bank account"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.62xl"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">47000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit from my bank account"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87xp"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">9700</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Withdrawal June 2021"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-28T00:00:00Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T.87s4"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"from_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a79423b2-3827-4cf5-9eda-dc02a298d005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"to_bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0921a719-c79d-4ffb-91b6-1b30ab77d14d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">230</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer to my other Float account"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-03T00:00:00Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='properties-51'>Properties</h3>
+<p><em>List all Transfers (response)</em></p>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -15229,51 +15005,9 @@ If a high probability of insufficient funds is detected, Split will not submit t
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>object</td>
+<td>[object]</td>
 <td>true</td>
 <td>No description</td>
-</tr>
-<tr>
-<td>» ref</td>
-<td>string(uuid)</td>
-<td>true</td>
-<td>The Transfer request reference (T.*) (Min: 4 - Max: 8)</td>
-</tr>
-<tr>
-<td>» initiator_id</td>
-<td>string</td>
-<td>false</td>
-<td>Initiating Split Account</td>
-</tr>
-<tr>
-<td>» from_bank_account_id</td>
-<td>string</td>
-<td>true</td>
-<td>The source bank/float account (UUID)</td>
-</tr>
-<tr>
-<td>» to_bank_account_id</td>
-<td>string</td>
-<td>true</td>
-<td>The destination bank/float account (UUID</td>
-</tr>
-<tr>
-<td>» amount</td>
-<td>integer</td>
-<td>true</td>
-<td>The amount value provided (Min: 1 - Max: 99999999999)</td>
-</tr>
-<tr>
-<td>» description</td>
-<td>string</td>
-<td>true</td>
-<td>Description for the Transfer</td>
-</tr>
-<tr>
-<td>» matures_at</td>
-<td>string(date-time)</td>
-<td>true</td>
-<td>Date &amp; time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day)</td>
 </tr>
 </tbody></table>
 

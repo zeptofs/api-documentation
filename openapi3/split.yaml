@@ -1462,6 +1462,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-06-08** - Added Transfers, Payment Channel selection, Receivable Refunds
+
     - **2021-05-21** - Added new Payment Request endpoints, updated Postman collection
 
     - **2021-05-03** - Deprecated */payments_requests/outgoing* endpoint
@@ -1731,8 +1733,19 @@ tags:
   - name: Refunds
     description: >
 
-      Refunds can be issued for any successfully completed Payment Request transaction.
-      This allows you to return previously collected funds.
+      Refunds can be issued for any successfully completed Payment Request transaction. This includes:
+      
+
+      1. **Payment Requests for direct debit payments (Collections)**:
+        * Contact to refund already exists (original Payment Request to collect funds will have used this Contact)
+        * Refund will be initiated to this _existing_ Contact
+      2. **Payment Requests for funds received via DE/NPP (Receivables)**:
+        * Contact to refund does not exist (Funds were received from an external source)
+        * Split will create a new contact representing the original Payer
+        * Refund will be initiated to this _new_ Contact
+
+
+      This allows you to return any funds that were previously collected or received into one of your bank/float accounts.
   - name: Transactions
     description: >
       By default, the transactions endpoint provides a detailed look at all past, current
@@ -1863,14 +1876,19 @@ tags:
       </aside>
   - name: Transfers
     description: >
-      This endpoint lets you Transfer funds between all bank and float accounts registered under your Split account:
+
+      This endpoint lets you Transfer funds between any bank & float accounts registered under your Split account:
 
 
-      * From: Bank Account -> To: Float Account (Topping up a float account)
-
-      * From: Float Account -> To: Bank Account (Withdrawing from a float account)
-
-      * From: Float Account -> To: Float Account (Transfer between two float accounts).
+      1. **From**: Bank Account **To**: Float Account:
+        * Topping up a float account via Direct Debit
+        * Up to 2 days
+      2. **From**: Float Account **To**: Bank Account:
+        * Withdrawing from a float account
+        * Will attempt NPP first and channel switch to DE if required
+      3. **From**: Float Account **To**: Float Account:
+        * Transfer between two float accounts
+        * Within seconds
   - name: Unassigned Agreements
     description: >
       An agreement with no preset authoriser that can only be accepted once and
@@ -2676,39 +2694,6 @@ paths:
       responses:
         '204':
           description: No Content
-  /payment_requests/outgoing:
-    get:
-      tags:
-        - Payment Requests
-      summary: List Payment Requests [DEPRECATED]
-      description: Payment Requests where you're the creditor and are _collecting_ funds from the debtor.
-          <aside class="notice">
-            The **/payment_requests/outgoing** endpoint will be supported until 31 June 2021. Any integrations to this 
-            endpoint should be pointed at the new **/payment_requests/collections** endpoint which returns the same information.
-          </aside>
-      operationId: ListOutgoingPaymentRequests
-      parameters:
-        - name: page
-          in: query
-          description: 'Page of results to return, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '1'
-        - name: per_page
-          in: query
-          description: 'Number of results per page, single value, exact match'
-          style: form
-          schema:
-            type: string
-          example: '100'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListOutgoingPaymentRequestsResponse'
   /payment_requests/collections:
     get:
       tags:
@@ -2777,8 +2762,9 @@ paths:
         Certain rules apply to the issuance of a refund:
 
         <ul>
-          <li>Must be applied against a successfully cleared Payment Request (credit)</li>
-          <li>Many refunds may be created against the original Payment Request. The total refunded amount must not exceed the original value</li>
+          <li>Must be applied against a successfully cleared Payment Request (Collections or Receivables)</li>
+          <li>Many refunds may be created against the original Payment Request</li>
+          <li>The total refunded amount must not exceed the original value</li>
         </ul>
       operationId: IssueARefund
       parameters:
@@ -2847,7 +2833,7 @@ paths:
           style: simple
           schema:
             type: string
-          example: PRF.1
+          example: PRF.75f
       responses:
         '200':
           description: OK
@@ -3077,8 +3063,6 @@ paths:
       summary: Add a Transfer
       description: >
         Use this endpoint when you want to create a Transfer between any 2 of your float/bank accounts.
-
-
 
       operationId: AddATransfer
       parameters: []
@@ -4750,146 +4734,6 @@ components:
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
-    ListOutgoingPaymentRequestsResponse:
-      title: List outgoing Payment Requests (response)
-      required:
-        - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-              - ref
-              - initiator_id
-              - your_bank_account_id
-              - authoriser_id
-              - authoriser_contact_id
-              - contact_initiated
-              - schedule_ref
-              - status
-              - status_reason
-              - matures_at
-              - responded_at
-              - created_at
-              - credit_ref
-              - payout
-            properties:
-              ref:
-                type: string
-                description: The Payment Reference reference (PR.*)
-              initiator_id:
-                type: string
-                format: uuid
-                description: Your bank account ID where the funds will settle
-              your_bank_account_id:
-                type: string
-                format: uuid
-                description: Your bank account ID where the funds will settle (alias of `initiator_id`)
-              authoriser_id:
-                type: string
-                format: uuid
-                description: The debtor's bank account ID
-              authoriser_contact_id:
-                type: string
-                format: uuid
-                description: The contact ID representing the debtor within Split
-              contact_initiated:
-                type: boolean
-                description: Initiated by Contact or Merchant
-              schedule_ref:
-                type: string
-                description: The schedule that generated the Payment request if applicable
-              status:
-                type: string
-                description: The status of the Payment Request
-                enum:
-                  - pending_approval
-                  - unverified
-                  - approved
-                  - declined
-                  - cancelled
-              status_reason:
-                type: string
-                description: Only used when the `status` is `declined` due to prechecking.
-                enum:
-                  - The balance of the nominated bank account for this Payment Request is not available.
-                  - The nominated bank account for this Payment Request has insufficient funds.
-              matures_at:
-                type: string
-                format: date-time
-                description: The date-time when the Payment Request is up for processing
-              responded_at:
-                type: string
-                format: date-time
-                description: The date-time when the Payment Request status changed
-              created_at:
-                type: string
-                format: date-time
-                description: The date-time when the Payment Request was created
-              credit_ref:
-                type: string
-                description: The resulting credit entry reference (available once approved)
-              payout:
-                type: object
-                properties:
-                  amount:
-                    type: integer
-                    min: 1
-                    max: 99999999999
-                    description: 'Amount in cents (Min: 1 - Max: 99999999999)'
-                  'description':
-                    type: string
-                    description: Payment Request description
-                  matures_at:
-                    type: string
-                    format: date-time
-                    description: The date-time when the Payment Request is up for processing
-                required:
-                  - amount
-                  - description
-                  - matures_at
-              metadata:
-                type: array
-                description: Your custom keyed data
-                items:
-                  type: object
-      example:
-        data:
-          - ref: PR.4
-            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-            your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
-            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
-            authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-            contact_initiated: true
-            schedule_ref: PRS.2
-            status: approved
-            status_reason: null
-            matures_at: '2016-12-20T00:00:00Z'
-            responded_at: '2016-12-19T02:10:18Z'
-            created_at: '2016-12-19T02:09:09Z'
-            credit_ref: C.a
-            payout:
-              amount: 30000
-              description: The SuperPackage
-              matures_at: '2016-12-20T00:00:00Z'
-          - ref: PR.5
-            initiator_id: ca7bc5b3-e47f-4153-96fb-bbe326b42772
-            your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
-            authoriser_id: de86472c-c027-4735-a6a7-234366a27fc7
-            authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
-            contact_initiated: true
-            schedule_ref: null
-            status: pending_approval
-            status_reason: null
-            matures_at: '2016-12-25T00:00:00Z'
-            responded_at: null
-            created_at: '2016-12-19T02:10:56Z'
-            credit_ref: null
-            payout:
-              amount: 99000
-              description: The elite package for 4
-              matures_at: '2016-12-25T00:00:00Z'
     ListOutgoingPaymentRequestCollectionsResponse:
       title: 'List Payment Requests: Collections (response)'
       required:
@@ -5192,21 +5036,64 @@ components:
           another_custom_key: Maybe a URL
     IssueARefundResponse:
       title: Issue a Refund (response)
+      type: object
       required:
         - data
-      type: object
+        - ref
+        - for_ref
+        - debit_ref
+        - your_bank_account_id
+        - created_at
+        - amount
+        - reason
       properties:
         data:
           type: object
+        ref:
+          type: string
+          format: uuid
+          description: 'The Refund request reference (PRF.*) (Min: 5 - Max: 9)'
+        for_ref:
+          type: string
+          description: 'The associated credit reference (C.*)'
+        debit_ref:
+          type: string
+          description: 'The associated debit reference (C.*)'
+        your_bank_Account_id:
+          type: string
+          description: 'The source bank/float account (UUID)'
+        created_at:
+          type: string
+          format: date-time
+          description: The date-time when the Payment Request was created
+          example: '2021-06-01T08:30:12Z'
+        amount:
+          type: integer
+          description: 'The amount value provided (Min: 1 - Max: 99999999999)'
+        reason:
+          type: string
+          description: Reason for the refund
+        contacts:
+          type: object
+          properties:
+            source_contact_id:
+              type: string
+              description: The original 'Receivable Contact' ID (only visible when refunding Receivables)
+            target_contact_id:
+              type: string
+              description: The new Contact ID receiving the funds (only visible when refunding Receivables)
       example:
         data:
-          ref: PRF.1
-          for_ref: C.59
-          debit_ref: D.hi
+          ref: PRF.7f4
+          for_ref: C.1gf22
+          debit_ref: D.63hgf
           your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
-          created_at: '2017-05-08T07:20:24Z'
+          created_at: '2021-06-01T07:20:24Z'
           amount: 500
-          reason: Because reason
+          reason: Subscription refund
+          contacts:
+            source_contact_id: 194b0237-6c2c-4705-b4fb-308274b14eda
+            target_contact_id: 3694ff53-32ea-40ae-8392-821e48d7bd5a
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
@@ -5608,11 +5495,7 @@ components:
           properties:
             ref:
               type: string
-              format: uuid
               description: 'The Transfer request reference (T.*) (Min: 4 - Max: 8)'
-            initiator_id:
-              type: string
-              description: 'Initiating Split Account'
             from_bank_account_id:
               type: string
               description: 'The source bank/float account (UUID)'
@@ -5633,7 +5516,6 @@ components:
       example:
         data:
           ref: T.11ub
-          initiator_id: c0272er9-9b10-40de-aa45-386853f3efb5
           from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
           to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
           amount: 100000
@@ -5681,11 +5563,40 @@ components:
       example:
         data:
           ref: T.87xp
-          initiator_id: c0272er9-9b10-40de-aa45-386853f3efb5
           from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
           to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
           amount: 47000
           description: Deposit from my bank account
           matures_at: '2021-06-03T00:00:00Z'
+    ListAllTransfersResponse:
+      title:  List all Transfers (response)
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+      example:
+        data:
+        - ref: T.62xl
+          from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
+          to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
+          amount: 47000
+          description: Deposit from my bank account
+          matures_at: '2021-06-03T00:00:00Z'
+        - ref: T.87xp
+          from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
+          to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
+          amount: 9700
+          description: Withdrawal June 2021
+          matures_at: '2021-05-28T00:00:00Z'
+        - ref: T.87s4
+          from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
+          to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
+          amount: 230
+          description: Transfer to my other Float account
+          matures_at: '2021-05-03T00:00:00Z'
 security:
   - bearerAuth: []
