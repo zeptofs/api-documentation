@@ -497,10 +497,10 @@
                     <a href="#cancel-a-payment-request" class="toc-h2 toc-link" data-title="Cancel a Payment Request">Cancel a Payment Request</a>
                   </li>
                   <li>
-                    <a href="#list-payment-requests-collections" class="toc-h2 toc-link" data-title="List Payment Requests: Collections">List Payment Requests: Collections</a>
+                    <a href="#list-collections" class="toc-h2 toc-link" data-title="List Collections">List Collections</a>
                   </li>
                   <li>
-                    <a href="#list-payment-requests-receivables" class="toc-h2 toc-link" data-title="List Payment Requests: Receivables">List Payment Requests: Receivables</a>
+                    <a href="#list-receivables" class="toc-h2 toc-link" data-title="List Receivables">List Receivables</a>
                   </li>
               </ul>
           </li>
@@ -707,10 +707,10 @@
                     <a href="#getapaymentrequestresponse" class="toc-h2 toc-link" data-title="GetAPaymentRequestResponse">GetAPaymentRequestResponse</a>
                   </li>
                   <li>
-                    <a href="#listoutgoingpaymentrequestcollectionsresponse" class="toc-h2 toc-link" data-title="ListOutgoingPaymentRequestCollectionsResponse">ListOutgoingPaymentRequestCollectionsResponse</a>
+                    <a href="#listpaymentrequestcollectionsresponse" class="toc-h2 toc-link" data-title="ListPaymentRequestCollectionsResponse">ListPaymentRequestCollectionsResponse</a>
                   </li>
                   <li>
-                    <a href="#listoutgoingpaymentrequestreceivablesresponse" class="toc-h2 toc-link" data-title="ListOutgoingPaymentRequestReceivablesResponse">ListOutgoingPaymentRequestReceivablesResponse</a>
+                    <a href="#listpaymentrequestreceivablesresponse" class="toc-h2 toc-link" data-title="ListPaymentRequestReceivablesResponse">ListPaymentRequestReceivablesResponse</a>
                   </li>
                   <li>
                     <a href="#issuearefundrequest" class="toc-h2 toc-link" data-title="IssueARefundRequest">IssueARefundRequest</a>
@@ -1519,7 +1519,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <h2 id='available-balances-in-the-sandbox'>Available balances in the Sandbox</h2>
 <p>If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly.  A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested.  This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.</p>
 
-<p>In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the  available balance of any <strong>Transactional</strong>bank account will always be <code>$123.45</code>. Any payment requests above this amount will pre-fail and any amount  less than or equal to this amount will succeed.</p>
+<p>In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the  available balance of any <strong>Transactional</strong> bank account will always be <code>$123.45</code>. Any payment requests above this amount will pre-fail and any amount  less than or equal to this amount will succeed.</p>
 <h1 id='configuration'>Configuration</h1><h2 id='scopes'>Scopes</h2>
 <p>Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.</p>
 
@@ -1564,6 +1564,10 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <tr>
 <td><code>refunds</code></td>
 <td>Manage user&#39;s Refunds</td>
+</tr>
+<tr>
+<td><code>transfers</code></td>
+<td>Manage user&#39;s Transfers</td>
 </tr>
 <tr>
 <td><code>transactions</code></td>
@@ -6639,8 +6643,8 @@ class MainClass {
 <td>None</td>
 </tr>
 </tbody></table>
-<h2 id='list-payment-requests-collections'>List Payment Requests: Collections</h2>
-<p><a id="opIdListOutgoingPaymentRequestCollections"></a></p>
+<h2 id='list-collections'>List Collections</h2>
+<p><a id="opIdListPaymentRequestCollections"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -6757,7 +6761,7 @@ class MainClass {
 
 <p>Payment Requests where you are the creditor and are collecting funds from your debtor using traditional direct-debit.</p>
 
-<h3 id="List-Payment-Requests:-Collections-parameters" class="parameters">Parameters</h3>
+<h3 id="List-Collections-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -6834,7 +6838,7 @@ class MainClass {
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="List Payment Requests: Collections-responses">Responses</h3>
+<h3 id="List Collections-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -6848,11 +6852,11 @@ class MainClass {
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemalistoutgoingpaymentrequestcollectionsresponse">ListOutgoingPaymentRequestCollectionsResponse</a></td>
+<td><a href="#schemalistpaymentrequestcollectionsresponse">ListPaymentRequestCollectionsResponse</a></td>
 </tr>
 </tbody></table>
-<h2 id='list-payment-requests-receivables'>List Payment Requests: Receivables</h2>
-<p><a id="opIdListOutgoingPaymentRequestReceivables"></a></p>
+<h2 id='list-receivables'>List Receivables</h2>
+<p><a id="opIdListPaymentRequestReceivables"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -6969,7 +6973,7 @@ class MainClass {
 
 <p>Payment Requests where the debtor is sending you funds (<a href="/#add-a-receivable-contact">Receivable Contacts</a>). This endpoint exposes all received payments.</p>
 
-<h3 id="List-Payment-Requests:-Receivables-parameters" class="parameters">Parameters</h3>
+<h3 id="List-Receivables-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -7046,7 +7050,7 @@ class MainClass {
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="List Payment Requests: Receivables-responses">Responses</h3>
+<h3 id="List Receivables-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -7060,7 +7064,7 @@ class MainClass {
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemalistoutgoingpaymentrequestreceivablesresponse">ListOutgoingPaymentRequestReceivablesResponse</a></td>
+<td><a href="#schemalistpaymentrequestreceivablesresponse">ListPaymentRequestReceivablesResponse</a></td>
 </tr>
 </tbody></table>
 
@@ -8261,19 +8265,8 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <p>Refunds can be issued for any successfully completed Payment Request transaction. This includes:</p>
 
 <ol>
-<li><strong>Payment Requests for direct debit payments (Collections)</strong>:
-
-<ul>
-<li>Contact to refund already exists (original Payment Request to collect funds will have used this Contact)</li>
-<li>Refund will be initiated to this <em>existing</em> Contact</li>
-</ul></li>
-<li><strong>Payment Requests for funds received via DE/NPP (Receivables)</strong>:
-
-<ul>
-<li>Contact to refund does not exist (Funds were received from an external source)</li>
-<li>Split will create a new contact representing the original Payer</li>
-<li>Refund will be initiated to this <em>new</em> Contact</li>
-</ul></li>
+<li>Payment Requests for direct debit payments <strong>(Collections)</strong>:</li>
+<li>Payment Requests for funds received via DE/NPP <strong>(Receivables)</strong>:</li>
 </ol>
 
 <p>This allows you to return any funds that were previously collected or received into one of your bank/float accounts.</p>
@@ -13730,8 +13723,8 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
 </tbody></table>
-<h2 id='listoutgoingpaymentrequestcollectionsresponse'>ListOutgoingPaymentRequestCollectionsResponse</h2>
-<p><a id="schemalistoutgoingpaymentrequestcollectionsresponse"></a></p>
+<h2 id='listpaymentrequestcollectionsresponse'>ListPaymentRequestCollectionsResponse</h2>
+<p><a id="schemalistpaymentrequestcollectionsresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -13777,7 +13770,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='properties-33'>Properties</h3>
-<p><em>List Payment Requests: Collections (response)</em></p>
+<p><em>List Collections (response)</em></p>
 
 <table><thead>
 <tr>
@@ -13938,8 +13931,8 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
 </tbody></table>
-<h2 id='listoutgoingpaymentrequestreceivablesresponse'>ListOutgoingPaymentRequestReceivablesResponse</h2>
-<p><a id="schemalistoutgoingpaymentrequestreceivablesresponse"></a></p>
+<h2 id='listpaymentrequestreceivablesresponse'>ListPaymentRequestReceivablesResponse</h2>
+<p><a id="schemalistpaymentrequestreceivablesresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -13985,7 +13978,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='properties-34'>Properties</h3>
-<p><em>List Payment Requests: Receivables (response)</em></p>
+<p><em>List Receivables (response)</em></p>
 
 <table><thead>
 <tr>

@@ -864,7 +864,7 @@ info:
 
 
     In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the 
-    available balance of any **Transactional**bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount 
+    available balance of any **Transactional** bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount 
     less than or equal to this amount will succeed.
 
     # Configuration
@@ -897,6 +897,8 @@ info:
     | `payment_requests` | Manage user's Payment Requests |
 
     | `refunds` | Manage user's Refunds |
+
+    | `transfers` | Manage user's Transfers |
 
     | `transactions` | Access user's Transactions |
 
@@ -1736,13 +1738,9 @@ tags:
       Refunds can be issued for any successfully completed Payment Request transaction. This includes:
       
 
-      1. **Payment Requests for direct debit payments (Collections)**:
-        * Contact to refund already exists (original Payment Request to collect funds will have used this Contact)
-        * Refund will be initiated to this _existing_ Contact
-      2. **Payment Requests for funds received via DE/NPP (Receivables)**:
-        * Contact to refund does not exist (Funds were received from an external source)
-        * Split will create a new contact representing the original Payer
-        * Refund will be initiated to this _new_ Contact
+      1. Payment Requests for direct debit payments **(Collections)**:
+
+      2. Payment Requests for funds received via DE/NPP **(Receivables)**:
 
 
       This allows you to return any funds that were previously collected or received into one of your bank/float accounts.
@@ -2698,9 +2696,9 @@ paths:
     get:
       tags:
         - Payment Requests
-      summary: 'List Payment Requests: Collections'
+      summary: 'List Collections'
       description: Payment Requests where you are the creditor and are collecting funds from your debtor using traditional direct-debit.
-      operationId: ListOutgoingPaymentRequestCollections
+      operationId: ListPaymentRequestCollections
       parameters:
         - name: page
           in: query
@@ -2722,15 +2720,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOutgoingPaymentRequestCollectionsResponse'
+                $ref: '#/components/schemas/ListPaymentRequestCollectionsResponse'
   /payment_requests/receivables:
     get:
       tags:
         - Payment Requests
-      summary: 'List Payment Requests: Receivables'
+      summary: 'List Receivables'
       description: Payment Requests where the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact)). 
                   This endpoint exposes all received payments.
-      operationId: ListOutgoingPaymentRequestReceivables
+      operationId: ListPaymentRequestReceivables
       parameters:
         - name: page
           in: query
@@ -2752,7 +2750,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOutgoingPaymentRequestReceivablesResponse'
+                $ref: '#/components/schemas/ListPaymentRequestReceivablesResponse'
   '/credits/{credit_ref}/refunds':
     post:
       tags:
@@ -3297,6 +3295,7 @@ components:
             agreements: Manage your agreements
             transactions: Access your transaction history
             open_agreements: Manage your open agreements
+            transfers: Manage your Transfers
   schemas:
     GetAgreementResponse:
       title: Get an Agreement (response)
@@ -4734,8 +4733,8 @@ components:
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
-    ListOutgoingPaymentRequestCollectionsResponse:
-      title: 'List Payment Requests: Collections (response)'
+    ListPaymentRequestCollectionsResponse:
+      title: 'List Collections (response)'
       required:
         - data
       properties:
@@ -4874,8 +4873,8 @@ components:
               amount: 3000
               description: Membership fees
               matures_at: '2021-03-09T16:58:00Z'
-    ListOutgoingPaymentRequestReceivablesResponse:
-      title: 'List Payment Requests: Receivables (response)'
+    ListPaymentRequestReceivablesResponse:
+      title: 'List Receivables (response)'
       required:
         - data
       properties:
