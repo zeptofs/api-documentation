@@ -5058,7 +5058,7 @@ components:
         debit_ref:
           type: string
           description: 'The associated debit reference (C.*)'
-        your_bank_Account_id:
+        your_bank_account_id:
           type: string
           description: 'The source bank/float account (UUID)'
         created_at:
