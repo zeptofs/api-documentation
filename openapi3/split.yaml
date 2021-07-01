@@ -3,8 +3,8 @@ info:
   title: Split API
   description: >
     Split enables your business to make, collect and receive payments using nothing but bank accounts.
-    We've overlaid a simple REST API on top of the legacy (and newer) Australian payment rails, 
-    enabling all of your account-to-account payment flows through 1 simple integration. 
+    We've overlaid a simple REST API on top of the legacy (and newer) Australian payment rails,
+    enabling all of your account-to-account payment flows through 1 simple integration.
 
 
     You can find more on this in the
@@ -12,7 +12,7 @@ info:
     guides.
 
 
-    And for all kinds of How To's and Recipes, head on over to our 
+    And for all kinds of How To's and Recipes, head on over to our
     [Help Guide](https://help.split.cash/en/).
 
     <div class="middle-header">Conventions</div>
@@ -67,7 +67,7 @@ info:
 
 
     We've preloaded a collection with all our endpoints for you to use in Postman.
-    Before you start, import a copy of our API collection:
+    Before you start, **import a copy** of our API collection:
 
 
     [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0=)
@@ -235,7 +235,7 @@ info:
     Before you start, load up our API collection:
 
 
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/46835ea325243f7bcb26#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIwLTExLTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0=)
 
 
     **A screencast of this process is also available:
@@ -417,7 +417,7 @@ info:
     ### POSTing a [Payment Request](/#Split-API-Payment-Requests)
 
 
-    Provides the ability to send a Payment Request (get paid) to any of 
+    Provides the ability to send a Payment Request (get paid) to any of
     your Contacts as long as there is an accepted Agreement in place.
 
 
@@ -428,7 +428,7 @@ info:
     link](http://help.split.cash/agreements/unassigned-agreement) for them to
     [elect & verify their bank
     account](https://help.split.cash/bank-accounts/instant-account-verification-iav)
-    and accept the Agreement. Having this in place will allow any future Payment 
+    and accept the Agreement. Having this in place will allow any future Payment
     Requests to be automatically approved and processed as per the Agreement terms.
 
 
@@ -715,18 +715,18 @@ info:
 
     # Sandbox Testing Details
 
-    Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds. 
+    Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds.
     All transactions are simulated and no communication with financial institutions is performed.
 
 
-    The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. 
+    The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through.
     In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.
 
 
     All 6 digits BSBs are valid in the sandbox with the exception of `100000`. This BSB allows you to simulate the adding of an invalid BSB.
     In production, only real BSBs are accepted.
 
-    ## Transaction failures
+    ## DE Transaction failures
 
     To simulate [transaction failures](#failure-reasons) create a Payment or Payment Request with a specific amount listed in the table.
 
@@ -772,9 +772,9 @@ info:
         * Initiate a Payment Request for <code>$0.02</code>.
         * Split will mimic a failure to debit the contact's bank account.
 
-    ## NPP payment failures
+    ## NPP Payment failures
 
-    If you are utilising an [Account Float](https://help.split.cash/en/articles/4275280-utilising-an-account-float) 
+    If you are utilising an [Account Float](https://help.split.cash/en/articles/4275280-utilising-an-account-float)
     to create NPP payments, you can simulate a transaction that fails to process through the NPP channel by
     [creating a Payment from your account float](https://help.split.cash/en/articles/4275293-transacting-from-your-account-float)
     for one of the following amounts.
@@ -788,8 +788,10 @@ info:
 
     | `refer_to_customer`        | Real-time payment rejected by recipient |  $1.60  |
 
+    | `refer_to_customer`        | Real-time payments not available for recipient |  $1.65  |
+
     You will receive all the same notifications as if this happened in our live environment. We recommend you
-    check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails) 
+    check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails)
     to learn more about what happens when an NPP Payment is unable to process.
 
     ## Special accounts
@@ -858,13 +860,13 @@ info:
 
     ## Available balances in the Sandbox
 
-    If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. 
-    A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested. 
+    If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly.
+    A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested.
     This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.
 
 
-    In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the 
-    available balance of any **Transactional** bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount 
+    In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the
+    available balance of any **Transactional** bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount
     less than or equal to this amount will succeed.
 
     # Configuration
@@ -1464,12 +1466,14 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-07-01** - Added $1.65 amount for Sandbox simulated failures and minor tweaks
+
     - **2021-06-08** - Added Transfers, Payment Channel selection, Receivable Refunds
 
     - **2021-05-21** - Added new Payment Request endpoints, updated Postman collection
 
     - **2021-05-03** - Deprecated */payments_requests/outgoing* endpoint
-    
+
     - **2021-04-20** - Removed deprecated API references, refreshed Refunds and Payout descriptions
 
     - **2021-03-17** - Remove note indicating single active bank account limitation
@@ -1518,9 +1522,9 @@ tags:
 
 
       1. **Outgoing:** Agreement sent to one of your Contacts
-      
+
       2. **Outgoing:** Agreement sent to another Split account [Deprecated]
-      
+
       3. **Incoming:** Agreement received from another Split account [Deprecated]
 
 
@@ -1560,15 +1564,15 @@ tags:
   - name: Open Agreements
     description: >
       An Open Agreement is essentially an Agreement template with no specific
-      authoriser. Each time an Open Agreement is accepted by anyone, the 
-      authoriser is added to your Contacts list and a new Agreement is 
+      authoriser. Each time an Open Agreement is accepted by anyone, the
+      authoriser is added to your Contacts list and a new Agreement is
       automatically created between the Open Agreement initiator and the authoriser.
 
 
       An Open Agreement can be accepted multiple times by different parties and
-      the result is always the same: A new Agreement. 
-      
-      
+      the result is always the same: A new Agreement.
+
+
       Additionally, an Open Agreement can be accepted by anybody. This is achieved
       by using our [Instant Account Verification process]
       (http://help.split.cash/bank-accounts/instant-account-verification-iav)
@@ -1616,9 +1620,9 @@ tags:
       Supported payment rails:
 
 
-      * NPP: New Payments Platform (Real-time)
+      * **NPP**: New Payments Platform (Real-time)
 
-      * DE / BECS: Direct Entry / Bulk Electronic Clearing System (Slower)
+      * **DE / BECS**: Direct Entry / Bulk Electronic Clearing System (Slower)
 
 
       ##Lifecycle
@@ -1668,7 +1672,7 @@ tags:
 
       ### Payout Reversal
 
-      When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. 
+      When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer.
       Furthermore, within the payout reversal credit, Split will include details in the `description` and under the `reversal_details` key
        as to why the original credit to the recipient failed.
   - name: Payouts
@@ -1730,13 +1734,13 @@ tags:
       <div class="middle-header">Prechecking</div>
 
 
-      When using Payment Requests to collect payments from your customer, Split will automatically check for available funds before **attempting to debit** the debtor. 
+      When using Payment Requests to collect payments from your customer, Split will automatically check for available funds before **attempting to debit** the debtor.
       This check is only performed for contacts with an active [bank connection](/#Split-API-Bank-Connections).
   - name: Refunds
     description: >
 
       Refunds can be issued for any successfully completed Payment Request transaction. This includes:
-      
+
 
       1. Payment Requests for direct debit payments **(Collections)**:
 
@@ -1795,6 +1799,9 @@ tags:
       detected that there were insufficient funds. The transaction can be
       retried. |
 
+      | `channel_switched` | The initial payment channel has failed and the credit has automatically
+      switched to attempt the payment using the next available channel. |
+
 
 
       ##Failure reasons
@@ -1839,7 +1846,7 @@ tags:
       accompanied by a `failure_reason`:
 
 
-      <aside class="notice">Please note that these failure reasons are passed to us directly from the banks.</aside>      
+      <aside class="notice">Please note that these failure reasons are passed to us directly from the banks.</aside>
 
 
       | Reason | Description |
@@ -2491,7 +2498,7 @@ paths:
       description: >
         To enable custom payment flows, the required payment channel can be selected by setting the _channel_ attribute to one of the following combinations:
 
-        
+
         <ul>
           <li>["new_payments_platform"] - for faster payments 24/7/365</li>
           <li>["direct_entry"] - for slower traditional payments</li>
@@ -2582,7 +2589,7 @@ paths:
       parameters:
         - name: ref
           in: path
-          description: Payment Request credit reference number e.g C.2 
+          description: Payment Request credit reference number e.g C.2
           required: true
           style: simple
           explode: false
@@ -2726,7 +2733,7 @@ paths:
       tags:
         - Payment Requests
       summary: 'List Receivables'
-      description: Payment Requests where the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact)). 
+      description: Payment Requests where the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact)).
                   This endpoint exposes all received payments.
       operationId: ListPaymentRequestReceivables
       parameters:
@@ -3699,7 +3706,7 @@ components:
         email:
           type: string
           min: 6
-          max: 256 
+          max: 256
           description: 'Contact email (Min: 6 - Max: 256)'
         payid_email:
           type: string
@@ -4925,7 +4932,7 @@ components:
                 description: The schedule that generated the Payment request if applicable
               status:
                 type: string
-                description: The status of the Payment Request. For Receivables, this will always be *approved* 
+                description: The status of the Payment Request. For Receivables, this will always be *approved*
               status_reason:
                 type: string
                 description: Only used when the `status` is `declined` due to prechecking.
@@ -5504,7 +5511,7 @@ components:
             amount:
               type: integer
               description: 'The amount value provided (Min: 1 - Max: 99999999999)'
-            description:  
+            description:
               type: string
               description: Description for the Transfer
             matures_at:
@@ -5551,7 +5558,7 @@ components:
             amount:
               type: integer
               description: 'The amount value provided (Min: 1 - Max: 99999999999)'
-            description:  
+            description:
               type: string
               description: Description for the Transfer
             matures_at:

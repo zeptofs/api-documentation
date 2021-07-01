@@ -357,10 +357,10 @@
             <a href="#sandbox-testing-details" class="toc-h1 toc-link" data-title="Sandbox Testing Details">Sandbox Testing Details</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#transaction-failures" class="toc-h2 toc-link" data-title="Transaction failures">Transaction failures</a>
+                    <a href="#de-transaction-failures" class="toc-h2 toc-link" data-title="DE Transaction failures">DE Transaction failures</a>
                   </li>
                   <li>
-                    <a href="#npp-payment-failures" class="toc-h2 toc-link" data-title="NPP payment failures">NPP payment failures</a>
+                    <a href="#npp-payment-failures" class="toc-h2 toc-link" data-title="NPP Payment failures">NPP Payment failures</a>
                   </li>
                   <li>
                     <a href="#special-accounts" class="toc-h2 toc-link" data-title="Special accounts">Special accounts</a>
@@ -778,11 +778,11 @@
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
 
-<p>Split enables your business to make, collect and receive payments using nothing but bank accounts. We&#39;ve overlaid a simple REST API on top of the legacy (and newer) Australian payment rails,  enabling all of your account-to-account payment flows through 1 simple integration. </p>
+<p>Split enables your business to make, collect and receive payments using nothing but bank accounts. We&#39;ve overlaid a simple REST API on top of the legacy (and newer) Australian payment rails, enabling all of your account-to-account payment flows through 1 simple integration.</p>
 
 <p>You can find more on this in the <a href="/#making-payments">Making payments</a> and <a href="/#getting-paid">Getting paid</a> guides.</p>
 
-<p>And for all kinds of How To&#39;s and Recipes, head on over to our  <a href="https://help.split.cash/en/">Help Guide</a>.
+<p>And for all kinds of How To&#39;s and Recipes, head on over to our <a href="https://help.split.cash/en/">Help Guide</a>.
 <div class="middle-header">Conventions</div></p>
 
 <ul>
@@ -811,7 +811,7 @@
 <h1 id='guides'>Guides</h1><h2 id='try-it-out'>Try it out</h2>
 <p>The best way to familiarise yourself with our API is by interacting with it.</p>
 
-<p>We&#39;ve preloaded a collection with all our endpoints for you to use in Postman. Before you start, import a copy of our API collection:</p>
+<p>We&#39;ve preloaded a collection with all our endpoints for you to use in Postman. Before you start, <strong>import a copy</strong> of our API collection:</p>
 
 <p><a href="https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&amp;collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
@@ -990,7 +990,7 @@ To do so, you must simply append the access token to the header of any API reque
 
 <p>Before you start, load up our API collection:</p>
 
-<p><a href="https://god.postman.co/run-collection/46835ea325243f7bcb26#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIyMDIwLTExLTExVDIzOjU1OjE5WiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYWNjZXNzX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZnJlc2hfdG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&amp;collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><strong>A screencast of this process is also available: <a href="https://vimeo.com/246203244">https://vimeo.com/246203244</a>.</strong></p>
 
@@ -1108,10 +1108,10 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <h2 id='getting-paid'>Getting paid</h2>
 <p>In order to collect funds, use our Payment Requests to pull funds from your customers using direct debit.</p>
 <h3 id='posting-a-payment-request'>POSTing a <a href="/#Split-API-Payment-Requests">Payment Request</a></h3>
-<p>Provides the ability to send a Payment Request (get paid) to any of  your Contacts as long as there is an accepted Agreement in place.</p>
+<p>Provides the ability to send a Payment Request (get paid) to any of your Contacts as long as there is an accepted Agreement in place.</p>
 
 <ul>
-<li>To send a Payment Request to a Contact using the API, you must first have an accepted <a href="/#Split-API-Agreements">Agreement</a> with them. To do so, you can send them an <a href="https://help.split.cash/agreements/open-agreement">Open Agreement link</a> or <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreement link</a> for them to <a href="https://help.split.cash/bank-accounts/instant-account-verification-iav">elect &amp; verify their bank account</a> and accept the Agreement. Having this in place will allow any future Payment  Requests to be automatically approved and processed as per the Agreement terms.</li>
+<li>To send a Payment Request to a Contact using the API, you must first have an accepted <a href="/#Split-API-Agreements">Agreement</a> with them. To do so, you can send them an <a href="https://help.split.cash/agreements/open-agreement">Open Agreement link</a> or <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreement link</a> for them to <a href="https://help.split.cash/bank-accounts/instant-account-verification-iav">elect &amp; verify their bank account</a> and accept the Agreement. Having this in place will allow any future Payment Requests to be automatically approved and processed as per the Agreement terms.</li>
 </ul>
 
 <p>Common use cases:</p>
@@ -1314,12 +1314,12 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 
 <p>You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded: <a href="https://go.sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgceco&amp;first_name=George">https://go.sandbox.split.cash/business/sign_up?name=GeorgeCo&amp;nickname=georgeco&amp;first_name=George</a>.</p>
 <h1 id='sandbox-testing-details'>Sandbox Testing Details</h1>
-<p>Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds.  All transactions are simulated and no communication with financial institutions is performed.</p>
+<p>Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds. All transactions are simulated and no communication with financial institutions is performed.</p>
 
-<p>The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through.  In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.</p>
+<p>The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.</p>
 
 <p>All 6 digits BSBs are valid in the sandbox with the exception of <code>100000</code>. This BSB allows you to simulate the adding of an invalid BSB. In production, only real BSBs are accepted.</p>
-<h2 id='transaction-failures'>Transaction failures</h2>
+<h2 id='de-transaction-failures'>DE Transaction failures</h2>
 <p>To simulate <a href="#failure-reasons">transaction failures</a> create a Payment or Payment Request with a specific amount listed in the table.</p>
 
 <table><thead>
@@ -1405,8 +1405,8 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>Split will mimic a failure to debit the contact&#39;s bank account.</li>
 </ul></li>
 </ol>
-<h2 id='npp-payment-failures'>NPP payment failures</h2>
-<p>If you are utilising an <a href="https://help.split.cash/en/articles/4275280-utilising-an-account-float">Account Float</a>  to create NPP payments, you can simulate a transaction that fails to process through the NPP channel by <a href="https://help.split.cash/en/articles/4275293-transacting-from-your-account-float">creating a Payment from your account float</a> for one of the following amounts.</p>
+<h2 id='npp-payment-failures'>NPP Payment failures</h2>
+<p>If you are utilising an <a href="https://help.split.cash/en/articles/4275280-utilising-an-account-float">Account Float</a> to create NPP payments, you can simulate a transaction that fails to process through the NPP channel by <a href="https://help.split.cash/en/articles/4275293-transacting-from-your-account-float">creating a Payment from your account float</a> for one of the following amounts.</p>
 
 <table><thead>
 <tr>
@@ -1425,9 +1425,14 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <td>Real-time payment rejected by recipient</td>
 <td>$1.60</td>
 </tr>
+<tr>
+<td><code>refer_to_customer</code></td>
+<td>Real-time payments not available for recipient</td>
+<td>$1.65</td>
+</tr>
 </tbody></table>
 
-<p>You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on <a href="https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails">what happens when an NPP Payment fails</a>  to learn more about what happens when an NPP Payment is unable to process.</p>
+<p>You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on <a href="https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails">what happens when an NPP Payment fails</a> to learn more about what happens when an NPP Payment is unable to process.</p>
 <h2 id='special-accounts'>Special accounts</h2>
 <p>There are some accounts with a special behaviour. You can add them to your Contacts by nickname or bank details.</p>
 
@@ -1517,9 +1522,9 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 
 <aside class="notice">The credentials will work with any of the available financial institutions.</aside>
 <h2 id='available-balances-in-the-sandbox'>Available balances in the Sandbox</h2>
-<p>If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly.  A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested.  This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.</p>
+<p>If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested. This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.</p>
 
-<p>In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the  available balance of any <strong>Transactional</strong> bank account will always be <code>$123.45</code>. Any payment requests above this amount will pre-fail and any amount  less than or equal to this amount will succeed.</p>
+<p>In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the available balance of any <strong>Transactional</strong> bank account will always be <code>$123.45</code>. Any payment requests above this amount will pre-fail and any amount less than or equal to this amount will succeed.</p>
 <h1 id='configuration'>Configuration</h1><h2 id='scopes'>Scopes</h2>
 <p>Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.</p>
 
@@ -1993,6 +1998,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-07-01</strong> - Added $1.65 amount for Sandbox simulated failures and minor tweaks</li>
 <li><strong>2021-06-08</strong> - Added Transfers, Payment Channel selection, Receivable Refunds</li>
 <li><strong>2021-05-21</strong> - Added new Payment Request endpoints, updated Postman collection</li>
 <li><strong>2021-05-03</strong> - Deprecated <em>/payments_requests/outgoing</em> endpoint</li>
@@ -5094,9 +5100,9 @@ class MainClass {
 
 <h1 id="Split-API-Open-Agreements">Open Agreements</h1>
 
-<p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by anyone, the  authoriser is added to your Contacts list and a new Agreement is  automatically created between the Open Agreement initiator and the authoriser.</p>
+<p>An Open Agreement is essentially an Agreement template with no specific authoriser. Each time an Open Agreement is accepted by anyone, the authoriser is added to your Contacts list and a new Agreement is automatically created between the Open Agreement initiator and the authoriser.</p>
 
-<p>An Open Agreement can be accepted multiple times by different parties and the result is always the same: A new Agreement. </p>
+<p>An Open Agreement can be accepted multiple times by different parties and the result is always the same: A new Agreement.</p>
 
 <p>Additionally, an Open Agreement can be accepted by anybody. This is achieved by using our <a href="http://help.split.cash/bank-accounts/instant-account-verification-iav">Instant Account Verification process</a> as part of accepting an <a href="https://help.split.cash/agreements/open-agreement">Open Agreement</a>.</p>
 <h2 id='lifecycle-2'>Lifecycle</h2>
@@ -6035,7 +6041,7 @@ class MainClass {
 
 <div class="middle-header">Prechecking</div>
 
-<p>When using Payment Requests to collect payments from your customer, Split will automatically check for available funds before <strong>attempting to debit</strong> the debtor.  This check is only performed for contacts with an active <a href="/#Split-API-Bank-Connections">bank connection</a>.</p>
+<p>When using Payment Requests to collect payments from your customer, Split will automatically check for available funds before <strong>attempting to debit</strong> the debtor. This check is only performed for contacts with an active <a href="/#Split-API-Bank-Connections">bank connection</a>.</p>
 <h2 id='request-payment'>Request Payment</h2>
 <p><a id="opIdMakeAPaymentRequest"></a></p>
 
@@ -7075,8 +7081,8 @@ class MainClass {
 <p>Supported payment rails:</p>
 
 <ul>
-<li>NPP: New Payments Platform (Real-time)</li>
-<li>DE / BECS: Direct Entry / Bulk Electronic Clearing System (Slower)</li>
+<li><strong>NPP</strong>: New Payments Platform (Real-time)</li>
+<li><strong>DE / BECS</strong>: Direct Entry / Bulk Electronic Clearing System (Slower)</li>
 </ul>
 <h2 id='lifecycle-4'>Lifecycle</h2>
 <blockquote>
@@ -7114,7 +7120,7 @@ class MainClass {
     Split no longer supports multiple Payouts within a single Payment request. A Payment request must only contain 1 Payout object.
   </aside></p>
 <h3 id='payout-reversal'>Payout Reversal</h3>
-<p>When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer.  Furthermore, within the payout reversal credit, Split will include details in the <code>description</code> and under the <code>reversal_details</code> key
+<p>When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer. Furthermore, within the payout reversal credit, Split will include details in the <code>description</code> and under the <code>reversal_details</code> key
  as to why the original credit to the recipient failed.</p>
 <h2 id='make-a-payment'>Make a Payment</h2>
 <p><a id="opIdMakeAPayment"></a></p>
@@ -9166,6 +9172,10 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <td><code>prefailed</code></td>
 <td>The transaction was never submitted to the bank because we detected that there were insufficient funds. The transaction can be retried.</td>
 </tr>
+<tr>
+<td><code>channel_switched</code></td>
+<td>The initial payment channel has failed and the credit has automatically switched to attempt the payment using the next available channel.</td>
+</tr>
 </tbody></table>
 <h2 id='failure-reasons'>Failure reasons</h2>
 <blockquote>
@@ -9200,7 +9210,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
 </span></code></pre></div>
 <p>The <code>rejected</code>, <code>returned</code>, <code>voided</code> &amp; <code>prefailed</code> statuses are always accompanied by a <code>failure_reason</code>:</p>
 
-<aside class="notice">Please note that these failure reasons are passed to us directly from the banks.</aside>      
+<aside class="notice">Please note that these failure reasons are passed to us directly from the banks.</aside>
 
 <table><thead>
 <tr>
@@ -14209,7 +14219,7 @@ If a high probability of insufficient funds is detected, Split will not submit t
 <tr>
 <td>your_bank_account_id</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>The source bank/float account (UUID)</td>
 </tr>
 <tr>
