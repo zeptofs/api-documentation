@@ -4278,7 +4278,7 @@ components:
         description: The SuperPackage
         matures_at: '2021-06-13T00:00:00Z'
         your_bank_account_id: 83623359-e86e-440c-9780-432a3bc3626f
-        channels: new_payments_platform
+        channels: ["new_payments_platform"]
         payouts:
           - amount: 30000
             description: A tandem skydive jump SB23094
@@ -4343,7 +4343,7 @@ components:
         data:
           ref: PB.1
           your_bank_account_id: 83623359-e86e-440c-9780-432a3bc3626f
-          channels: new_payments_platform
+          channels: ["new_payments_platform"]
           payouts:
             - ref: D.1
               recipient_contact_id: 48b89364-1577-4c81-ba02-96705895d457
@@ -5023,6 +5023,9 @@ components:
           max: 99999999999
           description: 'Amount in cents refund (Min: 1 - Max: 99999999999)'
           example: 500
+        channels:
+          description: Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)
+          type: array
         reason:
           type: string
           description: Reason for the refund. First 9 characters are visible to both parties.
@@ -5035,6 +5038,7 @@ components:
           $ref: '#/components/schemas/Metadata'
       example:
         amount: 500
+        channels: ["direct_entry"]
         reason: Because reason
         your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         metadata:
@@ -5045,49 +5049,54 @@ components:
       type: object
       required:
         - data
-        - ref
-        - for_ref
-        - debit_ref
-        - your_bank_account_id
-        - created_at
-        - amount
-        - reason
       properties:
         data:
           type: object
-        ref:
-          type: string
-          format: uuid
-          description: 'The Refund request reference (PRF.*) (Min: 5 - Max: 9)'
-        for_ref:
-          type: string
-          description: 'The associated credit reference (C.*)'
-        debit_ref:
-          type: string
-          description: 'The associated debit reference (C.*)'
-        your_bank_account_id:
-          type: string
-          description: 'The source bank/float account (UUID)'
-        created_at:
-          type: string
-          format: date-time
-          description: The date-time when the Payment Request was created
-          example: '2021-06-01T08:30:12Z'
-        amount:
-          type: integer
-          description: 'The amount value provided (Min: 1 - Max: 99999999999)'
-        reason:
-          type: string
-          description: Reason for the refund
-        contacts:
-          type: object
+          required:
+            - ref
+            - for_ref
+            - debit_ref
+            - your_bank_account_id
+            - created_at
+            - amount
+            - reason
           properties:
-            source_contact_id:
+            ref:
               type: string
-              description: The original 'Receivable Contact' ID (only visible when refunding Receivables)
-            target_contact_id:
+              format: uuid
+              description: 'The Refund request reference (PRF.*) (Min: 5 - Max: 9)'
+            for_ref:
               type: string
-              description: The new Contact ID receiving the funds (only visible when refunding Receivables)
+              description: 'The associated credit reference (C.*)'
+            debit_ref:
+              type: string
+              description: 'The associated debit reference (C.*)'
+            your_bank_account_id:
+              type: string
+              description: 'The source bank/float account (UUID)'
+            created_at:
+              type: string
+              format: date-time
+              description: The date-time when the Payment Request was created
+              example: '2021-06-01T08:30:12Z'
+            amount:
+              type: integer
+              description: 'The amount value provided (Min: 1 - Max: 99999999999)'
+            channels:
+              type: array
+              description: The requested payment channel(s) to be used, in order. (new_payments_platform, direct_entry, or both)
+            reason:
+              type: string
+              description: Reason for the refund
+            contacts:
+              type: object
+              properties:
+                source_contact_id:
+                  type: string
+                  description: The original 'Receivable Contact' ID (only visible when refunding Receivables)
+                target_contact_id:
+                  type: string
+                  description: The new Contact ID receiving the funds (only visible when refunding Receivables)
       example:
         data:
           ref: PRF.7f4
@@ -5096,6 +5105,7 @@ components:
           your_bank_account_id: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
           created_at: '2021-06-01T07:20:24Z'
           amount: 500
+          channels: ["direct_entry"]
           reason: Subscription refund
           contacts:
             source_contact_id: 194b0237-6c2c-4705-b4fb-308274b14eda
