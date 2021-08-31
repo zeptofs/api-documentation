@@ -75,7 +75,9 @@ html, body {
   .logo {
     display: block;
     max-width: 100%;
-    margin-bottom: $logo-margin;
+    width: 80%;
+    margin: 1rem auto;
+    text-align: center;
   }
 
   &>.search {
@@ -469,6 +471,13 @@ html, body {
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
     line-height: 1.6;
+    color: $nav-text;
+
+    a {
+      color: $nav-text;
+      text-decoration: underline;
+      font-weight: 500;
+    }
 
     &.warning {
       background-color: $aside-warning-bg;

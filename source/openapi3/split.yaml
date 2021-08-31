@@ -1,13 +1,22 @@
 openapi: 3.0.0
 info:
-  title: Split API
+  title: Zepto API
   description: >
-    Split enables your business to make, collect and receive payments using nothing but bank accounts.
-    We've overlaid a simple REST API on top of the legacy (and newer) Australian payment rails,
-    enabling all of your account-to-account payment flows through 1 simple integration.
+    Zepto allows you to make, get and manage payments using nothing but bank
+    accounts.
 
 
-    You can find more on this in the
+    It is important to understand that there are 2 main ways Zepto can be used
+    for maximum flexibility:
+
+
+    1. Between Zepto accounts.
+
+    2. Between a Zepto account and anyone.
+
+
+    Due to the above, certain endpoints and techniques will differ slightly
+    depending on who you are interacting with. You can find more on this in the
     [Making payments](/#making-payments) and [Getting paid](/#getting-paid)
     guides.
 
@@ -46,7 +55,7 @@ info:
 
     * Amounts are always in cents with no decimals unless otherwise stated.
 
-    * Split provides static public IP addresses for all outbound traffic, including webhooks.
+    * Zepto provides static public IP addresses for all outbound traffic, including webhooks.
         * Sandbox IP: `13.237.142.60`
         * Production IPs: `52.64.11.67` and `13.238.78.114`
 
@@ -76,42 +85,42 @@ info:
     Okay, lets get things setup!
 
 
-    1. **Create a Split account**
+    1. **Create a Zepto account**
 
-        If you haven't already, you'll want to create a sandbox Split account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
+        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
 
-    2. **Register your application with Split**
+    2. **Register your application with Zepto**
 
         Sign in and create an OAuth2 application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications).
 
-        [![Split OAuth2 app create](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png)
+        [![Zepto OAuth2 app create](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_create.png)
 
     3. **Generate personal access tokens**
 
-        The quickest way to access your Split account via the API is using
+        The quickest way to access your Zepto account via the API is using
         personal access tokens. Click on your newly created application from your [application
     list](https://go.sandbox.split.cash/oauth/applications) and click on
     **+ Personal Access Token**.
 
-        [![Split locate personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)
+        [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)
 
         _(You'll have the option to give the token a title)_
 
-        [![Split personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)
+        [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)
 
         <aside class="notice">Please note that personal access tokens do not expire.</aside>
 
     4. **Use personal access token in Postman**
 
         You can use this `access_token` to authorise any requests to the
-        Split API in Postman by choosing the **Bearer Token** option under
+        Zepto API in Postman by choosing the **Bearer Token** option under
         the **Authorization** tab.
 
         [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_personal_access_token.png)
 
     5. **Make an API request!**
 
-        You are now ready to interact with your Split account via the
+        You are now ready to interact with your Zepto account via the
         API! Go ahead and send a request using Postman.
 
         [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_request_response.png)
@@ -121,7 +130,7 @@ info:
     ## Get started
 
     This guide will help you setup an OAuth2 app in order to get authenticated &
-    authorised to communicate with the Split API.
+    authorised to communicate with the Zepto API.
 
 
 
@@ -137,17 +146,17 @@ info:
     new access token.
 
 
-    1. **Create a Split account**
+    1. **Create a Zepto account**
 
-        If you haven't already, you'll want to create a sandbox Split account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash).
+        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash).
 
     2. **Choose authentication method**
 
-        All requests to the Split API require an `access_token` for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:
+        All requests to the Zepto API require an `access_token` for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:
 
-        **Personal access token** If you only need to access your own Split account via the API, then using personal access tokens are the most straight-forward way. Refer to [Personal access token](/#personal-access-token) to setup. These tokens do not expire so no refreshing is required.
+        **Personal access token** If you only need to access your own Zepto account via the API, then using personal access tokens are the most straight-forward way. Refer to [Personal access token](/#personal-access-token) to setup. These tokens do not expire so no refreshing is required.
 
-        **OAuth grant flow** When you require your application to act on behalf of other Split accounts you'll need to implement the OAuth grant flow process. Refer to [OAuth grant flow guide](/#oauth-grant-flow) to setup. There is also an [OAuth grant flow tutorial](/#oauth-grant-flow-tutorial). These access tokens expire every 2 hours, unless the `offline_access` scope is used in which case the tokens will not expire.
+        **OAuth grant flow** When you require your application to act on behalf of other Zepto accounts you'll need to implement the OAuth grant flow process. Refer to [OAuth grant flow guide](/#oauth-grant-flow) to setup. There is also an [OAuth grant flow tutorial](/#oauth-grant-flow-tutorial). These access tokens expire every 2 hours, unless the `offline_access` scope is used in which case the tokens will not expire.
 
     ## Personal access token
 
@@ -155,21 +164,21 @@ info:
     generate a personal access token from the UI. These tokens do not expire, but can be deleted.
 
 
-    * To do this, sign in to your Split account and [create an
+    * To do this, sign in to your Zepto account and [create an
     application](https://go.sandbox.split.cash/oauth/applications) if you
     haven't already. Click on your application from your [application
     list](https://go.sandbox.split.cash/oauth/applications) and click on
     **Personal access**.
 
-        [![Split locate personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)
+        [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_tokens_empty.png)
 
         _(You'll have the option to give the token a title)_
 
-        [![Split personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)
+        [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_personal_access_token.png)
 
 
     * Now that you have an `access_token` you can interact
-    with your Split account via the API.
+    with your Zepto account via the API.
 
         To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
 
@@ -177,7 +186,7 @@ info:
 
     ## OAuth grant flow
 
-    1. **Register your application with Split**
+    1. **Register your application with Zepto**
 
         Once you've got your account up and running, sign in and create an OAuth2 profile for your application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications)
 
@@ -196,13 +205,13 @@ info:
         | Parameter | Description |
         |-----------|-------------|
         | `response_type` | Always set to `code` |
-        | `client_id` | This is your `Application ID` as generated when you registered your application with Split |
+        | `client_id` | This is your `Application ID` as generated when you registered your application with Zepto |
         | `redirect_uri` | URL where the user will get redirected along with the newly generated authorisation code |
         | `scope` | The [scope](/#scopes) of permission you're requesting |
 
     3. **Exchange the authorisation code for an access token**
 
-        When the user visits the above-mentioned URL, they will be presented with a Split login screen and then an authorisation screen:
+        When the user visits the above-mentioned URL, they will be presented with a Zepto login screen and then an authorisation screen:
 
         [![Authorise OAuth2 app](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)
 
@@ -215,14 +224,14 @@ info:
         | Parameter | Description |
         |-----------|-------------|
         | `grant_type` | Set to `authorization_code` |
-        | `client_id` | This is your `Application ID` as generated when you registered your application with Split |
-        | `client_secret` | This is your `Secret` as generated when you registered your application with Split |
+        | `client_id` | This is your `Application ID` as generated when you registered your application with Zepto |
+        | `client_secret` | This is your `Secret` as generated when you registered your application with Zepto |
         | `code` | The authorisation code returned with the user (ONE-TIME use) |
         | `redirect_uri` | Same URL used in step 3 |
 
     4. **Wrap-up**
 
-        Now that you have an access token and refresh token, you can interact with the Split API as the user related to the access token.
+        Now that you have an access token and refresh token, you can interact with the Zepto API as the user related to the access token.
         To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
 
 
@@ -242,21 +251,21 @@ info:
     [https://vimeo.com/246203244](https://vimeo.com/246203244).**
 
 
-    1. **Create a Split account**
+    1. **Create a Zepto account**
 
-        If you haven't already, you'll want to create a sandbox Split account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
+        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
 
-    2. **Register your application with Split**
+    2. **Register your application with Zepto**
 
         Sign in and create an OAuth2 application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications).
 
         Use the special Postman callback URL: `https://www.getpostman.com/oauth2/callback`
 
-        [![Split OAuth2 app setup](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)
+        [![Zepto OAuth2 app setup](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_app_setup.png)
 
     3. **In Postman, setup your environment variables**
 
-        We've included the **Split Payments Public Sandbox** environment to get you started. Select it in the top right corner of the window then click the <img class="inline-1" alt="Postman Quick-Look icon" src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_quick_look_icon.png" /> icon and click **edit**.
+        We've included the **Zepto Public Sandbox** environment to get you started. Select it in the top right corner of the window then click the <img class="inline-1" alt="Postman Quick-Look icon" src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_quick_look_icon.png" /> icon and click **edit**.
 
 
         [![Edit Postman environment](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_edit_environment.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_edit_environment.png)
@@ -283,17 +292,17 @@ info:
 
         Click **Request Token** and wait a few seconds and a browser window will popup
 
-        Sign in with your Split account (or any other Split account you want to authorise).
+        Sign in with your Zepto account (or any other Zepto account you want to authorise).
 
-        [![Signin Split to authorise via OAuth2](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png)
+        [![Sign in Zepto to authorise via OAuth2](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/split_oauth2_signin.png)
 
-        Click **Authorise** to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Split for the `access_token/refresh_token` pair. It will then store the `access_token/refresh_token` for you to use in subsequent API requests. The `access_token` effectively allows you to send requests via the API as the user who provided you authorisation.
+        Click **Authorise** to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Zepto for the `access_token/refresh_token` pair. It will then store the `access_token/refresh_token` for you to use in subsequent API requests. The `access_token` effectively allows you to send requests via the API as the user who provided you authorisation.
 
         [![Authorise OAuth2 app](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/oauth2_app_authorise.png)
 
     6. **You're now ready to use the API**
 
-        Select an endpoint from the Split collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.
+        Select an endpoint from the Zepto collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.
 
         [![Postman use token](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png)](https://raw.githubusercontent.com/splitpayments/public_assets/master/images/postman_use_token.png)
 
@@ -304,11 +313,11 @@ info:
     ## Authentication and Authorisation
 
 
-    Split uses OAuth2 over https to manage authentication and authorisation.
+    Zepto uses OAuth2 over https to manage authentication and authorisation.
 
 
     OAuth2 is a protocol that lets external applications request permission from
-    another Split user to send requests on their behalf without getting their
+    another Zepto user to send requests on their behalf without getting their
     password.
 
     This is preferred over Basic Authentication because access tokens can be
@@ -367,7 +376,7 @@ info:
     ```
 
 
-    When using the authorisation code grant above, Split will return a `refresh
+    When using the authorisation code grant above, Zepto will return a `refresh
     token` along with the access token. Access tokens are short lived and last 2
     hours but refresh tokens do not expire.
 
@@ -386,8 +395,9 @@ info:
 
     ## Making payments
 
-    To make outbound payments, you'll be looking to use the
-    [Payments](/#Split-API-Payments) endpoint:
+    In order to payout funds, you'll be looking to use the
+    [Payments](/#Split-API-Payments) endpoint. Whether you're paying out another
+    Zepto account holder or anyone, the process is the same:
 
 
     1. Add the recipient to your [Contact](/#add-a-contact) list.
@@ -407,15 +417,35 @@ info:
 
     * Lending
 
-
     ## Getting paid
 
-    In order to collect funds, use our Payment Requests to pull funds from your
-    customers using direct debit.
+    There are 2 ways to get paid:
 
 
     ### POSTing a [Payment Request](/#Split-API-Payment-Requests)
 
+
+    Provides the ability to send a Payment Request (get paid) to any Contact
+    that is either:
+
+
+    * A Zepto Contact (The contact has a Zepto account); **or**
+
+    * An Anyone Contact (The contact does not have a Zepto account) with an
+    accepted Agreement in place.
+
+
+    **For a Zepto Contact**:
+
+
+    * They will receive a request that they must approve via the Zepto UI or API
+    in order for the funds to flow from their bank account to yours.
+
+
+    * To automate the Payment Request approval, process you must first [enter
+    into an Agreement](/#Split-API-Agreements) with the Zepto Contact. Once the
+    Agreement is accepted, any future Payment Request will be automatically
+    approved and processed per the Agreement terms.
 
     Provides the ability to send a Payment Request (get paid) to any of
     your Contacts as long as there is an accepted Agreement in place.
@@ -458,7 +488,7 @@ info:
 
 
     Provides the ability to get paid once-off by a anyone whether they are a
-    Split account holder or not.
+    Zepto account holder or not.
 
 
     Usage notes:
@@ -522,7 +552,7 @@ info:
     ```
 
 
-    The Split API supports idempotency for safely retrying requests without
+    The Zepto API supports idempotency for safely retrying requests without
     accidentally performing the same operation twice.
 
     For example, if a [Payment](#Split-API-Payments) is `POST`ed and a there is
@@ -590,7 +620,7 @@ info:
 
     ```
 
-    The Split API returns two different types of error responses depending on the context.
+    The Zepto API returns two different types of error responses depending on the context.
 
 
     **Detailed error responses** are returned for:
@@ -603,7 +633,7 @@ info:
     * Idempotency
 
 
-    All other errors relating to Split specific resources(e.g. Contacts) will return the **Resource error response** style.
+    All other errors relating to Zepto specific resources(e.g. Contacts) will return the **Resource error response** style.
 
     <div class="middle-header">403 errors</div>
 
@@ -624,22 +654,22 @@ info:
     Consider the following scenario:
 
 
-    <blockquote class="main-quote">Split is integrated in your application to
-    handle payments.<br>A customer would like to use Split but does not yet have
-    Split account.<br>You already have some information about this
+    <blockquote class="main-quote">Zepto is integrated in your application to
+    handle payments.<br>A customer would like to use Zepto but does not yet have
+    Zepto account.<br>You already have some information about this
     customer.</blockquote>
 
 
     Given the above, in a standard implementation where a customer enables/uses
-    Split within your application, these are the steps they would follow:
+    Zepto within your application, these are the steps they would follow:
 
 
-    1. Click on some sort of button within your app to use Split.
+    1. Click on some sort of button within your app to use Zepto.
 
-    2. They get redirected to the Split sign in page (possibly via a popup or
+    2. They get redirected to the Zepto sign in page (possibly via a popup or
     modal).
 
-    3. Since they don't yet have a Split account, they would click on sign up.
+    3. Since they don't yet have a Zepto account, they would click on sign up.
 
     4. They would fill in all their signup details and submit.
 
@@ -655,7 +685,7 @@ info:
     In order to speed up the process, we allow query string params to be
     appended to the [authorisation URL](/#get-started). For instance, if we
     already have some information about the customer and know they probably
-    don't have a Split account, we can embed this information in the
+    don't have a Zepto account, we can embed this information in the
     authorisation URL.
 
 
@@ -672,7 +702,7 @@ info:
     <br><br>Deprecated values: `business_sign_up`, `personal_sign_up`.|
 
     | `nickname` | Only letters, numbers, dashes and underscores are permitted.
-    This will be used to identify the account in Split. |
+    This will be used to identify the account in Zepto. |
 
     | `name` | Business account only. Business name. |
 
@@ -760,17 +790,17 @@ info:
 
       1. Pay a contact with an invalid account number:
         * Initiate a Payment for <code>$0.54</code>.
-        * Split will mimic a successful debit from your bank account.
-        * Split will mimic a failure to credit the contact's bank account.
-        * Split will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.
+        * Zepto will mimic a successful debit from your bank account.
+        * Zepto will mimic a failure to credit the contact's bank account.
+        * Zepto will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.
       2. Pay a contact whilst having insufficient funds:
         * Initiate a Payment for <code>$0.11</code>.
-        * Split will mimic a failure to debit your bank account.
-        * Split will mark the debit as `returned` due to `insufficient_funds`.
-        * Split will void the scheduled credit to the contact's bank account.
+        * Zepto will mimic a failure to debit your bank account.
+        * Zepto will mark the debit as `returned` due to `insufficient_funds`.
+        * Zepto will void the scheduled credit to the contact's bank account.
       3. Request payment from a contact with a closed bank account:
         * Initiate a Payment Request for <code>$0.02</code>.
-        * Split will mimic a failure to debit the contact's bank account.
+        * Zepto will mimic a failure to debit the contact's bank account.
 
     ## NPP Payment failures
 
@@ -906,7 +936,7 @@ info:
 
     | `offline_access` | Create non-expiring access tokens for user |
 
-      <aside class="notice">Please use `offline_access` with discretion, as you'll have no direct way to invalidate the token. Please contact Split Payments immediately if any token may have potentially been compromised.</aside>
+      <aside class="notice">Please use `offline_access` with discretion, as you'll have no direct way to invalidate the token. Please contact Zepto immediately if any token may have potentially been compromised.</aside>
 
     ## Pagination
 
@@ -970,15 +1000,14 @@ info:
     ## Aggregation
 
 
-    Split will automatically aggregate debits that are:
+    Zepto will automatically aggregate debits that are:
 
 
     - From the same bank account; and
 
     - Have the same description; and
 
-    - Initiated by the same Split account.
-
+    - Initiated by the same Zepto account.
 
     Likewise for credits:
 
@@ -987,7 +1016,7 @@ info:
 
     - Have the same description; and
 
-    - Initiated by the same Split account.
+    - Initiated by the same Zepto account.
 
 
     Should you prefer debit aggregation to be disabled, please contact
@@ -1025,11 +1054,11 @@ info:
     We support two main categories of webhooks:
 
 
-    1. **Owner**: These webhooks are managed by the owner of the Split account
-    and only report on events owned by the Split account.
+    1. **Owner**: These webhooks are managed by the owner of the Zepto account
+    and only report on events owned by the Zepto account.
 
-    2. **App**: These webhooks are managed by the Split OAuth2 application owner
-    and will report on events relating to any authorised Split account (limited
+    2. **App**: These webhooks are managed by the Zepto OAuth2 application owner
+    and will report on events relating to any authorised Zepto account (limited
     by scope).
 
 
@@ -1045,9 +1074,9 @@ info:
 
     | » who | object | true | Who the webhook event relates to |
 
-    | »» account_id | string(uuid) | true | The Split account who's the owner of the event |
+    | »» account_id | string(uuid) | true | The Zepto account who's the owner of the event |
 
-    | »» bank_account_id | string(uuid) | true | The above Split account's bank account |
+    | »» bank_account_id | string(uuid) | true | The above Zepto account's bank account |
 
     | data | [object] | true | Array of response bodies |
 
@@ -1106,9 +1135,9 @@ info:
     ```
 
 
-    Split provides a `Split-Request-ID` header in the form of a `UUID` which
+    Zepto provides a `Split-Request-ID` header in the form of a `UUID` which
     uniquely identifies a webhook event. If the webhook event is
-    retried/retransmitted by Split, the UUID will remain the same. This allows
+    retried/retransmitted by Zepto, the UUID will remain the same. This allows
     you to check if a webhook event has been previously handled/processed.
 
 
@@ -1126,9 +1155,9 @@ info:
     ```
 
 
-    Split signs the webhook events it sends to your endpoints. We do so by
+    Zepto signs the webhook events it sends to your endpoints. We do so by
     including a signature in each event’s `Split-Signature` header. This allows
-    you to validate that the events were indeed sent by Split.
+    you to validate that the events were indeed sent by Zepto.
 
 
     Before you can verify signatures, you need to retrieve your endpoint’s
@@ -1409,7 +1438,7 @@ info:
     **Step 1. Extract the timestamp and signatures from the header**
 
 
-    Split the header, using the `.` (dot) character as the separator, to get a
+    Zepto the header, using the `.` (dot) character as the separator, to get a
     list of elements.
 
 
@@ -1511,9 +1540,8 @@ tags:
       agree on terms for which future Payment Requests will be auto-approved.
 
 
-      Split Agreements are managed on a per Contact basis, and if a Payment Request
+      Zepto Agreements are managed on a per Contact basis, and if a Payment Request
       is sent for an amount that exceeds the terms of the agreement, it will not be created.
-
 
       Please refer to the [What is an Agreement](http://help.split.cash/articles/3094575-what-is-an-agreement) article in our knowledge base for an overview.
 
@@ -1525,9 +1553,9 @@ tags:
 
       1. **Outgoing:** Agreement sent to one of your Contacts
 
-      2. **Outgoing:** Agreement sent to another Split account [Deprecated]
+      2. **Outgoing:** Agreement sent to another Zepto account [Deprecated]
 
-      3. **Incoming:** Agreement received from another Split account [Deprecated]
+      3. **Incoming:** Agreement received from another Zepto account [Deprecated]
 
 
       ##Lifecycle
@@ -1566,20 +1594,19 @@ tags:
   - name: Open Agreements
     description: >
       An Open Agreement is essentially an Agreement template with no specific
-      authoriser. Each time an Open Agreement is accepted by anyone, the
-      authoriser is added to your Contacts list and a new Agreement is
-      automatically created between the Open Agreement initiator and the authoriser.
+      authoriser. Each time an Open Agreement is accepted by either a Zepto
+      account holder or anyone, the authoriser is added to your Contacts list
+      and a new Agreement is automatically created between the Open Agreement
+      initiator and the authoriser.
 
 
       An Open Agreement can be accepted multiple times by different parties and
-      the result is always the same: A new Agreement.
-
-
-      Additionally, an Open Agreement can be accepted by anybody. This is achieved
-      by using our [Instant Account Verification process]
-      (http://help.split.cash/bank-accounts/instant-account-verification-iav)
-      as part of accepting an [Open Agreement](https://help.split.cash/agreements/open-agreement).
-
+      the result is the same: A new Agreement. Additionally, an Open Agreement
+      can be accepted by anybody, not just other Zepto users. This is achieved
+      by using our [Instant Account Verification
+      process](http://help.split.cash/bank-accounts/instant-account-verification-iav)
+      as part of accepting an [Open
+      Agreement](https://help.split.cash/agreements/open-agreement).
 
       ##Lifecycle
 
@@ -1602,7 +1629,7 @@ tags:
   - name: Bank Connections
     description: >
       Bank connections are read-only connections to your contacts' banking data. This
-      allows Split (and yourself) to make intelligent transactional decisions leading
+      allows Zepto (and yourself) to make intelligent transactional decisions leading
       to better outcomes.
 
 
@@ -1668,15 +1695,15 @@ tags:
       [Transactions](/#Split-API-Transactions).
 
         <aside class="notice">
-          Split no longer supports multiple Payouts within a single Payment request. A Payment request must only contain 1 Payout object.
+          Zepto no longer supports multiple Payouts within a single Payment request. A Payment request must only contain 1 Payout object.
         </aside>
 
 
       ### Payout Reversal
 
-      When Split is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer.
-      Furthermore, within the payout reversal credit, Split will include details in the `description` and under the `reversal_details` key
-       as to why the original credit to the recipient failed.
+      When Zepto is unable to credit funds to a recipient, we will automatically create a payout reversal credit back to the payer.
+      Furthermore, within the payout reversal credit, Zepto will include details in the `description` and under the `reversal_details` key
+      as to why the original credit to the recipient failed.
   - name: Payouts
     description: >
       This endpoint gives you some control over a transaction:
@@ -1706,7 +1733,7 @@ tags:
           1. Given the Payment Request is **not** within the terms of the Agreement, then it will not be created; **or**
           1. There is no Agreement in place, then it will not be created.
       1. **Your customer sends funds to you as a [Receivable Contact](/#add-a-receivable-contact):**
-          1. A *receivable* Payment Request will be automatically created and approved to identify the movement of funds from your customer to your chosen Split float account.
+          1. A *receivable* Payment Request will be automatically created and approved to identify the movement of funds from your customer to your chosen Zepto float account.
 
 
       ##Lifecycle
@@ -1736,7 +1763,7 @@ tags:
       <div class="middle-header">Prechecking</div>
 
 
-      When using Payment Requests to collect payments from your customer, Split will automatically check for available funds before **attempting to debit** the debtor.
+      When using Payment Requests to collect payments from your customer, Zepto will automatically check for available funds before **attempting to debit** the debtor.
       This check is only performed for contacts with an active [bank connection](/#Split-API-Bank-Connections).
   - name: Refunds
     description: >
@@ -1794,7 +1821,7 @@ tags:
       | `pending_verification` | The bank account must be verified before the
       transaction can proceed. |
 
-      | `paused` | The transaction has temporary been paused by Split pending
+      | `paused` | The transaction has temporary been paused by Zepto pending
       internal review. |
 
       | `prefailed` | The transaction was never submitted to the bank because we
@@ -1875,7 +1902,7 @@ tags:
 
       | `user_voided` | Voided by payout initiator |
 
-      | `admin_voided` | Voided by Split Payments admin |
+      | `admin_voided` | Voided by Zepto admin |
 
 
       <aside class="notice">
@@ -1884,7 +1911,7 @@ tags:
   - name: Transfers
     description: >
 
-      This endpoint lets you Transfer funds between any bank & float accounts registered under your Split account:
+      This endpoint lets you Transfer funds between any bank & float accounts registered under your Zepto account:
 
 
       1. **From**: Bank Account **To**: Float Account:
@@ -2581,8 +2608,8 @@ paths:
         - Payouts
       summary: Retry a Prefailed Payment Request [DEPRECATED]
       description: |
-        When debitting a Contact with an active bank connection, Split will first ensure that there are sufficient funds available before submitting the debit to the banks.
-        If a high probability of insufficient funds is detected, Split will not submit the transaction to the banks and will mark the transaction as <strong>Prefailed</strong>.
+        When debitting a Contact with an active bank connection, Zepto will first ensure that there are sufficient funds available before submitting the debit to the banks.
+        If a high probability of insufficient funds is detected, Zepto will not submit the transaction to the banks and will mark the transaction as <strong>Prefailed</strong>.
 
         This endpoint allows you to retry the Payment Request without having to create a brand new transaction.
 
@@ -2855,7 +2882,7 @@ paths:
       tags:
         - Transactions
       summary: List all transactions
-      description: '<aside class="notice">By default, Split will search and return all transactions created in the <strong>last 30 days</strong>. You can adjust this up to <strong>1 year</strong> by defining the <code>min_created_date</code> query string parameter defined below.</aside>'
+      description: '<aside class="notice">By default, Zepto will search and return all transactions created in the <strong>last 30 days</strong>. You can adjust this up to <strong>1 year</strong> by defining the <code>min_created_date</code> query string parameter defined below.</aside>'
       operationId: ListAllTransactions
       parameters:
         - name: page
@@ -3337,7 +3364,7 @@ components:
             initiator_id:
               type: string
               format: uuid
-              description: Your Split account ID
+              description: Your Zepto account ID
             authoriser_id:
               type: string
               format: uuid
@@ -3345,7 +3372,7 @@ components:
             contact_id:
               type: string
               format: uuid
-              description: The contact ID representing the authoriser within Split
+              description: The contact ID representing the authoriser within Zepto
             bank_account_id:
               type: string
               format: uuid
@@ -3467,7 +3494,7 @@ components:
             available_balance: null
           - id: ab3de19b-709b-4a41-82a5-3b43b3dc58c9
             branch_code: '802919'
-            bank_name: Split Float Account
+            bank_name: Zepto Float Account
             account_number: '1748212'
             status: active
             title: 'Float Account'
@@ -3770,15 +3797,15 @@ components:
                   type: string
                   min: 5
                   max: 9
-                  description: 'Split generated account number (Min: 5 - Max: 9)'
+                  description: 'Zepto generated account number (Min: 5 - Max: 9)'
                 branch_code:
                   type: string
                   min: 6
                   max: 6
-                  description: 'Split branch code (Min: 6 - Max: 6)'
+                  description: 'Zepto branch code (Min: 6 - Max: 6)'
                 bank_name:
                   type: string
-                  description: Fixed to 'Split Float Acount'
+                  description: Fixed to 'Zepto Float Acount'
                 state:
                   type: string
                   description: Fixed to 'Active'
@@ -3796,10 +3823,10 @@ components:
                   properties:
                     debits_blocked:
                       type: boolean
-                      description: Used by Split admins. Defines whether the bank account is blocked from being debited
+                      description: Used by Zepto admins. Defines whether the bank account is blocked from being debited
                     credits_blocked:
                       type: boolean
-                      description: Used by Split admins. Defined Whether this bank account is blocked from being credited
+                      description: Used by Zepto admins. Defined Whether this bank account is blocked from being credited
             anyone_account:
               type: object
               properties:
@@ -3844,7 +3871,7 @@ components:
             id: 55afddde-4296-4daf-8e49-7ba481ef9608
             account_number: '1408281'
             branch_code: '802919'
-            bank_name: Split Float Account
+            bank_name: Zepto Float Account
             state: active
             iav_provider: null
             iav_status: null
@@ -3874,7 +3901,7 @@ components:
           - id: 6a7ed958-f1e8-42dc-8c02-3901d7057357
             name: Outstanding Tours Pty Ltd
             email: accounts@outstandingtours.com.au
-            type: Split account
+            type: Zepto account
             bank_account:
               id: 095c5ab7-7fa8-40fd-b317-cddbbf4c8fbc
               account_number: '494307'
@@ -3891,7 +3918,7 @@ components:
           - id: 49935c67-c5df-4f00-99f4-1413c18a89a0
             name: Adventure Dudes Pty Ltd
             email: accounts@adventuredudes.com.au
-            type: Split account
+            type: Zepto account
             bank_account:
               id: 861ff8e4-7acf-4897-9e53-e7c5ae5f7cc0
               account_number: '4395959'
@@ -3908,7 +3935,7 @@ components:
           - id: eb3266f9-e172-4b6c-b802-fe5ac4d3250a
             name: Surfing World Pty Ltd
             email: accounts@surfingworld.com.au
-            type: Split account
+            type: Zepto account
             bank_account:
               id: null
               account_number: null
@@ -4066,7 +4093,7 @@ components:
               type: string
               description: (Deprecated) The Contact account type
               enum:
-                - Split account
+                - Zepto account
                 - anyone
             metadata:
               $ref: '#/components/schemas/Metadata'
@@ -4113,10 +4140,10 @@ components:
                   properties:
                     debits_blocked:
                       type: boolean
-                      description: Used by Split admins. Defines whether the bank account is blocked from being debited
+                      description: Used by Zepto admins. Defines whether the bank account is blocked from being debited
                     credits_blocked:
                       type: boolean
-                      description: Used by Split admins. Defined Whether this bank account is blocked from being credited
+                      description: Used by Zepto admins. Defined Whether this bank account is blocked from being credited
             anyone_account:
               type: object
               properties:
@@ -4242,7 +4269,7 @@ components:
             id: 55afddde-4296-4daf-8e49-7ba481ef9608
             account_number: '99887766'
             branch_code: '123456'
-            bank_name: Split SANDBOX Bank
+            bank_name: Zepto SANDBOX Bank
             state: active
             iav_provider: null
             iav_status: null
@@ -4327,9 +4354,9 @@ components:
           example: 48b89364-1577-4c81-ba02-96705895d457
         metadata:
           type: Metadata
-          description: Use for your custom data and certain Split customisations. Stored against generated transactions and included in associated webhook payloads.
-    VoidAPayment:
-      title: Void a Payment (request)
+          description: Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.
+    VoidAPayoutRequest:
+      title: Void a Payout (request)
       type: object
       properties:
         details:
@@ -4339,7 +4366,7 @@ components:
     Metadata:
       title: Metadata
       type: object
-      description: Use for your custom data and certain Split customisations.
+      description: Use for your custom data and certain Zepto customisations.
       properties: {}
       example:
         custom_key: Custom string
@@ -4492,7 +4519,7 @@ components:
           example: 9c70871d-8e36-4c3e-8a9c-c0ee20e7c679
         metadata:
           type: object
-          description: Use for your custom data and certain Split customisations. Stored against generated transactions and included in associated webhook payloads.
+          description: Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.
       example:
         description: Visible to both initiator and authoriser
         matures_at: 2016-12-19T02:10:56Z
@@ -4544,7 +4571,7 @@ components:
             authoriser_contact_id:
               type: string
               format: uuid
-              description: 'The contact ID representing the debtor within Split (Min: 36 - Max: 36)'
+              description: 'The contact ID representing the debtor within Zepto (Min: 36 - Max: 36)'
             contact_initiated:
               type: boolean
               description: Initiated by Contact or Merchant
@@ -4634,7 +4661,7 @@ components:
         errors:
           type: string
       example:
-        errors: Authoriser contact (de86472c-c027-4735-a6a7-234366a27fc7) is not a Split account holder and therefore must have a valid agreement in place before a Payment Request can be issued.
+        errors: Authoriser contact (de86472c-c027-4735-a6a7-234366a27fc7) is not a Zepto account holder and therefore must have a valid agreement in place before a Payment Request can be issued.
     GetAPaymentRequestResponse:
       title: Get a Payment Request (response)
       required:
@@ -4675,7 +4702,7 @@ components:
             authoriser_contact_id:
               type: string
               format: uuid
-              description: 'The contact ID representing the debtor within Split (Min: 36 - Max: 36)'
+              description: 'The contact ID representing the debtor within Zepto (Min: 36 - Max: 36)'
             schedule_ref:
               type: string
               description: 'The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)'
@@ -4796,7 +4823,7 @@ components:
               authoriser_contact_id:
                 type: string
                 format: uuid
-                description: The contact ID representing the debtor within Split
+                description: The contact ID representing the debtor within Zepto
               contact_initiated:
                 type: boolean
                 description: Initiated by Contact or Merchant
@@ -4936,7 +4963,7 @@ components:
               authoriser_contact_id:
                 type: string
                 format: uuid
-                description: The contact ID representing the debtor within Split
+                description: The contact ID representing the debtor within Zepto
               contact_initiated:
                 type: boolean
                 description: Initiated by Contact or Merchant
@@ -5459,7 +5486,7 @@ components:
             id:
               type: string
               format: uuid
-              description: A unique ID which can be provided to Split for debugging purposes
+              description: A unique ID which can be provided to Zepto for debugging purposes
             payid_email:
               type: string
               min: 6
@@ -5571,7 +5598,7 @@ components:
               description: 'The Transfer request reference (T.*) (Min: 4 - Max: 8)'
             initiator_id:
               type: string
-              description: 'Initiating Split Account'
+              description: 'Initiating Zepto Account'
             from_bank_account_id:
               type: string
               description: 'The source bank/float account (UUID)'
