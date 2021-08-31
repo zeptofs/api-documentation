@@ -914,7 +914,7 @@ To protect against timing attacks, use a constant-time string comparison to comp
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
-- **2021-08-13** - Added PayID pool references to */contacts/receivable* and */bank_accounts* endpoints
+- **2021-08-31** - Added PayID pool references to */contacts/receivable* and */bank_accounts* endpoints
 - **2021-07-01** - Added $1.65 amount for Sandbox simulated failures and minor tweaks
 - **2021-06-08** - Added Transfers, Payment Channel selection, Receivable Refunds
 - **2021-05-21** - Added new Payment Request endpoints, updated Postman collection
@@ -2648,10 +2648,9 @@ Receive funds from a Contact by allowing them to pay to a personalised PayID or 
     <li><strong>alias_name</strong>: the business name that will be displayed to your customers upon PayID resolution. We suggest using a shortened name appropriate for mobile displays</li>
 </aside>
 <aside class="notice">
-  When creating this type of Contact with a PayID pool configured, ensure payid_email_domain is provided to be assigned a pre-activated PayID for given domain.
-</aside>
-<aside class="notice">
-  When creating this type of Contact with a given payid_email, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it will transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
+  There are two strategies supported for PayID assignment when creating this type of Contact:
+  <li><strong>On-demand PayID activation</strong>: provide <code>payid_email</code> to activate a PayID with the given email address. The initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it will transition to <code>active</code>. We suggest you use webhooks to be informed of this state change.</li>
+  <li><strong>Pre-activated PayID from pool</strong>: provide <code>payid_email_domain</code> to be assigned a pre-activated PayID from your configured PayID pool. The PayID email address will be automatically generated using your configured PayID pool email domain. Providing both <code>payid_email</code> and <code>payid_email_domain</code> will not assign a pre-activated PayID from your configured PayID pool, you will receive a pending PayID for the given <code>payid_email</code>.</li>
 </aside>
 <aside class="notice">
   While unlikely, it is possible that we will be unable to register the given PayID. In this case <code>payid_details.state</code> will transition to <code>failed</code>.
