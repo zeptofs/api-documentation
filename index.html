@@ -2008,6 +2008,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-08-31</strong> - Added PayID pool references to <em>/contacts/receivable</em> and <em>/bank_accounts</em> endpoints</li>
 <li><strong>2021-07-01</strong> - Added $1.65 amount for Sandbox simulated failures and minor tweaks</li>
 <li><strong>2021-06-08</strong> - Added Transfers, Payment Channel selection, Receivable Refunds</li>
 <li><strong>2021-05-21</strong> - Added new Payment Request endpoints, updated Postman collection</li>
@@ -2814,7 +2815,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="nl">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1748212"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float Account"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+      </span><span class="nl">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"payid_configs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email_domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pay.zepto.com.au"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pooling_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"max_pool_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"current_pool_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3867,7 +3874,9 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 </aside>
 
 <aside class="notice">
-  When creating this type of Contact, the initial response <code>payid_details.state</code> value will always be <code>pending</code>. After a few seconds, it will transition to <code>active</code>. We suggest you use webhooks to be informed of this state change
+  There are two strategies supported for PayID assignment when creating this type of Contact:
+  <li><strong>On-demand PayID</strong>: provide a <code>payid_email</code> and we'll create a contact and register a PayID with the given email address. The PayID registration process happens when the request is received. The initial response for <code>payid_details.state</code> will always be <code>pending</code>. It will transition to <code>active</code> when the PayID registration process is complete. This can take up to a few seconds. You can use webhooks to be informed of this state change.</li>
+  <li><strong>Pooled PayID</strong>: provide your <code>payid_email_domain</code> and we'll create a contact and assign them a PayID from your pool. Pooled PayIDs are pre-registered. The PayID email value is generated using a random value and the email domain from your PayID pool configuration. Providing both <code>payid_email</code> and <code>payid_email_domain</code> will ignore your pool and use the "On-demand PayID" strategy instead.</li>
 </aside>
 
 <aside class="notice">
@@ -3929,8 +3938,15 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>» payid_email</td>
 <td>body</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>Contact PayID email (Min: 6 - Max: 256)</td>
+</tr>
+<tr>
+<td>» payid_email_domain</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>PayID pool email domain (Min: 3 - Max: 254)</td>
 </tr>
 <tr>
 <td>» metadata</td>
@@ -11631,7 +11647,13 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
       </span><span class="nl">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1748212"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float Account"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+      </span><span class="nl">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"payid_configs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email_domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pay.zepto.com.au"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pooling_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"max_pool_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"current_pool_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -12074,8 +12096,14 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <tr>
 <td>payid_email</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>Contact PayID email (Min: 6 - Max: 256)</td>
+</tr>
+<tr>
+<td>payid_email_domain</td>
+<td>string</td>
+<td>false</td>
+<td>PayID pool email domain (Min: 3 - Max: 254)</td>
 </tr>
 <tr>
 <td>metadata</td>
