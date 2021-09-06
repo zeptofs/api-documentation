@@ -1684,7 +1684,7 @@ By default, all Bank Accounts will be returned.
       "title": "Float Account",
       "available_balance": 10000,
       "payid_configs": {
-        "email_domain": "pay.splitpayments.com",
+        "email_domain": "pay.zepto.com.au",
         "pooling_state": "disabled",
         "max_pool_size": 10,
         "current_pool_size": 1
@@ -9433,7 +9433,7 @@ func main() {
       "title": "Float Account",
       "available_balance": 10000,
       "payid_configs": {
-        "email_domain": "pay.splitpayments.com",
+        "email_domain": "pay.zepto.com.au",
         "pooling_state": "disabled",
         "max_pool_size": 10,
         "current_pool_size": 1
