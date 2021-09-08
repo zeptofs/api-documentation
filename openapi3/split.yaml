@@ -1122,6 +1122,9 @@ info:
     4. We guarantee at least 1 delivery attempt.
 
 
+    **For redelivery of webhooks, check out our [Webhook/WebhookDelivery API endpoints](#Zepto-API-Webhooks).**
+
+
     ### Request ID
 
 
@@ -1438,7 +1441,7 @@ info:
     **Step 1. Extract the timestamp and signatures from the header**
 
 
-    Zepto the header, using the `.` (dot) character as the separator, to get a
+    Split the header, using the `.` (dot) character as the separator, to get a
     list of elements.
 
 
@@ -3294,6 +3297,155 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetUserDetailsResponse'
+  /webhooks:
+    get:
+      tags:
+        - Webhooks
+      summary: List all webhooks
+      description: "List all your application's webhook configurations."
+      operationId: GetWebhooks
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAllWebhooksResponse'
+        '404':
+          description: Not Found
+
+  '/webhooks/{webhook_id}/deliveries':
+    get:
+      tags:
+        - Webhooks
+      summary: List deliveries for a webhook
+      description: 'NOTE: Webhook deliveries are stored for 30 days.'
+      operationId: GetWebhookDeliveries
+      parameters:
+        - name: webhook_id
+          in: path
+          description: 'Single value, exact match'
+          required: true
+          style: simple
+          schema:
+            type: string
+          example: 31918dce-2dc3-405b-8d3c-fd3901b17e9f
+        - name: per_page
+          in: query
+          description: 'Number of results per page, single value, exact match'
+          required: false
+          style: simple
+          schema:
+            type: string
+          example: 20
+        - name: starting_after
+          in: query
+          description: 'Display all webhook deliveries after this webhook delivery offset UUID, single value, exact match'
+          required: false
+          style: simple
+          schema:
+            type: string
+            format: uuid
+          example: 31918dce-2dc3-405b-8d3c-fd3901b17e9f
+        - name: event_type
+          in: query
+          description: 'See ([Data schemas](/#data-schemas)) for a list of possible values, single value, exact match'
+          required: false
+          style: form
+          explode: false
+          schema:
+            type: string
+            enum: ['See ([Data schemas](/#data-schemas))']
+          example: 'agreement.accepted'
+        - name: since
+          in: query
+          required: false
+          description: 'Display all webhook deliveries after this date. Date/time UTC ISO 8601 format, single value, exact match'
+          style: form
+          schema:
+            type: string
+            format: date-time
+          example: '2017-05-10T00:00:00Z'
+        - name: response_status_code
+          in: query
+          description: 'Single value, exact match'
+          required: false
+          style: simple
+          schema:
+            type: string
+            enum: [2xx, 4xx, 5xx]
+          example: '418'
+        - name: state
+          in: query
+          description: 'Filter deliveries by state, single value, exact match. See [Our delivery promise](#our-delivery-promises)'
+          required: false
+          style: simple
+          schema:
+            type: string
+            enum: [pending, completed, retrying, failed]
+          example: 'delivered'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWebhookDeliveriesResponse'
+        '404':
+          description: Not Found
+  '/webhook_deliveries/{id}':
+    get:
+      tags:
+        - Webhooks
+      summary: Get a Webhook Delivery
+      description: Get a single webhook delivery by ID.
+      operationId: GetAWebhookDelivery
+      parameters:
+        - name: id
+          in: path
+          description: WebhookDelivery ID (`WebhookDelivery.data.id`)
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: UUID
+          example: 31918dce-2dc3-405b-8d3c-fd3901b17e9f
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAWebhookDeliveryResponse'
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - Webhooks
+      summary: Resend a Webhook Delivery
+      description: >
+        Use this endpoint to resend a failed webhook delivery.
+      operationId: ResendAWebhookDelivery
+      parameters:
+        - name: id
+          in: path
+          description: WebhookDelivery ID (`WebhookDelivery.data.id`)
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: UUID
+          example: 31918dce-2dc3-405b-8d3c-fd3901b17e9f
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedeliverAWebhookDeliveryResponse'
   /simulate/incoming_payid_payment:
     post:
       tags:
@@ -5654,5 +5806,128 @@ components:
           amount: 230
           description: Transfer to my other Float account
           matures_at: '2021-05-03T00:00:00Z'
+    ListAllWebhooksResponse:
+      title:  List all Webhooks (response)
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          required: true
+          type: array
+          items:
+            type: object
+      example:
+        data:
+        - id: 13bd760e-447f-4225-b801-0777a15da131
+          url: "https://webhook.site/a9a3033b-90eb-44af-9ba3-29972435d10e"
+          signature_secret: "8fad2f5570e6bf0351728f727c5a8c770dda646adde049b866a7800d59"
+          events:
+          - debit.cleared
+          - credit.cleared
+    GetWebhookDeliveriesResponse:
+      properties:
+        data:
+          required: true
+          type: array
+          items:
+            type: object
+      example:
+        data:
+        - id: 957d40a4-80f5-4dd2-8ada-8242d5ad66c1
+          event_type: payout_request.added
+          state: completed
+          response_status_code: 200
+          created_at: 2021-09-02T02:24:50Z
+          payload_data_summary:
+          - ref: PR.ct5b
+        - id: 29bb9835-7c69-4ecb-bf96-197d089d0ec3
+          event_type: creditor_debit.scheduled
+          state: completed
+          response_status_code: 200
+          created_at: 2021-09-02T02:24:50Z
+          payload_data_summary:
+          - ref: "D.hyy9"
+          - ref: "D.6st93"
+    GetAWebhookDeliveryResponse:
+      title: Get a WebhookDelivery (response)
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: The Webhook Delivery ID
+            webhook_id:
+              type: string
+              format: uuid
+              description: The Webhook ID
+            state:
+              type: string
+              description: The state of the webhook delivery.
+              enum:
+                - pending
+                - completed
+                - retrying
+                - failed
+            payload:
+              type: object
+              description: Could be anything
+            created_at:
+              type: string
+              format: date-time
+              description: When the webhook delivery was created
+      example:
+        data:
+          id: 957d40a4-80f5-4dd2-8ada-8242d5ad66c1
+          webhook_id: 13bd760e-447f-4225-b801-0777a15da131
+          event_type: "payout_request.added"
+          state: "completed"
+          payload:
+            data:
+            - ref: PR.ct5b
+              payout:
+                amount: 1501
+                matures_at: 2021-09-02T02:24:49Z
+                description: Payment from Incoming Test Payment Contact 014209 12345678 (Test Payment)
+              status: approved
+              created_at: 2021-09-02T02:24:49Z
+              credit_ref: C.p2rt
+              matures_at: 2021-09-02T02:24:49Z
+              initiator_id: b50a6e92-a5e1-4175-b560-9e4c9a9bb4b9
+              responded_at: 2021-09-02T02:24:49Z
+              schedule_ref: null
+              authoriser_id: 780f186c-80fd-42b9-97d5-650d99a0bc99
+              status_reason: null
+              your_bank_account_id: b50a6e92-a5e1-4175-b560-9e4c9a9bb4b9
+              authoriser_contact_id: 590be205-6bae-4070-a9af-eb50d514cec5
+              authoriser_contact_initiated: true
+            - event:
+                at: 2021-09-02T02:24:49Z
+                who:
+                  account_id: 20f4e3f8-2efc-48a9-920b-541515f1c9e3
+                  account_type: Account
+                  bank_account_id: b50a6e92-a5e1-4175-b560-9e4c9a9bb4b9
+                  bank_account_type: BankAccount
+                type: payment_request.added
+        response_status_code: 200
+        created_at: 2021-09-02T02:24:50Z
+    RedeliverAWebhookDeliveryResponse:
+      title: Resend a WebhookDelivery (response)
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: object
+      example:
+        data:
+          id: 957d40a4-80f5-4dd2-8ada-8242d5ad66c1
+          webhook_id: 13bd760e-447f-4225-b801-0777a15da131
+          state: pending
 security:
   - bearerAuth: []
