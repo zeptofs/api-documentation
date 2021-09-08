@@ -1497,6 +1497,7 @@ info:
 
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+    - **2021-09-08** - Added Webhooks and Webhook Delivery endpoints
 
     - **2021-08-31** - Added PayID pool references to */contacts/receivable* and */bank_accounts* endpoints
 
@@ -2191,7 +2192,7 @@ paths:
   /contacts/receivable:
     post:
       tags:
-        - Contacts
+        - Contacts (Receivable)
       summary: Add a Receivable Contact
       description: |
         Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error & improving your customer's experience.
@@ -2232,6 +2233,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AddAReceivableContactResponse'
+        '404':
+          description: Not Found
+  '/contacts/{contact_id}/receivable/disable':
+    post:
+      tags:
+        - Contacts (Receivable)
+      summary: Disable a Receivable Contact
+      description: |
+        This endpoint should be used to Disable a Receivable Contact.
+
+        This will reject all payments made to the relevant Account number or PayID and return them to your customer. Payments made via DE and NPP will be rejected.
+      operationId: DisableAReceivableContact
+      parameters:
+        - name: id
+          in: path
+          description: Receivable Contact ID (`ReceivableContact.data.id`)
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: UUID
+          example: 2d2429c2-b868-455e-80ef-915df7c115a7
+      responses:
+        '204':
+          description: No Content (success)
+        '400':
+          description: Bad Request (errors)
+        '404':
+          description: Not Found
+  '/contacts/{contact_id}/receivable/activate':
+    post:
+      tags:
+        - Contacts (Receivable)
+      summary: Reactivate a Receivable Contact
+      description: |
+        This endpoint should be used to Reactivate a Receivable Contact that has been previously Disabled.
+
+        This will once again allow you to receive funds from your customer via both DE and NPP channels.
+      operationId: ActivateAReceivableContact
+      parameters:
+        - name: id
+          in: path
+          description: Receivable Contact ID (`ReceivableContact.data.id`)
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: UUID
+          example: 2d2429c2-b868-455e-80ef-915df7c115a7
+      responses:
+        '204':
+          description: No Content (success)
+        '400':
+          description: Bad Request (errors)
         '404':
           description: Not Found
   /contacts:
@@ -4438,6 +4495,8 @@ components:
         - description
         - matures_at
         - payouts
+        - your_bank_account_id
+        - channels
       type: object
       properties:
         description:

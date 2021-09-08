@@ -439,9 +439,6 @@
                     <a href="#add-a-contact" class="toc-h2 toc-link" data-title="Add a Contact">Add a Contact</a>
                   </li>
                   <li>
-                    <a href="#add-a-receivable-contact" class="toc-h2 toc-link" data-title="Add a Receivable Contact">Add a Receivable Contact</a>
-                  </li>
-                  <li>
                     <a href="#list-all-contacts" class="toc-h2 toc-link" data-title="List all Contacts">List all Contacts</a>
                   </li>
                   <li>
@@ -455,6 +452,20 @@
                   </li>
                   <li>
                     <a href="#refresh-contact-bank-connection" class="toc-h2 toc-link" data-title="Refresh contact bank connection">Refresh contact bank connection</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#Zepto-API-Contacts--Receivable-" class="toc-h1 toc-link" data-title="Contacts (Receivable)">Contacts (Receivable)</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#add-a-receivable-contact" class="toc-h2 toc-link" data-title="Add a Receivable Contact">Add a Receivable Contact</a>
+                  </li>
+                  <li>
+                    <a href="#disable-a-receivable-contact" class="toc-h2 toc-link" data-title="Disable a Receivable Contact">Disable a Receivable Contact</a>
+                  </li>
+                  <li>
+                    <a href="#reactivate-a-receivable-contact" class="toc-h2 toc-link" data-title="Reactivate a Receivable Contact">Reactivate a Receivable Contact</a>
                   </li>
               </ul>
           </li>
@@ -2036,25 +2047,23 @@ class MainClass {
 
 <aside class="notice">The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.</aside>
 <h1 id='changelog'>Changelog</h1>
-<p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
-
-<ul>
-<li><strong>2021-08-31</strong> - Added PayID pool references to <em>/contacts/receivable</em> and <em>/bank_accounts</em> endpoints</li>
-<li><strong>2021-07-01</strong> - Added $1.65 amount for Sandbox simulated failures and minor tweaks</li>
-<li><strong>2021-06-08</strong> - Added Transfers, Payment Channel selection, Receivable Refunds</li>
-<li><strong>2021-05-21</strong> - Added new Payment Request endpoints, updated Postman collection</li>
-<li><strong>2021-05-03</strong> - Deprecated <em>/payments_requests/outgoing</em> endpoint</li>
-<li><strong>2021-04-20</strong> - Removed deprecated API references, refreshed Refunds and Payout descriptions</li>
-<li><strong>2021-03-17</strong> - Remove note indicating single active bank account limitation</li>
-<li><strong>2021-03-12</strong> - Add ref to GetAContactResponse</li>
-<li><strong>2021-02-24</strong> - Added details on enabling the Receivable Contact feature and amended the POST/contacts/receivable response body</li>
-<li><strong>2020-12-17</strong> - Add Sandbox Only API endpoints</li>
-<li><strong>2020-12-17</strong> - Enhance response schema for several endpoints</li>
-<li><strong>2020-12-16</strong> - Add webhook schema table</li>
-<li><strong>2020-12-15</strong> - Improve webhooks section</li>
-<li><strong>2020-12-15</strong> - Re-word Payment Requests introduction to better cover its use with Receivable Contacts.</li>
-<li><strong>2020-12-15</strong> - Add changelog</li>
-</ul>
+<p>We take backwards compatibility seriously. The following list contains backwards compatible changes:
+- <strong>2021-09-08</strong> - Added Webhooks and Webhook Delivery endpoints
+- <strong>2021-08-31</strong> - Added PayID pool references to <em>/contacts/receivable</em> and <em>/bank_accounts</em> endpoints
+- <strong>2021-07-01</strong> - Added $1.65 amount for Sandbox simulated failures and minor tweaks
+- <strong>2021-06-08</strong> - Added Transfers, Payment Channel selection, Receivable Refunds
+- <strong>2021-05-21</strong> - Added new Payment Request endpoints, updated Postman collection
+- <strong>2021-05-03</strong> - Deprecated <em>/payments_requests/outgoing</em> endpoint
+- <strong>2021-04-20</strong> - Removed deprecated API references, refreshed Refunds and Payout descriptions
+- <strong>2021-03-17</strong> - Remove note indicating single active bank account limitation
+- <strong>2021-03-12</strong> - Add ref to GetAContactResponse
+- <strong>2021-02-24</strong> - Added details on enabling the Receivable Contact feature and amended the POST/contacts/receivable response body
+- <strong>2020-12-17</strong> - Add Sandbox Only API endpoints
+- <strong>2020-12-17</strong> - Enhance response schema for several endpoints
+- <strong>2020-12-16</strong> - Add webhook schema table
+- <strong>2020-12-15</strong> - Improve webhooks section
+- <strong>2020-12-15</strong> - Re-word Payment Requests introduction to better cover its use with Receivable Contacts.
+- <strong>2020-12-15</strong> - Add changelog</p>
 
 <p>Looking for more? Our docs are open sourced! <a href="https://github.com/splitpayments/api-documentation">https://github.com/splitpayments/api-documentation</a></p>
 
@@ -3753,304 +3762,6 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td><a href="#schemaaddananyonecontactresponse">AddAnAnyoneContactResponse</a></td>
 </tr>
 </tbody></table>
-<h2 id='add-a-receivable-contact'>Add a Receivable Contact</h2>
-<p><a id="opIdAddAReceivableContact"></a></p>
-
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="se">\</span>
-  <span class="nt">--url</span> https://api.sandbox.split.cash/contacts/receivable <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'{"name":"Delphine Jestin","email":"delphine@gmail.com","payid_email":"delphine_123@merchant.com.au","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
-</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
-<span class="nb">require</span> <span class="s1">'net/http'</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/contacts/receivable"</span><span class="p">)</span>
-
-<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
-<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
-<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
-
-<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Delphine Jestin</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">delphine@gmail.com</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">payid_email</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">delphine_123@merchant.com.au</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/contacts/receivable</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
-
-  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
-  <span class="p">});</span>
-
-  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-  <span class="p">});</span>
-<span class="p">});</span>
-
-<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Delphine Jestin</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">delphine@gmail.com</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">payid_email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">delphine_123@merchant.com.au</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Custom string</span><span class="dl">'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Maybe a URL</span><span class="dl">'</span> <span class="p">}</span>
-<span class="p">}));</span>
-<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
-
-<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Delphine Jestin</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine@gmail.com</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payid_email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine_123@merchant.com.au</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span>
-
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
-    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
-    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
-    <span class="p">}</span>
-
-<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/contacts/receivable"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/contacts/receivable"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"name\":\"Delphine Jestin\",\"email\":\"delphine@gmail.com\",\"payid_email\":\"delphine_123@merchant.com.au\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
-
-<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
-<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
-
-<span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Message\Body</span><span class="p">;</span>
-<span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">append</span><span class="p">(</span><span class="s1">'{"name":"Delphine Jestin","email":"delphine@gmail.com","payid_email":"delphine_123@merchant.com.au","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span><span class="p">);</span>
-
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/contacts/receivable'</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
-
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
-<span class="p">));</span>
-
-<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
-<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
-
-<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
-
-<span class="k">import</span> <span class="p">(</span>
-    <span class="s">"fmt"</span>
-    <span class="s">"strings"</span>
-    <span class="s">"net/http"</span>
-    <span class="s">"io/ioutil"</span>
-<span class="p">)</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-
-    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/contacts/receivable"</span>
-
-    <span class="n">payload</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Delphine Jestin</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine@gmail.com</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payid_email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine_123@merchant.com.au</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span><span class="p">)</span>
-
-    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-
-    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
-    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
-    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
-
-    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-
-    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
-    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
-
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
-
-<span class="p">}</span>
-</code></pre></div>
-<p><code>POST /contacts/receivable</code></p>
-
-<p>Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error &amp; improving your customer&#39;s experience.</p>
-
-<aside class="notice">
-  To enable this feature, please contact our support team with the following information:
-    <li>Your full legal business name</li>
-    <li>A legally owned domain name: for your PayID email addresses</li>
-    <li><strong>alias_name</strong>: the business name that will be displayed to your customers upon PayID resolution. We suggest using a shortened name appropriate for mobile displays</li>
-</aside>
-
-<aside class="notice">
-  There are two strategies supported for PayID assignment when creating this type of Contact:
-  <li><strong>On-demand PayID</strong>: provide a <code>payid_email</code> and we'll create a contact and register a PayID with the given email address. The PayID registration process happens when the request is received. The initial response for <code>payid_details.state</code> will always be <code>pending</code>. It will transition to <code>active</code> when the PayID registration process is complete. This can take up to a few seconds. You can use webhooks to be informed of this state change.</li>
-  <li><strong>Pooled PayID</strong>: provide your <code>payid_email_domain</code> and we'll create a contact and assign them a PayID from your pool. Pooled PayIDs are pre-registered. The PayID email value is generated using a random value and the email domain from your PayID pool configuration. Providing both <code>payid_email</code> and <code>payid_email_domain</code> will ignore your pool and use the "On-demand PayID" strategy instead.</li>
-</aside>
-
-<aside class="notice">
-  While unlikely, it is possible that we will be unable to register the given PayID. In this case <code>payid_details.state</code> will transition to <code>failed</code>.
-
-  You can simulate this path in sandbox by adding <code>+failure</code> to your <code>payid_email</code> e.g <code>test+failure@split.cash</code>
-</aside>
-
-<aside class="notice">
-  You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="#simulate-incoming-payid-payment">PayID simulation endpoint</a>.
-</aside>
-
-<blockquote>
-<p>Body parameter</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Delphine Jestin"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine@gmail.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"payid_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine_123@merchant.com.au"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<h3 id="Add-a-Receivable-Contact-parameters" class="parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>In</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>body</td>
-<td>body</td>
-<td><a href="#schemaaddareceivablecontactrequest">AddAReceivableContactRequest</a></td>
-<td>true</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>» name</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>Contact name (Min: 3 - Max: 140)</td>
-</tr>
-<tr>
-<td>» email</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>Contact email (Min: 6 - Max: 256)</td>
-</tr>
-<tr>
-<td>» payid_email</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>Contact PayID email (Min: 6 - Max: 256)</td>
-</tr>
-<tr>
-<td>» payid_email_domain</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>PayID pool email domain (Min: 3 - Max: 254)</td>
-</tr>
-<tr>
-<td>» metadata</td>
-<td>body</td>
-<td><a href="#schemametadata">Metadata</a></td>
-<td>false</td>
-<td>Use for your custom data and certain Zepto customisations.</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p>Example responses</p>
-
-<p>201 Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a7ed958-f1e8-42dc-8c02-3901d7057357"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Delphine Jestin"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine@gmail.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anyone"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1408281"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802919"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zepto Float Account"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"anyone_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"payid_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"alias_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine_123@merchant.com.au"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"alias_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your merchant's alias_name"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<h3 id="Add a Receivable Contact-responses">Responses</h3>
-
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>201</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
-<td>Created</td>
-<td><a href="#schemaaddareceivablecontactresponse">AddAReceivableContactResponse</a></td>
-</tr>
-<tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Not Found</td>
-<td>None</td>
-</tr>
-</tbody></table>
 <h2 id='list-all-contacts'>List all Contacts</h2>
 <p><a id="opIdListAllContacts"></a></p>
 
@@ -5150,6 +4861,626 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>Unprocessable Entity (errors)</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<h1 id="Zepto-API-Contacts--Receivable-">Contacts (Receivable)</h1>
+<h2 id='add-a-receivable-contact'>Add a Receivable Contact</h2>
+<p><a id="opIdAddAReceivableContact"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> https://api.sandbox.split.cash/contacts/receivable <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'{"name":"Delphine Jestin","email":"delphine@gmail.com","payid_email":"delphine_123@merchant.com.au","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/contacts/receivable"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Delphine Jestin</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">delphine@gmail.com</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">payid_email</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">delphine_123@merchant.com.au</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/contacts/receivable</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Delphine Jestin</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">delphine@gmail.com</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">payid_email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">delphine_123@merchant.com.au</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom_key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Custom string</span><span class="dl">'</span><span class="p">,</span> <span class="na">another_custom_key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Maybe a URL</span><span class="dl">'</span> <span class="p">}</span>
+<span class="p">}));</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Delphine Jestin</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine@gmail.com</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payid_email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine_123@merchant.com.au</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
+    <span class="p">}</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/contacts/receivable"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/contacts/receivable"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"name\":\"Delphine Jestin\",\"email\":\"delphine@gmail.com\",\"payid_email\":\"delphine_123@merchant.com.au\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Message\Body</span><span class="p">;</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">append</span><span class="p">(</span><span class="s1">'{"name":"Delphine Jestin","email":"delphine@gmail.com","payid_email":"delphine_123@merchant.com.au","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/contacts/receivable'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"strings"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"io/ioutil"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/contacts/receivable"</span>
+
+    <span class="n">payload</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Delphine Jestin</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine@gmail.com</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">payid_email</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">delphine_123@merchant.com.au</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">metadata</span><span class="se">\"</span><span class="s">:{</span><span class="se">\"</span><span class="s">custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Custom string</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">another_custom_key</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">Maybe a URL</span><span class="se">\"</span><span class="s">}}"</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
+
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p><code>POST /contacts/receivable</code></p>
+
+<p>Receive funds from a Contact by allowing them to pay to a personalised PayID or account number. Perfect for reconciling incoming funds to a customer, receiving funds instantly, eliminating human error &amp; improving your customer&#39;s experience.</p>
+
+<aside class="notice">
+  To enable this feature, please contact our support team with the following information:
+    <li>Your full legal business name</li>
+    <li>A legally owned domain name: for your PayID email addresses</li>
+    <li><strong>alias_name</strong>: the business name that will be displayed to your customers upon PayID resolution. We suggest using a shortened name appropriate for mobile displays</li>
+</aside>
+
+<aside class="notice">
+  There are two strategies supported for PayID assignment when creating this type of Contact:
+  <li><strong>On-demand PayID</strong>: provide a <code>payid_email</code> and we'll create a contact and register a PayID with the given email address. The PayID registration process happens when the request is received. The initial response for <code>payid_details.state</code> will always be <code>pending</code>. It will transition to <code>active</code> when the PayID registration process is complete. This can take up to a few seconds. You can use webhooks to be informed of this state change.</li>
+  <li><strong>Pooled PayID</strong>: provide your <code>payid_email_domain</code> and we'll create a contact and assign them a PayID from your pool. Pooled PayIDs are pre-registered. The PayID email value is generated using a random value and the email domain from your PayID pool configuration. Providing both <code>payid_email</code> and <code>payid_email_domain</code> will ignore your pool and use the "On-demand PayID" strategy instead.</li>
+</aside>
+
+<aside class="notice">
+  While unlikely, it is possible that we will be unable to register the given PayID. In this case <code>payid_details.state</code> will transition to <code>failed</code>.
+
+  You can simulate this path in sandbox by adding <code>+failure</code> to your <code>payid_email</code> e.g <code>test+failure@split.cash</code>
+</aside>
+
+<aside class="notice">
+  You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="#simulate-incoming-payid-payment">PayID simulation endpoint</a>.
+</aside>
+
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Delphine Jestin"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payid_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine_123@merchant.com.au"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="Add-a-Receivable-Contact-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemaaddareceivablecontactrequest">AddAReceivableContactRequest</a></td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>Contact name (Min: 3 - Max: 140)</td>
+</tr>
+<tr>
+<td>» email</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>Contact email (Min: 6 - Max: 256)</td>
+</tr>
+<tr>
+<td>» payid_email</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Contact PayID email (Min: 6 - Max: 256)</td>
+</tr>
+<tr>
+<td>» payid_email_domain</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>PayID pool email domain (Min: 3 - Max: 254)</td>
+</tr>
+<tr>
+<td>» metadata</td>
+<td>body</td>
+<td><a href="#schemametadata">Metadata</a></td>
+<td>false</td>
+<td>Use for your custom data and certain Zepto customisations.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>201 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a7ed958-f1e8-42dc-8c02-3901d7057357"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Delphine Jestin"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anyone"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55afddde-4296-4daf-8e49-7ba481ef9608"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1408281"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"branch_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802919"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bank_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zepto Float Account"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"iav_provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"iav_status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"debits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"credits_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"anyone_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77be6ecc-5fa7-454b-86d6-02a5f147878d"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"payid_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"alias_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delphine_123@merchant.com.au"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"alias_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"alias_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your merchant's alias_name"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="Add a Receivable Contact-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>Created</td>
+<td><a href="#schemaaddareceivablecontactresponse">AddAReceivableContactResponse</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Not Found</td>
+<td>None</td>
+</tr>
+</tbody></table>
+<h2 id='disable-a-receivable-contact'>Disable a Receivable Contact</h2>
+<p><a id="opIdDisableAReceivableContact"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> https://api.sandbox.split.cash/contacts//receivable/disable <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/contacts//receivable/disable"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/contacts//receivable/disable</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span> <span class="p">}</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/contacts//receivable/disable"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/contacts//receivable/disable"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/contacts//receivable/disable'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"io/ioutil"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/contacts//receivable/disable"</span>
+
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
+
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p><code>POST /contacts/{contact_id}/receivable/disable</code></p>
+
+<p>This endpoint should be used to Disable a Receivable Contact.</p>
+
+<p>This will reject all payments made to the relevant Account number or PayID and return them to your customer. Payments made via DE and NPP will be rejected.</p>
+
+<h3 id="Disable-a-Receivable-Contact-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string(UUID)</td>
+<td>true</td>
+<td>Receivable Contact ID (<code>ReceivableContact.data.id</code>)</td>
+</tr>
+</tbody></table>
+
+<h3 id="Disable a Receivable Contact-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>No Content (success)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad Request (errors)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Not Found</td>
+<td>None</td>
+</tr>
+</tbody></table>
+<h2 id='reactivate-a-receivable-contact'>Reactivate a Receivable Contact</h2>
+<p><a id="opIdActivateAReceivableContact"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> https://api.sandbox.split.cash/contacts//receivable/activate <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/contacts//receivable/activate"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/contacts//receivable/activate</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span> <span class="p">}</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/contacts//receivable/activate"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/contacts//receivable/activate"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/contacts//receivable/activate'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"io/ioutil"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/contacts//receivable/activate"</span>
+
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
+
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p><code>POST /contacts/{contact_id}/receivable/activate</code></p>
+
+<p>This endpoint should be used to Reactivate a Receivable Contact that has been previously Disabled.</p>
+
+<p>This will once again allow you to receive funds from your customer via both DE and NPP channels.</p>
+
+<h3 id="Reactivate-a-Receivable-Contact-parameters" class="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>string(UUID)</td>
+<td>true</td>
+<td>Receivable Contact ID (<code>ReceivableContact.data.id</code>)</td>
+</tr>
+</tbody></table>
+
+<h3 id="Reactivate a Receivable Contact-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>No Content (success)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad Request (errors)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Not Found</td>
 <td>None</td>
 </tr>
 </tbody></table>
@@ -7404,14 +7735,14 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>» your_bank_account_id</td>
 <td>body</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.</td>
 </tr>
 <tr>
 <td>» channels</td>
 <td>body</td>
 <td>array</td>
-<td>false</td>
+<td>true</td>
 <td>Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)</td>
 </tr>
 <tr>
@@ -13895,13 +14226,13 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <tr>
 <td>your_bank_account_id</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.</td>
 </tr>
 <tr>
 <td>channels</td>
 <td>array</td>
-<td>false</td>
+<td>true</td>
 <td>Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)</td>
 </tr>
 <tr>
