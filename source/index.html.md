@@ -928,6 +928,7 @@ To protect against timing attacks, use a constant-time string comparison to comp
 
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
+
 - **2021-09-08** - Added Webhooks and Webhook Delivery endpoints
 - **2021-08-31** - Added PayID pool references to */contacts/receivable* and */bank_accounts* endpoints
 - **2021-07-01** - Added $1.65 amount for Sandbox simulated failures and minor tweaks
