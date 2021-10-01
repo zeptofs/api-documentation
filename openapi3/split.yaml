@@ -1498,6 +1498,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-09-29** - Added/expanded sandbox-only endpoints for simulating incoming payments
+
     - **2021-09-08** - Added Webhooks and Webhook Delivery endpoints
 
     - **2021-08-31** - Added PayID pool references to */contacts/receivable* and */bank_accounts* endpoints
@@ -3504,12 +3506,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RedeliverAWebhookDeliveryResponse'
-  /simulate/incoming_payid_payment:
+  /simulate/incoming_npp_payid_payment:
     post:
       tags:
         - Sandbox Only
       summary: Simulate incoming PayID payment
-      description: Simulate receiving a real time PayID payment from one of your Receivable Contacts.
+      description: Simulate receiving a real-time PayID payment from one of your Receivable Contacts.
       operationId: SimulateIncomingPayIDPayment
       requestBody:
         description: ''
@@ -3520,11 +3522,52 @@ paths:
         required: true
       responses:
         '201':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SimulateIncomingPayIDPaymentResponse'
+          description: Success
+        '400':
+          description: Invalid parameters
+  /simulate/incoming_npp_bban_payment:
+    post:
+      tags:
+        - Sandbox Only
+      summary: Simulate an incoming real-time payment
+      description: >
+        Simulate receiving a real-time payment to either a Receivable
+        Contact or one of your float accounts, made using a BSB and account
+        number (i.e. not via PayID).
+      operationId: SimulateIncomingNPPBBANPayment
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulateIncomingNPPBBANPaymentRequest'
+        required: true
+      responses:
+        '201':
+          description: Success
+        '400':
+          description: Invalid parameters
+  /simulate/incoming_de_payment:
+    post:
+      tags:
+        - Sandbox Only
+      summary: Simulate an incoming DE payment
+      description: >
+        Simulate receiving a Direct Entry payment (i.e. not a real-time payment)
+        to either a Receivable Contact or one of your float accounts.
+      operationId: SimulateIncomingDEPayment
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulateIncomingDEPaymentRequest'
+        required: true
+      responses:
+        '201':
+          description: Success
+        '400':
+          description: Invalid parameters
 components:
   securitySchemes:
     bearerAuth:
@@ -5680,40 +5723,128 @@ components:
           min: 1
           max: 99999999999
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+        payment_description:
+          type: string
+          description: 'Default:  "Simulated PayID payment"'
+        payment_reference:
+          type: string
+          description: 'Default:  "simulated-payid-payment"'
+        from_bsb:
+          type: string
+          min: 6
+          max: 6
+          description: 'Default: "014209"'
+        from_account_number:
+          type: string
+          min: 1
+          max: 9
+          description: 'Default: "12345678"'
+        debtor_name:
+          type: string
+          min: 1
+          description: 'Default:  "Simulated Debtor"'
+        debtor_legal_name:
+          type: string
+          min: 1
+          description: 'Default:  "Simulated Debtor Pty Ltd"'
       example:
         payid_email: incoming@split.cash
         amount: 10000
-    SimulateIncomingPayIDPaymentResponse:
+    SimulateIncomingNPPBBANPaymentRequest:
       required:
-        - data
+        - to_bsb
+        - to_account_number
+        - amount
       type: object
       properties:
-        data:
-          type: object
-          required:
-            - id
-            - payid_email
-            - amount
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: A unique ID which can be provided to Zepto for debugging purposes
-            payid_email:
-              type: string
-              min: 6
-              max: 256
-              description: 'The PayID email value provided (Min: 6 - Max: 256)'
-            amount:
-              type: integer
-              min: 1
-              max: 99999999999
-              description: 'The amount value provided (Min: 1 - Max: 99999999999)'
+        to_bsb:
+          type: string
+          min: 6
+          max: 6
+          description: 'Zepto float account BSB (usually 802919)'
+        to_account_number:
+          type: string
+          min: 1
+          max: 9
+          description: 'Zepto float account number'
+        amount:
+          type: integer
+          min: 1
+          max: 99999999999
+          description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+        payment_description:
+          type: string
+          description: 'Default: "Simulated NPP payment"'
+        payment_reference:
+          type: string
+          description: 'Default: "simulated-npp-payment"'
+        from_bsb:
+          type: string
+          min: 6
+          max: 6
+          description: 'Default: "014209"'
+        from_account_number:
+          type: string
+          min: 1
+          max: 9
+          description: 'Default: "12345678"'
+        debtor_name:
+          type: string
+          min: 1
+          description: 'Default: "Simulated Debtor"'
+        debtor_legal_name:
+          type: string
+          min: 1
+          description: 'Default: "Simulated Debtor Pty Ltd"'
       example:
-        data:
-          id: 92c75281-5b60-489a-bd8a-e513ba9277c5
-          payid_email: incoming@split.cash
-          amount: 10000
+        to_bsb: "802919"
+        to_account_number: "88888888"
+        amount: 10000
+    SimulateIncomingDEPaymentRequest:
+      required:
+        - to_bsb
+        - to_account_number
+        - amount
+      type: object
+      properties:
+        to_bsb:
+          type: string
+          min: 6
+          max: 6
+          description: 'Zepto float account BSB (usually 802919)'
+        to_account_number:
+          type: string
+          min: 1
+          max: 9
+          description: 'Zepto float account number'
+        amount:
+          type: integer
+          min: 1
+          max: 99999999999
+          description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+        payment_reference:
+          type: string
+          max: 18
+          description: 'Max 18 characters. Default: "simulated-de-pymt"'
+        from_bsb:
+          type: string
+          min: 6
+          max: 6
+          description: 'Default: "014209"'
+        from_account_number:
+          type: string
+          min: 1
+          max: 9
+          description: 'Default: "12345678"'
+        debtor_name:
+          type: string
+          min: 1
+          max: 16
+          description: 'Max 16 characters. Default: "Simulated Debtor"'
+      example:
+        to_bsb: "802919"
+        to_account_number: "88888888"
+        amount: 10000
     AddATransferRequest:
       required:
         - from_bank_account_id
