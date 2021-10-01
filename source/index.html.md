@@ -7505,7 +7505,7 @@ Special testing endpoints that only exist in the sandbox environment.
 
 ```shell
 curl --request POST \
-  --url https://api.sandbox.split.cash/simulate/incoming_payid_payment \
+  --url https://api.sandbox.split.cash/simulate/incoming_npp_payid_payment \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
   --data '{"payid_email":"incoming@split.cash","amount":10000}'
@@ -7515,7 +7515,7 @@ curl --request POST \
 require 'uri'
 require 'net/http'
 
-url = URI("https://api.sandbox.split.cash/simulate/incoming_payid_payment")
+url = URI("https://api.sandbox.split.cash/simulate/incoming_npp_payid_payment")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -7537,7 +7537,7 @@ var options = {
   "method": "POST",
   "hostname": "api.sandbox.split.cash",
   "port": null,
-  "path": "/simulate/incoming_payid_payment",
+  "path": "/simulate/incoming_npp_payid_payment",
   "headers": {
     "content-type": "application/json",
     "authorization": "Bearer {access-token}"
@@ -7573,7 +7573,7 @@ headers = {
     'authorization': "Bearer {access-token}"
     }
 
-conn.request("POST", "/simulate/incoming_payid_payment", payload, headers)
+conn.request("POST", "/simulate/incoming_npp_payid_payment", payload, headers)
 
 res = conn.getresponse()
 data = res.read()
@@ -7582,7 +7582,7 @@ print(data.decode("utf-8"))
 ```
 
 ```java
-HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/simulate/incoming_payid_payment")
+HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/simulate/incoming_npp_payid_payment")
   .header("content-type", "application/json")
   .header("authorization", "Bearer {access-token}")
   .body("{\"payid_email\":\"incoming@split.cash\",\"amount\":10000}")
@@ -7598,7 +7598,7 @@ $request = new http\Client\Request;
 $body = new http\Message\Body;
 $body->append('{"payid_email":"incoming@split.cash","amount":10000}');
 
-$request->setRequestUrl('https://api.sandbox.split.cash/simulate/incoming_payid_payment');
+$request->setRequestUrl('https://api.sandbox.split.cash/simulate/incoming_npp_payid_payment');
 $request->setRequestMethod('POST');
 $request->setBody($body);
 
@@ -7625,7 +7625,7 @@ import (
 
 func main() {
 
-	url := "https://api.sandbox.split.cash/simulate/incoming_payid_payment"
+	url := "https://api.sandbox.split.cash/simulate/incoming_npp_payid_payment"
 
 	payload := strings.NewReader("{\"payid_email\":\"incoming@split.cash\",\"amount\":10000}")
 
@@ -7645,7 +7645,7 @@ func main() {
 }
 ```
 
-`POST /simulate/incoming_payid_payment`
+`POST /simulate/incoming_npp_payid_payment`
 
 Simulate receiving a real-time PayID payment from one of your Receivable Contacts.
 
@@ -7665,12 +7665,12 @@ Simulate receiving a real-time PayID payment from one of your Receivable Contact
 |body|body|[SimulateIncomingPayIDPaymentRequest](#schemasimulateincomingpayidpaymentrequest)|true|No description|
 |» payid_email|body|string|true|Receivable Contact PayID email (Min: 6 - Max: 256)|
 |» amount|body|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
-|» payment_description|body|string|false|Default: "Test Payment"|
-|» payment_reference|body|string|false|Default: "Test Payment"|
+|» payment_description|body|string|false|Default:  "Simulated PayID payment"|
+|» payment_reference|body|string|false|Default:  "simulated-payid-payment"|
 |» from_bsb|body|string|false|Default: "014209"|
 |» from_account_number|body|string|false|Default: "12345678"|
-|» debtor_name|body|string|false|Default: "Incoming Test Payment Contact"|
-|» debtor_legal_name|body|string|false|Default: "Incoming Test Payment Contact"|
+|» debtor_name|body|string|false|Default:  "Simulated Debtor"|
+|» debtor_legal_name|body|string|false|Default:  "Simulated Debtor Pty Ltd"|
 
 <h3 id="Simulate incoming PayID payment-responses">Responses</h3>
 
@@ -12768,12 +12768,12 @@ Use this endpoint to resend a failed webhook delivery.
 |---|---|---|---|
 |payid_email|string|true|Receivable Contact PayID email (Min: 6 - Max: 256)|
 |amount|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
-|payment_description|string|false|Default: "Test Payment"|
-|payment_reference|string|false|Default: "Test Payment"|
+|payment_description|string|false|Default:  "Simulated PayID payment"|
+|payment_reference|string|false|Default:  "simulated-payid-payment"|
 |from_bsb|string|false|Default: "014209"|
 |from_account_number|string|false|Default: "12345678"|
-|debtor_name|string|false|Default: "Incoming Test Payment Contact"|
-|debtor_legal_name|string|false|Default: "Incoming Test Payment Contact"|
+|debtor_name|string|false|Default:  "Simulated Debtor"|
+|debtor_legal_name|string|false|Default:  "Simulated Debtor Pty Ltd"|
 
 ## SimulateIncomingNPPBBANPaymentRequest
 

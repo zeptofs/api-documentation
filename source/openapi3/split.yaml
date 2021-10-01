@@ -3506,7 +3506,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RedeliverAWebhookDeliveryResponse'
-  /simulate/incoming_payid_payment:
+  /simulate/incoming_npp_payid_payment:
     post:
       tags:
         - Sandbox Only
@@ -5725,10 +5725,10 @@ components:
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         payment_description:
           type: string
-          description: 'Default: "Test Payment"'
+          description: 'Default:  "Simulated PayID payment"'
         payment_reference:
           type: string
-          description: 'Default: "Test Payment"'
+          description: 'Default:  "simulated-payid-payment"'
         from_bsb:
           type: string
           min: 6
@@ -5742,11 +5742,11 @@ components:
         debtor_name:
           type: string
           min: 1
-          description: 'Default: "Incoming Test Payment Contact"'
+          description: 'Default:  "Simulated Debtor"'
         debtor_legal_name:
           type: string
           min: 1
-          description: 'Default: "Incoming Test Payment Contact"'
+          description: 'Default:  "Simulated Debtor Pty Ltd"'
       example:
         payid_email: incoming@split.cash
         amount: 10000
