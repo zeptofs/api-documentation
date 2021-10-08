@@ -340,6 +340,9 @@
                     <a href="#making-payments" class="toc-h2 toc-link" data-title="Making payments">Making payments</a>
                   </li>
                   <li>
+                    <a href="#getting-paid" class="toc-h2 toc-link" data-title="Getting paid">Getting paid</a>
+                  </li>
+                  <li>
                     <a href="#idempotent-requests" class="toc-h2 toc-link" data-title="Idempotent requests">Idempotent requests</a>
                   </li>
                   <li>
@@ -449,9 +452,6 @@
                   </li>
                   <li>
                     <a href="#update-a-contact" class="toc-h2 toc-link" data-title="Update a Contact">Update a Contact</a>
-                  </li>
-                  <li>
-                    <a href="#refresh-contact-bank-connection" class="toc-h2 toc-link" data-title="Refresh contact bank connection">Refresh contact bank connection</a>
                   </li>
               </ul>
           </li>
@@ -575,7 +575,10 @@
                     <a href="#lifecycle-5" class="toc-h2 toc-link" data-title="Lifecycle">Lifecycle</a>
                   </li>
                   <li>
-                    <a href="#failure-reasons" class="toc-h2 toc-link" data-title="Failure reasons">Failure reasons</a>
+                    <a href="#failure-codes" class="toc-h2 toc-link" data-title="Failure codes">Failure codes</a>
+                  </li>
+                  <li>
+                    <a href="#deprecated-failure-reasons" class="toc-h2 toc-link" data-title="[DEPRECATED] Failure reasons">[DEPRECATED] Failure reasons</a>
                   </li>
                   <li>
                     <a href="#list-all-transactions" class="toc-h2 toc-link" data-title="List all transactions">List all transactions</a>
@@ -861,6 +864,36 @@
 <div class="middle-header">System Status</div>
 
 <p>Check the platform status, or subscribe to receive notifications at <a href="https://status.split.cash/">status.split.cash</a>. If you would like to check platform status programmatically, please refer to <a href="https://status.split.cash/api">status.split.cash/api</a>.</p>
+
+<div class="middle-header">Breaking Changes</div>
+
+<p>A breaking change is assumed to be:</p>
+
+<ul>
+<li>Renaming a parameter (request/response)</li>
+<li>Removing a parameter (request/response)</li>
+<li>Changing a parameter type (request/response)</li>
+<li>Renaming a header (request/response)</li>
+<li>Removing a header (request/response)</li>
+<li>Application of stricter validation rules for request parameters</li>
+<li>Reducing the set of possible enumeration values for a request</li>
+<li>Changing a HTTP response status code</li>
+</ul>
+
+<p>We take backwards compatibility very seriously, and will make every effort to ensure this never changes. In the unfortunate (and rare) case where a breaking change can not be avoided, these will be announced well in advance, enabling a transition period for API consumers.</p>
+
+<p>The following are not assumed to be a breaking change and must be taken into account by API consumers:</p>
+
+<ul>
+<li>Addition of optional new parameters in request</li>
+<li>Addition of new parameters in response</li>
+<li>Addition of new headers in request</li>
+<li>Reordering of parameters in response</li>
+<li>Softening of validation rules for request parameters</li>
+<li>Increasing the set of possible enumeration values</li>
+</ul>
+
+<p>In the case of non breaking changes, a transition period may not be provided, meaning the possibility of such changes occurring must be considered in consumers&#39; logic so as not to break any integrations with both API and Webhooks.</p>
 <h1 id='guides'>Guides</h1><h2 id='try-it-out'>Try it out</h2>
 <p>The best way to familiarise yourself with our API is by interacting with it.</p>
 
@@ -868,7 +901,7 @@
 
 <p><a href="https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&amp;collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0="><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>Okay, lets get things setup!</p>
+<p>Okay, let&#39;s get things setup!</p>
 
 <ol>
 <li><p><strong>Create a Zepto account</strong></p>
@@ -1156,26 +1189,16 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 <li>Automated payout disbursement (Referal programs, net/commission payouts, etc...)</li>
 <li>Wage payments</li>
 <li>Gig economy payments</li>
-<li>Lending
-## Getting paid
-There are 2 ways to get paid:</li>
+<li>Lending</li>
 </ul>
-<h3 id='posting-a-payment-request'>POSTing a <a href="/#Split-API-Payment-Requests">Payment Request</a></h3>
-<p>Provides the ability to send a Payment Request (get paid) to any Contact that is either:</p>
+<h2 id='getting-paid'>Getting paid</h2><h3 id='posting-a-payment-request'>POSTing a <a href="/#Split-API-Payment-Requests">Payment Request</a></h3>
+<p>Provides the ability to send a Payment Request (get paid) to any Contact that has an accepted Agreement in place.</p>
 
-<ul>
-<li>A Zepto Contact (The contact has a Zepto account); <strong>or</strong></li>
-<li>An Anyone Contact (The contact does not have a Zepto account) with an accepted Agreement in place.</li>
-</ul>
+<p>To send a Payment Request to a Contact using the API, you must first have an accepted <a href="/#Split-API-Agreements">Agreement</a> with them.</p>
 
-<p><strong>For a Zepto Contact</strong>:</p>
+<p>To do so, you can send them an <a href="https://help.split.cash/agreements/open-agreement">Open Agreement link</a> or <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreement link</a> for them to <a href="https://help.split.cash/bank-accounts/instant-account-verification-iav">elect &amp; verify their bank account</a> and accept the Agreement.</p>
 
-<ul>
-<li><p>They will receive a request that they must approve via the Zepto UI or API in order for the funds to flow from their bank account to yours.</p></li>
-<li><p>To automate the Payment Request approval, process you must first <a href="/#Split-API-Agreements">enter into an Agreement</a> with the Zepto Contact. Once the Agreement is accepted, any future Payment Request will be automatically approved and processed per the Agreement terms.
-Provides the ability to send a Payment Request (get paid) to any of your Contacts as long as there is an accepted Agreement in place.</p></li>
-<li><p>To send a Payment Request to a Contact using the API, you must first have an accepted <a href="/#Split-API-Agreements">Agreement</a> with them. To do so, you can send them an <a href="https://help.split.cash/agreements/open-agreement">Open Agreement link</a> or <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreement link</a> for them to <a href="https://help.split.cash/bank-accounts/instant-account-verification-iav">elect &amp; verify their bank account</a> and accept the Agreement. Having this in place will allow any future Payment Requests to be automatically approved and processed as per the Agreement terms.</p></li>
-</ul>
+<p>Having this in place will allow any future Payment Requests to be automatically approved and processed as per the Agreement terms.</p>
 
 <p>Common use cases:</p>
 
@@ -1189,28 +1212,6 @@ Provides the ability to send a Payment Request (get paid) to any of your Contact
 <p>Example flow embedding an <a href="https://help.split.cash/agreements/open-agreement">Open Agreement link</a> using an iFrame in order to automate future Payment Request approvals:</p>
 
 <p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/host_oa.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/host_oa.png" alt="Hosted Open Agreement" /></a></p>
-<h3 id='sharing-an-open-payment-request'>Sharing an <a href="http://help.split.cash/payment-requests/open-payment-requests">Open Payment Request</a></h3>
-<p>Provides the ability to get paid once-off by a anyone whether they are a Zepto account holder or not.</p>
-
-<p>Usage notes:</p>
-
-<ul>
-<li>Utilise a <a href="http://help.split.cash/payment-requests/open-payment-requests">customisable hosted Payment Request form</a> that takes care of everything from confirming the payer&#39;s bank account access to the transfer of funds.</li>
-<li>The Open Payment Request link can be shared and sit as a secure form either outside your app or embeded within via iframe with the ability to whitelabel.</li>
-<li>The URL for the form contains all the customisation parameters enabling you to generate the form on the fly.</li>
-</ul>
-
-<p>Common use cases:</p>
-
-<ul>
-<li>Online or offline purchases (eCommerce, fundraiser, etc...)</li>
-<li>Invoice payment</li>
-<li>Group funding (paying for a restaurant bill)</li>
-</ul>
-
-<p>Example flow embedding the <a href="https://help.split.cash/payment-requests/open-payment-requests">Open Payment Request</a> link using an iFrame:</p>
-
-<p><a href="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/hosted_opr.png"><img src="https://raw.githubusercontent.com/splitpayments/public_assets/master/images/hosted_opr.png" alt="Hosted Open Payment Request" /></a></p>
 <h2 id='idempotent-requests'>Idempotent requests</h2>
 <blockquote>
 <p>Example response</p>
@@ -1382,7 +1383,40 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <p>The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.</p>
 
 <p>All 6 digits BSBs are valid in the sandbox with the exception of <code>100000</code>. This BSB allows you to simulate the adding of an invalid BSB. In production, only real BSBs are accepted.</p>
-<h2 id='de-transaction-failures'>DE Transaction failures</h2>
+<h2 id='de-transaction-failures'>DE Transaction failures</h2><h3 id='new-using-failure-codes'>[NEW] Using failure codes</h3>
+<aside class="notice">
+  <ul>
+      <li><a href="#de-credit-failures">DE credit failure codes</a></li>
+      <li><a href="#de-debit-failures">DE debit failure codes</a></li>
+  </ul>
+</aside>
+
+<p>To simulate a transaction failure, create a Payment or Payment Request with an amount corresponding to the desired <a href="#failure-codes">failure code</a>.</p>
+
+<p>For example:</p>
+
+<ul>
+<li>DE amount <code>$1.05</code> will cause the credit transaction to fail, triggering the credit failure code <code>E105</code> (Account Not Found).</li>
+<li>DE amount <code>$2.03</code> will cause the debit transaction to fail, triggering the debit failure code <code>E203</code> (Account Closed).</li>
+</ul>
+<h3 id='example-scenarios'>Example scenarios</h3>
+<ol>
+<li>Pay a contact with an invalid account number:
+
+<ul>
+<li>Initiate a Payment for <code>$1.05</code>.</li>
+<li>Zepto will mimic a successful debit from your bank account.</li>
+<li>Zepto will mimic a failure to credit the contact&#39;s bank account.</li>
+<li>Zepto will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.</li>
+</ul></li>
+<li>Request payment from a contact with a closed bank account:
+
+<ul>
+<li>Initiate a Payment Request for <code>$2.03</code>.</li>
+<li>Zepto will mimic a failure to debit the contact&#39;s bank account.</li>
+</ul></li>
+</ol>
+<h3 id='deprecated-using-failure-reasons'>[DEPRECATED] Using failure reasons</h3>
 <p>To simulate <a href="#failure-reasons">transaction failures</a> create a Payment or Payment Request with a specific amount listed in the table.</p>
 
 <table><thead>
@@ -1443,7 +1477,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='example-scenarios'>Example scenarios</h3>
+<h3 id='example-scenarios-2'>Example scenarios</h3>
 <ol>
 <li>Pay a contact with an invalid account number:
 
@@ -1468,7 +1502,21 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>Zepto will mimic a failure to debit the contact&#39;s bank account.</li>
 </ul></li>
 </ol>
-<h2 id='npp-payment-failures'>NPP Payment failures</h2>
+<h2 id='npp-payment-failures'>NPP Payment failures</h2><h3 id='new-using-failure-codes-2'>[NEW] Using failure codes</h3>
+<aside class="notice">
+  <ul>
+      <li><a href="#npp-credit-failures">NPP credit failure codes</a></li>
+  </ul>
+</aside>
+
+<p>To simulate a transaction failure, create a Payment with an amount corresponding to the desired <a href="#npp-credit-failures">failure code</a>.
+For example:</p>
+
+<ul>
+<li>NPP amount <code>$3.02</code> will cause the transaction to fail, triggering credit failure code <code>E302</code> (BSB Not NPP Enabled).</li>
+<li>NPP amount <code>$3.04</code> will cause the transaction to fail, triggering credit failure code <code>E304</code> (Account Not Found).</li>
+</ul>
+<h3 id='deprecated-using-failure-reasons-2'>[DEPRECATED] Using failure reasons</h3>
 <p>If you are utilising an <a href="https://help.split.cash/en/articles/4275280-utilising-an-account-float">Account Float</a> to create NPP payments, you can simulate a transaction that fails to process through the NPP channel by <a href="https://help.split.cash/en/articles/4275293-transacting-from-your-account-float">creating a Payment from your account float</a> for one of the following amounts.</p>
 
 <table><thead>
@@ -1520,7 +1568,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <td>Always declines agreements</td>
 </tr>
 </tbody></table>
-<h3 id='deprecated-payment-request-failure-bank-accounts'>(Deprecated) Payment Request failure bank accounts</h3>
+<h3 id='deprecated-payment-request-failure-bank-accounts'>[DEPRECATED] Payment Request failure bank accounts</h3>
 <p>You can send Payment Requests to the following reserved bank accounts to trigger specific failures.</p>
 
 <table><thead>
@@ -2059,6 +2107,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-10-08</strong> - Introduced improved transaction failure messaging (code, title and detail)</li>
 <li><strong>2021-09-29</strong> - Added/expanded sandbox-only endpoints for simulating incoming payments</li>
 <li><strong>2021-09-08</strong> - Added Webhooks and Webhook Delivery endpoints</li>
 <li><strong>2021-08-31</strong> - Added PayID pool references to <em>/contacts/receivable</em> and <em>/bank_accounts</em> endpoints</li>
@@ -3505,7 +3554,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 
 <p>Your Contacts form an address book of parties with whom you can interact. In order to initiate any type of transaction you must first have the party in your Contact list.</p>
 
-<aside class="notice">In the case of Open Payment Requests & Open Agreements, the authorising party will be automatically added to your Contacts list.</aside>
+<aside class="notice">In the case of Open Agreements, the authorising party will be automatically added to your Contacts list.</aside>
 <h2 id='add-a-contact'>Add a Contact</h2>
 <p><a id="opIdAddAnAnyoneContact"></a></p>
 
@@ -4722,158 +4771,6 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Not Found</td>
-<td>None</td>
-</tr>
-</tbody></table>
-<h2 id='refresh-contact-bank-connection'>Refresh contact bank connection</h2>
-<p><a id="opIdRefreshBalanceContact"></a></p>
-
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="se">\</span>
-  <span class="nt">--url</span> https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
-</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
-<span class="nb">require</span> <span class="s1">'net/http'</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="p">)</span>
-
-<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
-<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
-<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
-
-<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--node"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">hostname</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">api.sandbox.split.cash</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[];</span>
-
-  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">chunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
-  <span class="p">});</span>
-
-  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunks</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-  <span class="p">});</span>
-<span class="p">});</span>
-
-<span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">http.client</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.split.cash"</span><span class="p">)</span>
-
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span> <span class="p">}</span>
-
-<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
-
-<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
-<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
-
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance'</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span>
-<span class="p">));</span>
-
-<span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
-<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">getResponse</span><span class="p">();</span>
-
-<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
-
-<span class="k">import</span> <span class="p">(</span>
-    <span class="s">"fmt"</span>
-    <span class="s">"net/http"</span>
-    <span class="s">"io/ioutil"</span>
-<span class="p">)</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-
-    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.split.cash/contacts/55afddde-4296-4daf-8e49-7ba481ef9608/refresh_balance"</span>
-
-    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
-
-    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
-
-    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-
-    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
-    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
-
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
-
-<span class="p">}</span>
-</code></pre></div>
-<p><code>POST /contacts/{id}/refresh_balance</code></p>
-
-<p>Refresh one of your Contact&#39;s bank connections to get the latest available balance.</p>
-
-<h3 id="Refresh-contact-bank-connection-parameters" class="parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>In</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>path</td>
-<td>string(UUID)</td>
-<td>true</td>
-<td>Contact ID (<code>Contact.data.id</code>)</td>
-</tr>
-</tbody></table>
-
-<h3 id="Refresh contact bank connection-responses">Responses</h3>
-
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>204</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
-<td>No Content (success)</td>
-<td>None</td>
-</tr>
-<tr>
-<td>422</td>
-<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
-<td>Unprocessable Entity (errors)</td>
 <td>None</td>
 </tr>
 </tbody></table>
@@ -10083,7 +9980,256 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>The initial payment channel has failed and the credit has automatically switched to attempt the payment using the next available channel.</td>
 </tr>
 </tbody></table>
-<h2 id='failure-reasons'>Failure reasons</h2>
+<h2 id='failure-codes'>Failure codes</h2>
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.3"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_refund"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-10T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"returned"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-08T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"failure"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E251"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Voided By Initiator"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The transaction was voided by its initiator."</span><span class="p">,</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_voided"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"failure_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong amount - approved by Stacey"</span><span class="w">
+      </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="w">
+      </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"float_account"</span><span class="p">]</span><span class="w">
+      </span><span class="nl">"current_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float_account"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>The rejected, returned, voided &amp; prefailed statuses are always accompanied by a failure code, title and detail as listed below.</p>
+<h3 id='de-credit-failures'>DE credit failures</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Title</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>E101</td>
+<td>Invalid BSB Number</td>
+<td>The BSB is not valid or is no longer active.</td>
+</tr>
+<tr>
+<td>E102</td>
+<td>Payment Stopped</td>
+<td>The target institution has blocked transactions to this account. Please refer to customer.</td>
+</tr>
+<tr>
+<td>E103</td>
+<td>Account Closed</td>
+<td>The target account is closed.</td>
+</tr>
+<tr>
+<td>E104</td>
+<td>Customer Deceased</td>
+<td>The target account&#39;s owner has been listed as deceased.</td>
+</tr>
+<tr>
+<td>E105</td>
+<td>Account Not Found</td>
+<td>The target account number is incorrect.</td>
+</tr>
+<tr>
+<td>E106</td>
+<td>Refer to Customer</td>
+<td>Usually means insufficient funds or that the target account has breached their transaction limits.</td>
+</tr>
+<tr>
+<td>E107</td>
+<td>Account Deleted</td>
+<td>The target account is deleted.</td>
+</tr>
+<tr>
+<td>E108</td>
+<td>Invalid UserID</td>
+<td>Please contact Zepto for further information.</td>
+</tr>
+<tr>
+<td>E109</td>
+<td>Technically Invalid</td>
+<td>Usually means that the account is not debitable or that the reason for failure can not be categorised within the standard BECS return codes. Please refer to customer.</td>
+</tr>
+<tr>
+<td>E150</td>
+<td>Voided By Admin</td>
+<td>The transaction was voided by an administrator.</td>
+</tr>
+<tr>
+<td>E151</td>
+<td>Voided By Initiator</td>
+<td>The transaction was voided by its initiator.</td>
+</tr>
+<tr>
+<td>E152</td>
+<td>Insufficient Funds</td>
+<td>There were insufficient funds to complete the transaction.</td>
+</tr>
+<tr>
+<td>E153</td>
+<td>System Error</td>
+<td>The transaction was unable to complete. Please contact Zepto for assistance.</td>
+</tr>
+<tr>
+<td>E199</td>
+<td>Unknown DE Error</td>
+<td>An unknown DE error occurred. Please contact Zepto for assistance.</td>
+</tr>
+</tbody></table>
+<h3 id='de-debit-failures'>DE debit failures</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Title</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>E201</td>
+<td>Invalid BSB Number</td>
+<td>The BSB is not valid or is no longer active.</td>
+</tr>
+<tr>
+<td>E202</td>
+<td>Payment Stopped</td>
+<td>The target institution has blocked transactions to this account. Please refer to customer.</td>
+</tr>
+<tr>
+<td>E203</td>
+<td>Account Closed</td>
+<td>The target account is closed.</td>
+</tr>
+<tr>
+<td>E204</td>
+<td>Customer Deceased</td>
+<td>The target account&#39;s owner has been listed as deceased.</td>
+</tr>
+<tr>
+<td>E205</td>
+<td>Account Not Found</td>
+<td>The target account number is incorrect.</td>
+</tr>
+<tr>
+<td>E206</td>
+<td>Refer to Customer</td>
+<td>Usually means insufficient funds or that the target account has breached their transaction limits.</td>
+</tr>
+<tr>
+<td>E207</td>
+<td>Account Deleted</td>
+<td>The target account is deleted.</td>
+</tr>
+<tr>
+<td>E208</td>
+<td>Invalid UserID</td>
+<td>Please contact Zepto for further information.</td>
+</tr>
+<tr>
+<td>E209</td>
+<td>Technically Invalid</td>
+<td>Usually means that the account is not debitable or that the reason for failure can not be categorised within the standard BECS return codes. Please refer to customer.</td>
+</tr>
+<tr>
+<td>E250</td>
+<td>Voided By Admin</td>
+<td>The transaction was voided by an administrator.</td>
+</tr>
+<tr>
+<td>E251</td>
+<td>Voided By Initiator</td>
+<td>The transaction was voided by its initiator.</td>
+</tr>
+<tr>
+<td>E252</td>
+<td>Insufficient Funds</td>
+<td>There were insufficient funds to complete the transaction.</td>
+</tr>
+<tr>
+<td>E253</td>
+<td>System Error</td>
+<td>The transaction was unable to complete. Please contact Zepto for assistance.</td>
+</tr>
+<tr>
+<td>E299</td>
+<td>Unknown DE Error</td>
+<td>An unknown DE error occurred. Please contact Zepto for assistance.</td>
+</tr>
+</tbody></table>
+<h3 id='npp-credit-failures'>NPP credit failures</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Title</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>E301</td>
+<td>Upstream Network Outage</td>
+<td>An upstream network issue occurred. Please try again later.</td>
+</tr>
+<tr>
+<td>E302</td>
+<td>BSB Not NPP Enabled</td>
+<td>The target BSB is not NPP enabled. Please try another channel.</td>
+</tr>
+<tr>
+<td>E303</td>
+<td>Account Not NPP Enabled</td>
+<td>The target account is not NPP enabled. Please try another channel.</td>
+</tr>
+<tr>
+<td>E304</td>
+<td>Account Not Found</td>
+<td>The target account number is incorrect.</td>
+</tr>
+<tr>
+<td>E305</td>
+<td>Intermittent Outage At Target Institution</td>
+<td>The target financial institution is experiencing technical difficulties. Please try again later.</td>
+</tr>
+<tr>
+<td>E306</td>
+<td>Account Closed</td>
+<td>The target account is closed.</td>
+</tr>
+<tr>
+<td>E307</td>
+<td>Target Institution Offline</td>
+<td>The target financial institution is undergoing maintenance or experiencing an outage. Please try again later.</td>
+</tr>
+<tr>
+<td>E308</td>
+<td>Account Blocked</td>
+<td>The target account is blocked and cannot receive funds.</td>
+</tr>
+<tr>
+<td>E399</td>
+<td>Unknown NPP Error</td>
+<td>An unknown NPP error occurred. Please contact Zepto for assistance.</td>
+</tr>
+</tbody></table>
+<h2 id='deprecated-failure-reasons'>[DEPRECATED] Failure reasons</h2>
 <blockquote>
 <p>Example response</p>
 </blockquote>
