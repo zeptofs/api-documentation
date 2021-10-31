@@ -737,6 +737,22 @@ info:
 
     # Sandbox Testing Details
 
+
+    > Example failure object
+
+
+    ```json
+
+    {
+      "failure": {
+          "code": "E302",
+          "title": "BSB Not NPP Enabled",
+          "detail": "The target BSB is not NPP enabled. Please try another channel."
+      }
+    }
+
+    ```
+
     Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds.
     All transactions are simulated and no communication with financial institutions is performed.
 
@@ -747,6 +763,17 @@ info:
 
     All 6 digits BSBs are valid in the sandbox with the exception of `100000`. This BSB allows you to simulate the adding of an invalid BSB.
     In production, only real BSBs are accepted.
+
+
+    Failed transactions will contain the following information inside the event:
+
+
+    * Failure Code
+
+    * Failure Title
+
+    * Failure Details
+
 
     ## DE Transaction failures
 
@@ -813,7 +840,7 @@ info:
     | `payment_stopped`          |  $0.12  |          |
 
 
-    ### Example scenarios
+    ### [DEPRECATED] Example scenarios
 
       1. Pay a contact with an invalid account number:
         * Initiate a Payment for <code>$0.54</code>.
@@ -2007,9 +2034,9 @@ tags:
 
       | E302 | BSB Not NPP Enabled | The target BSB is not NPP enabled. Please try another channel. |
 
-      | E303 | Account Not NPP Enabled | The target account is not NPP enabled. Please try another channel. |
+      | E303 | Account Not NPP Enabled | The target account exists but cannot accept funds via the NPP. Please try another channel. |
 
-      | E304 | Account Not Found | The target account number is incorrect. |
+      | E304 | Account Not Found | The target account number cannot be found. |
 
       | E305 | Intermittent Outage At Target Institution | The target financial institution is experiencing technical difficulties. Please try again later. |
 
@@ -3613,7 +3640,7 @@ paths:
                 $ref: '#/components/schemas/GetWebhookDeliveriesResponse'
         '404':
           description: Not Found
-  '/webhook_deliveries/{id}':
+  '/webhook_deliveries/{id}/redeliver':
     get:
       tags:
         - Webhooks
