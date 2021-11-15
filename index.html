@@ -363,9 +363,6 @@
                     <a href="#npp-payment-failures" class="toc-h2 toc-link" data-title="NPP Payment failures">NPP Payment failures</a>
                   </li>
                   <li>
-                    <a href="#special-accounts" class="toc-h2 toc-link" data-title="Special accounts">Special accounts</a>
-                  </li>
-                  <li>
                     <a href="#instant-account-verification-accounts" class="toc-h2 toc-link" data-title="Instant account verification accounts">Instant account verification accounts</a>
                   </li>
                   <li>
@@ -1563,78 +1560,6 @@ For example:</p>
 </tbody></table>
 
 <p>You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on <a href="https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails">what happens when an NPP Payment fails</a> to learn more about what happens when an NPP Payment is unable to process.</p>
-<h2 id='special-accounts'>Special accounts</h2>
-<p>There are some accounts with a special behaviour. You can add them to your Contacts by nickname or bank details.</p>
-
-<table><thead>
-<tr>
-<th>Account nickname</th>
-<th>Branch code (BSB)</th>
-<th>Account number</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accept_agreements</td>
-<td><code>900000</code></td>
-<td><code>99999</code></td>
-<td>Always accepts agreements</td>
-</tr>
-<tr>
-<td>decline_agreements</td>
-<td><code>900001</code></td>
-<td><code>99999</code></td>
-<td>Always declines agreements</td>
-</tr>
-</tbody></table>
-<h3 id='deprecated-payment-request-failure-bank-accounts'>[DEPRECATED] Payment Request failure bank accounts</h3>
-<p>You can send Payment Requests to the following reserved bank accounts to trigger specific failures.</p>
-
-<table><thead>
-<tr>
-<th>Failure type</th>
-<th>Branch code (BSB)</th>
-<th>Account number</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>payment_stopped</code></td>
-<td><code>200000</code></td>
-<td><code>99999</code></td>
-</tr>
-<tr>
-<td><code>account_closed</code></td>
-<td><code>300000</code></td>
-<td><code>99999</code></td>
-</tr>
-<tr>
-<td><code>customer_deceased</code></td>
-<td><code>400000</code></td>
-<td><code>99999</code></td>
-</tr>
-<tr>
-<td><code>incorrect_account_number</code></td>
-<td><code>500000</code></td>
-<td><code>99999</code></td>
-</tr>
-<tr>
-<td><code>refer_to_customer</code></td>
-<td><code>600000</code></td>
-<td><code>99999</code></td>
-</tr>
-<tr>
-<td><code>refer_to_split</code></td>
-<td><code>700000</code></td>
-<td><code>99999</code></td>
-</tr>
-<tr>
-<td><code>insufficient_funds</code></td>
-<td><code>800000</code></td>
-<td><code>99999</code></td>
-</tr>
-</tbody></table>
-
-<p>By default, all Agreements sent to Contacts with a failure bank account will be automatically accepted.</p>
 <h2 id='instant-account-verification-accounts'>Instant account verification accounts</h2>
 <p>When using any of our hosted solutions (<a href="https://help.split.cash/payment-requests/open-payment-requests">Payment Requests</a>, <a href="https://help.split.cash/agreements/open-agreement">Open Agreements</a> or <a href="http://help.split.cash/agreements/unassigned-agreement">Unassigned Agreements</a>) you may want to test the <a href="http://help.split.cash/bank-accounts/instant-account-verification-iav">Instant Account Verification (IAV)</a> process where we accept online banking credentials to validate bank account access. To do so, you can use the following credentials:</p>
 
