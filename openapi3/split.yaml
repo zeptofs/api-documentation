@@ -1532,6 +1532,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2021-12-01** - Add ref to Webhook Delivery endpoint
+
     - **2021-10-08** - Introduced improved transaction failure messaging (code, title and detail)
 
     - **2021-09-29** - Added/expanded sandbox-only endpoints for simulating incoming payments
@@ -3537,6 +3539,13 @@ paths:
           schema:
             type: string
           example: 31918dce-2dc3-405b-8d3c-fd3901b17e9f
+        - name: ref
+          in: query
+          description: 'Filter deliveries by ref (`WebhookDelivery.data.ref`), single value, exact match'
+          required: false
+          style: simple
+          schema:
+            type: string
         - name: per_page
           in: query
           description: 'Number of results per page, single value, exact match'

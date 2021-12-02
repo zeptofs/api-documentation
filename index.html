@@ -2051,6 +2051,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2021-12-01</strong> - Add ref to Webhook Delivery endpoint</li>
 <li><strong>2021-10-08</strong> - Introduced improved transaction failure messaging (code, title and detail)</li>
 <li><strong>2021-09-29</strong> - Added/expanded sandbox-only endpoints for simulating incoming payments</li>
 <li><strong>2021-09-08</strong> - Added Webhooks and Webhook Delivery endpoints</li>
@@ -12685,6 +12686,13 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>string</td>
 <td>true</td>
 <td>Single value, exact match</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Filter deliveries by ref (<code>WebhookDelivery.data.ref</code>), single value, exact match</td>
 </tr>
 <tr>
 <td>per_page</td>
