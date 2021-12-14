@@ -3609,7 +3609,7 @@ paths:
                 $ref: '#/components/schemas/GetWebhookDeliveriesResponse'
         '404':
           description: Not Found
-  '/webhook_deliveries/{id}/redeliver':
+  '/webhook_deliveries/{id}':
     get:
       tags:
         - Webhooks
@@ -3636,6 +3636,7 @@ paths:
                 $ref: '#/components/schemas/GetAWebhookDeliveryResponse'
         '404':
           description: Not Found
+  '/webhook_deliveries/{id}/redeliver':
     post:
       tags:
         - Webhooks
