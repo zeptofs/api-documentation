@@ -728,6 +728,10 @@ Use the following table to discover what type of response schema to expect for f
 4. We guarantee at least 1 delivery attempt.
 
 **For redelivery of webhooks, check out our [Webhook/WebhookDelivery API endpoints](#Zepto-API-Webhooks).**
+<aside class="notice">
+  In the sandbox environment, webhook deliveries will only be retried once,
+  to allow for easier testing of failure scenarios.
+</aside>
 
 ### Request ID
 
@@ -966,6 +970,7 @@ To protect against timing attacks, use a constant-time string comparison to comp
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+- **2022-01-21** - Reduced webhook delivery retries on sandbox to a single retry
 - **2021-12-01** - Add ref to Webhook Delivery endpoint
 - **2021-10-08** - Introduced improved transaction failure messaging (code, title and detail)
 - **2021-09-29** - Added/expanded sandbox-only endpoints for simulating incoming payments
