@@ -1820,7 +1820,11 @@ Likewise for credits:</p></li>
 <li>We guarantee at least 1 delivery attempt.</li>
 </ol>
 
-<p><strong>For redelivery of webhooks, check out our <a href="#Zepto-API-Webhooks">Webhook/WebhookDelivery API endpoints</a>.</strong></p>
+<p><strong>For redelivery of webhooks, check out our <a href="#Zepto-API-Webhooks">Webhook/WebhookDelivery API endpoints</a>.</strong>
+<aside class="notice">
+  In the sandbox environment, webhook deliveries will only be retried once,
+  to allow for easier testing of failure scenarios.
+</aside></p>
 <h3 id='request-id'>Request ID</h3>
 <blockquote>
 <p>Example header</p>
@@ -2051,6 +2055,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2022-01-21</strong> - Reduced webhook delivery retries on sandbox to a single retry</li>
 <li><strong>2021-12-01</strong> - Add ref to Webhook Delivery endpoint</li>
 <li><strong>2021-10-08</strong> - Introduced improved transaction failure messaging (code, title and detail)</li>
 <li><strong>2021-09-29</strong> - Added/expanded sandbox-only endpoints for simulating incoming payments</li>

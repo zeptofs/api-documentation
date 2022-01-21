@@ -1158,6 +1158,11 @@ info:
 
     **For redelivery of webhooks, check out our [Webhook/WebhookDelivery API endpoints](#Zepto-API-Webhooks).**
 
+    <aside class="notice">
+      In the sandbox environment, webhook deliveries will only be retried once,
+      to allow for easier testing of failure scenarios.
+    </aside>
+
 
     ### Request ID
 
@@ -1531,6 +1536,8 @@ info:
 
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+
+    - **2022-01-21** - Reduced webhook delivery retries on sandbox to a single retry
 
     - **2021-12-01** - Add ref to Webhook Delivery endpoint
 
