@@ -4713,7 +4713,7 @@ components:
         matures_at:
           type: string
           format: date-time
-          description: Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in AEST)
+          description: Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)
           example: '9/13/2016 12:00:00 AM'
         your_bank_account_id:
           type: string
@@ -6032,7 +6032,7 @@ components:
         matures_at:
           type: string
           format: date-time
-          description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in AEST)
+          description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)
           example: '2021-06-01T02:10:56Z'
       example:
         from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
@@ -6073,7 +6073,7 @@ components:
             matures_at:
               type: string
               format: date-time
-              description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in AEST)
+              description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)
               example: '2021-06-01T02:10:56Z'
       example:
         data:
@@ -6120,7 +6120,7 @@ components:
             matures_at:
               type: string
               format: date-time
-              description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in AEST)
+              description: Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)
               example: '2021-06-01T02:10:56Z'
       example:
         data:
