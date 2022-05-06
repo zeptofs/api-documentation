@@ -5990,7 +5990,7 @@ To enable custom payment flows, the required payment channel can be selected by 
 |---|---|---|---|---|
 |body|body|[MakeAPaymentRequest](#schemamakeapaymentrequest)|true|No description|
 |» description|body|string|true|User description. Only visible to the payer|
-|» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in AEST)|
+|» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 |» your_bank_account_id|body|string|true|Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.|
 |» channels|body|array|true|Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)|
 |» payouts|body|[[Payout](#schemapayout)]|true|One Payout object only|
@@ -8588,7 +8588,7 @@ Use this endpoint when you want to create a Transfer between any 2 of your float
 |» to_bank_account_id|body|string|true|The destination float/bank account (UUID)|
 |» amount|body|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
 |» description|body|string|true|Description for the Transfer|
-|» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in AEST)|
+|» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 
 > Example responses
 
@@ -11686,7 +11686,7 @@ Use this endpoint to resend a failed webhook delivery.
 |Name|Type|Required|Description|
 |---|---|---|---|
 |description|string|true|User description. Only visible to the payer|
-|matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in AEST)|
+|matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 |your_bank_account_id|string|true|Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.|
 |channels|array|true|Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)|
 |payouts|[[Payout](#schemapayout)]|true|One Payout object only|
@@ -12833,7 +12833,7 @@ Use this endpoint to resend a failed webhook delivery.
 |to_bank_account_id|string|true|The destination float/bank account (UUID)|
 |amount|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
 |description|string|true|Description for the Transfer|
-|matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in AEST)|
+|matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 
 ## AddATransferResponse
 
@@ -12862,7 +12862,7 @@ Use this endpoint to resend a failed webhook delivery.
 |» to_bank_account_id|string|true|The destination bank/float account (UUID|
 |» amount|integer|true|The amount value provided (Min: 1 - Max: 99999999999)|
 |» description|string|true|Description for the Transfer|
-|» matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in AEST)|
+|» matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 
 ## GetATransferResponse
 
@@ -12892,7 +12892,7 @@ Use this endpoint to resend a failed webhook delivery.
 |» to_bank_account_id|string|true|The destination bank/float account (UUID|
 |» amount|integer|true|The amount value provided (Min: 1 - Max: 99999999999)|
 |» description|string|true|Description for the Transfer|
-|» matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in AEST)|
+|» matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 
 ## ListAllTransfersResponse
 
