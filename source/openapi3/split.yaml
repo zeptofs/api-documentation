@@ -265,7 +265,7 @@ info:
 
         When the user visits the above-mentioned URL, they will be presented with a Zepto login screen and then an authorisation screen:
 
-        [![Authorise OAuth2 app](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png)
+        [![Authorise OAuth2 app](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png)
 
         After the user has authorised your application, they will be returned to your application at the URL specified in `redirect_uri` along with the `code` query parameter as the authorisation code.
 
@@ -346,11 +346,11 @@ info:
 
         Sign in with your Zepto account (or any other Zepto account you want to authorise).
 
-        [![Sign in Zepto to authorise via OAuth2](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_signin.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_signin.png)
+        [![Sign in Zepto to authorise via OAuth2](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_signin.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_signin.png)
 
         Click **Authorise** to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Zepto for the `access_token/refresh_token` pair. It will then store the `access_token/refresh_token` for you to use in subsequent API requests. The `access_token` effectively allows you to send requests via the API as the user who provided you authorisation.
 
-        [![Authorise OAuth2 app](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png)
+        [![Authorise OAuth2 app](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png)
 
     6. **You're now ready to use the API**
 
