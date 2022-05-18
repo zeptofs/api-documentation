@@ -1028,7 +1028,7 @@ API! Go ahead and send a request using Postman.</p>
 
 <p>When the user visits the above-mentioned URL, they will be presented with a Zepto login screen and then an authorisation screen:</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png" alt="Authorise OAuth2 app" /></a></p>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png" alt="Authorise OAuth2 app" /></a></p>
 
 <p>After the user has authorised your application, they will be returned to your application at the URL specified in <code>redirect_uri</code> along with the <code>code</code> query parameter as the authorisation code.</p>
 
@@ -1092,11 +1092,11 @@ To do so, you must simply append the access token to the header of any API reque
 
 <p>We&#39;ve included the <strong>Zepto Public Sandbox</strong> environment to get you started. Select it in the top right corner of the window then click the <img class="inline-1" alt="Postman Quick-Look icon" src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_quick_look_icon.png" /> icon and click <strong>edit</strong>.</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_edit_environment.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_edit_environment.png" alt="Edit Postman environment" /></a></p>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_sandbox_environment.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_sandbox_environment.png" alt="Edit Postman environment" /></a></p>
 
 <p>Using the details from the OAuth2 app you created earlier, fill in the <strong>oauth2_application_id</strong> &amp; <strong>oauth2_secret</strong> fields.</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_environment_values.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_environment_values.png" alt="Fill in environment values" /></a></p></li>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_environment_values.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_environment_values.png" alt="Fill in environment values" /></a></p></li>
 <li><p><strong>Setup the authorization</strong></p>
 
 <p>Click on the <strong>Authorization</strong> tab and select <strong>OAuth 2.0</strong></p>
@@ -1116,11 +1116,11 @@ To do so, you must simply append the access token to the header of any API reque
 
 <p>Sign in with your Zepto account (or any other Zepto account you want to authorise).</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_signin.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_signin.png" alt="Sign in Zepto to authorise via OAuth2" /></a></p>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_signin.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_signin.png" alt="Sign in Zepto to authorise via OAuth2" /></a></p>
 
 <p>Click <strong>Authorise</strong> to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Zepto for the <code>access_token/refresh_token</code> pair. It will then store the <code>access_token/refresh_token</code> for you to use in subsequent API requests. The <code>access_token</code> effectively allows you to send requests via the API as the user who provided you authorisation.</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png" alt="Authorise OAuth2 app" /></a></p></li>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png" alt="Authorise OAuth2 app" /></a></p></li>
 <li><p><strong>You&#39;re now ready to use the API</strong></p>
 
 <p>Select an endpoint from the Zepto collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.</p>
