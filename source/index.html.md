@@ -396,6 +396,12 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 * Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 * A request that quickly follows another with the same idempotency key may return with `503 Service Unavailable`. If so, retry the request after the number of seconds specified in the `Retry-After` response header.
 
+Currently the following `POST` requests can be made idempotent:
+
+* [Request Payment](/#request-payment)
+* [Make a Payment](/#make-a-payment)
+* [Issue a Refund](/#issue-a-refund)
+
 ## Error responses
 
 > Example detailed error response
@@ -4928,6 +4934,8 @@ func main() {
 
 `POST /payment_requests`
 
+<aside class="notice">To safely retry this action without accidentally performing the same operation twice, you can supply an <code>Idempotency-Key</code> header. If a header value is different to one provided previously or is omitted, we will be treating a request as a new operation to be performed. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+
 > Body parameter
 
 ```json
@@ -5953,6 +5961,7 @@ To enable custom payment flows, the required payment channel can be selected by 
   <li>["direct_entry"] - for slower traditional payments</li>
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
+<aside class="notice">To safely retry this action without accidentally performing the same operation twice, you can supply an <code>Idempotency-Key</code> header. If a header value is different to one provided previously or is omitted, we will be treating a request as a new operation to be performed. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -6985,6 +6994,7 @@ Certain rules apply to the issuance of a refund:
   <li>Many refunds may be created against the original Payment Request</li>
   <li>The total refunded amount must not exceed the original value</li>
 </ul>
+<aside class="notice">To safely retry this action without accidentally performing the same operation twice, you can supply an <code>Idempotency-Key</code> header. If a header value is different to one provided previously or is omitted, we will be treating a request as a new operation to be performed. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
