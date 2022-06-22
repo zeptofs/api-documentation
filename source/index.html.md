@@ -383,7 +383,7 @@ Example flow embedding an [Open Agreement link](https://help.split.cash/agreemen
 ```
 
 The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
-For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.
+For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.  In case an idempotency key is not supplied and a Payment is retried,  we would treat this as two different payments being made.
 
 To perform an idempotent request, provide an additional `Idempotency-Key: <key>` header to the request.
 You can pass any value as the key but we suggest that you use [V4 UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random string.
@@ -396,7 +396,7 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 * Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 * A request that quickly follows another with the same idempotency key may return with `503 Service Unavailable`. If so, retry the request after the number of seconds specified in the `Retry-After` response header.
 
-Currently the following `POST` requests can be made idempotent:
+Currently the following `POST` requests can be made idempotent.  We **strongly recommend** sending a unique `Idempotency-Key` header  when making those requests to allow for safe retries:
 
 * [Request Payment](/#request-payment)
 * [Make a Payment](/#make-a-payment)
@@ -4934,7 +4934,7 @@ func main() {
 
 `POST /payment_requests`
 
-<aside class="notice">To safely retry this action without accidentally performing the same operation twice, you can supply an <code>Idempotency-Key</code> header. If a header value is different to one provided previously or is omitted, we will be treating a request as a new operation to be performed. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -5961,7 +5961,7 @@ To enable custom payment flows, the required payment channel can be selected by 
   <li>["direct_entry"] - for slower traditional payments</li>
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
-<aside class="notice">To safely retry this action without accidentally performing the same operation twice, you can supply an <code>Idempotency-Key</code> header. If a header value is different to one provided previously or is omitted, we will be treating a request as a new operation to be performed. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -6994,7 +6994,7 @@ Certain rules apply to the issuance of a refund:
   <li>Many refunds may be created against the original Payment Request</li>
   <li>The total refunded amount must not exceed the original value</li>
 </ul>
-<aside class="notice">To safely retry this action without accidentally performing the same operation twice, you can supply an <code>Idempotency-Key</code> header. If a header value is different to one provided previously or is omitted, we will be treating a request as a new operation to be performed. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
