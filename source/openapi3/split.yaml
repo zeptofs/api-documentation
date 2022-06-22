@@ -2770,6 +2770,14 @@ paths:
 
         <aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
       operationId: MakeAPayment
+      parameters:
+        - name: 'Idempotency-Key'
+          in: header
+          description: 'Idempotency key to support safe retries for 24h'
+          required: false
+          schema:
+            type: string
+          example: '{unique-uuid-per-payment}'
       requestBody:
         description: ''
         content:
@@ -2902,7 +2910,14 @@ paths:
       description: >
         <aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
       operationId: MakeAPaymentRequest
-      parameters: []
+      parameters:
+        - name: 'Idempotency-Key'
+          in: header
+          description: 'Idempotency key to support safe retries for 24h'
+          required: false
+          schema:
+            type: string
+          example: '{unique-uuid-per-payment-request}'
       requestBody:
         description: ''
         content:
@@ -3040,6 +3055,13 @@ paths:
         <aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
       operationId: IssueARefund
       parameters:
+        - name: 'Idempotency-Key'
+          in: header
+          description: 'Idempotency key to support safe retries for 24h'
+          required: false
+          schema:
+            type: string
+          example: '{unique-uuid-per-refund}'
         - name: credit_ref
           in: path
           description: 'The credit reference number e.g C.625v'
