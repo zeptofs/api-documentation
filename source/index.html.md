@@ -8025,6 +8025,7 @@ The rejected, returned, voided & prefailed statuses are always accompanied by a 
 | E151 | Voided By Initiator | The transaction was voided by its initiator. |
 | E152 | Insufficient Funds | There were insufficient funds to complete the transaction. |
 | E153 | System Error | The transaction was unable to complete. Please contact Zepto for assistance. |
+| E154 | Account Blocked | The target account is blocked and cannot receive funds. |
 | E199 | Unknown DE Error | An unknown DE error occurred. Please contact Zepto for assistance. |
 ### DE debit failures
 | Code | Title | Detail |
