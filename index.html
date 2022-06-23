@@ -1229,7 +1229,7 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
-For example, if a <a href="#Zepto-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.</p>
+For example, if a <a href="#Zepto-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.  In case an idempotency key is not supplied and a Payment is retried,  we would treat this as two different payments being made.</p>
 
 <p>To perform an idempotent request, provide an additional <code>Idempotency-Key: &lt;key&gt;</code> header to the request.
 You can pass any value as the key but we suggest that you use <a href="https://www.uuidtools.com/generate/v4">V4 UUIDs</a> or another appropriately random string.</p>
@@ -1242,6 +1242,14 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>Only the <code>POST</code> action for the Payments, Payment Requests and Refunds endpoints support the use of the <code>Idempotency-Key</code>.</li>
 <li>Endpoints that use the <code>GET</code> or <code>DELETE</code> actions are idempotent by nature.</li>
 <li>A request that quickly follows another with the same idempotency key may return with <code>503 Service Unavailable</code>. If so, retry the request after the number of seconds specified in the <code>Retry-After</code> response header.</li>
+</ul>
+
+<p>Currently the following <code>POST</code> requests can be made idempotent.  We <strong>strongly recommend</strong> sending a unique <code>Idempotency-Key</code> header  when making those requests to allow for safe retries:</p>
+
+<ul>
+<li><a href="/#request-payment">Request Payment</a></li>
+<li><a href="/#make-a-payment">Make a Payment</a></li>
+<li><a href="/#issue-a-refund">Issue a Refund</a></li>
 </ul>
 <h2 id='error-responses'>Error responses</h2>
 <blockquote>
@@ -6298,6 +6306,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'idempotency-key: {unique-uuid-per-payment-request}'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"description":"Visible to both initiator and authoriser","matures_at":"2016-12-19T02:10:56.000Z","amount":99000,"authoriser_contact_id":"de86472c-c027-4735-a6a7-234366a27fc7","your_bank_account_id":"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
 </code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -6311,6 +6320,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"idempotency-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'{unique-uuid-per-payment-request}'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Visible to both initiator and authoriser</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2016-12-19T02:10:56.000Z</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:99000,</span><span class="se">\"</span><span class="s2">authoriser_contact_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">de86472c-c027-4735-a6a7-234366a27fc7</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">your_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">9c70871d-8e36-4c3e-8a9c-c0ee20e7c679</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
 
@@ -6326,6 +6336,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">idempotency-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{unique-uuid-per-payment-request}</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -6361,6 +6372,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
     <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'idempotency-key'</span><span class="p">:</span> <span class="s">"{unique-uuid-per-payment-request}"</span><span class="p">,</span>
     <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
     <span class="p">}</span>
 
@@ -6373,6 +6385,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/payment_requests"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"idempotency-key"</span><span class="o">,</span> <span class="s">"{unique-uuid-per-payment-request}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"description\":\"Visible to both initiator and authoriser\",\"matures_at\":\"2016-12-19T02:10:56.000Z\",\"amount\":99000,\"authoriser_contact_id\":\"de86472c-c027-4735-a6a7-234366a27fc7\",\"your_bank_account_id\":\"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
@@ -6390,6 +6403,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
   <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'idempotency-key'</span> <span class="o">=&gt;</span> <span class="s1">'{unique-uuid-per-payment-request}'</span><span class="p">,</span>
   <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
 <span class="p">));</span>
@@ -6417,6 +6431,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"idempotency-key"</span><span class="p">,</span> <span class="s">"{unique-uuid-per-payment-request}"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
 
     <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
@@ -6430,6 +6445,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <span class="p">}</span>
 </code></pre></div>
 <p><code>POST /payment_requests</code></p>
+
+<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 <blockquote>
 <p>Body parameter</p>
@@ -6457,6 +6474,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>Idempotency-Key</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>Idempotency key to support safe retries for 24h</td>
+</tr>
 <tr>
 <td>body</td>
 <td>body</td>
@@ -7377,6 +7401,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'idempotency-key: {unique-uuid-per-payment}'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"description":"The SuperPackage","matures_at":"2021-06-13T00:00:00Z","your_bank_account_id":"83623359-e86e-440c-9780-432a3bc3626f","channels":["new_payments_platform"],"payouts":[{"amount":30000,"description":"A tandem skydive jump SB23094","recipient_contact_id":"48b89364-1577-4c81-ba02-96705895d457","metadata":{"invoice_ref":"BILL-0001","invoice_id":"c80a9958-e805-47c0-ac2a-c947d7fd778d","custom_key":"Custom string","another_custom_key":"Maybe a URL"}}],"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
 </code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -7390,6 +7415,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"idempotency-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'{unique-uuid-per-payment}'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">The SuperPackage</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2021-06-13T00:00:00Z</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">your_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">83623359-e86e-440c-9780-432a3bc3626f</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">channels</span><span class="se">\"</span><span class="s2">:[</span><span class="se">\"</span><span class="s2">new_payments_platform</span><span class="se">\"</span><span class="s2">],</span><span class="se">\"</span><span class="s2">payouts</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:30000,</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">A tandem skydive jump SB23094</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">recipient_contact_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">48b89364-1577-4c81-ba02-96705895d457</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">invoice_ref</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BILL-0001</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">invoice_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">c80a9958-e805-47c0-ac2a-c947d7fd778d</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}],</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
 
@@ -7405,6 +7431,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">idempotency-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{unique-uuid-per-payment}</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -7452,6 +7479,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
     <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'idempotency-key'</span><span class="p">:</span> <span class="s">"{unique-uuid-per-payment}"</span><span class="p">,</span>
     <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
     <span class="p">}</span>
 
@@ -7464,6 +7492,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/payments"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"idempotency-key"</span><span class="o">,</span> <span class="s">"{unique-uuid-per-payment}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"description\":\"The SuperPackage\",\"matures_at\":\"2021-06-13T00:00:00Z\",\"your_bank_account_id\":\"83623359-e86e-440c-9780-432a3bc3626f\",\"channels\":[\"new_payments_platform\"],\"payouts\":[{\"amount\":30000,\"description\":\"A tandem skydive jump SB23094\",\"recipient_contact_id\":\"48b89364-1577-4c81-ba02-96705895d457\",\"metadata\":{\"invoice_ref\":\"BILL-0001\",\"invoice_id\":\"c80a9958-e805-47c0-ac2a-c947d7fd778d\",\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}],\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
@@ -7481,6 +7510,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
   <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'idempotency-key'</span> <span class="o">=&gt;</span> <span class="s1">'{unique-uuid-per-payment}'</span><span class="p">,</span>
   <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
 <span class="p">));</span>
@@ -7508,6 +7538,7 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"idempotency-key"</span><span class="p">,</span> <span class="s">"{unique-uuid-per-payment}"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
 
     <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
@@ -7529,6 +7560,8 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
   <li>["direct_entry"] - for slower traditional payments</li>
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
+
+<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 <blockquote>
 <p>Body parameter</p>
@@ -7570,6 +7603,13 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>Idempotency-Key</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>Idempotency key to support safe retries for 24h</td>
+</tr>
 <tr>
 <td>body</td>
 <td>body</td>
@@ -8518,6 +8558,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'idempotency-key: {unique-uuid-per-refund}'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"amount":500,"channels":["direct_entry"],"reason":"Because reason","your_bank_account_id":"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'</span>
 </code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -8531,6 +8572,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"idempotency-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'{unique-uuid-per-refund}'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:500,</span><span class="se">\"</span><span class="s2">channels</span><span class="se">\"</span><span class="s2">:[</span><span class="se">\"</span><span class="s2">direct_entry</span><span class="se">\"</span><span class="s2">],</span><span class="se">\"</span><span class="s2">reason</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Because reason</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">your_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">9c70871d-8e36-4c3e-8a9c-c0ee20e7c679</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">metadata</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Custom string</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">another_custom_key</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Maybe a URL</span><span class="se">\"</span><span class="s2">}}"</span>
 
@@ -8546,6 +8588,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">idempotency-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{unique-uuid-per-refund}</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -8580,6 +8623,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
     <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'idempotency-key'</span><span class="p">:</span> <span class="s">"{unique-uuid-per-refund}"</span><span class="p">,</span>
     <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
     <span class="p">}</span>
 
@@ -8592,6 +8636,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.split.cash/credits/string/refunds"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"idempotency-key"</span><span class="o">,</span> <span class="s">"{unique-uuid-per-refund}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"amount\":500,\"channels\":[\"direct_entry\"],\"reason\":\"Because reason\",\"your_bank_account_id\":\"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
@@ -8609,6 +8654,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
   <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'idempotency-key'</span> <span class="o">=&gt;</span> <span class="s1">'{unique-uuid-per-refund}'</span><span class="p">,</span>
   <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
 <span class="p">));</span>
@@ -8636,6 +8682,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"idempotency-key"</span><span class="p">,</span> <span class="s">"{unique-uuid-per-refund}"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
 
     <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
@@ -8655,7 +8702,8 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   <li>Must be applied against a successfully cleared Payment Request (Collections or Receivables)</li>
   <li>Many refunds may be created against the original Payment Request</li>
   <li>The total refunded amount must not exceed the original value</li>
-</ul></p>
+</ul>
+<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside></p>
 
 <blockquote>
 <p>Body parameter</p>
@@ -8684,6 +8732,13 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>Idempotency-Key</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>Idempotency key to support safe retries for 24h</td>
+</tr>
 <tr>
 <td>credit_ref</td>
 <td>path</td>
