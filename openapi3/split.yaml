@@ -1971,6 +1971,8 @@ tags:
 
       | E153 | System Error | The transaction was unable to complete. Please contact Zepto for assistance. |
 
+      | E154 | Account Blocked | The target account is blocked and cannot receive funds. |
+
       | E199 | Unknown DE Error | An unknown DE error occurred. Please contact Zepto for assistance. |
 
       ### DE debit failures
