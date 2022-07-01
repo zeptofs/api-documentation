@@ -3633,21 +3633,25 @@ paths:
           example: '2017-05-10T00:00:00Z'
         - name: response_status_code
           in: query
-          description: 'Single value, exact match'
+          description: 'Single value / multiple values separated by commas'
           required: false
           style: simple
           schema:
-            type: string
-            enum: [2xx, 4xx, 5xx]
+            type: array
+            items:
+              type: string
+              enum: [2xx, 4xx, 5xx]
           example: '418'
         - name: state
           in: query
-          description: 'Filter deliveries by state, single value, exact match. See [Our delivery promise](#our-delivery-promises)'
+          description: 'Filter deliveries by state, single value / multiple values separated by commas. See [Our delivery promise](#our-delivery-promises)'
           required: false
           style: simple
           schema:
-            type: string
-            enum: [pending, completed, retrying, failed]
+            type: array
+            items:
+              type: string
+              enum: [pending, completed, retrying, failed]
           example: 'delivered'
       responses:
         '200':
