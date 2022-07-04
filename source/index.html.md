@@ -10260,8 +10260,8 @@ NOTE: Webhook deliveries are stored for 30 days.
 |starting_after|query|string(uuid)|false|Display all webhook deliveries after this webhook delivery offset UUID, single value, exact match|
 |event_type|query|string|false|See ([Data schemas](/#data-schemas)) for a list of possible values, single value, exact match|
 |since|query|string(date-time)|false|Display all webhook deliveries after this date. Date/time UTC ISO 8601 format, single value, exact match|
-|response_status_code|query|string|false|Single value, exact match|
-|state|query|string|false|Filter deliveries by state, single value, exact match. See [Our delivery promise](#our-delivery-promises)|
+|response_status_code|query|array[string]|false|Single value / multiple values separated by commas|
+|state|query|array[string]|false|Filter deliveries by state, single value / multiple values separated by commas. See [Our delivery promise](#our-delivery-promises)|
 
 #### Enumerated Values
 
