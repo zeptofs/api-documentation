@@ -581,7 +581,7 @@ info:
     specified in the `Retry-After` response header.
 
 
-    **Caution:** Keys are are scoped to the User making the request. This means if User A makes a request
+    **Caution:** Keys are scoped to the User making the request. This means if User A makes a request
     to an Account using idempotency key `123` and an User B makes a request to the same Account using 
     idempotency key `123` the requests will be treated as different and not idempotent.
 
