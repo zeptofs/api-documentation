@@ -1244,7 +1244,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>A request that quickly follows another with the same idempotency key may return with <code>503 Service Unavailable</code>. If so, retry the request after the number of seconds specified in the <code>Retry-After</code> response header.</li>
 </ul>
 
-<p><strong>Caution:</strong> Keys are scoped to the User making the request. This means if User A makes a request to an Account using idempotency key <code>123</code> and an User B makes a request to the same Account using  idempotency key <code>123</code> the requests will be treated as different and not idempotent.</p>
+<p><strong>Caution:</strong> Keys are scoped to the User making the request. This means if User A makes a request with an access token they have generated to an Account using idempotency key <code>123</code> and User B makes a request with their own access token to the same Account using idempotency key <code>123</code> the requests will be treated as different and not idempotent.</p>
 
 <p>Currently the following <code>POST</code> requests can be made idempotent.  We <strong>strongly recommend</strong> sending a unique <code>Idempotency-Key</code> header  when making those requests to allow for safe retries:</p>
 
