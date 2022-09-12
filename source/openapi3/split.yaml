@@ -582,8 +582,9 @@ info:
 
 
     **Caution:** Keys are scoped to the User making the request. This means if User A makes a request
-    to an Account using idempotency key `123` and an User B makes a request to the same Account using 
-    idempotency key `123` the requests will be treated as different and not idempotent.
+    with an access token they have generated to an Account using idempotency key `123` and User B makes a
+    request with their own access token to the same Account using idempotency key `123` the requests will be
+    treated as different and not idempotent.
 
 
     Currently the following `POST` requests can be made idempotent. 
