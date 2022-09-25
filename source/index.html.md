@@ -547,8 +547,6 @@ For example:
       <li><a href="#npp-credit-failures">NPP credit failure codes</a></li>
   </ul>
 </aside>
-If you are utilising an [Account Float](https://help.split.cash/en/articles/4275280-utilising-an-account-float) to create NPP payments, you can simulate a transaction that fails to process through the NPP channel by [creating a Payment from your account float](https://help.split.cash/en/articles/4275293-transacting-from-your-account-float).
-
 To simulate a transaction failure, create a Payment with an amount corresponding to the desired [failure code](#npp-credit-failures).
 For example:
 
