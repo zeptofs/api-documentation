@@ -797,7 +797,7 @@ info:
 
     ## DE Transaction failures
 
-    ### [NEW] Using failure codes
+    ### Using failure codes
 
     <aside class="notice">
       <ul>
@@ -830,55 +830,10 @@ info:
         * Initiate a Payment Request for <code>$2.03</code>.
         * Zepto will mimic a failure to debit the contact's bank account.
 
-    ### [DEPRECATED] Using failure reasons
-
-    To simulate [transaction failures](#failure-reasons) create a Payment or Payment Request with a specific amount listed in the table.
-
-
-    | Transaction failure reason | Debit | Credit |
-
-    |----------------------------|-------|--------|
-
-    | `invalid_bsb_number`       |  $0.01  |  $0.51   |
-
-    | `account_closed`           |  $0.02  |  $0.52   |
-
-    | `customer_deceased`        |  $0.03  |  $0.53   |
-
-    | `incorrect_account_number` |  $0.04  |  $0.54   |
-
-    | `refer_to_split`           |  $0.05  |  $0.55   |
-
-    | `user_voided`              |  $0.06  |  $0.56   |
-
-    | `admin_voided`             |  $0.07  |  $0.57   |
-
-    | `refer_to_customer`        |  $0.10  |          |
-
-    | `insufficient_funds`       |  $0.11  |          |
-
-    | `payment_stopped`          |  $0.12  |          |
-
-
-    ### [DEPRECATED] Example scenarios
-
-      1. Pay a contact with an invalid account number:
-        * Initiate a Payment for <code>$0.54</code>.
-        * Zepto will mimic a successful debit from your bank account.
-        * Zepto will mimic a failure to credit the contact's bank account.
-        * Zepto will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.
-      2. Pay a contact whilst having insufficient funds:
-        * Initiate a Payment for <code>$0.11</code>.
-        * Zepto will mimic a failure to debit your bank account.
-        * Zepto will mark the debit as `returned` due to `insufficient_funds`.
-        * Zepto will void the scheduled credit to the contact's bank account.
-      3. Request payment from a contact with a closed bank account:
-        * Initiate a Payment Request for <code>$0.02</code>.
-        * Zepto will mimic a failure to debit the contact's bank account.
 
     ## NPP Payment failures
 
-    ### [NEW] Using failure codes
+    ### Using failure codes
 
     <aside class="notice">
       <ul>
@@ -895,24 +850,6 @@ info:
 
     * NPP amount `$3.04` will cause the transaction to fail, triggering credit failure code `E304` (Account Not Found).
 
-
-    ### [DEPRECATED] Using failure reasons
-
-    If you are utilising an [Account Float](https://help.split.cash/en/articles/4275280-utilising-an-account-float)
-    to create NPP payments, you can simulate a transaction that fails to process through the NPP channel by
-    [creating a Payment from your account float](https://help.split.cash/en/articles/4275293-transacting-from-your-account-float)
-    for one of the following amounts.
-
-
-    | Transaction failure reason | Failure details | Amount |
-
-    |----------------------------|-----------------|---------|
-
-    | `refer_to_split`           | Real-time payment service currently unavailable |  $1.55  |
-
-    | `refer_to_customer`        | Real-time payment rejected by recipient |  $1.60  |
-
-    | `refer_to_customer`        | Real-time payments not available for recipient |  $1.65  |
 
     You will receive all the same notifications as if this happened in our live environment. We recommend you
     check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails)
