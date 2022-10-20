@@ -549,8 +549,8 @@ info:
 
     For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is
     a network connection error, you can retry the Payment with the same
-    idempotency key to guarantee that only a single Payment is created. 
-    In case an idempotency key is not supplied and a Payment is retried, 
+    idempotency key to guarantee that only a single Payment is created.
+    In case an idempotency key is not supplied and a Payment is retried,
     we would treat this as two different payments being made.
 
 
@@ -587,8 +587,8 @@ info:
     treated as different and not idempotent.
 
 
-    Currently the following `POST` requests can be made idempotent. 
-    We **strongly recommend** sending a unique `Idempotency-Key` header 
+    Currently the following `POST` requests can be made idempotent.
+    We **strongly recommend** sending a unique `Idempotency-Key` header
     when making those requests to allow for safe retries:
 
 
@@ -1690,6 +1690,11 @@ tags:
           "reversal_details": {
             "source_debit_ref": "D.1",
             "source_credit_failure_reason": "incorrect_account_number",
+            "source_credit_failure": {
+              "code": "E105",
+              "title": "Account Not Found",
+              "detail": "The target account number is incorrect."
+            }
           }
         }
         ]

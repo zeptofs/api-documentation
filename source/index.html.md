@@ -383,7 +383,7 @@ Example flow embedding an [Open Agreement link](https://help.split.cash/agreemen
 ```
 
 The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
-For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.  In case an idempotency key is not supplied and a Payment is retried,  we would treat this as two different payments being made.
+For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.
 
 To perform an idempotent request, provide an additional `Idempotency-Key: <key>` header to the request.
 You can pass any value as the key but we suggest that you use [V4 UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random string.
@@ -398,7 +398,7 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 
 **Caution:** Keys are scoped to the User making the request. This means if User A makes a request with an access token they have generated to an Account using idempotency key `123` and User B makes a request with their own access token to the same Account using idempotency key `123` the requests will be treated as different and not idempotent.
 
-Currently the following `POST` requests can be made idempotent.  We **strongly recommend** sending a unique `Idempotency-Key` header  when making those requests to allow for safe retries:
+Currently the following `POST` requests can be made idempotent. We **strongly recommend** sending a unique `Idempotency-Key` header when making those requests to allow for safe retries:
 
 * [Request Payment](/#request-payment)
 * [Make a Payment](/#make-a-payment)
@@ -5734,6 +5734,11 @@ Supported payment rails:
     "reversal_details": {
       "source_debit_ref": "D.1",
       "source_credit_failure_reason": "incorrect_account_number",
+      "source_credit_failure": {
+        "code": "E105",
+        "title": "Account Not Found",
+        "detail": "The target account number is incorrect."
+      }
     }
   }
   ]
