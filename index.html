@@ -1229,7 +1229,7 @@ want to store the newly generated <code>refresh_token</code> everytime you use i
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
-For example, if a <a href="#Zepto-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created.  In case an idempotency key is not supplied and a Payment is retried,  we would treat this as two different payments being made.</p>
+For example, if a <a href="#Zepto-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.</p>
 
 <p>To perform an idempotent request, provide an additional <code>Idempotency-Key: &lt;key&gt;</code> header to the request.
 You can pass any value as the key but we suggest that you use <a href="https://www.uuidtools.com/generate/v4">V4 UUIDs</a> or another appropriately random string.</p>
@@ -1246,7 +1246,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 
 <p><strong>Caution:</strong> Keys are scoped to the User making the request. This means if User A makes a request with an access token they have generated to an Account using idempotency key <code>123</code> and User B makes a request with their own access token to the same Account using idempotency key <code>123</code> the requests will be treated as different and not idempotent.</p>
 
-<p>Currently the following <code>POST</code> requests can be made idempotent.  We <strong>strongly recommend</strong> sending a unique <code>Idempotency-Key</code> header  when making those requests to allow for safe retries:</p>
+<p>Currently the following <code>POST</code> requests can be made idempotent. We <strong>strongly recommend</strong> sending a unique <code>Idempotency-Key</code> header when making those requests to allow for safe retries:</p>
 
 <ul>
 <li><a href="/#request-payment">Request Payment</a></li>
@@ -7268,6 +7268,11 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
     </span><span class="nl">"reversal_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"source_debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"source_credit_failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incorrect_account_number"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"source_credit_failure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E105"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account Not Found"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The target account number is incorrect."</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
