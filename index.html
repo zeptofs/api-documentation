@@ -575,9 +575,6 @@
                     <a href="#failure-codes" class="toc-h2 toc-link" data-title="Failure codes">Failure codes</a>
                   </li>
                   <li>
-                    <a href="#deprecated-failure-reasons" class="toc-h2 toc-link" data-title="[DEPRECATED] Failure reasons">[DEPRECATED] Failure reasons</a>
-                  </li>
-                  <li>
                     <a href="#list-all-transactions" class="toc-h2 toc-link" data-title="List all transactions">List all transactions</a>
                   </li>
               </ul>
@@ -7267,7 +7264,6 @@ Please refer to the <a href="http://help.split.cash/articles/3094575-what-is-an-
       </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"reversal_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"source_debit_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.1"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"source_credit_failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incorrect_account_number"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"source_credit_failure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E105"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account Not Found"</span><span class="p">,</span><span class="w">
@@ -9902,7 +9898,6 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
         </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Voided By Initiator"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The transaction was voided by its initiator."</span><span class="p">,</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_voided"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"failure_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong amount - approved by Stacey"</span><span class="w">
       </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
@@ -10134,92 +10129,6 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>An unknown NPP error occurred. Please contact Zepto for assistance.</td>
 </tr>
 </tbody></table>
-<h2 id='deprecated-failure-reasons'>[DEPRECATED] Failure reasons</h2>
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.3"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_refund"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-10T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"returned"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-08T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"failure_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_voided"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"failure_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong amount - approved by Stacey"</span><span class="w">
-      </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26297f44-c5e1-40a1-9864-3e0b0754c32a"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sanford-Rees"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sanford-rees-8"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56df206a-aaff-471a-b075-11882bc8906a"</span><span class="w">
-      </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"float_account"</span><span class="p">]</span><span class="w">
-      </span><span class="nl">"current_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float_account"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>The <code>rejected</code>, <code>returned</code>, <code>voided</code> &amp; <code>prefailed</code> statuses are always accompanied by a <code>failure_reason</code>:</p>
-
-<aside class="notice">Please note that these failure reasons are passed to us directly from the banks.</aside>
-
-<table><thead>
-<tr>
-<th>Reason</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>refer_to_customer</code></td>
-<td>Usually due to insufficient funds</td>
-</tr>
-<tr>
-<td><code>insufficient_funds</code></td>
-<td>Insufficient funds</td>
-</tr>
-<tr>
-<td><code>payment_stopped</code></td>
-<td>The payment was stopped at the bank. Can be due to a customer requesting a stop payment with their financial institution.</td>
-</tr>
-<tr>
-<td><code>invalid_bsb_number</code></td>
-<td>BSB number is invalid</td>
-</tr>
-<tr>
-<td><code>account_closed</code></td>
-<td>The bank account is closed</td>
-</tr>
-<tr>
-<td><code>customer_deceased</code></td>
-<td>Customer is deceased</td>
-</tr>
-<tr>
-<td><code>incorrect_account_number</code></td>
-<td>Account number is incorrect</td>
-</tr>
-<tr>
-<td><code>refer_to_split</code></td>
-<td>Failed due to reasons not listed here. Please contact us.</td>
-</tr>
-<tr>
-<td><code>user_voided</code></td>
-<td>Voided by payout initiator</td>
-</tr>
-<tr>
-<td><code>admin_voided</code></td>
-<td>Voided by Zepto admin</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-  The <code>user_voided</code> and <code>admin_voided</code> <code>failure_reasons</code> can sometimes be accompanied by the <code>failure_details</code> key which includes user submitted comments relating to the <code>failure_reason</code>.
-</aside>
 <h2 id='list-all-transactions'>List all transactions</h2>
 <p><a id="opIdListAllTransactions"></a></p>
 

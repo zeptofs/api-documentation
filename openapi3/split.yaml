@@ -1689,7 +1689,6 @@ tags:
             "amount": 1,
           "reversal_details": {
             "source_debit_ref": "D.1",
-            "source_credit_failure_reason": "incorrect_account_number",
             "source_credit_failure": {
               "code": "E105",
               "title": "Account Not Found",
@@ -1869,7 +1868,6 @@ tags:
               "title": "Voided By Initiator",
               "detail": "The transaction was voided by its initiator.",
             },
-            "failure_reason": "user_voided",
             "failure_details": "Wrong amount - approved by Stacey"
             "party_contact_id": "26297f44-c5e1-40a1-9864-3e0b0754c32a",
             "party_name": "Sanford-Rees",
@@ -1982,81 +1980,6 @@ tags:
       | E399 | Unknown NPP Error | An unknown NPP error occurred. Please contact Zepto for assistance. |
 
 
-      ## [DEPRECATED] Failure reasons
-
-
-      > Example response
-
-
-      ```json
-
-      {
-        "data": [
-          {
-            "ref": "D.3",
-            "parent_ref": null,
-            "type": "debit",
-            "category": "payout_refund",
-            "created_at": "2021-04-07T23:15:00Z",
-            "matures_at": "2021-04-10T23:15:00Z",
-            "cleared_at": null,
-            "bank_ref": null,
-            "status": "returned",
-            "status_changed_at": "2021-04-08T23:15:00Z",
-            "failure_reason": "user_voided",
-            "failure_details": "Wrong amount - approved by Stacey"
-            "party_contact_id": "26297f44-c5e1-40a1-9864-3e0b0754c32a",
-            "party_name": "Sanford-Rees",
-            "party_nickname": "sanford-rees-8",
-            "description": null,
-            "amount": 1,
-            "bank_account_id": "56df206a-aaff-471a-b075-11882bc8906a"
-            "channels": ["float_account"]
-            "current_channel": "float_account"
-          }
-        ]
-      }
-
-      ```
-
-
-      The `rejected`, `returned`, `voided` & `prefailed` statuses are always
-      accompanied by a `failure_reason`:
-
-
-      <aside class="notice">Please note that these failure reasons are passed to us directly from the banks.</aside>
-
-
-      | Reason | Description |
-
-      |--------|-------------|
-
-      | `refer_to_customer` | Usually due to insufficient funds |
-
-      | `insufficient_funds` | Insufficient funds |
-
-      | `payment_stopped` | The payment was stopped at the bank. Can be due to a
-      customer requesting a stop payment with their financial institution. |
-
-      | `invalid_bsb_number` | BSB number is invalid |
-
-      | `account_closed` | The bank account is closed |
-
-      | `customer_deceased` | Customer is deceased |
-
-      | `incorrect_account_number` | Account number is incorrect |
-
-      | `refer_to_split` | Failed due to reasons not listed here. Please contact
-      us. |
-
-      | `user_voided` | Voided by payout initiator |
-
-      | `admin_voided` | Voided by Zepto admin |
-
-
-      <aside class="notice">
-        The <code>user_voided</code> and <code>admin_voided</code> <code>failure_reasons</code> can sometimes be accompanied by the <code>failure_details</code> key which includes user submitted comments relating to the <code>failure_reason</code>.
-      </aside>
   - name: Transfers
     description: >
 
