@@ -8015,11 +8015,11 @@ The rejected, returned, voided & prefailed statuses are always accompanied by a 
 | E102 | Payment Stopped | The target institution has blocked transactions to this account. Please refer to customer. |
 | E103 | Account Closed | The target account is closed. |
 | E104 | Customer Deceased | The target account's owner has been listed as deceased. |
-| E105 | Account Not Found | The target account number is incorrect. |
-| E106 | Refer to Customer | Usually means insufficient funds or that the target account has breached their transaction limits. |
+| E105 | Account Not Found | The target account number cannot be found by the financial institution. |
+| E106 | Refer to Customer | Usually means that there is an issue with the account receiving a credit that only the customer and their financial institution can resolve. Please refer to customer. |
 | E107 | Account Deleted | The target account is deleted. |
 | E108 | Invalid UserID | Please contact Zepto for further information. |
-| E109 | Technically Invalid | Usually means that the account is not debitable or that the reason for failure can not be categorised within the standard BECS return codes. Please refer to customer. |
+| E109 | Technically Invalid | Usually means that the account is not creditable or that the reason for failure cannot be categorised within the standard BECS return codes. Please refer to customer. |
 | E150 | Voided By Admin | The transaction was voided by an administrator. |
 | E151 | Voided By Initiator | The transaction was voided by its initiator. |
 | E152 | Insufficient Funds | There were insufficient funds to complete the transaction. |
@@ -8033,7 +8033,7 @@ The rejected, returned, voided & prefailed statuses are always accompanied by a 
 | E202 | Payment Stopped | The target institution has blocked transactions to this account. Please refer to customer. |
 | E203 | Account Closed | The target account is closed. |
 | E204 | Customer Deceased | The target account's owner has been listed as deceased. |
-| E205 | Account Not Found | The target account number is incorrect. |
+| E205 | Account Not Found | The target account number cannot be found by the financial institution. |
 | E206 | Refer to Customer | Usually means insufficient funds or that the target account has breached their transaction limits. |
 | E207 | Account Deleted | The target account is deleted. |
 | E208 | Invalid UserID | Please contact Zepto for further information. |
