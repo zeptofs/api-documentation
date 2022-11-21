@@ -5569,8 +5569,7 @@ components:
         data:
           type: array
           items:
-            type: object
-          description: ''
+            $ref: '#/components/schemas/TransactionResponse'
       example:
         data:
           - ref: D.3
@@ -5633,6 +5632,177 @@ components:
             metadata:
               customer_id: xur4492
               product_ref: TSXL392110x
+    TransactionResponse:
+      title: A transaction (response)
+      required:
+        - ref
+        - parent_ref
+        - type
+        - category
+        - created_at
+        - matured_at
+        - cleared_at
+        - bank_ref
+        - status
+        - status_changed_at
+        - party_contact_id
+        - party_name
+        - party_nickname
+        - party_bank_ref
+        - description
+        - amount
+        - bank_account_id
+        - channels
+        - current_channel
+      type: object
+      properties:
+        ref:
+          type: string
+          description: The ref of the transaction (`C.*` or `D.*`)
+        parent_ref:
+          type: string
+          description: The ref of the parent of this transaction
+        type:
+          type: string
+          description: The type of the transaction
+          enum:
+            - credit
+            - debit
+        category:
+          type: string
+          description: The category of the transaction
+          enum:
+            - payout
+            - payout_refund
+            - invoice
+            - payout_reversal
+            - transfer
+            - recovery
+        created_at:
+          type: string
+          format: date-time
+          description: When the transaction was created
+        matures_at:
+          type: string
+          format: date-time
+          description: When the transaction was processed
+        cleared_at:
+          type: string
+          format: date-time
+          description: When the transaction was cleared
+        bank_ref:
+          type: string
+          description: The ref that is sent to the bank
+        status:
+          type: string
+          description: The status of the transaction (see [Transactions/Lifecycle](#lifecycle-4) for more info)
+          enum:
+            - maturing
+            - matured
+            - preprecessing
+            - processing
+            - clearing
+            - cleared
+            - rejected
+            - returned
+            - voided
+            - pending_verification
+            - paused
+            - prefailed
+            - channel_switched
+        status_changed_at:
+          type: string
+          description: When the status was last changed
+        failure_details:
+          type: string
+          description: Details if a failure occured
+        failure:
+          $ref: '#/components/schemas/Failure'
+        party_contact_id:
+          type: string
+          format: uuid
+          description: The transaction party's contact ID
+        party_name:
+          type: string
+          description: The transaction party's name
+        party_nickname:
+          type: string
+          description: The transaction party's nickname
+        party_bank_ref:
+          type: string
+          description: The transaction party's bank ref
+        description:
+          type: string
+          description: The transaction's description
+        amount:
+          type: integer
+          description: 'Amount in cents (Min: 1 - Max: 99999999999)'
+        bank_account_id:
+          type: string
+          format: uuid
+          description: The bank account ID of this transaction
+        channels:
+          type: array
+          description: Which payment channels this transaction can use (see [Payments/Make a payment](#make-a-payment) for more info)
+        current_channel:
+          type: string
+          description: The current payment channel in use for this transaction
+          enum:
+            - direct_entry
+            - float_account
+            - new_payments_platform
+        reversal_details:
+          type: object
+          description: Reversal details (see [Payments/Lifecyle](#lifecycle-3) for more info)
+          properties:
+            source_debit_ref:
+              type: string
+              description: The source debit ref of the reversal
+            source_credit_failure:
+              $ref: '#/components/schemas/Failure'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      example:
+        ref: C.2
+        parent_ref: PB.s0z
+        type: credit
+        category: payout
+        created_at: '2016-12-05T23:15:00Z'
+        matures_at: '2016-12-06T23:15:00Z'
+        cleared_at: '2016-12-09T23:15:00Z'
+        bank_ref: CT.1
+        status: cleared
+        status_changed_at: '2016-12-09T23:15:00Z'
+        party_contact_id: 33c6e31d3-1dc1-448b-9512-0320bc44fdcf
+        party_name: Price and Sons
+        party_nickname: price-and-sons-2
+        party_bank_ref: null
+        description: Online purchase
+        amount: 19999
+        bank_account_id: 'c2e329ae-606f-4311-a9ab-a751baa1915c'
+        channels: [direct_entry]
+        current_channel: direct_entry
+        metadata:
+          customer_id: xur4492
+          product_ref: TSXL392110x
+    Failure:
+      title: Failure object (see [Transaction/Failure codes](#failure-codes) for more info)
+      required:
+        - code
+        - title
+        - detail
+      type: object
+      properties:
+        code:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+      example:
+        code: E205
+        title: Account Not Found
+        detail: The target account number cannot be found by the financial institution.
     ProposeUnassignedAgreementRequest:
       title: Propose an Unassigned Agreement (request)
       required:
