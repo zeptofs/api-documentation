@@ -584,6 +584,7 @@ Scopes define the level of access granted via the OAuth2 authorisation process. 
 | `refunds` | Manage user's Refunds |
 | `transfers` | Manage user's Transfers |
 | `transactions` | Access user's Transactions |
+| `webhooks` | Manage user's Webhook events |
 | `offline_access` | Create non-expiring access tokens for user |
 
   <aside class="notice">Please use `offline_access` with discretion, as you'll have no direct way to invalidate the token. Please contact Zepto immediately if any token may have potentially been compromised.</aside>
