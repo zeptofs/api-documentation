@@ -12479,7 +12479,124 @@ Use this endpoint to resend a failed webhook delivery.
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|data|[object]|true|No description|
+|data|[[TransactionResponse](#schematransactionresponse)]|true|No description|
+
+## TransactionResponse
+
+<a id="schematransactionresponse"></a>
+
+```json
+{
+  "ref": "C.2",
+  "parent_ref": "PB.s0z",
+  "type": "credit",
+  "category": "payout",
+  "created_at": "2016-12-05T23:15:00Z",
+  "matures_at": "2016-12-06T23:15:00Z",
+  "cleared_at": "2016-12-09T23:15:00Z",
+  "bank_ref": "CT.1",
+  "status": "cleared",
+  "status_changed_at": "2016-12-09T23:15:00Z",
+  "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
+  "party_name": "Price and Sons",
+  "party_nickname": "price-and-sons-2",
+  "party_bank_ref": null,
+  "description": "Online purchase",
+  "amount": 19999,
+  "bank_account_id": "c2e329ae-606f-4311-a9ab-a751baa1915c",
+  "channels": [
+    "direct_entry"
+  ],
+  "current_channel": "direct_entry",
+  "metadata": {
+    "customer_id": "xur4492",
+    "product_ref": "TSXL392110x"
+  }
+}
+```
+
+### Properties
+
+*A transaction (response)*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|ref|string|true|The ref of the transaction (`C.*` or `D.*`)|
+|parent_ref|string|true|The ref of the parent of this transaction|
+|type|string|true|The type of the transaction|
+|category|string|true|The category of the transaction|
+|created_at|string(date-time)|true|When the transaction was created|
+|matures_at|string(date-time)|false|When the transaction was processed|
+|cleared_at|string(date-time)|true|When the transaction was cleared|
+|bank_ref|string|true|The ref that is sent to the bank|
+|status|string|true|The status of the transaction (see [Transactions/Lifecycle](#lifecycle-4) for more info)|
+|status_changed_at|string|true|When the status was last changed|
+|failure_details|string|false|Details if a failure occured|
+|failure|[Failure](#schemafailure)|false|No description|
+|party_contact_id|string(uuid)|true|The transaction party's contact ID|
+|party_name|string|true|The transaction party's name|
+|party_nickname|string|true|The transaction party's nickname|
+|party_bank_ref|string|true|The transaction party's bank ref|
+|description|string|true|The transaction's description|
+|amount|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
+|bank_account_id|string(uuid)|true|The bank account ID of this transaction|
+|channels|array|true|Which payment channels this transaction can use (see [Payments/Make a payment](#make-a-payment) for more info)|
+|current_channel|string|true|The current payment channel in use for this transaction|
+|reversal_details|object|false|Reversal details (see [Payments/Lifecyle](#lifecycle-3) for more info)|
+|» source_debit_ref|string|false|The source debit ref of the reversal|
+|» source_credit_failure|[Failure](#schemafailure)|false|No description|
+|metadata|[Metadata](#schemametadata)|false|No description|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|credit|
+|type|debit|
+|category|payout|
+|category|payout_refund|
+|category|invoice|
+|category|payout_reversal|
+|category|transfer|
+|category|recovery|
+|status|maturing|
+|status|matured|
+|status|preprecessing|
+|status|processing|
+|status|clearing|
+|status|cleared|
+|status|rejected|
+|status|returned|
+|status|voided|
+|status|pending_verification|
+|status|paused|
+|status|prefailed|
+|status|channel_switched|
+|current_channel|direct_entry|
+|current_channel|float_account|
+|current_channel|new_payments_platform|
+
+## Failure
+
+<a id="schemafailure"></a>
+
+```json
+{
+  "code": "E205",
+  "title": "Account Not Found",
+  "detail": "The target account number cannot be found by the financial institution."
+}
+```
+
+### Properties
+
+*Failure object (see [Transaction/Failure codes](#failure-codes) for more info)*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|code|string|true|No description|
+|title|string|true|No description|
+|detail|string|true|No description|
 
 ## ProposeUnassignedAgreementRequest
 
