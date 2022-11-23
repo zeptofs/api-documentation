@@ -759,6 +759,12 @@
                     <a href="#listalltransactionsresponse" class="toc-h2 toc-link" data-title="ListAllTransactionsResponse">ListAllTransactionsResponse</a>
                   </li>
                   <li>
+                    <a href="#transactionresponse" class="toc-h2 toc-link" data-title="TransactionResponse">TransactionResponse</a>
+                  </li>
+                  <li>
+                    <a href="#failure" class="toc-h2 toc-link" data-title="Failure">Failure</a>
+                  </li>
+                  <li>
                     <a href="#proposeunassignedagreementrequest" class="toc-h2 toc-link" data-title="ProposeUnassignedAgreementRequest">ProposeUnassignedAgreementRequest</a>
                   </li>
                   <li>
@@ -16194,7 +16200,339 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>[object]</td>
+<td>[<a href="#schematransactionresponse">TransactionResponse</a>]</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+</tbody></table>
+<h2 id='transactionresponse'>TransactionResponse</h2>
+<p><a id="schematransactionresponse"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB.s0z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Online purchase"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">19999</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c2e329ae-606f-4311-a9ab-a751baa1915c"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"direct_entry"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"current_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"direct_entry"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xur4492"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"product_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSXL392110x"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='properties-41'>Properties</h3>
+<p><em>A transaction (response)</em></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ref</td>
+<td>string</td>
+<td>true</td>
+<td>The ref of the transaction (<code>C.*</code> or <code>D.*</code>)</td>
+</tr>
+<tr>
+<td>parent_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The ref of the parent of this transaction</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>The type of the transaction</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>true</td>
+<td>The category of the transaction</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>When the transaction was created</td>
+</tr>
+<tr>
+<td>matures_at</td>
+<td>string(date-time)</td>
+<td>false</td>
+<td>When the transaction was processed</td>
+</tr>
+<tr>
+<td>cleared_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>When the transaction was cleared</td>
+</tr>
+<tr>
+<td>bank_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The ref that is sent to the bank</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>true</td>
+<td>The status of the transaction (see <a href="#lifecycle-4">Transactions/Lifecycle</a> for more info)</td>
+</tr>
+<tr>
+<td>status_changed_at</td>
+<td>string</td>
+<td>true</td>
+<td>When the status was last changed</td>
+</tr>
+<tr>
+<td>failure_details</td>
+<td>string</td>
+<td>false</td>
+<td>Details if a failure occured</td>
+</tr>
+<tr>
+<td>failure</td>
+<td><a href="#schemafailure">Failure</a></td>
+<td>false</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>party_contact_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The transaction party&#39;s contact ID</td>
+</tr>
+<tr>
+<td>party_name</td>
+<td>string</td>
+<td>true</td>
+<td>The transaction party&#39;s name</td>
+</tr>
+<tr>
+<td>party_nickname</td>
+<td>string</td>
+<td>true</td>
+<td>The transaction party&#39;s nickname</td>
+</tr>
+<tr>
+<td>party_bank_ref</td>
+<td>string</td>
+<td>true</td>
+<td>The transaction party&#39;s bank ref</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>true</td>
+<td>The transaction&#39;s description</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer</td>
+<td>true</td>
+<td>Amount in cents (Min: 1 - Max: 99999999999)</td>
+</tr>
+<tr>
+<td>bank_account_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The bank account ID of this transaction</td>
+</tr>
+<tr>
+<td>channels</td>
+<td>array</td>
+<td>true</td>
+<td>Which payment channels this transaction can use (see <a href="#make-a-payment">Payments/Make a payment</a> for more info)</td>
+</tr>
+<tr>
+<td>current_channel</td>
+<td>string</td>
+<td>true</td>
+<td>The current payment channel in use for this transaction</td>
+</tr>
+<tr>
+<td>reversal_details</td>
+<td>object</td>
+<td>false</td>
+<td>Reversal details (see <a href="#lifecycle-3">Payments/Lifecyle</a> for more info)</td>
+</tr>
+<tr>
+<td>» source_debit_ref</td>
+<td>string</td>
+<td>false</td>
+<td>The source debit ref of the reversal</td>
+</tr>
+<tr>
+<td>» source_credit_failure</td>
+<td><a href="#schemafailure">Failure</a></td>
+<td>false</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td><a href="#schemametadata">Metadata</a></td>
+<td>false</td>
+<td>No description</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-11'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>credit</td>
+</tr>
+<tr>
+<td>type</td>
+<td>debit</td>
+</tr>
+<tr>
+<td>category</td>
+<td>payout</td>
+</tr>
+<tr>
+<td>category</td>
+<td>payout_refund</td>
+</tr>
+<tr>
+<td>category</td>
+<td>invoice</td>
+</tr>
+<tr>
+<td>category</td>
+<td>payout_reversal</td>
+</tr>
+<tr>
+<td>category</td>
+<td>transfer</td>
+</tr>
+<tr>
+<td>category</td>
+<td>recovery</td>
+</tr>
+<tr>
+<td>status</td>
+<td>maturing</td>
+</tr>
+<tr>
+<td>status</td>
+<td>matured</td>
+</tr>
+<tr>
+<td>status</td>
+<td>preprecessing</td>
+</tr>
+<tr>
+<td>status</td>
+<td>processing</td>
+</tr>
+<tr>
+<td>status</td>
+<td>clearing</td>
+</tr>
+<tr>
+<td>status</td>
+<td>cleared</td>
+</tr>
+<tr>
+<td>status</td>
+<td>rejected</td>
+</tr>
+<tr>
+<td>status</td>
+<td>returned</td>
+</tr>
+<tr>
+<td>status</td>
+<td>voided</td>
+</tr>
+<tr>
+<td>status</td>
+<td>pending_verification</td>
+</tr>
+<tr>
+<td>status</td>
+<td>paused</td>
+</tr>
+<tr>
+<td>status</td>
+<td>prefailed</td>
+</tr>
+<tr>
+<td>status</td>
+<td>channel_switched</td>
+</tr>
+<tr>
+<td>current_channel</td>
+<td>direct_entry</td>
+</tr>
+<tr>
+<td>current_channel</td>
+<td>float_account</td>
+</tr>
+<tr>
+<td>current_channel</td>
+<td>new_payments_platform</td>
+</tr>
+</tbody></table>
+<h2 id='failure'>Failure</h2>
+<p><a id="schemafailure"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E205"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account Not Found"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The target account number cannot be found by the financial institution."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='properties-42'>Properties</h3>
+<p><em>Failure object (see <a href="#failure-codes">Transaction/Failure codes</a> for more info)</em></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>true</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>detail</td>
+<td>string</td>
 <td>true</td>
 <td>No description</td>
 </tr>
@@ -16219,7 +16557,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-41'>Properties</h3>
+</span></code></pre></div><h3 id='properties-43'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (request)</em></p>
 
 <table><thead>
@@ -16282,7 +16620,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-42'>Properties</h3>
+</span></code></pre></div><h3 id='properties-44'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -16344,7 +16682,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-43'>Properties</h3>
+</span></code></pre></div><h3 id='properties-45'>Properties</h3>
 <p><em>List Unassigned Agreements (response)</em></p>
 
 <table><thead>
@@ -16385,7 +16723,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="nl">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-44'>Properties</h3>
+</span></code></pre></div><h3 id='properties-46'>Properties</h3>
 <p><em>Get an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -16423,7 +16761,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-45'>Properties</h3>
+</span></code></pre></div><h3 id='properties-47'>Properties</h3>
 <p><em>Get User details (response)</em></p>
 
 <table><thead>
@@ -16447,7 +16785,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   </span><span class="nl">"payid_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming@split.cash"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-46'>Properties</h3>
+</span></code></pre></div><h3 id='properties-48'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -16512,7 +16850,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   </span><span class="nl">"to_account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88888888"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-47'>Properties</h3>
+</span></code></pre></div><h3 id='properties-49'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -16583,7 +16921,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   </span><span class="nl">"to_account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88888888"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-48'>Properties</h3>
+</span></code></pre></div><h3 id='properties-50'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -16644,7 +16982,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-49'>Properties</h3>
+</span></code></pre></div><h3 id='properties-51'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -16696,7 +17034,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-50'>Properties</h3>
+</span></code></pre></div><h3 id='properties-52'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -16760,7 +17098,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-51'>Properties</h3>
+</span></code></pre></div><h3 id='properties-53'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -16848,7 +17186,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-52'>Properties</h3>
+</span></code></pre></div><h3 id='properties-54'>Properties</h3>
 <p><em>List all Transfers (response)</em></p>
 
 <table><thead>
@@ -16881,7 +17219,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-53'>Properties</h3>
+</span></code></pre></div><h3 id='properties-55'>Properties</h3>
 <p><em>List all Webhooks (response)</em></p>
 
 <table><thead>
@@ -16932,7 +17270,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-54'>Properties</h3>
+</span></code></pre></div><h3 id='properties-56'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -16996,7 +17334,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   </span><span class="nl">"response_status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-09-02T02:24:50.000Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-55'>Properties</h3>
+</span></code></pre></div><h3 id='properties-57'>Properties</h3>
 <p><em>Get a WebhookDelivery (response)</em></p>
 
 <table><thead>
@@ -17044,7 +17382,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>When the webhook delivery was created</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-11'>Enumerated Values</h4>
+<h4 id='enumerated-values-12'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -17077,7 +17415,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
     </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-56'>Properties</h3>
+</span></code></pre></div><h3 id='properties-58'>Properties</h3>
 <p><em>Resend a WebhookDelivery (response)</em></p>
 
 <table><thead>
