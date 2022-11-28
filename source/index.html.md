@@ -3619,7 +3619,7 @@ Receive funds from a Contact by allowing them to pay to a personalised PayID or 
 
 ```shell
 curl --request POST \
-  --url https://api.sandbox.split.cash/contacts//receivable/disable \
+  --url https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/disable \
   --header 'authorization: Bearer {access-token}'
 ```
 
@@ -3627,7 +3627,7 @@ curl --request POST \
 require 'uri'
 require 'net/http'
 
-url = URI("https://api.sandbox.split.cash/contacts//receivable/disable")
+url = URI("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/disable")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -3647,7 +3647,7 @@ var options = {
   "method": "POST",
   "hostname": "api.sandbox.split.cash",
   "port": null,
-  "path": "/contacts//receivable/disable",
+  "path": "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/disable",
   "headers": {
     "authorization": "Bearer {access-token}"
   }
@@ -3676,7 +3676,7 @@ conn = http.client.HTTPSConnection("api.sandbox.split.cash")
 
 headers = { 'authorization': "Bearer {access-token}" }
 
-conn.request("POST", "/contacts//receivable/disable", headers=headers)
+conn.request("POST", "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/disable", headers=headers)
 
 res = conn.getresponse()
 data = res.read()
@@ -3685,7 +3685,7 @@ print(data.decode("utf-8"))
 ```
 
 ```java
-HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/contacts//receivable/disable")
+HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/disable")
   .header("authorization", "Bearer {access-token}")
   .asString();
 ```
@@ -3696,7 +3696,7 @@ HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/con
 $client = new http\Client;
 $request = new http\Client\Request;
 
-$request->setRequestUrl('https://api.sandbox.split.cash/contacts//receivable/disable');
+$request->setRequestUrl('https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/disable');
 $request->setRequestMethod('POST');
 $request->setHeaders(array(
   'authorization' => 'Bearer {access-token}'
@@ -3719,7 +3719,7 @@ import (
 
 func main() {
 
-	url := "https://api.sandbox.split.cash/contacts//receivable/disable"
+	url := "https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/disable"
 
 	req, _ := http.NewRequest("POST", url, nil)
 
@@ -3746,7 +3746,7 @@ This will reject all payments made to the relevant Account number or PayID and r
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string(UUID)|true|Receivable Contact ID (`ReceivableContact.data.id`)|
+|contact_id|path|string(UUID)|true|Receivable Contact ID (`ReceivableContact.data.id`)|
 
 <h3 id="Disable a Receivable Contact-responses">Responses</h3>
 
@@ -3764,7 +3764,7 @@ This will reject all payments made to the relevant Account number or PayID and r
 
 ```shell
 curl --request POST \
-  --url https://api.sandbox.split.cash/contacts//receivable/activate \
+  --url https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/activate \
   --header 'authorization: Bearer {access-token}'
 ```
 
@@ -3772,7 +3772,7 @@ curl --request POST \
 require 'uri'
 require 'net/http'
 
-url = URI("https://api.sandbox.split.cash/contacts//receivable/activate")
+url = URI("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/activate")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -3792,7 +3792,7 @@ var options = {
   "method": "POST",
   "hostname": "api.sandbox.split.cash",
   "port": null,
-  "path": "/contacts//receivable/activate",
+  "path": "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/activate",
   "headers": {
     "authorization": "Bearer {access-token}"
   }
@@ -3821,7 +3821,7 @@ conn = http.client.HTTPSConnection("api.sandbox.split.cash")
 
 headers = { 'authorization': "Bearer {access-token}" }
 
-conn.request("POST", "/contacts//receivable/activate", headers=headers)
+conn.request("POST", "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/activate", headers=headers)
 
 res = conn.getresponse()
 data = res.read()
@@ -3830,7 +3830,7 @@ print(data.decode("utf-8"))
 ```
 
 ```java
-HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/contacts//receivable/activate")
+HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/activate")
   .header("authorization", "Bearer {access-token}")
   .asString();
 ```
@@ -3841,7 +3841,7 @@ HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/con
 $client = new http\Client;
 $request = new http\Client\Request;
 
-$request->setRequestUrl('https://api.sandbox.split.cash/contacts//receivable/activate');
+$request->setRequestUrl('https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/activate');
 $request->setRequestMethod('POST');
 $request->setHeaders(array(
   'authorization' => 'Bearer {access-token}'
@@ -3864,7 +3864,7 @@ import (
 
 func main() {
 
-	url := "https://api.sandbox.split.cash/contacts//receivable/activate"
+	url := "https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/activate"
 
 	req, _ := http.NewRequest("POST", url, nil)
 
@@ -3891,13 +3891,193 @@ This will once again allow you to receive funds from your customer via both DE a
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string(UUID)|true|Receivable Contact ID (`ReceivableContact.data.id`)|
+|contact_id|path|string(UUID)|true|Receivable Contact ID (`ReceivableContact.data.id`)|
 
 <h3 id="Reactivate a Receivable Contact-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content (success)|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request (errors)|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
+
+## Update a Receivable Contact
+
+<a id="opIdUpdateAReceivableContact"></a>
+
+> Code samples
+
+```shell
+curl --request PATCH \
+  --url https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/ \
+  --header 'authorization: Bearer {access-token}' \
+  --header 'content-type: application/json' \
+  --data '{"payid_name":"Bob Smith"}'
+```
+
+```ruby
+require 'uri'
+require 'net/http'
+
+url = URI("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Patch.new(url)
+request["content-type"] = 'application/json'
+request["authorization"] = 'Bearer {access-token}'
+request.body = "{\"payid_name\":\"Bob Smith\"}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```javascript--node
+var http = require("https");
+
+var options = {
+  "method": "PATCH",
+  "hostname": "api.sandbox.split.cash",
+  "port": null,
+  "path": "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/",
+  "headers": {
+    "content-type": "application/json",
+    "authorization": "Bearer {access-token}"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(JSON.stringify({ payid_name: 'Bob Smith' }));
+req.end();
+```
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection("api.sandbox.split.cash")
+
+payload = "{\"payid_name\":\"Bob Smith\"}"
+
+headers = {
+    'content-type': "application/json",
+    'authorization': "Bearer {access-token}"
+    }
+
+conn.request("PATCH", "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+```java
+HttpResponse<String> response = Unirest.patch("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {access-token}")
+  .body("{\"payid_name\":\"Bob Smith\"}")
+  .asString();
+```
+
+```php
+<?php
+
+$client = new http\Client;
+$request = new http\Client\Request;
+
+$body = new http\Message\Body;
+$body->append('{"payid_name":"Bob Smith"}');
+
+$request->setRequestUrl('https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/');
+$request->setRequestMethod('PATCH');
+$request->setBody($body);
+
+$request->setHeaders(array(
+  'authorization' => 'Bearer {access-token}',
+  'content-type' => 'application/json'
+));
+
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+
+echo $response->getBody();
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/"
+
+	payload := strings.NewReader("{\"payid_name\":\"Bob Smith\"}")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {access-token}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+
+`PATCH /contacts/{contact_id}/receivable/`
+
+You can update the PayID name of a Receivable Contact.
+
+<aside class="notice">
+  The Receivable Contact you are updating must be active.
+</aside>
+
+> Body parameter
+
+```json
+{
+  "payid_name": "Bob Smith"
+}
+```
+
+<h3 id="Update-a-Receivable-Contact-parameters" class="parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|contact_id|path|string(UUID)|true|Receivable Contact ID (`ReceivableContact.data.id`)|
+|body|body|[UpdateAReceivableContactRequest](#schemaupdateareceivablecontactrequest)|true|No description|
+|» payid_name|body|string|true|The PayID name of the Receivable Contact|
+
+<h3 id="Update a Receivable Contact-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Accepted|None|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request (errors)|None|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
 
@@ -11518,6 +11698,24 @@ Use this endpoint to resend a failed webhook delivery.
 |state|active|
 |state|failed|
 |state|deregistered|
+
+## UpdateAReceivableContactRequest
+
+<a id="schemaupdateareceivablecontactrequest"></a>
+
+```json
+{
+  "payid_name": "Bob Smith"
+}
+```
+
+### Properties
+
+*Update a Receivable Contact (request)*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|payid_name|string|true|The PayID name of the Receivable Contact|
 
 ## UpdateAContactRequest
 
