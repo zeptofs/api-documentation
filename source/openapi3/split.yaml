@@ -2316,7 +2316,7 @@ paths:
         This will reject all payments made to the relevant Account number or PayID and return them to your customer. Payments made via DE and NPP will be rejected.
       operationId: DisableAReceivableContact
       parameters:
-        - name: id
+        - name: contact_id
           in: path
           description: Receivable Contact ID (`ReceivableContact.data.id`)
           required: true
@@ -2344,7 +2344,7 @@ paths:
         This will once again allow you to receive funds from your customer via both DE and NPP channels.
       operationId: ActivateAReceivableContact
       parameters:
-        - name: id
+        - name: contact_id
           in: path
           description: Receivable Contact ID (`ReceivableContact.data.id`)
           required: true
@@ -2357,6 +2357,43 @@ paths:
       responses:
         '204':
           description: No Content (success)
+        '400':
+          description: Bad Request (errors)
+        '404':
+          description: Not Found
+  '/contacts/{contact_id}/receivable':
+    patch:
+      tags:
+        - Contacts (Receivable)
+      summary: Update a Receivable Contact
+      description: |
+        You can update the PayID name of a Receivable Contact.
+
+        <aside class="notice">
+          The Receivable Contact you are updating must be active.
+        </aside>
+      operationId: UpdateAReceivableContact
+      parameters:
+        - name: contact_id
+          in: path
+          description: Receivable Contact ID (`ReceivableContact.data.id`)
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: UUID
+          example: 2d2429c2-b868-455e-80ef-915df7c115a7
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAReceivableContactRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
         '400':
           description: Bad Request (errors)
         '404':
@@ -4557,6 +4594,17 @@ components:
             alias_type: email
             alias_name: your merchant's alias_name
             state: active
+    UpdateAReceivableContactRequest:
+      title: Update a Receivable Contact (request)
+      type: object
+      required:
+        - payid_name
+      properties:
+        payid_name:
+          type: string
+          description: The PayID name of the Receivable Contact
+      example:
+        payid_name: Bob Smith
     UpdateAContactRequest:
       title: Update a Contact (request)
       type: object
