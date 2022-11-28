@@ -2361,7 +2361,7 @@ paths:
           description: Bad Request (errors)
         '404':
           description: Not Found
-  '/contacts/{contact_id}/receivable/':
+  '/contacts/{contact_id}/receivable':
     patch:
       tags:
         - Contacts (Receivable)

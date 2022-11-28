@@ -3909,7 +3909,7 @@ This will once again allow you to receive funds from your customer via both DE a
 
 ```shell
 curl --request PATCH \
-  --url https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/ \
+  --url https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
   --data '{"payid_name":"Bob Smith"}'
@@ -3919,7 +3919,7 @@ curl --request PATCH \
 require 'uri'
 require 'net/http'
 
-url = URI("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/")
+url = URI("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -3941,7 +3941,7 @@ var options = {
   "method": "PATCH",
   "hostname": "api.sandbox.split.cash",
   "port": null,
-  "path": "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/",
+  "path": "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable",
   "headers": {
     "content-type": "application/json",
     "authorization": "Bearer {access-token}"
@@ -3977,7 +3977,7 @@ headers = {
     'authorization': "Bearer {access-token}"
     }
 
-conn.request("PATCH", "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/", payload, headers)
+conn.request("PATCH", "/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable", payload, headers)
 
 res = conn.getresponse()
 data = res.read()
@@ -3986,7 +3986,7 @@ print(data.decode("utf-8"))
 ```
 
 ```java
-HttpResponse<String> response = Unirest.patch("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/")
+HttpResponse<String> response = Unirest.patch("https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable")
   .header("content-type", "application/json")
   .header("authorization", "Bearer {access-token}")
   .body("{\"payid_name\":\"Bob Smith\"}")
@@ -4002,7 +4002,7 @@ $request = new http\Client\Request;
 $body = new http\Message\Body;
 $body->append('{"payid_name":"Bob Smith"}');
 
-$request->setRequestUrl('https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/');
+$request->setRequestUrl('https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable');
 $request->setRequestMethod('PATCH');
 $request->setBody($body);
 
@@ -4029,7 +4029,7 @@ import (
 
 func main() {
 
-	url := "https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable/"
+	url := "https://api.sandbox.split.cash/contacts/2d2429c2-b868-455e-80ef-915df7c115a7/receivable"
 
 	payload := strings.NewReader("{\"payid_name\":\"Bob Smith\"}")
 
@@ -4049,7 +4049,7 @@ func main() {
 }
 ```
 
-`PATCH /contacts/{contact_id}/receivable/`
+`PATCH /contacts/{contact_id}/receivable`
 
 You can update the PayID name of a Receivable Contact.
 
