@@ -6124,6 +6124,7 @@ To enable custom payment flows, the required payment channel can be selected by 
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
 <aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">To conduct a SuperStream compliant payment, a Payment Reference Number must be supplied to the <code>your_unique_ref</code> field and <code>PENS</code> filled in the <code>category_purpose_code</code> field </aside>
 
 > Body parameter
 
@@ -6170,8 +6171,16 @@ To enable custom payment flows, the required payment channel can be selected by 
 |»»» amount|body|integer|true|Amount in cents to pay the recipient|
 |»»» description|body|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
 |»»» recipient_contact_id|body|string|true|Contact to pay (`Contact.data.id`)|
+|»»» your_unique_ref|body|string|false|Can be used to uniquely reference a payment. Must be filled with a PRN when `category_purpose_code` is set to `PENS`|
+|»»» category_purpose_code|body|string|false|A four letter code from the [ISO20022 external code set](https://www.iso20022.org/catalogue-messages/additional-content-messages/external-code-sets) used to indicate the purpose of the payments. When `PENS` is specifed, the `your_unique_ref` field must be filled with a PRN.|
 |»»» metadata|body|Metadata|false|Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.|
 |»» metadata|body|[Metadata](#schemametadata)|false|Use for your custom data and certain Zepto customisations.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|»»» category_purpose_code|PENS|
 
 > Example responses
 
@@ -11846,6 +11855,8 @@ Use this endpoint to resend a failed webhook delivery.
   "amount": 30000,
   "description": "A tandem skydive jump SB23094",
   "recipient_contact_id": "48b89364-1577-4c81-ba02-96705895d457",
+  "your_unique_ref": "string",
+  "category_purpose_code": "PENS",
   "metadata": null
 }
 ```
@@ -11859,7 +11870,15 @@ Use this endpoint to resend a failed webhook delivery.
 |amount|integer|true|Amount in cents to pay the recipient|
 |description|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
 |recipient_contact_id|string|true|Contact to pay (`Contact.data.id`)|
+|your_unique_ref|string|false|Can be used to uniquely reference a payment. Must be filled with a PRN when `category_purpose_code` is set to `PENS`|
+|category_purpose_code|string|false|A four letter code from the [ISO20022 external code set](https://www.iso20022.org/catalogue-messages/additional-content-messages/external-code-sets) used to indicate the purpose of the payments. When `PENS` is specifed, the `your_unique_ref` field must be filled with a PRN.|
 |metadata|Metadata|false|Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|category_purpose_code|PENS|
 
 ## VoidAPayoutRequest
 
