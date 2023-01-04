@@ -6124,7 +6124,7 @@ To enable custom payment flows, the required payment channel can be selected by 
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
 <aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
-<aside class="notice">To conduct a SuperStream compliant payment, a Payment Reference Number must be supplied to the <code>your_unique_ref</code> field and <code>PENS</code> filled in the <code>category_purpose_code</code> field </aside>
+<aside class="notice">To conduct a <a href="https://www.ato.gov.au/super/superstream/">SuperStream</a> compliant payment, a Payment Reference Number must be supplied for the <code>your_unique_ref</code> property and <code>PENS</code> value supplied for the <code>category_purpose_code</code> property.</aside>
 
 > Body parameter
 
