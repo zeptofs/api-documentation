@@ -22,7 +22,7 @@ info:
 
 
     And for all kinds of How To's and Recipes, head on over to our
-    [Help Guide](https://help.split.cash/en/).
+    [Help Guide](https://help.zepto.money/en/).
 
     <div class="middle-header">Conventions</div>
 
@@ -485,11 +485,11 @@ info:
 
 
     To do so, you can send them an
-    [Open Agreement link](https://help.split.cash/agreements/open-agreement) or
+    [Open Agreement link](https://help.zepto.money/agreements/open-agreement) or
     [Unassigned Agreement
-    link](http://help.split.cash/agreements/unassigned-agreement) for them to
+    link](http://help.zepto.money/agreements/unassigned-agreement) for them to
     [elect & verify their bank
-    account](https://help.split.cash/bank-accounts/instant-account-verification-iav)
+    account](https://help.zepto.money/bank-accounts/instant-account-verification-iav)
     and accept the Agreement.
 
 
@@ -510,7 +510,7 @@ info:
 
 
     Example flow embedding an [Open Agreement
-    link](https://help.split.cash/agreements/open-agreement) using an iFrame in
+    link](https://help.zepto.money/agreements/open-agreement) using an iFrame in
     order to automate future Payment Request approvals:
 
 
@@ -852,19 +852,19 @@ info:
 
 
     You will receive all the same notifications as if this happened in our live environment. We recommend you
-    check out our article on [what happens when an NPP Payment fails](https://help.split.cash/en/articles/4405560-what-happens-when-an-npp-payment-fails)
+    check out our article on [what happens when an NPP Payment fails](https://help.zepto.money/en/articles/4405560-what-happens-when-an-npp-payment-fails)
     to learn more about what happens when an NPP Payment is unable to process.
 
 
     ## Instant account verification accounts
 
     When using any of our hosted solutions ([Payment
-    Requests](https://help.split.cash/payment-requests/open-payment-requests),
-    [Open Agreements](https://help.split.cash/agreements/open-agreement) or
+    Requests](https://help.zepto.money/en/?q=payment+request),
+    [Open Agreements](https://help.zepto.money/agreements/open-agreement) or
     [Unassigned
-    Agreements](http://help.split.cash/agreements/unassigned-agreement)) you may
+    Agreements](http://help.zepto.money/agreements/unassigned-agreement)) you may
     want to test the [Instant Account Verification
-    (IAV)](http://help.split.cash/bank-accounts/instant-account-verification-iav)
+    (IAV)](http://help.zepto.money/bank-accounts/instant-account-verification-iav)
     process where we accept online banking credentials to validate bank account
     access. To do so, you can use the following credentials:
 
@@ -1041,7 +1041,7 @@ info:
 
     ```
 
-    Please refer to our help centre [article on webhooks](http://help.split.cash/en/articles/3303626-webhooks) for more information and an overview of what you can achieve with webhooks.
+    Please refer to our help centre [article on webhooks](http://help.zepto.money/en/articles/3303626-webhooks) for more information and an overview of what you can achieve with webhooks.
 
 
     We support two main categories of webhooks:
@@ -1554,7 +1554,7 @@ tags:
       Zepto Agreements are managed on a per Contact basis, and if a Payment Request
       is sent for an amount that exceeds the terms of the agreement, it will not be created.
 
-      Please refer to the [What is an Agreement](http://help.split.cash/articles/3094575-what-is-an-agreement) article in our knowledge base for an overview.
+      Please refer to the [What is an Agreement](http://help.zepto.money/articles/3094575-what-is-an-agreement) article in our knowledge base for an overview.
 
       <div class="middle-header">Direction</div>
 
@@ -1614,9 +1614,9 @@ tags:
       the result is the same: A new Agreement. Additionally, an Open Agreement
       can be accepted by anybody, not just other Zepto users. This is achieved
       by using our [Instant Account Verification
-      process](http://help.split.cash/bank-accounts/instant-account-verification-iav)
+      process](http://help.zepto.money/bank-accounts/instant-account-verification-iav)
       as part of accepting an [Open
-      Agreement](https://help.split.cash/agreements/open-agreement).
+      Agreement](https://help.zepto.money/agreements/open-agreement).
 
       ##Lifecycle
 
@@ -2008,7 +2008,7 @@ tags:
       in an iFrame, etc...
 
 
-      Please refer to the [Unassigned Agreement](http://help.split.cash/agreements/unassigned-agreement)
+      Please refer to the [Unassigned Agreement](http://help.zepto.money/agreements/unassigned-agreement)
       article in our knowledge base for more information.
   - name: Users
     description: |
@@ -2535,7 +2535,7 @@ paths:
             <li>Previous transactions to this Contact will retain the name and bank account that was used at the time.</li>
             <li>You cannot update a Contact's bank account details if they currently have an accepted agreement.</li>
             <li>Any active Bank Connections will be lost if you change the Contact's bank account.</li>
-            <li>See our [Help Article](https://help.split.cash/en/articles/3829211-how-do-i-change-my-customers-bank-account-details) for more information about the nuances and implications of changing a contacts Bank Account.</li>
+            <li>See our [Help Article](https://help.zepto.money/en/articles/3829211-how-do-i-change-my-customers-bank-account-details) for more information about the nuances and implications of changing a contacts Bank Account.</li>
           </ul>
         </aside>
       operationId: UpdateAContact
