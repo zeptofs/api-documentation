@@ -372,7 +372,7 @@ Example flow embedding an [Open Agreement link](https://help.zepto.money/agreeme
       "title": "Duplicate idempotency key",
       "detail": "A resource has already been created with this idempotency key",
       "links": {
-        "about": "https://docs.split.cash/"
+        "about": "https://docs.zepto.money/"
       },
       "meta": {
         "resource_ref": "PB.1a4"
@@ -415,7 +415,7 @@ Currently the following `POST` requests can be made idempotent. We **strongly re
       "title": "A Specific Error",
       "detail": "Details about the error",
       "links": {
-        "about": "https://docs.split.cash/..."
+        "about": "https://docs.zepto.money/..."
       }
     }
   ]
