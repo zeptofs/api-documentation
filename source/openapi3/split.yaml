@@ -4825,7 +4825,7 @@ components:
         category_purpose_code:
           type: string
           description: "ISO 20022 code for payment category purpose (see supported values below)."
-          enum: ["PENS"]
+          enum: ["PENS", "TAXS"]
           example: "PENS"
         end_to_end_id:
           type: string

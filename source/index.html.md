@@ -6239,6 +6239,7 @@ To enable custom payment flows, the required payment channel can be selected by 
 |Parameter|Value|
 |---|---|
 |»»» category_purpose_code|PENS|
+|»»» category_purpose_code|TAXS|
 
 > Example responses
 
@@ -11988,6 +11989,7 @@ Use this endpoint to resend a failed webhook delivery.
 |Property|Value|
 |---|---|
 |category_purpose_code|PENS|
+|category_purpose_code|TAXS|
 
 ## VoidAPayoutRequest
 
