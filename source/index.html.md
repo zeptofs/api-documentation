@@ -6230,7 +6230,7 @@ To enable custom payment flows, the required payment channel can be selected by 
 |»»» description|body|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
 |»»» recipient_contact_id|body|string|true|Contact to pay (`Contact.data.id`)|
 |»»» category_purpose_code|body|string|false|ISO 20022 code for payment category purpose (see supported values below).|
-|»»» end_to_end_id|body|string|false|End-To-End ID (35 max. characters). Required if a category purpose code is present. For superannuation payments, set this to the Payment Reference Number (PRN).|
+|»»» end_to_end_id|body|string|false|End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN).|
 |»»» metadata|body|Metadata|false|Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.|
 |»» metadata|body|[Metadata](#schemametadata)|false|Use for your custom data and certain Zepto customisations.|
 
@@ -11981,7 +11981,7 @@ Use this endpoint to resend a failed webhook delivery.
 |description|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
 |recipient_contact_id|string|true|Contact to pay (`Contact.data.id`)|
 |category_purpose_code|string|false|ISO 20022 code for payment category purpose (see supported values below).|
-|end_to_end_id|string|false|End-To-End ID (35 max. characters). Required if a category purpose code is present. For superannuation payments, set this to the Payment Reference Number (PRN).|
+|end_to_end_id|string|false|End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN).|
 |metadata|Metadata|false|Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.|
 
 #### Enumerated Values

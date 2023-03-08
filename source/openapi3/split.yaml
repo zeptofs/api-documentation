@@ -4832,8 +4832,8 @@ components:
           max: 35
           description: >
             End-To-End ID (35 max. characters).
-            Required if a category purpose code is present.
-            For superannuation payments, set this to the Payment Reference Number (PRN).
+            Required when a category purpose code is present.
+            For superannuation or tax payments, set this to the Payment Reference Number (PRN).
           example: "FFC6D34847134E4D8BF4B9B41BDC94C8"
         metadata:
           type: Metadata
