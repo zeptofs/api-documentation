@@ -4825,7 +4825,7 @@ components:
         category_purpose_code:
           type: string
           description: "ISO 20022 code for payment category purpose (see supported values below)."
-          enum: ["PENS", "TAXS"]
+          enum: ["PENS", "SALA", "TAXS"]
           example: "PENS"
         end_to_end_id:
           type: string
@@ -4834,6 +4834,7 @@ components:
             End-To-End ID (35 max. characters).
             Required when a category purpose code is present.
             For superannuation or tax payments, set this to the Payment Reference Number (PRN).
+            For salary payments, set this to the Employee Reference.
           example: "FFC6D34847134E4D8BF4B9B41BDC94C8"
         metadata:
           type: Metadata
