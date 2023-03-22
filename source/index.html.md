@@ -946,6 +946,8 @@ To protect against timing attacks, use a constant-time string comparison to comp
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+- **2023-03-22** - Removed the `Total` pagination header
+- **2023-03-22** - Removed rel=first, rel=prev, rel=last from the `Link` pagination header
 - **2022-01-21** - Reduced webhook delivery retries on sandbox to a single retry
 - **2021-12-01** - Add ref to Webhook Delivery endpoint
 - **2021-10-08** - Introduced improved transaction failure messaging (code, title and detail)
