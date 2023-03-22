@@ -598,7 +598,7 @@ Link: <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
 Per-Page: 25
 ```
 
-Pagination information can be located in the response headers: `Link` & `Per-Page` <br> All collection endpoints are paginated to `Per-Page: 25` by default. (`100` per page is max, any value above will revert to `100`) <br> You can control the pagination by including `per_page=x` and/or `page=x` in the the endpoint URL params.
+Pagination information can be located in the response headers: `Link` & `Per-Page` <br> All collection endpoints are paginated to `Per-Page: 25` by default. (`100` per page is max, any value above will revert to `100`) <br> You can control the pagination by including `per_page=x` and/or `page=x` in the endpoint URL params.
 
 The `Link` header will be optionally present if a "next page" is available to navigate to. The next page link is identified with `rel="next"`
 
