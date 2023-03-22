@@ -169,7 +169,7 @@ If you're looking to only access your own account via the API, you can generate 
 
     | Parameter | Description |
     |-----------|-------------|
-    | **Name**  | The name of your application. When using the the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |
+    | **Name**  | The name of your application. When using the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |
     | **Redirect URI** | Set this to your application's endpoint charged with receiving the authorisation code. |
 
 2. **Obtain an authorisation code**

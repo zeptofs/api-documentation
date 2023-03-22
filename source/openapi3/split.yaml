@@ -244,7 +244,7 @@ info:
 
         | Parameter | Description |
         |-----------|-------------|
-        | **Name**  | The name of your application. When using the the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |
+        | **Name**  | The name of your application. When using the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |
         | **Redirect URI** | Set this to your application's endpoint charged with receiving the authorisation code. |
 
     2. **Obtain an authorisation code**
@@ -950,7 +950,7 @@ info:
     <br>
     All collection endpoints are paginated to `Per-Page: 25` by default. (`100` per page is max, any value above will revert to `100`)
     <br>
-    You can control the pagination by including `per_page=x` and/or `page=x` in the the endpoint URL params.
+    You can control the pagination by including `per_page=x` and/or `page=x` in the endpoint URL params.
 
 
     The `Link` header will be optionally present if a "next page" is available to navigate to. The next page link is identified with `rel="next"`
