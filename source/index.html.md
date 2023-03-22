@@ -591,17 +591,24 @@ Scopes define the level of access granted via the OAuth2 authorisation process. 
 
 ## Pagination
 
-> Example response header
+> Example response headers
 
 ```
-Link: <http://api.sandbox.split.cash/contacts?page=5>; rel="last", <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
+Link: <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
 Per-Page: 25
-Total: 5
 ```
 
-All collections are paginated to 25 items by default and the pagination information may be found in the response header. You can customise the pagination by appending `?per_page=x` and/or `?page=x` to the endpoint URL.
+Pagination information can be located in the response headers: `Link` & `Per-Page` <br> All collection endpoints are paginated to `Per-Page: 25` by default. (`100` per page is max, any value above will revert to `100`) <br> You can control the pagination by including `per_page=x` and/or `page=x` in the endpoint URL params.
 
-<aside class="notice">The maximum <code>per_page</code> value is <code>100</code>. Any value above this will be ignored and <code>100</code> will be used instead.</aside>
+The `Link` header will be optionally present if a "next page" is available to navigate to. The next page link is identified with `rel="next"`
+
+<aside class="notice">
+  <b>Legacy Pagination</b> Some existing users may still be on a transitional legacy version of pagination.
+  <br>
+  The Legacy version returns some extra <b>deprecated header values: <code>Total</code> plus <code>rel="last"</code> & <code>rel="prev"</code> in <code>Link</code></b>.
+  <br>
+  Please transition to only using the <code>rel="next"</code> from the <code>Link</code> header, as all other values are deprecated.
+</aside>
 
 ## Remitter
 
@@ -1204,6 +1211,13 @@ By default, all outgoing Agreements will be returned. You can apply filters to y
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListOutgoingAgreementsResponse](#schemalistoutgoingagreementsresponse)|
 
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
+
 ## Get an Agreement
 
 <a id="opIdGetAgreement"></a>
@@ -1717,6 +1731,13 @@ By default, all Bank Accounts will be returned.
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllBankAccountsResponse](#schemalistallbankaccountsresponse)|
 
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
+
 <h1 id="Zepto-API-Bank-Connections">Bank Connections</h1>
 
 Bank connections are read-only connections to your contacts' banking data. This allows Zepto (and yourself) to make intelligent transactional decisions leading to better outcomes.
@@ -1942,6 +1963,13 @@ By default, all Bank Connections will be returned. You can apply filters to your
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllBankConnectionsResponse](#schemalistallbankconnectionsresponse)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 ## Get a Bank Connection
 
@@ -2761,6 +2789,13 @@ By default, all Contacts will be returned. You can apply filters to your query t
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllContactsResponse](#schemalistallcontactsresponse)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 ## Get a Contact
 
@@ -4530,6 +4565,13 @@ By default, all Open Agreements will be returned.
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllOpenAgreementsResponse](#schemalistallopenagreementsresponse)|
 
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
+
 ## Activate a closed Open Agreement
 
 <a id="opIdActivateOpenAgreement"></a>
@@ -5679,6 +5721,13 @@ Payment Requests where you are the creditor and are collecting funds from your d
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListPaymentRequestCollectionsResponse](#schemalistpaymentrequestcollectionsresponse)|
 
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
+
 ## List Receivables
 
 <a id="opIdListPaymentRequestReceivables"></a>
@@ -5880,6 +5929,13 @@ Payment Requests where the debtor is sending you funds ([Receivable Contacts](/#
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListPaymentRequestReceivablesResponse](#schemalistpaymentrequestreceivablesresponse)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 <h1 id="Zepto-API-Payments">Payments</h1>
 
@@ -6422,6 +6478,13 @@ func main() {
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllPaymentsResponse](#schemalistallpaymentsresponse)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 ## Get a Payment
 
@@ -7403,6 +7466,13 @@ func main() {
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListOutgoingRefundsResponse](#schemalistoutgoingrefundsresponse)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 ## Retrieve a Refund
 
@@ -8515,6 +8585,13 @@ func main() {
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllTransactionsResponse](#schemalistalltransactionsresponse)|
 
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
+
 <h1 id="Zepto-API-Transfers">Transfers</h1>
 
 This endpoint lets you Transfer funds between any bank & float accounts registered under your Zepto account:
@@ -8925,6 +9002,13 @@ func main() {
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllTransfersResponse](#schemalistalltransfersresponse)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 ## Get a Transfer (Available soon)
 
@@ -9546,6 +9630,13 @@ Will return all Unassigned Agreements that have not yet been accepted.
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListUnassignedAgreementsResponse](#schemalistunassignedagreementsresponse)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 ## Get an Unassigned Agreement
 
@@ -10204,6 +10295,13 @@ List all your application's webhook configurations.
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[ListAllWebhooksResponse](#schemalistallwebhooksresponse)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
 
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
+
 ## List deliveries for a webhook
 
 <a id="opIdGetWebhookDeliveries"></a>
@@ -10412,6 +10510,13 @@ NOTE: Webhook deliveries are stored for 30 days.
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[GetWebhookDeliveriesResponse](#schemagetwebhookdeliveriesresponse)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Link|string||Contains pagination link for next page of collection, if next page exists.|
+|200|Per-Page|integer||Contains the current maximum items in collection. Defaults to 25|
 
 ## Get a Webhook Delivery
 
