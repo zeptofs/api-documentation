@@ -244,7 +244,7 @@ info:
 
         | Parameter | Description |
         |-----------|-------------|
-        | **Name**  | The name of your application. When using the the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |
+        | **Name**  | The name of your application. When using the *Authorisation Grant Flow*, users will see this name as the application requesting access to their account. |
         | **Redirect URI** | Set this to your application's endpoint charged with receiving the authorisation code. |
 
     2. **Obtain an authorisation code**
@@ -934,26 +934,35 @@ info:
     ## Pagination
 
 
-    > Example response header
+    > Example response headers
 
 
     ```
 
-    Link: <http://api.sandbox.split.cash/contacts?page=5>; rel="last",
-    <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
+    Link: <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
 
     Per-Page: 25
 
-    Total: 5
-
     ```
 
 
-    All collections are paginated to 25 items by default and the pagination
-    information may be found in the response header. You can customise the pagination by appending `?per_page=x` and/or `?page=x` to the endpoint URL.
+    Pagination information can be located in the response headers: `Link` & `Per-Page`
+    <br>
+    All collection endpoints are paginated to `Per-Page: 25` by default. (`100` per page is max, any value above will revert to `100`)
+    <br>
+    You can control the pagination by including `per_page=x` and/or `page=x` in the endpoint URL params.
 
 
-    <aside class="notice">The maximum <code>per_page</code> value is <code>100</code>. Any value above this will be ignored and <code>100</code> will be used instead.</aside>
+    The `Link` header will be optionally present if a "next page" is available to navigate to. The next page link is identified with `rel="next"`
+
+
+    <aside class="notice">
+      <b>Legacy Pagination</b> Some existing users may still be on a transitional legacy version of pagination.
+      <br>
+      The Legacy version returns some extra <b>deprecated header values: <code>Total</code> plus <code>rel="last"</code> & <code>rel="prev"</code> in <code>Link</code></b>.
+      <br>
+      Please transition to only using the <code>rel="next"</code> from the <code>Link</code> header, as all other values are deprecated.
+    </aside>
 
 
     ## Remitter
@@ -1495,6 +1504,10 @@ info:
 
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+
+    - **2023-03-22** - Removed the `Total` pagination header
+
+    - **2023-03-22** - Removed rel=first, rel=prev, rel=last from the `Link` pagination header
 
     - **2022-01-21** - Reduced webhook delivery retries on sandbox to a single retry
 
@@ -2073,6 +2086,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -2132,6 +2150,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -2148,6 +2171,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -2467,6 +2495,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -2615,6 +2648,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -2728,6 +2766,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -2916,6 +2959,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -2946,6 +2994,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -3020,6 +3073,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -3258,6 +3316,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -3324,6 +3387,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -3402,6 +3470,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -3475,6 +3548,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -3566,6 +3644,11 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            Per-Page:
+              $ref: '#/components/headers/Per-Page'
           content:
             application/json:
               schema:
@@ -6420,5 +6503,16 @@ components:
           id: 957d40a4-80f5-4dd2-8ada-8242d5ad66c1
           webhook_id: 13bd760e-447f-4225-b801-0777a15da131
           state: pending
+  headers:
+    Link:
+      schema:
+        type: string
+      description: Contains pagination link for next page of collection, if next page exists.
+      example: <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
+    Per-Page:
+      schema:
+        type: integer
+      description: Contains the current maximum items in collection. Defaults to 25
+      example: 25
 security:
   - bearerAuth: []
