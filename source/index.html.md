@@ -10440,7 +10440,7 @@ func main() {
 
 `GET /webhooks/{webhook_id}/deliveries`
 
-NOTE: Webhook deliveries are stored for 30 days.
+NOTE: Webhook deliveries are stored for 7 days.
 
 <h3 id="List-deliveries-for-a-webhook-parameters" class="parameters">Parameters</h3>
 
