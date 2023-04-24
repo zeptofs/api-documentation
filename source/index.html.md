@@ -946,6 +946,7 @@ To protect against timing attacks, use a constant-time string comparison to comp
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+- **2023-04-20** - Changed the webhook retention period to 7 days
 - **2023-03-22** - Removed the `Total` pagination header
 - **2023-03-22** - Removed rel=first, rel=prev, rel=last from the `Link` pagination header
 - **2022-01-21** - Reduced webhook delivery retries on sandbox to a single retry
