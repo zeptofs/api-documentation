@@ -6690,7 +6690,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </code></pre></div>
 <p><code>POST /payment_requests</code></p>
 
-<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 <blockquote>
 <p>Body parameter</p>
@@ -7859,7 +7859,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
 
-<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 <blockquote>
 <p>Body parameter</p>
@@ -7979,6 +7979,20 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td>Contact to pay (<code>Contact.data.id</code>)</td>
 </tr>
 <tr>
+<td>»»» category_purpose_code</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>ISO 20022 code for payment category purpose (see supported values below).</td>
+</tr>
+<tr>
+<td>»»» end_to_end_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN). For salary payments, set this to the Employee Reference.</td>
+</tr>
+<tr>
 <td>»»» metadata</td>
 <td>body</td>
 <td>Metadata</td>
@@ -7991,6 +8005,26 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td><a href="#schemametadata">Metadata</a></td>
 <td>false</td>
 <td>Use for your custom data and certain Zepto customisations.</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>»»» category_purpose_code</td>
+<td>PENS</td>
+</tr>
+<tr>
+<td>»»» category_purpose_code</td>
+<td>SALA</td>
+</tr>
+<tr>
+<td>»»» category_purpose_code</td>
+<td>TAXS</td>
 </tr>
 </tbody></table>
 
@@ -8018,6 +8052,8 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
         </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A tandem skydive jump SB23094"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"from_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"to_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21066764-c103-4e7f-b436-4cee7db5f400"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"category_purpose_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end_to_end_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFC6D34847134E4D8BF4B9B41BDC94C8"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"invoice_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BILL-0001"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"invoice_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c80a9958-e805-47c0-ac2a-c947d7fd778d"</span><span class="p">,</span><span class="w">
@@ -9026,7 +9062,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   <li>Many refunds may be created against the original Payment Request</li>
   <li>The total refunded amount must not exceed the original value</li>
 </ul>
-<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside></p>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside></p>
 
 <blockquote>
 <p>Body parameter</p>
@@ -10877,7 +10913,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Date/time UTC ISO 8601 format, single value, exact match</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -13163,7 +13199,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Filter deliveries by state, single value / multiple values separated by commas. See <a href="#our-delivery-promises">Our delivery promise</a></td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<h4 id='enumerated-values-5'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -13779,7 +13815,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Your custom keyed data</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-5'>Enumerated Values</h4>
+<h4 id='enumerated-values-6'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -14559,7 +14595,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Pending -&gt; Active or Failed -&gt; Deregistered (Contact removed)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-6'>Enumerated Values</h4>
+<h4 id='enumerated-values-7'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -15070,7 +15106,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Pending -&gt; Active or Failed -&gt; Deregistered (Contact removed)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-7'>Enumerated Values</h4>
+<h4 id='enumerated-values-8'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -15347,6 +15383,8 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A tandem skydive jump SB23094"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"recipient_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48b89364-1577-4c81-ba02-96705895d457"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"category_purpose_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"end_to_end_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFC6D34847134E4D8BF4B9B41BDC94C8"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='properties-24'>Properties</h3>
@@ -15379,10 +15417,42 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Contact to pay (<code>Contact.data.id</code>)</td>
 </tr>
 <tr>
+<td>category_purpose_code</td>
+<td>string</td>
+<td>false</td>
+<td>ISO 20022 code for payment category purpose (see supported values below).</td>
+</tr>
+<tr>
+<td>end_to_end_id</td>
+<td>string</td>
+<td>false</td>
+<td>End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN). For salary payments, set this to the Employee Reference.</td>
+</tr>
+<tr>
 <td>metadata</td>
 <td>Metadata</td>
 <td>false</td>
 <td>Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-9'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>category_purpose_code</td>
+<td>PENS</td>
+</tr>
+<tr>
+<td>category_purpose_code</td>
+<td>SALA</td>
+</tr>
+<tr>
+<td>category_purpose_code</td>
+<td>TAXS</td>
 </tr>
 </tbody></table>
 <h2 id='voidapayoutrequest'>VoidAPayoutRequest</h2>
@@ -15439,6 +15509,8 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
         </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A tandem skydive jump SB23094"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"from_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83623359-e86e-440c-9780-432a3bc3626f"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"to_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21066764-c103-4e7f-b436-4cee7db5f400"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"category_purpose_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end_to_end_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFC6D34847134E4D8BF4B9B41BDC94C8"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"invoice_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BILL-0001"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"invoice_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c80a9958-e805-47c0-ac2a-c947d7fd778d"</span><span class="p">,</span><span class="w">
@@ -15807,7 +15879,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Your custom keyed data</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-8'>Enumerated Values</h4>
+<h4 id='enumerated-values-10'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -16014,7 +16086,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Your custom keyed data</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-9'>Enumerated Values</h4>
+<h4 id='enumerated-values-11'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -16222,7 +16294,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>Your custom keyed data</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-10'>Enumerated Values</h4>
+<h4 id='enumerated-values-12'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -16995,7 +17067,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>No description</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-11'>Enumerated Values</h4>
+<h4 id='enumerated-values-13'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -17981,7 +18053,7 @@ If a high probability of insufficient funds is detected, Zepto will not submit t
 <td>When the webhook delivery was created</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-12'>Enumerated Values</h4>
+<h4 id='enumerated-values-14'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
