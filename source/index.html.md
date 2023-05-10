@@ -5129,7 +5129,7 @@ func main() {
 
 `POST /payment_requests`
 
-<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -6182,7 +6182,7 @@ To enable custom payment flows, the required payment channel can be selected by 
   <li>["direct_entry"] - for slower traditional payments</li>
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
-<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -6229,8 +6229,18 @@ To enable custom payment flows, the required payment channel can be selected by 
 |»»» amount|body|integer|true|Amount in cents to pay the recipient|
 |»»» description|body|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
 |»»» recipient_contact_id|body|string|true|Contact to pay (`Contact.data.id`)|
+|»»» category_purpose_code|body|string|false|ISO 20022 code for payment category purpose (see supported values below).|
+|»»» end_to_end_id|body|string|false|End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN). For salary payments, set this to the Employee Reference.|
 |»»» metadata|body|Metadata|false|Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.|
 |»» metadata|body|[Metadata](#schemametadata)|false|Use for your custom data and certain Zepto customisations.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|»»» category_purpose_code|PENS|
+|»»» category_purpose_code|SALA|
+|»»» category_purpose_code|TAXS|
 
 > Example responses
 
@@ -6256,6 +6266,8 @@ To enable custom payment flows, the required payment channel can be selected by 
         "description": "A tandem skydive jump SB23094",
         "from_id": "83623359-e86e-440c-9780-432a3bc3626f",
         "to_id": "21066764-c103-4e7f-b436-4cee7db5f400",
+        "category_purpose_code": "PENS",
+        "end_to_end_id": "FFC6D34847134E4D8BF4B9B41BDC94C8",
         "metadata": {
           "invoice_ref": "BILL-0001",
           "invoice_id": "c80a9958-e805-47c0-ac2a-c947d7fd778d",
@@ -7230,7 +7242,7 @@ Certain rules apply to the issuance of a refund:
   <li>Many refunds may be created against the original Payment Request</li>
   <li>The total refunded amount must not exceed the original value</li>
 </ul>
-<aside class="notice">We strongly recommend to supply an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -11954,6 +11966,8 @@ Use this endpoint to resend a failed webhook delivery.
   "amount": 30000,
   "description": "A tandem skydive jump SB23094",
   "recipient_contact_id": "48b89364-1577-4c81-ba02-96705895d457",
+  "category_purpose_code": "PENS",
+  "end_to_end_id": "FFC6D34847134E4D8BF4B9B41BDC94C8",
   "metadata": null
 }
 ```
@@ -11967,7 +11981,17 @@ Use this endpoint to resend a failed webhook delivery.
 |amount|integer|true|Amount in cents to pay the recipient|
 |description|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
 |recipient_contact_id|string|true|Contact to pay (`Contact.data.id`)|
+|category_purpose_code|string|false|ISO 20022 code for payment category purpose (see supported values below).|
+|end_to_end_id|string|false|End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN). For salary payments, set this to the Employee Reference.|
 |metadata|Metadata|false|Use for your custom data and certain Zepto customisations. Stored against generated transactions and included in associated webhook payloads.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|category_purpose_code|PENS|
+|category_purpose_code|SALA|
+|category_purpose_code|TAXS|
 
 ## VoidAPayoutRequest
 
@@ -12028,6 +12052,8 @@ Use this endpoint to resend a failed webhook delivery.
         "description": "A tandem skydive jump SB23094",
         "from_id": "83623359-e86e-440c-9780-432a3bc3626f",
         "to_id": "21066764-c103-4e7f-b436-4cee7db5f400",
+        "category_purpose_code": "PENS",
+        "end_to_end_id": "FFC6D34847134E4D8BF4B9B41BDC94C8",
         "metadata": {
           "invoice_ref": "BILL-0001",
           "invoice_id": "c80a9958-e805-47c0-ac2a-c947d7fd778d",
