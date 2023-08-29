@@ -563,10 +563,6 @@ When using any of our hosted solutions ([Payment Requests](https://help.zepto.mo
 | `12345678` | `TestMyMoney` |
 
 <aside class="notice">The credentials will work with any of the available financial institutions.</aside>
-## Available balances in the Sandbox
-If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly. A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested. This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.
-
-In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the available balance of any **Transactional** bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount less than or equal to this amount will succeed.
 # Configuration
 ## Scopes
 Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.
@@ -945,7 +941,7 @@ To protect against timing attacks, use a constant-time string comparison to comp
 
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
-
+- **2023-08-29** - Remove references to the prefail feature
 - **2023-04-20** - Changed the webhook retention period to 7 days
 - **2023-03-22** - Removed the `Total` pagination header
 - **2023-03-22** - Removed rel=first, rel=prev, rel=last from the `Link` pagination header
@@ -6696,197 +6692,12 @@ Get a single payment by its reference
 This endpoint gives you some control over a transaction:
 
 * After it has been created; and
-* Before it has been submitted to the banks; or
-* If it was Prefailed, due to insufficient funds, and was therefore not submitted to the banks.
+* Before it has been submitted to the banks.
 
 <aside class="notice">
   Payments and Payment Requests are made up of individual Debits and Credits. These debits and credits
   were once referred to as Payouts [Legacy naming].
 </aside>
-
-## Retry a Prefailed Payment Request [DEPRECATED]
-
-<a id="opIdRetryAPayout"></a>
-
-> Code samples
-
-```shell
-curl --request POST \
-  --url https://api.sandbox.split.cash/payouts/C.2/retry \
-  --header 'accept: application/json' \
-  --header 'authorization: Bearer {access-token}'
-```
-
-```ruby
-require 'uri'
-require 'net/http'
-
-url = URI("https://api.sandbox.split.cash/payouts/C.2/retry")
-
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-request = Net::HTTP::Post.new(url)
-request["accept"] = 'application/json'
-request["authorization"] = 'Bearer {access-token}'
-
-response = http.request(request)
-puts response.read_body
-```
-
-```javascript--node
-var http = require("https");
-
-var options = {
-  "method": "POST",
-  "hostname": "api.sandbox.split.cash",
-  "port": null,
-  "path": "/payouts/C.2/retry",
-  "headers": {
-    "accept": "application/json",
-    "authorization": "Bearer {access-token}"
-  }
-};
-
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-});
-
-req.end();
-```
-
-```python
-import http.client
-
-conn = http.client.HTTPSConnection("api.sandbox.split.cash")
-
-headers = {
-    'accept': "application/json",
-    'authorization': "Bearer {access-token}"
-    }
-
-conn.request("POST", "/payouts/C.2/retry", headers=headers)
-
-res = conn.getresponse()
-data = res.read()
-
-print(data.decode("utf-8"))
-```
-
-```java
-HttpResponse<String> response = Unirest.post("https://api.sandbox.split.cash/payouts/C.2/retry")
-  .header("accept", "application/json")
-  .header("authorization", "Bearer {access-token}")
-  .asString();
-```
-
-```php
-<?php
-
-$client = new http\Client;
-$request = new http\Client\Request;
-
-$request->setRequestUrl('https://api.sandbox.split.cash/payouts/C.2/retry');
-$request->setRequestMethod('POST');
-$request->setHeaders(array(
-  'authorization' => 'Bearer {access-token}',
-  'accept' => 'application/json'
-));
-
-$client->enqueue($request)->send();
-$response = $client->getResponse();
-
-echo $response->getBody();
-```
-
-```go
-package main
-
-import (
-	"fmt"
-	"net/http"
-	"io/ioutil"
-)
-
-func main() {
-
-	url := "https://api.sandbox.split.cash/payouts/C.2/retry"
-
-	req, _ := http.NewRequest("POST", url, nil)
-
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("authorization", "Bearer {access-token}")
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println(res)
-	fmt.Println(string(body))
-
-}
-```
-
-`POST /payouts/{ref}/retry`
-
-When debitting a Contact with an active bank connection, Zepto will first ensure that there are sufficient funds available before submitting the debit to the banks.
-If a high probability of insufficient funds is detected, Zepto will not submit the transaction to the banks and will mark the transaction as <strong>Prefailed</strong>.
-
-This endpoint allows you to retry the Payment Request without having to create a brand new transaction.
-
-<aside class="notice">
-  Rather than using this endpoint, we now recommend creating a brand new transaction as this simplifies and maintains data integrity for the lifecycle of each attempt
-</aside>
-
-<h3 id="Retry-a-Prefailed-Payment-Request-[DEPRECATED]-parameters" class="parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|ref|path|string|true|Payment Request credit reference number e.g C.2|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": {
-    "ref": "C.2",
-    "parent_ref": "PR.039a",
-    "type": "credit",
-    "category": "payout",
-    "created_at": "2016-12-05T23:15:00Z",
-    "matures_at": "2016-12-06T23:15:00Z",
-    "cleared_at": null,
-    "bank_ref": null,
-    "status": "maturing",
-    "status_changed_at": "2016-12-05T23:15:00Z",
-    "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
-    "party_name": "Price and Sons",
-    "party_nickname": "price-and-sons-2",
-    "party_bank_ref": null,
-    "description": "Money for jam",
-    "amount": 1
-  }
-}
-```
-
-<h3 id="Retry a Prefailed Payment Request [DEPRECATED]-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[RetryPayoutResponse](#schemaretrypayoutresponse)|
 
 ## Void a Payment
 
@@ -8236,7 +8047,6 @@ A transaction (debit or credit) can have the following statuses:
 | `voided` | The transaction has been cancelled and is no longer eligible for processing. |
 | `pending_verification` | The bank account must be verified before the transaction can proceed. |
 | `paused` | The transaction has temporary been paused by Zepto pending internal review. |
-| `prefailed` | The transaction was never submitted to the bank because we detected that there were insufficient funds. The transaction can be retried. |
 | `channel_switched` | The initial payment channel has failed and the credit has automatically switched to attempt the payment using the next available channel. |
 ## Failure codes
 > Example response
@@ -8273,7 +8083,7 @@ A transaction (debit or credit) can have the following statuses:
   ]
 }
 ```
-The rejected, returned, voided & prefailed statuses are always accompanied by a failure code, title and detail as listed below.
+The rejected, returned & voided statuses are always accompanied by a failure code, title and detail as listed below.
 ### DE credit failures
 | Code | Title | Detail |
 | ------------ | ------------- | -------------- |
@@ -12903,7 +12713,6 @@ Use this endpoint to resend a failed webhook delivery.
 |status|voided|
 |status|pending_verification|
 |status|paused|
-|status|prefailed|
 |status|channel_switched|
 |current_channel|direct_entry|
 |current_channel|float_account|
