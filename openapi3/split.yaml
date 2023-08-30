@@ -879,17 +879,6 @@ info:
     <aside class="notice">The credentials will work with any of the available
     financial institutions.</aside>
 
-    ## Available balances in the Sandbox
-
-    If your integration includes allowing us to pre-fail transactions prior to being processed, you may want to test that your system is handling these events correctly.
-    A transaction will pre-fail when the available balance of the customers account is less than the amount of the payment being requested.
-    This is checked during pre-processing just before your debit is sent for processing if there is an active bank connection.
-
-
-    In the Sandbox environment, if the contact you are attempting to debit has a bank connection that was created through our Instant Account Verification feature, the
-    available balance of any **Transactional** bank account will always be `$123.45`. Any payment requests above this amount will pre-fail and any amount
-    less than or equal to this amount will succeed.
-
     # Configuration
 
     ## Scopes
@@ -1504,6 +1493,7 @@ info:
 
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+    - **2023-08-29** - Remove references to the prefail feature
 
     - **2023-04-20** - Changed the webhook retention period to 7 days
 
@@ -1740,9 +1730,7 @@ tags:
 
       * After it has been created; and
 
-      * Before it has been submitted to the banks; or
-
-      * If it was Prefailed, due to insufficient funds, and was therefore not submitted to the banks.
+      * Before it has been submitted to the banks.
 
 
       <aside class="notice">
@@ -1853,10 +1841,6 @@ tags:
       | `paused` | The transaction has temporary been paused by Zepto pending
       internal review. |
 
-      | `prefailed` | The transaction was never submitted to the bank because we
-      detected that there were insufficient funds. The transaction can be
-      retried. |
-
       | `channel_switched` | The initial payment channel has failed and the credit has automatically
       switched to attempt the payment using the next available channel. |
 
@@ -1900,7 +1884,7 @@ tags:
 
       ```
 
-      The rejected, returned, voided & prefailed statuses are always accompanied by a failure code, title and detail as listed below.
+      The rejected, returned & voided statuses are always accompanied by a failure code, title and detail as listed below.
 
       ### DE credit failures
 
@@ -2800,38 +2784,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAPaymentResponse'
-  '/payouts/{ref}/retry':
-    post:
-      tags:
-        - Payouts
-      summary: Retry a Prefailed Payment Request [DEPRECATED]
-      description: |
-        When debitting a Contact with an active bank connection, Zepto will first ensure that there are sufficient funds available before submitting the debit to the banks.
-        If a high probability of insufficient funds is detected, Zepto will not submit the transaction to the banks and will mark the transaction as <strong>Prefailed</strong>.
-
-        This endpoint allows you to retry the Payment Request without having to create a brand new transaction.
-
-        <aside class="notice">
-          Rather than using this endpoint, we now recommend creating a brand new transaction as this simplifies and maintains data integrity for the lifecycle of each attempt
-        </aside>
-      operationId: RetryAPayout
-      parameters:
-        - name: ref
-          in: path
-          description: Payment Request credit reference number e.g C.2
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-          example: C.2
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RetryPayoutResponse'
   '/payouts/{ref}':
     delete:
       tags:
@@ -5859,7 +5811,6 @@ components:
             - voided
             - pending_verification
             - paused
-            - prefailed
             - channel_switched
         status_changed_at:
           type: string
