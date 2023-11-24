@@ -33,13 +33,13 @@ info:
 
     * All communication is via `https` and supports **only** `TLSv1.2`.
 
-    * Production API: `https://api.split.cash/`.
+    * Production API: `https://api.zeptopayments.com/`.
 
-    * Production UI: `https://go.split.cash/`.
+    * Production UI: `https://go.zeptopayments.com/`.
 
-    * Sandbox API: `https://api.sandbox.split.cash/`.
+    * Sandbox API: `https://api.sandbox.zeptopayments.com/`.
 
-    * Sandbox UI: `https://go.sandbox.split.cash/`.
+    * Sandbox UI: `https://go.sandbox.zeptopayments.com/`.
 
     * Data is sent and received as JSON.
 
@@ -63,8 +63,8 @@ info:
     <div class="middle-header">System Status</div>
 
 
-    Check the platform status, or subscribe to receive notifications at [status.split.cash](https://status.split.cash/).
-    If you would like to check platform status programmatically, please refer to [status.split.cash/api](https://status.split.cash/api).
+    Check the platform status, or subscribe to receive notifications at [status.zeptopayments.com](https://status.zeptopayments.com/).
+    If you would like to check platform status programmatically, please refer to [status.zeptopayments.com/api](https://status.zeptopayments.com/api).
 
 
     <div class="middle-header">Breaking Changes</div>
@@ -139,11 +139,11 @@ info:
 
     1. **Create a Zepto account**
 
-        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
+        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.zeptopayments.com](https://go.sandbox.zeptopayments.com)
 
     2. **Register your application with Zepto**
 
-        Sign in and create an OAuth2 application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications).
+        Sign in and create an OAuth2 application: [https://go.sandbox.zeptopayments.com/oauth/applications](https://go.sandbox.zeptopayments.com/oauth/applications).
 
         [![Zepto OAuth2 app create](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png)
 
@@ -151,7 +151,7 @@ info:
 
         The quickest way to access your Zepto account via the API is using
         personal access tokens. Click on your newly created application from your [application
-    list](https://go.sandbox.split.cash/oauth/applications) and click on
+    list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on
     **+ Personal Access Token**.
 
         [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
@@ -200,7 +200,7 @@ info:
 
     1. **Create a Zepto account**
 
-        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash).
+        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.zeptopayments.com](https://go.sandbox.zeptopayments.com).
 
     2. **Choose authentication method**
 
@@ -217,9 +217,9 @@ info:
 
 
     * To do this, sign in to your Zepto account and [create an
-    application](https://go.sandbox.split.cash/oauth/applications) if you
+    application](https://go.sandbox.zeptopayments.com/oauth/applications) if you
     haven't already. Click on your application from your [application
-    list](https://go.sandbox.split.cash/oauth/applications) and click on
+    list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on
     **Personal access**.
 
         [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
@@ -240,7 +240,7 @@ info:
 
     1. **Register your application with Zepto**
 
-        Once you've got your account up and running, sign in and create an OAuth2 profile for your application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications)
+        Once you've got your account up and running, sign in and create an OAuth2 profile for your application: [https://go.sandbox.zeptopayments.com/oauth/applications](https://go.sandbox.zeptopayments.com/oauth/applications)
 
         | Parameter | Description |
         |-----------|-------------|
@@ -252,7 +252,7 @@ info:
         Construct the initial URL the user will need to visit in order to grant your application permission to act on his/her behalf. The constructed URL describes the level of permission ([`scope`](/#scopes)), the application requesting permission (`client_id`) and where the user gets redirected once they've granted permission (`redirect_uri`).
 
         The URL should be formatted to look like this:
-        `https://go.sandbox.split.cash/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}`
+        `https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}`
 
         | Parameter | Description |
         |-----------|-------------|
@@ -269,7 +269,7 @@ info:
 
         After the user has authorised your application, they will be returned to your application at the URL specified in `redirect_uri` along with the `code` query parameter as the authorisation code.
 
-        Finally, the authorisation code can then be exchanged for an access token and refresh token pair by POSTing to: `https://go.sandbox.split.cash/oauth/token`
+        Finally, the authorisation code can then be exchanged for an access token and refresh token pair by POSTing to: `https://go.sandbox.zeptopayments.com/oauth/token`
 
         **Note** The authorisation code is a ONE-TIME use code. It will not work again if you try to POST it a second time.
 
@@ -305,11 +305,11 @@ info:
 
     1. **Create a Zepto account**
 
-        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.split.cash](https://go.sandbox.split.cash)
+        If you haven't already, you'll want to create a sandbox Zepto account at [https://go.sandbox.zeptopayments.com](https://go.sandbox.zeptopayments.com)
 
     2. **Register your application with Zepto**
 
-        Sign in and create an OAuth2 application: [https://go.sandbox.split.cash/oauth/applications](https://go.sandbox.split.cash/oauth/applications).
+        Sign in and create an OAuth2 application: [https://go.sandbox.zeptopayments.com/oauth/applications](https://go.sandbox.zeptopayments.com/oauth/applications).
 
         Use the special Postman callback URL: `https://www.getpostman.com/oauth2/callback`
 
@@ -408,7 +408,7 @@ info:
          -F "client_id={{oauth2_application_id}}" \
          -F "client_secret={{oauth2_application_secret }}" \
          -F "refresh_token={{refresh_token}}" \
-         -X POST https://go.sandbox.split.cash/oauth/token
+         -X POST https://go.sandbox.zeptopayments.com/oauth/token
     ```
 
 
@@ -656,7 +656,7 @@ info:
 
     * An [invalid/expired `access_token`](/#authentication-and-authorisation); or
 
-    * The required **scopes** not being present when setting up your [OAuth application](https://go.sandbox.split.cash/oauth/applications); or
+    * The required **scopes** not being present when setting up your [OAuth application](https://go.sandbox.zeptopayments.com/oauth/applications); or
 
     * The required **scopes** not being present in the [authorisation code link](/#oauth-grant-flow) used to present your user with an authorisation request.
 
@@ -746,13 +746,13 @@ info:
     As an example, the following authorisation URL would display the **personal
     sign up** & prefill the first name field with **George**:
 
-    `https://go.sandbox.split.cash/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=sign_up&first_name=George`
+    `https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=sign_up&first_name=George`
 
 
     You can also pass the values directly to the sign up page outside of the
     OAuth2 authorisation process. Click on the following link to see the values
     preloaded:
-    [https://go.sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgeco&first_name=George](https://go.sandbox.split.cash/business/sign_up?name=GeorgeCo&nickname=georgceco&first_name=George).
+    [https://go.sandbox.zeptopayments.com/business/sign_up?name=GeorgeCo&nickname=georgeco&first_name=George](https://go.sandbox.zeptopayments.com/business/sign_up?name=GeorgeCo&nickname=georgceco&first_name=George).
 
 
     # Sandbox Testing Details
@@ -928,7 +928,7 @@ info:
 
     ```
 
-    Link: <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
+    Link: <http://api.sandbox.zeptopayments.com/contacts?page=2>; rel="next"
 
     Per-Page: 25
 
@@ -1545,9 +1545,9 @@ info:
     Looking for more? Our docs are open sourced! [https://github.com/zeptofs/api-documentation](https://github.com/zeptofs/api-documentation)
   version: '1.0'
 servers:
-  - url: 'https://api.sandbox.split.cash'
+  - url: 'https://api.sandbox.zeptopayments.com'
     description: Sandbox API server
-  - url: 'https://api.split.cash'
+  - url: 'https://api.zeptopayments.com'
     description: Production API server
 tags:
   - name: Agreements
@@ -2296,7 +2296,7 @@ paths:
         <aside class="notice">
           While unlikely, it is possible that we will be unable to register the given PayID. In this case <code>payid_details.state</code> will transition to <code>failed</code>.
 
-          You can simulate this path in sandbox by adding <code>+failure</code> to your <code>payid_email</code> e.g <code>test+failure@split.cash</code>
+          You can simulate this path in sandbox by adding <code>+failure</code> to your <code>payid_email</code> e.g <code>test+failure@zeptopayments.com</code>
         </aside>
         <aside class="notice">
           You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="#simulate-incoming-payid-payment">PayID simulation endpoint</a>.
@@ -3940,7 +3940,7 @@ components:
               name: George Morissette
               email: randy@windler.net
             links:
-              update_bank_connection: http://go.split.cash/authorise_bank_connections/williams-and-sons-5/fb497754-87e2-407d-871f-32aec39d09d4
+              update_bank_connection: http://go.zeptopayments.com/authorise_bank_connections/williams-and-sons-5/fb497754-87e2-407d-871f-32aec39d09d4
           - id: ddbee875-7344-4d74-9503-6233149fe1a0
             provider_name: split
             state: credentials_invalid
@@ -3955,7 +3955,7 @@ components:
               name: Joel Boyle
               email: travis@hermanntorp.net
             links:
-              update_bank_connection: http://go.split.cash/authorise_bank_connections/williams-and-sons-5/ddbee875-7344-4d74-9503-6233149fe1a0
+              update_bank_connection: http://go.zeptopayments.com/authorise_bank_connections/williams-and-sons-5/ddbee875-7344-4d74-9503-6233149fe1a0
     CreateOpenAgreementRequest:
       title: Create an Open Agreement (request)
       required:
@@ -4049,7 +4049,7 @@ components:
               days: 7
               max_amount: 1000000
           link: >-
-            https://go.sandbox.split.cash/open_agreements/aecff76d-13e0-4e17-b7c5-844ae07fa675/agreements/invitation
+            https://go.sandbox.zeptopayments.com/open_agreements/aecff76d-13e0-4e17-b7c5-844ae07fa675/agreements/invitation
     ListAllOpenAgreementsResponse:
       title: List all Open Agreements (response)
       required:
@@ -4075,7 +4075,7 @@ components:
                 days: 7
                 max_amount: 1000000
             link: >-
-              https://go.sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation
+              https://go.sandbox.zeptopayments.com/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation
           - ref: OA.2
             title: Subscription Plan B
             status: closed
@@ -4088,7 +4088,7 @@ components:
                 days: null
                 max_amount: null
             link: >-
-              https://go.sandbox.split.cash/open_agreements/948e3662-154d-42d1-bdc9-a05c251d3981/agreements/invitation
+              https://go.sandbox.zeptopayments.com/open_agreements/948e3662-154d-42d1-bdc9-a05c251d3981/agreements/invitation
     ActivateOpenAgreementResponse:
       title: Activate Open Agreement Request (response)
       required:
@@ -4111,7 +4111,7 @@ components:
               days: 7
               max_amount: 1000000
           link: >-
-            https://go.sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation
+            https://go.sandbox.zeptopayments.com/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation
     CloseOpenAgreementResponse:
       title: Close Open Agreement Request (response)
       required:
@@ -4134,7 +4134,7 @@ components:
               days: 7
               max_amount: 1000000
           link: >-
-            https://go.sandbox.split.cash/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation
+            https://go.sandbox.zeptopayments.com/open_agreements/2e002c0b-ffaf-44eb-a35c-15fa384ddde1/agreements/invitation
     AddAReceivableContactRequest:
       title: Add a Receivable Contact (request)
       required:
@@ -4357,7 +4357,7 @@ components:
                 debits_blocked: false
                 credits_blocked: false
             links:
-              add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
+              add_bank_connection: https://go.sandbox.zeptopayments.com/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
           - id: 6a7ed958-f1e8-42dc-8c02-3901d7057357
             name: Hunter Thompson
             email: hunter@batcountry.com
@@ -4374,7 +4374,7 @@ components:
                 debits_blocked: false
                 credits_blocked: false
             links:
-              add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
+              add_bank_connection: https://go.sandbox.zeptopayments.com/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     AddAnAnyoneContactRequest:
       title: Add a Contact (request)
       required:
@@ -4435,7 +4435,7 @@ components:
               debits_blocked: false
               credits_blocked: false
           links:
-            add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
+            add_bank_connection: https://go.sandbox.zeptopayments.com/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
     GetABankConnectionResponse:
       title: Get a BankConnection (response)
       required:
@@ -4460,7 +4460,7 @@ components:
             name: Joel Boyle
             email: travis@hermanntorp.net
           links:
-            update_bank_connection: https://go.sandbox.split.cash/authorise_bank_connections/thomas-morgan-1/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
+            update_bank_connection: https://go.sandbox.zeptopayments.com/authorise_bank_connections/thomas-morgan-1/c397645b-bd4f-4fc6-b1fe-4993fef6c3c7
     GetAContactResponse:
       title: Get a Contact (response)
       required:
@@ -4625,7 +4625,7 @@ components:
           bank_connection:
             id: null
           links:
-            add_bank_connection: https://go.sandbox.split.cash/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
+            add_bank_connection: https://go.sandbox.zeptopayments.com/invite_contact/thomas-morgan-1/1030bfef-cef5-4938-b10b-5841cafafc80
           payid_details:
             alias_value: otp@pay.travel.com.au
             alias_type: email
@@ -4699,7 +4699,7 @@ components:
           anyone_account:
             id: 63232c0a-a783-4ae9-ae73-f0974fe1e345
           links:
-            add_bank_connection: http://go.sandbox.split.cash/invite_contact/dog-bones-inc/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb
+            add_bank_connection: http://go.sandbox.zeptopayments.com/invite_contact/dog-bones-inc/fcabeacb-2ef6-4b27-ba19-4f6fa0d57dcb
     MakeAPaymentRequest:
       title: Make a Payment (request)
       required:
@@ -5964,7 +5964,7 @@ components:
               max_amount: 1000000
           assignment_expires_at: '2017-03-20T00:54:27Z'
           link: >-
-            https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation
+            https://go.sandbox.zeptopayments.com/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation
           metadata:
             custom_key: Custom string
             another_custom_key: Maybe a URL
@@ -5995,7 +5995,7 @@ components:
                 max_amount: 1000000
             assignment_expires_at: '2017-03-20T00:54:27Z'
             link: >-
-              https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation
+              https://go.sandbox.zeptopayments.com/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation
           - ref: A.7ea
             initiator_id: b61fc159-8779-4a17-a826-e398e3e7e211
             status: proposed
@@ -6010,7 +6010,7 @@ components:
                 max_amount: null
             assignment_expires_at: '2017-03-21T00:54:27Z'
             link: >-
-              https://go.sandbox.split.cash/unassigned_agreements/4e2728cc-b4ba-42c2-a6c3-26a7758de58d/invitation
+              https://go.sandbox.zeptopayments.com/unassigned_agreements/4e2728cc-b4ba-42c2-a6c3-26a7758de58d/invitation
     GetUnassignedAgreementResponse:
       title: Get an Unassigned Agreement (response)
       required:
@@ -6035,7 +6035,7 @@ components:
               max_amount: 1000000
           assignment_expires_at: '2017-03-20T00:54:27Z'
           link: >-
-            https://go.sandbox.split.cash/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation
+            https://go.sandbox.zeptopayments.com/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation
     GetUserDetailsResponse:
       title: Get User details (response)
       required:
@@ -6100,7 +6100,7 @@ components:
           min: 1
           description: 'Default:  "Simulated Debtor Pty Ltd"'
       example:
-        payid_email: incoming@split.cash
+        payid_email: incoming@zeptopayments.com
         amount: 10000
     SimulateIncomingNPPBBANPaymentRequest:
       required:
@@ -6477,7 +6477,7 @@ components:
       schema:
         type: string
       description: Contains pagination link for next page of collection, if next page exists.
-      example: <http://api.sandbox.split.cash/contacts?page=2>; rel="next"
+      example: <http://api.sandbox.zeptopayments.com/contacts?page=2>; rel="next"
     Per-Page:
       schema:
         type: integer
