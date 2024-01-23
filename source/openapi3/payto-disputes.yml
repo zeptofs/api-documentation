@@ -326,10 +326,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
-          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
-          example: DIS.1234
-          description: Unique identifier for the dispute
+          "$ref": "#/components/schemas/prop.dispute.id"
     post:
       summary: Accept dispute
       description: ""
@@ -351,10 +348,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
-          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
-          example: DIS.1234
-          description: Unique identifier for the dispute
+          "$ref": "#/components/schemas/prop.dispute.id"
     post:
       summary: Reject dispute
       description: ""
