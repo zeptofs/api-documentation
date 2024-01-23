@@ -1,0 +1,241 @@
+openapi: "3.0.2"
+info:
+  title: PayTo Disputes API
+  version: "1.0"
+servers:
+  - url: https://api.zeptopayments.com
+tags:
+  - name: Disputes
+  - name: Dispute Responses
+components:
+  schemas:
+    prop.dispute.id:
+      type: string
+      format: uuid
+      example: 37e7a750-b8c9-427c-b6c9-5b4e519f0f4b
+      description: Unique identifier for the dispute. Value is a 16 byte ULID, encoded in hexadecimal UUID format
+    prop.dispute.payment_source:
+      type: object
+      additionalProperties: false
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          example: pay_to_payment
+          enum:
+            - pay_to_payment
+        id:
+          type: string
+          example: biz_20221231_G7MQWwkQZIP8vbfH
+    dispute:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - status
+        - payment_source
+        - created_at
+        - amount
+        - reason
+        - currency
+      properties:
+        id:
+          "$ref": "#/components/schemas/prop.dispute.id"
+        payment_source:
+          "$ref": "#/components/schemas/prop.dispute.payment_source"
+        amount:
+          type: integer
+          example: 1000
+        currency:
+          type: string
+          example: AUD
+        reason:
+          type: string
+          example: duplicate
+          enum:
+            - duplicate
+            - fraudulent
+        status:
+          type: string
+          example: needs_response
+        response_due_by:
+          type: string
+          format: date
+          example: "2024-01-25T06: 07: 54Z"
+        created_at:
+          type: string
+          format: date
+          example: "2024-01-11T06: 07: 54Z"
+        updated_at:
+          type: string
+          format: date
+          example: "2024-01-11T06: 07: 54Z"
+        open_at:
+          type: string
+          format: date
+          example: "2024-01-11T06: 07: 54Z"
+        opening_description:
+          type: string
+          example: You charged me twice for this item
+        closed_at:
+          type: string
+          format: date
+          example: "2024-01-11T06: 07: 54Z"
+        closing_outcome:
+          type: string
+          example: merchant_won
+        closing_description:
+          type: string
+          example: Dispute has been closed, no further action required.
+        metadata:
+          type: object
+          properties:
+            npp:
+              type: object
+              properties:
+                reason_code:
+                  type: string
+                  example: INV16
+                  enum:
+                    - INV16
+                reason_description:
+                  type: string
+                  example: Request to Return Mandate Payment
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows: {}
+paths:
+  "/payto/disputes/{id}":
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    get:
+      summary: Show dispute
+      operationId: get-dispute
+      tags:
+        - Disputes
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: "{}"
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/dispute"
+  "/payto/disputes":
+    get:
+      summary: List disputes
+      description: ""
+      tags:
+        - Disputes
+      operationId: list-disputes
+      responses:
+        "200":
+          description: OK
+  "/disputes/{dispute_id}/accept":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+          example: DIS.1234
+          description: Unique identifier for the dispute
+    post:
+      summary: Accept dispute
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: accept-dispute
+      responses:
+        "200":
+          description: OK
+  "/disputes/{dispute_id}/reject":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+          example: DIS.1234
+          description: Unique identifier for the dispute
+    post:
+      summary: Reject dispute
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: reject-dispute
+      responses:
+        "200":
+          description: OK
+  "/disputes/unresolved":
+    get:
+      summary: List unresolved disputes
+      description: ""
+      tags:
+        - Disputes
+      operationId: list-unresolved-disputes
+      responses:
+        "200":
+          description: OK
+  "/disputes/{dispute_id}/responses":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+          example: DIS.1234
+          description: Unique identifier for the dispute
+    get:
+      summary: List dispute responses
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: list-dispute-responses
+      responses:
+        "200":
+          description: OK
+  "/disputes/{dispute_id}/responses/{id}":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+          example: DIS.1234
+          description: Unique identifier for the dispute
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+          example: DISR.1234
+          description: Unique identifier for the dispute response
+    get:
+      summary: Show dispute response
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: show-dispute-response
+      responses:
+        "200":
+          description: OK
