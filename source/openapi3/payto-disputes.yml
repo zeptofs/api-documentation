@@ -9,11 +9,29 @@ tags:
   - name: Dispute Responses
 components:
   schemas:
+    pagination.links:
+      type: object
+      properties:
+        next:
+          type: string
+          description: >
+            URL for the next page of results. Won't be present if there are no further pages.
+    prop.uid:
+      type: string
+      pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+      description:
+        Supplied unique identifier for agreement, maximum 64 characters
+        containing only RFC3986(Unreserved Characters). This identifier ensures
+        agreement uniqueness between integrator systems and Zepto.
+      example: disp_response_G7MQWwkQZIP8vbfH
+      minLength: 1
+      maxLength: 64
     prop.dispute.id:
       type: string
       format: uuid
       example: 37e7a750-b8c9-427c-b6c9-5b4e519f0f4b
-      description: Unique identifier for the dispute. Value is a 16 byte ULID, encoded in hexadecimal UUID format
+      description: >
+        Unique identifier for the dispute. Value is a 16 byte ULID, encoded in hexadecimal UUID format.
     prop.dispute.payment_source:
       type: object
       additionalProperties: false
@@ -26,10 +44,12 @@ components:
           example: pay_to_payment
           enum:
             - pay_to_payment
+          description: Type of payment source.
         id:
           type: string
           example: biz_20221231_G7MQWwkQZIP8vbfH
-    dispute:
+          description: Identifier for the payment source.
+    obj.dispute:
       type: object
       additionalProperties: false
       required:
@@ -40,69 +60,164 @@ components:
         - amount
         - reason
         - currency
+        - response_due_by
+        - updated_at
+        - open_at
+        - opening_description
+        - closed_at
+        - closing_outcome
+        - closing_description
+        - metadata
       properties:
         id:
           "$ref": "#/components/schemas/prop.dispute.id"
+          description: Unique identifier for the dispute.
         payment_source:
           "$ref": "#/components/schemas/prop.dispute.payment_source"
+          description: Details of the payment source used in the dispute.
         amount:
           type: integer
           example: 1000
+          description: Amount associated with the dispute.
         currency:
           type: string
           example: AUD
+          description: Currency of the dispute amount.
         reason:
           type: string
           example: duplicate
           enum:
             - duplicate
             - fraudulent
+            - credit_not_processed
+            - product_not_received
+            - product_unacceptable
+            - subscription_canceled
+            - unrecognized
+          description: Reason for the dispute.
         status:
           type: string
           example: needs_response
+          enum:
+            - needs_response
+            - won
+            - lost
+            - partially_won
+            - under_review
+            - closed
+          description: Current status of the dispute.
         response_due_by:
           type: string
           format: date
-          example: "2024-01-25T06: 07: 54Z"
+          example: "2024-01-25T06:07:54Z"
+          description: Deadline for responding to the dispute.
         created_at:
           type: string
           format: date
-          example: "2024-01-11T06: 07: 54Z"
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was created.
         updated_at:
           type: string
           format: date
-          example: "2024-01-11T06: 07: 54Z"
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was last updated.
         open_at:
           type: string
           format: date
-          example: "2024-01-11T06: 07: 54Z"
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was opened.
         opening_description:
           type: string
           example: You charged me twice for this item
+          description: Description of the dispute when it was opened.
         closed_at:
           type: string
           format: date
-          example: "2024-01-11T06: 07: 54Z"
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was closed.
         closing_outcome:
           type: string
           example: merchant_won
+          description: Outcome of the dispute closing.
         closing_description:
           type: string
           example: Dispute has been closed, no further action required.
+          description: Description of the dispute closing.
         metadata:
           type: object
+          description: Metadata associated with the dispute.
           properties:
             npp:
               type: object
+              description: National Payments Platform metadata.
               properties:
                 reason_code:
                   type: string
                   example: INV16
                   enum:
                     - INV16
+                  description: Reason code for NPP metadata.
                 reason_description:
                   type: string
                   example: Request to Return Mandate Payment
+                  description: Description of the reason for NPP metadata.
+    props.dispute_response.evidence_file:
+      type: string
+      description: Uploaded file URL
+    prop.dispute_response.evidence:
+      type: object
+      additionalProperties: false
+      description: Evidence related to the dispute response.
+      properties:
+        billing_address:
+          type: string
+          description: The billing address provided by the customer.
+        customer_name:
+          type: string
+          description: The name of the customer.
+        customer_email_address:
+          type: string
+          format: email
+          description: The email address of the customer.
+        customer_purchase_ip:
+          type: string
+          description: The IP address that the customer used when making the purchase.
+        customer_signature:
+          type: string
+          description: A relevant document or contract showing the customer's signature.
+        customer_communication:
+          type: string
+          description: Any communication with the customer relevant to the case.
+        receipt:
+          type: string
+          description: Any receipt or message sent to the customer notifying them of the charge.
+        product_description:
+          type: string
+          description: A description of the product or service and relevant details.
+    obj.dispute_response.accept:
+      type: object
+      description: Object representing the acceptance of a dispute response.
+      properties:
+        dispute_id:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    obj.dispute_response.reject:
+      type: object
+      description: Object representing the rejection of a dispute response.
+      properties:
+        uid:
+          "$ref": "#/components/schemas/prop.uid"
+        dispute_id:
+          "$ref": "#/components/schemas/prop.dispute.id"
+        evidence_file:
+          "$ref": "#/components/schemas/props.dispute_response.evidence_file"
+        evidence_data:
+          "$ref": "#/components/schemas/prop.dispute_response.evidence"
+    obj.dispute_response:
+      type: object
+      description: Object representing a dispute response.
+      properties:
+        dispute_id:
+          "$ref": "#/components/schemas/prop.dispute.id"
   securitySchemes:
     sec0:
       type: oauth2
@@ -125,16 +240,38 @@ paths:
           description: OK
           content:
             application/json:
-              examples:
-                Success:
-                  value: "{}"
               schema:
                 type: object
                 required:
                   - data
                 properties:
                   data:
-                    "$ref": "#/components/schemas/dispute"
+                    "$ref": "#/components/schemas/obj.dispute"
+              examples:
+                Success:
+                  value:
+                    data:
+                      id: 13607d15-460e-4d80-b819-364e1f1d6fff
+                      payment_source:
+                        type: pay_to_payment
+                        id: biz_20221231_G7MQWwkQZIP8vbfH
+                      amount: 1000
+                      currency: AUD
+                      reason: duplicate
+                      status: needs_response
+                      response_due_by: "2024-01-25T06: 07: 54Z"
+                      created_at: "2024-01-11T06: 07: 54Z"
+                      updated_at: "2024-01-11T06: 07: 54Z"
+                      open_at: "2024-01-11T06: 07: 54Z"
+                      opening_description: You charged me twice for this item
+                      closed_at: "2024-01-11T06: 07: 54Z"
+                      closing_outcome: merchant_won
+                      closing_description: Dispute has been closed, no further action required.
+                      metadata:
+                        npp:
+                          reason_code: INV16
+                          reason_description: Request to Return Mandate Payment
+
   "/payto/disputes":
     get:
       summary: List disputes
@@ -145,6 +282,44 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  links:
+                    "$ref": "#/components/schemas/pagination.links"
+                  data:
+                    "$ref": "#/components/schemas/obj.dispute"
+              examples:
+                Success:
+                  summary: Success
+                  value:
+                    links: {}
+                    data:
+                      - id: 13607d15-460e-4d80-b819-364e1f1d6fff
+                        payment_source:
+                          type: pay_to_payment
+                          id: biz_20221231_G7MQWwkQZIP8vbfH
+                        amount: 1000
+                        currency: AUD
+                        reason: duplicate
+                        status: needs_response
+                        response_due_by: "2024-01-25T06: 07: 54Z"
+                        created_at: "2024-01-11T06: 07: 54Z"
+                        updated_at: "2024-01-11T06: 07: 54Z"
+                        open_at: "2024-01-11T06: 07: 54Z"
+                        opening_description: You charged me twice for this item
+                        closed_at: "2024-01-11T06: 07: 54Z"
+                        closing_outcome: merchant_won
+                        closing_description: Dispute has been closed, no further action required.
+                        metadata:
+                          npp:
+                            reason_code: INV16
+                            reason_description: Request to Return Mandate Payment
+
   "/disputes/{dispute_id}/accept":
     parameters:
       - name: dispute_id
@@ -161,6 +336,12 @@ paths:
       tags:
         - Dispute Responses
       operationId: accept-dispute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              "$ref": "#/components/schemas/obj.dispute_response.accept"
       responses:
         "200":
           description: OK
@@ -180,6 +361,12 @@ paths:
       tags:
         - Dispute Responses
       operationId: reject-dispute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              "$ref": "#/components/schemas/obj.dispute_response.reject"
       responses:
         "200":
           description: OK
