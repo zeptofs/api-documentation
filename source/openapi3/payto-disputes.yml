@@ -94,7 +94,7 @@ components:
           type: string
           example: biz_20221231_G7MQWwkQZIP8vbfH
           description: Identifier for the payment source.
-    obj.dispute:
+    resp.dispute:
       type: object
       additionalProperties: false
       required:
@@ -239,13 +239,13 @@ components:
         product_description:
           type: string
           description: A description of the product or service and relevant details.
-    obj.dispute_response.accept:
+    req.dispute_response.accept:
       type: object
       description: Object representing the acceptance of a dispute response.
       properties:
         dispute_id:
           "$ref": "#/components/schemas/prop.dispute.id"
-    obj.dispute_response.reject:
+    req.dispute_response.reject:
       type: object
       description: Object representing the rejection of a dispute response.
       properties:
@@ -257,12 +257,26 @@ components:
           "$ref": "#/components/schemas/props.dispute_response.evidence_file"
         evidence_data:
           "$ref": "#/components/schemas/prop.dispute_response.evidence"
-    obj.dispute_response:
+    resp.dispute_response:
       type: object
       description: Object representing a dispute response.
       properties:
         dispute_id:
           "$ref": "#/components/schemas/prop.dispute.id"
+        created_at:
+          type: string
+          format: date-time
+          description: When the dispute response was created
+          example: "2023-03-07T22:50:40Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: When the dispute response was last updated
+          example: "2023-03-07T22:50:40Z"
+        evidence_file:
+          "$ref": "#/components/schemas/props.dispute_response.evidence_file"
+        evidence_data:
+          "$ref": "#/components/schemas/prop.dispute_response.evidence"
     event.base:
       type: object
       properties:
@@ -471,6 +485,11 @@ components:
         links: {}
         data:
           dispute_id: 13607d15-460e-4d80-b819-364e1f1d6fff
+          evidence_file: https://api.zeptopayments.com/payto/dispute_responses/13607d15-460e-4d80-b819-364e1f1d6fff/evidence_file
+          evidence_data:
+            billing_address: 123 Fake Street, Sydney, NSW, 2000
+            customer_name: John Smith
+            customer_email_address:
 
   securitySchemes:
     sec0:
@@ -508,6 +527,33 @@ paths:
           "$ref": "#/components/responses/response.400"
         "401":
           "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute.created:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.created
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
+        dispute.updated:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.updated
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
   "/payto/disputes":
     get:
       summary: List disputes
@@ -557,7 +603,7 @@ paths:
               type: object
               "$ref": "#/components/schemas/obj.dispute_response.accept"
       responses:
-        "200":
+        "201":
           description: OK
         "400":
           "$ref": "#/components/responses/response.400"
@@ -610,12 +656,26 @@ paths:
               type: object
               "$ref": "#/components/schemas/obj.dispute_response.reject"
       responses:
-        "200":
+        "201":
           description: OK
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
           "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute.rejected:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.rejected
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
   "/disputes/unresolved":
     get:
       summary: List unresolved disputes
@@ -671,7 +731,33 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/obj.dispute_response"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.dispute_response.pay_to_payment"
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
           "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute_response.created:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.created
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
