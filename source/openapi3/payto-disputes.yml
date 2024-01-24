@@ -496,7 +496,7 @@ components:
       type: oauth2
       flows: {}
 paths:
-  "/payto/disputes/{id}":
+  "/disputes/{id}":
     parameters:
       - name: id
         in: path
@@ -519,7 +519,7 @@ paths:
                   - data
                 properties:
                   data:
-                    "$ref": "#/components/schemas/obj.dispute"
+                    "$ref": "#/components/schemas/resp.dispute"
               examples:
                 Success:
                   "$ref": "#/components/examples/example.dispute.pay_to_payment"
@@ -554,7 +554,7 @@ paths:
               responses:
                 "200":
                   description: OK
-  "/payto/disputes":
+  "/disputes":
     get:
       summary: List disputes
       description: ""
@@ -574,7 +574,7 @@ paths:
                   links:
                     "$ref": "#/components/schemas/pagination.links"
                   data:
-                    "$ref": "#/components/schemas/obj.dispute"
+                    "$ref": "#/components/schemas/resp.dispute"
               examples:
                 Success:
                   "$ref": "#/components/examples/example.dispute.pay_to_payments"
@@ -601,7 +601,7 @@ paths:
           application/json:
             schema:
               type: object
-              "$ref": "#/components/schemas/obj.dispute_response.accept"
+              "$ref": "#/components/schemas/req.dispute_response.accept"
       responses:
         "201":
           description: OK
@@ -654,7 +654,7 @@ paths:
           application/json:
             schema:
               type: object
-              "$ref": "#/components/schemas/obj.dispute_response.reject"
+              "$ref": "#/components/schemas/req.dispute_response.reject"
       responses:
         "201":
           description: OK
@@ -739,10 +739,10 @@ paths:
                   - data
                 properties:
                   data:
-                    "$ref": "#/components/schemas/obj.dispute_response"
+                    "$ref": "#/components/schemas/resp.dispute_response"
               examples:
                 Success:
-                  "$ref": "#/components/examples/example.dispute_response.pay_to_payment"
+                  "$ref": "#/components/examples/example.dispute_response.reject"
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
