@@ -564,16 +564,29 @@ paths:
         "401":
           "$ref": "#/components/responses/response.401"
       callbacks:
-        dispute_response.accepted:
+        dispute_response.created:
           DESTINATION_WEBHOOK_URL:
             post:
-              summary: dispute_response.accepted
+              summary: dispute_response.created
               requestBody:
                 required: true
                 content:
                   application/json:
                     schema:
-                      "$ref": "#/components/schemas/webhook.payto_agreement.activated"
+                      "$ref": "#/components/schemas/webhook.dispute_response.created"
+              responses:
+                "200":
+                  description: OK
+        dispute.accepted:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.accepted
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.dispute.accepted"
               responses:
                 "200":
                   description: OK
