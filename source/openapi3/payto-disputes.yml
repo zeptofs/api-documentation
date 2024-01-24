@@ -604,7 +604,7 @@ paths:
               "$ref": "#/components/schemas/req.dispute_response.accept"
       responses:
         "201":
-          description: OK
+          description: Created
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
@@ -657,7 +657,19 @@ paths:
               "$ref": "#/components/schemas/req.dispute_response.reject"
       responses:
         "201":
-          description: OK
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/resp.dispute_response"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.dispute_response.reject"
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
