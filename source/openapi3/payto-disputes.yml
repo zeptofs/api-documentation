@@ -263,6 +263,101 @@ components:
       properties:
         dispute_id:
           "$ref": "#/components/schemas/prop.dispute.id"
+    event.base:
+      type: object
+      properties:
+        id:
+          type: string
+          description:
+            The ID of event that triggered the webhook delivery. Value
+            is a 16 byte ULID, encoded in hexadecimal UUID format
+          example: "0186b521-78f2-3ee4-6547-245133933086"
+        type:
+          type: string
+          description: Type of event that triggered the webhook delivery
+          example: payto_payment.settled
+        published_at:
+          type: string
+          format: date-time
+          description: When the event was published by Zepto
+          example: "2023-03-07T22:50:40Z"
+        resource_uid:
+          type: string
+          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+          description:
+            Supplied unique identifier for resource that the event affected,
+            maximum 64 characters containing only RFC3986(Unreserved Characters).
+          example: biz_20221231_G7MQWwkQZIP8vbfH
+          minLength: 1
+          maxLength: 64
+        resource_type:
+          type: string
+          description: The type of resource the resource_uid relates to
+          enum:
+            - payto_agreement
+            - payto_payment
+          example: payto_payment
+        body:
+          type: object
+          nullable: true
+          example:
+      required:
+        - id
+        - type
+        - published_at
+        - resource_uid
+        - resource_type
+        - body
+    webhook.base:
+      type: object
+      properties:
+        data:
+          "$ref": "#/components/schemas/event.base"
+        links:
+          type: object
+          properties:
+            resource:
+              type: string
+              description: The api url to the resource
+              example: https://api.split.cash/payto/payments/biz_20221231_G7MQWwkQZIP8vbfH
+      required:
+        - data
+        - links
+    event.dispute.accepted:
+      allOf:
+        - "$ref": "#/components/schemas/event.base"
+    event.dispute_response.created:
+      allOf:
+        - "$ref": "#/components/schemas/event.base"
+
+    webhook.dispute.accepted:
+      allOf:
+        - "$ref": "#/components/schemas/webhook.base"
+        - type: object
+          properties:
+            data:
+              "$ref": "#/components/schemas/event.dispute.accepted"
+        - type: object
+          example:
+            data:
+              type: dispute.accepted
+              resource_type: dispute
+            links:
+              resource: https://api.split.cash/payto/disputes/e168bf9c-698a-4d5b-a151-8e104f0858cf
+    webhook.dispute_response.created:
+      allOf:
+        - "$ref": "#/components/schemas/webhook.base"
+        - type: object
+          properties:
+            data:
+              "$ref": "#/components/schemas/event.dispute_response.created"
+        - type: object
+          example:
+            data:
+              type: dispute_response.created
+              resource_type: dispute_response
+            links:
+              resource: https://api.split.cash/payto/dispute_responses/d291214e-2e39-4cf9-9508-6b1628a2f73a
 
   responses:
     response.400:
@@ -293,6 +388,89 @@ components:
                     detail: Access token is expired or not valid
                     links:
                       about: https://docs.zepto.money/#authentication-and-authorisation
+  examples:
+    example.dispute.pay_to_payment:
+      summary: Success
+      value:
+        links: {}
+        data:
+          - id: 13607d15-460e-4d80-b819-364e1f1d6fff
+            payment_source:
+              type: pay_to_payment
+              id: biz_20221231_G7MQWwkQZIP8vbfH
+            amount: 1000
+            currency: AUD
+            reason: duplicate
+            status: needs_response
+            response_due_by: "2024-01-25T06: 07: 54Z"
+            created_at: "2024-01-11T06: 07: 54Z"
+            updated_at: "2024-01-11T06: 07: 54Z"
+            open_at: "2024-01-11T06: 07: 54Z"
+            opening_description: You charged me twice for this item
+            closed_at: "2024-01-11T06: 07: 54Z"
+            closing_outcome: merchant_won
+            closing_description: Dispute has been closed, no further action required.
+            metadata:
+              npp:
+                reason_code: INV16
+                reason_description: Request to Return Mandate Payment
+    example.dispute.pay_to_payments:
+      summary: Success
+      value:
+        links: {}
+        data:
+          - id: 13607d15-460e-4d80-b819-364e1f1d6fff
+            payment_source:
+              type: pay_to_payment
+              id: biz_20221231_G7MQWwkQZIP8vbfH
+            amount: 1000
+            currency: AUD
+            reason: duplicate
+            status: needs_response
+            response_due_by: "2024-01-25T06: 07: 54Z"
+            created_at: "2024-01-11T06: 07: 54Z"
+            updated_at: "2024-01-11T06: 07: 54Z"
+            open_at: "2024-01-11T06: 07: 54Z"
+            opening_description: You charged me twice for this item
+            closed_at: "2024-01-11T06: 07: 54Z"
+            closing_outcome: merchant_won
+            closing_description: Dispute has been closed, no further action required.
+            metadata:
+              npp:
+                reason_code: INV16
+                reason_description: Request to Return Mandate Payment
+          - id: eb7967d5-1721-4f60-8de1-ec73c3549d1e
+            payment_source:
+              type: pay_to_payment
+              id: biz_20221231_A7MQWwkQZIP8vbfH
+            amount: 1000
+            currency: AUD
+            reason: duplicate
+            status: needs_response
+            response_due_by: "2024-01-25T06: 07: 54Z"
+            created_at: "2024-01-11T06: 07: 54Z"
+            updated_at: "2024-01-11T06: 07: 54Z"
+            open_at: "2024-01-11T06: 07: 54Z"
+            opening_description: You charged me twice for this item
+            closed_at: "2024-01-11T06: 07: 54Z"
+            closing_outcome: merchant_won
+            closing_description: Dispute has been closed, no further action required.
+            metadata:
+              npp:
+                reason_code: INV16
+                reason_description: Request to Return Mandate Payment
+    example.dispute_response.accept:
+      summary: Success
+      value:
+        links: {}
+        data:
+          dispute_id: 13607d15-460e-4d80-b819-364e1f1d6fff
+    example.dispute_response.reject:
+      summary: Success
+      value:
+        links: {}
+        data:
+          dispute_id: 13607d15-460e-4d80-b819-364e1f1d6fff
 
   securitySchemes:
     sec0:
@@ -325,28 +503,7 @@ paths:
                     "$ref": "#/components/schemas/obj.dispute"
               examples:
                 Success:
-                  value:
-                    data:
-                      id: 13607d15-460e-4d80-b819-364e1f1d6fff
-                      payment_source:
-                        type: pay_to_payment
-                        id: biz_20221231_G7MQWwkQZIP8vbfH
-                      amount: 1000
-                      currency: AUD
-                      reason: duplicate
-                      status: needs_response
-                      response_due_by: "2024-01-25T06: 07: 54Z"
-                      created_at: "2024-01-11T06: 07: 54Z"
-                      updated_at: "2024-01-11T06: 07: 54Z"
-                      open_at: "2024-01-11T06: 07: 54Z"
-                      opening_description: You charged me twice for this item
-                      closed_at: "2024-01-11T06: 07: 54Z"
-                      closing_outcome: merchant_won
-                      closing_description: Dispute has been closed, no further action required.
-                      metadata:
-                        npp:
-                          reason_code: INV16
-                          reason_description: Request to Return Mandate Payment
+                  "$ref": "#/components/examples/example.dispute.pay_to_payment"
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
@@ -374,30 +531,8 @@ paths:
                     "$ref": "#/components/schemas/obj.dispute"
               examples:
                 Success:
-                  summary: Success
-                  value:
-                    links: {}
-                    data:
-                      - id: 13607d15-460e-4d80-b819-364e1f1d6fff
-                        payment_source:
-                          type: pay_to_payment
-                          id: biz_20221231_G7MQWwkQZIP8vbfH
-                        amount: 1000
-                        currency: AUD
-                        reason: duplicate
-                        status: needs_response
-                        response_due_by: "2024-01-25T06: 07: 54Z"
-                        created_at: "2024-01-11T06: 07: 54Z"
-                        updated_at: "2024-01-11T06: 07: 54Z"
-                        open_at: "2024-01-11T06: 07: 54Z"
-                        opening_description: You charged me twice for this item
-                        closed_at: "2024-01-11T06: 07: 54Z"
-                        closing_outcome: merchant_won
-                        closing_description: Dispute has been closed, no further action required.
-                        metadata:
-                          npp:
-                            reason_code: INV16
-                            reason_description: Request to Return Mandate Payment
+                  "$ref": "#/components/examples/example.dispute.pay_to_payments"
+
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
@@ -424,6 +559,24 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute_response.accepted:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute_response.accepted
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.payto_agreement.activated"
+              responses:
+                "200":
+                  description: OK
   "/disputes/{dispute_id}/reject":
     parameters:
       - name: dispute_id
@@ -446,6 +599,10 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
   "/disputes/unresolved":
     get:
       summary: List unresolved disputes
@@ -456,16 +613,17 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
   "/disputes/{dispute_id}/responses":
     parameters:
       - name: dispute_id
         in: path
         required: true
         schema:
-          type: string
-          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
-          example: DIS.1234
-          description: Unique identifier for the dispute
+          "$ref": "#/components/schemas/prop.dispute.id"
     get:
       summary: List dispute responses
       description: ""
@@ -475,6 +633,10 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
   "/disputes/{dispute_id}/responses/{id}":
     parameters:
       - name: dispute_id
@@ -496,3 +658,7 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
