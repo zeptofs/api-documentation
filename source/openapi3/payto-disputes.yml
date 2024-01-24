@@ -36,11 +36,11 @@ components:
             resource_ref:
               type: string
               description: Resource reference of the resource impacted by the error
-              example: P2PAY.1000
+              example: 3dff9861-448a-4177-a7bc-88620a73bc51
             resource_uid:
               type: string
               description: Supplied ID of the resource impacted by the error
-              example: payment_34fj8djh2
+              example: bda10572-4761-4af5-9990-be4ccc7190fe
       required:
         - title
         - detail
@@ -265,12 +265,34 @@ components:
           "$ref": "#/components/schemas/prop.dispute.id"
 
   responses:
+    response.400:
+      description: ""
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/generic.errors"
+          examples:
+            Generic validation error:
+              summary: Generic validation error
+              value:
+                errors:
+                  - title: Validation Failed
+                    detail: The value for `invalid_key` is not allowed
     response.401:
       description: ""
       content:
         application/json:
           schema:
             "$ref": "#/components/schemas/generic.errors"
+          examples:
+            Unauthorised access token:
+              summary: Unauthorised access token
+              value:
+                errors:
+                  - title: Unauthorised access token
+                    detail: Access token is expired or not valid
+                    links:
+                      about: https://docs.zepto.money/#authentication-and-authorisation
 
   securitySchemes:
     sec0:
@@ -325,6 +347,8 @@ paths:
                         npp:
                           reason_code: INV16
                           reason_description: Request to Return Mandate Payment
+        "400":
+          "$ref": "#/components/responses/response.400"
         "401":
           "$ref": "#/components/responses/response.401"
   "/payto/disputes":
@@ -374,6 +398,8 @@ paths:
                           npp:
                             reason_code: INV16
                             reason_description: Request to Return Mandate Payment
+        "400":
+          "$ref": "#/components/responses/response.400"
         "401":
           "$ref": "#/components/responses/response.401"
   "/disputes/{dispute_id}/accept":
