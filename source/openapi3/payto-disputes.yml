@@ -71,6 +71,25 @@ components:
       example: disp_response_G7MQWwkQZIP8vbfH
       minLength: 1
       maxLength: 64
+    prop.urn:
+      type: string
+      pattern: "^urn:[a-zA-Z0-9][a-zA-Z0-9-]*:[a-zA-Z0-9-._~%!$&'()*+,;=:@/]*$"
+      description: Universal resource name (URN) for the resource. This is a unique identifier
+    prop.amount:
+      type: object
+      additionalProperties: false
+      required:
+        - value
+        - currency
+      properties:
+        value:
+          type: integer
+          example: 1000
+          description: Amount (in cents)
+        currency:
+          type: string
+          example: AUD
+          description: Currency of the  amount
     prop.dispute.id:
       type: string
       format: uuid
@@ -78,22 +97,49 @@ components:
       description: >
         Unique identifier for the dispute. Value is a 16 byte ULID, encoded in hexadecimal UUID format.
     prop.dispute.payment_source:
-      type: object
-      additionalProperties: false
-      required:
-        - type
-        - id
+      allOf:
+        - "$ref": "#/components/schemas/prop.urn"
+        - example:
+            - "urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH"
+            - "urn:direct_debit:biz_20221231_G7MQWwkQZIP8vbfH"
       properties:
         type:
           type: string
-          example: pay_to_payment
+          example: payto_payment
           enum:
-            - pay_to_payment
+            - payto_payment
           description: Type of payment source.
         id:
           type: string
           example: biz_20221231_G7MQWwkQZIP8vbfH
           description: Identifier for the payment source.
+    prop.dispute.closed_outcome:
+      type: object
+      description: Outcome of the dispute when it was closed.
+      additionalProperties: false
+      required:
+        - closed_at
+        - outcome
+        - description
+      properties:
+        outcome:
+          type: string
+          example: merchant_won
+          enum:
+            - won
+            - lost
+            - partially_won
+          description: Outcome of the dispute.
+        description:
+          type: string
+          example: Dispute has been closed, no further action required.
+          description: Description of the dispute closing.
+        closed_at:
+          type: string
+          format: date
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was closed.
+
     resp.dispute:
       type: object
       additionalProperties: false
@@ -109,9 +155,7 @@ components:
         - updated_at
         - open_at
         - opening_description
-        - closed_at
-        - closing_outcome
-        - closing_description
+        - closed_outcome
         - metadata
       properties:
         id:
@@ -121,13 +165,7 @@ components:
           "$ref": "#/components/schemas/prop.dispute.payment_source"
           description: Details of the payment source used in the dispute.
         amount:
-          type: integer
-          example: 1000
-          description: Amount associated with the dispute.
-        currency:
-          type: string
-          example: AUD
-          description: Currency of the dispute amount.
+          "$ref": "#/components/schemas/prop.amount"
         reason:
           type: string
           example: duplicate
@@ -144,10 +182,8 @@ components:
           type: string
           example: needs_response
           enum:
+            - pending
             - needs_response
-            - won
-            - lost
-            - partially_won
             - under_review
             - closed
           description: Current status of the dispute.
@@ -175,19 +211,8 @@ components:
           type: string
           example: You charged me twice for this item
           description: Description of the dispute when it was opened.
-        closed_at:
-          type: string
-          format: date
-          example: "2024-01-11T06:07:54Z"
-          description: Timestamp when the dispute was closed.
-        closing_outcome:
-          type: string
-          example: merchant_won
-          description: Outcome of the dispute closing.
-        closing_description:
-          type: string
-          example: Dispute has been closed, no further action required.
-          description: Description of the dispute closing.
+        closed_outcome:
+          "$ref": "#/components/schemas/prop.dispute.closed_outcome"
         metadata:
           type: object
           description: Metadata associated with the dispute.
@@ -403,39 +428,39 @@ components:
                     links:
                       about: https://docs.zepto.money/#authentication-and-authorisation
   examples:
-    example.dispute.pay_to_payment:
+    example.dispute.payto_payment:
+      summary: Success
+      value:
+        links: {}
+        data:
+          id: 13607d15-460e-4d80-b819-364e1f1d6fff
+          payment_source:
+            type: payto_payment
+            id: biz_20221231_G7MQWwkQZIP8vbfH
+          amount: 1000
+          currency: AUD
+          reason: duplicate
+          status: needs_response
+          response_due_by: "2024-01-25T06: 07: 54Z"
+          created_at: "2024-01-11T06: 07: 54Z"
+          updated_at: "2024-01-11T06: 07: 54Z"
+          open_at: "2024-01-11T06: 07: 54Z"
+          opening_description: You charged me twice for this item
+          closed_at: "2024-01-11T06: 07: 54Z"
+          closing_outcome: merchant_won
+          closing_description: Dispute has been closed, no further action required.
+          metadata:
+            npp:
+              reason_code: INV16
+              reason_description: Request to Return Mandate Payment
+    example.dispute.payto_payments:
       summary: Success
       value:
         links: {}
         data:
           - id: 13607d15-460e-4d80-b819-364e1f1d6fff
             payment_source:
-              type: pay_to_payment
-              id: biz_20221231_G7MQWwkQZIP8vbfH
-            amount: 1000
-            currency: AUD
-            reason: duplicate
-            status: needs_response
-            response_due_by: "2024-01-25T06: 07: 54Z"
-            created_at: "2024-01-11T06: 07: 54Z"
-            updated_at: "2024-01-11T06: 07: 54Z"
-            open_at: "2024-01-11T06: 07: 54Z"
-            opening_description: You charged me twice for this item
-            closed_at: "2024-01-11T06: 07: 54Z"
-            closing_outcome: merchant_won
-            closing_description: Dispute has been closed, no further action required.
-            metadata:
-              npp:
-                reason_code: INV16
-                reason_description: Request to Return Mandate Payment
-    example.dispute.pay_to_payments:
-      summary: Success
-      value:
-        links: {}
-        data:
-          - id: 13607d15-460e-4d80-b819-364e1f1d6fff
-            payment_source:
-              type: pay_to_payment
+              type: payto_payment
               id: biz_20221231_G7MQWwkQZIP8vbfH
             amount: 1000
             currency: AUD
@@ -455,7 +480,7 @@ components:
                 reason_description: Request to Return Mandate Payment
           - id: eb7967d5-1721-4f60-8de1-ec73c3549d1e
             payment_source:
-              type: pay_to_payment
+              type: payto_payment
               id: biz_20221231_A7MQWwkQZIP8vbfH
             amount: 1000
             currency: AUD
@@ -522,7 +547,7 @@ paths:
                     "$ref": "#/components/schemas/resp.dispute"
               examples:
                 Success:
-                  "$ref": "#/components/examples/example.dispute.pay_to_payment"
+                  "$ref": "#/components/examples/example.dispute.payto_payment"
         "400":
           "$ref": "#/components/responses/response.400"
         "401":
@@ -577,7 +602,7 @@ paths:
                     "$ref": "#/components/schemas/resp.dispute"
               examples:
                 Success:
-                  "$ref": "#/components/examples/example.dispute.pay_to_payments"
+                  "$ref": "#/components/examples/example.dispute.payto_payments"
 
         "400":
           "$ref": "#/components/responses/response.400"
