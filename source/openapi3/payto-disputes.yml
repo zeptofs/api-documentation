@@ -434,21 +434,21 @@ components:
         links: {}
         data:
           id: 13607d15-460e-4d80-b819-364e1f1d6fff
-          payment_source:
-            type: payto_payment
-            id: biz_20221231_G7MQWwkQZIP8vbfH
-          amount: 1000
-          currency: AUD
+          payment_source: urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH
+          amount:
+            value: 1000
+            currency: AUD
           reason: duplicate
           status: needs_response
-          response_due_by: "2024-01-25T06: 07: 54Z"
-          created_at: "2024-01-11T06: 07: 54Z"
-          updated_at: "2024-01-11T06: 07: 54Z"
-          open_at: "2024-01-11T06: 07: 54Z"
+          response_due_by: "2024-01-25T06:07:54Z"
+          created_at: "2024-01-11T06:07:54Z"
+          updated_at: "2024-01-11T06:07:54Z"
+          open_at: "2024-01-11T06:07:54Z"
           opening_description: You charged me twice for this item
-          closed_at: "2024-01-11T06: 07: 54Z"
-          closing_outcome: merchant_won
-          closing_description: Dispute has been closed, no further action required.
+          closed_outcome:
+            outcome: merchant_won
+            description: Dispute has been closed, no further action required.
+            closed_at: "2024-01-11T06:07:54Z"
           metadata:
             npp:
               reason_code: INV16
@@ -459,41 +459,41 @@ components:
         links: {}
         data:
           - id: 13607d15-460e-4d80-b819-364e1f1d6fff
-            payment_source:
-              type: payto_payment
-              id: biz_20221231_G7MQWwkQZIP8vbfH
-            amount: 1000
-            currency: AUD
+            payment_source: urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH
+            amount:
+              value: 1000
+              currency: AUD
             reason: duplicate
             status: needs_response
-            response_due_by: "2024-01-25T06: 07: 54Z"
-            created_at: "2024-01-11T06: 07: 54Z"
-            updated_at: "2024-01-11T06: 07: 54Z"
-            open_at: "2024-01-11T06: 07: 54Z"
+            response_due_by: "2024-01-25T06:07:54Z"
+            created_at: "2024-01-11T06:07:54Z"
+            updated_at: "2024-01-11T06:07:54Z"
+            open_at: "2024-01-11T06:07:54Z"
             opening_description: You charged me twice for this item
-            closed_at: "2024-01-11T06: 07: 54Z"
-            closing_outcome: merchant_won
-            closing_description: Dispute has been closed, no further action required.
+            closed_outcome:
+              outcome: merchant_won
+              description: Dispute has been closed, no further action required.
+              closed_at: "2024-01-11T06:07:54Z"
             metadata:
               npp:
                 reason_code: INV16
                 reason_description: Request to Return Mandate Payment
           - id: eb7967d5-1721-4f60-8de1-ec73c3549d1e
-            payment_source:
-              type: payto_payment
-              id: biz_20221231_A7MQWwkQZIP8vbfH
-            amount: 1000
-            currency: AUD
+            payment_source: urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH
+            amount:
+              value: 1000
+              currency: AUD
             reason: duplicate
             status: needs_response
-            response_due_by: "2024-01-25T06: 07: 54Z"
-            created_at: "2024-01-11T06: 07: 54Z"
-            updated_at: "2024-01-11T06: 07: 54Z"
-            open_at: "2024-01-11T06: 07: 54Z"
+            response_due_by: "2024-01-25T06:07:54Z"
+            created_at: "2024-01-11T06:07:54Z"
+            updated_at: "2024-01-11T06:07:54Z"
+            open_at: "2024-01-11T06:07:54Z"
             opening_description: You charged me twice for this item
-            closed_at: "2024-01-11T06: 07: 54Z"
-            closing_outcome: merchant_won
-            closing_description: Dispute has been closed, no further action required.
+            closed_outcome:
+              outcome: merchant_won
+              description: Dispute has been closed, no further action required.
+              closed_at: "2024-01-11T06:07:54Z"
             metadata:
               npp:
                 reason_code: INV16
@@ -553,10 +553,10 @@ paths:
         "401":
           "$ref": "#/components/responses/response.401"
       callbacks:
-        dispute.created:
+        dispute.initiated:
           DESTINATION_WEBHOOK_URL:
             post:
-              summary: dispute.created
+              summary: dispute.initiated
               requestBody:
                 required: true
                 content:
