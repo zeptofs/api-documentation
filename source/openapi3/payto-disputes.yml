@@ -7,6 +7,7 @@ servers:
 tags:
   - name: Disputes
   - name: Dispute Responses
+  - name: File Upload
 components:
   schemas:
     generic.error:
@@ -139,7 +140,14 @@ components:
           format: date
           example: "2024-01-11T06:07:54Z"
           description: Timestamp when the dispute was closed.
-
+    resp.post_file:
+      type: object
+      additionalProperties: false
+      required:
+        - urn
+      properties:
+        urn:
+          "$ref": "#/components/schemas/prop.urn"
     resp.dispute:
       type: object
       additionalProperties: false
@@ -562,7 +570,12 @@ components:
                 billing_address: 123 Fake Street, Sydney, NSW, 2000
                 name: John Smith
                 email_address:
-
+    example.file.post:
+      summary: Success
+      value:
+        links: {}
+        data:
+          urn: urn:dispute_evidence_file:13607d15-460e-4d80-b819-364e1f1d6fff
   securitySchemes:
     sec0:
       type: oauth2
@@ -845,3 +858,38 @@ paths:
               responses:
                 "200":
                   description: OK
+  "/files":
+    post:
+      summary: Upload a file
+      description: ""
+      tags:
+        - File Upload
+      operationId: post-file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/resp.post_file"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.file.post"
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
