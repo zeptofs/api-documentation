@@ -140,14 +140,17 @@ components:
           format: date
           example: "2024-01-11T06:07:54Z"
           description: Timestamp when the dispute was closed.
-    resp.post_file:
+    resp.file:
       type: object
       additionalProperties: false
       required:
         - urn
+        - namespace
       properties:
         urn:
           "$ref": "#/components/schemas/prop.urn"
+        namespace:
+          type: string
     resp.dispute:
       type: object
       additionalProperties: false
@@ -874,6 +877,10 @@ paths:
                 file:
                   type: string
                   format: binary
+                namespace:
+                  type: string
+                  description: Namespace for the file
+                  example: dispute_evidence_file
       responses:
         "201":
           description: Created
@@ -885,7 +892,7 @@ paths:
                   - data
                 properties:
                   data:
-                    "$ref": "#/components/schemas/resp.post_file"
+                    "$ref": "#/components/schemas/resp.file"
               examples:
                 Success:
                   "$ref": "#/components/examples/example.file.post"
