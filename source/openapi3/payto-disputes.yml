@@ -231,39 +231,85 @@ components:
                   type: string
                   example: Request to Return Mandate Payment
                   description: Description of the reason for NPP metadata.
-    props.dispute_response.evidence_file:
-      type: string
-      description: Uploaded file URL
     prop.dispute_response.evidence:
       type: object
       additionalProperties: false
       description: Evidence related to the dispute response.
       properties:
-        billing_address:
-          type: string
-          description: The billing address provided by the customer.
-        customer_name:
-          type: string
-          description: The name of the customer.
-        customer_email_address:
-          type: string
-          format: email
-          description: The email address of the customer.
-        customer_purchase_ip:
-          type: string
-          description: The IP address that the customer used when making the purchase.
-        customer_signature:
-          type: string
-          description: A relevant document or contract showing the customer's signature.
-        customer_communication:
-          type: string
-          description: Any communication with the customer relevant to the case.
-        receipt:
-          type: string
-          description: Any receipt or message sent to the customer notifying them of the charge.
-        product_description:
-          type: string
-          description: A description of the product or service and relevant details.
+        content:
+          type: object
+          properties:
+            file:
+              type: string
+              description: Uploaded file URL
+              example: urn:dispute_evidence_file:13607d15-460e-4d80-b819-364e1f1d6fff
+            description:
+              type: string
+              description: Description of the evidence.
+              example: A text description of the evidence.
+        extra_data:
+          type: object
+          properties:
+            customer:
+              type: object
+              properties:
+                billing_address:
+                  type: string
+                name:
+                  type: string
+                email_address:
+                  type: string
+                  format: email
+                purchase_ip:
+                  type: string
+                signature:
+                  type: string
+                communication:
+                  type: string
+            product:
+              type: object
+              properties:
+                receipt:
+                  type: string
+                product_description:
+                  type: string
+                shipping_address:
+                  type: string
+                shipping_date:
+                  type: string
+                shipping_carrier:
+                  type: string
+                shipping_tracking_number:
+                  type: string
+                cancellation_policy:
+                  type: string
+                cancellation_policy_disclosure:
+                  type: string
+                cancellation_rebuttal:
+                  type: string
+                refund_policy:
+                  type: string
+                refund_policy_disclosure:
+                  type: string
+                refund_refusal_explanation:
+                  type: string
+                duplicate_charge_id:
+                  type: string
+                duplicate_charge_explanation:
+                  type: string
+                duplicate_charge_documentation:
+                  type: string
+                service_documentation:
+                  type: string
+                service_date:
+                  type: string
+                access_activity_logs:
+                  type: string
+                uncategorised_file:
+                  type: string
+                uncategorised_text:
+                  type: string
+
     req.dispute_response.accept:
       type: object
       description: Object representing the acceptance of a dispute response.
@@ -278,9 +324,7 @@ components:
           "$ref": "#/components/schemas/prop.uid"
         dispute_id:
           "$ref": "#/components/schemas/prop.dispute.id"
-        evidence_file:
-          "$ref": "#/components/schemas/props.dispute_response.evidence_file"
-        evidence_data:
+        evidence:
           "$ref": "#/components/schemas/prop.dispute_response.evidence"
     resp.dispute_response:
       type: object
@@ -298,9 +342,7 @@ components:
           format: date-time
           description: When the dispute response was last updated
           example: "2023-03-07T22:50:40Z"
-        evidence_file:
-          "$ref": "#/components/schemas/props.dispute_response.evidence_file"
-        evidence_data:
+        evidence:
           "$ref": "#/components/schemas/prop.dispute_response.evidence"
     event.base:
       type: object
@@ -510,11 +552,16 @@ components:
         links: {}
         data:
           dispute_id: 13607d15-460e-4d80-b819-364e1f1d6fff
-          evidence_file: https://api.zeptopayments.com/payto/dispute_responses/13607d15-460e-4d80-b819-364e1f1d6fff/evidence_file
-          evidence_data:
-            billing_address: 123 Fake Street, Sydney, NSW, 2000
-            customer_name: John Smith
-            customer_email_address:
+          created_at: "2024-01-11T06:07:54Z"
+          updated_at: "2024-01-11T06:07:54Z"
+          evidence:
+            content:
+              file: https://api.zeptopayments.com/payto/dispute_responses/13607d15-460e-4d80-b819-364e1f1d6fff/evidence_file
+            extra_data:
+              customer:
+                billing_address: 123 Fake Street, Sydney, NSW, 2000
+                name: John Smith
+                email_address:
 
   securitySchemes:
     sec0:
