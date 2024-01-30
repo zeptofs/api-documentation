@@ -74,7 +74,7 @@ components:
       maxLength: 64
     prop.urn:
       type: string
-      pattern: "^urn:[a-zA-Z0-9][a-zA-Z0-9-]*:[a-zA-Z0-9-._~%!$&'()*+,;=:@/]*$"
+      pattern: "^urn:zepto:[a-zA-Z0-9][a-zA-Z0-9-]*:[a-zA-Z0-9-._~%!$&'()*+,;=:@/]*$"
       description: Universal resource name (URN) for the resource. This is a unique identifier
     prop.amount:
       type: object
@@ -101,8 +101,8 @@ components:
       allOf:
         - "$ref": "#/components/schemas/prop.urn"
         - example:
-            - "urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH"
-            - "urn:direct_debit:biz_20221231_G7MQWwkQZIP8vbfH"
+            - "urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH"
+            - "urn:zepto:direct_debit:payment:biz_20221231_G7MQWwkQZIP8vbfH"
       properties:
         type:
           type: string
@@ -253,7 +253,7 @@ components:
             file:
               type: string
               description: Uploaded file URL
-              example: urn:dispute_evidence_file:13607d15-460e-4d80-b819-364e1f1d6fff
+              example: urn:zepto:dispute_evidence_file:13607d15-460e-4d80-b819-364e1f1d6fff
             description:
               type: string
               description: Description of the evidence.
@@ -487,7 +487,7 @@ components:
         links: {}
         data:
           id: 13607d15-460e-4d80-b819-364e1f1d6fff
-          payment_source: urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH
+          payment_source: urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH
           amount:
             value: 1000
             currency: AUD
@@ -512,7 +512,7 @@ components:
         links: {}
         data:
           - id: 13607d15-460e-4d80-b819-364e1f1d6fff
-            payment_source: urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH
+            payment_source: urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH
             amount:
               value: 1000
               currency: AUD
@@ -532,7 +532,7 @@ components:
                 reason_code: INV16
                 reason_description: Request to Return Mandate Payment
           - id: eb7967d5-1721-4f60-8de1-ec73c3549d1e
-            payment_source: urn:payto_payment:biz_20221231_G7MQWwkQZIP8vbfH
+            payment_source: urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH
             amount:
               value: 1000
               currency: AUD
@@ -578,7 +578,7 @@ components:
       value:
         links: {}
         data:
-          urn: urn:dispute_evidence_file:13607d15-460e-4d80-b819-364e1f1d6fff
+          urn: urn:zepto:file:dispute_evidence:13607d15-460e-4d80-b819-364e1f1d6fff
   securitySchemes:
     sec0:
       type: oauth2
