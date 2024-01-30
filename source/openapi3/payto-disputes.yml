@@ -629,10 +629,10 @@ paths:
               responses:
                 "200":
                   description: OK
-        dispute.updated:
+        dispute.resolved:
           DESTINATION_WEBHOOK_URL:
             post:
-              summary: dispute.updated
+              summary: dispute.resolved
               requestBody:
                 required: true
                 content:
