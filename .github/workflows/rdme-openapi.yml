@@ -1,4 +1,4 @@
-name: Sync PayTo API docs with ReadMe 🦉
+name: Sync PayTo Disputes API docs with ReadMe 🦉
 
 on:
   push:
