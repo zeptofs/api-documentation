@@ -941,7 +941,6 @@ To protect against timing attacks, use a constant-time string comparison to comp
 
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
-
 - **2023-08-29** - Remove references to the prefail feature
 - **2023-04-20** - Changed the webhook retention period to 7 days
 - **2023-03-22** - Removed the `Total` pagination header
@@ -968,6 +967,8 @@ We take backwards compatibility seriously. The following list contains backwards
 - **2020-12-15** - Add changelog
 
 Looking for more? Our docs are open sourced! [https://github.com/zeptofs/api-documentation](https://github.com/zeptofs/api-documentation)
+
+Email: <a href="mailto:support@zepto.com.au">Support</a> 
 
 <h1 id="Zepto-API-Agreements">Agreements</h1>
 
@@ -1374,8 +1375,8 @@ Get a single Agreement by its reference
     "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
     "contact_id": "0d290763-bd5a-4b4d-a8ce-06c64c4a697b",
     "bank_account_id": "fb9381ec-22af-47fd-8998-804f947aaca3",
-    "status": "approved",
-    "status_reason": null,
+    "status": "accepted",
+    "status_reason": "reason",
     "responded_at": "2017-03-20T02:13:11Z",
     "created_at": "2017-03-20T00:53:27Z",
     "terms": {
@@ -4144,7 +4145,7 @@ curl --request POST \
   --header 'accept: application/json' \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
-  --data '{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":null,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'
+  --data '{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":0,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'
 ```
 
 ```ruby
@@ -4161,7 +4162,7 @@ request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["accept"] = 'application/json'
 request["authorization"] = 'Bearer {access-token}'
-request.body = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
+request.body = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 response = http.request(request)
 puts response.read_body
@@ -4198,7 +4199,7 @@ var req = http.request(options, function (res) {
 req.write(JSON.stringify({
   title: 'Subscription Plan A',
   terms: {
-    per_payout: { min_amount: null, max_amount: 10000 },
+    per_payout: { min_amount: 0, max_amount: 10000 },
     per_frequency: { days: 7, max_amount: 1000000 }
   },
   metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
@@ -4211,7 +4212,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("api.sandbox.zeptopayments.com")
 
-payload = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
+payload = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 headers = {
     'content-type': "application/json",
@@ -4232,7 +4233,7 @@ HttpResponse<String> response = Unirest.post("https://api.sandbox.zeptopayments.
   .header("content-type", "application/json")
   .header("accept", "application/json")
   .header("authorization", "Bearer {access-token}")
-  .body("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
+  .body("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
   .asString();
 ```
 
@@ -4243,7 +4244,7 @@ $client = new http\Client;
 $request = new http\Client\Request;
 
 $body = new http\Message\Body;
-$body->append('{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":null,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}');
+$body->append('{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":0,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}');
 
 $request->setRequestUrl('https://api.sandbox.zeptopayments.com/open_agreements');
 $request->setRequestMethod('POST');
@@ -4275,7 +4276,7 @@ func main() {
 
 	url := "https://api.sandbox.zeptopayments.com/open_agreements"
 
-	payload := strings.NewReader("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
+	payload := strings.NewReader("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
 
 	req, _ := http.NewRequest("POST", url, payload)
 
@@ -4307,7 +4308,7 @@ Create an Open Agreement that can be accepted by anyone.
   "title": "Subscription Plan A",
   "terms": {
     "per_payout": {
-      "min_amount": null,
+      "min_amount": 0,
       "max_amount": 10000
     },
     "per_frequency": {
@@ -4330,7 +4331,7 @@ Create an Open Agreement that can be accepted by anyone.
 |» title|body|string|true|Title of the Open Agreement (Visible to authorisers)|
 |» terms|body|[Terms](#schematerms)|true|Terms|
 |»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
-|»»» min_amount|body|integer|true|Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
+|»»» min_amount|body|integer,null|true|Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
 |»»» max_amount|body|integer|true|Maximum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
 |»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
 |»»» days|body|integer|true|Amount of days to apply against the frequency. Specify <code>null</code> for no limit.|
@@ -6709,9 +6710,7 @@ This endpoint gives you some control over a transaction:
 ```shell
 curl --request DELETE \
   --url https://api.sandbox.zeptopayments.com/payouts/D.48 \
-  --header 'authorization: Bearer {access-token}' \
-  --header 'content-type: application/json' \
-  --data false
+  --header 'authorization: Bearer {access-token}'
 ```
 
 ```ruby
@@ -6725,9 +6724,7 @@ http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 request = Net::HTTP::Delete.new(url)
-request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {access-token}'
-request.body = "false"
 
 response = http.request(request)
 puts response.read_body
@@ -6742,7 +6739,6 @@ var options = {
   "port": null,
   "path": "/payouts/D.48",
   "headers": {
-    "content-type": "application/json",
     "authorization": "Bearer {access-token}"
   }
 };
@@ -6768,14 +6764,9 @@ import http.client
 
 conn = http.client.HTTPSConnection("api.sandbox.zeptopayments.com")
 
-payload = "false"
+headers = { 'authorization': "Bearer {access-token}" }
 
-headers = {
-    'content-type': "application/json",
-    'authorization': "Bearer {access-token}"
-    }
-
-conn.request("DELETE", "/payouts/D.48", payload, headers)
+conn.request("DELETE", "/payouts/D.48", headers=headers)
 
 res = conn.getresponse()
 data = res.read()
@@ -6785,9 +6776,7 @@ print(data.decode("utf-8"))
 
 ```java
 HttpResponse<String> response = Unirest.delete("https://api.sandbox.zeptopayments.com/payouts/D.48")
-  .header("content-type", "application/json")
   .header("authorization", "Bearer {access-token}")
-  .body("false")
   .asString();
 ```
 
@@ -6797,16 +6786,10 @@ HttpResponse<String> response = Unirest.delete("https://api.sandbox.zeptopayment
 $client = new http\Client;
 $request = new http\Client\Request;
 
-$body = new http\Message\Body;
-$body->append('false');
-
 $request->setRequestUrl('https://api.sandbox.zeptopayments.com/payouts/D.48');
 $request->setRequestMethod('DELETE');
-$request->setBody($body);
-
 $request->setHeaders(array(
-  'authorization' => 'Bearer {access-token}',
-  'content-type' => 'application/json'
+  'authorization' => 'Bearer {access-token}'
 ));
 
 $client->enqueue($request)->send();
@@ -6820,7 +6803,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"net/http"
 	"io/ioutil"
 )
@@ -6829,11 +6811,8 @@ func main() {
 
 	url := "https://api.sandbox.zeptopayments.com/payouts/D.48"
 
-	payload := strings.NewReader("false")
+	req, _ := http.NewRequest("DELETE", url, nil)
 
-	req, _ := http.NewRequest("DELETE", url, payload)
-
-	req.Header.Add("content-type", "application/json")
 	req.Header.Add("authorization", "Bearer {access-token}")
 
 	res, _ := http.DefaultClient.Do(req)
@@ -6850,12 +6829,6 @@ func main() {
 `DELETE /payouts/{ref}`
 
 You can void any Payment from your account that has not yet matured.
-
-> Body parameter
-
-```json
-false
-```
 
 <h3 id="Void-a-Payment-parameters" class="parameters">Parameters</h3>
 
@@ -8333,7 +8306,7 @@ func main() {
       "type": "debit",
       "category": "payout_refund",
       "created_at": "2021-04-07T23:15:00Z",
-      "matures_at": "2021-04-07T23:15:00Z",
+      "matured_at": "2021-04-07T23:15:00Z",
       "cleared_at": "2021-04-10T23:15:00Z",
       "bank_ref": "DT.9a",
       "status": "cleared",
@@ -8348,7 +8321,7 @@ func main() {
       "channels": [
         "float account"
       ],
-      "current_channel": "float account"
+      "current_channel": "float_account"
     },
     {
       "ref": "D.2",
@@ -8356,7 +8329,7 @@ func main() {
       "type": "debit",
       "category": "payout",
       "created_at": "2016-12-06T23:15:00Z",
-      "matures_at": "2016-12-09T23:15:00Z",
+      "matured_at": "2016-12-09T23:15:00Z",
       "cleared_at": null,
       "bank_ref": null,
       "status": "maturing",
@@ -8379,12 +8352,12 @@ func main() {
       "type": "credit",
       "category": "payout",
       "created_at": "2016-12-05T23:15:00Z",
-      "matures_at": "2016-12-06T23:15:00Z",
+      "matured_at": "2016-12-06T23:15:00Z",
       "cleared_at": "2016-12-09T23:15:00Z",
       "bank_ref": "CT.1",
       "status": "cleared",
       "status_changed_at": "2016-12-09T23:15:00Z",
-      "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
+      "party_contact_id": "33c6e31d-1dc1-448b-9512-0320bc44fdcf",
       "party_name": "Price and Sons",
       "party_nickname": "price-and-sons-2",
       "party_bank_ref": null,
@@ -8987,7 +8960,7 @@ Get a single transfer by its reference
 ```json
 {
   "data": {
-    "ref": "T.87xp",
+    "ref": "52986d9d-4788-4c41-92a1-9d364c6545e5",
     "from_bank_account_id": "a79423b2-3827-4cf5-9eda-dc02a298d005",
     "to_bank_account_id": "0921a719-c79d-4ffb-91b6-1b30ab77d14d",
     "amount": 47000,
@@ -9212,7 +9185,7 @@ Create an Unassigned Agreement.
 |» single_use|body|boolean|false|Optionally propose a single use agreement. When the Unassigned Agreement is accepted and a Payment Request is approved according to the Agreement terms, the agreement will automatically become <code>expended</code>.<br><br>The proposed agreement must have equal max/min <code>per_payout</code> amounts and <code>null</code> <code>per_frequency</code> amounts.<br><br>Furthermore, we will automatically check that the authoriser's bank account has sufficient funds to honour the agreement terms.|
 |» terms|body|[Terms](#schematerms)|true|Terms|
 |»» per_payout|body|[PerPayout](#schemaperpayout)|true|No description|
-|»»» min_amount|body|integer|true|Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
+|»»» min_amount|body|integer,null|true|Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
 |»»» max_amount|body|integer|true|Maximum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
 |»» per_frequency|body|[PerFrequency](#schemaperfrequency)|true|No description|
 |»»» days|body|integer|true|Amount of days to apply against the frequency. Specify <code>null</code> for no limit.|
@@ -9466,7 +9439,7 @@ Will return all Unassigned Agreements that have not yet been accepted.
 
 ## Get an Unassigned Agreement
 
-<a id="opIdGetAgreement"></a>
+<a id="opIdGetUnassignedAgreement"></a>
 
 > Code samples
 
@@ -10272,7 +10245,7 @@ NOTE: Webhook deliveries are stored for 7 days.
 |---|---|---|---|---|
 |webhook_id|path|string|true|Single value, exact match|
 |ref|query|string|false|Filter deliveries by ref (`WebhookDelivery.data.ref`), single value, exact match|
-|per_page|query|string|false|Number of results per page, single value, exact match|
+|per_page|query|integer|false|Number of results per page, single value, exact match|
 |starting_after|query|string(uuid)|false|Display all webhook deliveries after this webhook delivery offset UUID, single value, exact match|
 |event_type|query|string|false|See ([Data schemas](/#data-schemas)) for a list of possible values, single value, exact match|
 |since|query|string(date-time)|false|Display all webhook deliveries after this date. Date/time UTC ISO 8601 format, single value, exact match|
@@ -10726,8 +10699,8 @@ Use this endpoint to resend a failed webhook delivery.
     "authoriser_id": "8df89c16-330f-462b-8891-808d7bdceb7f",
     "contact_id": "0d290763-bd5a-4b4d-a8ce-06c64c4a697b",
     "bank_account_id": "fb9381ec-22af-47fd-8998-804f947aaca3",
-    "status": "approved",
-    "status_reason": null,
+    "status": "accepted",
+    "status_reason": "reason",
     "responded_at": "2017-03-20T02:13:11Z",
     "created_at": "2017-03-20T00:53:27Z",
     "terms": {
@@ -10954,7 +10927,7 @@ Use this endpoint to resend a failed webhook delivery.
   "title": "Subscription Plan A",
   "terms": {
     "per_payout": {
-      "min_amount": null,
+      "min_amount": 0,
       "max_amount": 10000
     },
     "per_frequency": {
@@ -11022,7 +10995,7 @@ Use this endpoint to resend a failed webhook delivery.
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|min_amount|integer|true|Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
+|min_amount|integer,null|true|Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
 |max_amount|integer|true|Maximum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
 
 ## PerFrequency
@@ -11287,8 +11260,8 @@ Use this endpoint to resend a failed webhook delivery.
 |»» branch_code|string|false|Zepto branch code (Min: 6 - Max: 6)|
 |»» bank_name|string|false|Fixed to 'Zepto Float Acount'|
 |»» state|string|false|Fixed to 'Active'|
-|»» iav_provider|string|false|Always null|
-|»» iav_status|string|false|Always null|
+|»» iav_provider|string,null|false|Always null|
+|»» iav_status|string,null|false|Always null|
 |»» blocks|object|false|No description|
 |»»» debits_blocked|boolean|false|Used by Zepto admins. Defines whether the bank account is blocked from being debited|
 |»»» credits_blocked|boolean|false|Used by Zepto admins. Defined Whether this bank account is blocked from being credited|
@@ -11593,15 +11566,15 @@ Use this endpoint to resend a failed webhook delivery.
 |»» account_number|string|false|The Bank Account number (Min: 5 - Max: 9)|
 |»» branch_code|string|false|The BSB number (Min: 6 - Max: 6)|
 |»» state|string|false|The bank account state|
-|»» iav_provider|string|false|The instant account verification provider|
-|»» iav_status|string|false|The instant account verification bank connection status|
+|»» iav_provider|string,null|false|The instant account verification provider|
+|»» iav_status|string,null|false|The instant account verification bank connection status|
 |»» blocks|object|false|No description|
 |»»» debits_blocked|boolean|false|Used by Zepto admins. Defines whether the bank account is blocked from being debited|
 |»»» credits_blocked|boolean|false|Used by Zepto admins. Defined Whether this bank account is blocked from being credited|
 |»» anyone_account|object|true|No description|
 |»»» id|string(uuid)|false|(Deprecated) The Anyone Account ID|
 |»» bank_connection|object|false|No description|
-|»»» id|string(uuid)|false|The bank connection ID|
+|»»» id|string,null(uuid)|false|The bank connection ID|
 |»» links|object|false|No description|
 |»»» add_bank_connection|string(url)|false|A unique URL to share with the Contact in order to establish a new bank connection to their bank account|
 |»» payid_details|object|false|No description|
@@ -11622,9 +11595,11 @@ Use this endpoint to resend a failed webhook delivery.
 |iav_provider|proviso|
 |iav_provider|basiq|
 |iav_provider|credit_sense|
+|iav_provider|null|
 |iav_status|active|
 |iav_status|removed|
 |iav_status|credentials_invalid|
+|iav_status|null|
 |state|pending|
 |state|active|
 |state|failed|
@@ -11952,6 +11927,22 @@ Use this endpoint to resend a failed webhook delivery.
 |---|---|---|---|
 |data|[object]|true|No description|
 
+## VoidAPayment
+
+<a id="schemavoidapayment"></a>
+
+```json
+null
+```
+
+### Properties
+
+*Void a Payment*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|Void a Payment|any|false|No description|
+
 ## GetAPaymentResponse
 
 <a id="schemagetapaymentresponse"></a>
@@ -12077,13 +12068,13 @@ Use this endpoint to resend a failed webhook delivery.
 |» authoriser_id|string(uuid)|true|The debtor's bank account ID (Min: 36 - Max: 36)|
 |» authoriser_contact_id|string(uuid)|true|The contact ID representing the debtor within Zepto (Min: 36 - Max: 36)|
 |» contact_initiated|boolean|true|Initiated by Contact or Merchant|
-|» schedule_ref|string|true|The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)|
+|» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)|
 |» status|string|true|The status of the Payment Request|
-|» status_reason|string|true|Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)|
+|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)|
-|» responded_at|string(date-time)|true|The date-time when the Payment Request status changed (Min: 0 - Max: 20)|
+|» responded_at|string,null(date-time)|true|The date-time when the Payment Request status changed (Min: 0 - Max: 20)|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created (Min: 20 - Max: 20)|
-|» credit_ref|string|true|The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)|
+|» credit_ref|string,null|true|The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)|
 |» payout|object|true|No description|
 |»» amount|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
 |»» description|string|true|Payment Request description (Min: 1 - Max: 280)|
@@ -12101,6 +12092,7 @@ Use this endpoint to resend a failed webhook delivery.
 |status|cancelled|
 |status_reason|The balance of the nominated bank account for this Payment Request is not available.|
 |status_reason|The nominated bank account for this Payment Request has insufficient funds.|
+|status_reason|null|
 
 ## MakeAPaymentRequestWithNoAgreementResponse
 
@@ -12165,9 +12157,9 @@ Use this endpoint to resend a failed webhook delivery.
 |» your_bank_account_id|string(uuid)|true|Your bank account ID where the funds will settle (alias of `initiator_id`) (Min: 36 - Max: 36)|
 |» authoriser_id|string(uuid)|true|The debtor's bank account ID (Min: 36 - Max: 36)|
 |» authoriser_contact_id|string(uuid)|true|The contact ID representing the debtor within Zepto (Min: 36 - Max: 36)|
-|» schedule_ref|string|true|The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)|
+|» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)|
 |» status|string|true|The status of the Payment Request|
-|» status_reason|string|true|Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)|
+|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)|
 |» responded_at|string(date-time)|true|The date-time when the Payment Request status changed (Min: 0 - Max: 20)|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created (Min: 20 - Max: 20)|
@@ -12189,6 +12181,7 @@ Use this endpoint to resend a failed webhook delivery.
 |status|cancelled|
 |status_reason|The balance of the nominated bank account for this Payment Request is not available.|
 |status_reason|The nominated bank account for this Payment Request has insufficient funds.|
+|status_reason|null|
 
 ## ListPaymentRequestCollectionsResponse
 
@@ -12254,13 +12247,13 @@ Use this endpoint to resend a failed webhook delivery.
 |» authoriser_id|string(uuid)|true|The debtor's bank account ID|
 |» authoriser_contact_id|string(uuid)|true|The contact ID representing the debtor within Zepto|
 |» contact_initiated|boolean|true|Initiated by Contact or Merchant|
-|» schedule_ref|string|true|The schedule that generated the Payment request if applicable|
+|» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable|
 |» status|string|true|The status of the Payment Request|
-|» status_reason|string|true|Only used when the `status` is `declined` due to prechecking.|
+|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking.|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing|
-|» responded_at|string(date-time)|true|The date-time when the Payment Request status changed|
+|» responded_at|string,null(date-time)|true|The date-time when the Payment Request status changed|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created|
-|» credit_ref|string|true|The resulting credit entry reference (available once approved)|
+|» credit_ref|string,null|true|The resulting credit entry reference (available once approved)|
 |» payout|object|true|No description|
 |»» amount|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
 |»» description|string|true|Payment Request description|
@@ -12278,6 +12271,7 @@ Use this endpoint to resend a failed webhook delivery.
 |status|cancelled|
 |status_reason|The balance of the nominated bank account for this Payment Request is not available.|
 |status_reason|The nominated bank account for this Payment Request has insufficient funds.|
+|status_reason|null|
 
 ## ListPaymentRequestReceivablesResponse
 
@@ -12343,11 +12337,11 @@ Use this endpoint to resend a failed webhook delivery.
 |» authoriser_id|string(uuid)|true|The debtor's bank account ID|
 |» authoriser_contact_id|string(uuid)|true|The contact ID representing the debtor within Zepto|
 |» contact_initiated|boolean|true|Initiated by Contact or Merchant|
-|» schedule_ref|string|true|The schedule that generated the Payment request if applicable|
+|» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable|
 |» status|string|true|The status of the Payment Request. For Receivables, this will always be *approved*|
-|» status_reason|string|true|Only used when the `status` is `declined` due to prechecking.|
+|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking.|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing|
-|» responded_at|string(date-time)|true|The date-time when the Payment Request status changed|
+|» responded_at|string,null(date-time)|true|The date-time when the Payment Request status changed|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created|
 |» credit_ref|string|true|The resulting credit entry reference (available once approved)|
 |» payout|object|true|No description|
@@ -12423,7 +12417,7 @@ Use this endpoint to resend a failed webhook delivery.
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|object|true|No description|
-|» ref|string(uuid)|true|The Refund request reference (PRF.*) (Min: 5 - Max: 9)|
+|» ref|string|true|The Refund request reference (PRF.*) (Min: 5 - Max: 9)|
 |» for_ref|string|true|The associated credit reference (C.*)|
 |» debit_ref|string|true|The associated debit reference (C.*)|
 |» your_bank_account_id|string|true|The source bank/float account (UUID)|
@@ -12503,24 +12497,26 @@ Use this endpoint to resend a failed webhook delivery.
 
 ```json
 {
-  "data": {
-    "ref": "C.2",
-    "parent_ref": "PR.039a",
-    "type": "credit",
-    "category": "payout",
-    "created_at": "2016-12-05T23:15:00Z",
-    "matures_at": "2016-12-06T23:15:00Z",
-    "cleared_at": null,
-    "bank_ref": null,
-    "status": "maturing",
-    "status_changed_at": "2016-12-05T23:15:00Z",
-    "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
-    "party_name": "Price and Sons",
-    "party_nickname": "price-and-sons-2",
-    "party_bank_ref": null,
-    "description": "Money for jam",
-    "amount": 1
-  }
+  "data": [
+    {
+      "ref": "C.2",
+      "parent_ref": "PR.039a",
+      "type": "credit",
+      "category": "payout",
+      "created_at": "2016-12-05T23:15:00Z",
+      "matures_at": "2016-12-06T23:15:00Z",
+      "cleared_at": null,
+      "bank_ref": null,
+      "status": "maturing",
+      "status_changed_at": "2016-12-05T23:15:00Z",
+      "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
+      "party_name": "Price and Sons",
+      "party_nickname": "price-and-sons-2",
+      "party_bank_ref": null,
+      "description": "Money for jam",
+      "amount": 1
+    }
+  ]
 }
 ```
 
@@ -12545,7 +12541,7 @@ Use this endpoint to resend a failed webhook delivery.
       "type": "debit",
       "category": "payout_refund",
       "created_at": "2021-04-07T23:15:00Z",
-      "matures_at": "2021-04-07T23:15:00Z",
+      "matured_at": "2021-04-07T23:15:00Z",
       "cleared_at": "2021-04-10T23:15:00Z",
       "bank_ref": "DT.9a",
       "status": "cleared",
@@ -12560,7 +12556,7 @@ Use this endpoint to resend a failed webhook delivery.
       "channels": [
         "float account"
       ],
-      "current_channel": "float account"
+      "current_channel": "float_account"
     },
     {
       "ref": "D.2",
@@ -12568,7 +12564,7 @@ Use this endpoint to resend a failed webhook delivery.
       "type": "debit",
       "category": "payout",
       "created_at": "2016-12-06T23:15:00Z",
-      "matures_at": "2016-12-09T23:15:00Z",
+      "matured_at": "2016-12-09T23:15:00Z",
       "cleared_at": null,
       "bank_ref": null,
       "status": "maturing",
@@ -12591,12 +12587,12 @@ Use this endpoint to resend a failed webhook delivery.
       "type": "credit",
       "category": "payout",
       "created_at": "2016-12-05T23:15:00Z",
-      "matures_at": "2016-12-06T23:15:00Z",
+      "matured_at": "2016-12-06T23:15:00Z",
       "cleared_at": "2016-12-09T23:15:00Z",
       "bank_ref": "CT.1",
       "status": "cleared",
       "status_changed_at": "2016-12-09T23:15:00Z",
-      "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
+      "party_contact_id": "33c6e31d-1dc1-448b-9512-0320bc44fdcf",
       "party_name": "Price and Sons",
       "party_nickname": "price-and-sons-2",
       "party_bank_ref": null,
@@ -12636,12 +12632,12 @@ Use this endpoint to resend a failed webhook delivery.
   "type": "credit",
   "category": "payout",
   "created_at": "2016-12-05T23:15:00Z",
-  "matures_at": "2016-12-06T23:15:00Z",
+  "matured_at": "2016-12-06T23:15:00Z",
   "cleared_at": "2016-12-09T23:15:00Z",
   "bank_ref": "CT.1",
   "status": "cleared",
   "status_changed_at": "2016-12-09T23:15:00Z",
-  "party_contact_id": "33c6e31d3-1dc1-448b-9512-0320bc44fdcf",
+  "party_contact_id": "33c6e31d-1dc1-448b-9512-0320bc44fdcf",
   "party_name": "Price and Sons",
   "party_nickname": "price-and-sons-2",
   "party_bank_ref": null,
@@ -12666,22 +12662,22 @@ Use this endpoint to resend a failed webhook delivery.
 |Name|Type|Required|Description|
 |---|---|---|---|
 |ref|string|true|The ref of the transaction (`C.*` or `D.*`)|
-|parent_ref|string|true|The ref of the parent of this transaction|
+|parent_ref|string,null|true|The ref of the parent of this transaction|
 |type|string|true|The type of the transaction|
 |category|string|true|The category of the transaction|
 |created_at|string(date-time)|true|When the transaction was created|
 |matures_at|string(date-time)|false|When the transaction was processed|
-|cleared_at|string(date-time)|true|When the transaction was cleared|
-|bank_ref|string|true|The ref that is sent to the bank|
+|cleared_at|string,null(date-time)|true|When the transaction was cleared|
+|bank_ref|string,null|true|The ref that is sent to the bank|
 |status|string|true|The status of the transaction (see [Transactions/Lifecycle](#lifecycle-4) for more info)|
 |status_changed_at|string|true|When the status was last changed|
 |failure_details|string|false|Details if a failure occured|
 |failure|[Failure](#schemafailure)|false|No description|
 |party_contact_id|string(uuid)|true|The transaction party's contact ID|
 |party_name|string|true|The transaction party's name|
-|party_nickname|string|true|The transaction party's nickname|
-|party_bank_ref|string|true|The transaction party's bank ref|
-|description|string|true|The transaction's description|
+|party_nickname|string,null|true|The transaction party's nickname|
+|party_bank_ref|string,null|true|The transaction party's bank ref|
+|description|string,null|true|The transaction's description|
 |amount|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
 |bank_account_id|string(uuid)|true|The bank account ID of this transaction|
 |channels|array|true|Which payment channels this transaction can use (see [Payments/Make a payment](#make-a-payment) for more info)|
@@ -13077,7 +13073,7 @@ Use this endpoint to resend a failed webhook delivery.
 ```json
 {
   "data": {
-    "ref": "T.87xp",
+    "ref": "52986d9d-4788-4c41-92a1-9d364c6545e5",
     "from_bank_account_id": "a79423b2-3827-4cf5-9eda-dc02a298d005",
     "to_bank_account_id": "0921a719-c79d-4ffb-91b6-1b30ab77d14d",
     "amount": 47000,
