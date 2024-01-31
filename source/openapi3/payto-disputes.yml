@@ -1,0 +1,902 @@
+openapi: "3.0.2"
+info:
+  title: PayTo Disputes API
+  version: "1.0"
+servers:
+  - url: https://api.zeptopayments.com
+tags:
+  - name: Disputes
+  - name: Dispute Responses
+  - name: File Upload
+components:
+  schemas:
+    generic.error:
+      type: object
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          example: Title of error
+        detail:
+          type: string
+          description: A short description of the error
+          example: Description of error
+        links:
+          type: object
+          properties:
+            about:
+              type: string
+              description: An optional link to more information on the error
+              example: https://docs.zepto.money/#idempotent-requests
+          required:
+            - about
+        meta:
+          type: object
+          description: Optional meta information about the error
+          properties:
+            resource_ref:
+              type: string
+              description: Resource reference of the resource impacted by the error
+              example: 3dff9861-448a-4177-a7bc-88620a73bc51
+            resource_uid:
+              type: string
+              description: Supplied ID of the resource impacted by the error
+              example: bda10572-4761-4af5-9990-be4ccc7190fe
+      required:
+        - title
+        - detail
+    generic.errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          minItems: 1
+          items:
+            "$ref": "#/components/schemas/generic.error"
+      required:
+        - errors
+    pagination.links:
+      type: object
+      properties:
+        next:
+          type: string
+          description: >
+            URL for the next page of results. Won't be present if there are no further pages.
+    prop.uid:
+      type: string
+      pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+      description:
+        Supplied unique identifier for agreement, maximum 64 characters
+        containing only RFC3986(Unreserved Characters). This identifier ensures
+        agreement uniqueness between integrator systems and Zepto.
+      example: disp_response_G7MQWwkQZIP8vbfH
+      minLength: 1
+      maxLength: 64
+    prop.urn:
+      type: string
+      pattern: "^urn:zepto:[a-zA-Z0-9][a-zA-Z0-9-]*:[a-zA-Z0-9-._~%!$&'()*+,;=:@/]*$"
+      description: Universal resource name (URN) for the resource. This is a unique identifier
+    prop.amount:
+      type: object
+      additionalProperties: false
+      required:
+        - value
+        - currency
+      properties:
+        value:
+          type: integer
+          example: 1000
+          description: Amount (in cents)
+        currency:
+          type: string
+          example: AUD
+          description: Currency of the  amount
+    prop.dispute.id:
+      type: string
+      format: uuid
+      example: 37e7a750-b8c9-427c-b6c9-5b4e519f0f4b
+      description: >
+        Unique identifier for the dispute. Value is a 16 byte ULID, encoded in hexadecimal UUID format.
+    prop.dispute.payment_source:
+      allOf:
+        - "$ref": "#/components/schemas/prop.urn"
+        - example:
+            - "urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH"
+            - "urn:zepto:direct_debit:payment:biz_20221231_G7MQWwkQZIP8vbfH"
+      properties:
+        type:
+          type: string
+          example: payto_payment
+          enum:
+            - payto_payment
+          description: Type of payment source.
+        id:
+          type: string
+          example: biz_20221231_G7MQWwkQZIP8vbfH
+          description: Identifier for the payment source.
+    prop.dispute.closed_outcome:
+      type: object
+      description: Outcome of the dispute when it was closed.
+      additionalProperties: false
+      required:
+        - closed_at
+        - outcome
+        - description
+      properties:
+        outcome:
+          type: string
+          example: merchant_won
+          enum:
+            - won
+            - lost
+            - partially_won
+          description: Outcome of the dispute.
+        description:
+          type: string
+          example: Dispute has been closed, no further action required.
+          description: Description of the dispute closing.
+        closed_at:
+          type: string
+          format: date
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was closed.
+    resp.file:
+      type: object
+      additionalProperties: false
+      required:
+        - urn
+        - namespace
+      properties:
+        urn:
+          "$ref": "#/components/schemas/prop.urn"
+        namespace:
+          type: string
+    resp.dispute:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - status
+        - payment_source
+        - created_at
+        - amount
+        - reason
+        - currency
+        - response_due_by
+        - updated_at
+        - open_at
+        - opening_description
+        - closed_outcome
+        - metadata
+      properties:
+        id:
+          "$ref": "#/components/schemas/prop.dispute.id"
+          description: Unique identifier for the dispute.
+        payment_source:
+          "$ref": "#/components/schemas/prop.dispute.payment_source"
+          description: Details of the payment source used in the dispute.
+        amount:
+          "$ref": "#/components/schemas/prop.amount"
+        reason:
+          type: string
+          example: duplicate
+          enum:
+            - duplicate
+            - fraudulent
+            - credit_not_processed
+            - product_not_received
+            - product_unacceptable
+            - subscription_canceled
+            - unrecognized
+          description: Reason for the dispute.
+        status:
+          type: string
+          example: needs_response
+          enum:
+            - pending
+            - needs_response
+            - under_review
+            - closed
+          description: Current status of the dispute.
+        response_due_by:
+          type: string
+          format: date
+          example: "2024-01-25T06:07:54Z"
+          description: Deadline for responding to the dispute.
+        created_at:
+          type: string
+          format: date
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was created.
+        updated_at:
+          type: string
+          format: date
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was last updated.
+        open_at:
+          type: string
+          format: date
+          example: "2024-01-11T06:07:54Z"
+          description: Timestamp when the dispute was opened.
+        opening_description:
+          type: string
+          example: You charged me twice for this item
+          description: Description of the dispute when it was opened.
+        closed_outcome:
+          "$ref": "#/components/schemas/prop.dispute.closed_outcome"
+        metadata:
+          type: object
+          description: Metadata associated with the dispute.
+          properties:
+            npp:
+              type: object
+              description: National Payments Platform metadata.
+              properties:
+                reason_code:
+                  type: string
+                  example: INV16
+                  enum:
+                    - INV16
+                  description: Reason code for NPP metadata.
+                reason_description:
+                  type: string
+                  example: Request to Return Mandate Payment
+                  description: Description of the reason for NPP metadata.
+    prop.dispute_response.evidence:
+      type: object
+      additionalProperties: false
+      description: Evidence related to the dispute response.
+      properties:
+        content:
+          type: object
+          properties:
+            file:
+              type: string
+              description: Uploaded file URL
+              example: urn:zepto:dispute_evidence_file:13607d15-460e-4d80-b819-364e1f1d6fff
+            description:
+              type: string
+              description: Description of the evidence.
+              example: A text description of the evidence.
+        extra_data:
+          type: object
+          properties:
+            customer:
+              type: object
+              properties:
+                billing_address:
+                  type: string
+                name:
+                  type: string
+                email_address:
+                  type: string
+                  format: email
+                purchase_ip:
+                  type: string
+                signature:
+                  type: string
+                communication:
+                  type: string
+            product:
+              type: object
+              properties:
+                receipt:
+                  type: string
+                product_description:
+                  type: string
+                shipping_address:
+                  type: string
+                shipping_date:
+                  type: string
+                shipping_carrier:
+                  type: string
+                shipping_tracking_number:
+                  type: string
+                cancellation_policy:
+                  type: string
+                cancellation_policy_disclosure:
+                  type: string
+                cancellation_rebuttal:
+                  type: string
+                refund_policy:
+                  type: string
+                refund_policy_disclosure:
+                  type: string
+                refund_refusal_explanation:
+                  type: string
+                duplicate_charge_id:
+                  type: string
+                duplicate_charge_explanation:
+                  type: string
+                duplicate_charge_documentation:
+                  type: string
+                service_documentation:
+                  type: string
+                service_date:
+                  type: string
+                access_activity_logs:
+                  type: string
+                uncategorised_file:
+                  type: string
+                uncategorised_text:
+                  type: string
+
+    req.dispute_response.accept:
+      type: object
+      description: Object representing the acceptance of a dispute response.
+      properties:
+        dispute_id:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    req.dispute_response.reject:
+      type: object
+      description: Object representing the rejection of a dispute response.
+      properties:
+        uid:
+          "$ref": "#/components/schemas/prop.uid"
+        dispute_id:
+          "$ref": "#/components/schemas/prop.dispute.id"
+        evidence:
+          "$ref": "#/components/schemas/prop.dispute_response.evidence"
+    resp.dispute_response:
+      type: object
+      description: Object representing a dispute response.
+      properties:
+        dispute_id:
+          "$ref": "#/components/schemas/prop.dispute.id"
+        created_at:
+          type: string
+          format: date-time
+          description: When the dispute response was created
+          example: "2023-03-07T22:50:40Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: When the dispute response was last updated
+          example: "2023-03-07T22:50:40Z"
+        evidence:
+          "$ref": "#/components/schemas/prop.dispute_response.evidence"
+    event.base:
+      type: object
+      properties:
+        id:
+          type: string
+          description:
+            The ID of event that triggered the webhook delivery. Value
+            is a 16 byte ULID, encoded in hexadecimal UUID format
+          example: "0186b521-78f2-3ee4-6547-245133933086"
+        type:
+          type: string
+          description: Type of event that triggered the webhook delivery
+          example: payto_payment.settled
+        published_at:
+          type: string
+          format: date-time
+          description: When the event was published by Zepto
+          example: "2023-03-07T22:50:40Z"
+        resource_uid:
+          type: string
+          pattern: "^[A-Za-z0-9_~.-]{1,64}$"
+          description:
+            Supplied unique identifier for resource that the event affected,
+            maximum 64 characters containing only RFC3986(Unreserved Characters).
+          example: biz_20221231_G7MQWwkQZIP8vbfH
+          minLength: 1
+          maxLength: 64
+        resource_type:
+          type: string
+          description: The type of resource the resource_uid relates to
+          enum:
+            - payto_agreement
+            - payto_payment
+          example: payto_payment
+        body:
+          type: object
+          nullable: true
+          example:
+      required:
+        - id
+        - type
+        - published_at
+        - resource_uid
+        - resource_type
+        - body
+    webhook.base:
+      type: object
+      properties:
+        data:
+          "$ref": "#/components/schemas/event.base"
+        links:
+          type: object
+          properties:
+            resource:
+              type: string
+              description: The api url to the resource
+              example: https://api.split.cash/payto/payments/biz_20221231_G7MQWwkQZIP8vbfH
+      required:
+        - data
+        - links
+    event.dispute.accepted:
+      allOf:
+        - "$ref": "#/components/schemas/event.base"
+    event.dispute_response.created:
+      allOf:
+        - "$ref": "#/components/schemas/event.base"
+
+    webhook.dispute.accepted:
+      allOf:
+        - "$ref": "#/components/schemas/webhook.base"
+        - type: object
+          properties:
+            data:
+              "$ref": "#/components/schemas/event.dispute.accepted"
+        - type: object
+          example:
+            data:
+              type: dispute.accepted
+              resource_type: dispute
+            links:
+              resource: https://api.split.cash/payto/disputes/e168bf9c-698a-4d5b-a151-8e104f0858cf
+    webhook.dispute_response.created:
+      allOf:
+        - "$ref": "#/components/schemas/webhook.base"
+        - type: object
+          properties:
+            data:
+              "$ref": "#/components/schemas/event.dispute_response.created"
+        - type: object
+          example:
+            data:
+              type: dispute_response.created
+              resource_type: dispute_response
+            links:
+              resource: https://api.split.cash/payto/dispute_responses/d291214e-2e39-4cf9-9508-6b1628a2f73a
+
+  responses:
+    response.400:
+      description: ""
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/generic.errors"
+          examples:
+            Generic validation error:
+              summary: Generic validation error
+              value:
+                errors:
+                  - title: Validation Failed
+                    detail: The value for `invalid_key` is not allowed
+    response.401:
+      description: ""
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/generic.errors"
+          examples:
+            Unauthorised access token:
+              summary: Unauthorised access token
+              value:
+                errors:
+                  - title: Unauthorised access token
+                    detail: Access token is expired or not valid
+                    links:
+                      about: https://docs.zepto.money/#authentication-and-authorisation
+  examples:
+    example.dispute.payto_payment:
+      summary: Success
+      value:
+        links: {}
+        data:
+          id: 13607d15-460e-4d80-b819-364e1f1d6fff
+          payment_source: urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH
+          amount:
+            value: 1000
+            currency: AUD
+          reason: duplicate
+          status: needs_response
+          response_due_by: "2024-01-25T06:07:54Z"
+          created_at: "2024-01-11T06:07:54Z"
+          updated_at: "2024-01-11T06:07:54Z"
+          open_at: "2024-01-11T06:07:54Z"
+          opening_description: You charged me twice for this item
+          closed_outcome:
+            outcome: merchant_won
+            description: Dispute has been closed, no further action required.
+            closed_at: "2024-01-11T06:07:54Z"
+          metadata:
+            npp:
+              reason_code: INV16
+              reason_description: Request to Return Mandate Payment
+    example.dispute.payto_payments:
+      summary: Success
+      value:
+        links: {}
+        data:
+          - id: 13607d15-460e-4d80-b819-364e1f1d6fff
+            payment_source: urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH
+            amount:
+              value: 1000
+              currency: AUD
+            reason: duplicate
+            status: needs_response
+            response_due_by: "2024-01-25T06:07:54Z"
+            created_at: "2024-01-11T06:07:54Z"
+            updated_at: "2024-01-11T06:07:54Z"
+            open_at: "2024-01-11T06:07:54Z"
+            opening_description: You charged me twice for this item
+            closed_outcome:
+              outcome: merchant_won
+              description: Dispute has been closed, no further action required.
+              closed_at: "2024-01-11T06:07:54Z"
+            metadata:
+              npp:
+                reason_code: INV16
+                reason_description: Request to Return Mandate Payment
+          - id: eb7967d5-1721-4f60-8de1-ec73c3549d1e
+            payment_source: urn:zepto:payto:payment:biz_20221231_G7MQWwkQZIP8vbfH
+            amount:
+              value: 1000
+              currency: AUD
+            reason: duplicate
+            status: needs_response
+            response_due_by: "2024-01-25T06:07:54Z"
+            created_at: "2024-01-11T06:07:54Z"
+            updated_at: "2024-01-11T06:07:54Z"
+            open_at: "2024-01-11T06:07:54Z"
+            opening_description: You charged me twice for this item
+            closed_outcome:
+              outcome: merchant_won
+              description: Dispute has been closed, no further action required.
+              closed_at: "2024-01-11T06:07:54Z"
+            metadata:
+              npp:
+                reason_code: INV16
+                reason_description: Request to Return Mandate Payment
+    example.dispute_response.accept:
+      summary: Success
+      value:
+        links: {}
+        data:
+          dispute_id: 13607d15-460e-4d80-b819-364e1f1d6fff
+    example.dispute_response.reject:
+      summary: Success
+      value:
+        links: {}
+        data:
+          dispute_id: 13607d15-460e-4d80-b819-364e1f1d6fff
+          created_at: "2024-01-11T06:07:54Z"
+          updated_at: "2024-01-11T06:07:54Z"
+          evidence:
+            content:
+              file: https://api.zeptopayments.com/payto/dispute_responses/13607d15-460e-4d80-b819-364e1f1d6fff/evidence_file
+            extra_data:
+              customer:
+                billing_address: 123 Fake Street, Sydney, NSW, 2000
+                name: John Smith
+                email_address:
+    example.file.post:
+      summary: Success
+      value:
+        links: {}
+        data:
+          urn: urn:zepto:file:dispute_evidence:13607d15-460e-4d80-b819-364e1f1d6fff
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows: {}
+paths:
+  "/disputes/{id}":
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    get:
+      summary: Show dispute
+      operationId: get-dispute
+      tags:
+        - Disputes
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/resp.dispute"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.dispute.payto_payment"
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute.initiated:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.initiated
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
+        dispute.resolved:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.resolved
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
+  "/disputes":
+    get:
+      summary: List disputes
+      description: ""
+      tags:
+        - Disputes
+      operationId: list-disputes
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  links:
+                    "$ref": "#/components/schemas/pagination.links"
+                  data:
+                    "$ref": "#/components/schemas/resp.dispute"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.dispute.payto_payments"
+
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+  "/disputes/{dispute_id}/accept":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    post:
+      summary: Accept dispute
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: accept-dispute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              "$ref": "#/components/schemas/req.dispute_response.accept"
+      responses:
+        "201":
+          description: Created
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute_response.created:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute_response.created
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.dispute_response.created"
+              responses:
+                "200":
+                  description: OK
+        dispute.accepted:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.accepted
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.dispute.accepted"
+              responses:
+                "200":
+                  description: OK
+  "/disputes/{dispute_id}/reject":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    post:
+      summary: Reject dispute
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: reject-dispute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              "$ref": "#/components/schemas/req.dispute_response.reject"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/resp.dispute_response"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.dispute_response.reject"
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute.rejected:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.rejected
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
+  "/disputes/unresolved":
+    get:
+      summary: List unresolved disputes
+      description: ""
+      tags:
+        - Disputes
+      operationId: list-unresolved-disputes
+      responses:
+        "200":
+          description: OK
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+  "/disputes/{dispute_id}/responses":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    get:
+      summary: List dispute responses
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: list-dispute-responses
+      responses:
+        "200":
+          description: OK
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+  "/disputes/{dispute_id}/responses/{id}":
+    parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          "$ref": "#/components/schemas/prop.dispute.id"
+      - name: id
+        in: path
+        required: true
+        schema:
+          "$ref": "#/components/schemas/prop.dispute.id"
+    get:
+      summary: Show dispute response
+      description: ""
+      tags:
+        - Dispute Responses
+      operationId: show-dispute-response
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/resp.dispute_response"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.dispute_response.reject"
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"
+      callbacks:
+        dispute_response.created:
+          DESTINATION_WEBHOOK_URL:
+            post:
+              summary: dispute.created
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      "$ref": "#/components/schemas/webhook.base"
+              responses:
+                "200":
+                  description: OK
+  "/files":
+    post:
+      summary: Upload a file
+      description: ""
+      tags:
+        - File Upload
+      operationId: post-file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                namespace:
+                  type: string
+                  description: Namespace for the file
+                  example: dispute_evidence_file
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/resp.file"
+              examples:
+                Success:
+                  "$ref": "#/components/examples/example.file.post"
+        "400":
+          "$ref": "#/components/responses/response.400"
+        "401":
+          "$ref": "#/components/responses/response.401"

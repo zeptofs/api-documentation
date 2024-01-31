@@ -1,0 +1,19 @@
+name: Sync ReadMe Docs 🦉
+
+on:
+  push:
+    branches:
+      - main
+      - feat/payto-disputes-api # TODO: Remove once WIP development completed
+
+jobs:
+  rdme-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo 📚
+        uses: actions/checkout@v3
+
+      - name: Run `docs` command 🚀
+        uses: readmeio/rdme@v8
+        with:
+          rdme: docs source/guides/ --key=${{ secrets.README_API_KEY }} --version=1.0
