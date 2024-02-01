@@ -4749,14 +4749,14 @@ components:
             description: A tandem skydive jump SB23094
             recipient_contact_id: 48b89364-1577-4c81-ba02-96705895d457
             metadata: {
-                invoice_ref: 'BILL-0001',
-                invoice_id: 'c80a9958-e805-47c0-ac2a-c947d7fd778d',
-                custom_key: 'Custom string',
-                another_custom_key: 'Maybe a URL'
+                invoice_ref: "BILL-0001",
+                invoice_id: "c80a9958-e805-47c0-ac2a-c947d7fd778d",
+                custom_key: "Custom string",
+                another_custom_key: "Maybe a URL"
               }
         metadata: {
-            custom_key: 'Custom string',
-            another_custom_key: 'Maybe a URL'
+            custom_key: "Custom string",
+            another_custom_key: "Maybe a URL"
           }
     Payout:
       title: Payout
