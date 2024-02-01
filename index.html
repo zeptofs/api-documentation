@@ -720,6 +720,9 @@
                     <a href="#listallpaymentsresponse" class="toc-h2 toc-link" data-title="ListAllPaymentsResponse">ListAllPaymentsResponse</a>
                   </li>
                   <li>
+                    <a href="#voidapayment" class="toc-h2 toc-link" data-title="VoidAPayment">VoidAPayment</a>
+                  </li>
+                  <li>
                     <a href="#getapaymentresponse" class="toc-h2 toc-link" data-title="GetAPaymentResponse">GetAPaymentResponse</a>
                   </li>
                   <li>
@@ -1991,6 +1994,8 @@ class MainClass {
 
 <p>Looking for more? Our docs are open sourced! <a href="https://github.com/zeptofs/api-documentation">https://github.com/zeptofs/api-documentation</a></p>
 
+<p>Email: <a href="mailto:support@zepto.com.au">Support</a> </p>
+
 <h1 id="Zepto-API-Agreements">Agreements</h1>
 
 <p>An Agreement is an arrangement between two parties that allows them to agree on terms for which future Payment Requests will be auto-approved.</p>
@@ -2470,8 +2475,8 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8df89c16-330f-462b-8891-808d7bdceb7f"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d290763-bd5a-4b4d-a8ce-06c64c4a697b"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb9381ec-22af-47fd-8998-804f947aaca3"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reason"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-20T02:13:11Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-20T00:53:27Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -5799,7 +5804,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <tr>
 <td>»»» min_amount</td>
 <td>body</td>
-<td>integer</td>
+<td>integer,null</td>
 <td>true</td>
 <td>Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.</td>
 </tr>
@@ -8532,9 +8537,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> DELETE <span class="se">\</span>
   <span class="nt">--url</span> https://api.sandbox.zeptopayments.com/payouts/D.48 <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="nb">false</span>
+  <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span>
 </code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
 
@@ -8545,9 +8548,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
 
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Delete</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"false"</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 <span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
@@ -8559,7 +8560,6 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/payouts/D.48</span><span class="dl">"</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -8582,39 +8582,26 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 
 <span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">HTTPSConnection</span><span class="p">(</span><span class="s">"api.sandbox.zeptopayments.com"</span><span class="p">)</span>
 
-<span class="n">payload</span> <span class="o">=</span> <span class="s">"false"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span> <span class="p">}</span>
 
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
-    <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
-    <span class="p">}</span>
-
-<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"/payouts/D.48"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"/payouts/D.48"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 
 <span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="s">"https://api.sandbox.zeptopayments.com/payouts/D.48"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"false"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
 </code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
 <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client</span><span class="p">;</span>
 <span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Client\Request</span><span class="p">;</span>
 
-<span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">http\Message\Body</span><span class="p">;</span>
-<span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">append</span><span class="p">(</span><span class="s1">'false'</span><span class="p">);</span>
-
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestUrl</span><span class="p">(</span><span class="s1">'https://api.sandbox.zeptopayments.com/payouts/D.48'</span><span class="p">);</span>
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setRequestMethod</span><span class="p">(</span><span class="s1">'DELETE'</span><span class="p">);</span>
-<span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
-
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span>
 <span class="p">));</span>
 
 <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">send</span><span class="p">();</span>
@@ -8625,7 +8612,6 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 
 <span class="k">import</span> <span class="p">(</span>
     <span class="s">"fmt"</span>
-    <span class="s">"strings"</span>
     <span class="s">"net/http"</span>
     <span class="s">"io/ioutil"</span>
 <span class="p">)</span>
@@ -8634,11 +8620,8 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 
     <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://api.sandbox.zeptopayments.com/payouts/D.48"</span>
 
-    <span class="n">payload</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="s">"false"</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
 
-    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-
-    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
 
     <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
@@ -8655,11 +8638,6 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 
 <p>You can void any Payment from your account that has not yet matured.</p>
 
-<blockquote>
-<p>Body parameter</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="kc">false</span><span class="w">
-</span></code></pre></div>
 <h3 id="Void-a-Payment-parameters" class="parameters">Parameters</h3>
 
 <table><thead>
@@ -10797,7 +10775,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_refund"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matured_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
@@ -10812,7 +10790,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"float account"</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"current_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float account"</span><span class="w">
+      </span><span class="nl">"current_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float_account"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.2"</span><span class="p">,</span><span class="w">
@@ -10820,7 +10798,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matured_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
@@ -10843,12 +10821,12 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matured_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -11811,7 +11789,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <tr>
 <td>»»» min_amount</td>
 <td>body</td>
-<td>integer</td>
+<td>integer,null</td>
 <td>true</td>
 <td>Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.</td>
 </tr>
@@ -12136,7 +12114,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 </tbody></table>
 <h2 id='get-an-unassigned-agreement'>Get an Unassigned Agreement</h2>
-<p><a id="opIdGetAgreement"></a></p>
+<p><a id="opIdGetUnassignedAgreement"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -12957,7 +12935,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <tr>
 <td>per_page</td>
 <td>query</td>
-<td>string</td>
+<td>integer</td>
 <td>false</td>
 <td>Number of results per page, single value, exact match</td>
 </tr>
@@ -13513,8 +13491,8 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"authoriser_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8df89c16-330f-462b-8891-808d7bdceb7f"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d290763-bd5a-4b4d-a8ce-06c64c4a697b"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb9381ec-22af-47fd-8998-804f947aaca3"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reason"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-20T02:13:11Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-20T00:53:27Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -13881,7 +13859,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <p><a id="schematerms"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"per_payout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"max_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"per_frequency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -13916,7 +13894,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <h2 id='perpayout'>PerPayout</h2>
 <p><a id="schemaperpayout"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"max_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='properties-7'>Properties</h3>
@@ -13932,7 +13910,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </thead><tbody>
 <tr>
 <td>min_amount</td>
-<td>integer</td>
+<td>integer,null</td>
 <td>true</td>
 <td>Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.</td>
 </tr>
@@ -14322,13 +14300,13 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>»» iav_provider</td>
-<td>string</td>
+<td>string,null</td>
 <td>false</td>
 <td>Always null</td>
 </tr>
 <tr>
 <td>»» iav_status</td>
-<td>string</td>
+<td>string,null</td>
 <td>false</td>
 <td>Always null</td>
 </tr>
@@ -14809,13 +14787,13 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>»» iav_provider</td>
-<td>string</td>
+<td>string,null</td>
 <td>false</td>
 <td>The instant account verification provider</td>
 </tr>
 <tr>
 <td>»» iav_status</td>
-<td>string</td>
+<td>string,null</td>
 <td>false</td>
 <td>The instant account verification bank connection status</td>
 </tr>
@@ -14857,7 +14835,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>»»» id</td>
-<td>string(uuid)</td>
+<td>string,null(uuid)</td>
 <td>false</td>
 <td>The bank connection ID</td>
 </tr>
@@ -14944,6 +14922,10 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td>credit_sense</td>
 </tr>
 <tr>
+<td>iav_provider</td>
+<td>null</td>
+</tr>
+<tr>
 <td>iav_status</td>
 <td>active</td>
 </tr>
@@ -14954,6 +14936,10 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <tr>
 <td>iav_status</td>
 <td>credentials_invalid</td>
+</tr>
+<tr>
+<td>iav_status</td>
+<td>null</td>
 </tr>
 <tr>
 <td>state</td>
@@ -15409,6 +15395,27 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td>No description</td>
 </tr>
 </tbody></table>
+<h2 id='voidapayment'>VoidAPayment</h2>
+<p><a id="schemavoidapayment"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="kc">null</span><span class="w">
+</span></code></pre></div><h3 id='properties-29'>Properties</h3>
+<p><em>Void a Payment</em></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Void a Payment</td>
+<td>any</td>
+<td>false</td>
+<td>No description</td>
+</tr>
+</tbody></table>
 <h2 id='getapaymentresponse'>GetAPaymentResponse</h2>
 <p><a id="schemagetapaymentresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -15444,7 +15451,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-29'>Properties</h3>
+</span></code></pre></div><h3 id='properties-30'>Properties</h3>
 <p><em>Get a Payment (response)</em></p>
 
 <table><thead>
@@ -15475,7 +15482,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-30'>Properties</h3>
+</span></code></pre></div><h3 id='properties-31'>Properties</h3>
 <p><em>Make a Payment Request (request)</em></p>
 
 <table><thead>
@@ -15551,7 +15558,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-31'>Properties</h3>
+</span></code></pre></div><h3 id='properties-32'>Properties</h3>
 <p><em>Make a Payment Request (response)</em></p>
 
 <table><thead>
@@ -15606,7 +15613,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» schedule_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)</td>
 </tr>
@@ -15618,7 +15625,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» status_reason</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>Only used when the <code>status</code> is <code>declined</code> due to prechecking. (Min: 0 - Max: 280)</td>
 </tr>
@@ -15630,7 +15637,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» responded_at</td>
-<td>string(date-time)</td>
+<td>string,null(date-time)</td>
 <td>true</td>
 <td>The date-time when the Payment Request status changed (Min: 0 - Max: 20)</td>
 </tr>
@@ -15642,7 +15649,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» credit_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)</td>
 </tr>
@@ -15712,13 +15719,17 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td>status_reason</td>
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
+<tr>
+<td>status_reason</td>
+<td>null</td>
+</tr>
 </tbody></table>
 <h2 id='makeapaymentrequestwithnoagreementresponse'>MakeAPaymentRequestWithNoAgreementResponse</h2>
 <p><a id="schemamakeapaymentrequestwithnoagreementresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authoriser contact (de86472c-c027-4735-a6a7-234366a27fc7) is not a Zepto account holder and therefore must have a valid agreement in place before a Payment Request can be issued."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-32'>Properties</h3>
+</span></code></pre></div><h3 id='properties-33'>Properties</h3>
 <p><em>Make a Payment Request to an Anyone Contact with no valid Agreement (response)</em></p>
 
 <table><thead>
@@ -15764,7 +15775,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-33'>Properties</h3>
+</span></code></pre></div><h3 id='properties-34'>Properties</h3>
 <p><em>Get a Payment Request (response)</em></p>
 
 <table><thead>
@@ -15813,7 +15824,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» schedule_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)</td>
 </tr>
@@ -15825,7 +15836,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» status_reason</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>Only used when the <code>status</code> is <code>declined</code> due to prechecking. (Min: 0 - Max: 280)</td>
 </tr>
@@ -15919,6 +15930,10 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td>status_reason</td>
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
+<tr>
+<td>status_reason</td>
+<td>null</td>
+</tr>
 </tbody></table>
 <h2 id='listpaymentrequestcollectionsresponse'>ListPaymentRequestCollectionsResponse</h2>
 <p><a id="schemalistpaymentrequestcollectionsresponse"></a></p>
@@ -15966,7 +15981,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-34'>Properties</h3>
+</span></code></pre></div><h3 id='properties-35'>Properties</h3>
 <p><em>List Collections (response)</em></p>
 
 <table><thead>
@@ -16021,7 +16036,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» schedule_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The schedule that generated the Payment request if applicable</td>
 </tr>
@@ -16033,7 +16048,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» status_reason</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
 </tr>
@@ -16045,7 +16060,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» responded_at</td>
-<td>string(date-time)</td>
+<td>string,null(date-time)</td>
 <td>true</td>
 <td>The date-time when the Payment Request status changed</td>
 </tr>
@@ -16057,7 +16072,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» credit_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The resulting credit entry reference (available once approved)</td>
 </tr>
@@ -16127,6 +16142,10 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td>status_reason</td>
 <td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
+<tr>
+<td>status_reason</td>
+<td>null</td>
+</tr>
 </tbody></table>
 <h2 id='listpaymentrequestreceivablesresponse'>ListPaymentRequestReceivablesResponse</h2>
 <p><a id="schemalistpaymentrequestreceivablesresponse"></a></p>
@@ -16174,7 +16193,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-35'>Properties</h3>
+</span></code></pre></div><h3 id='properties-36'>Properties</h3>
 <p><em>List Receivables (response)</em></p>
 
 <table><thead>
@@ -16229,7 +16248,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» schedule_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The schedule that generated the Payment request if applicable</td>
 </tr>
@@ -16241,7 +16260,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» status_reason</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
 </tr>
@@ -16253,7 +16272,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» responded_at</td>
-<td>string(date-time)</td>
+<td>string,null(date-time)</td>
 <td>true</td>
 <td>The date-time when the Payment Request status changed</td>
 </tr>
@@ -16314,7 +16333,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-36'>Properties</h3>
+</span></code></pre></div><h3 id='properties-37'>Properties</h3>
 <p><em>Issue a Refund (request)</em></p>
 
 <table><thead>
@@ -16380,7 +16399,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-37'>Properties</h3>
+</span></code></pre></div><h3 id='properties-38'>Properties</h3>
 <p><em>Issue a Refund (response)</em></p>
 
 <table><thead>
@@ -16399,7 +16418,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» ref</td>
-<td>string(uuid)</td>
+<td>string</td>
 <td>true</td>
 <td>The Refund request reference (PRF.*) (Min: 5 - Max: 9)</td>
 </tr>
@@ -16417,7 +16436,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» your_bank_account_id</td>
-<td>string</td>
+<td>string(uuid)</td>
 <td>true</td>
 <td>The source bank/float account (UUID)</td>
 </tr>
@@ -16483,7 +16502,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-38'>Properties</h3>
+</span></code></pre></div><h3 id='properties-39'>Properties</h3>
 <p><em>List outgoing Refunds (response)</em></p>
 
 <table><thead>
@@ -16518,7 +16537,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-39'>Properties</h3>
+</span></code></pre></div><h3 id='properties-40'>Properties</h3>
 <p><em>Retrieve a Refund (response)</em></p>
 
 <table><thead>
@@ -16539,26 +16558,28 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <h2 id='retrypayoutresponse'>RetryPayoutResponse</h2>
 <p><a id="schemaretrypayoutresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.2"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.039a"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Money for jam"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C.2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"parent_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR.039a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Money for jam"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-40'>Properties</h3>
+</span></code></pre></div><h3 id='properties-41'>Properties</h3>
 <p><em>Retry a payout (response)</em></p>
 
 <table><thead>
@@ -16586,7 +16607,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout_refund"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matured_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-07T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-10T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DT.9a"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
@@ -16601,7 +16622,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"float account"</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"current_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float account"</span><span class="w">
+      </span><span class="nl">"current_channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float_account"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D.2"</span><span class="p">,</span><span class="w">
@@ -16609,7 +16630,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debit"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matured_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maturing"</span><span class="p">,</span><span class="w">
@@ -16632,12 +16653,12 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"matured_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -16656,7 +16677,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-41'>Properties</h3>
+</span></code></pre></div><h3 id='properties-42'>Properties</h3>
 <p><em>List all transactions (response)</em></p>
 
 <table><thead>
@@ -16682,12 +16703,12 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payout"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-05T23:15:00Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matured_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-06T23:15:00Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"cleared_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CT.1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cleared"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status_changed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-09T23:15:00Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d3-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"party_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33c6e31d-1dc1-448b-9512-0320bc44fdcf"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"party_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price and Sons"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"party_nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price-and-sons-2"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"party_bank_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -16703,7 +16724,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"product_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSXL392110x"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-42'>Properties</h3>
+</span></code></pre></div><h3 id='properties-43'>Properties</h3>
 <p><em>A transaction (response)</em></p>
 
 <table><thead>
@@ -16722,7 +16743,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>parent_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The ref of the parent of this transaction</td>
 </tr>
@@ -16752,13 +16773,13 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>cleared_at</td>
-<td>string(date-time)</td>
+<td>string,null(date-time)</td>
 <td>true</td>
 <td>When the transaction was cleared</td>
 </tr>
 <tr>
 <td>bank_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The ref that is sent to the bank</td>
 </tr>
@@ -16800,19 +16821,19 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>party_nickname</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The transaction party&#39;s nickname</td>
 </tr>
 <tr>
 <td>party_bank_ref</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The transaction party&#39;s bank ref</td>
 </tr>
 <tr>
 <td>description</td>
-<td>string</td>
+<td>string,null</td>
 <td>true</td>
 <td>The transaction&#39;s description</td>
 </tr>
@@ -16972,7 +16993,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account Not Found"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The target account number cannot be found by the financial institution."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-43'>Properties</h3>
+</span></code></pre></div><h3 id='properties-44'>Properties</h3>
 <p><em>Failure object (see <a href="#failure-codes">Transaction/Failure codes</a> for more info)</em></p>
 
 <table><thead>
@@ -17022,7 +17043,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"another_custom_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maybe a URL"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-44'>Properties</h3>
+</span></code></pre></div><h3 id='properties-45'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (request)</em></p>
 
 <table><thead>
@@ -17085,7 +17106,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-45'>Properties</h3>
+</span></code></pre></div><h3 id='properties-46'>Properties</h3>
 <p><em>Propose an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -17147,7 +17168,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-46'>Properties</h3>
+</span></code></pre></div><h3 id='properties-47'>Properties</h3>
 <p><em>List Unassigned Agreements (response)</em></p>
 
 <table><thead>
@@ -17188,7 +17209,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://go.sandbox.zeptopayments.com/unassigned_agreements/b61fc159-8779-4a17-a826-e398e3e7e211/invitation"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-47'>Properties</h3>
+</span></code></pre></div><h3 id='properties-48'>Properties</h3>
 <p><em>Get an Unassigned Agreement (response)</em></p>
 
 <table><thead>
@@ -17226,7 +17247,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-48'>Properties</h3>
+</span></code></pre></div><h3 id='properties-49'>Properties</h3>
 <p><em>Get User details (response)</em></p>
 
 <table><thead>
@@ -17250,7 +17271,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="nl">"payid_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming@zeptopayments.com"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-49'>Properties</h3>
+</span></code></pre></div><h3 id='properties-50'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -17315,7 +17336,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="nl">"to_account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88888888"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-50'>Properties</h3>
+</span></code></pre></div><h3 id='properties-51'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -17386,7 +17407,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="nl">"to_account_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88888888"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-51'>Properties</h3>
+</span></code></pre></div><h3 id='properties-52'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -17447,7 +17468,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Float account balance adjustment"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-52'>Properties</h3>
+</span></code></pre></div><h3 id='properties-53'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -17499,7 +17520,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-06T00:00:00Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-53'>Properties</h3>
+</span></code></pre></div><h3 id='properties-54'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -17563,7 +17584,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-03T00:00:00Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-54'>Properties</h3>
+</span></code></pre></div><h3 id='properties-55'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -17580,7 +17601,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» ref</td>
-<td>string(uuid)</td>
+<td>string</td>
 <td>true</td>
 <td>The Transfer request reference (T.*) (Min: 4 - Max: 8)</td>
 </tr>
@@ -17651,7 +17672,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-55'>Properties</h3>
+</span></code></pre></div><h3 id='properties-56'>Properties</h3>
 <p><em>List all Transfers (response)</em></p>
 
 <table><thead>
@@ -17684,7 +17705,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-56'>Properties</h3>
+</span></code></pre></div><h3 id='properties-57'>Properties</h3>
 <p><em>List all Webhooks (response)</em></p>
 
 <table><thead>
@@ -17735,7 +17756,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-57'>Properties</h3>
+</span></code></pre></div><h3 id='properties-58'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -17799,7 +17820,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="nl">"response_status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-09-02T02:24:50.000Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-58'>Properties</h3>
+</span></code></pre></div><h3 id='properties-59'>Properties</h3>
 <p><em>Get a WebhookDelivery (response)</em></p>
 
 <table><thead>
@@ -17880,7 +17901,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='properties-59'>Properties</h3>
+</span></code></pre></div><h3 id='properties-60'>Properties</h3>
 <p><em>Resend a WebhookDelivery (response)</em></p>
 
 <table><thead>
