@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feat/payto-disputes-api # TODO: Remove once WIP development completed
 
 jobs:
   rdme-openapi:
