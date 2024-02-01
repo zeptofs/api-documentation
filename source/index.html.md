@@ -4145,7 +4145,7 @@ curl --request POST \
   --header 'accept: application/json' \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
-  --data '{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":0,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'
+  --data '{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":null,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}'
 ```
 
 ```ruby
@@ -4162,7 +4162,7 @@ request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["accept"] = 'application/json'
 request["authorization"] = 'Bearer {access-token}'
-request.body = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
+request.body = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 response = http.request(request)
 puts response.read_body
@@ -4199,7 +4199,7 @@ var req = http.request(options, function (res) {
 req.write(JSON.stringify({
   title: 'Subscription Plan A',
   terms: {
-    per_payout: { min_amount: 0, max_amount: 10000 },
+    per_payout: { min_amount: null, max_amount: 10000 },
     per_frequency: { days: 7, max_amount: 1000000 }
   },
   metadata: { custom_key: 'Custom string', another_custom_key: 'Maybe a URL' }
@@ -4212,7 +4212,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("api.sandbox.zeptopayments.com")
 
-payload = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
+payload = "{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}"
 
 headers = {
     'content-type': "application/json",
@@ -4233,7 +4233,7 @@ HttpResponse<String> response = Unirest.post("https://api.sandbox.zeptopayments.
   .header("content-type", "application/json")
   .header("accept", "application/json")
   .header("authorization", "Bearer {access-token}")
-  .body("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
+  .body("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
   .asString();
 ```
 
@@ -4244,7 +4244,7 @@ $client = new http\Client;
 $request = new http\Client\Request;
 
 $body = new http\Message\Body;
-$body->append('{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":0,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}');
+$body->append('{"title":"Subscription Plan A","terms":{"per_payout":{"min_amount":null,"max_amount":10000},"per_frequency":{"days":7,"max_amount":1000000}},"metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}');
 
 $request->setRequestUrl('https://api.sandbox.zeptopayments.com/open_agreements');
 $request->setRequestMethod('POST');
@@ -4276,7 +4276,7 @@ func main() {
 
 	url := "https://api.sandbox.zeptopayments.com/open_agreements"
 
-	payload := strings.NewReader("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":0,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
+	payload := strings.NewReader("{\"title\":\"Subscription Plan A\",\"terms\":{\"per_payout\":{\"min_amount\":null,\"max_amount\":10000},\"per_frequency\":{\"days\":7,\"max_amount\":1000000}},\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
 
 	req, _ := http.NewRequest("POST", url, payload)
 
@@ -4308,7 +4308,7 @@ Create an Open Agreement that can be accepted by anyone.
   "title": "Subscription Plan A",
   "terms": {
     "per_payout": {
-      "min_amount": 0,
+      "min_amount": null,
       "max_amount": 10000
     },
     "per_frequency": {
@@ -8960,7 +8960,7 @@ Get a single transfer by its reference
 ```json
 {
   "data": {
-    "ref": "52986d9d-4788-4c41-92a1-9d364c6545e5",
+    "ref": "T.87xp",
     "from_bank_account_id": "a79423b2-3827-4cf5-9eda-dc02a298d005",
     "to_bank_account_id": "0921a719-c79d-4ffb-91b6-1b30ab77d14d",
     "amount": 47000,
@@ -10927,7 +10927,7 @@ Use this endpoint to resend a failed webhook delivery.
   "title": "Subscription Plan A",
   "terms": {
     "per_payout": {
-      "min_amount": 0,
+      "min_amount": null,
       "max_amount": 10000
     },
     "per_frequency": {
@@ -12420,7 +12420,7 @@ null
 |» ref|string|true|The Refund request reference (PRF.*) (Min: 5 - Max: 9)|
 |» for_ref|string|true|The associated credit reference (C.*)|
 |» debit_ref|string|true|The associated debit reference (C.*)|
-|» your_bank_account_id|string|true|The source bank/float account (UUID)|
+|» your_bank_account_id|string(uuid)|true|The source bank/float account (UUID)|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created|
 |» amount|integer|true|The amount value provided (Min: 1 - Max: 99999999999)|
 |» channels|array|false|The requested payment channel(s) to be used, in order. (new_payments_platform, direct_entry, or both)|
@@ -13073,7 +13073,7 @@ null
 ```json
 {
   "data": {
-    "ref": "52986d9d-4788-4c41-92a1-9d364c6545e5",
+    "ref": "T.87xp",
     "from_bank_account_id": "a79423b2-3827-4cf5-9eda-dc02a298d005",
     "to_bank_account_id": "0921a719-c79d-4ffb-91b6-1b30ab77d14d",
     "amount": 47000,
@@ -13088,7 +13088,7 @@ null
 |Name|Type|Required|Description|
 |---|---|---|---|
 |data|object|true|No description|
-|» ref|string(uuid)|true|The Transfer request reference (T.*) (Min: 4 - Max: 8)|
+|» ref|string|true|The Transfer request reference (T.*) (Min: 4 - Max: 8)|
 |» initiator_id|string|false|Initiating Zepto Account|
 |» from_bank_account_id|string|true|The source bank/float account (UUID)|
 |» to_bank_account_id|string|true|The destination bank/float account (UUID|

@@ -2065,10 +2065,10 @@ paths:
             items:
               type: string
             enum:
-              - [proposed]
-              - [accepted]
-              - [declined]
-              - [cancelled]
+              - proposed
+              - accepted
+              - declined
+              - cancelled
           example:
             - proposed
       responses:
@@ -3114,17 +3114,17 @@ paths:
             items:
               type: string
             enum:
-              - [maturing]
-              - [matured]
-              - [preprocessing]
-              - [processing]
-              - [clearing]
-              - [cleared]
-              - [rejected]
-              - [returned]
-              - [voided]
-              - [pending_verification]
-              - [paused]
+              - maturing
+              - matured
+              - preprocessing
+              - processing
+              - clearing
+              - cleared
+              - rejected
+              - returned
+              - voided
+              - pending_verification
+              - paused
           example:
             - maturing
         - name: category
@@ -3137,9 +3137,9 @@ paths:
             items:
               type: string
             enum:
-              - [payout]
-              - [payout_refund]
-              - [invoice]
+              - payout
+              - payout_refund
+              - invoice
           example:
             - payout
         - name: type
@@ -3152,8 +3152,8 @@ paths:
             items:
               type: string
             enum:
-              - [debit]
-              - [credit]
+              - debit
+              - credit
           example:
             - debit
         - name: other_party
@@ -3964,7 +3964,7 @@ components:
         title: Subscription Plan A
         terms:
           per_payout:
-            min_amount: 0
+            min_amount: null
             max_amount: 10000
           per_frequency:
             days: 7
@@ -5586,6 +5586,7 @@ components:
               description: 'The associated debit reference (C.*)'
             your_bank_account_id:
               type: string
+              format: uuid
               description: 'The source bank/float account (UUID)'
             created_at:
               type: string
@@ -6336,7 +6337,6 @@ components:
           properties:
             ref:
               type: string
-              format: uuid
               description: 'The Transfer request reference (T.*) (Min: 4 - Max: 8)'
             initiator_id:
               type: string
@@ -6360,7 +6360,7 @@ components:
               example: '2021-06-01T02:10:56Z'
       example:
         data:
-          ref: 52986d9d-4788-4c41-92a1-9d364c6545e5
+          ref: T.87xp
           from_bank_account_id: a79423b2-3827-4cf5-9eda-dc02a298d005
           to_bank_account_id: 0921a719-c79d-4ffb-91b6-1b30ab77d14d
           amount: 47000
