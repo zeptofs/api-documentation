@@ -1,6 +1,8 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: Zepto API
+  contact:
+    email: support@zepto.com.au
   description: >
     Zepto allows you to make, get and manage payments using nothing but bank
     accounts.
@@ -1493,6 +1495,7 @@ info:
 
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+
     - **2023-08-29** - Remove references to the prefail feature
 
     - **2023-04-20** - Changed the webhook retention period to 7 days
@@ -2184,7 +2187,7 @@ paths:
         - name: provider_name
           in: query
           description: 'Single value, exact match'
-          style: simple
+          required: false
           schema:
             type: string
             enum: [basiq, proviso, split]
@@ -2192,7 +2195,6 @@ paths:
         - name: state
           in: query
           description: 'Single value, exact match'
-          style: simple
           schema:
             type: string
             enum: [active, credentials_invalid]
@@ -2470,7 +2472,7 @@ paths:
           style: form
           schema:
             type: string
-          example: 068231
+          example: "068231"
         - name: bank_account_account_number
           in: query
           description: 'Single value, exact match'
@@ -2802,12 +2804,6 @@ paths:
           schema:
             type: string
           example: D.48
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VoidAPayment'
       responses:
         '204':
           description: No Content
@@ -3439,7 +3435,7 @@ paths:
         - Unassigned Agreements
       summary: Get an Unassigned Agreement
       description: Get a single Unassigned Agreement by its reference.
-      operationId: GetAgreement
+      operationId: GetUnassignedAgreement
       parameters:
         - name: unassigned_agreement_ref
           in: path
@@ -3534,22 +3530,19 @@ paths:
           in: query
           description: 'Filter deliveries by ref (`WebhookDelivery.data.ref`), single value, exact match'
           required: false
-          style: simple
           schema:
             type: string
         - name: per_page
           in: query
           description: 'Number of results per page, single value, exact match'
           required: false
-          style: simple
           schema:
-            type: string
+            type: integer
           example: 20
         - name: starting_after
           in: query
           description: 'Display all webhook deliveries after this webhook delivery offset UUID, single value, exact match'
           required: false
-          style: simple
           schema:
             type: string
             format: uuid
@@ -3577,7 +3570,6 @@ paths:
           in: query
           description: 'Single value / multiple values separated by commas'
           required: false
-          style: simple
           schema:
             type: array
             items:
@@ -3588,13 +3580,12 @@ paths:
           in: query
           description: 'Filter deliveries by state, single value / multiple values separated by commas. See [Our delivery promise](#our-delivery-promises)'
           required: false
-          style: simple
           schema:
             type: array
             items:
               type: string
               enum: [pending, completed, retrying, failed]
-          example: 'delivered'
+          example: ['completed']
       responses:
         '200':
           description: OK
@@ -3762,13 +3753,12 @@ components:
             - status_reason
             - responded_at
             - created_at
-            - payout
             - terms
           properties:
             ref:
               type: string
               minLength: 3
-              maxLenght: 18
+              maxLength: 18
               description: "The Agreement reference (Min: 3 - Max: 18)"
             initiator_id:
               type: string
@@ -3818,8 +3808,8 @@ components:
           authoriser_id: 8df89c16-330f-462b-8891-808d7bdceb7f
           contact_id: 0d290763-bd5a-4b4d-a8ce-06c64c4a697b
           bank_account_id: fb9381ec-22af-47fd-8998-804f947aaca3
-          status: approved
-          status_reason: null
+          status: accepted
+          status_reason: "reason"
           responded_at: '2017-03-20T02:13:11Z'
           created_at: '2017-03-20T00:53:27Z'
           terms:
@@ -4003,11 +3993,15 @@ components:
       type: object
       properties:
         min_amount:
-          type: integer
+          type:
+            - integer
+            - 'null'
+          minimum: 1
           description: Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.
-          example: 0
+          example: 1
         max_amount:
           type: integer
+          minimum: 1
           description: Maximum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 10000
     PerFrequency:
@@ -4144,23 +4138,23 @@ components:
       properties:
         name:
           type: string
-          min: 3
-          max: 140
+          minLength: 3
+          maxLength: 140
           description: 'Contact name (Min: 3 - Max: 140)'
         email:
           type: string
-          min: 6
-          max: 256
+          minLength: 6
+          maxLength: 256
           description: 'Contact email (Min: 6 - Max: 256)'
         payid_email:
           type: string
-          min: 6
-          max: 256
+          minLength: 6
+          maxLength: 256
           description: 'Contact PayID email (Min: 6 - Max: 256)'
         payid_email_domain:
           type: string
-          min: 3
-          max: 254
+          minLength: 3
+          maxLength: 254
           description: 'PayID pool email domain (Min: 3 - Max: 254)'
         metadata:
           $ref: '#/components/schemas/Metadata'
@@ -4183,13 +4177,13 @@ components:
               format: uuid
             name:
               type: string
-              min: 3
-              max: 140
+              minLength: 3
+              maxLength: 140
               description: 'Contact name (Min: 3 - Max: 140)'
             email:
               type: string
-              min: 6
-              max: 256
+              minLength: 6
+              maxLength: 256
               description: 'Contact email (Min: 6 - Max: 256)'
             'type':
               type: string
@@ -4204,13 +4198,13 @@ components:
                   format: uuid
                 account_number:
                   type: string
-                  min: 5
-                  max: 9
+                  minLength: 5
+                  maxLength: 9
                   description: 'Zepto generated account number (Min: 5 - Max: 9)'
                 branch_code:
                   type: string
-                  min: 6
-                  max: 6
+                  minLength: 6
+                  maxLength: 6
                   description: 'Zepto branch code (Min: 6 - Max: 6)'
                 bank_name:
                   type: string
@@ -4222,10 +4216,14 @@ components:
                     - active
                     - removed
                 iav_provider:
-                  type: string
+                  type:
+                    - string
+                    - 'null'
                   description: Always null
                 iav_status:
-                  type: string
+                  type:
+                    - string
+                    - 'null'
                   description: Always null
                 blocks:
                   type: object
@@ -4248,16 +4246,16 @@ components:
                 alias_value:
                   type: string
                   format: email
-                  min: 6
-                  max: 256
+                  minLength: 6
+                  maxLength: 256
                   description: The PayID email
                 alias_type:
                   type: string
                   description: Type of PayID. Fixed to `email`
                 alias_name:
                   type: string
-                  min: 3
-                  max: 140
+                  minLength: 3
+                  maxLength: 140
                   description: Your merchant's alias_name
                 state:
                   type: string
@@ -4489,13 +4487,13 @@ components:
               description: The Contact ref
             name:
               type: string
-              min: 3
-              max: 140
+              minLength: 3
+              maxLength: 140
               description: 'The Contact name (Min: 3 - Max: 140)'
             email:
               type: string
-              min: 6
-              max: 256
+              minLength: 6
+              maxLength: 256
               format: email
               description: 'The Contact email (Min: 6 - Max: 256)'
             'type':
@@ -4515,13 +4513,13 @@ components:
                   description: The Bank Account ID
                 account_number:
                   type: string
-                  min: 5
-                  max: 9
+                  minLength: 5
+                  maxLength: 9
                   description: 'The Bank Account number (Min: 5 - Max: 9)'
                 branch_code:
                   type: string
-                  min: 6
-                  max: 6
+                  minLength: 6
+                  maxLength: 6
                   description: 'The BSB number (Min: 6 - Max: 6)'
                 state:
                   type: string
@@ -4530,20 +4528,26 @@ components:
                     - active
                     - removed
                 iav_provider:
-                  type: string
+                  type:
+                    - string
+                    - 'null'
                   description: The instant account verification provider
                   enum:
                     - split
                     - proviso
                     - basiq
                     - credit_sense
+                    - null
                 iav_status:
-                  type: string
+                  type:
+                    - string
+                    - 'null'
                   description: The instant account verification bank connection status
                   enum:
                     - active
                     - removed
                     - credentials_invalid
+                    - null
                 blocks:
                   type: object
                   properties:
@@ -4564,7 +4568,9 @@ components:
               type: object
               properties:
                 id:
-                  type: string
+                  type:
+                    - string
+                    - 'null'
                   format: uuid
                   description: The bank connection ID
             links:
@@ -4580,16 +4586,16 @@ components:
                 alias_value:
                   type: string
                   format: email
-                  min: 6
-                  max: 256
+                  minLength: 6
+                  maxLength: 256
                   description: The PayID email
                 alias_type:
                   type: string
                   description: Type of PayID. Fixed to `email`
                 alias_name:
                   type: string
-                  min: 3
-                  max: 140
+                  minLength: 3
+                  maxLength: 140
                   description: Your merchant's alias_name
                 state:
                   type: string
@@ -4718,7 +4724,7 @@ components:
           type: string
           format: date-time
           description: Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)
-          example: '9/13/2016 12:00:00 AM'
+          example: '2016-09-13T00:00:00Z'
         your_bank_account_id:
           type: string
           description: Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.
@@ -4745,14 +4751,16 @@ components:
           - amount: 30000
             description: A tandem skydive jump SB23094
             recipient_contact_id: 48b89364-1577-4c81-ba02-96705895d457
-            metadata:
-              invoice_ref: BILL-0001
-              invoice_id: c80a9958-e805-47c0-ac2a-c947d7fd778d
-              custom_key: Custom string
-              another_custom_key: Maybe a URL
-        metadata:
-          custom_key: Custom string
-          another_custom_key: Maybe a URL
+            metadata: {
+                invoice_ref: "BILL-0001",
+                invoice_id: "c80a9958-e805-47c0-ac2a-c947d7fd778d",
+                custom_key: "Custom string",
+                another_custom_key: "Maybe a URL"
+              }
+        metadata: {
+            custom_key: "Custom string",
+            another_custom_key: "Maybe a URL"
+          }
     Payout:
       title: Payout
       required:
@@ -4781,7 +4789,7 @@ components:
           example: "PENS"
         end_to_end_id:
           type: string
-          max: 35
+          maxLength: 35
           description: >
             End-To-End ID (35 max. characters).
             Required when a category purpose code is present.
@@ -4886,6 +4894,8 @@ components:
             metadata:
               custom_key: Custom string
               another_custom_key: Maybe a URL
+    VoidAPayment:
+      title: Void a Payment
     GetAPaymentResponse:
       title: Get a Payment (response)
       required:
@@ -4939,8 +4949,8 @@ components:
           example: '2016-12-19T02:10:56Z'
         amount:
           type: integer
-          min: 1
-          max: 99999999999
+          minimum: 1
+          maximum: 99999999999
           description: 'Amount in cents to pay the initiator (Min: 1 - Max: 99999999999)'
           example: 99000
         authoriser_contact_id:
@@ -5014,7 +5024,9 @@ components:
               type: boolean
               description: Initiated by Contact or Merchant
             schedule_ref:
-              type: string
+              type:
+                - string
+                - 'null'
               description: 'The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)'
             status:
               type: string
@@ -5026,17 +5038,22 @@ components:
                 - declined
                 - cancelled
             status_reason:
-              type: string
+              type:
+                - string
+                - 'null'
               description: 'Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)'
               enum:
                 - The balance of the nominated bank account for this Payment Request is not available.
                 - The nominated bank account for this Payment Request has insufficient funds.
+                - null
             matures_at:
               type: string
               format: date-time
               description: 'The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)'
             responded_at:
-              type: string
+              type:
+                - string
+                - 'null'
               format: date-time
               description: 'The date-time when the Payment Request status changed (Min: 0 - Max: 20)'
             created_at:
@@ -5044,15 +5061,17 @@ components:
               format: date-time
               description: 'The date-time when the Payment Request was created (Min: 20 - Max: 20)'
             credit_ref:
-              type: string
+              type:
+                - string
+                - 'null'
               description: 'The resulting credit entry reference (available once approved) (Min: 4 - Max: 8)'
             payout:
               type: object
               properties:
                 amount:
                   type: integer
-                  min: 1
-                  max: 99999999999
+                  minimum: 1
+                  maximum: 99999999999
                   description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                 'description':
                   type: string
@@ -5142,7 +5161,9 @@ components:
               format: uuid
               description: 'The contact ID representing the debtor within Zepto (Min: 36 - Max: 36)'
             schedule_ref:
-              type: string
+              type:
+                - string
+                - 'null'
               description: 'The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)'
             status:
               type: string
@@ -5154,11 +5175,14 @@ components:
                 - declined
                 - cancelled
             status_reason:
-              type: string
+              type:
+                - string
+                - 'null'
               description: 'Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)'
               enum:
                 - The balance of the nominated bank account for this Payment Request is not available.
                 - The nominated bank account for this Payment Request has insufficient funds.
+                - null
             matures_at:
               type: string
               format: date-time
@@ -5179,8 +5203,8 @@ components:
               properties:
                 amount:
                   type: integer
-                  min: 1
-                  max: 99999999999
+                  minimum: 1
+                  maximum: 99999999999
                   description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                 'description':
                   type: string
@@ -5266,7 +5290,9 @@ components:
                 type: boolean
                 description: Initiated by Contact or Merchant
               schedule_ref:
-                type: string
+                type:
+                  - string
+                  - 'null'
                 description: The schedule that generated the Payment request if applicable
               status:
                 type: string
@@ -5278,17 +5304,22 @@ components:
                   - declined
                   - cancelled
               status_reason:
-                type: string
+                type:
+                  - string
+                  - 'null'
                 description: Only used when the `status` is `declined` due to prechecking.
                 enum:
                   - The balance of the nominated bank account for this Payment Request is not available.
                   - The nominated bank account for this Payment Request has insufficient funds.
+                  - null
               matures_at:
                 type: string
                 format: date-time
                 description: The date-time when the Payment Request is up for processing
               responded_at:
-                type: string
+                type:
+                  - string
+                  - 'null'
                 format: date-time
                 description: The date-time when the Payment Request status changed
               created_at:
@@ -5296,15 +5327,17 @@ components:
                 format: date-time
                 description: The date-time when the Payment Request was created
               credit_ref:
-                type: string
+                type:
+                  - string
+                  - 'null'
                 description: The resulting credit entry reference (available once approved)
               payout:
                 type: object
                 properties:
                   amount:
                     type: integer
-                    min: 1
-                    max: 99999999999
+                    minimum: 1
+                    maximum: 99999999999
                     description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                   'description':
                     type: string
@@ -5406,20 +5439,26 @@ components:
                 type: boolean
                 description: Initiated by Contact or Merchant
               schedule_ref:
-                type: string
+                type:
+                  - string
+                  - 'null'
                 description: The schedule that generated the Payment request if applicable
               status:
                 type: string
                 description: The status of the Payment Request. For Receivables, this will always be *approved*
               status_reason:
-                type: string
+                type:
+                  - string
+                  - 'null'
                 description: Only used when the `status` is `declined` due to prechecking.
               matures_at:
                 type: string
                 format: date-time
                 description: The date-time when the Payment Request is up for processing
               responded_at:
-                type: string
+                type:
+                  - string
+                  - 'null'
                 format: date-time
                 description: The date-time when the Payment Request status changed
               created_at:
@@ -5434,8 +5473,8 @@ components:
                 properties:
                   amount:
                     type: integer
-                    min: 1
-                    max: 99999999999
+                    minimum: 1
+                    maximum: 99999999999
                     description: 'Amount in cents (Min: 1 - Max: 99999999999)'
                   'description':
                     type: string
@@ -5497,8 +5536,8 @@ components:
       properties:
         amount:
           type: integer
-          min: 1
-          max: 99999999999
+          minimum: 1
+          maximum: 99999999999
           description: 'Amount in cents refund (Min: 1 - Max: 99999999999)'
           example: 500
         channels:
@@ -5541,7 +5580,6 @@ components:
           properties:
             ref:
               type: string
-              format: uuid
               description: 'The Refund request reference (PRF.*) (Min: 5 - Max: 9)'
             for_ref:
               type: string
@@ -5551,6 +5589,7 @@ components:
               description: 'The associated debit reference (C.*)'
             your_bank_account_id:
               type: string
+              format: uuid
               description: 'The source bank/float account (UUID)'
             created_at:
               type: string
@@ -5647,22 +5686,22 @@ components:
           description: ''
       example:
         data:
-          ref: C.2
-          parent_ref: PR.039a
-          type: credit
-          category: payout
-          created_at: '2016-12-05T23:15:00Z'
-          matures_at: '2016-12-06T23:15:00Z'
-          cleared_at: null
-          bank_ref: null
-          status: maturing
-          status_changed_at: '2016-12-05T23:15:00Z'
-          party_contact_id: 33c6e31d3-1dc1-448b-9512-0320bc44fdcf
-          party_name: Price and Sons
-          party_nickname: price-and-sons-2
-          party_bank_ref: null
-          description: Money for jam
-          amount: 1
+          - ref: C.2
+            parent_ref: PR.039a
+            type: credit
+            category: payout
+            created_at: '2016-12-05T23:15:00Z'
+            matures_at: '2016-12-06T23:15:00Z'
+            cleared_at: null
+            bank_ref: null
+            status: maturing
+            status_changed_at: '2016-12-05T23:15:00Z'
+            party_contact_id: 33c6e31d3-1dc1-448b-9512-0320bc44fdcf
+            party_name: Price and Sons
+            party_nickname: price-and-sons-2
+            party_bank_ref: null
+            description: Money for jam
+            amount: 1
     ListAllTransactionsResponse:
       title: List all transactions (response)
       required:
@@ -5680,7 +5719,7 @@ components:
             type: debit
             category: payout_refund
             created_at: '2021-04-07T23:15:00Z'
-            matures_at: '2021-04-07T23:15:00Z'
+            matured_at: '2021-04-07T23:15:00Z'
             cleared_at: '2021-04-10T23:15:00Z'
             bank_ref: DT.9a
             status: cleared
@@ -5693,13 +5732,13 @@ components:
             amount: 20000
             bank_account_id: '56df206a-aaff-471a-b075-11882bc8906a'
             channels: [float account]
-            current_channel: "float account"
+            current_channel: "float_account"
           - ref: D.2
             parent_ref: PB.2
             type: debit
             category: payout
             created_at: '2016-12-06T23:15:00Z'
-            matures_at: '2016-12-09T23:15:00Z'
+            matured_at: '2016-12-09T23:15:00Z'
             cleared_at: null
             bank_ref: null
             status: maturing
@@ -5718,12 +5757,12 @@ components:
             type: credit
             category: payout
             created_at: '2016-12-05T23:15:00Z'
-            matures_at: '2016-12-06T23:15:00Z'
+            matured_at: '2016-12-06T23:15:00Z'
             cleared_at: '2016-12-09T23:15:00Z'
             bank_ref: CT.1
             status: cleared
             status_changed_at: '2016-12-09T23:15:00Z'
-            party_contact_id: 33c6e31d3-1dc1-448b-9512-0320bc44fdcf
+            party_contact_id: 33c6e31d-1dc1-448b-9512-0320bc44fdcf
             party_name: Price and Sons
             party_nickname: price-and-sons-2
             party_bank_ref: null
@@ -5763,7 +5802,9 @@ components:
           type: string
           description: The ref of the transaction (`C.*` or `D.*`)
         parent_ref:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The ref of the parent of this transaction
         type:
           type: string
@@ -5790,11 +5831,15 @@ components:
           format: date-time
           description: When the transaction was processed
         cleared_at:
-          type: string
+          type:
+            - string
+            - 'null'
           format: date-time
           description: When the transaction was cleared
         bank_ref:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The ref that is sent to the bank
         status:
           type: string
@@ -5828,13 +5873,19 @@ components:
           type: string
           description: The transaction party's name
         party_nickname:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The transaction party's nickname
         party_bank_ref:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The transaction party's bank ref
         description:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The transaction's description
         amount:
           type: integer
@@ -5870,12 +5921,12 @@ components:
         type: credit
         category: payout
         created_at: '2016-12-05T23:15:00Z'
-        matures_at: '2016-12-06T23:15:00Z'
+        matured_at: '2016-12-06T23:15:00Z'
         cleared_at: '2016-12-09T23:15:00Z'
         bank_ref: CT.1
         status: cleared
         status_changed_at: '2016-12-09T23:15:00Z'
-        party_contact_id: 33c6e31d3-1dc1-448b-9512-0320bc44fdcf
+        party_contact_id: 33c6e31d-1dc1-448b-9512-0320bc44fdcf
         party_name: Price and Sons
         party_nickname: price-and-sons-2
         party_bank_ref: null
@@ -6067,13 +6118,13 @@ components:
       properties:
         payid_email:
           type: string
-          min: 6
-          max: 256
+          minLength: 6
+          maxLength: 256
           description: 'Receivable Contact PayID email (Min: 6 - Max: 256)'
         amount:
           type: integer
-          min: 1
-          max: 99999999999
+          minimum: 1
+          maximum: 99999999999
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         payment_description:
           type: string
@@ -6083,21 +6134,21 @@ components:
           description: 'Default:  "simulated-payid-payment"'
         from_bsb:
           type: string
-          min: 6
-          max: 6
+          minLength: 6
+          maxLength: 6
           description: 'Default: "014209"'
         from_account_number:
           type: string
-          min: 1
-          max: 9
+          minLength: 1
+          maxLength: 9
           description: 'Default: "12345678"'
         debtor_name:
           type: string
-          min: 1
+          minLength: 1
           description: 'Default:  "Simulated Debtor"'
         debtor_legal_name:
           type: string
-          min: 1
+          minLength: 1
           description: 'Default:  "Simulated Debtor Pty Ltd"'
       example:
         payid_email: incoming@zeptopayments.com
@@ -6111,18 +6162,18 @@ components:
       properties:
         to_bsb:
           type: string
-          min: 6
-          max: 6
+          minLength: 6
+          maxLength: 6
           description: 'Zepto float account BSB (usually 802919)'
         to_account_number:
           type: string
-          min: 1
-          max: 9
+          minLength: 1
+          maxLength: 9
           description: 'Zepto float account number'
         amount:
           type: integer
-          min: 1
-          max: 99999999999
+          minimum: 1
+          maximum: 99999999999
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         payment_description:
           type: string
@@ -6132,21 +6183,21 @@ components:
           description: 'Default: "simulated-npp-payment"'
         from_bsb:
           type: string
-          min: 6
-          max: 6
+          minLength: 6
+          maxLength: 6
           description: 'Default: "014209"'
         from_account_number:
           type: string
-          min: 1
-          max: 9
+          minLength: 1
+          maxLength: 9
           description: 'Default: "12345678"'
         debtor_name:
           type: string
-          min: 1
+          minLength: 1
           description: 'Default: "Simulated Debtor"'
         debtor_legal_name:
           type: string
-          min: 1
+          minLength: 1
           description: 'Default: "Simulated Debtor Pty Ltd"'
       example:
         to_bsb: "802919"
@@ -6161,37 +6212,37 @@ components:
       properties:
         to_bsb:
           type: string
-          min: 6
-          max: 6
+          minLength: 6
+          maxLength: 6
           description: 'Zepto float account BSB (usually 802919)'
         to_account_number:
           type: string
-          min: 1
-          max: 9
+          minLength: 1
+          maxLength: 9
           description: 'Zepto float account number'
         amount:
           type: integer
-          min: 1
-          max: 99999999999
+          minimum: 1
+          maximum: 99999999999
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         payment_reference:
           type: string
-          max: 18
+          maxLength: 18
           description: 'Max 18 characters. Default: "simulated-de-pymt"'
         from_bsb:
           type: string
-          min: 6
-          max: 6
+          minLength: 6
+          maxLength: 6
           description: 'Default: "014209"'
         from_account_number:
           type: string
-          min: 1
-          max: 9
+          minLength: 1
+          maxLength: 9
           description: 'Default: "12345678"'
         debtor_name:
           type: string
-          min: 1
-          max: 16
+          minLength: 1
+          maxLength: 16
           description: 'Max 16 characters. Default: "Simulated Debtor"'
       example:
         to_bsb: "802919"
@@ -6214,6 +6265,8 @@ components:
           description: 'The destination float/bank account (UUID)'
         amount:
           type: integer
+          minimum: 1
+          maximum: 99999999999
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         description:
           type: string
@@ -6255,6 +6308,8 @@ components:
               description: 'The destination bank/float account (UUID'
             amount:
               type: integer
+              minimum: 1
+              maximum: 99999999999
               description: 'The amount value provided (Min: 1 - Max: 99999999999)'
             description:
               type: string
@@ -6289,7 +6344,6 @@ components:
           properties:
             ref:
               type: string
-              format: uuid
               description: 'The Transfer request reference (T.*) (Min: 4 - Max: 8)'
             initiator_id:
               type: string
@@ -6302,6 +6356,8 @@ components:
               description: 'The destination bank/float account (UUID'
             amount:
               type: integer
+              minimum: 1
+              maximum: 99999999999
               description: 'The amount value provided (Min: 1 - Max: 99999999999)'
             description:
               type: string
