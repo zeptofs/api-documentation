@@ -3995,10 +3995,12 @@ components:
           type:
             - integer
             - 'null'
+          minimum: 1
           description: Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.
-          example: 0
+          example: 1
         max_amount:
           type: integer
+          minimum: 1
           description: Maximum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.
           example: 10000
     PerFrequency:
@@ -6262,6 +6264,8 @@ components:
           description: 'The destination float/bank account (UUID)'
         amount:
           type: integer
+          minimum: 1
+          maximum: 99999999999
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         description:
           type: string
@@ -6303,6 +6307,8 @@ components:
               description: 'The destination bank/float account (UUID'
             amount:
               type: integer
+              minimum: 1
+              maximum: 99999999999
               description: 'The amount value provided (Min: 1 - Max: 99999999999)'
             description:
               type: string
@@ -6349,6 +6355,8 @@ components:
               description: 'The destination bank/float account (UUID'
             amount:
               type: integer
+              minimum: 1
+              maximum: 99999999999
               description: 'The amount value provided (Min: 1 - Max: 99999999999)'
             description:
               type: string

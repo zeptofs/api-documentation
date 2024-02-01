@@ -10959,7 +10959,7 @@ Use this endpoint to resend a failed webhook delivery.
 ```json
 {
   "per_payout": {
-    "min_amount": 0,
+    "min_amount": 1,
     "max_amount": 10000
   },
   "per_frequency": {
@@ -10984,7 +10984,7 @@ Use this endpoint to resend a failed webhook delivery.
 
 ```json
 {
-  "min_amount": 0,
+  "min_amount": 1,
   "max_amount": 10000
 }
 ```
