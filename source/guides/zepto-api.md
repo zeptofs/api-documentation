@@ -1104,7 +1104,7 @@ puts(given_signature)
 ```
 
 
-```javascript--node
+```javascript
 
 var crypto = require('crypto')
 
