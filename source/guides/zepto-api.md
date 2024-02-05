@@ -18,7 +18,7 @@ It is important to understand that there are 2 main ways Zepto can be used for m
 2. Between a Zepto account and anyone.
 
 
-Due to the above, certain endpoints and techniques will differ slightly depending on who you are interacting with. You can find more on this in the [Making payments](/#making-payments) and [Getting paid](/#getting-paid) guides.
+Due to the above, certain endpoints and techniques will differ slightly depending on who you are interacting with. You can find more on this in the [Making payments](doc:zepto-api#making-payments) and [Getting paid](doc:zepto-api#getting-paid) guides.
 
 
 And for all kinds of How To's and Recipes, head on over to our [Help Guide](https://help.zepto.money/en/).
@@ -26,7 +26,7 @@ And for all kinds of How To's and Recipes, head on over to our [Help Guide](http
 # Conventions
 
 
-* Authentication is performed using OAuth2. See the [Get started](/#get-started) and [Authentication & Authorisation](/#authentication-and-authorisation) guides for more.
+* Authentication is performed using OAuth2. See the [Get started](doc:zepto-api#get-started) and [Authentication & Authorisation](doc:zepto-api#authentication-and-authorisation) guides for more.
 
 * All communication is via `https` and supports **only** `TLSv1.2`.
 
@@ -172,7 +172,7 @@ This guide will help you setup an OAuth2 app in order to get authenticated & aut
 
 * We use the term **user** below but the user can be a third party or the same user that owns the OAuth2 application.
 
-* As noted below, some access tokens expire every 2 hours. To get a new access token use the [refresh grant strategy](/#authentication-and-authorisation) to swap a refresh token for a new access token.
+* As noted below, some access tokens expire every 2 hours. To get a new access token use the [refresh grant strategy](doc:zepto-api#authentication-and-authorisation) to swap a refresh token for a new access token.
 
 
 1. **Create a Zepto account**
@@ -183,9 +183,9 @@ This guide will help you setup an OAuth2 app in order to get authenticated & aut
 
     All requests to the Zepto API require an `access_token` for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:
 
-    **Personal access token** If you only need to access your own Zepto account via the API, then using personal access tokens are the most straight-forward way. Refer to [Personal access token](/#personal-access-token) to setup. These tokens do not expire so no refreshing is required.
+    **Personal access token** If you only need to access your own Zepto account via the API, then using personal access tokens are the most straight-forward way. Refer to [Personal access token](doc:zepto-api#personal-access-token) to setup. These tokens do not expire so no refreshing is required.
 
-    **OAuth grant flow** When you require your application to act on behalf of other Zepto accounts you'll need to implement the OAuth grant flow process. Refer to [OAuth grant flow guide](/#oauth-grant-flow) to setup. There is also an [OAuth grant flow tutorial](/#oauth-grant-flow-tutorial). These access tokens expire every 2 hours, unless the `offline_access` scope is used in which case the tokens will not expire.
+    **OAuth grant flow** When you require your application to act on behalf of other Zepto accounts you'll need to implement the OAuth grant flow process. Refer to [OAuth grant flow guide](doc:zepto-api#oauth-grant-flow) to setup. There is also an [OAuth grant flow tutorial](doc:zepto-api#oauth-grant-flow-tutorial). These access tokens expire every 2 hours, unless the `offline_access` scope is used in which case the tokens will not expire.
 
 ## Personal access token
 
@@ -220,7 +220,7 @@ If you're looking to only access your own account via the API, you can generate 
 
 2. **Obtain an authorisation code**
 
-    Construct the initial URL the user will need to visit in order to grant your application permission to act on his/her behalf. The constructed URL describes the level of permission ([`scope`](/#scopes)), the application requesting permission (`client_id`) and where the user gets redirected once they've granted permission (`redirect_uri`).
+    Construct the initial URL the user will need to visit in order to grant your application permission to act on his/her behalf. The constructed URL describes the level of permission ([`scope`](doc:zepto-api#scopes)), the application requesting permission (`client_id`) and where the user gets redirected once they've granted permission (`redirect_uri`).
 
     The URL should be formatted to look like this:
     `https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}`
@@ -230,7 +230,7 @@ If you're looking to only access your own account via the API, you can generate 
     | `response_type` | Always set to `code` |
     | `client_id` | This is your `Application ID` as generated when you registered your application with Zepto |
     | `redirect_uri` | URL where the user will get redirected along with the newly generated authorisation code |
-    | `scope` | The [scope](/#scopes) of permission you're requesting |
+    | `scope` | The [scope](doc:zepto-api#scopes) of permission you're requesting |
 
 3. **Exchange the authorisation code for an access token**
 
@@ -356,7 +356,7 @@ This type of grant allows your application to act on behalf of a user. If you've
 Google, Twitter or Facebook account, this is the grant being used.
 
 
-See the [Get Started guide](/#get-started) for step by step details on how to use this grant.
+See the [Get Started guide](doc:zepto-api#get-started) for step by step details on how to use this grant.
 
 
 ### Refresh Token Grant
@@ -404,12 +404,12 @@ When the access token expires, instead of sending the user back through the auth
 
 ## Making payments
 
-In order to payout funds, you'll be looking to use the [Payments](/#Zepto-API-Payments) endpoint. Whether you're paying out another Zepto account holder or anyone, the process is the same:
+In order to payout funds, you'll be looking to use the [Payments](doc:zepto-api#Zepto-API-Payments) endpoint. Whether you're paying out another Zepto account holder or anyone, the process is the same:
 
 
-1. Add the recipient to your [Contact](/#add-a-contact) list.
+1. Add the recipient to your [Contact](doc:zepto-api#add-a-contact) list.
 
-2. [Make a Payment](/#make-a-payment) to your Contact.
+2. [Make a Payment](doc:zepto-api#make-a-payment) to your Contact.
 
 
 Common use cases:
@@ -427,13 +427,13 @@ Common use cases:
 ## Getting paid
 
 
-### POSTing a [Payment Request](/#Zepto-API-Payment-Requests)
+### POSTing a [Payment Request](doc:zepto-api#Zepto-API-Payment-Requests)
 
 
 Provides the ability to send a Payment Request (get paid) to any Contact that has an accepted Agreement in place.
 
 
-To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](/#Zepto-API-Agreements) with them.
+To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](doc:zepto-api#Zepto-API-Agreements) with them.
 
 
 To do so, you can send them an [Open Agreement link](https://help.zepto.money/agreements/open-agreement) or [Unassigned Agreement link](http://help.zepto.money/agreements/unassigned-agreement) for them to [Select & verify their bank account](https://help.zepto.money/bank-accounts/instant-account-verification-iav) and accept the Agreement.
@@ -516,11 +516,11 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 Currently the following `POST` requests can be made idempotent. We **strongly recommend** sending a unique `Idempotency-Key` header when making those requests to allow for safe retries:
 
 
-* [Request Payment](/#request-payment)
+* [Request Payment](doc:zepto-api#request-payment)
 
-* [Make a Payment](/#make-a-payment)
+* [Make a Payment](doc:zepto-api#make-a-payment)
 
-* [Issue a Refund](/#issue-a-refund)
+* [Issue a Refund](doc:zepto-api#issue-a-refund)
 
 
 ## Error responses
@@ -577,11 +577,11 @@ All other errors relating to Zepto specific resources(e.g. Contacts) will return
 **403 errors** are generally returned from any of our endpoints if your application does not have the required authorisation. This is usually due to:
 
 
-* An [invalid/expired `access_token`](/#authentication-and-authorisation); or
+* An [invalid/expired `access_token`](doc:zepto-api#authentication-and-authorisation); or
 
 * The required **scopes** not being present when setting up your [OAuth application](https://go.sandbox.zeptopayments.com/oauth/applications); or
 
-* The required **scopes** not being present in the [authorisation code link](/#oauth-grant-flow) used to present your user with an authorisation request.
+* The required **scopes** not being present in the [authorisation code link](doc:zepto-api#oauth-grant-flow) used to present your user with an authorisation request.
 
 
 ## Speeding up onboarding
@@ -615,7 +615,7 @@ Given the above, in a standard implementation where a customer enables/uses Zept
 Whilst not too bad, we can do better!
 
 
-In order to speed up the process, we allow query string params to be appended to the [authorisation URL](/#get-started). For instance, if we already have some information about the customer and know they probably don't have a Zepto account, we can embed this information in the authorisation URL.
+In order to speed up the process, we allow query string params to be appended to the [authorisation URL](doc:zepto-api#get-started). For instance, if we already have some information about the customer and know they probably don't have a Zepto account, we can embed this information in the authorisation URL.
 
 
 **Supported query string parameters**
@@ -919,16 +919,16 @@ Use the following table to discover what type of response schema to expect for f
 
 | Event                    | Data schema                                                               |
 |--------------------------|---------------------------------------------------------------------------|
-| `agreement.*`            | [GetAnAgreementResponse](/#schemagetagreementresponse)                    |
-| `contact.*`              | [GetAContactResponse](/#schemagetacontactresponse)                        |
-| `credit.*`               | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
-| `creditor_debit.*`       | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
-| `debit.*`                | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
-| `debtor_credit.*`        | [ListAllTransactionsResponse](/#schemalistalltransactionsresponse)        |
-| `open_agreement.*`       | [ListAllOpenAgreementsRespose](/#schemalistallopenagreementsresponse)     |
-| `payment.*`              | [GetAPaymentResponse](/#schemagetapaymentresponse)                        |
-| `payment_request.*`      | [GetAPaymentRequestResponse](/#schemagetapaymentrequestresponse)          |
-| `unassigned_agreement.*` | [GetAnUnassignedAgreementResponse](#schemagetunassignedagreementresponse) |
+| `agreement.*`            | [GetAnAgreementResponse](ref:getagreement)                                |
+| `contact.*`              | [GetAContactResponse](ref:getacontact)                                    |
+| `credit.*`               | [ListAllTransactionsResponse](ref:listalltransactions)                    |
+| `creditor_debit.*`       | [ListAllTransactionsResponse](ref:listalltransactions)                    |
+| `debit.*`                | [ListAllTransactionsResponse](ref:listalltransactions)                    |
+| `debtor_credit.*`        | [ListAllTransactionsResponse](ref:listalltransactions)                    |
+| `open_agreement.*`       | [ListAllOpenAgreementsRespose](ref:listallopenagreements)                 |
+| `payment.*`              | [GetAPaymentResponse](ref:getapayment)                                    |
+| `payment_request.*`      | [GetAPaymentRequestResponse](ref:getapaymentrequest)                      |
+| `unassigned_agreement.*` | [GetAnUnassignedAgreementResponse](ref:getunassignedagreement)            |
 
 
 ### Our Delivery Promises
