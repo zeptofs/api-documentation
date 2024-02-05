@@ -7,12 +7,10 @@ hidden: true
 
 # Zepto
 
-Zepto allows you to make, get and manage payments using nothing but bank
-accounts.
+Zepto allows you to make, get and manage payments using nothing but bank accounts.
 
 
-It is important to understand that there are 2 main ways Zepto can be used
-for maximum flexibility:
+It is important to understand that there are 2 main ways Zepto can be used for maximum flexibility:
 
 
 1. Between Zepto accounts.
@@ -20,21 +18,15 @@ for maximum flexibility:
 2. Between a Zepto account and anyone.
 
 
-Due to the above, certain endpoints and techniques will differ slightly
-depending on who you are interacting with. You can find more on this in the
-[Making payments](/#making-payments) and [Getting paid](/#getting-paid)
-guides.
+Due to the above, certain endpoints and techniques will differ slightly depending on who you are interacting with. You can find more on this in the [Making payments](/#making-payments) and [Getting paid](/#getting-paid) guides.
 
 
-And for all kinds of How To's and Recipes, head on over to our
-[Help Guide](https://help.zepto.money/en/).
+And for all kinds of How To's and Recipes, head on over to our [Help Guide](https://help.zepto.money/en/).
 
 # Conventions
 
 
-* Authentication is performed using OAuth2. See the [Get
-started](/#get-started) and [Authentication &
-Authorisation](/#authentication-and-authorisation) guides for more.
+* Authentication is performed using OAuth2. See the [Get started](/#get-started) and [Authentication & Authorisation](/#authentication-and-authorisation) guides for more.
 
 * All communication is via `https` and supports **only** `TLSv1.2`.
 
@@ -50,13 +42,9 @@ Authorisation](/#authentication-and-authorisation) guides for more.
 
 * Clients should include the `Accepts: application/json` header in their requests.
 
-* Currencies are represented by 3 characters as defined in [ISO
-4217](http://www.xe.com/iso4217.php).
+* Currencies are represented by 3 characters as defined in [ISO 4217](http://www.xe.com/iso4217.php).
 
-* Dates & times are returned in UTC using [ISO
-8601](https://en.wikipedia.org/wiki/ISO_8601) format with second accuracy.
-With requests, when no TZ is supplied, the configured TZ of the
-authenticated user is used, or `Australia/Sydney` if no TZ is configured.
+* Dates & times are returned in UTC using [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used, or `Australia/Sydney` if no TZ is configured.
 
 * Amounts are always in cents with no decimals unless otherwise stated.
 
@@ -95,14 +83,11 @@ A breaking change is assumed to be:
 * Changing a HTTP response status code
 
 
-We take backwards compatibility very seriously, and will make every effort
-to ensure this never changes. In the unfortunate (and rare) case where a
-breaking change can not be avoided, these will be announced well in
+We take backwards compatibility very seriously, and will make every effort to ensure this never changes. In the unfortunate (and rare) case where a breaking change can not be avoided, these will be announced well in
 advance, enabling a transition period for API consumers.
 
 
-The following are not assumed to be a breaking change and must be taken
-into account by API consumers:
+The following are not assumed to be a breaking change and must be taken into account by API consumers:
 
 
 * Addition of optional new parameters in request
@@ -118,10 +103,7 @@ into account by API consumers:
 * Increasing the set of possible enumeration values
 
 
-In the case of non breaking changes, a transition period may not be
-provided, meaning the possibility of such changes occurring must be
-considered in consumers' logic so as not to break any integrations with
-both API and Webhooks.
+In the case of non breaking changes, a transition period may not be provided, meaning the possibility of such changes occurring must be considered in consumers' logic so as not to break any integrations with both API and Webhooks.
 
 
 # Guides
@@ -154,9 +136,7 @@ Okay, let's get things setup!
 
 3. **Generate personal access tokens**
 
-    The quickest way to access your Zepto account via the API is using
-    personal access tokens. Click on your newly created application from your [application
-list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on
+    The quickest way to access your Zepto account via the API is using personal access tokens. Click on your newly created application from your [application list](https://go.sandbox.zeptopayments.com/oauth applications) and click on
 **+ Personal Access Token**.
 
     [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
@@ -169,16 +149,13 @@ list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on
 
 4. **Use personal access token in Postman**
 
-    You can use this `access_token` to authorise any requests to the
-    Zepto API in Postman by choosing the **Bearer Token** option under
-    the **Authorization** tab.
+    You can use this `access_token` to authorise any requests to the Zepto API in Postman by choosing the **Bearer Token** option under the **Authorization** tab.
 
     [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png)
 
 5. **Make an API request!**
 
-    You are now ready to interact with your Zepto account via the
-    API! Go ahead and send a request using Postman.
+    You are now ready to interact with your Zepto account via the API! Go ahead and send a request using Postman.
 
     [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png)
 
@@ -186,21 +163,16 @@ list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on
 
 ## Get started
 
-This guide will help you setup an OAuth2 app in order to get authenticated &
-authorised to communicate with the Zepto API.
+This guide will help you setup an OAuth2 app in order to get authenticated & authorised to communicate with the Zepto API.
 
 
 
 **Before you start:**
 
 
-* We use the term **user** below but the user can be a third party or the
-same user that owns the OAuth2 application.
+* We use the term **user** below but the user can be a third party or the same user that owns the OAuth2 application.
 
-* As noted below, some access tokens expire every 2 hours. To get a new
-access token use the [refresh grant
-strategy](/#authentication-and-authorisation) to swap a refresh token for a
-new access token.
+* As noted below, some access tokens expire every 2 hours. To get a new access token use the [refresh grant strategy](/#authentication-and-authorisation) to swap a refresh token for a new access token.
 
 
 1. **Create a Zepto account**
@@ -217,15 +189,10 @@ new access token.
 
 ## Personal access token
 
-If you're looking to only access your own account via the API, you can
-generate a personal access token from the UI. These tokens do not expire, but can be deleted.
+If you're looking to only access your own account via the API, you can generate a personal access token from the UI. These tokens do not expire, but can be deleted.
 
 
-* To do this, sign in to your Zepto account and [create an
-application](https://go.sandbox.zeptopayments.com/oauth/applications) if you
-haven't already. Click on your application from your [application
-list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on
-**Personal access**.
+* To do this, sign in to your Zepto account and [create an application](https://go.sandbox.zeptopayments.com/oauth/applications) if you haven't already. Click on your application from your [application list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on **Personal access**.
 
     [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
 
@@ -234,8 +201,7 @@ list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on
     [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)
 
 
-* Now that you have an `access_token` you can interact
-with your Zepto account via the API.
+* Now that you have an `access_token` you can interact with your Zepto account via the API.
 
     To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
 
@@ -294,8 +260,7 @@ with your Zepto account via the API.
 
 ## OAuth grant flow tutorial
 
-The OAuth grant flow process is demonstrated using Postman in the steps
-below.
+The OAuth grant flow process is demonstrated using Postman in the steps below.
 
 
 Before you start, load up our API collection:
@@ -373,32 +338,25 @@ a new endpoint. Have fun!
 Zepto uses OAuth2 over https to manage authentication and authorisation.
 
 
-OAuth2 is a protocol that lets external applications request permission from
-another Zepto user to send requests on their behalf without getting their
-password.
+OAuth2 is a protocol that lets external applications request permission from another Zepto user to send requests on their behalf without getting their password.
 
-This is preferred over Basic Authentication because access tokens can be
-limited by scope and can be revoked by the user at any time.
+This is preferred over Basic Authentication because access tokens can be limited by scope and can be revoked by the user at any time.
 
 
-New to OAuth2? DigitalOcean has a fantastic 5 minute [introduction to
-OAuth2](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2#grant-type-authorization-code).
+New to OAuth2? DigitalOcean has a fantastic 5 minute [introduction to OAuth2](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2#grant-type-authorization-code).
 
 
-We currently support the **authorisation code** and **refresh token**
-grants.
+We currently support the **authorisation code** and **refresh token** grants.
 
 
 ### Authorisation Code Grant
 
-This type of grant allows your application to act on behalf of a user. If
-you've ever used a website or application with your
+This type of grant allows your application to act on behalf of a user. If you've ever used a website or application with your
 
 Google, Twitter or Facebook account, this is the grant being used.
 
 
-See the [Get Started guide](/#get-started) for step by step details on how
-to use this grant.
+See the [Get Started guide](/#get-started) for step by step details on how to use this grant.
 
 
 ### Refresh Token Grant
@@ -433,28 +391,20 @@ curl -F "grant_type=refresh_token" \
 ```
 
 
-When using the authorisation code grant above, Zepto will return a `refresh
-token` along with the access token. Access tokens are short lived and last 2
-hours but refresh tokens do not expire.
+When using the authorisation code grant above, Zepto will return a `refresh token` along with the access token. Access tokens are short lived and last 2 hours but refresh tokens do not expire.
 
 
-When the access token expires, instead of sending the user back through the
-authorisation flow you can use the refresh token to retrieve a new access
-token with the same permissions as the old one.
+When the access token expires, instead of sending the user back through the authorisation flow you can use the refresh token to retrieve a new access token with the same permissions as the old one.
 
 
 > **_NOTE:_**
-  The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you'll
-want to store the newly generated <code>refresh_token</code> everytime you
-use it to get a new <code>access_token</code>
+  The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you'll want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>access_token</code>
 
 
 
 ## Making payments
 
-In order to payout funds, you'll be looking to use the
-[Payments](/#Zepto-API-Payments) endpoint. Whether you're paying out another
-Zepto account holder or anyone, the process is the same:
+In order to payout funds, you'll be looking to use the [Payments](/#Zepto-API-Payments) endpoint. Whether you're paying out another Zepto account holder or anyone, the process is the same:
 
 
 1. Add the recipient to your [Contact](/#add-a-contact) list.
@@ -465,8 +415,7 @@ Zepto account holder or anyone, the process is the same:
 Common use cases:
 
 
-* Automated payout disbursement (Referal programs, net/commission payouts,
-etc...)
+* Automated payout disbursement (Referal programs, net/commission payouts, etc...)
 
 * Wage payments
 
@@ -481,25 +430,16 @@ etc...)
 ### POSTing a [Payment Request](/#Zepto-API-Payment-Requests)
 
 
-Provides the ability to send a Payment Request (get paid) to any Contact
-that has an accepted Agreement in place.
+Provides the ability to send a Payment Request (get paid) to any Contact that has an accepted Agreement in place.
 
 
-To send a Payment Request to a Contact using the API, you must
-first have an accepted [Agreement](/#Zepto-API-Agreements) with them.
+To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](/#Zepto-API-Agreements) with them.
 
 
-To do so, you can send them an
-[Open Agreement link](https://help.zepto.money/agreements/open-agreement) or
-[Unassigned Agreement
-link](http://help.zepto.money/agreements/unassigned-agreement) for them to
-[elect & verify their bank
-account](https://help.zepto.money/bank-accounts/instant-account-verification-iav)
-and accept the Agreement.
+To do so, you can send them an [Open Agreement link](https://help.zepto.money/agreements/open-agreement) or [Unassigned Agreement link](http://help.zepto.money/agreements/unassigned-agreement) for them to [Select & verify their bank account](https://help.zepto.money/bank-accounts/instant-account-verification-iav) and accept the Agreement.
 
 
-Having this in place will allow any future Payment
-Requests to be automatically approved and processed as per the Agreement terms.
+Having this in place will allow any future Payment Requests to be automatically approved and processed as per the Agreement terms.
 
 
 Common use cases:
@@ -514,13 +454,10 @@ Common use cases:
 * Repayment plans
 
 
-Example flow embedding an [Open Agreement
-link](https://help.zepto.money/agreements/open-agreement) using an iFrame in
-order to automate future Payment Request approvals:
+Example flow embedding an [Open Agreement link](https://help.zepto.money/agreements/open-agreement) using an iFrame in order to automate future Payment Request approvals:
 
 
-[![Hosted Open
-Agreement](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/host_oa.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/host_oa.png)
+[![Hosted Open Agreement](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/host_oa.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/host_oa.png)
 
 
 ## Idempotent requests
@@ -549,52 +486,34 @@ Agreement](https://raw.githubusercontent.com/zeptofs/public_assets/master/images
 ```
 
 
-The Zepto API supports idempotency for safely retrying requests without
-accidentally performing the same operation twice.
+The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
 
-For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is
-a network connection error, you can retry the Payment with the same
-idempotency key to guarantee that only a single Payment is created.
-In case an idempotency key is not supplied and a Payment is retried,
-we would treat this as two different payments being made.
+For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.
 
 
-To perform an idempotent request, provide an additional `Idempotency-Key:
-<key>` header to the request.
+To perform an idempotent request, provide an additional `Idempotency-Key:<key>` header to the request.
 
-You can pass any value as the key but we suggest that you use [V4
-UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random
-string.
+You can pass any value as the key but we suggest that you use [V4 UUIDs](https://www.uuidtools.com/generate v4) or another appropriately random string.
 
 
-Keys expire after 24 hours. If there is a subsequent request with the same
-idempotency key within the 24 hour period, we will return a `409 Conflict`.
+Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a `409 Conflict`.
 
 
-* The `meta.resource_ref` value is the reference of the resource that was
-previously created with the conflicting idempotency key.
+* The `meta.resource_ref` value is the reference of the resource that was previously created with the conflicting idempotency key.
 
 * The `Idempotency-Key` header is optional but recommended.
 
-* Only the `POST` action for the Payments, Payment Requests and Refunds endpoints
-support the use of the `Idempotency-Key`.
+* Only the `POST` action for the Payments, Payment Requests and Refunds endpoints support the use of the `Idempotency-Key`.
 
 * Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 
-* A request that quickly follows another with the same idempotency key may return
-with `503 Service Unavailable`. If so, retry the request after the number of seconds
-specified in the `Retry-After` response header.
+* A request that quickly follows another with the same idempotency key may return with `503 Service Unavailable`. If so, retry the request after the number of seconds specified in the `Retry-After` response header.
 
 
-**Caution:** Keys are scoped to the User making the request. This means if User A makes a request
-with an access token they have generated to an Account using idempotency key `123` and User B makes a
-request with their own access token to the same Account using idempotency key `123` the requests will be
-treated as different and not idempotent.
+**Caution:** Keys are scoped to the User making the request. This means if User A makes a request with an access token they have generated to an Account using idempotency key `123` and User B makes a request with their own access token to the same Account using idempotency key `123` the requests will be treated as different and not idempotent.
 
 
-Currently the following `POST` requests can be made idempotent.
-We **strongly recommend** sending a unique `Idempotency-Key` header
-when making those requests to allow for safe retries:
+Currently the following `POST` requests can be made idempotent. We **strongly recommend** sending a unique `Idempotency-Key` header when making those requests to allow for safe retries:
 
 
 * [Request Payment](/#request-payment)
@@ -652,11 +571,10 @@ The Zepto API returns two different types of error responses depending on the co
 
 All other errors relating to Zepto specific resources(e.g. Contacts) will return the **Resource error response** style.
 
-<div class="middle-header">403 errors</div>
+### 403 errors
 
 
-**403 errors** are generally returned from any of our endpoints if your
-application does not have the required authorisation. This is usually due to:
+**403 errors** are generally returned from any of our endpoints if your application does not have the required authorisation. This is usually due to:
 
 
 * An [invalid/expired `access_token`](/#authentication-and-authorisation); or
@@ -671,27 +589,21 @@ application does not have the required authorisation. This is usually due to:
 Consider the following scenario:
 
 
-<blockquote class="main-quote">Zepto is integrated in your application to
-handle payments.<br>A customer would like to use Zepto but does not yet have
-Zepto account.<br>You already have some information about this
-customer.</blockquote>
+> Zepto is integrated in your application to handle payments.<br>A customer would like to use Zepto but does not yet have Zepto account.<br>You already have some information about this customer.
 
 
-Given the above, in a standard implementation where a customer enables/uses
-Zepto within your application, these are the steps they would follow:
+Given the above, in a standard implementation where a customer enables/uses Zepto within your application, these are the steps they would follow:
 
 
 1. Click on some sort of button within your app to use Zepto.
 
-2. They get redirected to the Zepto sign in page (possibly via a popup or
-modal).
+2. They get redirected to the Zepto sign in page (possibly via a popup or modal).
 
 3. Since they don't yet have a Zepto account, they would click on sign up.
 
 4. They would fill in all their signup details and submit.
 
-5. They would be presented with the [authorisation
-page](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png).
+5. They would be presented with the [authorisation page](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oauth2_app_authorise.png).
 
 6. They would click the "Authorise" button and be redirected to your app.
 
@@ -699,11 +611,7 @@ page](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/oaut
 Whilst not too bad, we can do better!
 
 
-In order to speed up the process, we allow query string params to be
-appended to the [authorisation URL](/#get-started). For instance, if we
-already have some information about the customer and know they probably
-don't have a Zepto account, we can embed this information in the
-authorisation URL.
+In order to speed up the process, we allow query string params to be appended to the [authorisation URL](/#get-started). For instance, if we already have some information about the customer and know they probably don't have a Zepto account, we can embed this information in the authorisation URL.
 
 
 **Supported query string parameters**
@@ -726,19 +634,15 @@ This will be used to identify the account in Zepto. |
 | `email` | |
 
 
-All values should be [URL
-encoded](https://en.wikipedia.org/wiki/Query_string#URL_encoding).
+All values should be [URL encoded](https://en.wikipedia.org/wiki/Query_string#URL_encoding).
 
 
-As an example, the following authorisation URL would display the **personal
-sign up** & prefill the first name field with **George**:
+As an example, the following authorisation URL would display the **personal sign up** & prefill the first name field with **George**:
 
 `https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=sign_up&first_name=George`
 
 
-You can also pass the values directly to the sign up page outside of the
-OAuth2 authorisation process. Click on the following link to see the values
-preloaded:
+You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded:
 [https://go.sandbox.zeptopayments.com/business/sign_up?name=GeorgeCo&nickname=georgeco&first_name=George](https://go.sandbox.zeptopayments.com/business/sign_up?name=GeorgeCo&nickname=georgceco&first_name=George).
 
 
@@ -760,16 +664,13 @@ preloaded:
 
 ```
 
-Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds.
-All transactions are simulated and no communication with financial institutions is performed.
+Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds. All transactions are simulated and no communication with financial institutions is performed.
 
 
-The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through.
-In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.
+The sandbox works on a 1 minute cycle to better illustrate how transactions are received and the lifecyle they go through. In other words, every minute, we simulate communicating with financial institutions and update statuses and events accordingly.
 
 
-All 6 digits BSBs are valid in the sandbox with the exception of `100000`. This BSB allows you to simulate the adding of an invalid BSB.
-In production, only real BSBs are accepted.
+All 6 digits BSBs are valid in the sandbox with the exception of `100000`. This BSB allows you to simulate the adding of an invalid BSB. In production, only real BSBs are accepted.
 
 
 Failed transactions will contain the following information inside the event:
@@ -832,22 +733,14 @@ For example:
 * NPP amount `$3.04` will cause the transaction to fail, triggering credit failure code `E304` (Account Not Found).
 
 
-You will receive all the same notifications as if this happened in our live environment. We recommend you
-check out our article on [what happens when an NPP Payment fails](https://help.zepto.money/en/articles/4405560-what-happens-when-an-npp-payment-fails)
-to learn more about what happens when an NPP Payment is unable to process.
+You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on [what happens when an NPP Payment fails](https://help.zepto.money/en/articles/4405560-what-happens-when-an-npp-payment-fails) to learn more about what happens when an NPP Payment is unable to process.
 
 
 ## Instant account verification accounts
 
-When using any of our hosted solutions ([Payment
-Requests](https://help.zepto.money/en/?q=payment+request),
+When using any of our hosted solutions ([Payment Requests](https://help.zepto.money/en/?q=payment+request),
 [Open Agreements](https://help.zepto.money/agreements/open-agreement) or
-[Unassigned
-Agreements](http://help.zepto.money/agreements/unassigned-agreement)) you may
-want to test the [Instant Account Verification
-(IAV)](http://help.zepto.money/bank-accounts/instant-account-verification-iav)
-process where we accept online banking credentials to validate bank account
-access. To do so, you can use the following credentials:
+[Unassigned Agreements](http://help.zepto.money/agreements/unassigned-agreement)) you may want to test the [Instant Account Verification (IAV)](http://help.zepto.money/bank-accounts/instant-account-verification-iav) process where we accept online banking credentials to validate bank account access. To do so, you can use the following credentials:
 
 
 | Login | Password |
@@ -855,16 +748,13 @@ access. To do so, you can use the following credentials:
 | `12345678` | `TestMyMoney` |
 
 
-> **_NOTE:_** The credentials will work with any of the available
-financial institutions.
+> **_NOTE:_** The credentials will work with any of the available financial institutions.
 
 # Configuration
 
 ## Scopes
 
-Scopes define the level of access granted via the OAuth2 authorisation
-process. As a best practice, only use the scopes your application will
-require.
+Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.
 
 
 | Scope | Description |
@@ -912,7 +802,7 @@ The `Link` header will be optionally present if a "next page" is available to na
 
 >  **Legacy Pagination**: Some existing users may still be on a transitional legacy version of pagination.
 >
->  The Legacy version returns some extra <b>deprecated header values: <code>Total</code> plus <code>rel="last"</code> & <code>rel="prev"</code> in <code>Link</code></b>.
+>  The Legacy version returns some extra <b>deprecated header values: `Total</code> plus <code>rel="last"</code> & <code>rel="prev"</code> in <code>Link</code></b>.
 >
 >  Please transition to only using the <code>rel="next"</code> from the <code>Link</code> header, as all other values are deprecated.
 >
@@ -936,20 +826,15 @@ The `Link` header will be optionally present if a "next page" is available to na
 ```
 
 
-You can elect to assign a remitter name on a per-request basis when
-submitting Payments & Payment Requests. Simply append the `remitter` key and
-a value within the `metadata` key.
+You can elect to assign a remitter name on a per-request basis when submitting Payments & Payment Requests. Simply append the `remitter` key and a value within the `metadata` key.
 
 
-* **For Payments**, the party being credited will see the designated
-remitter name along the entry on their bank statement.
+* **For Payments**, the party being credited will see the designated remitter name along the entry on their bank statement.
 
-* **For Payment Requests**, the party being debited will see the designated
-remitter name along the entry on their bank statement.
+* **For Payment Requests**, the party being debited will see the designated remitter name along the entry on their bank statement.
 
 
-> **_NOTE:_** The remitter name MUST be between <code>3</code> and <code>16</code>
-characters.
+> **_NOTE:_** The remitter name MUST be between <code>3</code> and <code>16</code> characters.
 
 
 ## Aggregation
@@ -974,9 +859,7 @@ Likewise for credits:
 - Initiated by the same Zepto account.
 
 
-Should you prefer debit aggregation to be disabled, please contact
-[support@zepto.com.au](mailto:support@zepto.com.au). Note
-that additional charges may apply.
+Should you prefer debit aggregation to be disabled, please contact [support@zepto.com.au](mailto:support@zepto.com.au). Note that additional charges may apply.
 
 
 ## Webhooks
@@ -1009,12 +892,9 @@ Please refer to our help centre [article on webhooks](http://help.zepto.money/en
 We support two main categories of webhooks:
 
 
-1. **Owner**: These webhooks are managed by the owner of the Zepto account
-and only report on events owned by the Zepto account.
+1. **Owner**: These webhooks are managed by the owner of the Zepto account and only report on events owned by the Zepto account.
 
-2. **App**: These webhooks are managed by the Zepto OAuth2 application owner
-and will report on events relating to any authorised Zepto account (limited
-by scope).
+2. **App**: These webhooks are managed by the Zepto OAuth2 application owner and will report on events relating to any authorised Zepto account (limited by scope).
 
 
 | Name | Type | Required | Description |
@@ -1060,9 +940,7 @@ Use the following table to discover what type of response schema to expect for f
 
 **For redelivery of webhooks, check out our [Webhook/WebhookDelivery API endpoints](#Zepto-API-Webhooks).**
 
-> **_NOTE:_**
-  In the sandbox environment, webhook deliveries will only be retried once,
-  to allow for easier testing of failure scenarios.
+> **_NOTE:_** In the sandbox environment, webhook deliveries will only be retried once, to allow for easier testing of failure scenarios.
 
 
 
@@ -1079,10 +957,7 @@ Split-Request-ID: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
 ```
 
 
-Zepto provides a `Split-Request-ID` header in the form of a `UUID` which
-uniquely identifies a webhook event. If the webhook event is
-retried/retransmitted by Zepto, the UUID will remain the same. This allows
-you to check if a webhook event has been previously handled/processed.
+Zepto provides a `Split-Request-ID` header in the form of a `UUID` which uniquely identifies a webhook event. If the webhook event is retried/retransmitted by Zepto, the UUID will remain the same. This allows you to check if a webhook event has been previously handled/processed.
 
 
 ### Checking Webhook Signatures
@@ -1099,18 +974,13 @@ Split-Signature:
 ```
 
 
-Zepto signs the webhook events it sends to your endpoints. We do so by
-including a signature in each event’s `Split-Signature` header. This allows
-you to validate that the events were indeed sent by Zepto.
+Zepto signs the webhook events it sends to your endpoints. We do so by including a signature in each event’s `Split-Signature` header. This allows you to validate that the events were indeed sent by Zepto.
 
 
-Before you can verify signatures, you need to retrieve your endpoint’s
-secret from your Webhooks settings. Each endpoint has its own unique secret;
-if you use multiple endpoints, you must obtain a secret for each one.
+Before you can verify signatures, you need to retrieve your endpoint’s secret from your Webhooks settings. Each endpoint has its own unique secret; if you use multiple endpoints, you must obtain a secret for each one.
 
 
-The `Split-Signature` header contains a timestamp and one or more
-signatures. All separated by `.` (dot).
+The `Split-Signature` header contains a timestamp and one or more signatures. All separated by `.` (dot).
 
 
 > Example code
@@ -1382,8 +1252,7 @@ class MainClass {
 **Step 1. Extract the timestamp and signatures from the header**
 
 
-Split the header, using the `.` (dot) character as the separator, to get a
-list of elements.
+Split the header, using the `.` (dot) character as the separator, to get a list of elements.
 
 
 | Element | Description |
@@ -1410,21 +1279,16 @@ You achieve this by concatenating:
 **Step 3: Determine the expected signature**
 
 
-Compute an HMAC with the SHA256 hash function. Use the endpoint’s signing
-secret as the key, and use the `signed_payload` string as the message.
+Compute an HMAC with the SHA256 hash function. Use the endpoint’s signing secret as the key, and use the `signed_payload` string as the message.
 
 
 **Step 4: Compare signatures**
 
 
-Compare the signature in the header to the expected signature. If a
-signature matches, compute the difference between the current timestamp and
-the received timestamp, then decide if the difference is within your
-tolerance.
+Compare the signature in the header to the expected signature. If a signature matches, compute the difference between the current timestamp and the received timestamp, then decide if the difference is within your tolerance.
 
 
-To protect against timing attacks, use a constant-time string comparison to
-compare the expected signature to each of the received signatures.
+To protect against timing attacks, use a constant-time string comparison to compare the expected signature to each of the received signatures.
 
 
 > **_NOTE:_** The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
