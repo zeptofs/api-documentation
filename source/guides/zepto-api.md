@@ -2,7 +2,7 @@
 title: Zepto API
 excerpt: Zepto allows you to make, get and manage payments using nothing but bank accounts.
 category: 65ada3d7699b7900765d2ed5
-hidden: true
+hidden: false
 ---
 
 # Zepto
