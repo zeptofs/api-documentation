@@ -398,7 +398,7 @@ When the access token expires, instead of sending the user back through the auth
 
 
 > **_NOTE:_**
-  The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you'll want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>access_token</code>
+  The `refresh_token` gets regenerated and sent alongside the new `access_token`. In other words, `refresh_token`s are single use so you'll want to store the newly generated `refresh_token` everytime you use it to get a new `access_token`
 
 
 
@@ -589,7 +589,11 @@ All other errors relating to Zepto specific resources(e.g. Contacts) will return
 Consider the following scenario:
 
 
-> Zepto is integrated in your application to handle payments.<br>A customer would like to use Zepto but does not yet have Zepto account.<br>You already have some information about this customer.
+> Zepto is integrated in your application to handle payments.
+
+> A customer would like to use Zepto but does not yet have Zepto account.
+
+> You already have some information about this customer.
 
 
 Given the above, in a standard implementation where a customer enables/uses Zepto within your application, these are the steps they would follow:
@@ -707,12 +711,12 @@ For example:
 ### Example scenarios
 
   1. Pay a contact with an invalid account number:
-    * Initiate a Payment for <code>$1.05</code>.
+    * Initiate a Payment for `$1.05`.
     * Zepto will mimic a successful debit from your bank account.
     * Zepto will mimic a failure to credit the contact's bank account.
-    * Zepto will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.
+    * Zepto will automatically create a `payout_reversal` credit transaction back to your bank account.
   2. Request payment from a contact with a closed bank account:
-    * Initiate a Payment Request for <code>$2.03</code>.
+    * Initiate a Payment Request for `$2.03`.
     * Zepto will mimic a failure to debit the contact's bank account.
 
 
@@ -802,9 +806,9 @@ The `Link` header will be optionally present if a "next page" is available to na
 
 >  **Legacy Pagination**: Some existing users may still be on a transitional legacy version of pagination.
 >
->  The Legacy version returns some extra <b>deprecated header values: `Total</code> plus <code>rel="last"</code> & <code>rel="prev"</code> in <code>Link</code></b>.
+>  The Legacy version returns some extra **deprecated header values: `Total` plus `rel="last"` & `rel="prev"` in `Link`**.
 >
->  Please transition to only using the <code>rel="next"</code> from the <code>Link</code> header, as all other values are deprecated.
+>  Please transition to only using the `rel="next"` from the `Link` header, as all other values are deprecated.
 >
 
 
@@ -834,7 +838,7 @@ You can elect to assign a remitter name on a per-request basis when submitting P
 * **For Payment Requests**, the party being debited will see the designated remitter name along the entry on their bank statement.
 
 
-> **_NOTE:_** The remitter name MUST be between <code>3</code> and <code>16</code> characters.
+> **_NOTE:_** The remitter name MUST be between `3` and `16` characters.
 
 
 ## Aggregation
