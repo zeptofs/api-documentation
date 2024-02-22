@@ -1,0 +1,3 @@
+<ul>
+<li>Reduced webhook delivery retries on sandbox to a single retry</li>
+</ul>

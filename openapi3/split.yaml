@@ -4523,6 +4523,7 @@ components:
                   description: 'The BSB number (Min: 6 - Max: 6)'
                 state:
                   type: string
+                  enumeratedValueName: bank_account.state
                   description: The bank account state
                   enum:
                     - active
@@ -4599,6 +4600,7 @@ components:
                   description: Your merchant's alias_name
                 state:
                   type: string
+                  enumeratedValueName: payid_details.state
                   description: Pending -> Active or Failed -> Deregistered (Contact removed)
                   enum:
                     - pending

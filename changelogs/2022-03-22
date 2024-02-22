@@ -1,0 +1,4 @@
+<ul>
+<li>Removed <code>rel=first</code>, <code>rel=prev</code>, <code>rel=last</code> from the <code>Link</code> pagination header</li>
+<li>Removed the <code>Total</code> pagination header</li>
+</ul>

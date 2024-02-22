@@ -1,0 +1,3 @@
+<ul>
+<li>Added PayID pool references to <code>/contacts/receivable</code> and <code>/bank_accounts</code> endpoints</li>
+</ul>

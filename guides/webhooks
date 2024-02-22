@@ -1,0 +1,48 @@
+<h1 id='au-webhooks-zepto-help-center'>[AU] Webhooks | Zepto Help Center</h1>
+<p>Webhooks are used to notify your application of changes to the status of Agreements, Payment Requests, Credits and Debits, etc as they are processed through the system.</p>
+<h2 id='we-support-two-types-of-webhooks'>We support two types of webhooks</h2><h2 id='owner'><strong>Owner</strong></h2>
+<p>These webhooks are managed by the owner of the Zepto account and only report on events relating to the Zepto account. </p>
+
+<p>To create an Owner webhook:</p>
+<h2 id='application'><strong>Application</strong></h2>
+<p>These webhooks are managed by the Zepto OAuth2 application owner and will report on events relating to any authorised Zepto account (limited by scope)</p>
+
+<p>To create an Application webhook:</p>
+<h2 id='webhook-event-payload'><strong>Webhook Event Payload</strong></h2>
+<p>Each webhook event contains data relating to the event type. For example, when you receive an Agreement event, the payload will contain data relating to that agreement.</p>
+
+<p>The webhook payload will also include metadata where available.
+​
+The best way to see example payloads for each type of webhook event is to try them out in the developer sandbox by creating a webhook and subscribing to all of the events.</p>
+
+<p><em>Note: that the payload for a single webhook event contains an array that may hold more than one transaction, so you&#39;ll need to loop through them all.</em> </p>
+
+<p><a href="https://downloads.intercomcdn.com/i/o/145843405/df2ba5b7f1439a35a18922bc/Screen+Shot+2019-09-02+at+5.12.39+pm.png?expires=1619761494&amp;signature=b741439eec1691a83101e70a890a96a4c2ac673ed1522753b2a24f3586ccf0d2"><img src="https://downloads.intercomcdn.com/i/o/145843405/df2ba5b7f1439a35a18922bc/Screen+Shot+2019-09-02+at+5.12.39+pm.png?expires=1619761494&amp;signature=b741439eec1691a83101e70a890a96a4c2ac673ed1522753b2a24f3586ccf0d2" alt="" /></a></p>
+
+<p>If your application is not ready to receive webhooks but you want a quick way to see the events in action, you can use the <a href="https://www.webhook.site/">https:/webhook.site</a> to quickly create a URL that you can use as the webhook URL when settings up webhooks in Zepto. Alternatively, you can also use <a href="https://ngrok.com/">https://ngrok.com/</a> to allow webhook events to be posted to your local machine.</p>
+
+<p>Once you have subscribed to all the events, you can try creating an Agreement, Payment Request or Payment in the sandbox. You can then see the events that have been sent to the configured webhook URL under the <em>Deliveries</em> heading on the webhook detailed page.</p>
+
+<p><a href="https://downloads.intercomcdn.com/i/o/145842706/9127f96c7741b97ba6e617e2/Screen+Shot+2019-09-02+at+5.36.44+pm.png?expires=1619761494&amp;signature=3639e0f59afdb79748b96b0934dbe5d2639b726d47313495e605692d0a3e1fe6"><img src="https://downloads.intercomcdn.com/i/o/145842706/9127f96c7741b97ba6e617e2/Screen+Shot+2019-09-02+at+5.36.44+pm.png?expires=1619761494&amp;signature=3639e0f59afdb79748b96b0934dbe5d2639b726d47313495e605692d0a3e1fe6" alt="" /></a></p>
+<h2 id='knowing-when-credit-to-your-account-has-cleared'><strong>Knowing when credit to your account has cleared</strong></h2>
+<p>Transactions always have two parts, a debit and a credit. After using a Payment Request to get paid, your application can be notified when the debit from the debtor&#39;s account has cleared by subscribing to the <strong>Creditor Debit cleared</strong> event. </p>
+
+<p>Once the creditor debit has cleared, you can be notified when the credit to your account has cleared by subscribing to the <strong>Credit Cleared</strong> event.</p>
+
+<p>The normal lifecycle of the creditor debit and credit events is shown below, and you can also subscribe to these events to keep your system updated.</p>
+
+<p>Please also find an article attached <a href="https://help.zepto.money/en/articles/4882892-webhook-event-flows">here</a>, that will help you understand the webhooks events you will receive for the types of the transaction.</p>
+
+<p>If you would like to check the configuration of your webhooks or redeliver specific webhooks you can refer to our article attached <a href="https://help.zepto.money/en/articles/5806231-webhook-api-endpoints">here</a>.</p>
+<h2 id='handling-transaction-failures'>Handling transaction failures</h2>
+<p>Transactions can fail for a number of reasons. The failure states include <code>rejected</code> , <code>returned</code> , <code>voided</code>  and <code>prefailed</code> . Subscribe to these webhook events to notify your system of transaction failures. For more information on all the status values, please refer to the <a href="https://docs.zepto.money/#lifecycle">transaction lifecycle developer documentation</a>.</p>
+
+<p><strong>Is Your Delivery Showing A Different State Than The Delivery Type?</strong></p>
+
+<p>When webhooks are sent, our system will populate the payload fields using the current state of the object that it relates to.</p>
+
+<p>For a transaction that uses an NPP channel, it essentially clears straight away and the credit status moves to <code>cleared</code> very quickly. So, when the fields are populated for the <code>debtor_credit.xxxx</code> webhook notification, the current status of the credit is actually cleared which is what may be returned back to you.</p>
+
+<p>Please be mindful that you would still receive a <code>debtor_credit.cleared</code> event.</p>
+<h2 id='our-delivery-promises'>Our Delivery Promises</h2>
+<p>Feel free to reach out if you have further questions by emailing us directly at <a href="mailto:support@zepto.com.au">support@zepto.com.au</a> or clicking on the blue bubble icon from the corner of the screen.</p>
