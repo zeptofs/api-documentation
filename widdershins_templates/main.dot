@@ -53,7 +53,7 @@
      for (var p of block.rows) {
        if (p.schema && p.schema.enum) {
          for (var e of p.schema.enum) {
-           enums.push({name:p.name,value:e});
+           enums.push({name:p.name,value:e,enumeratedValueName:p.schema.enumeratedValueName});
          }
        }
      }
@@ -78,7 +78,7 @@
 
 |Property|Value|
 |---|---|
-{{~ enums :e}}|{{=e.name}}|{{=e.value}}|
+{{~ enums :e}}|{{=e.enumeratedValueName||e.name}}|{{=e.value}}|
 {{~}}
 
 {{?}}

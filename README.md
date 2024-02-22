@@ -17,6 +17,8 @@ Get started
 
 1. Clone the repo
 2. `$ bundle install`
+   - Having trouble running this on an m1 due to openssl errors when installing eventmachine?
+   Try using `gem install eventmachine -v '1.2.7' -- --with-openssl-dir=$(brew --prefix openssl)`
 3. `$ yarn install`
 4. `$ bundle exec foreman start`
 5. Browse to http://localhost:4567 to preview the documentation.
