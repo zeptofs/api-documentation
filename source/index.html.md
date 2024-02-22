@@ -11590,8 +11590,8 @@ Use this endpoint to resend a failed webhook delivery.
 |---|---|
 |type|Zepto account|
 |type|anyone|
-|state|active|
-|state|removed|
+|bank_account.state|active|
+|bank_account.state|removed|
 |iav_provider|split|
 |iav_provider|proviso|
 |iav_provider|basiq|
@@ -11601,10 +11601,10 @@ Use this endpoint to resend a failed webhook delivery.
 |iav_status|removed|
 |iav_status|credentials_invalid|
 |iav_status|null|
-|state|pending|
-|state|active|
-|state|failed|
-|state|deregistered|
+|payid_details.state|pending|
+|payid_details.state|active|
+|payid_details.state|failed|
+|payid_details.state|deregistered|
 
 ## UpdateAReceivableContactRequest
 
