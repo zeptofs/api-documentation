@@ -11278,12 +11278,12 @@ Use this endpoint to resend a failed webhook delivery.
 
 |Property|Value|
 |---|---|
-|state|active|
-|state|removed|
-|state|pending|
-|state|active|
-|state|failed|
-|state|deregistered|
+|bank_account.state|active|
+|bank_account.state|removed|
+|payid_details.state|pending|
+|payid_details.state|active|
+|payid_details.state|failed|
+|payid_details.state|deregistered|
 
 ## ListAllContactsResponse
 
