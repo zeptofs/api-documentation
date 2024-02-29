@@ -1,7 +1,10 @@
 openapi: "3.0.2"
 info:
-  title: PayTo Disputes API
+  title: PayTo Disputes API (Not live)
   version: "1.0"
+  contact:
+    email: support@zepto.com.au
+  description: Zepto's PayTo Disputes API (Not live)
 servers:
   - url: https://api.zeptopayments.com
 tags:
