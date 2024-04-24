@@ -4215,6 +4215,7 @@ components:
                   enum:
                     - active
                     - removed
+                  enumeratedValueName: bank_account.state
                 iav_provider:
                   type:
                     - string
@@ -4265,6 +4266,7 @@ components:
                     - active
                     - failed
                     - deregistered
+                  enumeratedValueName: payid_details.state
       example:
         data:
           id: 6a7ed958-f1e8-42dc-8c02-3901d7057357
