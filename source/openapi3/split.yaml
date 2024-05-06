@@ -1769,13 +1769,7 @@ tags:
 
       |-------|-------------|
 
-      | `pending_approval` | Waiting for the debtor to approve the Payment Request. [DEPRECATED] |
-
-      | `unverified` | Waiting for available funds response. |
-
       | `approved` | The debtor has approved the Payment Request. |
-
-      | `declined` | The debtor has declined the Payment Request. |
 
       | `cancelled` | The creditor has cancelled the Payment Request. |
 
@@ -5036,10 +5030,7 @@ components:
               type: string
               description: The status of the Payment Request
               enum:
-                - pending_approval
-                - unverified
                 - approved
-                - declined
                 - cancelled
             status_reason:
               type:
@@ -5100,7 +5091,7 @@ components:
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
           contact_initiated: false
           schedule_ref: null
-          status: pending_approval
+          status: approved
           status_reason: null
           matures_at: '2021-12-25T00:00:00Z'
           responded_at: null
@@ -5173,10 +5164,7 @@ components:
               type: string
               description: The status of the Payment Request
               enum:
-                - pending_approval
-                - unverified
                 - approved
-                - declined
                 - cancelled
             status_reason:
               type:
@@ -5302,10 +5290,7 @@ components:
                 type: string
                 description: The status of the Payment Request
                 enum:
-                  - pending_approval
-                  - unverified
                   - approved
-                  - declined
                   - cancelled
               status_reason:
                 type:
@@ -5385,7 +5370,7 @@ components:
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
             contact_initiated: false
             schedule_ref: null
-            status: pending_approval
+            status: approved
             status_reason: null
             matures_at: '2021-03-09T16:58:00Z'
             responded_at: null
