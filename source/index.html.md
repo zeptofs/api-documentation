@@ -969,7 +969,7 @@ We take backwards compatibility seriously. The following list contains backwards
 
 Looking for more? Our docs are open sourced! [https://github.com/zeptofs/api-documentation](https://github.com/zeptofs/api-documentation)
 
-Email: <a href="mailto:support@zepto.com.au">Support</a> 
+Email: <a href="mailto:support@zepto.com.au">Support</a>
 
 <h1 id="Zepto-API-Agreements">Agreements</h1>
 
@@ -12068,7 +12068,7 @@ null
 |» contact_initiated|boolean|true|Initiated by Contact or Merchant|
 |» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)|
 |» status|string|true|The status of the Payment Request|
-|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)|
+|» status_reason|null|true|(Deprecated) Only used when the `status` is `declined` due to prechecking.|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)|
 |» responded_at|string,null(date-time)|true|The date-time when the Payment Request status changed (Min: 0 - Max: 20)|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created (Min: 20 - Max: 20)|
@@ -12085,8 +12085,6 @@ null
 |---|---|
 |status|approved|
 |status|cancelled|
-|status_reason|The balance of the nominated bank account for this Payment Request is not available.|
-|status_reason|The nominated bank account for this Payment Request has insufficient funds.|
 |status_reason|null|
 
 ## MakeAPaymentRequestWithNoAgreementResponse
@@ -12154,7 +12152,7 @@ null
 |» authoriser_contact_id|string(uuid)|true|The contact ID representing the debtor within Zepto (Min: 36 - Max: 36)|
 |» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable (Min: 0 - Max: 8)|
 |» status|string|true|The status of the Payment Request|
-|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)|
+|» status_reason|null|true|(Deprecated) Only used when the `status` is `declined` due to prechecking.|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing (Min: 20 - Max: 20)|
 |» responded_at|string(date-time)|true|The date-time when the Payment Request status changed (Min: 0 - Max: 20)|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created (Min: 20 - Max: 20)|
@@ -12171,8 +12169,6 @@ null
 |---|---|
 |status|approved|
 |status|cancelled|
-|status_reason|The balance of the nominated bank account for this Payment Request is not available.|
-|status_reason|The nominated bank account for this Payment Request has insufficient funds.|
 |status_reason|null|
 
 ## ListPaymentRequestCollectionsResponse
@@ -12241,7 +12237,7 @@ null
 |» contact_initiated|boolean|true|Initiated by Contact or Merchant|
 |» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable|
 |» status|string|true|The status of the Payment Request|
-|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking.|
+|» status_reason|null|true|(Deprecated) Only used when the `status` is `declined` due to prechecking.|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing|
 |» responded_at|string,null(date-time)|true|The date-time when the Payment Request status changed|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created|
@@ -12258,8 +12254,6 @@ null
 |---|---|
 |status|approved|
 |status|cancelled|
-|status_reason|The balance of the nominated bank account for this Payment Request is not available.|
-|status_reason|The nominated bank account for this Payment Request has insufficient funds.|
 |status_reason|null|
 
 ## ListPaymentRequestReceivablesResponse
@@ -12328,7 +12322,7 @@ null
 |» contact_initiated|boolean|true|Initiated by Contact or Merchant|
 |» schedule_ref|string,null|true|The schedule that generated the Payment request if applicable|
 |» status|string|true|The status of the Payment Request. For Receivables, this will always be *approved*|
-|» status_reason|string,null|true|Only used when the `status` is `declined` due to prechecking.|
+|» status_reason|null|true|(Deprecated) Only used when the `status` is `declined` due to prechecking.|
 |» matures_at|string(date-time)|true|The date-time when the Payment Request is up for processing|
 |» responded_at|string,null(date-time)|true|The date-time when the Payment Request status changed|
 |» created_at|string(date-time)|true|The date-time when the Payment Request was created|

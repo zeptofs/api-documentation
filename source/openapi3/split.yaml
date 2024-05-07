@@ -1496,6 +1496,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2024-05-07** - Updated Payment Request status values, deprecate `status_reason`.
+
     - **2023-08-29** - Remove references to the prefail feature
 
     - **2023-04-20** - Changed the webhook retention period to 7 days
@@ -5034,12 +5036,9 @@ components:
                 - cancelled
             status_reason:
               type:
-                - string
                 - 'null'
-              description: 'Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)'
+              description: '(Deprecated) Only used when the `status` is `declined` due to prechecking.'
               enum:
-                - The balance of the nominated bank account for this Payment Request is not available.
-                - The nominated bank account for this Payment Request has insufficient funds.
                 - null
             matures_at:
               type: string
@@ -5294,12 +5293,9 @@ components:
                   - cancelled
               status_reason:
                 type:
-                  - string
                   - 'null'
-                description: Only used when the `status` is `declined` due to prechecking.
+                description: (Deprecated) Only used when the `status` is `declined` due to prechecking.
                 enum:
-                  - The balance of the nominated bank account for this Payment Request is not available.
-                  - The nominated bank account for this Payment Request has insufficient funds.
                   - null
               matures_at:
                 type: string
@@ -5437,9 +5433,8 @@ components:
                 description: The status of the Payment Request. For Receivables, this will always be *approved*
               status_reason:
                 type:
-                  - string
                   - 'null'
-                description: Only used when the `status` is `declined` due to prechecking.
+                description: (Deprecated) Only used when the `status` is `declined` due to prechecking.
               matures_at:
                 type: string
                 format: date-time
