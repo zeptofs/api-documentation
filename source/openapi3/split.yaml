@@ -1496,6 +1496,8 @@ info:
     We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
 
+    - **2024-05-07** - Updated Payment Request status values, deprecate `status_reason`.
+
     - **2023-08-29** - Remove references to the prefail feature
 
     - **2023-04-20** - Changed the webhook retention period to 7 days
@@ -1769,13 +1771,7 @@ tags:
 
       |-------|-------------|
 
-      | `pending_approval` | Waiting for the debtor to approve the Payment Request. [DEPRECATED] |
-
-      | `unverified` | Waiting for available funds response. |
-
       | `approved` | The debtor has approved the Payment Request. |
-
-      | `declined` | The debtor has declined the Payment Request. |
 
       | `cancelled` | The creditor has cancelled the Payment Request. |
 
@@ -5036,19 +5032,13 @@ components:
               type: string
               description: The status of the Payment Request
               enum:
-                - pending_approval
-                - unverified
                 - approved
-                - declined
                 - cancelled
             status_reason:
               type:
-                - string
                 - 'null'
-              description: 'Only used when the `status` is `declined` due to prechecking. (Min: 0 - Max: 280)'
+              description: '(Deprecated) Only used when the `status` is `declined` due to prechecking.'
               enum:
-                - The balance of the nominated bank account for this Payment Request is not available.
-                - The nominated bank account for this Payment Request has insufficient funds.
                 - null
             matures_at:
               type: string
@@ -5100,7 +5090,7 @@ components:
           authoriser_contact_id: de86472c-c027-4735-a6a7-234366a27fc7
           contact_initiated: false
           schedule_ref: null
-          status: pending_approval
+          status: approved
           status_reason: null
           matures_at: '2021-12-25T00:00:00Z'
           responded_at: null
@@ -5173,10 +5163,7 @@ components:
               type: string
               description: The status of the Payment Request
               enum:
-                - pending_approval
-                - unverified
                 - approved
-                - declined
                 - cancelled
             status_reason:
               type:
@@ -5302,19 +5289,13 @@ components:
                 type: string
                 description: The status of the Payment Request
                 enum:
-                  - pending_approval
-                  - unverified
                   - approved
-                  - declined
                   - cancelled
               status_reason:
                 type:
-                  - string
                   - 'null'
-                description: Only used when the `status` is `declined` due to prechecking.
+                description: (Deprecated) Only used when the `status` is `declined` due to prechecking.
                 enum:
-                  - The balance of the nominated bank account for this Payment Request is not available.
-                  - The nominated bank account for this Payment Request has insufficient funds.
                   - null
               matures_at:
                 type: string
@@ -5385,7 +5366,7 @@ components:
             authoriser_contact_id: fb6a9252-3818-44dc-b5aa-2195391a746f
             contact_initiated: false
             schedule_ref: null
-            status: pending_approval
+            status: approved
             status_reason: null
             matures_at: '2021-03-09T16:58:00Z'
             responded_at: null
@@ -5452,9 +5433,8 @@ components:
                 description: The status of the Payment Request. For Receivables, this will always be *approved*
               status_reason:
                 type:
-                  - string
                   - 'null'
-                description: Only used when the `status` is `declined` due to prechecking.
+                description: (Deprecated) Only used when the `status` is `declined` due to prechecking.
               matures_at:
                 type: string
                 format: date-time
