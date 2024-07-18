@@ -600,6 +600,8 @@ info:
 
     * [Issue a Refund](/#issue-a-refund)
 
+    * [Add a Transfer](/#add-a-transfer)
+
 
     ## Error responses
 
@@ -3280,7 +3282,14 @@ paths:
         Use this endpoint when you want to create a Transfer between any 2 of your float/bank accounts.
 
       operationId: AddATransfer
-      parameters: []
+      parameters:
+        - name: 'Idempotency-Key'
+          in: header
+          description: 'Idempotency key to support safe retries for 24h'
+          required: false
+          schema:
+            type: string
+          example: '{unique-uuid-per-transfer}'
       requestBody:
         description: ''
         content:
