@@ -1258,6 +1258,7 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li><a href="/#request-payment">Request Payment</a></li>
 <li><a href="/#make-a-payment">Make a Payment</a></li>
 <li><a href="/#issue-a-refund">Issue a Refund</a></li>
+<li><a href="/#add-a-transfer">Add a Transfer</a></li>
 </ul>
 <h2 id='error-responses'>Error responses</h2>
 <blockquote>
@@ -1966,6 +1967,7 @@ class MainClass {
 <p>We take backwards compatibility seriously. The following list contains backwards compatible changes:</p>
 
 <ul>
+<li><strong>2024-05-07</strong> - Updated Payment Request status values, deprecate <code>status_reason</code>.</li>
 <li><strong>2023-08-29</strong> - Remove references to the prefail feature</li>
 <li><strong>2023-04-20</strong> - Changed the webhook retention period to 7 days</li>
 <li><strong>2023-03-22</strong> - Removed the <code>Total</code> pagination header</li>
@@ -6511,20 +6513,8 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 </thead><tbody>
 <tr>
-<td><code>pending_approval</code></td>
-<td>Waiting for the debtor to approve the Payment Request. [DEPRECATED]</td>
-</tr>
-<tr>
-<td><code>unverified</code></td>
-<td>Waiting for available funds response.</td>
-</tr>
-<tr>
 <td><code>approved</code></td>
 <td>The debtor has approved the Payment Request.</td>
-</tr>
-<tr>
-<td><code>declined</code></td>
-<td>The debtor has declined the Payment Request.</td>
 </tr>
 <tr>
 <td><code>cancelled</code></td>
@@ -6786,7 +6776,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -7338,7 +7328,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -10924,6 +10914,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   <span class="nt">--header</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'authorization: Bearer {access-token}'</span> <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'idempotency-key: {unique-uuid-per-transfer}'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"from_bank_account_id":"a79423b2-3827-4cf5-9eda-dc02a298d005","to_bank_account_id":"0921a719-c79d-4ffb-91b6-1b30ab77d14d","amount":100000,"description":"Float account balance adjustment","matures_at":"2021-06-06T00:00:00Z"}'</span>
 </code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
 <span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -10937,6 +10928,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"content-type"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"idempotency-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'{unique-uuid-per-transfer}'</span>
 <span class="n">request</span><span class="p">[</span><span class="s2">"authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Bearer {access-token}'</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">from_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">a79423b2-3827-4cf5-9eda-dc02a298d005</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">to_bank_account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">0921a719-c79d-4ffb-91b6-1b30ab77d14d</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">amount</span><span class="se">\"</span><span class="s2">:100000,</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Float account balance adjustment</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">matures_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2021-06-06T00:00:00Z</span><span class="se">\"</span><span class="s2">}"</span>
 
@@ -10952,6 +10944,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">accept</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">idempotency-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{unique-uuid-per-transfer}</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {access-token}</span><span class="dl">"</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -10986,6 +10979,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'content-type'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
     <span class="s">'accept'</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">'idempotency-key'</span><span class="p">:</span> <span class="s">"{unique-uuid-per-transfer}"</span><span class="p">,</span>
     <span class="s">'authorization'</span><span class="p">:</span> <span class="s">"Bearer {access-token}"</span>
     <span class="p">}</span>
 
@@ -10998,6 +10992,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">HttpResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">Unirest</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"https://api.sandbox.zeptopayments.com/transfers"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"accept"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"idempotency-key"</span><span class="o">,</span> <span class="s">"{unique-uuid-per-transfer}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">"Bearer {access-token}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"{\"from_bank_account_id\":\"a79423b2-3827-4cf5-9eda-dc02a298d005\",\"to_bank_account_id\":\"0921a719-c79d-4ffb-91b6-1b30ab77d14d\",\"amount\":100000,\"description\":\"Float account balance adjustment\",\"matures_at\":\"2021-06-06T00:00:00Z\"}"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">asString</span><span class="o">();</span>
@@ -11015,6 +11010,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 
 <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
   <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s1">'idempotency-key'</span> <span class="o">=&gt;</span> <span class="s1">'{unique-uuid-per-transfer}'</span><span class="p">,</span>
   <span class="s1">'accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
   <span class="s1">'content-type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
 <span class="p">));</span>
@@ -11042,6 +11038,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"idempotency-key"</span><span class="p">,</span> <span class="s">"{unique-uuid-per-transfer}"</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"Bearer {access-token}"</span><span class="p">)</span>
 
     <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
@@ -11080,6 +11077,13 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>Idempotency-Key</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>Idempotency key to support safe retries for 24h</td>
+</tr>
 <tr>
 <td>body</td>
 <td>body</td>
@@ -15541,7 +15545,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
     </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de86472c-c027-4735-a6a7-234366a27fc7"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-12-25T00:00:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -15625,9 +15629,9 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» status_reason</td>
-<td>string,null</td>
+<td>null</td>
 <td>true</td>
-<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking. (Min: 0 - Max: 280)</td>
+<td>(Deprecated) Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
 </tr>
 <tr>
 <td>» matures_at</td>
@@ -15693,31 +15697,11 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>pending_approval</td>
-</tr>
-<tr>
-<td>status</td>
-<td>unverified</td>
-</tr>
-<tr>
-<td>status</td>
 <td>approved</td>
 </tr>
 <tr>
 <td>status</td>
-<td>declined</td>
-</tr>
-<tr>
-<td>status</td>
 <td>cancelled</td>
-</tr>
-<tr>
-<td>status_reason</td>
-<td>The balance of the nominated bank account for this Payment Request is not available.</td>
-</tr>
-<tr>
-<td>status_reason</td>
-<td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
 <tr>
 <td>status_reason</td>
@@ -15904,19 +15888,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>pending_approval</td>
-</tr>
-<tr>
-<td>status</td>
-<td>unverified</td>
-</tr>
-<tr>
-<td>status</td>
 <td>approved</td>
-</tr>
-<tr>
-<td>status</td>
-<td>declined</td>
 </tr>
 <tr>
 <td>status</td>
@@ -15967,7 +15939,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
       </span><span class="nl">"authoriser_contact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb6a9252-3818-44dc-b5aa-2195391a746f"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"contact_initiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nl">"schedule_ref"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_approval"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"matures_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-09T16:58:00Z"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"responded_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -16048,9 +16020,9 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» status_reason</td>
-<td>string,null</td>
+<td>null</td>
 <td>true</td>
-<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
+<td>(Deprecated) Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
 </tr>
 <tr>
 <td>» matures_at</td>
@@ -16116,31 +16088,11 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>pending_approval</td>
-</tr>
-<tr>
-<td>status</td>
-<td>unverified</td>
-</tr>
-<tr>
-<td>status</td>
 <td>approved</td>
 </tr>
 <tr>
 <td>status</td>
-<td>declined</td>
-</tr>
-<tr>
-<td>status</td>
 <td>cancelled</td>
-</tr>
-<tr>
-<td>status_reason</td>
-<td>The balance of the nominated bank account for this Payment Request is not available.</td>
-</tr>
-<tr>
-<td>status_reason</td>
-<td>The nominated bank account for this Payment Request has insufficient funds.</td>
 </tr>
 <tr>
 <td>status_reason</td>
@@ -16260,9 +16212,9 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>» status_reason</td>
-<td>string,null</td>
+<td>null</td>
 <td>true</td>
-<td>Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
+<td>(Deprecated) Only used when the <code>status</code> is <code>declined</code> due to prechecking.</td>
 </tr>
 <tr>
 <td>» matures_at</td>
