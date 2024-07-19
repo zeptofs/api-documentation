@@ -403,6 +403,7 @@ Currently the following `POST` requests can be made idempotent. We **strongly re
 * [Request Payment](/#request-payment)
 * [Make a Payment](/#make-a-payment)
 * [Issue a Refund](/#issue-a-refund)
+* [Add a Transfer](/#add-a-transfer)
 
 ## Error responses
 
@@ -942,6 +943,7 @@ To protect against timing attacks, use a constant-time string comparison to comp
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
+- **2024-07-18** - Updated Add a Transfer to allow idempotent requests, add `Idempotency-Key` as optional header.
 - **2023-08-29** - Remove references to the prefail feature
 - **2023-04-20** - Changed the webhook retention period to 7 days
 - **2023-03-22** - Removed the `Total` pagination header
@@ -8415,6 +8417,7 @@ curl --request POST \
   --header 'accept: application/json' \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
+  --header 'idempotency-key: {unique-uuid-per-transfer}' \
   --data '{"from_bank_account_id":"a79423b2-3827-4cf5-9eda-dc02a298d005","to_bank_account_id":"0921a719-c79d-4ffb-91b6-1b30ab77d14d","amount":100000,"description":"Float account balance adjustment","matures_at":"2021-06-06T00:00:00Z"}'
 ```
 
@@ -8431,6 +8434,7 @@ http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["accept"] = 'application/json'
+request["idempotency-key"] = '{unique-uuid-per-transfer}'
 request["authorization"] = 'Bearer {access-token}'
 request.body = "{\"from_bank_account_id\":\"a79423b2-3827-4cf5-9eda-dc02a298d005\",\"to_bank_account_id\":\"0921a719-c79d-4ffb-91b6-1b30ab77d14d\",\"amount\":100000,\"description\":\"Float account balance adjustment\",\"matures_at\":\"2021-06-06T00:00:00Z\"}"
 
@@ -8449,6 +8453,7 @@ var options = {
   "headers": {
     "content-type": "application/json",
     "accept": "application/json",
+    "idempotency-key": "{unique-uuid-per-transfer}",
     "authorization": "Bearer {access-token}"
   }
 };
@@ -8486,6 +8491,7 @@ payload = "{\"from_bank_account_id\":\"a79423b2-3827-4cf5-9eda-dc02a298d005\",\"
 headers = {
     'content-type': "application/json",
     'accept': "application/json",
+    'idempotency-key': "{unique-uuid-per-transfer}",
     'authorization': "Bearer {access-token}"
     }
 
@@ -8501,6 +8507,7 @@ print(data.decode("utf-8"))
 HttpResponse<String> response = Unirest.post("https://api.sandbox.zeptopayments.com/transfers")
   .header("content-type", "application/json")
   .header("accept", "application/json")
+  .header("idempotency-key", "{unique-uuid-per-transfer}")
   .header("authorization", "Bearer {access-token}")
   .body("{\"from_bank_account_id\":\"a79423b2-3827-4cf5-9eda-dc02a298d005\",\"to_bank_account_id\":\"0921a719-c79d-4ffb-91b6-1b30ab77d14d\",\"amount\":100000,\"description\":\"Float account balance adjustment\",\"matures_at\":\"2021-06-06T00:00:00Z\"}")
   .asString();
@@ -8521,6 +8528,7 @@ $request->setBody($body);
 
 $request->setHeaders(array(
   'authorization' => 'Bearer {access-token}',
+  'idempotency-key' => '{unique-uuid-per-transfer}',
   'accept' => 'application/json',
   'content-type' => 'application/json'
 ));
@@ -8551,6 +8559,7 @@ func main() {
 
 	req.Header.Add("content-type", "application/json")
 	req.Header.Add("accept", "application/json")
+	req.Header.Add("idempotency-key", "{unique-uuid-per-transfer}")
 	req.Header.Add("authorization", "Bearer {access-token}")
 
 	res, _ := http.DefaultClient.Do(req)
@@ -8584,6 +8593,7 @@ Use this endpoint when you want to create a Transfer between any 2 of your float
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
+|Idempotency-Key|header|string|false|Idempotency key to support safe retries for 24h|
 |body|body|[AddATransferRequest](#schemaaddatransferrequest)|true|No description|
 |» from_bank_account_id|body|string|true|The source float/bank account (UUID)|
 |» to_bank_account_id|body|string|true|The destination float/bank account (UUID)|
