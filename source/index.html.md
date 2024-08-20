@@ -339,27 +339,9 @@ Common use cases:
 * Lending
 
 ## Getting paid
-
 ### POSTing a [Payment Request](/#Zepto-API-Payment-Requests)
-
-Provides the ability to send a Payment Request (get paid) to any Contact that has an accepted Agreement in place.
-
-To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](/#Zepto-API-Agreements) with them.
-
-To do so, you can send them an [Open Agreement link](https://help.zepto.money/agreements/open-agreement) or [Unassigned Agreement link](http://help.zepto.money/agreements/unassigned-agreement) for them to [elect & verify their bank account](https://help.zepto.money/bank-accounts/instant-account-verification-iav) and accept the Agreement.
-
-Having this in place will allow any future Payment Requests to be automatically approved and processed as per the Agreement terms.
-
-Common use cases:
-
-* Subscriptions
-* On-account balance payments
-* Bill smoothing
-* Repayment plans
-
-Example flow embedding an [Open Agreement link](https://help.zepto.money/agreements/open-agreement) using an iFrame in order to automate future Payment Request approvals:
-
-[![Hosted Open Agreement](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/host_oa.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/host_oa.png)
+Provides the ability to send a Payment Request (get paid) to a Contact that has accepted a direct debit agreement (external to Zepto).
+Refer to the following article to get started: https://help.zepto.money/en/articles/2866698-au-kyc-trusted-general
 
 ## Idempotent requests
 
@@ -555,15 +537,6 @@ For example:
 * NPP amount `$3.04` will cause the transaction to fail, triggering credit failure code `E304` (Account Not Found).
 
 You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on [what happens when an NPP Payment fails](https://help.zepto.money/en/articles/4405560-what-happens-when-an-npp-payment-fails) to learn more about what happens when an NPP Payment is unable to process.
-
-## Instant account verification accounts
-When using any of our hosted solutions ([Payment Requests](https://help.zepto.money/en/?q=payment+request), [Open Agreements](https://help.zepto.money/agreements/open-agreement) or [Unassigned Agreements](http://help.zepto.money/agreements/unassigned-agreement)) you may want to test the [Instant Account Verification (IAV)](http://help.zepto.money/bank-accounts/instant-account-verification-iav) process where we accept online banking credentials to validate bank account access. To do so, you can use the following credentials:
-
-| Login | Password |
-|-------|----------|
-| `12345678` | `TestMyMoney` |
-
-<aside class="notice">The credentials will work with any of the available financial institutions.</aside>
 # Configuration
 ## Scopes
 Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.
@@ -573,9 +546,7 @@ Scopes define the level of access granted via the OAuth2 authorisation process. 
 | `public` | View user's public information |
 | `agreements` | Manage user's Agreements |
 | `bank_accounts` | Manage user's Bank Accounts |
-| `bank_connections` | Manage user's Bank Connections |
 | `contacts` | Manage user's Contacts |
-| `open_agreements` | Manage user's Open Agreements |
 | `payments` | Manage user's Payments |
 | `payment_requests` | Manage user's Payment Requests |
 | `refunds` | Manage user's Refunds |
@@ -943,7 +914,6 @@ To protect against timing attacks, use a constant-time string comparison to comp
 # Changelog
 We take backwards compatibility seriously. The following list contains backwards compatible changes:
 
-- **2024-08-19** - Removed the Open Agreement, Unassigned Agreements and Bank Connections endpoints
 - **2024-05-07** - Updated Payment Request status values, deprecate `status_reason`.
 - **2023-08-29** - Remove references to the prefail feature
 - **2023-04-20** - Changed the webhook retention period to 7 days
@@ -8726,54 +8696,19 @@ Use this endpoint to resend a failed webhook delivery.
 |---|---|---|---|
 |data|[object]|true|No description|
 
-## ListAllBankConnectionsResponse
+## AddAReceivableContactRequest
 
-<a id="schemalistallbankconnectionsresponse"></a>
+<a id="schemaaddareceivablecontactrequest"></a>
 
 ```json
 {
-  "data": [
-    {
-      "id": "fb497754-87e2-407d-871f-32aec39d09d4",
-      "provider_name": "split",
-      "state": "active",
-      "refreshed_at": "2020-02-13T09:05:00Z",
-      "removed_at": null,
-      "failure_reason": null,
-      "institution": {
-        "short_name": "CBA",
-        "full_name": "Commonwealth Bank of Australia"
-      },
-      "contact": {
-        "id": "626e15b1-aa4a-496e-b5d6-3f8c1a6d2189",
-        "name": "George Morissette",
-        "email": "randy@windler.net"
-      },
-      "links": {
-        "update_bank_connection": "http://go.zeptopayments.com/authorise_bank_connections/williams-and-sons-5/fb497754-87e2-407d-871f-32aec39d09d4"
-      }
-    },
-    {
-      "id": "ddbee875-7344-4d74-9503-6233149fe1a0",
-      "provider_name": "split",
-      "state": "credentials_invalid",
-      "refreshed_at": "2020-02-13T09:05:00Z",
-      "removed_at": null,
-      "failure_reason": null,
-      "institution": {
-        "short_name": "CBA",
-        "full_name": "Commonwealth Bank of Australia"
-      },
-      "contact": {
-        "id": "72e37667-6364-440f-b1bd-56df5654e258",
-        "name": "Joel Boyle",
-        "email": "travis@hermanntorp.net"
-      },
-      "links": {
-        "update_bank_connection": "http://go.zeptopayments.com/authorise_bank_connections/williams-and-sons-5/ddbee875-7344-4d74-9503-6233149fe1a0"
-      }
-    }
-  ]
+  "name": "Delphine Jestin",
+  "email": "delphine@gmail.com",
+  "payid_email": "delphine_123@merchant.com.au",
+  "metadata": {
+    "custom_key": "Custom string",
+    "another_custom_key": "Maybe a URL"
+  }
 }
 ```
 
@@ -10312,27 +10247,27 @@ null
 |title|string|true|No description|
 |detail|string|true|No description|
 
-## ProposeUnassignedAgreementRequest
+## GetUserDetailsResponse
 
-<a id="schemaproposeunassignedagreementrequest"></a>
+<a id="schemagetuserdetailsresponse"></a>
 
 ```json
 {
-  "expiry_in_seconds": 60,
-  "single_use": false,
-  "terms": {
-    "per_payout": {
-      "min_amount": null,
-      "max_amount": 10000
-    },
-    "per_frequency": {
-      "days": 7,
-      "max_amount": 1000000
+  "data": {
+    "first_name": "Bear",
+    "last_name": "Dog",
+    "mobile_phone": "0456945832",
+    "email": "bear@dog.com",
+    "account": {
+      "name": "Dog Bones Inc",
+      "nickname": "dog-bones-inc",
+      "abn": "129959040",
+      "phone": "0418495033",
+      "street_address": "98 Acme Avenue",
+      "suburb": "Lead",
+      "state": "NSW",
+      "postcode": "2478"
     }
-  },
-  "metadata": {
-    "custom_key": "Custom string",
-    "another_custom_key": "Maybe a URL"
   }
 }
 ```
