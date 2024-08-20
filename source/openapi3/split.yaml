@@ -3546,29 +3546,6 @@ components:
             Maximum amount in cents the total of all PRs can be for the duration
             of the frequency. Specify <code>null</code> for no limit.
           example: 1000000
-    CreateOpenAgreementResponse:
-      title: Create an Open Agreement (response)
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          type: object
-      example:
-        data:
-          ref: OA.1
-          title: Subscription Plan A
-          status: active
-          created_at: '2017-03-20T00:53:27Z'
-          terms:
-            per_payout:
-              min_amount: null
-              max_amount: 10000
-            per_frequency:
-              days: 7
-              max_amount: 1000000
-          link: >-
-            https://go.sandbox.zeptopayments.com/open_agreements/aecff76d-13e0-4e17-b7c5-844ae07fa675/agreements/invitation
     AddAReceivableContactRequest:
       title: Add a Receivable Contact (request)
       required:

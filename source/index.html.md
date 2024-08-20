@@ -8762,40 +8762,6 @@ Use this endpoint to resend a failed webhook delivery.
 |days|integer|true|Amount of days to apply against the frequency. Specify <code>null</code> for no limit.|
 |max_amount|integer|true|Maximum amount in cents the total of all PRs can be for the duration of the frequency. Specify <code>null</code> for no limit.|
 
-## CreateOpenAgreementResponse
-
-<a id="schemacreateopenagreementresponse"></a>
-
-```json
-{
-  "data": {
-    "ref": "OA.1",
-    "title": "Subscription Plan A",
-    "status": "active",
-    "created_at": "2017-03-20T00:53:27Z",
-    "terms": {
-      "per_payout": {
-        "min_amount": null,
-        "max_amount": 10000
-      },
-      "per_frequency": {
-        "days": 7,
-        "max_amount": 1000000
-      }
-    },
-    "link": "https://go.sandbox.zeptopayments.com/open_agreements/aecff76d-13e0-4e17-b7c5-844ae07fa675/agreements/invitation"
-  }
-}
-```
-
-### Properties
-
-*Create an Open Agreement (response)*
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|data|object|true|No description|
-
 ## AddAReceivableContactRequest
 
 <a id="schemaaddareceivablecontactrequest"></a>
