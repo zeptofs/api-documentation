@@ -8696,6 +8696,106 @@ Use this endpoint to resend a failed webhook delivery.
 |---|---|---|---|
 |data|[object]|true|No description|
 
+## Terms
+
+<a id="schematerms"></a>
+
+```json
+{
+  "per_payout": {
+    "min_amount": 1,
+    "max_amount": 10000
+  },
+  "per_frequency": {
+    "days": 7,
+    "max_amount": 1000000
+  }
+}
+```
+
+### Properties
+
+*Agreement terms*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|per_payout|[PerPayout](#schemaperpayout)|true|No description|
+|per_frequency|[PerFrequency](#schemaperfrequency)|true|No description|
+
+## PerPayout
+
+<a id="schemaperpayout"></a>
+
+```json
+{
+  "min_amount": 1,
+  "max_amount": 10000
+}
+```
+
+### Properties
+
+*Per payout terms*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|min_amount|integer,null|true|Minimum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
+|max_amount|integer|true|Maximum amount in cents a Payment Request can be in order to be auto-approved. Specify <code>null</code> for no limit.|
+
+## PerFrequency
+
+<a id="schemaperfrequency"></a>
+
+```json
+{
+  "days": 7,
+  "max_amount": 1000000
+}
+```
+
+### Properties
+
+*Per frequency terms*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|days|integer|true|Amount of days to apply against the frequency. Specify <code>null</code> for no limit.|
+|max_amount|integer|true|Maximum amount in cents the total of all PRs can be for the duration of the frequency. Specify <code>null</code> for no limit.|
+
+## CreateOpenAgreementResponse
+
+<a id="schemacreateopenagreementresponse"></a>
+
+```json
+{
+  "data": {
+    "ref": "OA.1",
+    "title": "Subscription Plan A",
+    "status": "active",
+    "created_at": "2017-03-20T00:53:27Z",
+    "terms": {
+      "per_payout": {
+        "min_amount": null,
+        "max_amount": 10000
+      },
+      "per_frequency": {
+        "days": 7,
+        "max_amount": 1000000
+      }
+    },
+    "link": "https://go.sandbox.zeptopayments.com/open_agreements/aecff76d-13e0-4e17-b7c5-844ae07fa675/agreements/invitation"
+  }
+}
+```
+
+### Properties
+
+*Create an Open Agreement (response)*
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|data|object|true|No description|
+
 ## AddAReceivableContactRequest
 
 <a id="schemaaddareceivablecontactrequest"></a>
