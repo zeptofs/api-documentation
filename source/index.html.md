@@ -365,10 +365,12 @@ Refer to the following article to get started: https://help.zepto.money/en/artic
 ```
 
 The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
+
 For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.
 
 To perform an idempotent request, provide an additional `Idempotency-Key: <key>` header to the request.
-You can pass any value as the key but we suggest that you use [V4 UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random string.
+
+You can pass any value (up to 256 characters) as the key but we suggest [V4 UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random string.
 
 Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a `409 Conflict`.
 
