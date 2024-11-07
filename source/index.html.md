@@ -380,8 +380,6 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 * Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 * A request that quickly follows another with the same idempotency key may return with `503 Service Unavailable`. If so, retry the request after the number of seconds specified in the `Retry-After` response header.
 
-**Caution:** Keys are scoped to the User making the request. This means if User A makes a request with an access token they have generated to an Account using idempotency key `123` and User B makes a request with their own access token to the same Account using idempotency key `123` the requests will be treated as different and not idempotent.
-
 Currently the following `POST` requests can be made idempotent. We **strongly recommend** sending a unique `Idempotency-Key` header when making those requests to allow for safe retries:
 
 * [Request Payment](/#request-payment)
