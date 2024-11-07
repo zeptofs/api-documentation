@@ -1132,11 +1132,13 @@ Refer to the following article to get started: https://help.zepto.money/en/artic
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
-For example, if a <a href="#Zepto-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.</p>
+<p>The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.</p>
 
-<p>To perform an idempotent request, provide an additional <code>Idempotency-Key: &lt;key&gt;</code> header to the request.
-You can pass any value as the key but we suggest that you use <a href="https://www.uuidtools.com/generate/v4">V4 UUIDs</a> or another appropriately random string.</p>
+<p>For example, if a <a href="#Zepto-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.</p>
+
+<p>To perform an idempotent request, provide an additional <code>Idempotency-Key: &lt;key&gt;</code> header to the request.</p>
+
+<p>You can pass any value (up to 256 characters) as the key but we suggest <a href="https://www.uuidtools.com/generate/v4">V4 UUIDs</a> or another appropriately random string.</p>
 
 <p>Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a <code>409 Conflict</code>.</p>
 
@@ -1147,8 +1149,6 @@ You can pass any value as the key but we suggest that you use <a href="https://w
 <li>Endpoints that use the <code>GET</code> or <code>DELETE</code> actions are idempotent by nature.</li>
 <li>A request that quickly follows another with the same idempotency key may return with <code>503 Service Unavailable</code>. If so, retry the request after the number of seconds specified in the <code>Retry-After</code> response header.</li>
 </ul>
-
-<p><strong>Caution:</strong> Keys are scoped to the User making the request. This means if User A makes a request with an access token they have generated to an Account using idempotency key <code>123</code> and User B makes a request with their own access token to the same Account using idempotency key <code>123</code> the requests will be treated as different and not idempotent.</p>
 
 <p>Currently the following <code>POST</code> requests can be made idempotent. We <strong>strongly recommend</strong> sending a unique <code>Idempotency-Key</code> header when making those requests to allow for safe retries:</p>
 
