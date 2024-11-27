@@ -172,15 +172,15 @@ If you're looking to only access your own account via the API, you can generate 
 
 - To do this, sign in to your Zepto account and [create an application](https://go.sandbox.zeptopayments.com/oauth/applications) if you haven't already. Click on your application from your [application list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on **Personal access**.
 
-    [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
+  [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
 
-    _(You'll have the option to give the token a title)_
+  _(You'll have the option to give the token a title)_
 
-    [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)
+  [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)
 
 - Now that you have an `access_token` you can interact with your Zepto account via the API.
 
-    To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
+  To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
 
 ## OAuth grant flow
 
@@ -335,15 +335,13 @@ curl -F "grant_type=refresh_token" \
 > Example response
 
 ```json
-
 {
-    "access_token": "ad0b5847cb7d254f1e2ff1910275fe9dcb95345c9d54502d156fe35a37b93e80",
-    "token_type": "bearer",
-    "expires_in": 7200,
-    "refresh_token": "cc38f78a5b8abe8ee81cdf25b1ca74c3fa10c3da2309de5ac37fde00cbcf2815",
-    "scope": "public"
+  "access_token": "ad0b5847cb7d254f1e2ff1910275fe9dcb95345c9d54502d156fe35a37b93e80",
+  "token_type": "bearer",
+  "expires_in": 7200,
+  "refresh_token": "cc38f78a5b8abe8ee81cdf25b1ca74c3fa10c3da2309de5ac37fde00cbcf2815",
+  "scope": "public"
 }
-
 ```
 
 When using the authorisation code grant above, Zepto will return a `refresh token` along with the access token. Access tokens are short lived and last 2 hours but refresh tokens do not expire.
@@ -351,7 +349,7 @@ When using the authorisation code grant above, Zepto will return a `refresh toke
 When the access token expires, instead of sending the user back through the authorisation flow you can use the refresh token to retrieve a new access token with the same permissions as the old one.
 
 > **_NOTE:_**  
->   The `refresh_token` gets regenerated and sent alongside the new `access_token`. In other words, `refresh_token`s are single use so you'll want to store the newly generated `refresh_token` everytime you use it to get a new `access_token`
+>  The `refresh_token` gets regenerated and sent alongside the new `access_token`. In other words, `refresh_token`s are single use so you'll want to store the newly generated `refresh_token` everytime you use it to get a new `access_token`
 
 ## Making payments
 
@@ -402,7 +400,6 @@ Example flow embedding an [Open Agreement link](https://help.zepto.money/agreeme
 > Example response
 
 ```json
-
 {
   "errors": [
     {
@@ -417,7 +414,6 @@ Example flow embedding an [Open Agreement link](https://help.zepto.money/agreeme
     }
   ]
 }
-
 ```
 
 The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
@@ -453,7 +449,6 @@ Currently the following `POST` requests can be made idempotent. We **strongly re
 > Example detailed error response
 
 ```json
-
 {
   "errors": [
     {
@@ -465,17 +460,14 @@ Currently the following `POST` requests can be made idempotent. We **strongly re
     }
   ]
 }
-
 ```
 
 > Example resource error response
 
 ```json
-
 {
   "errors": "A sentence explaining error/s encounted"
 }
-
 ```
 
 The Zepto API returns two different types of error responses depending on the context.
@@ -561,15 +553,13 @@ You can also pass the values directly to the sign up page outside of the OAuth2 
 > Example failure object
 
 ```json
-
 {
   "failure": {
-      "code": "E302",
-      "title": "BSB Not NPP Enabled",
-      "detail": "The target BSB is not NPP enabled. Please try another channel."
+    "code": "E302",
+    "title": "BSB Not NPP Enabled",
+    "detail": "The target BSB is not NPP enabled. Please try another channel."
   }
 }
-
 ```
 
 Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds. All transactions are simulated and no communication with financial institutions is performed.
@@ -690,25 +680,23 @@ You can control the pagination by including `per_page=x` and/or `page=x` in the 
 
 The `Link` header will be optionally present if a "next page" is available to navigate to. The next page link is identified with `rel="next"`
 
->  **Legacy Pagination**: Some existing users may still be on a transitional legacy version of pagination.
+> **Legacy Pagination**: Some existing users may still be on a transitional legacy version of pagination.
 >
->  The Legacy version returns some extra **deprecated header values: `Total` plus `rel="last"` & `rel="prev"` in `Link`**.
+> The Legacy version returns some extra **deprecated header values: `Total` plus `rel="last"` & `rel="prev"` in `Link`**.
 >
->  Please transition to only using the `rel="next"` from the `Link` header, as all other values are deprecated.
+> Please transition to only using the `rel="next"` from the `Link` header, as all other values are deprecated.
 
 ## Remitter
 
 > Example request
 
 ```json
-
 {
   "...": "...",
   "metadata": {
     "remitter": "CustomRem"
-    }
+  }
 }
-
 ```
 
 You can elect to assign a remitter name on a per-request basis when submitting Payments & Payment Requests. Simply append the `remitter` key and a value within the `metadata` key.
@@ -744,7 +732,6 @@ Should you prefer debit aggregation to be disabled, please contact [support@zept
 > Example response
 
 ```json
-
 {
   "event": {
     "type": "object.action",
@@ -754,11 +741,8 @@ Should you prefer debit aggregation to be disabled, please contact [support@zept
       "bank_account_id": "x"
     }
   },
-  "data": [
-    {}
-  ]
+  "data": [{}]
 }
-
 ```
 
 Please refer to our help centre [article on webhooks](http://help.zepto.money/en/articles/3303626-webhooks) for more information and an overview of what you can achieve with webhooks.
@@ -950,40 +934,35 @@ puts(given_signature)
 ```
 
 ```javascript
+var crypto = require("crypto");
 
-var crypto = require('crypto')
+var message = "full payload of the request";
 
-var message = 'full payload of the request'
-
-var secret = '1234'
+var secret = "1234";
 
 var splitSignature =
-'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'
+  "1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f";
 
+var data = splitSignature.split(".");
 
-var data = splitSignature.split('.')
+var timestamp = data[0];
 
-var timestamp = data[0]
+var givenSignature = data[1];
 
-var givenSignature = data[1]
+var signedPayload = timestamp + "." + message;
 
+var expectedSignature = crypto
+  .createHmac("sha256", secret)
+  .update(signedPayload)
+  .digest("hex");
 
-var signedPayload = timestamp + '.' + message
-
-
-var expectedSignature = crypto.createHmac('sha256',
-secret).update(signedPayload).digest('hex')
-
-
-console.log(expectedSignature)
+console.log(expectedSignature);
 
 // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 
-console.log(givenSignature)
+console.log(givenSignature);
 
 // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
-
-
 ```
 
 ```php
@@ -1058,7 +1037,7 @@ class Main {
 
 <!--
 
- 
+
 
 This example is commented out since the docs do not include C#
 
