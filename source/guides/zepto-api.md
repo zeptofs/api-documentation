@@ -49,7 +49,7 @@ And for all kinds of How To's and Recipes, head on over to our [Help Guide](http
 
 # System Status
 
-Check the platform status, or subscribe to receive notifications at [status.zeptopayments.com](https://status.zeptopayments.com/).  
+Check the platform status, or subscribe to receive notifications at [status.zeptopayments.com](https://status.zeptopayments.com/).
 If you would like to check platform status programmatically, please refer to [status.zeptopayments.com/api](https://status.zeptopayments.com/api).
 
 # Breaking Changes
@@ -72,7 +72,7 @@ A breaking change is assumed to be:
 
 - Changing a HTTP response status code
 
-We take backwards compatibility very seriously, and will make every effort to ensure this never changes. In the unfortunate (and rare) case where a breaking change can not be avoided, these will be announced well in  
+We take backwards compatibility very seriously, and will make every effort to ensure this never changes. In the unfortunate (and rare) case where a breaking change can not be avoided, these will be announced well in
 advance, enabling a transition period for API consumers.
 
 The following are not assumed to be a breaking change and must be taken into account by API consumers:
@@ -97,7 +97,7 @@ In the case of non breaking changes, a transition period may not be provided, me
 
 The best way to familiarise yourself with our API is by interacting with it.
 
-We've preloaded a collection with all our endpoints for you to use in Postman.  
+We've preloaded a collection with all our endpoints for you to use in Postman.
 Before you start, **import a copy** of our API collection:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0=)
@@ -197,7 +197,7 @@ If you're looking to only access your own account via the API, you can generate 
 
    Construct the initial URL the user will need to visit in order to grant your application permission to act on his/her behalf. The constructed URL describes the level of permission ([`scope`](doc:zepto-api#scopes)), the application requesting permission (`client_id`) and where the user gets redirected once they've granted permission (`redirect_uri`).
 
-   The URL should be formatted to look like this:  
+   The URL should be formatted to look like this:
    `https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}`
 
    | Parameter       | Description                                                                                |
@@ -229,7 +229,7 @@ If you're looking to only access your own account via the API, you can generate 
 
 4. **Wrap-up**
 
-   Now that you have an access token and refresh token, you can interact with the Zepto API as the user related to the access token.  
+   Now that you have an access token and refresh token, you can interact with the Zepto API as the user related to the access token.
    To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
 
 ## OAuth grant flow tutorial
@@ -240,7 +240,7 @@ Before you start, load up our API collection:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41?action=collection%2Ffork&collection-url=entityId%3D3168734-baa5ff70-4bc2-44d5-9ba6-fcb61839ff41%26entityType%3Dcollection%26workspaceId%3D6400ea2b-bb46-421e-a88c-a8625653c35a#?env%5BSplit%20Payments%20Public%20Sandbox%5D=W3sia2V5Ijoic2l0ZV9ob3N0IiwidmFsdWUiOiJodHRwczovL2dvLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX2hvc3QiLCJ2YWx1ZSI6Imh0dHBzOi8vYXBpLnNhbmRib3guc3BsaXQuY2FzaCIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoib2F1dGgyX2FwcGxpY2F0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im9hdXRoMl9zZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5Ijoic2NvcGUiLCJ2YWx1ZSI6InB1YmxpYyBhZ3JlZW1lbnRzIGJhbmtfYWNjb3VudHMgYmFua19jb25uZWN0aW9ucyBjb250YWN0cyBwYXltZW50cyBwYXltZW50X3JlcXVlc3RzIHJlZnVuZF9yZXF1ZXN0cyB0cmFuc2FjdGlvbnMgcmVmdW5kcyBvcGVuX2FncmVlbWVudHMgb2ZmbGluZV9hY2Nlc3MiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imlzbzg2MDFfbm93IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZWZyZXNoX3Rva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0=)
 
-**A screencast of this process is also available:  
+**A screencast of this process is also available:
 <https://vimeo.com/246203244>.**
 
 1. **Create a Zepto account**
@@ -297,7 +297,7 @@ Before you start, load up our API collection:
 
    [![Postman use token](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_token.png)
 
-> **_NOTE:_** Remember to select the access token everytime you try  
+> **_NOTE:_** Remember to select the access token everytime you try
 > a new endpoint. Have fun!
 
 ## Authentication and Authorisation
@@ -348,7 +348,7 @@ When using the authorisation code grant above, Zepto will return a `refresh toke
 
 When the access token expires, instead of sending the user back through the authorisation flow you can use the refresh token to retrieve a new access token with the same permissions as the old one.
 
-> **_NOTE:_**  
+> **_NOTE:_**
 >  The `refresh_token` gets regenerated and sent alongside the new `access_token`. In other words, `refresh_token`s are single use so you'll want to store the newly generated `refresh_token` everytime you use it to get a new `access_token`
 
 ## Making payments
@@ -545,7 +545,7 @@ As an example, the following authorisation URL would display the **personal sign
 
 `https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=xxx&scope=xxx&landing=sign_up&first_name=George`
 
-You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded:  
+You can also pass the values directly to the sign up page outside of the OAuth2 authorisation process. Click on the following link to see the values preloaded:
 [https://go.sandbox.zeptopayments.com/business/sign_up?name=GeorgeCo&nickname=georgeco&first_name=George](https://go.sandbox.zeptopayments.com/business/sign_up?name=GeorgeCo&nickname=georgceco&first_name=George).
 
 # Sandbox Testing Details
@@ -627,8 +627,8 @@ You will receive all the same notifications as if this happened in our live envi
 
 ## Instant account verification accounts
 
-When using any of our hosted solutions ([Payment Requests](https://help.zepto.money/en/?q=payment+request),  
-[Open Agreements](https://help.zepto.money/agreements/open-agreement) or  
+When using any of our hosted solutions ([Payment Requests](https://help.zepto.money/en/?q=payment+request),
+[Open Agreements](https://help.zepto.money/agreements/open-agreement) or
 [Unassigned Agreements](http://help.zepto.money/agreements/unassigned-agreement)) you may want to test the [Instant Account Verification (IAV)](http://help.zepto.money/bank-accounts/instant-account-verification-iav) process where we accept online banking credentials to validate bank account access. To do so, you can use the following credentials:
 
 | Login      | Password      |
