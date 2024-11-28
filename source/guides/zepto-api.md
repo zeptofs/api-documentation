@@ -12,7 +12,6 @@ Zepto allows you to make, get and manage payments using nothing but bank account
 It is important to understand that there are 2 main ways Zepto can be used for maximum flexibility:
 
 1. Between Zepto accounts.
-
 2. Between a Zepto account and anyone.
 
 Due to the above, certain endpoints and techniques will differ slightly depending on who you are interacting with. You can find more on this in the [Making payments](doc:zepto-api#making-payments) and [Getting paid](doc:zepto-api#getting-paid) guides.
@@ -22,27 +21,16 @@ And for all kinds of How To's and Recipes, head on over to our [Help Guide](http
 # Conventions
 
 - Authentication is performed using OAuth2. See the [Get started](doc:zepto-api#get-started) and [Authentication & Authorisation](doc:zepto-api#authentication-and-authorisation) guides for more.
-
 - All communication is via `https` and supports **only** `TLSv1.2`.
-
 - Production API: `https://api.zeptopayments.com/`.
-
 - Production UI: `https://go.zeptopayments.com/`.
-
 - Sandbox API: `https://api.sandbox.zeptopayments.com/`.
-
 - Sandbox UI: `https://go.sandbox.zeptopayments.com/`.
-
 - Data is sent and received as JSON.
-
 - Clients should include the `Accepts: application/json` header in their requests.
-
 - Currencies are represented by 3 characters as defined in [ISO 4217](http://www.xe.com/iso4217.php).
-
 - Dates & times are returned in UTC using [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used, or `Australia/Sydney` if no TZ is configured.
-
 - Amounts are always in cents with no decimals unless otherwise stated.
-
 - Zepto provides static public IP addresses for all outbound traffic, including webhooks.
   - Sandbox IP: `13.237.142.60`
   - Production IPs: `52.64.11.67` and `13.238.78.114`
@@ -57,19 +45,12 @@ If you would like to check platform status programmatically, please refer to [st
 A breaking change is assumed to be:
 
 - Renaming a parameter (request/response)
-
 - Removing a parameter (request/response)
-
 - Changing a parameter type (request/response)
-
 - Renaming a header (request/response)
-
 - Removing a header (request/response)
-
 - Application of stricter validation rules for request parameters
-
 - Reducing the set of possible enumeration values for a request
-
 - Changing a HTTP response status code
 
 We take backwards compatibility very seriously, and will make every effort to ensure this never changes. In the unfortunate (and rare) case where a breaking change can not be avoided, these will be announced well in
@@ -78,15 +59,10 @@ advance, enabling a transition period for API consumers.
 The following are not assumed to be a breaking change and must be taken into account by API consumers:
 
 - Addition of optional new parameters in request
-
 - Addition of new parameters in response
-
 - Addition of new headers in request
-
 - Reordering of parameters in response
-
 - Softening of validation rules for request parameters
-
 - Increasing the set of possible enumeration values
 
 In the case of non breaking changes, a transition period may not be provided, meaning the possibility of such changes occurring must be considered in consumers' logic so as not to break any integrations with both API and Webhooks.
@@ -105,43 +81,20 @@ Before you start, **import a copy** of our API collection:
 Okay, let's get things setup!
 
 1. **Create a Zepto account**
-
    If you haven't already, you'll want to create a sandbox Zepto account at <https://go.sandbox.zeptopayments.com>
-
 2. **Register your application with Zepto**
-
    Sign in and create an OAuth2 application: <https://go.sandbox.zeptopayments.com/oauth/applications>.
-
    [![Zepto OAuth2 app create](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png)
-
 3. **Generate personal access tokens**
-
-   ```
    The quickest way to access your Zepto account via the API is using personal access tokens. Click on your newly created application from your [application list](https://go.sandbox.zeptopayments.com/oauth applications) and click on
-   ```
-
-   **+ Personal Access Token**.
-
-   ```
-   [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
-
+   [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
    _(You'll have the option to give the token a title)_
-
-   [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)
-
    > **_NOTE:_** Please note that personal access tokens do not expire.
-   ```
-
 4. **Use personal access token in Postman**
-
    You can use this `access_token` to authorise any requests to the Zepto API in Postman by choosing the **Bearer Token** option under the **Authorization** tab.
-
    [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png)
-
 5. **Make an API request!**
-
    You are now ready to interact with your Zepto account via the API! Go ahead and send a request using Postman.
-
    [![Postman use personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png)
 
 ## Get started
@@ -151,36 +104,25 @@ This guide will help you setup an OAuth2 app in order to get authenticated & aut
 **Before you start:**
 
 - We use the term **user** below but the user can be a third party or the same user that owns the OAuth2 application.
-
 - As noted below, some access tokens expire every 2 hours. To get a new access token use the [refresh grant strategy](doc:zepto-api#authentication-and-authorisation) to swap a refresh token for a new access token.
 
 1. **Create a Zepto account**
-
    If you haven't already, you'll want to create a sandbox Zepto account at <https://go.sandbox.zeptopayments.com>.
-
 2. **Choose authentication method**
-
    All requests to the Zepto API require an `access_token` for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:
-
-   **Personal access token** If you only need to access your own Zepto account via the API, then using personal access tokens are the most straight-forward way. Refer to [Personal access token](doc:zepto-api#personal-access-token) to setup. These tokens do not expire so no refreshing is required.
-
-   **OAuth grant flow** When you require your application to act on behalf of other Zepto accounts you'll need to implement the OAuth grant flow process. Refer to [OAuth grant flow guide](doc:zepto-api#oauth-grant-flow) to setup. There is also an [OAuth grant flow tutorial](doc:zepto-api#oauth-grant-flow-tutorial). These access tokens expire every 2 hours, unless the `offline_access` scope is used in which case the tokens will not expire.
+   - **Personal access token** If you only need to access your own Zepto account via the API, then using personal access tokens are the most straight-forward way. Refer to [Personal access token](doc:zepto-api#personal-access-token) to setup. These tokens do not expire so no refreshing is required.
+   - **OAuth grant flow** When you require your application to act on behalf of other Zepto accounts you'll need to implement the OAuth grant flow process. Refer to [OAuth grant flow guide](doc:zepto-api#oauth-grant-flow) to setup. There is also an [OAuth grant flow tutorial](doc:zepto-api#oauth-grant-flow-tutorial). These access tokens expire every 2 hours, unless the `offline_access` scope is used in which case the tokens will not expire.
 
 ## Personal access token
 
-If you're looking to only access your own account via the API, you can generate a personal access token from the UI. These tokens do not expire, but can be deleted.
+If you're looking to only access your own account via the API, you can generate a personal access token from the UI. These tokens do not expire, but can be deleted. To do this:
 
-- To do this, sign in to your Zepto account and [create an application](https://go.sandbox.zeptopayments.com/oauth/applications) if you haven't already. Click on your application from your [application list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on **Personal access**.
-
-  [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
-
-  _(You'll have the option to give the token a title)_
-
-  [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)
-
-- Now that you have an `access_token` you can interact with your Zepto account via the API.
-
-  To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
+1. Sign in to your Zepto account and [create an application](https://go.sandbox.zeptopayments.com/oauth/applications) if you haven't already. Click on your application from your [application list](https://go.sandbox.zeptopayments.com/oauth/applications) and click on **Personal access**.
+   [![Zepto locate personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png)
+   _(You'll have the option to give the token a title)_
+   [![Zepto personal OAuth2 tokens](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)](https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png)
+2. Now that you have an `access_token` you can interact with your Zepto account via the API.
+   To do so, you must simply append the access token to the header of any API request: `Authorization: Bearer {access_token}`
 
 ## OAuth grant flow
 
@@ -349,7 +291,7 @@ When using the authorisation code grant above, Zepto will return a `refresh toke
 When the access token expires, instead of sending the user back through the authorisation flow you can use the refresh token to retrieve a new access token with the same permissions as the old one.
 
 > **_NOTE:_**
->  The `refresh_token` gets regenerated and sent alongside the new `access_token`. In other words, `refresh_token`s are single use so you'll want to store the newly generated `refresh_token` everytime you use it to get a new `access_token`
+> The `refresh_token` gets regenerated and sent alongside the new `access_token`. In other words, `refresh_token`s are single use so you'll want to store the newly generated `refresh_token` everytime you use it to get a new `access_token`
 
 ## Making payments
 
