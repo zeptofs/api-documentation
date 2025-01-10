@@ -2670,6 +2670,7 @@ paths:
           style: simple
           schema:
             type: string
+          example: C.625v
       requestBody:
         description: ''
         content:

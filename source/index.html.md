@@ -5468,7 +5468,7 @@ This allows you to return any funds that were previously collected or received i
 
 ```shell
 curl --request POST \
-  --url https://api.sandbox.zeptopayments.com/credits/string/refunds \
+  --url https://api.sandbox.zeptopayments.com/credits/C.625v/refunds \
   --header 'accept: application/json' \
   --header 'authorization: Bearer {access-token}' \
   --header 'content-type: application/json' \
@@ -5480,7 +5480,7 @@ curl --request POST \
 require 'uri'
 require 'net/http'
 
-url = URI("https://api.sandbox.zeptopayments.com/credits/string/refunds")
+url = URI("https://api.sandbox.zeptopayments.com/credits/C.625v/refunds")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -5504,7 +5504,7 @@ var options = {
   "method": "POST",
   "hostname": "api.sandbox.zeptopayments.com",
   "port": null,
-  "path": "/credits/string/refunds",
+  "path": "/credits/C.625v/refunds",
   "headers": {
     "content-type": "application/json",
     "accept": "application/json",
@@ -5550,7 +5550,7 @@ headers = {
     'authorization': "Bearer {access-token}"
     }
 
-conn.request("POST", "/credits/string/refunds", payload, headers)
+conn.request("POST", "/credits/C.625v/refunds", payload, headers)
 
 res = conn.getresponse()
 data = res.read()
@@ -5559,7 +5559,7 @@ print(data.decode("utf-8"))
 ```
 
 ```java
-HttpResponse<String> response = Unirest.post("https://api.sandbox.zeptopayments.com/credits/string/refunds")
+HttpResponse<String> response = Unirest.post("https://api.sandbox.zeptopayments.com/credits/C.625v/refunds")
   .header("content-type", "application/json")
   .header("accept", "application/json")
   .header("idempotency-key", "{unique-uuid-per-refund}")
@@ -5577,7 +5577,7 @@ $request = new http\Client\Request;
 $body = new http\Message\Body;
 $body->append('{"amount":500,"channels":["direct_entry"],"reason":"Because reason","your_bank_account_id":"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679","metadata":{"custom_key":"Custom string","another_custom_key":"Maybe a URL"}}');
 
-$request->setRequestUrl('https://api.sandbox.zeptopayments.com/credits/string/refunds');
+$request->setRequestUrl('https://api.sandbox.zeptopayments.com/credits/C.625v/refunds');
 $request->setRequestMethod('POST');
 $request->setBody($body);
 
@@ -5606,7 +5606,7 @@ import (
 
 func main() {
 
-	url := "https://api.sandbox.zeptopayments.com/credits/string/refunds"
+	url := "https://api.sandbox.zeptopayments.com/credits/C.625v/refunds"
 
 	payload := strings.NewReader("{\"amount\":500,\"channels\":[\"direct_entry\"],\"reason\":\"Because reason\",\"your_bank_account_id\":\"9c70871d-8e36-4c3e-8a9c-c0ee20e7c679\",\"metadata\":{\"custom_key\":\"Custom string\",\"another_custom_key\":\"Maybe a URL\"}}")
 
