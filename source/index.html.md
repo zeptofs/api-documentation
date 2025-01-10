@@ -370,7 +370,7 @@ For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a ne
 
 To perform an idempotent request, provide an additional `Idempotency-Key: <key>` header to the request.
 
-You can pass any value (up to 256 characters) as the key but we suggest [V4 UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random string.
+You can pass any value (up to 256 characters) as the key but we suggest [V7 UUIDs](https://uuid7.com/) or another appropriately random string.
 
 Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a `409 Conflict`.
 
@@ -382,10 +382,10 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 
 Currently the following `POST` requests can be made idempotent. We **strongly recommend** sending a unique `Idempotency-Key` header when making those requests to allow for safe retries:
 
-* [Request Payment](/#request-payment)
-* [Make a Payment](/#make-a-payment)
-* [Issue a Refund](/#issue-a-refund)
-* [Add a Transfer](/#add-a-transfer)
+* [Request Payment](https://docs.zeptopayments.com/reference/makeapaymentrequest)
+* [Make a Payment](https://docs.zeptopayments.com/reference/makeapayment)
+* [Issue a Refund](https://docs.zeptopayments.com/reference/issuearefund)
+* [Add a Transfer](https://docs.zeptopayments.com/reference/addatransfer)
 
 ## Error responses
 
@@ -671,7 +671,7 @@ Use the following table to discover what type of response schema to expect for f
 3. Delivery order for webhook events is not guaranteed.
 4. We guarantee at least 1 delivery attempt.
 
-**For redelivery of webhooks, check out our [Webhook/WebhookDelivery API endpoints](#Zepto-API-Webhooks).**
+**For redelivery of webhooks, check out our [Webhook/WebhookDelivery API endpoints](https://docs.zeptopayments.com/reference/resendawebhookdelivery).**
 <aside class="notice">
   In the sandbox environment, webhook deliveries will only be retried once,
   to allow for easier testing of failure scenarios.
@@ -2732,7 +2732,7 @@ You can update the name, email, bank account and metadata of any Contact.
     <li>Previous transactions to this Contact will retain the name and bank account that was used at the time.</li>
     <li>You cannot update a Contact's bank account details if they currently have an accepted agreement.</li>
     <li>Any active Bank Connections will be lost if you change the Contact's bank account.</li>
-    <li>See our [Help Article](https://help.zepto.money/en/articles/3829211-how-do-i-change-my-customers-bank-account-details) for more information about the nuances and implications of changing a contacts Bank Account.</li>
+    <li>See our <a href="https://help.zepto.money/en/articles/3829211-how-do-i-change-my-customers-bank-account-details">Help Article</a> for more information about the nuances and implications of changing a contacts Bank Account.</li>
   </ul>
 </aside>
 
@@ -2991,7 +2991,7 @@ Receive funds from a Contact by allowing them to pay to a personalised PayID or 
   You can simulate this path in sandbox by adding <code>+failure</code> to your <code>payid_email</code> e.g <code>test+failure@zeptopayments.com</code>
 </aside>
 <aside class="notice">
-  You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="#simulate-incoming-payid-payment">PayID simulation endpoint</a>.
+  You can test receiving payments to a Receivable Contact in our sandbox environment using the <a href="https://docs.zeptopayments.com/reference/simulateincomingpayidpayment">PayID simulation endpoint</a>.
 </aside>
 
 > Body parameter
@@ -3736,7 +3736,7 @@ func main() {
 
 `POST /payment_requests`
 
-<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -4474,7 +4474,7 @@ func main() {
 
 `GET /payment_requests/receivables`
 
-Payment Requests where the debtor is sending you funds ([Receivable Contacts](/#add-a-receivable-contact)). This endpoint exposes all received payments.
+Payment Requests where the debtor is sending you funds ([Receivable Contacts](https://docs.zeptopayments.com/reference/addareceivablecontact)). This endpoint exposes all received payments.
 
 <h3 id="List-Receivables-parameters" class="parameters">Parameters</h3>
 
@@ -4789,7 +4789,7 @@ To enable custom payment flows, the required payment channel can be selected by 
   <li>["direct_entry"] - for slower traditional payments</li>
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
-<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -5636,7 +5636,7 @@ Certain rules apply to the issuance of a refund:
   <li>Many refunds may be created against the original Payment Request</li>
   <li>The total refunded amount must not exceed the original value</li>
 </ul>
-<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
