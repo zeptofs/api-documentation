@@ -360,7 +360,7 @@ Example flow embedding an [Open Agreement link](https://help.zepto.money/agreeme
 
 The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
 
-For example, if a [Payment](https://docs.zeptopayments.com/reference/makeapayment) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.
+For example, if a [Make a Payment] is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.
 
 To perform an idempotent request, provide an additional `Idempotency-Key:<key>` header to the request.
 
