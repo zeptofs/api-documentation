@@ -317,7 +317,7 @@ Common use cases:
 
 Provides the ability to send a Payment Request (get paid) to any Contact that has an accepted Agreement in place.
 
-To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](https://help.zepto.money/en/articles/3094575-au-agreements) with them.
+To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](https://docs.zeptopayments.com/reference/listoutgoingagreements) with them.
 
 To do so, you can send them an [Open Agreement link](https://help.zepto.money/agreements/open-agreement) or [Unassigned Agreement link](http://help.zepto.money/agreements/unassigned-agreement) for them to [Select & verify their bank account](https://help.zepto.money/bank-accounts/instant-account-verification-iav) and accept the Agreement.
 
