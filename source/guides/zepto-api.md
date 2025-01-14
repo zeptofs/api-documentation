@@ -317,7 +317,7 @@ Common use cases:
 
 Provides the ability to send a Payment Request (get paid) to any Contact that has an accepted Agreement in place.
 
-To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](doc:zepto-api#Zepto-API-Agreements) with them.
+To send a Payment Request to a Contact using the API, you must first have an accepted [Agreement](https://docs.zeptopayments.com/reference/listoutgoingagreements) with them.
 
 To do so, you can send them an [Open Agreement link](https://help.zepto.money/agreements/open-agreement) or [Unassigned Agreement link](http://help.zepto.money/agreements/unassigned-agreement) for them to [Select & verify their bank account](https://help.zepto.money/bank-accounts/instant-account-verification-iav) and accept the Agreement.
 
@@ -360,11 +360,11 @@ Example flow embedding an [Open Agreement link](https://help.zepto.money/agreeme
 
 The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.
 
-For example, if a [Payment](#Zepto-API-Payments) is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.
+For example, if a [Make a Payment] is `POST`ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.
 
 To perform an idempotent request, provide an additional `Idempotency-Key:<key>` header to the request.
 
-You can pass any value (up to 256 characters) as the key but we suggest [V4 UUIDs](https://www.uuidtools.com/generate/v4) or another appropriately random string.
+You can pass any value (up to 256 characters) as the key but we suggest [V7 UUIDs](https://uuid7.com/) or another appropriately random string.
 
 Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a `409 Conflict`.
 
