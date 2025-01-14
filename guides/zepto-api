@@ -4,8 +4,8 @@
 <p>It is important to understand that there are 2 main ways Zepto can be used for maximum flexibility:</p>
 
 <ol>
-<li><p>Between Zepto accounts.</p></li>
-<li><p>Between a Zepto account and anyone.</p></li>
+<li>Between Zepto accounts.</li>
+<li>Between a Zepto account and anyone.</li>
 </ol>
 
 <p>Due to the above, certain endpoints and techniques will differ slightly depending on who you are interacting with. You can find more on this in the <a href="doc:zepto-api#making-payments">Making payments</a> and <a href="doc:zepto-api#getting-paid">Getting paid</a> guides.</p>
@@ -13,18 +13,18 @@
 <p>And for all kinds of How To&#39;s and Recipes, head on over to our <a href="https://help.zepto.money/en/">Help Guide</a>.</p>
 <h1 id='conventions'>Conventions</h1>
 <ul>
-<li><p>Authentication is performed using OAuth2. See the <a href="doc:zepto-api#get-started">Get started</a> and <a href="doc:zepto-api#authentication-and-authorisation">Authentication &amp; Authorisation</a> guides for more.</p></li>
-<li><p>All communication is via <code>https</code> and supports <strong>only</strong> <code>TLSv1.2</code>.</p></li>
-<li><p>Production API: <code>https://api.zeptopayments.com/</code>.</p></li>
-<li><p>Production UI: <code>https://go.zeptopayments.com/</code>.</p></li>
-<li><p>Sandbox API: <code>https://api.sandbox.zeptopayments.com/</code>.</p></li>
-<li><p>Sandbox UI: <code>https://go.sandbox.zeptopayments.com/</code>.</p></li>
-<li><p>Data is sent and received as JSON.</p></li>
-<li><p>Clients should include the <code>Accepts: application/json</code> header in their requests.</p></li>
-<li><p>Currencies are represented by 3 characters as defined in <a href="http://www.xe.com/iso4217.php">ISO 4217</a>.</p></li>
-<li><p>Dates &amp; times are returned in UTC using <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used, or <code>Australia/Sydney</code> if no TZ is configured.</p></li>
-<li><p>Amounts are always in cents with no decimals unless otherwise stated.</p></li>
-<li><p>Zepto provides static public IP addresses for all outbound traffic, including webhooks.</p>
+<li>Authentication is performed using OAuth2. See the <a href="doc:zepto-api#get-started">Get started</a> and <a href="doc:zepto-api#authentication-and-authorisation">Authentication &amp; Authorisation</a> guides for more.</li>
+<li>All communication is via <code>https</code> and supports <strong>only</strong> <code>TLSv1.2</code>.</li>
+<li>Production API: <code>https://api.zeptopayments.com/</code>.</li>
+<li>Production UI: <code>https://go.zeptopayments.com/</code>.</li>
+<li>Sandbox API: <code>https://api.sandbox.zeptopayments.com/</code>.</li>
+<li>Sandbox UI: <code>https://go.sandbox.zeptopayments.com/</code>.</li>
+<li>Data is sent and received as JSON.</li>
+<li>Clients should include the <code>Accepts: application/json</code> header in their requests.</li>
+<li>Currencies are represented by 3 characters as defined in <a href="http://www.xe.com/iso4217.php">ISO 4217</a>.</li>
+<li>Dates &amp; times are returned in UTC using <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format with second accuracy. With requests, when no TZ is supplied, the configured TZ of the authenticated user is used, or <code>Australia/Sydney</code> if no TZ is configured.</li>
+<li>Amounts are always in cents with no decimals unless otherwise stated.</li>
+<li>Zepto provides static public IP addresses for all outbound traffic, including webhooks.
 
 <ul>
 <li>Sandbox IP: <code>13.237.142.60</code></li>
@@ -38,14 +38,14 @@ If you would like to check platform status programmatically, please refer to <a 
 <p>A breaking change is assumed to be:</p>
 
 <ul>
-<li><p>Renaming a parameter (request/response)</p></li>
-<li><p>Removing a parameter (request/response)</p></li>
-<li><p>Changing a parameter type (request/response)</p></li>
-<li><p>Renaming a header (request/response)</p></li>
-<li><p>Removing a header (request/response)</p></li>
-<li><p>Application of stricter validation rules for request parameters</p></li>
-<li><p>Reducing the set of possible enumeration values for a request</p></li>
-<li><p>Changing a HTTP response status code</p></li>
+<li>Renaming a parameter (request/response)</li>
+<li>Removing a parameter (request/response)</li>
+<li>Changing a parameter type (request/response)</li>
+<li>Renaming a header (request/response)</li>
+<li>Removing a header (request/response)</li>
+<li>Application of stricter validation rules for request parameters</li>
+<li>Reducing the set of possible enumeration values for a request</li>
+<li>Changing a HTTP response status code</li>
 </ul>
 
 <p>We take backwards compatibility very seriously, and will make every effort to ensure this never changes. In the unfortunate (and rare) case where a breaking change can not be avoided, these will be announced well in
@@ -54,12 +54,12 @@ advance, enabling a transition period for API consumers.</p>
 <p>The following are not assumed to be a breaking change and must be taken into account by API consumers:</p>
 
 <ul>
-<li><p>Addition of optional new parameters in request</p></li>
-<li><p>Addition of new parameters in response</p></li>
-<li><p>Addition of new headers in request</p></li>
-<li><p>Reordering of parameters in response</p></li>
-<li><p>Softening of validation rules for request parameters</p></li>
-<li><p>Increasing the set of possible enumeration values</p></li>
+<li>Addition of optional new parameters in request</li>
+<li>Addition of new parameters in response</li>
+<li>Addition of new headers in request</li>
+<li>Reordering of parameters in response</li>
+<li>Softening of validation rules for request parameters</li>
+<li>Increasing the set of possible enumeration values</li>
 </ul>
 
 <p>In the case of non breaking changes, a transition period may not be provided, meaning the possibility of such changes occurring must be considered in consumers&#39; logic so as not to break any integrations with both API and Webhooks.</p>
@@ -74,38 +74,22 @@ Before you start, <strong>import a copy</strong> of our API collection:</p>
 <p>Okay, let&#39;s get things setup!</p>
 
 <ol>
-<li><p><strong>Create a Zepto account</strong></p>
-
-<p>If you haven&#39;t already, you&#39;ll want to create a sandbox Zepto account at <a href="https://go.sandbox.zeptopayments.com">https://go.sandbox.zeptopayments.com</a></p></li>
-<li><p><strong>Register your application with Zepto</strong></p>
-
-<p>Sign in and create an OAuth2 application: <a href="https://go.sandbox.zeptopayments.com/oauth/applications">https://go.sandbox.zeptopayments.com/oauth/applications</a>.</p>
-
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png" alt="Zepto OAuth2 app create" /></a></p></li>
-<li><p><strong>Generate personal access tokens</strong></p>
-
-<p>The quickest way to access your Zepto account via the API is using personal access tokens. Click on your newly created application from your <a href="https://go.sandbox.zeptopayments.com/oauth%20applications">application list</a> and click on
-<strong>+ Personal Access Token</strong>.</p>
-
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png" alt="Zepto locate personal OAuth2 tokens" /></a></p>
-
-<p><em>(You&#39;ll have the option to give the token a title)</em></p>
-
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png" alt="Zepto personal OAuth2 tokens" /></a></p>
-
-<blockquote>
-<p><strong><em>NOTE:</em></strong> Please note that personal access tokens do not expire.</p>
-</blockquote></li>
-<li><p><strong>Use personal access token in Postman</strong></p>
-
-<p>You can use this <code>access_token</code> to authorise any requests to the Zepto API in Postman by choosing the <strong>Bearer Token</strong> option under the <strong>Authorization</strong> tab.</p>
-
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png" alt="Postman use personal OAuth2 tokens" /></a></p></li>
-<li><p><strong>Make an API request!</strong></p>
-
-<p>You are now ready to interact with your Zepto account via the API! Go ahead and send a request using Postman.</p>
-
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png" alt="Postman use personal OAuth2 tokens" /></a></p></li>
+<li><strong>Create a Zepto account</strong>
+If you haven&#39;t already, you&#39;ll want to create a sandbox Zepto account at <a href="https://go.sandbox.zeptopayments.com">https://go.sandbox.zeptopayments.com</a></li>
+<li><strong>Register your application with Zepto</strong>
+Sign in and create an OAuth2 application: <a href="https://go.sandbox.zeptopayments.com/oauth/applications">https://go.sandbox.zeptopayments.com/oauth/applications</a>.
+<a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_create.png" alt="Zepto OAuth2 app create" /></a></li>
+<li><strong>Generate personal access tokens</strong>
+The quickest way to access your Zepto account via the API is using personal access tokens. Click on your newly created application from your <a href="https://go.sandbox.zeptopayments.com/oauth%20applications">application list</a> and click on
+<a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png" alt="Zepto personal OAuth2 tokens" /></a>
+<em>(You&#39;ll have the option to give the token a title)</em>
+&gt; <strong><em>NOTE:</em></strong> Please note that personal access tokens do not expire.</li>
+<li><strong>Use personal access token in Postman</strong>
+You can use this <code>access_token</code> to authorise any requests to the Zepto API in Postman by choosing the <strong>Bearer Token</strong> option under the <strong>Authorization</strong> tab.
+<a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_personal_access_token.png" alt="Postman use personal OAuth2 tokens" /></a></li>
+<li><strong>Make an API request!</strong>
+You are now ready to interact with your Zepto account via the API! Go ahead and send a request using Postman.
+<a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_request_response.png" alt="Postman use personal OAuth2 tokens" /></a></li>
 </ol>
 <h2 id='get-started'>Get started</h2>
 <p>This guide will help you setup an OAuth2 app in order to get authenticated &amp; authorised to communicate with the Zepto API.</p>
@@ -113,89 +97,63 @@ Before you start, <strong>import a copy</strong> of our API collection:</p>
 <p><strong>Before you start:</strong></p>
 
 <ul>
-<li><p>We use the term <strong>user</strong> below but the user can be a third party or the same user that owns the OAuth2 application.</p></li>
-<li><p>As noted below, some access tokens expire every 2 hours. To get a new access token use the <a href="doc:zepto-api#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</p></li>
+<li>We use the term <strong>user</strong> below but the user can be a third party or the same user that owns the OAuth2 application.</li>
+<li>As noted below, some access tokens expire every 2 hours. To get a new access token use the <a href="doc:zepto-api#authentication-and-authorisation">refresh grant strategy</a> to swap a refresh token for a new access token.</li>
 </ul>
 
 <ol>
-<li><p><strong>Create a Zepto account</strong></p>
-
-<p>If you haven&#39;t already, you&#39;ll want to create a sandbox Zepto account at <a href="https://go.sandbox.zeptopayments.com">https://go.sandbox.zeptopayments.com</a>.</p></li>
-<li><p><strong>Choose authentication method</strong></p>
-
-<p>All requests to the Zepto API require an <code>access_token</code> for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:</p>
-
-<p><strong>Personal access token</strong> If you only need to access your own Zepto account via the API, then using personal access tokens are the most straight-forward way. Refer to <a href="doc:zepto-api#personal-access-token">Personal access token</a> to setup. These tokens do not expire so no refreshing is required.</p>
-
-<p><strong>OAuth grant flow</strong> When you require your application to act on behalf of other Zepto accounts you&#39;ll need to implement the OAuth grant flow process. Refer to <a href="doc:zepto-api#oauth-grant-flow">OAuth grant flow guide</a> to setup. There is also an <a href="doc:zepto-api#oauth-grant-flow-tutorial">OAuth grant flow tutorial</a>. These access tokens expire every 2 hours, unless the <code>offline_access</code> scope is used in which case the tokens will not expire.</p></li>
-</ol>
-<h2 id='personal-access-token'>Personal access token</h2>
-<p>If you&#39;re looking to only access your own account via the API, you can generate a personal access token from the UI. These tokens do not expire, but can be deleted.</p>
+<li><strong>Create a Zepto account</strong>
+If you haven&#39;t already, you&#39;ll want to create a sandbox Zepto account at <a href="https://go.sandbox.zeptopayments.com">https://go.sandbox.zeptopayments.com</a>.</li>
+<li><strong>Choose authentication method</strong>
+All requests to the Zepto API require an <code>access_token</code> for authentication. There are two options for obtaining these tokens, the correct option will depend on your use case:
 
 <ul>
-<li><p>To do this, sign in to your Zepto account and <a href="https://go.sandbox.zeptopayments.com/oauth/applications">create an application</a> if you haven&#39;t already. Click on your application from your <a href="https://go.sandbox.zeptopayments.com/oauth/applications">application list</a> and click on <strong>Personal access</strong>.</p>
+<li><strong>Personal access token</strong> If you only need to access your own Zepto account via the API, then using personal access tokens are the most straight-forward way. Refer to <a href="doc:zepto-api#personal-access-token">Personal access token</a> to setup. These tokens do not expire so no refreshing is required.</li>
+<li><strong>OAuth grant flow</strong> When you require your application to act on behalf of other Zepto accounts you&#39;ll need to implement the OAuth grant flow process. Refer to <a href="doc:zepto-api#oauth-grant-flow">OAuth grant flow guide</a> to setup. There is also an <a href="doc:zepto-api#oauth-grant-flow-tutorial">OAuth grant flow tutorial</a>. These access tokens expire every 2 hours, unless the <code>offline_access</code> scope is used in which case the tokens will not expire.</li>
+</ul></li>
+</ol>
+<h2 id='personal-access-token'>Personal access token</h2>
+<p>If you&#39;re looking to only access your own account via the API, you can generate a personal access token from the UI. These tokens do not expire, but can be deleted. To do this:</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png" alt="Zepto locate personal OAuth2 tokens" /></a></p>
-
-<p><em>(You&#39;ll have the option to give the token a title)</em></p>
-
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png" alt="Zepto personal OAuth2 tokens" /></a></p></li>
-<li><p>Now that you have an <code>access_token</code> you can interact with your Zepto account via the API.</p>
-
-<p>To do so, you must simply append the access token to the header of any API request: <code>Authorization: Bearer {access_token}</code></p></li>
-</ul>
+<ol>
+<li>Sign in to your Zepto account and <a href="https://go.sandbox.zeptopayments.com/oauth/applications">create an application</a> if you haven&#39;t already. Click on your application from your <a href="https://go.sandbox.zeptopayments.com/oauth/applications">application list</a> and click on <strong>Personal access</strong>.
+<a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_tokens_empty.png" alt="Zepto locate personal OAuth2 tokens" /></a>
+<em>(You&#39;ll have the option to give the token a title)</em>
+<a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_personal_access_token.png" alt="Zepto personal OAuth2 tokens" /></a></li>
+<li>Now that you have an <code>access_token</code> you can interact with your Zepto account via the API.
+To do so, you must simply append the access token to the header of any API request: <code>Authorization: Bearer {access_token}</code></li>
+</ol>
 <h2 id='oauth-grant-flow'>OAuth grant flow</h2>
 <ol>
-<li><p><strong>Register your application with Zepto</strong></p>
+<li><strong>Register your application with Zepto</strong></li>
+</ol>
 
 <p>Once you&#39;ve got your account up and running, sign in and create an OAuth2 profile for your application: <a href="https://go.sandbox.zeptopayments.com/oauth/applications">https://go.sandbox.zeptopayments.com/oauth/applications</a></p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>The name of your application. When using the <em>Authorisation Grant Flow</em>, users will see this name as the application requesting access to their account.</td>
-</tr>
-<tr>
-<td><strong>Redirect URI</strong></td>
-<td>Set this to your application&#39;s endpoint charged with receiving the authorisation code.</td>
-</tr>
-</tbody></table></li>
-<li><p><strong>Obtain an authorisation code</strong></p>
+<p>| Parameter        | Description                                                                                                                                              |
+   | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | <strong>Name</strong>         | The name of your application. When using the <em>Authorisation Grant Flow</em>, users will see this name as the application requesting access to their account. |
+   | <strong>Redirect URI</strong> | Set this to your application&#39;s endpoint charged with receiving the authorisation code.                                                                   |</p>
+
+<ol>
+<li><strong>Obtain an authorisation code</strong></li>
+</ol>
 
 <p>Construct the initial URL the user will need to visit in order to grant your application permission to act on his/her behalf. The constructed URL describes the level of permission (<a href="doc:zepto-api#scopes"><code>scope</code></a>), the application requesting permission (<code>client_id</code>) and where the user gets redirected once they&#39;ve granted permission (<code>redirect_uri</code>).</p>
 
 <p>The URL should be formatted to look like this:
-<code>https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&amp;client_id={client_id}&amp;redirect_uri={redirect_uri}&amp;scope={scope}</code></p>
+   <code>https://go.sandbox.zeptopayments.com/oauth/authorize?response_type=code&amp;client_id={client_id}&amp;redirect_uri={redirect_uri}&amp;scope={scope}</code></p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>response_type</code></td>
-<td>Always set to <code>code</code></td>
-</tr>
-<tr>
-<td><code>client_id</code></td>
-<td>This is your <code>Application ID</code> as generated when you registered your application with Zepto</td>
-</tr>
-<tr>
-<td><code>redirect_uri</code></td>
-<td>URL where the user will get redirected along with the newly generated authorisation code</td>
-</tr>
-<tr>
-<td><code>scope</code></td>
-<td>The <a href="doc:zepto-api#scopes">scope</a> of permission you&#39;re requesting</td>
-</tr>
-</tbody></table></li>
-<li><p><strong>Exchange the authorisation code for an access token</strong></p>
+<p>| Parameter       | Description                                                                                |
+   | --------------- | ------------------------------------------------------------------------------------------ |
+   | <code>response_type</code> | Always set to <code>code</code>                                                                       |
+   | <code>client_id</code>     | This is your <code>Application ID</code> as generated when you registered your application with Zepto |
+   | <code>redirect_uri</code>  | URL where the user will get redirected along with the newly generated authorisation code   |
+   | <code>scope</code>         | The <a href="doc:zepto-api#scopes">scope</a> of permission you&#39;re requesting                          |</p>
+
+<ol>
+<li><strong>Exchange the authorisation code for an access token</strong></li>
+</ol>
 
 <p>When the user visits the above-mentioned URL, they will be presented with a Zepto login screen and then an authorisation screen:</p>
 
@@ -207,38 +165,20 @@ Before you start, <strong>import a copy</strong> of our API collection:</p>
 
 <p><strong>Note</strong> The authorisation code is a ONE-TIME use code. It will not work again if you try to POST it a second time.</p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>grant_type</code></td>
-<td>Set to <code>authorization_code</code></td>
-</tr>
-<tr>
-<td><code>client_id</code></td>
-<td>This is your <code>Application ID</code> as generated when you registered your application with Zepto</td>
-</tr>
-<tr>
-<td><code>client_secret</code></td>
-<td>This is your <code>Secret</code> as generated when you registered your application with Zepto</td>
-</tr>
-<tr>
-<td><code>code</code></td>
-<td>The authorisation code returned with the user (ONE-TIME use)</td>
-</tr>
-<tr>
-<td><code>redirect_uri</code></td>
-<td>Same URL used in step 3</td>
-</tr>
-</tbody></table></li>
-<li><p><strong>Wrap-up</strong></p>
+<p>| Parameter       | Description                                                                                |
+   | --------------- | ------------------------------------------------------------------------------------------ |
+   | <code>grant_type</code>    | Set to <code>authorization_code</code>                                                                |
+   | <code>client_id</code>     | This is your <code>Application ID</code> as generated when you registered your application with Zepto |
+   | <code>client_secret</code> | This is your <code>Secret</code> as generated when you registered your application with Zepto         |
+   | <code>code</code>          | The authorisation code returned with the user (ONE-TIME use)                               |
+   | <code>redirect_uri</code>  | Same URL used in step 3                                                                    |</p>
+
+<ol>
+<li><strong>Wrap-up</strong></li>
+</ol>
 
 <p>Now that you have an access token and refresh token, you can interact with the Zepto API as the user related to the access token.
-To do so, you must simply append the access token to the header of any API request: <code>Authorization: Bearer {access_token}</code></p></li>
-</ol>
+   To do so, you must simply append the access token to the header of any API request: <code>Authorization: Bearer {access_token}</code></p>
 <h2 id='oauth-grant-flow-tutorial'>OAuth grant flow tutorial</h2>
 <p>The OAuth grant flow process is demonstrated using Postman in the steps below.</p>
 
@@ -250,17 +190,24 @@ To do so, you must simply append the access token to the header of any API reque
 <a href="https://vimeo.com/246203244">https://vimeo.com/246203244</a>.</strong></p>
 
 <ol>
-<li><p><strong>Create a Zepto account</strong></p>
+<li><strong>Create a Zepto account</strong></li>
+</ol>
 
-<p>If you haven&#39;t already, you&#39;ll want to create a sandbox Zepto account at <a href="https://go.sandbox.zeptopayments.com">https://go.sandbox.zeptopayments.com</a></p></li>
-<li><p><strong>Register your application with Zepto</strong></p>
+<p>If you haven&#39;t already, you&#39;ll want to create a sandbox Zepto account at <a href="https://go.sandbox.zeptopayments.com">https://go.sandbox.zeptopayments.com</a></p>
+
+<ol>
+<li><strong>Register your application with Zepto</strong></li>
+</ol>
 
 <p>Sign in and create an OAuth2 application: <a href="https://go.sandbox.zeptopayments.com/oauth/applications">https://go.sandbox.zeptopayments.com/oauth/applications</a>.</p>
 
 <p>Use the special Postman callback URL: <code>https://www.getpostman.com/oauth2/callback</code></p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_setup.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_setup.png" alt="Zepto OAuth2 app setup" /></a></p></li>
-<li><p><strong>In Postman, setup your environment variables</strong></p>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_setup.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/split_oauth2_app_setup.png" alt="Zepto OAuth2 app setup" /></a></p>
+
+<ol>
+<li><strong>In Postman, setup your environment variables</strong></li>
+</ol>
 
 <p>We&#39;ve included the <strong>Zepto Public Sandbox</strong> environment to get you started. Select it in the top right corner of the window then click the <img class="inline-1" alt="Postman Quick-Look icon" src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_quick_look_icon.png" /> icon and click <strong>edit</strong>.</p>
 
@@ -268,8 +215,11 @@ To do so, you must simply append the access token to the header of any API reque
 
 <p>Using the details from the OAuth2 app you created earlier, fill in the <strong>oauth2_application_id</strong> &amp; <strong>oauth2_secret</strong> fields.</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_environment_values.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_environment_values.png" alt="Fill in environment values" /></a></p></li>
-<li><p><strong>Setup the authorization</strong></p>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_environment_values.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_zepto_environment_values.png" alt="Fill in environment values" /></a></p>
+
+<ol>
+<li><strong>Setup the authorization</strong></li>
+</ol>
 
 <p>Click on the <strong>Authorization</strong> tab and select <strong>OAuth 2.0</strong></p>
 
@@ -281,8 +231,11 @@ To do so, you must simply append the access token to the header of any API reque
 
 <p>Fill in the OAuth2 form as below:</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_oauth2_form.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_oauth2_form.png" alt="Postman OAuth2" /></a></p></li>
-<li><p><strong>Get authorised</strong></p>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_oauth2_form.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_oauth2_form.png" alt="Postman OAuth2" /></a></p>
+
+<ol>
+<li><strong>Get authorised</strong></li>
+</ol>
 
 <p>Click <strong>Request Token</strong> and wait a few seconds and a browser window will popup</p>
 
@@ -292,13 +245,15 @@ To do so, you must simply append the access token to the header of any API reque
 
 <p>Click <strong>Authorise</strong> to allow the app to access the signed in account. Once complete, Postman will automatically exchange the authorisation code it received from Zepto for the <code>access_token/refresh_token</code> pair. It will then store the <code>access_token/refresh_token</code> for you to use in subsequent API requests. The <code>access_token</code> effectively allows you to send requests via the API as the user who provided you authorisation.</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png" alt="Authorise OAuth2 app" /></a></p></li>
-<li><p><strong>You&#39;re now ready to use the API</strong></p>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/zepto_oauth2_authorize.png" alt="Authorise OAuth2 app" /></a></p>
+
+<ol>
+<li><strong>You&#39;re now ready to use the API</strong></li>
+</ol>
 
 <p>Select an endpoint from the Zepto collection from the left hand side menu. Before you send an API request ensure you select your access token and Postman will automatically add it to the request header.</p>
 
-<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_token.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_token.png" alt="Postman use token" /></a></p></li>
-</ol>
+<p><a href="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_token.png"><img src="https://raw.githubusercontent.com/zeptofs/public_assets/master/images/postman_use_token.png" alt="Postman use token" /></a></p>
 
 <blockquote>
 <p><strong><em>NOTE:</em></strong> Remember to select the access token everytime you try
@@ -324,8 +279,7 @@ a new endpoint. Have fun!</p>
 <blockquote>
 <p>Code sample</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-curl -F "grant_type=refresh_token" \
+<div class="highlight"><pre class="highlight plaintext"><code>curl -F "grant_type=refresh_token" \
       -F "client_id={{oauth2_application_id}}" \
       -F "client_secret={{oauth2_application_secret }}" \
       -F "refresh_token={{refresh_token}}" \
@@ -334,15 +288,13 @@ curl -F "grant_type=refresh_token" \
 <blockquote>
 <p>Example response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
-    </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad0b5847cb7d254f1e2ff1910275fe9dcb95345c9d54502d156fe35a37b93e80"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc38f78a5b8abe8ee81cdf25b1ca74c3fa10c3da2309de5ac37fde00cbcf2815"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad0b5847cb7d254f1e2ff1910275fe9dcb95345c9d54502d156fe35a37b93e80"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc38f78a5b8abe8ee81cdf25b1ca74c3fa10c3da2309de5ac37fde00cbcf2815"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <p>When using the authorisation code grant above, Zepto will return a <code>refresh token</code> along with the access token. Access tokens are short lived and last 2 hours but refresh tokens do not expire.</p>
 
@@ -350,7 +302,7 @@ curl -F "grant_type=refresh_token" \
 
 <blockquote>
 <p><strong><em>NOTE:</em></strong>
-  The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you&#39;ll want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>access_token</code></p>
+The <code>refresh_token</code> gets regenerated and sent alongside the new <code>access_token</code>. In other words, <code>refresh_token</code>s are single use so you&#39;ll want to store the newly generated <code>refresh_token</code> everytime you use it to get a new <code>access_token</code></p>
 </blockquote>
 <h2 id='making-payments'>Making payments</h2>
 <p>In order to payout funds, you&#39;ll be looking to use the <a href="doc:zepto-api#Zepto-API-Payments">Payments</a> endpoint. Whether you&#39;re paying out another Zepto account holder or anyone, the process is the same:</p>
@@ -371,7 +323,7 @@ curl -F "grant_type=refresh_token" \
 <h2 id='getting-paid'>Getting paid</h2><h3 id='posting-a-payment-request'>POSTing a <a href="doc:zepto-api#Zepto-API-Payment-Requests">Payment Request</a></h3>
 <p>Provides the ability to send a Payment Request (get paid) to any Contact that has an accepted Agreement in place.</p>
 
-<p>To send a Payment Request to a Contact using the API, you must first have an accepted <a href="doc:zepto-api#Zepto-API-Agreements">Agreement</a> with them.</p>
+<p>To send a Payment Request to a Contact using the API, you must first have an accepted <a href="https://docs.zeptopayments.com/reference/listoutgoingagreements">Agreement</a> with them.</p>
 
 <p>To do so, you can send them an <a href="https://help.zepto.money/agreements/open-agreement">Open Agreement link</a> or <a href="http://help.zepto.money/agreements/unassigned-agreement">Unassigned Agreement link</a> for them to <a href="https://help.zepto.money/bank-accounts/instant-account-verification-iav">Select &amp; verify their bank account</a> and accept the Agreement.</p>
 
@@ -393,8 +345,7 @@ curl -F "grant_type=refresh_token" \
 <blockquote>
 <p>Example response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Duplicate idempotency key"</span><span class="p">,</span><span class="w">
@@ -408,15 +359,14 @@ curl -F "grant_type=refresh_token" \
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <p>The Zepto API supports idempotency for safely retrying requests without accidentally performing the same operation twice.</p>
 
-<p>For example, if a <a href="#Zepto-API-Payments">Payment</a> is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.</p>
+<p>For example, if a [Make a Payment] is <code>POST</code>ed and a there is a network connection error, you can retry the Payment with the same idempotency key to guarantee that only a single Payment is created. In case an idempotency key is not supplied and a Payment is retried, we would treat this as two different payments being made.</p>
 
 <p>To perform an idempotent request, provide an additional <code>Idempotency-Key:&lt;key&gt;</code> header to the request.</p>
 
-<p>You can pass any value (up to 256 characters) as the key but we suggest <a href="https://www.uuidtools.com/generate/v4">V4 UUIDs</a> or another appropriately random string.</p>
+<p>You can pass any value (up to 256 characters) as the key but we suggest <a href="https://uuid7.com/">V7 UUIDs</a> or another appropriately random string.</p>
 
 <p>Keys expire after 24 hours. If there is a subsequent request with the same idempotency key within the 24 hour period, we will return a <code>409 Conflict</code>.</p>
 
@@ -439,8 +389,7 @@ curl -F "grant_type=refresh_token" \
 <blockquote>
 <p>Example detailed error response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Specific Error"</span><span class="p">,</span><span class="w">
@@ -451,16 +400,13 @@ curl -F "grant_type=refresh_token" \
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <blockquote>
 <p>Example resource error response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A sentence explaining error/s encounted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <p>The Zepto API returns two different types of error responses depending on the context.</p>
 
@@ -585,15 +531,13 @@ curl -F "grant_type=refresh_token" \
 <blockquote>
 <p>Example failure object</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"failure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E302"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BSB Not NPP Enabled"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The target BSB is not NPP enabled. Please try another channel."</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E302"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BSB Not NPP Enabled"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The target BSB is not NPP enabled. Please try another channel."</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <p>Try out your happy paths and not-so happy paths; the sandbox is a great place to get started without transferring actual funds. All transactions are simulated and no communication with financial institutions is performed.</p>
 
@@ -626,29 +570,26 @@ curl -F "grant_type=refresh_token" \
 </ul>
 <h3 id='example-scenarios'>Example scenarios</h3>
 <ol>
-<li>Pay a contact with an invalid account number:
-
-<ul>
-<li>Initiate a Payment for <code>$1.05</code>.</li>
-<li>Zepto will mimic a successful debit from your bank account.</li>
-<li>Zepto will mimic a failure to credit the contact&#39;s bank account.</li>
-<li>Zepto will automatically create a <code>payout_reversal</code> credit transaction back to your bank account.</li>
-</ul></li>
-<li>Request payment from a contact with a closed bank account:
-
-<ul>
-<li>Initiate a Payment Request for <code>$2.03</code>.</li>
-<li>Zepto will mimic a failure to debit the contact&#39;s bank account.</li>
-</ul></li>
+<li>Pay a contact with an invalid account number:</li>
 </ol>
-<h2 id='npp-payment-failures'>NPP Payment failures</h2><h3 id='using-failure-codes-2'>Using failure codes</h3>
+<div class="highlight"><pre class="highlight plaintext"><code>* Initiate a Payment for `$1.05`.
+* Zepto will mimic a successful debit from your bank account.
+* Zepto will mimic a failure to credit the contact's bank account.
+* Zepto will automatically create a `payout_reversal` credit transaction back to your bank account.
+</code></pre></div>
+<ol>
+<li>Request payment from a contact with a closed bank account:</li>
+</ol>
+<div class="highlight"><pre class="highlight plaintext"><code>* Initiate a Payment Request for `$2.03`.
+* Zepto will mimic a failure to debit the contact's bank account.
+</code></pre></div><h2 id='npp-payment-failures'>NPP Payment failures</h2><h3 id='using-failure-codes-2'>Using failure codes</h3>
 <blockquote>
 <ul>
-<li><a href="&quot;#npp-credit-failures&quot;">NPP credit failure codes</a></li>
+<li><a href="https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_81961f33a0">NPP credit failure codes</a></li>
 </ul>
 </blockquote>
 
-<p>To simulate a transaction failure, create a Payment with an amount corresponding to the desired <a href="#npp-credit-failures">failure code</a>.</p>
+<p>To simulate a transaction failure, create a Payment with an amount corresponding to the desired <a href="#npp-credit-failures">failure code</a></p>
 
 <p>For example:</p>
 
@@ -748,8 +689,7 @@ curl -F "grant_type=refresh_token" \
 <blockquote>
 <p>Example response headers</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-Link: &lt;http://api.sandbox.zeptopayments.com/contacts?page=2&gt;; rel="next"
+<div class="highlight"><pre class="highlight plaintext"><code>Link: &lt;http://api.sandbox.zeptopayments.com/contacts?page=2&gt;; rel="next"
 
 Per-Page: 25
 
@@ -773,14 +713,12 @@ Per-Page: 25
 <blockquote>
 <p>Example request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"..."</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
   </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"remitter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomRem"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <p>You can elect to assign a remitter name on a per-request basis when submitting Payments &amp; Payment Requests. Simply append the <code>remitter</code> key and a value within the <code>metadata</code> key.</p>
 
@@ -814,8 +752,7 @@ Per-Page: 25
 <blockquote>
 <p>Example response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object.action"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yyyy-mm-ddThh:mm:ssZ"</span><span class="p">,</span><span class="w">
@@ -824,11 +761,8 @@ Per-Page: 25
       </span><span class="nl">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <p>Please refer to our help centre <a href="http://help.zepto.money/en/articles/3303626-webhooks">article on webhooks</a> for more information and an overview of what you can achieve with webhooks.</p>
 
@@ -957,8 +891,7 @@ Per-Page: 25
 <blockquote>
 <p>Example header</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-Split-Request-ID: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
+<div class="highlight"><pre class="highlight plaintext"><code>Split-Request-ID: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
 
 </code></pre></div>
 <p>Zepto provides a <code>Split-Request-ID</code> header in the form of a <code>UUID</code> which uniquely identifies a webhook event. If the webhook event is retried/retransmitted by Zepto, the UUID will remain the same. This allows you to check if a webhook event has been previously handled/processed.</p>
@@ -966,8 +899,7 @@ Split-Request-ID: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
 <blockquote>
 <p>Example header</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-Split-Signature:
+<div class="highlight"><pre class="highlight plaintext"><code>Split-Signature:
 1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
 
 </code></pre></div>
@@ -1078,40 +1010,35 @@ Split-Signature:
 
 <span class="c1"># =&gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
 
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
-<span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">crypto</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">crypto</span><span class="dl">"</span><span class="p">);</span>
 
-<span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">full payload of the request</span><span class="dl">'</span>
+<span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">full payload of the request</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">secret</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">1234</span><span class="dl">'</span>
+<span class="kd">var</span> <span class="nx">secret</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">1234</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">splitSignature</span> <span class="o">=</span>
-<span class="dl">'</span><span class="s1">1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span><span class="dl">'</span>
+  <span class="dl">"</span><span class="s2">1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span><span class="dl">"</span><span class="p">;</span>
 
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">splitSignature</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
 
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">splitSignature</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
-<span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="kd">var</span> <span class="nx">givenSignature</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
-<span class="kd">var</span> <span class="nx">givenSignature</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="kd">var</span> <span class="nx">signedPayload</span> <span class="o">=</span> <span class="nx">timestamp</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">.</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">message</span><span class="p">;</span>
 
+<span class="kd">var</span> <span class="nx">expectedSignature</span> <span class="o">=</span> <span class="nx">crypto</span>
+  <span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="dl">"</span><span class="s2">sha256</span><span class="dl">"</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">signedPayload</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="dl">"</span><span class="s2">hex</span><span class="dl">"</span><span class="p">);</span>
 
-<span class="kd">var</span> <span class="nx">signedPayload</span> <span class="o">=</span> <span class="nx">timestamp</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">message</span>
-
-
-<span class="kd">var</span> <span class="nx">expectedSignature</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="dl">'</span><span class="s1">sha256</span><span class="dl">'</span><span class="p">,</span>
-<span class="nx">secret</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">signedPayload</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="dl">'</span><span class="s1">hex</span><span class="dl">'</span><span class="p">)</span>
-
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">);</span>
 
 <span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">givenSignature</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">givenSignature</span><span class="p">);</span>
 
 <span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
-
-
 </code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code>
 <span class="nv">$split_signature</span> <span class="o">=</span> <span class="s1">'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'</span><span class="p">;</span>
 
@@ -1178,6 +1105,9 @@ Split-Signature:
 
 </code></pre></div>
 <!--
+
+
+
 This example is commented out since the docs do not include C#
 
 ```csharp
@@ -1214,7 +1144,7 @@ class MainClass {
 
 ```
 
--->
+\-->
 
 <p><strong>Step 1. Extract the timestamp and signatures from the header</strong></p>
 
