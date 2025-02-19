@@ -4946,7 +4946,7 @@ components:
           type: array
         reason:
           type: string
-          description: Reason for the refund. First 9 characters are visible to both parties.
+          description: The first 8 characters are visible if funds are sent via direct credit / BECS, and up to 270 characters if sent via NPP
           example: Because reason
         your_bank_account_id:
           type: string

@@ -5664,7 +5664,7 @@ Certain rules apply to the issuance of a refund:
 |body|body|[IssueARefundRequest](#schemaissuearefundrequest)|true|No description|
 |» amount|body|integer|true|Amount in cents refund (Min: 1 - Max: 99999999999)|
 |» channels|body|array|false|Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)|
-|» reason|body|string|false|Reason for the refund. First 9 characters are visible to both parties.|
+|» reason|body|string|false|The first 8 characters are visible if funds are sent via direct credit / BECS, and up to 270 characters if sent via NPP|
 |» your_bank_account_id|body|string(uuid)|false|Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.|
 |» metadata|body|[Metadata](#schemametadata)|false|Use for your custom data and certain Zepto customisations.|
 
@@ -9953,7 +9953,7 @@ null
 |---|---|---|---|
 |amount|integer|true|Amount in cents refund (Min: 1 - Max: 99999999999)|
 |channels|array|false|Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)|
-|reason|string|false|Reason for the refund. First 9 characters are visible to both parties.|
+|reason|string|false|The first 8 characters are visible if funds are sent via direct credit / BECS, and up to 270 characters if sent via NPP|
 |your_bank_account_id|string(uuid)|false|Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.|
 |metadata|[Metadata](#schemametadata)|false|No description|
 
