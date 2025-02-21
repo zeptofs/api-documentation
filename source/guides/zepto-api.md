@@ -522,8 +522,8 @@ Failed transactions will contain the following information inside the event:
 
 ### Using failure codes
 
-> - [DE credit failure codes]("#de-credit-failures")
-> - [DE debit failure codes]("#de-debit-failures)
+> - [DE credit failure codes](https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_b2229b3745)
+> - [DE debit failure codes](https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_b15d7bd439)
 
 To simulate a transaction failure, create a Payment or Payment Request with an amount corresponding to the desired [failure code](#failure-codes).
 
