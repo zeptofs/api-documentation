@@ -815,6 +815,20 @@ info:
     check out our article on [what happens when an NPP Payment fails](https://help.zepto.money/en/articles/4405560-what-happens-when-an-npp-payment-fails)
     to learn more about what happens when an NPP Payment is unable to process.
 
+    ## NPP & DE Payment failures (channel switching)
+
+    ### Using failure codes
+
+    To simulate a transaction failure across both NPP and DE channels, create a Payment with an amount corresponding to the desired failure code.
+
+    For example, the transaction amount `$4.02` will:
+    
+
+    * fail NPP processing, triggering credit failure code `E303` (Account Not NPP Enabled).
+
+    * fail DE processing (if the transaction switches channels), triggering the credit failure code that corresponds to the amount, in this case `E102` (Payment Stopped).
+
+    
     # Configuration
 
     ## Scopes

@@ -537,6 +537,14 @@ For example:
 * NPP amount `$3.04` will cause the transaction to fail, triggering credit failure code `E304` (Account Not Found).
 
 You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on [what happens when an NPP Payment fails](https://help.zepto.money/en/articles/4405560-what-happens-when-an-npp-payment-fails) to learn more about what happens when an NPP Payment is unable to process.
+## NPP & DE Payment failures (channel switching)
+### Using failure codes
+To simulate a transaction failure across both NPP and DE channels, create a Payment with an amount corresponding to the desired failure code.
+For example, the transaction amount `$4.02` will:
+
+* fail NPP processing, triggering credit failure code `E303` (Account Not NPP Enabled).
+* fail DE processing (if the transaction switches channels), triggering the credit failure code that corresponds to the amount, in this case `E102` (Payment Stopped).
+
 # Configuration
 ## Scopes
 Scopes define the level of access granted via the OAuth2 authorisation process. As a best practice, only use the scopes your application will require.
