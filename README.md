@@ -20,10 +20,10 @@ make start # Ctrl+C to stop
 
 ### Making changes
 
-1. Edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
+1. With the application running, edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
    you save your changes.
-2. Changes to the YAML file will be built and output to the `source/`
-   directory, so don't edit the build output in there.
+2. Changes to the YAML file will be built and output to `source/index.html.md`, courtesy of Guard (see the [Guardfile](Guardfile)). 
+   (Don't edit the output file directly).
 3. Update the Changelog section of `source/openapi3/split.yaml`.
 4. Commit both the YAML and the build output changes.
 
