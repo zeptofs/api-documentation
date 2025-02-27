@@ -4,19 +4,21 @@
 
 Welcome to the Zepto API documentation source.
 
-## How does it work?
+## API Reference
+
+### How does it work?
 
 - The Zepto API is documented using the [OpenAPI 3.0.0 specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md).
 - The new [Swagger editor](http://editor.swagger.io/) was used to get the boilerplate done.
 - The API spec is then converted to [Slate](https://github.com/lord/slate) friendly markdown with [Widdershins](https://github.com/mermade/widdershins).
 
-## Starting application locally
+### Starting application locally
 
 ```sh
 make start # Ctrl+C to stop
 ```
 
-## Making changes
+### Making changes
 
 1. Edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
    you save your changes.
@@ -26,6 +28,17 @@ make start # Ctrl+C to stop
 4. Commit both the YAML and the build output changes.
 
 Note: Currently only changes to split.yaml will trigger the automatic update.
+
+## Developer Guides
+
+### Making changes
+
+1. Make changes to the Developer Gudies directly in the [source/guides](source/guides) markdown files (there is no need for the application to be running). For example:
+- [source/guides/zepto-api.md](source/guides/zepto-api.md)
+- [source/guides/webhooks.md](source/guides/webhooks.md)
+2. Commit your changes.
+3. Create an [Internal Release Note](https://zeptoau.atlassian.net/wiki/spaces/IRN) so that the (Merchant-facing) API Changelog can be updated accordingly.
+
 
 ## Publishing changes
 
