@@ -32,8 +32,8 @@ make start # Ctrl+C to stop
    you save your changes.
 2. Changes to the YAML file will be built and output to `source/index.html.md`, courtesy of Guard (see the [Guardfile](Guardfile)). 
    (Don't edit the output file directly).
-3. Update the Changelog section of `source/openapi3/split.yaml`.
-4. Commit both the YAML and the build output changes.
+3. Commit both the YAML and the build output changes.
+4. Create an [Internal Release Note](https://zeptoau.atlassian.net/wiki/spaces/IRN) so that the (Merchant-facing) API Changelog can be updated accordingly.
 
 Note: Currently only changes to split.yaml will trigger the automatic update.
 
