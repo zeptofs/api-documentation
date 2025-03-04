@@ -522,10 +522,10 @@ Failed transactions will contain the following information inside the event:
 
 ### Using failure codes
 
-> - [DE credit failure codes]("#de-credit-failures")
-> - [DE debit failure codes]("#de-debit-failures)
+> - [DE credit failure codes](https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_b2229b3745)
+> - [DE debit failure codes](https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_b15d7bd439)
 
-To simulate a transaction failure, create a Payment or Payment Request with an amount corresponding to the desired [failure code](#failure-codes).
+To simulate a transaction failure, create a Payment or Payment Request with an amount corresponding to the desired failure code.
 
 For example:
 
@@ -557,7 +557,7 @@ For example:
 
 > - [NPP credit failure codes](https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_81961f33a0)
 
-To simulate a transaction failure, create a Payment with an amount corresponding to the desired [failure code](#npp-credit-failures)
+To simulate a transaction failure, create a Payment with an amount corresponding to the desired failure code.
 
 For example:
 
@@ -566,6 +566,20 @@ For example:
 - NPP amount `$3.04` will cause the transaction to fail, triggering credit failure code `E304` (Account Not Found).
 
 You will receive all the same notifications as if this happened in our live environment. We recommend you check out our article on [what happens when an NPP Payment fails](https://help.zepto.money/en/articles/4405560-what-happens-when-an-npp-payment-fails) to learn more about what happens when an NPP Payment is unable to process.
+
+## NPP Payment channel-switching failures
+
+### Using failure codes
+
+To simulate a transaction failure across both NPP and DE channels, create a Payment with an amount corresponding to the desired [DE credit failure code](https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_b2229b3745). The NPP leg of the payment will fail with error code E303 (this is to facilitate channel-switching where the transaction is set up to do so). If the transaction switches channels the DE leg of the payment will fail with the [DE credit failure code](https://help.zepto.money/en/articles/5633407-au-transaction-failure-responses#h_b2229b3745) that corresponds to the amount.
+
+For example:
+
+- payment amount `$1.02` will fail with code `E303` (Account Not NPP Enabled). If the payment channel-switches it will also fail DE processing with code `E102` (Payment Stopped).
+
+- payment amount `$1.05` will fail with code `E303` (Account Not NPP Enabled). If the payment channel-switches it will also fail DE processing with code `E105` (Account Not Found).
+
+- payment amount `$1.10` will succeed NPP processing, as there is no corresponding DE credit failure code for that amount.
 
 ## Instant account verification accounts
 
