@@ -4,28 +4,44 @@
 
 Welcome to the Zepto API documentation source.
 
-## How does it work?
+Zepto's API Documentation is hosted at [docs.zeptopayments.com](https://docs.zeptopayments.com/) and powered by [readme](https://readme.com/). 
+
+Note that some parts of the docs published at [docs.zeptopayments.com](https://docs.zeptopayments.com/) are maintained outside of this repo. 
+
+
+## API Reference
+
+### How does it work?
 
 - The Zepto API is documented using the [OpenAPI 3.0.0 specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md).
 - The new [Swagger editor](http://editor.swagger.io/) was used to get the boilerplate done.
 - The API spec is then converted to [Slate](https://github.com/lord/slate) friendly markdown with [Widdershins](https://github.com/mermade/widdershins).
 
-## Starting application locally
+### Starting application locally
 
 ```sh
 make start # Ctrl+C to stop
 ```
 
-## Making changes
+### Making changes
 
-1. Edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
+1. With the application running, edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
    you save your changes.
-2. Changes to the YAML file will be built and output to the `source/`
-   directory, so don't edit the build output in there.
-3. Update the Changelog section of `source/openapi3/split.yaml`.
-4. Commit both the YAML and the build output changes.
+2. Changes to the YAML file will be built and output to `source/index.html.md`, courtesy of Guard (see the [Guardfile](Guardfile)). 
+   (Don't edit the output file directly).
+3. Commit both the YAML and the build output changes.
 
 Note: Currently only changes to split.yaml will trigger the automatic update.
+
+## Developer Guides
+
+### Making changes
+
+1. Make changes to the Developer Guides directly in the [source/guides](source/guides) markdown files (there is no need for the application to be running). For example:
+  - [source/guides/zepto-api.md](source/guides/zepto-api.md)
+  - [source/guides/webhooks.md](source/guides/webhooks.md)
+2. Commit your changes.
+
 
 ## Publishing changes
 
