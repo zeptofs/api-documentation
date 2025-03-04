@@ -39,8 +39,8 @@ Note: Currently only changes to split.yaml will trigger the automatic update.
 ### Making changes
 
 1. Make changes to the Developer Guides directly in the [source/guides](source/guides) markdown files (there is no need for the application to be running). For example:
-- [source/guides/zepto-api.md](source/guides/zepto-api.md)
-- [source/guides/webhooks.md](source/guides/webhooks.md)
+  - [source/guides/zepto-api.md](source/guides/zepto-api.md)
+  - [source/guides/webhooks.md](source/guides/webhooks.md)
 2. Commit your changes.
 3. Create an [Internal Release Note](https://zeptoau.atlassian.net/wiki/spaces/IRN) so that the (Merchant-facing) API Changelog can be updated accordingly.
 
