@@ -6,10 +6,7 @@ Welcome to the Zepto API documentation source.
 
 Zepto's API Documentation is hosted at [docs.zeptopayments.com](https://docs.zeptopayments.com/) and powered by [readme](https://readme.com/). 
 
-Note that parts of the docs published at [docs.zeptopayments.com](https://docs.zeptopayments.com/) is maintained outside of this repo. For example:
-- The PayTo API reference is located in https://github.com/zeptofs/split. 
-- The [PayTo](https://docs.zeptopayments.com/docs/payto-overview) and [Getting Started](https://docs.zeptopayments.com/docs/getting-started-in-sandbox) Developer Guide is managed separately by the _Solutions & Customer Success team_. 
-- The [Changelog](https://docs.zeptopayments.com/reference/change-log) is managed separately by the _Solutions & Customer Success team_, which is prepared based on [Internal Release Notes](https://zeptoau.atlassian.net/wiki/spaces/IRN).
+Note that some parts of the docs published at [docs.zeptopayments.com](https://docs.zeptopayments.com/) are maintained outside of this repo. 
 
 
 ## API Reference
