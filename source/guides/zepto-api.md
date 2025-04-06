@@ -370,21 +370,23 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 
 - The `meta.resource_ref` value is the reference of the resource that was previously created with the conflicting idempotency key.
 
-- The `Idempotency-Key` header is optional but recommended.
+- The `Idempotency-Key` header is required when interacting with endpoints that support it.
 
-- Only the `POST` action for the Payments, Payment Requests and Refunds endpoints support the use of the `Idempotency-Key`.
+- Only the `POST` action for the Payments, Payment Requests, Transfers and Refunds endpoints support the use of the `Idempotency-Key`.
 
 - Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 
 - A request that quickly follows another with the same idempotency key may return with `503 Service Unavailable`. If so, retry the request after the number of seconds specified in the `Retry-After` response header.
 
-Currently the following `POST` requests can be made idempotent. We **strongly recommend** sending a unique `Idempotency-Key` header when making those requests to allow for safe retries:
+Currently the following `POST` requests can be made idempotent. We **require** sending a unique `Idempotency-Key` header when making those requests to allow for safe retries:
 
 - [Request Payment](doc:zepto-api#request-payment)
 
 - [Make a Payment](doc:zepto-api#make-a-payment)
 
 - [Issue a Refund](doc:zepto-api#issue-a-refund)
+
+- [Add a Transfer](doc:zepto-api#add-a-transfer)
 
 ## Error responses
 
