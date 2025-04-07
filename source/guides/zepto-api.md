@@ -372,7 +372,7 @@ Keys expire after 24 hours. If there is a subsequent request with the same idemp
 
 - The `Idempotency-Key` header is required when interacting with endpoints that support it.
 
-- Only the `POST` action for the Payments, Payment Requests, Transfers and Refunds endpoints support the use of the `Idempotency-Key`.
+- Only the `POST` action for the Payments, Payment Requests, Transfers and Refunds endpoints require the use of the `Idempotency-Key`.
 
 - Endpoints that use the `GET` or `DELETE` actions are idempotent by nature.
 
