@@ -918,13 +918,13 @@ paths:
           <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
         </ul>
 
-        <aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
+        <aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
       operationId: MakeAPayment
       parameters:
         - name: 'Idempotency-Key'
           in: header
           description: 'Idempotency key to support safe retries for 24h'
-          required: false
+          required: true
           schema:
             type: string
           example: '{unique-uuid-per-payment}'
@@ -1025,13 +1025,13 @@ paths:
         - Payment Requests
       summary: Request Payment
       description: >
-        <aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
+        <aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
       operationId: MakeAPaymentRequest
       parameters:
         - name: 'Idempotency-Key'
           in: header
           description: 'Idempotency key to support safe retries for 24h'
-          required: false
+          required: true
           schema:
             type: string
           example: '{unique-uuid-per-payment-request}'
@@ -1179,13 +1179,13 @@ paths:
           <li>The total refunded amount must not exceed the original value</li>
         </ul>
 
-        <aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
+        <aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
       operationId: IssueARefund
       parameters:
         - name: 'Idempotency-Key'
           in: header
           description: 'Idempotency key to support safe retries for 24h'
-          required: false
+          required: true
           schema:
             type: string
           example: '{unique-uuid-per-refund}'
@@ -1496,12 +1496,13 @@ paths:
       description: >
         Use this endpoint when you want to create a Transfer between any 2 of your float/bank accounts.
 
+        <aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
       operationId: AddATransfer
       parameters:
         - name: 'Idempotency-Key'
           in: header
           description: 'Idempotency key to support safe retries for 24h'
-          required: false
+          required: true
           schema:
             type: string
           example: '{unique-uuid-per-transfer}'

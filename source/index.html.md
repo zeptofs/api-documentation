@@ -2816,7 +2816,7 @@ func main() {
 
 `POST /payment_requests`
 
-<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to a duplicate funds collection. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -2838,7 +2838,7 @@ func main() {
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|Idempotency-Key|header|string|false|Idempotency key to support safe retries for 24h|
+|Idempotency-Key|header|string|true|Idempotency key to support safe retries for 24h|
 |body|body|[MakeAPaymentRequestRequest](#schemamakeapaymentrequestrequest)|true|No description|
 |» description|body|string|true|Description visible to the initiator (payee). The first 9 characters supplied will be visible to the authoriser (payer)|
 |» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 that the Payment will be processed if the request is approved. (If the request is approved after this point in time, it will be processed straight away)|
@@ -3869,7 +3869,7 @@ To enable custom payment flows, the required payment channel can be selected by 
   <li>["direct_entry"] - for slower traditional payments</li>
   <li>["new_payments_platform", "direct_entry"] - enables automatic channel switching if a payment fails on the NPP</li>
 </ul>
-<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -3905,7 +3905,7 @@ To enable custom payment flows, the required payment channel can be selected by 
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|Idempotency-Key|header|string|false|Idempotency key to support safe retries for 24h|
+|Idempotency-Key|header|string|true|Idempotency key to support safe retries for 24h|
 |body|body|[MakeAPaymentRequest](#schemamakeapaymentrequest)|true|No description|
 |» description|body|string|true|User description. Only visible to the payer|
 |» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
@@ -4716,7 +4716,7 @@ Certain rules apply to the issuance of a refund:
   <li>Many refunds may be created against the original Payment Request</li>
   <li>The total refunded amount must not exceed the original value</li>
 </ul>
-<aside class="notice">We strongly recommend supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If a header value is omitted or is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
+<aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate refunds. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -4739,7 +4739,7 @@ Certain rules apply to the issuance of a refund:
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|Idempotency-Key|header|string|false|Idempotency key to support safe retries for 24h|
+|Idempotency-Key|header|string|true|Idempotency key to support safe retries for 24h|
 |credit_ref|path|string|true|The credit reference number e.g C.625v|
 |body|body|[IssueARefundRequest](#schemaissuearefundrequest)|true|No description|
 |» amount|body|integer|true|Amount in cents refund (Min: 1 - Max: 99999999999)|
@@ -6265,6 +6265,7 @@ func main() {
 `POST /transfers`
 
 Use this endpoint when you want to create a Transfer between any 2 of your float/bank accounts.
+<aside class="notice">We now require supplying an <code>Idempotency-Key</code> header when performing this request to ensure you can safely retry the action in case of an issue. If the header value is different to one provided previously, we will be treating a request as a new operation which may lead to duplicate payments. To understand more on how to make idempotent requests, please refer to our <a href="https://docs.zeptopayments.com/docs/zepto-api#idempotent-requests">Idempotent requests guide</a>.</aside>
 
 > Body parameter
 
@@ -6282,7 +6283,7 @@ Use this endpoint when you want to create a Transfer between any 2 of your float
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|Idempotency-Key|header|string|false|Idempotency key to support safe retries for 24h|
+|Idempotency-Key|header|string|true|Idempotency key to support safe retries for 24h|
 |body|body|[AddATransferRequest](#schemaaddatransferrequest)|true|No description|
 |» from_bank_account_id|body|string|true|The source float/bank account (UUID)|
 |» to_bank_account_id|body|string|true|The destination float/bank account (UUID)|
