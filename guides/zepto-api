@@ -372,18 +372,19 @@ The <code>refresh_token</code> gets regenerated and sent alongside the new <code
 
 <ul>
 <li><p>The <code>meta.resource_ref</code> value is the reference of the resource that was previously created with the conflicting idempotency key.</p></li>
-<li><p>The <code>Idempotency-Key</code> header is optional but recommended.</p></li>
-<li><p>Only the <code>POST</code> action for the Payments, Payment Requests and Refunds endpoints support the use of the <code>Idempotency-Key</code>.</p></li>
+<li><p>The <code>Idempotency-Key</code> header is required when interacting with endpoints that support it.</p></li>
+<li><p>Only the <code>POST</code> action for the Payments, Payment Requests, Transfers and Refunds endpoints require the use of the <code>Idempotency-Key</code>.</p></li>
 <li><p>Endpoints that use the <code>GET</code> or <code>DELETE</code> actions are idempotent by nature.</p></li>
 <li><p>A request that quickly follows another with the same idempotency key may return with <code>503 Service Unavailable</code>. If so, retry the request after the number of seconds specified in the <code>Retry-After</code> response header.</p></li>
 </ul>
 
-<p>Currently the following <code>POST</code> requests can be made idempotent. We <strong>strongly recommend</strong> sending a unique <code>Idempotency-Key</code> header when making those requests to allow for safe retries:</p>
+<p>Currently the following <code>POST</code> requests can be made idempotent. We <strong>require</strong> sending a unique <code>Idempotency-Key</code> header when making those requests to allow for safe retries:</p>
 
 <ul>
 <li><p><a href="doc:zepto-api#request-payment">Request Payment</a></p></li>
 <li><p><a href="doc:zepto-api#make-a-payment">Make a Payment</a></p></li>
 <li><p><a href="doc:zepto-api#issue-a-refund">Issue a Refund</a></p></li>
+<li><p><a href="doc:zepto-api#add-a-transfer">Add a Transfer</a></p></li>
 </ul>
 <h2 id='error-responses'>Error responses</h2>
 <blockquote>
