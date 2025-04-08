@@ -3907,14 +3907,14 @@ To enable custom payment flows, the required payment channel can be selected by 
 |---|---|---|---|---|
 |Idempotency-Key|header|string|true|Idempotency key to support safe retries for 24h|
 |body|body|[MakeAPaymentRequest](#schemamakeapaymentrequest)|true|No description|
-|» description|body|string|true|User description. Only visible to the payer|
+|» description|body|string|true|User description. Only visible to the payer. ASCII-printable characters and unicode emojis are accepted.|
 |» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 |» your_bank_account_id|body|string|true|Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.|
 |» channels|body|array|true|Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)|
 |» payouts|body|[[Payout](#schemapayout)]|true|One Payout object only|
 |»» Payout|body|[Payout](#schemapayout)|false|The actual Payout|
 |»»» amount|body|integer|true|Amount in cents to pay the recipient|
-|»»» description|body|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
+|»»» description|body|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description. ASCII-printable characters and unicode emojis are accepted.|
 |»»» recipient_contact_id|body|string|true|Contact to pay (`Contact.data.id`)|
 |»»» category_purpose_code|body|string|false|ISO 20022 code for payment category purpose (see supported values below).|
 |»»» end_to_end_id|body|string|false|End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN). For salary payments, set this to the Employee Reference.|
@@ -8406,7 +8406,7 @@ Use this endpoint to resend a failed webhook delivery.
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|description|string|true|User description. Only visible to the payer|
+|description|string|true|User description. Only visible to the payer. ASCII-printable characters and unicode emojis are accepted.|
 |matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Payment should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 |your_bank_account_id|string|true|Specify where we should take the funds for this transaction. If omitted, your primary bank account will be used.|
 |channels|array|true|Specify the payment channel to be used, in order. (new_payments_platform, direct_entry, or both)|
@@ -8435,7 +8435,7 @@ Use this endpoint to resend a failed webhook delivery.
 |Name|Type|Required|Description|
 |---|---|---|---|
 |amount|integer|true|Amount in cents to pay the recipient|
-|description|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.|
+|description|string|true|Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description. ASCII-printable characters and unicode emojis are accepted.|
 |recipient_contact_id|string|true|Contact to pay (`Contact.data.id`)|
 |category_purpose_code|string|false|ISO 20022 code for payment category purpose (see supported values below).|
 |end_to_end_id|string|false|End-To-End ID (35 max. characters). Required when a category purpose code is present. For superannuation or tax payments, set this to the Payment Reference Number (PRN). For salary payments, set this to the Employee Reference.|
