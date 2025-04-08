@@ -2662,8 +2662,8 @@ components:
       properties:
         description:
           type: string
-          description: User description. Only visible to the payer
-           pattern: '^[ -~p{Emoji}]+$'
+          description: User description. Only visible to the payer. ASCII-printable characters and unicode emojis are accepted.
+          pattern: "^[ -~\\p{Emoji}]+$"
           example: The SuperPackage
         matures_at:
           type: string
@@ -2721,8 +2721,8 @@ components:
           example: 30000
         description:
           type: string
-          description: Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description.
-          pattern: '^[ -~p{Emoji}]+$'
+          description: Description that both the payer and recipient can see. For Direct Entry payments, the payout recipient will see the first 9 characters of this description. For NPP payments, the payout recipient will see the first 280 characters of this description. ASCII-printable characters and unicode emojis are accepted.
+          pattern: "^[ -~\\p{Emoji}]+$"
           example: A tandem skydive jump SB23094
         recipient_contact_id:
           type: string
