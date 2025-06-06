@@ -2080,6 +2080,7 @@ components:
           type: string
           minLength: 3
           maxLength: 140
+          pattern: "^[ -~]+$"
           description: 'Contact name (Min: 3 - Max: 140)'
         email:
           type: string
@@ -2326,9 +2327,12 @@ components:
       properties:
         name:
           type: string
-          description: The name of the Contact (140 max. characters)
+          pattern: "^[ -~]+$"
+          maxLength: 140
+          description: The name of the Contact (140 max. characters, ASCII characters only)
         email:
           type: string
+          maxLength: 256
           description: The email of the Contact (256 max. characters)
         branch_code:
           type: string
