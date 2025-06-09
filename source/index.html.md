@@ -988,7 +988,7 @@ Use this endpoint when you want to pay somebody.
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[AddAnAnyoneContactRequest](#schemaaddananyonecontactrequest)|true|No description|
-|» name|body|string|true|The name of the Contact (140 max. characters)|
+|» name|body|string|true|The name of the Contact (140 max. characters, ASCII characters only)|
 |» email|body|string|true|The email of the Contact (256 max. characters)|
 |» branch_code|body|string|true|The bank account BSB of the Contact|
 |» account_number|body|string|true|The bank account number of the Contact|
@@ -8084,7 +8084,7 @@ Use this endpoint to resend a failed webhook delivery.
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-|name|string|true|The name of the Contact (140 max. characters)|
+|name|string|true|The name of the Contact (140 max. characters, ASCII characters only)|
 |email|string|true|The email of the Contact (256 max. characters)|
 |branch_code|string|true|The bank account BSB of the Contact|
 |account_number|string|true|The bank account number of the Contact|
