@@ -586,7 +586,7 @@ An Agreement can be cancelled by the initiator at any time whilst the authoriser
 
 |Parameter|In|Type|Required|Description|
 |---|---|---|---|---|
-|agreement_ref|path|string|true|Single value, exact match|
+|agreement_ref|path|string|true|Single value, exact match.|
 
 <h3 id="Cancel an Agreement-responses">Responses</h3>
 
