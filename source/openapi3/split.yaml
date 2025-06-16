@@ -516,6 +516,7 @@ paths:
           style: simple
           schema:
             type: string
+            pattern: "^[ -~]+$"
           example: A.2
       responses:
         '200':
@@ -536,11 +537,12 @@ paths:
       parameters:
         - name: agreement_ref
           in: path
-          description: 'Single value, exact match'
+          description: 'Single value, exact match.'
           required: true
           style: simple
           schema:
             type: string
+            pattern: "^[ -~]+$"
           example: A.2
       responses:
         '204':
@@ -2593,6 +2595,7 @@ components:
       properties:
         payid_name:
           type: string
+          pattern: "^[ -~]+$"
           description: The PayID name of the Receivable Contact
       example:
         payid_name: Bob Smith
@@ -2602,6 +2605,8 @@ components:
       properties:
         name:
           type: string
+          maxLength: 140
+          pattern: "^[ -~]+$"
           description: The name of the Contact
         email:
           type: string
@@ -3479,6 +3484,7 @@ components:
           type: array
         reason:
           type: string
+          pattern: "^[ -~]+$"
           description: The first 8 characters are visible if funds are sent via direct credit / BECS, and up to 270 characters if sent via NPP
           example: Because reason
         your_bank_account_id:
@@ -3947,11 +3953,13 @@ components:
           description: 'Default: "12345678"'
         debtor_name:
           type: string
+          pattern: "^[ -~]+$"
           minLength: 1
           description: 'Default:  "Simulated Debtor"'
         debtor_legal_name:
           type: string
           minLength: 1
+          pattern: "^[ -~]+$"
           description: 'Default:  "Simulated Debtor Pty Ltd"'
       example:
         payid_email: incoming@zeptopayments.com
@@ -3997,10 +4005,12 @@ components:
         debtor_name:
           type: string
           minLength: 1
+          pattern: "^[ -~]+$"
           description: 'Default: "Simulated Debtor"'
         debtor_legal_name:
           type: string
           minLength: 1
+          pattern: "^[ -~]+$"
           description: 'Default: "Simulated Debtor Pty Ltd"'
       example:
         to_bsb: "802919"
@@ -4046,6 +4056,7 @@ components:
           type: string
           minLength: 1
           maxLength: 16
+          pattern: "^[ -~]+$"
           description: 'Max 16 characters. Default: "Simulated Debtor"'
       example:
         to_bsb: "802919"
@@ -4073,6 +4084,7 @@ components:
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         description:
           type: string
+          pattern: "^[ -~]+$"
           description: Description for the Transfer
         matures_at:
           type: string
