@@ -1067,5 +1067,3 @@ Compare the signature in the header to the expected signature. If a signature ma
 To protect against timing attacks, use a constant-time string comparison to compare the expected signature to each of the received signatures.
 
 > **_NOTE:_** The sandbox environment allow both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.
-
-Looking for more? Our docs are open sourced! <https://github.com/zeptofs/api-documentation>
