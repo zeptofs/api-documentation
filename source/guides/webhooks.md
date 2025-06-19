@@ -88,6 +88,3 @@ Please be mindful that you would still receive a `debtor_credit.cleared` event.
 1. We will auto-retry failed deliveries every 5 minutes for 1 hour.
 1. Delivery order for webhook events is not guaranteed.
 1. We guarantee at least 1 delivery attempt.
-
-Feel free to reach out if you have further questions by emailing us directly at [support@zepto.com.au](mailto:support@zepto.com.au) or clicking on the blue bubble icon from the corner of the screen.
-
