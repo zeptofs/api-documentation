@@ -6,27 +6,24 @@ hidden: false
 ---
 
 # [AU] Webhooks | Zepto Help Center
+
 Webhooks are used to notify your application of changes to the status of Agreements, Payment Requests, Credits and Debits, etc as they are processed through the system.
 
-We support two types of webhooks
---------------------------------
+## We support two types of webhooks
 
-**Owner**
----------
+## **Owner**
 
 These webhooks are managed by the owner of the Zepto account and only report on events relating to the Zepto account. 
 
 To create an Owner webhook:
 
-**Application**
----------------
+## **Application**
 
 These webhooks are managed by the Zepto OAuth2 application owner and will report on events relating to any authorised Zepto account (limited by scope)
 
 To create an Application webhook:
 
-**Webhook Event Payload**
--------------------------
+## **Webhook Event Payload**
 
 Each webhook event contains data relating to the event type. For example, when you receive an Agreement event, the payload will contain data relating to that agreement.
 
@@ -34,7 +31,7 @@ The webhook payload will also include metadata where available.
 ​
 The best way to see example payloads for each type of webhook event is to try them out in the developer sandbox by creating a webhook and subscribing to all of the events.
 
-_Note: that the payload for a single webhook event contains an array that may hold more than one transaction, so you'll need to loop through them all._ 
+*Note: that the payload for a single webhook event contains an array that may hold more than one transaction, so you'll need to loop through them all.* 
 
 [![](https://downloads.intercomcdn.com/i/o/145843405/df2ba5b7f1439a35a18922bc/Screen+Shot+2019-09-02+at+5.12.39+pm.png?expires=1619761494&signature=b741439eec1691a83101e70a890a96a4c2ac673ed1522753b2a24f3586ccf0d2)](https://downloads.intercomcdn.com/i/o/145843405/df2ba5b7f1439a35a18922bc/Screen+Shot+2019-09-02+at+5.12.39+pm.png?expires=1619761494&signature=b741439eec1691a83101e70a890a96a4c2ac673ed1522753b2a24f3586ccf0d2)
 
@@ -44,8 +41,7 @@ Once you have subscribed to all the events, you can try creating an Agreement, P
 
 [![](https://downloads.intercomcdn.com/i/o/145842706/9127f96c7741b97ba6e617e2/Screen+Shot+2019-09-02+at+5.36.44+pm.png?expires=1619761494&signature=3639e0f59afdb79748b96b0934dbe5d2639b726d47313495e605692d0a3e1fe6)](https://downloads.intercomcdn.com/i/o/145842706/9127f96c7741b97ba6e617e2/Screen+Shot+2019-09-02+at+5.36.44+pm.png?expires=1619761494&signature=3639e0f59afdb79748b96b0934dbe5d2639b726d47313495e605692d0a3e1fe6)
 
-**Knowing when credit to your account has cleared**
----------------------------------------------------
+## **Knowing when credit to your account has cleared**
 
 Transactions always have two parts, a debit and a credit. After using a Payment Request to get paid, your application can be notified when the debit from the debtor's account has cleared by subscribing to the **Creditor Debit cleared** event. 
 
@@ -57,8 +53,7 @@ Please also find an article attached [here](https://help.zepto.money/en/articles
 
 If you would like to check the configuration of your webhooks or redeliver specific webhooks you can refer to our article attached [here](https://help.zepto.money/en/articles/5806231-webhook-api-endpoints).
 
-Handling transaction failures
------------------------------
+## Handling transaction failures
 
 Transactions can fail for a number of reasons. The failure states include `rejected` , `returned` , `voided`  and `prefailed` . Subscribe to these webhook events to notify your system of transaction failures. For more information on all the status values, please refer to the [transaction lifecycle developer documentation](https://docs.zepto.money/#lifecycle).
 
@@ -70,7 +65,7 @@ For a transaction that uses an NPP channel, it essentially clears straight away 
 
 Please be mindful that you would still receive a `debtor_credit.cleared` event.
 
-Our Delivery Promises
----------------------
+## Our Delivery Promises
 
 Feel free to reach out if you have further questions by emailing us directly at [support@zepto.com.au](mailto:support@zepto.com.au) or clicking on the blue bubble icon from the corner of the screen.
+
