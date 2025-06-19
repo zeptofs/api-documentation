@@ -17,18 +17,26 @@ These webhooks are managed by the owner of the Zepto account and only report on 
 
 To create an Owner webhook:
 
+1. Once you're logged into your Zepto account, click on your name at the top left of the interface
+1. Within the drop down menu displayed, click Webhooks
+1. Click on the green + Webhook button found on the top right of the screen
+
 ## **Application**
 
 These webhooks are managed by the Zepto OAuth2 application owner and will report on events relating to any authorised Zepto account (limited by scope)
 
 To create an Application webhook:
 
+1. Once you're logged into your Zepto account, click on your name at the top left of the interface
+1. Within the drop down menu displayed, click on Your applications
+1. Click on one of your applications, then click on the green + Webhook button
+
 ## **Webhook Event Payload**
 
 Each webhook event contains data relating to the event type. For example, when you receive an Agreement event, the payload will contain data relating to that agreement.
 
 The webhook payload will also include metadata where available.
-​
+
 The best way to see example payloads for each type of webhook event is to try them out in the developer sandbox by creating a webhook and subscribing to all of the events.
 
 *Note: that the payload for a single webhook event contains an array that may hold more than one transaction, so you'll need to loop through them all.* 
@@ -49,6 +57,15 @@ Once the creditor debit has cleared, you can be notified when the credit to your
 
 The normal lifecycle of the creditor debit and credit events is shown below, and you can also subscribe to these events to keep your system updated.
 
+1. Creditor debit matured
+1. Creditor debit processing
+1. Creditor debit clearing
+1. Creditor debit cleared
+1. Credit matured
+1. Credit processing
+1. Credit clearing
+1. Credit cleared
+
 Please also find an article attached [here](https://help.zepto.money/en/articles/4882892-webhook-event-flows), that will help you understand the webhooks events you will receive for the types of the transaction.
 
 If you would like to check the configuration of your webhooks or redeliver specific webhooks you can refer to our article attached [here](https://help.zepto.money/en/articles/5806231-webhook-api-endpoints).
@@ -66,6 +83,11 @@ For a transaction that uses an NPP channel, it essentially clears straight away 
 Please be mindful that you would still receive a `debtor_credit.cleared` event.
 
 ## Our Delivery Promises
+
+1. We only consider a webhook event delivery as failed if we don't receive any http response code (2xx, 4xx, 5xx, etc.)
+1. We will auto-retry failed deliveries every 5 minutes for 1 hour.
+1. Delivery order for webhook events is not guaranteed.
+1. We guarantee at least 1 delivery attempt.
 
 Feel free to reach out if you have further questions by emailing us directly at [support@zepto.com.au](mailto:support@zepto.com.au) or clicking on the blue bubble icon from the corner of the screen.
 
