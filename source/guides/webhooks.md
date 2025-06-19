@@ -5,7 +5,7 @@ category: 65ada3d7699b7900765d2ed5
 hidden: false
 ---
 
-# [AU] Webhooks | Zepto Help Center
+# Webhooks
 
 Webhooks are used to notify your application of changes to the status of Agreements, Payment Requests, Credits and Debits, etc as they are processed through the system.
 
