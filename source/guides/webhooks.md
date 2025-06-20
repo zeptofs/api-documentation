@@ -9,9 +9,7 @@ hidden: false
 
 Webhooks are used to notify your application of changes to the status of Agreements, Payment Requests, Credits and Debits, etc. as they are processed through the system.
 
-## Types of Webhooks
-
-We support two types of webhooks
+## Webhook Types
 
 ### Owner
 
@@ -55,15 +53,15 @@ Each webhook event contains data relating to its event type. For example, when y
 
 The webhook payload's top-level fields are defined as follows:
 
-| Name               | Type              | Required | Description                                                    |
-| ------------------ | ----------------- | -------- | -------------------------------------------------------------- |
-| event              | object            | true     | Webhook event details                                          |
-| » type             | string            | true     | The webhook event key (list available in the webhook settings) |
-| » at               | string(date-time) | true     | When the event occurred                                        |
-| » who              | object            | true     | Who the webhook event relates to                               |
-| »» account_id      | string(uuid)      | true     | The Zepto account who's the owner of the event                 |
-| »» bank_account_id | string(uuid)      | true     | The above Zepto account's bank account                         |
-| data               | [object]          | true     | Array of response bodies                                       |
+ | Name                 | Type                | Required | Description                                                    |
+ | ------------------   | -----------------   | -------- | -------------------------------------------------------------- |
+ | `event`              | `object`            | `true`   | Webhook event details                                          |
+ | » `type`             | `string`            | `true`   | The webhook event key (list available in the webhook settings) |
+ | » `at`               | `string(date-time)` | `true`   | When the event occurred                                        |
+ | » `who`              | `object`            | `true`   | Who the webhook event relates to                               |
+ | »» `account_id`      | `string(uuid)`      | `true`   | The Zepto account who's the owner of the event                 |
+ | »» `bank_account_id` | `string(uuid)`      | `true`   | The above Zepto account's bank account                         |
+ | `data`               | `[object]`          | `true`   | Array of response bodies                                       |
 
 _Note: that the `data` payload for a single webhook event contains an array that may hold more than one transaction, so you'll need to loop through them all._
 
@@ -218,7 +216,6 @@ func main() {
 	// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 }
 ```
-
 ```python
 import hashlib
 import hmac
@@ -242,7 +239,6 @@ print(expected_signature)
 print(given_signature)
 # > f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 ```
-
 ```ruby
 require 'openssl'
 
@@ -260,7 +256,6 @@ puts(expected_signature)
 puts(given_signature)
 # => f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 ```
-
 ```javascript
 var crypto = require("crypto");
 
@@ -284,7 +279,6 @@ console.log(expectedSignature);
 console.log(givenSignature);
 // f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
 ```
-
 ```php
 <?php
 
@@ -304,7 +298,6 @@ echo $given_signature;
 
 ?>
 ```
-
 ```java
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
