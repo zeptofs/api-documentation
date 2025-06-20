@@ -1,41 +1,179 @@
-<h1 id='au-webhooks-zepto-help-center'>[AU] Webhooks | Zepto Help Center</h1>
-<p>Webhooks are used to notify your application of changes to the status of Agreements, Payment Requests, Credits and Debits, etc as they are processed through the system.</p>
-<h2 id='we-support-two-types-of-webhooks'>We support two types of webhooks</h2><h2 id='owner'><strong>Owner</strong></h2>
-<p>These webhooks are managed by the owner of the Zepto account and only report on events relating to the Zepto account. </p>
+<h1 id='webhooks'>Webhooks</h1>
+<p>Webhooks are used to notify your application of changes to the status of Agreements, Payment Requests, Credits and Debits, etc. as they are processed through the system.</p>
+<h2 id='types-of-webhooks'>Types of Webhooks</h2>
+<p>We support two types of webhooks</p>
+<h3 id='owner'>Owner</h3>
+<p>These webhooks are managed by the owner of the Zepto account and only report on events relating to the Zepto account.</p>
 
 <p>To create an Owner webhook:</p>
-<h2 id='application'><strong>Application</strong></h2>
-<p>These webhooks are managed by the Zepto OAuth2 application owner and will report on events relating to any authorised Zepto account (limited by scope)</p>
+
+<ol>
+<li> Once you&#39;re logged into your Zepto account, click on your name at the top left of the interface</li>
+<li> Within the drop down menu displayed, click Webhooks</li>
+<li> Click on the green + Webhook button found on the top right of the screen</li>
+</ol>
+<h3 id='application-or-app'>Application (or App)</h3>
+<p>These webhooks are managed by the Zepto OAuth2 application owner and will report on events relating to any authorised Zepto account (limited by scope).</p>
 
 <p>To create an Application webhook:</p>
-<h2 id='webhook-event-payload'><strong>Webhook Event Payload</strong></h2>
-<p>Each webhook event contains data relating to the event type. For example, when you receive an Agreement event, the payload will contain data relating to that agreement.</p>
 
-<p>The webhook payload will also include metadata where available.
-​
-The best way to see example payloads for each type of webhook event is to try them out in the developer sandbox by creating a webhook and subscribing to all of the events.</p>
+<ol>
+<li> Once you&#39;re logged into your Zepto account, click on your name at the top left of the interface</li>
+<li> Within the drop down menu displayed, click on Your applications</li>
+<li> Click on one of your applications, then click on the green + Webhook button</li>
+</ol>
+<h2 id='webhook-event-payload'>Webhook Event Payload</h2>
+<p>A typical webhook event follows this structure:</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object.action"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yyyy-mm-ddThh:mm:ssZ"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"who"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bank_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Each webhook event contains data relating to its event type. For example, when you receive an Agreement event, the payload will contain data relating to that agreement. The webhook payload will also include metadata where available.</p>
 
-<p><em>Note: that the payload for a single webhook event contains an array that may hold more than one transaction, so you&#39;ll need to loop through them all.</em> </p>
+<p>The webhook payload&#39;s top-level fields are defined as follows:</p>
 
-<p><a href="https://downloads.intercomcdn.com/i/o/145843405/df2ba5b7f1439a35a18922bc/Screen+Shot+2019-09-02+at+5.12.39+pm.png?expires=1619761494&amp;signature=b741439eec1691a83101e70a890a96a4c2ac673ed1522753b2a24f3586ccf0d2"><img src="https://downloads.intercomcdn.com/i/o/145843405/df2ba5b7f1439a35a18922bc/Screen+Shot+2019-09-02+at+5.12.39+pm.png?expires=1619761494&amp;signature=b741439eec1691a83101e70a890a96a4c2ac673ed1522753b2a24f3586ccf0d2" alt="" /></a></p>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>event</td>
+<td>object</td>
+<td>true</td>
+<td>Webhook event details</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>true</td>
+<td>The webhook event key (list available in the webhook settings)</td>
+</tr>
+<tr>
+<td>» at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>When the event occurred</td>
+</tr>
+<tr>
+<td>» who</td>
+<td>object</td>
+<td>true</td>
+<td>Who the webhook event relates to</td>
+</tr>
+<tr>
+<td>»» account_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The Zepto account who&#39;s the owner of the event</td>
+</tr>
+<tr>
+<td>»» bank_account_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>The above Zepto account&#39;s bank account</td>
+</tr>
+<tr>
+<td>data</td>
+<td>[object]</td>
+<td>true</td>
+<td>Array of response bodies</td>
+</tr>
+</tbody></table>
 
-<p>If your application is not ready to receive webhooks but you want a quick way to see the events in action, you can use the <a href="https://www.webhook.site/">https:/webhook.site</a> to quickly create a URL that you can use as the webhook URL when settings up webhooks in Zepto. Alternatively, you can also use <a href="https://ngrok.com/">https://ngrok.com/</a> to allow webhook events to be posted to your local machine.</p>
+<p><em>Note: that the <code>data</code> payload for a single webhook event contains an array that may hold more than one transaction, so you&#39;ll need to loop through them all.</em></p>
+<h3 id='data-schemas-for-data-component'>Data schemas for <code>data</code> component</h3>
+<p>Use the following table to discover what type of response schema to expect for for the <code>data.[{}]</code> component of the webhook delivery, based on the <code>event.type</code>.</p>
 
-<p>Once you have subscribed to all the events, you can try creating an Agreement, Payment Request or Payment in the sandbox. You can then see the events that have been sent to the configured webhook URL under the <em>Deliveries</em> heading on the webhook detailed page.</p>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Data schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>agreement.*</code></td>
+<td><a href="ref:getagreement">GetAnAgreementResponse</a></td>
+</tr>
+<tr>
+<td><code>contact.*</code></td>
+<td><a href="ref:getacontact">GetAContactResponse</a></td>
+</tr>
+<tr>
+<td><code>credit.*</code></td>
+<td><a href="ref:listalltransactions">ListAllTransactionsResponse</a></td>
+</tr>
+<tr>
+<td><code>creditor_debit.*</code></td>
+<td><a href="ref:listalltransactions">ListAllTransactionsResponse</a></td>
+</tr>
+<tr>
+<td><code>debit.*</code></td>
+<td><a href="ref:listalltransactions">ListAllTransactionsResponse</a></td>
+</tr>
+<tr>
+<td><code>debtor_credit.*</code></td>
+<td><a href="ref:listalltransactions">ListAllTransactionsResponse</a></td>
+</tr>
+<tr>
+<td><code>open_agreement.*</code></td>
+<td><a href="ref:listallopenagreements">ListAllOpenAgreementsRespose</a></td>
+</tr>
+<tr>
+<td><code>payment.*</code></td>
+<td><a href="ref:getapayment">GetAPaymentResponse</a></td>
+</tr>
+<tr>
+<td><code>payment_request.*</code></td>
+<td><a href="ref:getapaymentrequest">GetAPaymentRequestResponse</a></td>
+</tr>
+<tr>
+<td><code>unassigned_agreement.*</code></td>
+<td><a href="ref:getunassignedagreement">GetAnUnassignedAgreementResponse</a></td>
+</tr>
+</tbody></table>
 
-<p><a href="https://downloads.intercomcdn.com/i/o/145842706/9127f96c7741b97ba6e617e2/Screen+Shot+2019-09-02+at+5.36.44+pm.png?expires=1619761494&amp;signature=3639e0f59afdb79748b96b0934dbe5d2639b726d47313495e605692d0a3e1fe6"><img src="https://downloads.intercomcdn.com/i/o/145842706/9127f96c7741b97ba6e617e2/Screen+Shot+2019-09-02+at+5.36.44+pm.png?expires=1619761494&amp;signature=3639e0f59afdb79748b96b0934dbe5d2639b726d47313495e605692d0a3e1fe6" alt="" /></a></p>
+<p>The best way to see example payloads for each type of webhook event is to try them out in the developer sandbox by creating a webhook and subscribing to all events.</p>
+
+<p>If your application is not ready to receive webhooks but you want a quick way to see the events in action, you can use <a href="https://www.webhook.site/">https://webhook.site</a> to quickly create a URL that you can use as the webhook URL when setting up webhooks in Zepto. Alternatively, you can also use <a href="https://ngrok.com/">https://ngrok.com/</a> to allow webhook events to be posted to your local machine.</p>
+
+<p>Once you have subscribed to all events, you can try creating an Agreement, Payment Request or Payment in the sandbox. You can then see the events that have been sent to the configured webhook URL under the <em>Deliveries</em> heading on the webhook detailed page.</p>
+
+<p><img src="https://downloads.intercomcdn.com/i/o/145842706/9127f96c7741b97ba6e617e2/Screen+Shot+2019-09-02+at+5.36.44+pm.png?expires=1619761494&amp;signature=3639e0f59afdb79748b96b0934dbe5d2639b726d47313495e605692d0a3e1fe6" alt="" /></p>
 <h2 id='knowing-when-credit-to-your-account-has-cleared'><strong>Knowing when credit to your account has cleared</strong></h2>
-<p>Transactions always have two parts, a debit and a credit. After using a Payment Request to get paid, your application can be notified when the debit from the debtor&#39;s account has cleared by subscribing to the <strong>Creditor Debit cleared</strong> event. </p>
+<p>Transactions always have two parts, a debit and a credit. After using a Payment Request to get paid, your application can be notified when the debit from the debtor&#39;s account has cleared by subscribing to the <strong>Creditor Debit cleared</strong> event.</p>
 
 <p>Once the creditor debit has cleared, you can be notified when the credit to your account has cleared by subscribing to the <strong>Credit Cleared</strong> event.</p>
 
 <p>The normal lifecycle of the creditor debit and credit events is shown below, and you can also subscribe to these events to keep your system updated.</p>
 
-<p>Please also find an article attached <a href="https://help.zepto.money/en/articles/4882892-webhook-event-flows">here</a>, that will help you understand the webhooks events you will receive for the types of the transaction.</p>
+<ol>
+<li> Creditor debit matured</li>
+<li> Creditor debit processing</li>
+<li> Creditor debit clearing</li>
+<li> Creditor debit cleared</li>
+<li> Credit matured</li>
+<li> Credit processing</li>
+<li> Credit clearing</li>
+<li> Credit cleared</li>
+</ol>
 
-<p>If you would like to check the configuration of your webhooks or redeliver specific webhooks you can refer to our article attached <a href="https://help.zepto.money/en/articles/5806231-webhook-api-endpoints">here</a>.</p>
+<p>Please also find an article attached <a href="https://help.zepto.money/en/articles/4882892-webhook-event-flows">here</a>, that will help you understand the webhooks events you will receive for each type of transaction.</p>
+
+<p>If you would like to check the configuration of your webhooks or redeliver specific webhooks you can refer to our article attached <a href="https://help.zepto.money/en/articles/5806231-webhook-api-endpoints">here</a>. For redelivery of webhooks, also check out our <a href="#Zepto-API-Webhooks">Webhook/WebhookDelivery API endpoints</a>.</p>
 <h2 id='handling-transaction-failures'>Handling transaction failures</h2>
-<p>Transactions can fail for a number of reasons. The failure states include <code>rejected</code> , <code>returned</code> , <code>voided</code>  and <code>prefailed</code> . Subscribe to these webhook events to notify your system of transaction failures. For more information on all the status values, please refer to the <a href="https://docs.zepto.money/#lifecycle">transaction lifecycle developer documentation</a>.</p>
+<p>Transactions can fail for a number of reasons. The failure states include <code>rejected</code>, <code>returned</code>, <code>voided</code> and <code>prefailed</code>. Subscribe to these webhook events to notify your system of transaction failures. For more information on all the status values, please refer to the <a href="https://docs.zepto.money/#lifecycle">transaction lifecycle developer documentation</a>.</p>
 
 <p><strong>Is Your Delivery Showing A Different State Than The Delivery Type?</strong></p>
 
@@ -45,4 +183,207 @@ The best way to see example payloads for each type of webhook event is to try th
 
 <p>Please be mindful that you would still receive a <code>debtor_credit.cleared</code> event.</p>
 <h2 id='our-delivery-promises'>Our Delivery Promises</h2>
-<p>Feel free to reach out if you have further questions by emailing us directly at <a href="mailto:support@zepto.com.au">support@zepto.com.au</a> or clicking on the blue bubble icon from the corner of the screen.</p>
+<ol>
+<li> We only consider a webhook event delivery as failed if we don&#39;t receive any http response code (2xx, 4xx, 5xx, etc.)</li>
+<li> We will auto-retry failed deliveries every 5 minutes for 1 hour.
+
+<ul>
+<li><em>Note:</em> In the sandbox environment, webhook deliveries will only be retried once, to allow for easier testing of failure scenarios.</li>
+</ul></li>
+<li> Delivery order for webhook events is not guaranteed.</li>
+<li> We guarantee at least 1 delivery attempt.</li>
+</ol>
+<h2 id='request-id'>Request ID</h2>
+<p>Zepto provides a <code>Split-Request-ID</code> header in the form of a <code>UUID</code> which uniquely identifies a webhook event. If the webhook event is retried/retransmitted by Zepto, the UUID will remain the same. This allows you to check if a webhook event has been previously handled/processed.</p>
+<h3 id='example-header'>Example header</h3><div class="highlight"><pre class="highlight plaintext"><code>Split-Request-ID: 07f4e8c1-846b-5ec0-8a25-24c3bc5582b5
+</code></pre></div><h2 id='checking-webhook-signatures'>Checking Webhook Signatures</h2>
+<p>Zepto signs the webhook events it sends to your endpoints. We do so by including a signature in each event’s <code>Split-Signature</code> header. This allows you to validate that the events were indeed sent by Zepto.</p>
+
+<p>Before you can verify signatures, you need to retrieve your endpoint’s secret from your Webhooks settings. Each endpoint has its own unique secret; if you use multiple endpoints, you must obtain a secret for each one.</p>
+
+<p>The <code>Split-Signature</code> header contains a timestamp and one or more signatures. All separated by <code>.</code> (dot).</p>
+<h3 id='example-header-2'>Example header</h3><div class="highlight"><pre class="highlight plaintext"><code>Split-Signature: 1514772000.93eee90206280b25e82b38001e23961cba4c007f4d925ba71ecc2d9804978635
+</code></pre></div>
+<p><strong>Step 1. Extract the timestamp and signatures from the header</strong></p>
+
+<p>Split the header, using the <code>.</code> (dot) character as the separator, to get a list of elements.</p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>timestamp</code></td>
+<td><a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a> in seconds when the signature was created</td>
+</tr>
+<tr>
+<td><code>signature</code></td>
+<td>Request signature</td>
+</tr>
+<tr>
+<td><code>other</code></td>
+<td>Placeholder for future parameters (currently not used)</td>
+</tr>
+</tbody></table>
+
+<p><strong>Step 2: Prepare the <code>signed_payload</code> string</strong></p>
+
+<p>You achieve this by concatenating:</p>
+
+<ul>
+<li>The timestamp from the header (as a string)</li>
+<li>The character <code>.</code> (dot)</li>
+<li>The actual JSON payload (request body)</li>
+</ul>
+
+<p><strong>Step 3: Determine the expected signature</strong></p>
+
+<p>Compute an HMAC with the SHA256 hash function. Use the endpoint’s signing secret as the key, and use the <code>signed_payload</code> string as the message.</p>
+
+<p><strong>Step 4: Compare signatures</strong></p>
+
+<p>Compare the signature in the header to the expected signature. If a signature matches, compute the difference between the current timestamp and the received timestamp, then decide if the difference is within your tolerance.</p>
+
+<p>To protect against timing attacks, use a constant-time string comparison to compare the expected signature to each of the received signatures.</p>
+
+<p>Here are code examples for verifying signatures:</p>
+<div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"crypto/hmac"</span>
+    <span class="s">"crypto/sha256"</span>
+    <span class="s">"strings"</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"encoding/hex"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">secret</span> <span class="o">:=</span> <span class="s">"1234"</span>
+    <span class="n">message</span> <span class="o">:=</span> <span class="s">"full payload of the request"</span>
+    <span class="n">splitSignature</span> <span class="o">:=</span> <span class="s">"1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f"</span>
+
+    <span class="n">data</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">Split</span><span class="p">(</span><span class="n">splitSignature</span><span class="p">,</span> <span class="s">"."</span><span class="p">)</span>
+    <span class="n">timestamp</span><span class="p">,</span> <span class="n">givenSignature</span> <span class="o">:=</span> <span class="n">data</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+
+    <span class="n">signedPayload</span> <span class="o">:=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="n">message</span>
+
+    <span class="n">hash</span> <span class="o">:=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="n">sha256</span><span class="o">.</span><span class="n">New</span><span class="p">,</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">secret</span><span class="p">))</span>
+    <span class="n">hash</span><span class="o">.</span><span class="n">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="n">signedPayload</span><span class="p">))</span>
+    <span class="n">expectedSignature</span> <span class="o">:=</span> <span class="n">hex</span><span class="o">.</span><span class="n">EncodeToString</span><span class="p">(</span><span class="n">hash</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="no">nil</span><span class="p">))</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">expectedSignature</span><span class="p">)</span>
+    <span class="c">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">givenSignature</span><span class="p">)</span>
+    <span class="c">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">hmac</span>
+
+<span class="n">split_signature</span> <span class="o">=</span> <span class="s">'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s">'1234'</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="n">message</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s">'full payload of the request'</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">split_signature</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'.'</span><span class="p">)</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">given_signature</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">signed_payload</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s">'.'</span> <span class="o">+</span> <span class="n">message</span>
+
+<span class="n">expected_signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">signed_payload</span><span class="p">,</span>
+<span class="n">digestmod</span><span class="o">=</span><span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">).</span><span class="n">hexdigest</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">expected_signature</span><span class="p">)</span>
+<span class="c1"># &gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">given_signature</span><span class="p">)</span>
+<span class="c1"># &gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f
+</span></code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'openssl'</span>
+
+<span class="n">split_signature</span> <span class="o">=</span> <span class="s1">'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="s1">'1234'</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'full payload of the request'</span>
+
+<span class="n">timestamp</span><span class="p">,</span> <span class="n">given_signature</span><span class="p">,</span> <span class="o">*</span><span class="n">other</span> <span class="o">=</span> <span class="n">split_signature</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+<span class="n">signed_payload</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="n">message</span>
+<span class="n">expected_signature</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">hexdigest</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span>
+<span class="n">signed_payload</span><span class="p">)</span>
+
+<span class="nb">puts</span><span class="p">(</span><span class="n">expected_signature</span><span class="p">)</span>
+<span class="c1"># =&gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+<span class="nb">puts</span><span class="p">(</span><span class="n">given_signature</span><span class="p">)</span>
+<span class="c1"># =&gt; f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">crypto</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">full payload of the request</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">secret</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">1234</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">splitSignature</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">splitSignature</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">givenSignature</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">signedPayload</span> <span class="o">=</span> <span class="nx">timestamp</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">.</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">message</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">expectedSignature</span> <span class="o">=</span> <span class="nx">crypto</span>
+  <span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="dl">"</span><span class="s2">sha256</span><span class="dl">"</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">signedPayload</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="dl">"</span><span class="s2">hex</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">expectedSignature</span><span class="p">);</span>
+<span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">givenSignature</span><span class="p">);</span>
+<span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$split_signature</span> <span class="o">=</span> <span class="s1">'1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f'</span><span class="p">;</span>
+<span class="nv">$secret</span> <span class="o">=</span> <span class="s1">'1234'</span><span class="p">;</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="s1">'full payload of the request'</span><span class="p">;</span>
+
+<span class="k">list</span><span class="p">(</span><span class="nv">$timestamp</span><span class="p">,</span> <span class="nv">$given_signature</span><span class="p">,</span> <span class="nv">$other</span><span class="p">)</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="nv">$split_signature</span><span class="p">);</span>
+<span class="nv">$signed_payload</span> <span class="o">=</span> <span class="nv">$timestamp</span> <span class="mf">.</span> <span class="s2">"."</span> <span class="mf">.</span> <span class="nv">$message</span><span class="p">;</span>
+<span class="nv">$expected_signature</span> <span class="o">=</span> <span class="nb">hash_hmac</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="nv">$signed_payload</span><span class="p">,</span> <span class="nv">$secret</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$expected_signature</span><span class="p">;</span>
+<span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+<span class="k">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$given_signature</span><span class="p">;</span>
+<span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+
+<span class="cp">?&gt;</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">javax.crypto.Mac</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+      <span class="nc">String</span> <span class="n">splitSignature</span> <span class="o">=</span> <span class="s">"1514772000.f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f"</span><span class="o">;</span>
+      <span class="nc">String</span> <span class="n">secret</span> <span class="o">=</span> <span class="s">"1234"</span><span class="o">;</span>
+      <span class="nc">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"full payload of the request"</span><span class="o">;</span>
+
+      <span class="nc">String</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="n">splitSignature</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\."</span><span class="o">);</span>
+      <span class="nc">String</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+      <span class="nc">String</span> <span class="n">givenSignature</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+      <span class="nc">String</span> <span class="n">signedPayload</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="n">message</span><span class="o">;</span>
+
+      <span class="nc">Mac</span> <span class="n">sha256_HMAC</span> <span class="o">=</span> <span class="nc">Mac</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"HmacSHA256"</span><span class="o">);</span>
+      <span class="nc">SecretKeySpec</span> <span class="n">secret_key</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecretKeySpec</span><span class="o">(</span><span class="n">secret</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(),</span> <span class="s">"HmacSHA256"</span><span class="o">);</span>
+      <span class="n">sha256_HMAC</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">secret_key</span><span class="o">);</span>
+
+      <span class="nc">String</span> <span class="n">expectedSignature</span> <span class="o">=</span> <span class="n">javax</span><span class="o">.</span><span class="na">xml</span><span class="o">.</span><span class="na">bind</span><span class="o">.</span><span class="na">DatatypeConverter</span><span class="o">.</span><span class="na">printHexBinary</span><span class="o">(</span><span class="n">sha256_HMAC</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">signedPayload</span><span class="o">.</span><span class="na">getBytes</span><span class="o">())).</span><span class="na">toLowerCase</span><span class="o">();</span>
+
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">expectedSignature</span><span class="o">);</span>
+      <span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">givenSignature</span><span class="o">);</span>
+      <span class="c1">// f04cb05adb985b29d84616fbf3868e8e58403ff819cdc47ad8fc47e6acbce29f</span>
+    <span class="o">}</span>
+    <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Error"</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p><em>Note: The sandbox environment allows both HTTP and HTTPS webhook URLs. The live environment however will only POST to HTTPS URLs.</em></p>
