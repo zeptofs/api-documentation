@@ -4084,8 +4084,8 @@ components:
           description: 'Amount in cents (Min: 1 - Max: 99999999999)'
         description:
           type: string
-          pattern: "^[ -~]+$"
-          description: Description for the Transfer
+          pattern: "^[ -~\\p{Emoji}]+$"
+          description: Description for the Transfer. ASCII-printable characters and unicode emojis are accepted.
         matures_at:
           type: string
           format: date-time
