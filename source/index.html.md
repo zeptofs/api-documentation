@@ -6288,7 +6288,7 @@ Use this endpoint when you want to create a Transfer between any 2 of your float
 |» from_bank_account_id|body|string|true|The source float/bank account (UUID)|
 |» to_bank_account_id|body|string|true|The destination float/bank account (UUID)|
 |» amount|body|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
-|» description|body|string|true|Description for the Transfer|
+|» description|body|string|true|Description for the Transfer. ASCII-printable characters and unicode emojis are accepted.|
 |» matures_at|body|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 
 > Example responses
@@ -9522,7 +9522,7 @@ null
 |from_bank_account_id|string|true|The source float/bank account (UUID)|
 |to_bank_account_id|string|true|The destination float/bank account (UUID)|
 |amount|integer|true|Amount in cents (Min: 1 - Max: 99999999999)|
-|description|string|true|Description for the Transfer|
+|description|string|true|Description for the Transfer. ASCII-printable characters and unicode emojis are accepted.|
 |matures_at|string(date-time)|true|Date & time in UTC ISO8601 the Transfer should be processed. (Can not be earlier than the start of current day in Sydney AEST/AEDT)|
 
 ## AddATransferResponse
