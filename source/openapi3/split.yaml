@@ -703,6 +703,14 @@ paths:
                     type: string
         '404':
           description: Not Found
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: string
   '/contacts/{contact_id}/receivable':
     patch:
       tags:
