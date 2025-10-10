@@ -695,6 +695,12 @@ paths:
           description: No Content (success)
         '400':
           description: Bad Request (errors)
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: string
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
