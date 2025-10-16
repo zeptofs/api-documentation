@@ -714,6 +714,10 @@ paths:
                   summary: Contact blocked by a Split admin
                   value:
                     errors: This receivable contact can only be enabled by a Split administrator. Please contact Split for further information
+                Bank account not blocked:
+                  summary: Bank account not blocked
+                  value:
+                    errors: Bank account must be blocked.
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
