@@ -701,6 +701,11 @@ paths:
                 properties:
                   errors:
                     type: string
+              examples:
+                Contact is not receivable:
+                  summary: Contact is not receivable
+                  value:
+                    errors: Contact is not receivable
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
