@@ -718,6 +718,10 @@ paths:
                   summary: Bank account not blocked
                   value:
                     errors: Bank account must be blocked.
+                Bank account already unblocked:
+                  summary: Bank account already unblocked
+                  value:
+                    errors: Bank account is already unblocked
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
