@@ -726,6 +726,10 @@ paths:
                   summary: Bank account already unblocked for credits
                   value:
                     errors: Bank account is already unblocked for credits
+                Bank account already unblocked for debits:
+                  summary: Bank account already unblocked for debits
+                  value:
+                    errors: Bank account is already unblocked for debits
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
