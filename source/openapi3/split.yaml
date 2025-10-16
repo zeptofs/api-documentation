@@ -710,10 +710,10 @@ paths:
                   summary: PayID is not disabled
                   value:
                     errors: Contact must be 'disabled' but is '{status}'.
-                Contact blocked by a Split admin:
-                  summary: Contact blocked by a Split admin
+                Contact blocked by a Zepto admin:
+                  summary: Contact blocked by a Zepto admin
                   value:
-                    errors: This receivable contact can only be enabled by a Split administrator. Please contact Split for further information
+                    errors: This receivable contact can only be enabled by Zepto support. Please contact Zepto for further information
                 Bank account not blocked:
                   summary: Bank account not blocked
                   value:
