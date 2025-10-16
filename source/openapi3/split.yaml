@@ -710,6 +710,10 @@ paths:
                   summary: PayID is not disabled
                   value:
                     errors: Contact must be 'disabled' but is '{status}'.
+                Contact blocked by a Split admin:
+                  summary: Contact blocked by a Split admin
+                  value:
+                    errors: This receivable contact can only be enabled by a Split administrator. Please contact Split for further information
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
