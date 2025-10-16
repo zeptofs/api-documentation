@@ -706,6 +706,10 @@ paths:
                   summary: Contact is not receivable
                   value:
                     errors: Contact is not receivable
+                PayID is not disabled:
+                  summary: PayID is not disabled
+                  value:
+                    errors: Contact must be 'disabled' but is '{status}'.
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
