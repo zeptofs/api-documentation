@@ -952,6 +952,11 @@ paths:
                 properties:
                   errors:
                     type: string
+              examples:
+                Channel not supported by bank account:
+                  summary: Channel not supported by bank account
+                  value:
+                    errors: 'Channels {channel} is not supported by your bank account. Please contact us for assistance'
     get:
       tags:
         - Payments
