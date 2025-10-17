@@ -944,6 +944,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MakeAPaymentResponse'
+        '400':
+          description: Bad Request (errors)
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: string
     get:
       tags:
         - Payments
