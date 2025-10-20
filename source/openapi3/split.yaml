@@ -985,6 +985,10 @@ paths:
                   summary: Bank account removed
                   value:
                     errors: 'Recipient contact (#{recipient_contact.id}) bank account has been removed'
+                Recipient bank account blocked:
+                  summary: Recipient bank account blocked
+                  value:
+                    errors: 'Recipient contact (#{recipient_contact.id}) is blocked (reason)'
                 Insufficient funds:
                   summary: Insufficient funds
                   value:
