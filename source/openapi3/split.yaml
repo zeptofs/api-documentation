@@ -973,6 +973,10 @@ paths:
                   summary: Mature date in the past
                   value:
                     errors: 'Matures at must not be in the past'
+                Not found bank account:
+                  summary: Not found bank account
+                  value:
+                    errors: 'Your bank account not found'
                 Bank account not configured:
                   summary: Bank account not configured
                   value:
