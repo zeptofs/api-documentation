@@ -981,6 +981,14 @@ paths:
                   summary: Blocked bank account
                   value:
                     errors: 'Your bank account is blocked (reason)'
+                Inactive bank account:
+                  summary: Inactive bank account
+                  value:
+                    errors: 'Your bank account not active'
+                Invalid purpose category:
+                  summary: Invalid purpose category
+                  value:
+                    errors: 'Category purpose code must be one of: PENS, SALA, TAXS'
     get:
       tags:
         - Payments
