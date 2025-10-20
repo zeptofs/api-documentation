@@ -953,6 +953,10 @@ paths:
                   errors:
                     type: string
               examples:
+                Invalid channel:
+                  summary: Invalid channel
+                  value:
+                    errors: 'Channels must be one of: new_payments_platform, direct_entry'
                 Channel not supported by bank account:
                   summary: Channel not supported by bank account
                   value:
