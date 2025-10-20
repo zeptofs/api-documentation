@@ -981,6 +981,10 @@ paths:
                   summary: Bank account not configured
                   value:
                     errors: 'Your bank account is not configured for payments'
+                Bank account removed:
+                  summary: Bank account removed
+                  value:
+                    errors: 'Recipient contact (#{recipient_contact.id}) bank account has been removed'
                 Insufficient funds:
                   summary: Insufficient funds
                   value:
