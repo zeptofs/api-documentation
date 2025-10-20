@@ -961,10 +961,14 @@ paths:
                   summary: Channel not supported by bank account
                   value:
                     errors: 'Channels {channel} is not supported by your bank account. Please contact us for assistance'
+                Transaction limit exceeded:
+                  summary: Transaction limit exceeded
+                  value:
+                    errors: 'The requested amount exceeds the {amount} limit per transaction. Please contact Zepto customer support.'
                 Limit exceeded:
                   summary: Limit exceeded
                   value:
-                    errors: 'The requested amount exceeds the {amount} limit per transaction. Please contact Zepto customer support.'
+                    errors: 'Amount must be less than or equal to 1000000000'
                 Invalid description format:
                   summary: Invalid description format
                   value:
