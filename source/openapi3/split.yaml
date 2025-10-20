@@ -965,6 +965,10 @@ paths:
                   summary: Invalid description format
                   value:
                     errors: 'Description is in invalid format'
+                Mature date in the past:
+                  summary: Mature date in the past
+                  value:
+                    errors: 'Matures at must not be in the past'
     get:
       tags:
         - Payments
