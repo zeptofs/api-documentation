@@ -977,6 +977,10 @@ paths:
                   summary: Insufficient funds
                   value:
                     errors: 'Your bank account has insufficient funds'
+                Blocked bank account:
+                  summary: Blocked bank account
+                  value:
+                    errors: 'Your bank account is blocked (reason)'
     get:
       tags:
         - Payments
