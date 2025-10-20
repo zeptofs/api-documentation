@@ -961,6 +961,10 @@ paths:
                   summary: Limit exceeded
                   value:
                     errors: 'The requested amount exceeds the {amount} limit per transaction. Please contact Zepto customer support.'
+                Invalid description format:
+                  summary: Invalid description format
+                  value:
+                    errors: 'Description is in invalid format'
     get:
       tags:
         - Payments
