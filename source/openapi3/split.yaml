@@ -993,6 +993,10 @@ paths:
                   summary: Exceeded payout size
                   value:
                     errors: 'Payouts size cannot be greater than 50'
+                Not filled end to end:
+                  summary: Not filled end to end
+                  value:
+                    errors: "End to end can't be blank"
     get:
       tags:
         - Payments
