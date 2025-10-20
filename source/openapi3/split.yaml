@@ -973,6 +973,10 @@ paths:
                   summary: Bank account not configured
                   value:
                     errors: 'Your bank account is not configured for payments'
+                Insufficient funds:
+                  summary: Insufficient funds
+                  value:
+                    errors: 'Your bank account has insufficient funds'
     get:
       tags:
         - Payments
