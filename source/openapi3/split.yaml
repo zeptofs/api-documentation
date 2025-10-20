@@ -989,6 +989,10 @@ paths:
                   summary: Recipient bank account blocked
                   value:
                     errors: 'Recipient contact (#{recipient_contact.id}) is blocked (reason)'
+                Different float accounts:
+                  summary: Different float accounts
+                  value:
+                    errors: 'Recipient contact (#{recipient_contact.id}) must share the same control account'
                 Insufficient funds:
                   summary: Insufficient funds
                   value:
