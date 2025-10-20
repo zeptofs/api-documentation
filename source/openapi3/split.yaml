@@ -989,6 +989,10 @@ paths:
                   summary: Invalid purpose category
                   value:
                     errors: 'Category purpose code must be one of: PENS, SALA, TAXS'
+                Exceeded payout size:
+                  summary: Exceeded payout size
+                  value:
+                    errors: 'Payouts size cannot be greater than 50'
     get:
       tags:
         - Payments
