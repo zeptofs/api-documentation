@@ -1,8 +1,14 @@
 ---
 title: Webhooks
-excerpt: Webhooks are used to notify your application of changes to the status of Agreements, Payment Requests, Credits and Debits, etc as they are processed through the system
-category: 65ada3d7699b7900765d2ed5
-hidden: false
+category:
+  uri: Documentation
+content:
+  excerpt: >-
+    Webhooks are used to notify your application of changes to the status of
+    Agreements, Payment Requests, Credits and Debits, etc as they are processed
+    through the system
+privacy:
+  view: public
 ---
 
 # Webhooks
