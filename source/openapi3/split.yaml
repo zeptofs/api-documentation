@@ -979,6 +979,83 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MakeAPaymentResponse'
+        '400':
+          description: Bad Request (errors)
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: string
+              examples:
+                Invalid channel:
+                  summary: Invalid channel
+                  value:
+                    errors: 'Channels must be one of: new_payments_platform, direct_entry'
+                Channel not supported by bank account:
+                  summary: Channel not supported by bank account
+                  value:
+                    errors: 'Channels {channel} is not supported by your bank account. Please contact us for assistance'
+                Transaction limit exceeded:
+                  summary: Transaction limit exceeded
+                  value:
+                    errors: 'The requested amount exceeds the {amount} limit per transaction. Please contact Zepto customer support.'
+                Limit exceeded:
+                  summary: Limit exceeded
+                  value:
+                    errors: 'Amount must be less than or equal to 1000000000'
+                Invalid description format:
+                  summary: Invalid description format
+                  value:
+                    errors: 'Description is in invalid format'
+                Mature date in the past:
+                  summary: Mature date in the past
+                  value:
+                    errors: 'Matures at must not be in the past'
+                Not found bank account:
+                  summary: Not found bank account
+                  value:
+                    errors: 'Your bank account not found'
+                Bank account not configured:
+                  summary: Bank account not configured
+                  value:
+                    errors: 'Your bank account is not configured for payments'
+                Bank account removed:
+                  summary: Bank account removed
+                  value:
+                    errors: 'Recipient contact (#{recipient_contact.id}) bank account has been removed'
+                Recipient bank account blocked:
+                  summary: Recipient bank account blocked
+                  value:
+                    errors: 'Recipient contact (#{recipient_contact.id}) is blocked (reason)'
+                Different float accounts:
+                  summary: Different float accounts
+                  value:
+                    errors: 'Recipient contact (#{recipient_contact.id}) must share the same control account'
+                Insufficient funds:
+                  summary: Insufficient funds
+                  value:
+                    errors: 'Your bank account has insufficient funds'
+                Blocked bank account:
+                  summary: Blocked bank account
+                  value:
+                    errors: 'Your bank account is blocked (reason)'
+                Inactive bank account:
+                  summary: Inactive bank account
+                  value:
+                    errors: 'Your bank account not active'
+                Invalid purpose category:
+                  summary: Invalid purpose category
+                  value:
+                    errors: 'Category purpose code must be one of: PENS, SALA, TAXS'
+                Exceeded payout size:
+                  summary: Exceeded payout size
+                  value:
+                    errors: 'Payouts size cannot be greater than 50'
+                Not filled end to end:
+                  summary: Not filled end to end
+                  value:
+                    errors: "End to end can't be blank"
     get:
       tags:
         - Payments
