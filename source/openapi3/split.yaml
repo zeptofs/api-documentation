@@ -695,6 +695,41 @@ paths:
           description: No Content (success)
         '400':
           description: Bad Request (errors)
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: string
+              examples:
+                Contact is not receivable:
+                  summary: Contact is not receivable
+                  value:
+                    errors: Contact is not receivable
+                PayID is not disabled:
+                  summary: PayID is not disabled
+                  value:
+                    errors: Contact must be 'disabled' but is '{status}'.
+                Contact blocked by a Zepto admin:
+                  summary: Contact blocked by a Zepto admin
+                  value:
+                    errors: This receivable contact can only be enabled by Zepto support. Please contact Zepto for further information
+                Bank account not blocked:
+                  summary: Bank account not blocked
+                  value:
+                    errors: Bank account must be blocked.
+                Bank account already unblocked:
+                  summary: Bank account already unblocked
+                  value:
+                    errors: Bank account is already unblocked
+                Bank account already unblocked for credits:
+                  summary: Bank account already unblocked for credits
+                  value:
+                    errors: Bank account is already unblocked for credits
+                Bank account already unblocked for debits:
+                  summary: Bank account already unblocked for debits
+                  value:
+                    errors: Bank account is already unblocked for debits
         '404':
           description: Not Found
   '/contacts/{contact_id}/receivable':
