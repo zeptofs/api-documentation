@@ -1,8 +1,13 @@
 ---
 title: Introduction to PayTo
-excerpt: PayTo is a modern digital payment method that offers a fast, easy and secure way to pay
-category: 65ada3d7699b7900765d2ed5
-hidden: false
+category:
+  uri: Documentation
+content:
+  excerpt: >-
+    PayTo is a modern digital payment method that offers a fast, easy and secure
+    way to pay
+privacy:
+  view: public
 ---
 
 # Introduction to PayTo | Zepto Help Center
