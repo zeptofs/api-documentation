@@ -2429,13 +2429,67 @@ This will once again allow you to receive funds from your customer via both DE a
 |---|---|---|---|---|
 |contact_id|path|string(UUID)|true|Receivable Contact ID (`ReceivableContact.data.id`)|
 
+> Example responses
+
+> Bad Request (errors)
+
+```json
+{
+  "errors": "Contact is not receivable"
+}
+```
+
+```json
+{
+  "errors": "Contact must be 'disabled' but is '{status}'."
+}
+```
+
+```json
+{
+  "errors": "This receivable contact can only be enabled by Zepto support. Please contact Zepto for further information"
+}
+```
+
+```json
+{
+  "errors": "Bank account must be blocked."
+}
+```
+
+```json
+{
+  "errors": "Bank account is already unblocked"
+}
+```
+
+```json
+{
+  "errors": "Bank account is already unblocked for credits"
+}
+```
+
+```json
+{
+  "errors": "Bank account is already unblocked for debits"
+}
+```
+
 <h3 id="Reactivate a Receivable Contact-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content (success)|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request (errors)|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request (errors)|Inline|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|None|
+
+<h3 id="Reactivate a Receivable Contact-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» errors|string|false|No description|
 
 ## Update a Receivable Contact
 
@@ -3971,11 +4025,124 @@ To enable custom payment flows, the required payment channel can be selected by 
 }
 ```
 
+> Bad Request (errors)
+
+```json
+{
+  "errors": "Channels must be one of: new_payments_platform, direct_entry"
+}
+```
+
+```json
+{
+  "errors": "Channels {channel} is not supported by your bank account. Please contact us for assistance"
+}
+```
+
+```json
+{
+  "errors": "The requested amount exceeds the {amount} limit per transaction. Please contact Zepto customer support."
+}
+```
+
+```json
+{
+  "errors": "Amount must be less than or equal to 1000000000"
+}
+```
+
+```json
+{
+  "errors": "Description is in invalid format"
+}
+```
+
+```json
+{
+  "errors": "Matures at must not be in the past"
+}
+```
+
+```json
+{
+  "errors": "Your bank account not found"
+}
+```
+
+```json
+{
+  "errors": "Your bank account is not configured for payments"
+}
+```
+
+```json
+{
+  "errors": "Recipient contact (#{recipient_contact.id}) bank account has been removed"
+}
+```
+
+```json
+{
+  "errors": "Recipient contact (#{recipient_contact.id}) is blocked (reason)"
+}
+```
+
+```json
+{
+  "errors": "Recipient contact (#{recipient_contact.id}) must share the same control account"
+}
+```
+
+```json
+{
+  "errors": "Your bank account has insufficient funds"
+}
+```
+
+```json
+{
+  "errors": "Your bank account is blocked (reason)"
+}
+```
+
+```json
+{
+  "errors": "Your bank account not active"
+}
+```
+
+```json
+{
+  "errors": "Category purpose code must be one of: PENS, SALA, TAXS"
+}
+```
+
+```json
+{
+  "errors": "Payouts size cannot be greater than 50"
+}
+```
+
+```json
+{
+  "errors": "End to end can't be blank"
+}
+```
+
 <h3 id="Make a Payment-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[MakeAPaymentResponse](#schemamakeapaymentresponse)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request (errors)|Inline|
+
+<h3 id="Make a Payment-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» errors|string|false|No description|
 
 ## List all Payments
 
