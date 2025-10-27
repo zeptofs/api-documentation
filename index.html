@@ -3385,6 +3385,33 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 </tbody></table>
 
+<blockquote>
+<p>Example responses</p>
+
+<p>Bad Request (errors)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Contact is not receivable"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Contact must be 'disabled' but is '{status}'."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This receivable contact can only be enabled by Zepto support. Please contact Zepto for further information"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank account must be blocked."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank account is already unblocked"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank account is already unblocked for credits"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank account is already unblocked for debits"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <h3 id="Reactivate a Receivable Contact-responses">Responses</h3>
 
 <table><thead>
@@ -3405,13 +3432,33 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
 <td>Bad Request (errors)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Not Found</td>
 <td>None</td>
+</tr>
+</tbody></table>
+
+<h3 id="Reactivate a Receivable Contact-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>400</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» errors</td>
+<td>string</td>
+<td>false</td>
+<td>No description</td>
 </tr>
 </tbody></table>
 <h2 id='update-a-receivable-contact'>Update a Receivable Contact</h2>
@@ -5195,6 +5242,61 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<blockquote>
+<p>Bad Request (errors)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Channels must be one of: new_payments_platform, direct_entry"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Channels {channel} is not supported by your bank account. Please contact us for assistance"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The requested amount exceeds the {amount} limit per transaction. Please contact Zepto customer support."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount must be less than or equal to 1000000000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Description is in invalid format"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Matures at must not be in the past"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your bank account not found"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your bank account is not configured for payments"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient contact (#{recipient_contact.id}) bank account has been removed"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient contact (#{recipient_contact.id}) is blocked (reason)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient contact (#{recipient_contact.id}) must share the same control account"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your bank account has insufficient funds"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your bank account is blocked (reason)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your bank account not active"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category purpose code must be one of: PENS, SALA, TAXS"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payouts size cannot be greater than 50"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"End to end can't be blank"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <h3 id="Make a Payment-responses">Responses</h3>
 
 <table><thead>
@@ -5210,6 +5312,32 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td>Created</td>
 <td><a href="#schemamakeapaymentresponse">MakeAPaymentResponse</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad Request (errors)</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+
+<h3 id="Make a Payment-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>400</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» errors</td>
+<td>string</td>
+<td>false</td>
+<td>No description</td>
 </tr>
 </tbody></table>
 <h2 id='list-all-payments'>List all Payments</h2>
@@ -12860,7 +12988,7 @@ Please refer to the <a href="http://help.zepto.money/articles/3094575-what-is-an
 </tr>
 <tr>
 <td>status</td>
-<td>preprecessing</td>
+<td>preprocessing</td>
 </tr>
 <tr>
 <td>status</td>
