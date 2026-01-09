@@ -3596,9 +3596,12 @@ components:
           type: array
         reason:
           type: string
-          pattern: "^[ -~]+$"
-          description: The first 8 characters are visible if funds are sent via direct credit / BECS, and up to 270 characters if sent via NPP
+          pattern: "^[ -~\\p{Emoji}]+$"
+          description: The first 8 characters are visible if funds are sent via direct credit / BECS, and up to 270 characters if sent via NPP.
+            ASCII-printable characters and unicode emojis are accepted.
           example: Because reason
+          minLength: 1
+          maxLength: 280
         your_bank_account_id:
           type: string
           format: uuid
