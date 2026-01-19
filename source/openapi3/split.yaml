@@ -9,7 +9,7 @@ info:
     The Zepto API OpenAPI specification has moved to the following locations:
 
     **New locations:**
-    - Documentation: https://docs.zepto.money/reference/zepto-api
+    - Documentation: https://docs.zeptopayments.com/docs/zepto-api
     - OpenAPI Spec: https://go.zeptopayments.com/api-docs/zepto/v1/openapi.yaml
 
     Please update any tooling or integrations to use the new URLs above.
