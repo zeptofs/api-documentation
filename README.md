@@ -4,9 +4,25 @@
 
 Welcome to the Zepto API documentation source.
 
-Zepto's API Documentation is hosted at [docs.zeptopayments.com](https://docs.zeptopayments.com/) and powered by [readme](https://readme.com/). 
+Zepto's API Documentation is hosted at [docs.zeptopayments.com](https://docs.zeptopayments.com/) and powered by [readme](https://readme.com/).
 
-Note that some parts of the docs published at [docs.zeptopayments.com](https://docs.zeptopayments.com/) are maintained outside of this repo. 
+Note that some parts of the docs published at [docs.zeptopayments.com](https://docs.zeptopayments.com/) are maintained outside of this repo.
+
+---
+
+## ⚠️ Deprecation Notice
+
+The `split.yaml` (Zepto API) specification has been migrated to the [split repository](https://github.com/zeptofs/split/tree/main/rswag/zepto).
+
+**New locations:**
+| Resource      | URL                                                          |
+|---------------|--------------------------------------------------------------|
+| Documentation | https://docs.zepto.money/reference/zepto-api                 |
+| OpenAPI Spec  | https://go.zeptopayments.com/api-docs/zepto/v1/openapi.yaml  |
+
+The `source/openapi3/split.yaml` file in this repo is deprecated and will be removed on **2026-07-01**.
+
+--- 
 
 
 ## API Reference
@@ -25,9 +41,11 @@ make start # Ctrl+C to stop
 
 ### Making changes
 
+> ⚠️ **Note:** The `split.yaml` file is deprecated. For Zepto API changes, please update the spec in the [split repository](https://github.com/zeptofs/split/tree/main/rswag/zepto) instead.
+
 1. With the application running, edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
    you save your changes.
-2. Changes to the YAML file will be built and output to `source/index.html.md`, courtesy of Guard (see the [Guardfile](Guardfile)). 
+2. Changes to the YAML file will be built and output to `source/index.html.md`, courtesy of Guard (see the [Guardfile](Guardfile)).
    (Don't edit the output file directly).
 3. Commit both the YAML and the build output changes.
 
