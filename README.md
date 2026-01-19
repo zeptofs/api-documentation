@@ -20,7 +20,7 @@ The `split.yaml` (Zepto API) specification has been migrated to the [split repos
 | Documentation | https://docs.zepto.money/reference/zepto-api                 |
 | OpenAPI Spec  | https://go.zeptopayments.com/api-docs/zepto/v1/openapi.yaml  |
 
-The `source/openapi3/split.yaml` file in this repo is deprecated and will be removed on **2026-07-01**.
+The `source/openapi3/split.yaml` file in this repo is deprecated and will be removed on **2026-03-01**.
 
 --- 
 
