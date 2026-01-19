@@ -3,7 +3,20 @@ info:
   title: Zepto API
   contact:
     email: support@zepto.com.au
-  description: Zepto allows you to make, get and manage payments using nothing but bank accounts.
+  description: |
+    ⚠️ **DEPRECATION NOTICE:** This specification file is deprecated and will be removed on **2026-03-01**.
+
+    The Zepto API OpenAPI specification has moved to the following locations:
+
+    **New locations:**
+    - Documentation: https://docs.zepto.money/reference/zepto-api
+    - OpenAPI Spec: https://go.zeptopayments.com/api-docs/zepto/v1/openapi.yaml
+
+    Please update any tooling or integrations to use the new URLs above.
+
+    ---
+
+    Zepto allows you to make, get and manage payments using nothing but bank accounts.
   version: '1.0'
 servers:
   - url: 'https://api.sandbox.zeptopayments.com'
