@@ -12,7 +12,7 @@ Note that some parts of the docs published at [docs.zeptopayments.com](https://d
 
 ## ⚠️ Deprecation Notice
 
-The `split.yaml` (Zepto API) specification has been migrated to the [split repository](https://github.com/zeptofs/split/tree/main/rswag/zepto).
+The `split.yaml` (Zepto API) specification has been migrated to the Split repo.
 
 **New locations:**
 | Resource      | URL                                                          |
@@ -41,7 +41,7 @@ make start # Ctrl+C to stop
 
 ### Making changes
 
-> ⚠️ **Note:** The `split.yaml` file is deprecated. For Zepto API changes, please update the spec in the [split repository](https://github.com/zeptofs/split/tree/main/rswag/zepto) instead.
+> ⚠️ **Note:** The `split.yaml` file is deprecated. For Zepto API changes, please update the spec in the split repository instead.
 
 1. With the application running, edit the `source/openapi3/split.yaml` or any themes/templates. The preview should update a few seconds after
    you save your changes.
